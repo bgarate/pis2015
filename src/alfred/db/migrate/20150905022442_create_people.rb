@@ -8,7 +8,6 @@ class CreatePeople < ActiveRecord::Migration
       t.date :birth_date
       t.date :init_date
       t.date :finish_date
-      t.string :tech_rol
 
       t.timestamps null: false
     end

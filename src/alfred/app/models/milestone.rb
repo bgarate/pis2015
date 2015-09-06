@@ -5,3 +5,4 @@ class Milestone < ActiveRecord::Base
   has_many :resources
   has_one :category
 end
+

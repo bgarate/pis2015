@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150905024246) do
+ActiveRecord::Schema.define(version: 20150905151500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20150905024246) do
     t.date     "birth_date"
     t.date     "init_date"
     t.date     "finish_date"
-    t.string   "tech_rol"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -51,5 +50,15 @@ ActiveRecord::Schema.define(version: 20150905024246) do
 
   add_index "person_milestones", ["milestone_id"], name: "index_person_milestones_on_milestone_id", using: :btree
   add_index "person_milestones", ["person_id"], name: "index_person_milestones_on_person_id", using: :btree
+
+  create_table "users", force: :cascade do |t|
+    t.integer  "person_id"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "users", ["person_id"], name: "index_users_on_person_id", using: :btree
 
 end

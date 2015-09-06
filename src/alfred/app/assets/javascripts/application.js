@@ -12,5 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  $(".knob-stats input").knob({
+    'width':'90%',
+    'readOnly':true
+  });
+});

@@ -82,12 +82,31 @@ $nav-hover: $peterriver;
   h1 {
     margin-top: 0;
     font-size: 20px;
+    text-transform: none;
   }
   h2 {
     margin-top: 0px;
     font-size: 13px;
   }
+
 }
+
+ul#skills {
+
+  padding-left: 0;
+  margin-top: 20px;
+
+  li {
+    list-style: none;
+    display: inline-block;
+    width: 14%;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
 #profile-picture {
 
   width: 100%;
@@ -113,8 +132,11 @@ $nav-hover: $peterriver;
   vertical-align: middle;
   line-height: 22px;
 
+  font-size: 13px;
+
   .badge-stats {
 
+    
     border-bottom: 2px solid $peterriver-dark;
     padding-bottom: 20px;
 
@@ -140,4 +162,54 @@ $nav-hover: $peterriver;
 
   }
 
+}
+
+#events-card {
+  .separator {
+    div {
+      text-align: left;
+      display: inline-block;
+      float: left;
+      padding-right: 20px;
+    }
+    &:after {
+      content: '';
+      display: block;
+      overflow: hidden;
+      border-bottom: 2px solid white;
+      padding: 0.5rem;
+    }
+  }
+  ul {
+    clear: both;
+    position: relative;
+    z-index: 5;
+
+    li {
+      display: block;
+      margin-left: 40px;
+      background-color: $mooveit-orange-dark;
+      border-radius: 5px;
+      position: relative;
+      
+
+      .day-of-the-week {
+        position: absolute;
+        left: -40px;
+        top: 5px;
+        text-transform: uppercase;
+        color: $mooveit-orange;
+        padding: 2.5px 20px 2.5px 5px;
+        border-radius: 5px;
+        z-index: -1;
+        background-color: white;
+        font-weight: bold;
+      }
+
+      .content {
+        position: relative;
+      }
+
+    }
+  }
 }

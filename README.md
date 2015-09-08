@@ -1,6 +1,6 @@
 # PIS 2015
 
-![](https://codeship.com/projects/4ae8d830-37c9-0133-d28d-7214df95c63e/status?branch=master)
+[ ![Build status](https://codeship.com/projects/713c4650-37e4-0133-4df2-02d86a486363/status?branch=master)](https://codeship.com/projects/101151)
 
 ## src
 

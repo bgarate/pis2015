@@ -62,6 +62,7 @@ Rails.application.routes.draw do
     get 'auth/failure', to: redirect('/')
     get 'google/signout'
     get 'google/unregistered'
+    get 'google/test'
   end
 
 end

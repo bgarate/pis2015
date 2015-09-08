@@ -1,4 +1,4 @@
-class AddNotesRel < ActiveRecord::Migration
+class AddNotesRelationships < ActiveRecord::Migration
   def change
     add_reference :notes, :author, references: :people, index:true
     add_foreign_key :notes, :people, column: :author_id

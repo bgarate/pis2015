@@ -1,2 +1,2 @@
-class TechRol < ActiveRecord::Base
+class TechRole < ActiveRecord::Base
 end

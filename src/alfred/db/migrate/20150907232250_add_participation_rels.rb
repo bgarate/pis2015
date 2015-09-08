@@ -1,4 +1,4 @@
-class AddParticipationRels < ActiveRecord::Migration
+class AddParticipationRelationships < ActiveRecord::Migration
   def change
     add_reference :participations, :person, references: :people, index:true
     add_foreign_key :participations, :people, column: :person_id

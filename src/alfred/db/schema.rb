@@ -11,10 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150906225655) do
+ActiveRecord::Schema.define(version: 20150907235752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "category_name"
+    t.string   "icon"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "mentorships", force: :cascade do |t|
     t.date     "init_date"
@@ -28,6 +35,17 @@ ActiveRecord::Schema.define(version: 20150906225655) do
   add_index "mentorships", ["mentee_id"], name: "index_mentorships_on_mentee_id", using: :btree
   add_index "mentorships", ["mentor_id"], name: "index_mentorships_on_mentor_id", using: :btree
 
+  create_table "milestone_templates", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "due_term"
+    t.text     "description"
+    t.integer  "type"
+    t.string   "icon"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "milestones", force: :cascade do |t|
     t.string   "title"
     t.date     "due_date"
@@ -38,21 +56,32 @@ ActiveRecord::Schema.define(version: 20150906225655) do
     t.string   "icon"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "category_id"
   end
 
   create_table "notes", force: :cascade do |t|
     t.text     "text"
     t.integer  "visibility"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "author_id"
+    t.integer  "milestone_id"
   end
+
+  add_index "notes", ["author_id"], name: "index_notes_on_author_id", using: :btree
+  add_index "notes", ["milestone_id"], name: "index_notes_on_milestone_id", using: :btree
 
   create_table "participations", force: :cascade do |t|
     t.date     "init_date"
     t.date     "finish_date"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "person_id"
+    t.integer  "project_id"
   end
+
+  add_index "participations", ["person_id"], name: "index_participations_on_person_id", using: :btree
+  add_index "participations", ["project_id"], name: "index_participations_on_project_id", using: :btree
 
   create_table "people", force: :cascade do |t|
     t.string   "name"
@@ -81,7 +110,20 @@ ActiveRecord::Schema.define(version: 20150906225655) do
     t.date     "since_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "person_id"
+    t.integer  "skill_id"
   end
+
+  add_index "person_skills", ["person_id"], name: "index_person_skills_on_person_id", using: :btree
+  add_index "person_skills", ["skill_id"], name: "index_person_skills_on_skill_id", using: :btree
+
+  create_table "project_technologies", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "technology_id"
+  end
+
+  add_index "project_technologies", ["project_id"], name: "index_project_technologies_on_project_id", using: :btree
+  add_index "project_technologies", ["technology_id"], name: "index_project_technologies_on_technology_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
     t.string   "project_name"
@@ -91,6 +133,15 @@ ActiveRecord::Schema.define(version: 20150906225655) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
+
+  create_table "resources", force: :cascade do |t|
+    t.string   "url"
+    t.integer  "milestone_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "resources", ["milestone_id"], name: "index_resources_on_milestone_id", using: :btree
 
   create_table "skills", force: :cascade do |t|
     t.string   "skill_name"
@@ -116,4 +167,11 @@ ActiveRecord::Schema.define(version: 20150906225655) do
 
   add_foreign_key "mentorships", "people", column: "mentee_id"
   add_foreign_key "mentorships", "people", column: "mentor_id"
+  add_foreign_key "milestones", "categories"
+  add_foreign_key "notes", "milestones"
+  add_foreign_key "notes", "people", column: "author_id"
+  add_foreign_key "participations", "people"
+  add_foreign_key "participations", "projects"
+  add_foreign_key "person_skills", "people"
+  add_foreign_key "person_skills", "skills"
 end

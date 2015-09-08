@@ -7,15 +7,15 @@ class Person < ActiveRecord::Base
 
 
   # mentees_asignations es una collection de <init_date, finish_date, mentee>
-  has_many :mentees_asignations, foreign_key: :mentor_id, class_name: "Mentorship"
+  has_many :mentees_assignations, foreign_key: :mentor_id, class_name: "Mentorship"
   # mentees es una collection de <mentee>
-  has_many :mentees, through: :mentees_asignations, source: :mentee
+  has_many :mentees, through: :mentees_assignations, source: :mentee
 
 
   # mentors_asignations es una collection de <init_date, finish_date, mentor>
-  has_many :mentor_asignations, foreign_key: :mentee_id, class_name: "Mentorship"
+  has_many :mentor_assignations, foreign_key: :mentee_id, class_name: "Mentorship"
   # mentors es una collection de <mentor>
-  has_many :mentors, through: :mentor_asignations, source: :mentor
+  has_many :mentors, through: :mentor_assignations, source: :mentor
 
 
 

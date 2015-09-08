@@ -17,17 +17,17 @@ ActiveRecord::Schema.define(version: 20150907235752) do
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
-    t.string   "category_name"
+    t.string   "name"
     t.string   "icon"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "mentorships", force: :cascade do |t|
-    t.date     "init_date"
-    t.date     "finish_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "mentor_id"
     t.integer  "mentee_id"
   end
@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 20150907235752) do
   create_table "milestones", force: :cascade do |t|
     t.string   "title"
     t.date     "due_date"
-    t.date     "finish_date"
     t.text     "description"
     t.integer  "status"
     t.integer  "type"
@@ -72,10 +71,10 @@ ActiveRecord::Schema.define(version: 20150907235752) do
   add_index "notes", ["milestone_id"], name: "index_notes_on_milestone_id", using: :btree
 
   create_table "participations", force: :cascade do |t|
-    t.date     "init_date"
-    t.date     "finish_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "person_id"
     t.integer  "project_id"
   end
@@ -86,21 +85,21 @@ ActiveRecord::Schema.define(version: 20150907235752) do
   create_table "people", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.string   "celphone"
+    t.string   "cellphone"
     t.string   "phone"
     t.date     "birth_date"
-    t.date     "init_date"
-    t.date     "finish_date"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "person_milestones", force: :cascade do |t|
     t.integer  "person_id"
     t.integer  "milestone_id"
-    t.date     "finish_date"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.date     "completion_date"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "person_milestones", ["milestone_id"], name: "index_person_milestones_on_milestone_id", using: :btree
@@ -126,12 +125,12 @@ ActiveRecord::Schema.define(version: 20150907235752) do
   add_index "project_technologies", ["technology_id"], name: "index_project_technologies_on_technology_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
-    t.string   "project_name"
-    t.date     "init_date"
-    t.date     "finish_date"
+    t.string   "name"
+    t.date     "start_date"
+    t.date     "end_date"
     t.string   "client"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "resources", force: :cascade do |t|
@@ -144,22 +143,22 @@ ActiveRecord::Schema.define(version: 20150907235752) do
   add_index "resources", ["milestone_id"], name: "index_resources_on_milestone_id", using: :btree
 
   create_table "skills", force: :cascade do |t|
-    t.string   "skill_name"
-    t.integer  "skill_type"
+    t.string   "name"
+    t.integer  "type"
     t.string   "icon"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "tech_rols", force: :cascade do |t|
-    t.string   "tech_rol_name"
+  create_table "tech_roles", force: :cascade do |t|
+    t.string   "name"
     t.string   "icon"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "technologies", force: :cascade do |t|
-    t.string   "tech_name"
+    t.string   "name"
     t.string   "icon"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

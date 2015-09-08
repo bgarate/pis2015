@@ -1,4 +1,4 @@
-class CreateMilestoneTemplate < ActiveRecord::Migration
+class CreateMilestoneTemplates < ActiveRecord::Migration
   def change
     create_table :milestone_templates do |t|
       t.string :title

@@ -5,7 +5,7 @@ describe User do
   expireated = Time.now - (2*7*24*60*60)
   not_expirated = Time.now + (2*7*24*60*60)
 
-  describe '#saludar' do
+  describe '#oatuh_expired?' do
 
       it 'No espirado' do
         usr.oauth_expires_at = not_expirated

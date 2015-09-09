@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 # Gema para la autenticación con google
 gem "omniauth-google-oauth2", "~> 0.2.1"
+gem 'capybara'
 
 # RSpec y Cocoverage
 gem 'simplecov'

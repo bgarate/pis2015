@@ -1,0 +1,41 @@
+<%= form_for :person, url:people_path do |f| %>
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :email1 %><br>
+      <%= f.text_field :email1 %>
+    </div>
+    <div class="field">
+      <%= f.label :celphone %><br>
+      <%= f.text_field :celphone %>
+    </div>
+    <div class="field">
+      <%= f.label :phone %><br>
+      <%= f.text_field :phone %>
+    </div>
+    <div class="field">
+      <%= f.label :birthDate %><br>
+      <%= f.text_field :birthDate %>
+    </div>
+    <div class="field">
+      <%= f.label :initDate %><br>
+      <%= f.text_field :initDate %>
+    </div>
+    <div class="field">
+      <%= f.label :sex %><br>
+      <%= f.text_field :sex %>
+    </div>
+    <div class="field">
+      <%= f.label :finishDate %><br>
+      <%= f.text_field :finishDate %>
+    </div>
+    <div class="field">
+      <%= f.label :techRol %><br>
+      <%= f.text_field :techRol %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

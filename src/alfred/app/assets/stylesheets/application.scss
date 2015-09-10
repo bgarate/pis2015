@@ -184,6 +184,7 @@ ul#skills {
     clear: both;
     position: relative;
     z-index: 5;
+    margin: 10px 0;
 
     li {
       display: block;
@@ -191,12 +192,13 @@ ul#skills {
       background-color: $mooveit-orange-dark;
       border-radius: 5px;
       position: relative;
-      
+      padding: 10px 10px 10px 0;
+      margin-bottom: 10px;
 
       .day-of-the-week {
         position: absolute;
         left: -40px;
-        top: 5px;
+        top: 10px;
         text-transform: uppercase;
         color: $mooveit-orange;
         padding: 2.5px 20px 2.5px 5px;
@@ -206,9 +208,46 @@ ul#skills {
         font-weight: bold;
       }
 
+      .day {
+        float: left;
+        width: 40px;
+        font-weight: bold;
+        font-size: 18px;
+        text-align: left;
+        padding-left: 10px;
+      }
+
       .content {
         position: relative;
+        border-left: $mooveit-orange solid 2px;
+        float: left;
+        width: calc(100% - 40px);
+        padding: 0 10px 0 20px;
+        font-size: 14px;
       }
+
+      h2 {
+        display: inline-block;
+        float: left;
+        font-size: 16px;
+        margin: 0 5px 0 0;
+        font-weight: bold;
+      }
+
+      .month-and-year {
+        display: inline-block;
+        float: right;
+        font-size: 12px;
+        line-height: 1.8;
+      }
+
+      p {
+        clear: both;
+        text-align: left;
+      }
+
+
+
 
     }
   }

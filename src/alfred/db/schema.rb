@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20150905024246) do
     t.date     "birth_date"
     t.date     "init_date"
     t.date     "finish_date"
-    t.string   "tech_rol"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

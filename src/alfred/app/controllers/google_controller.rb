@@ -1,4 +1,7 @@
+require 'pp'
+
 class GoogleController < ApplicationController
+
   def callback
     auth = env["omniauth.auth"]
 
@@ -16,7 +19,7 @@ class GoogleController < ApplicationController
       session[:user_id] = user.id
       redirect_to root_path
     else
-      redirect_to :controller => 'google', :action => 'unregistered'
+      redirect_to google_unregistered_path
     end
   end
 

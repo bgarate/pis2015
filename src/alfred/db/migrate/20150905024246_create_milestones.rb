@@ -3,7 +3,6 @@ class CreateMilestones < ActiveRecord::Migration
     create_table :milestones do |t|
       t.string :title
       t.date :due_date
-      t.date :finish_date
       t.text :description
       t.integer :status
       t.integer :type
@@ -15,7 +14,7 @@ class CreateMilestones < ActiveRecord::Migration
     create_table :person_milestones do |t|
       t.belongs_to :person, index: true
       t.belongs_to :milestone, index: true
-      t.date :finish_date
+      t.date :completion_date
 
       t.timestamps null: false
     end

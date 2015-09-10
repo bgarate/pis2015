@@ -2,7 +2,7 @@ class Person < ActiveRecord::Base
   has_one :user
   has_many :person_milestones
   has_many :milestones, through: :person_milestones
-  has_one :tech_rol
+  has_one :tech_role
   has_many :participations
   has_many :projects, through: :participations
 

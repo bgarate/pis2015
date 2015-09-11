@@ -20,4 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  people_new_name: "Name"
+  people_new_email: "Email"
+  people_new_celphone: "Celphone"
+  people_new_telephone: "Telephone"
+  people_new_birth_date: "Birth date"
+  people_new_init_date: "Init date"
+  people_new_submit: "Create user"

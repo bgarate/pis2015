@@ -1,33 +1,48 @@
+<% I18n.locale = :es %>
 <%= form_for :person, url:people_path do |f| %>
     <div class="field">
-      <%= f.label :name %><br>
+      <%= f.label t('people_new_name') %><br>
       <%= f.text_field :name %>
     </div>
     <div class="field">
-      <%= f.label :email1 %><br>
+      <%= f.label t('people_new_email') %><br>
       <%= f.text_field :email %>
     </div>
     <div class="field">
-      <%= f.label :celphone %><br>
+      <%= f.label t('people_new_celphone') %><br>
       <%= f.text_field :celphone %>
     </div>
     <div class="field">
-      <%= f.label :phone %><br>
+      <%= f.label t('people_new_telephone') %><br>
       <%= f.text_field :phone %>
     </div>
     <div class="field">
-      <%= f.label :birth_date %><br>
+      <%= f.label t('people_new_birth_date') %><br>
       <%= f.text_field :birth_date %>
     </div>
     <div class="field">
-      <%= f.label :init_date %><br>
+      <%= f.label t('people_new_init_date') %><br>
       <%= f.text_field :init_date %>
     </div>
-    <div class="field">
-      <%= f.label :finish_date %><br>
-      <%= f.text_field :finish_date %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
+    <div class="btn">
+      <%= f.button t('people_new_submit'), options= :type=>'button', :onclick=>'if(validate()){submit();};' %>
     </div>
 <% end %>
+
+<script>
+  function validate(form){
+      var name, email;
+      // Get the value of the input field with id="name"
+      name = document.getElementById('person_name').value;
+      // Get the value of the input field with id="mail"
+      email = document.getElementById("person_email").value;
+
+      // Validate
+      return ((name!='') && (email!='')  && validateEmail(email))
+  }
+
+  function validateEmail(email) {
+      var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+      return re.test(email);
+  }
+</script>

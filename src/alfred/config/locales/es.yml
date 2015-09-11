@@ -1,0 +1,8 @@
+es:
+  people_new_name: "Nombre"
+  people_new_email: "Correo electrónico"
+  people_new_celphone: "Celular"
+  people_new_telephone: "Teléfono"
+  people_new_birth_date: "Fecha de nacimiento"
+  people_new_init_date: "Fecha de ingreso"
+  people_new_submit: "Crear usuario"

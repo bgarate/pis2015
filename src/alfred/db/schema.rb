@@ -117,14 +117,6 @@ ActiveRecord::Schema.define(version: 20150910230528) do
   add_index "person_skills", ["person_id"], name: "index_person_skills_on_person_id", using: :btree
   add_index "person_skills", ["skill_id"], name: "index_person_skills_on_skill_id", using: :btree
 
-  create_table "project_technologies", force: :cascade do |t|
-    t.integer "project_id"
-    t.integer "technology_id"
-  end
-
-  add_index "project_technologies", ["project_id"], name: "index_project_technologies_on_project_id", using: :btree
-  add_index "project_technologies", ["technology_id"], name: "index_project_technologies_on_technology_id", using: :btree
-
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.date     "start_date"
@@ -133,6 +125,14 @@ ActiveRecord::Schema.define(version: 20150910230528) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "projects_technologies", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "technology_id"
+  end
+
+  add_index "projects_technologies", ["project_id"], name: "index_projects_technologies_on_project_id", using: :btree
+  add_index "projects_technologies", ["technology_id"], name: "index_projects_technologies_on_technology_id", using: :btree
 
   create_table "resources", force: :cascade do |t|
     t.string   "url"

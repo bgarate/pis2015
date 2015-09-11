@@ -1,7 +1,7 @@
 class Person < ActiveRecord::Base
   has_many :person_milestones
   has_many :milestones, through: :person_milestones
-  has_one :tech_role
+  belongs_to :tech_role
   has_many :participations
   has_many :projects, through: :participations
 

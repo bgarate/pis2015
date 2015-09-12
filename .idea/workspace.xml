@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3d74fe3b-0e19-41c6-baf4-3b4cc90d53c8" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_cards.scss.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/controllers/people_controller.rb" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/alfred/app/controllers/.fuse_hidden000005e800000002" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/alfred/app/controllers/person_controller.rb" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/alfred/app/views/person/_events_card.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/_events_card.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/alfred/app/views/person/_profile_card.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/_profile_card.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/alfred/app/views/person/_stats_card.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/_stats_card.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/alfred/app/views/person/_timeline_card.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/_timeline_card.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/alfred/app/views/person/index.html.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/index.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb" afterPath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/views/welcome/index.html.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/welcome/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/pis2015.iml" afterPath="$PROJECT_DIR$/.idea/pis2015.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/config/routes.rb" afterPath="$PROJECT_DIR$/src/alfred/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/db/seeds.rb" afterPath="$PROJECT_DIR$/src/alfred/db/seeds.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pis2015.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,8 +37,8 @@
       <file leaf-file-name="application.scss.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.74533105">
-              <caret line="86" column="83" selection-start-line="86" selection-start-column="83" selection-end-line="86" selection-end-column="83" />
+            <state vertical-scroll-proportion="0.10186757">
+              <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -61,8 +47,8 @@
       <file leaf-file-name="_cards.scss.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_cards.scss.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.8333335">
-              <caret line="308" column="85" selection-start-line="308" selection-start-column="24" selection-end-line="308" selection-end-column="85" />
+            <state vertical-scroll-proportion="-3.2333333">
+              <caret line="309" column="20" selection-start-line="309" selection-start-column="19" selection-end-line="309" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -71,8 +57,8 @@
       <file leaf-file-name="_navigation.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_navigation.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.041667">
-              <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+            <state vertical-scroll-proportion="-3.2333333">
+              <caret line="30" column="12" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -500,6 +486,40 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pis2015" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pis2015" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alfred" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -727,7 +747,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -735,7 +755,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32974634" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2804781" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2804781" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3268945" sideWeight="0.49730977" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -1148,26 +1168,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_navigation.scss">
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_cards.scss.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.041667">
-          <caret line="53" column="5" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+        <state vertical-scroll-proportion="-3.2333333">
+          <caret line="309" column="20" selection-start-line="309" selection-start-column="19" selection-end-line="309" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_cards.scss.erb">
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_navigation.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.8333335">
-          <caret line="308" column="85" selection-start-line="308" selection-start-column="24" selection-end-line="308" selection-end-column="85" />
+        <state vertical-scroll-proportion="-3.2333333">
+          <caret line="30" column="12" selection-start-line="30" selection-start-column="10" selection-end-line="30" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74533105">
-          <caret line="86" column="83" selection-start-line="86" selection-start-column="83" selection-end-line="86" selection-end-column="83" />
+        <state vertical-scroll-proportion="0.10186757">
+          <caret line="54" column="22" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
           <folding />
         </state>
       </provider>

@@ -54,6 +54,21 @@ body {
   border-bottom-right-radius: 25px;
   border-bottom-left-radius: 25px;
 
+  z-index: 1;
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: 50px;
+    bottom: -40px;
+    width: 40px;
+    height: 40px;
+    background-image: url('<%= asset_path 'assets/logos/moove-it-logo.png' %>');;
+    background-size: 40px;
+    background-repeat: no-repeat;
+    z-index: -1;
+  }
+
   ul#login-top {
 
     display: table;
@@ -79,12 +94,26 @@ body {
 
   a {
     background-color: #FF8D40;
-    padding: 10px 10px 10px 40px;
+    padding: 10px 10px 10px 50px;
     color: white;
     border-radius: 5px;
     border: 1px solid #F67B28;
     font-size: 16px;
+    font-weight: bold;
     background-image: url('<%= asset_path 'assets/layouts/calendar-white.png' %>');
+    background-repeat: no-repeat;
+    background-position: 10px 50%;
+    background-size: 24px;
+    position: relative;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 40px;
+      top: 5px;
+      bottom: 5px;
+      border-left: 1px solid white;
+    }
 
   }
 

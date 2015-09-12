@@ -1,5 +1,8 @@
 class PeopleController < ApplicationController
 
+  skip_before_action :admin?, only:[:show]
+
+
   def show
     @person = Person.find(params[:id])
   end

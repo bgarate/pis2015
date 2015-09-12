@@ -27,6 +27,10 @@ describe 'Person' do
     @master.tech_role=@techRole
     @padawan.tech_role=@techRole
 
+
+
+
+
     @padawan.save!
     @master.save!
 
@@ -71,5 +75,6 @@ describe 'Person' do
     expect(@project.technologies).to include(@technology)
     expect(@project.technologies).to include(@technology2)
   end
+
 
 end

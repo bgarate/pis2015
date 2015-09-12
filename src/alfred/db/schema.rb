@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150907235752) do
+ActiveRecord::Schema.define(version: 20150910230528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,8 +90,9 @@ ActiveRecord::Schema.define(version: 20150907235752) do
     t.date     "birth_date"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "tech_role_id"
   end
 
   create_table "person_milestones", force: :cascade do |t|
@@ -116,14 +117,6 @@ ActiveRecord::Schema.define(version: 20150907235752) do
   add_index "person_skills", ["person_id"], name: "index_person_skills_on_person_id", using: :btree
   add_index "person_skills", ["skill_id"], name: "index_person_skills_on_skill_id", using: :btree
 
-  create_table "project_technologies", force: :cascade do |t|
-    t.integer "project_id"
-    t.integer "technology_id"
-  end
-
-  add_index "project_technologies", ["project_id"], name: "index_project_technologies_on_project_id", using: :btree
-  add_index "project_technologies", ["technology_id"], name: "index_project_technologies_on_technology_id", using: :btree
-
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.date     "start_date"
@@ -132,6 +125,14 @@ ActiveRecord::Schema.define(version: 20150907235752) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "projects_technologies", force: :cascade do |t|
+    t.integer "project_id"
+    t.integer "technology_id"
+  end
+
+  add_index "projects_technologies", ["project_id"], name: "index_projects_technologies_on_project_id", using: :btree
+  add_index "projects_technologies", ["technology_id"], name: "index_projects_technologies_on_technology_id", using: :btree
 
   create_table "resources", force: :cascade do |t|
     t.string   "url"
@@ -171,6 +172,7 @@ ActiveRecord::Schema.define(version: 20150907235752) do
   add_foreign_key "notes", "people", column: "author_id"
   add_foreign_key "participations", "people"
   add_foreign_key "participations", "projects"
+  add_foreign_key "people", "tech_roles"
   add_foreign_key "person_skills", "people"
   add_foreign_key "person_skills", "skills"
 end

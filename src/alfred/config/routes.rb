@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'person/index'
+  get 'people/index'
   root 'welcome#index'
 
   # Google auth

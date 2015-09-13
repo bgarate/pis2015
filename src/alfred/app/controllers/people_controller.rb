@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :admin?, only:[:show, :new, :create]
+  skip_before_action :admin?, only:[:show]
 
 
   def show
@@ -20,6 +20,6 @@ class PeopleController < ApplicationController
 
   private
   def person_params
-    params.require(:person).permit(:name, :email,:cellphone, :phone, :birth_date, :start_date)
+    params.require(:person).permit(:session)
   end
 end

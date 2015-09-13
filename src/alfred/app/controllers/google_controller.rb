@@ -2,6 +2,8 @@ require 'pp'
 
 class GoogleController < ApplicationController
 
+  skip_before_action :admin?
+
   def callback
     auth = env["omniauth.auth"]
 

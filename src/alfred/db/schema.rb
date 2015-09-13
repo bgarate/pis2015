@@ -164,17 +164,6 @@ ActiveRecord::Schema.define(version: 20150912203437) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "mentorships", "people", column: "mentee_id"
-  add_foreign_key "mentorships", "people", column: "mentor_id"
-  add_foreign_key "milestones", "categories"
-  add_foreign_key "notes", "milestones"
-  add_foreign_key "notes", "people", column: "author_id"
-  add_foreign_key "participations", "people"
-  add_foreign_key "participations", "projects"
-  add_foreign_key "people", "tech_roles"
-  add_foreign_key "person_skills", "people"
-  add_foreign_key "person_skills", "skills"
-
   create_table "users", force: :cascade do |t|
     t.integer  "person_id"
     t.string   "oauth_token"
@@ -185,4 +174,14 @@ ActiveRecord::Schema.define(version: 20150912203437) do
 
   add_index "users", ["person_id"], name: "index_users_on_person_id", using: :btree
 
+  add_foreign_key "mentorships", "people", column: "mentee_id"
+  add_foreign_key "mentorships", "people", column: "mentor_id"
+  add_foreign_key "milestones", "categories"
+  add_foreign_key "notes", "milestones"
+  add_foreign_key "notes", "people", column: "author_id"
+  add_foreign_key "participations", "people"
+  add_foreign_key "participations", "projects"
+  add_foreign_key "people", "tech_roles"
+  add_foreign_key "person_skills", "people"
+  add_foreign_key "person_skills", "skills"
 end

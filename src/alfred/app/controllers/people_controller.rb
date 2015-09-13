@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :admin?, only:[:show, :index]
+  skip_before_action :admin?, only:[:show]
 
   def index
   end
@@ -17,12 +17,14 @@ class PeopleController < ApplicationController
     @person.save
     if @person.valid?
       redirect_to @person
+    else
+      redirect_to '/people/new'
     end
   end
 
   private
   def person_params
-    params.require(:person).permit(:session)
+    params.require(:person).permit(:name, :email, :cellphone, :phone, :birth_date, :start_date)
   end
 
 

@@ -3,8 +3,8 @@ require 'rails_helper'
 describe 'Person' do
 
   before do
-    @master = Person.new :name => 'Obiwan'
-    @padawan = Person.new :name => 'Luke'
+    @master = Person.new :name => 'Obiwan', :email => 'obi@jedi.com'
+    @padawan = Person.new :name => 'Luke', :email => 'luke@jedi.com'
     @project = Project.new :name => 'Equilibrar la fuerza'
     @ms = Milestone.new :title => 'Destruir Death Star'
     @techRole = TechRole.new :name => 'Jedi'

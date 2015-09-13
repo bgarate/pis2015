@@ -10,7 +10,9 @@ describe PeopleController do
 
   describe "GET create" do
     it "should create with name and valid email" do
-      get :create, {:person=>{:name=>'Nombre', :email=>'mail@example.com'}}
+      @person = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :admin=>true
+      @person.save!
+      get :create, {:person=>{:name=>'Nombre', :email=>'mail@example.com'},:session=>{:user_id=>@person.id}}
       expect(response.status).to eq(302)
     end
   end

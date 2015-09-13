@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def admin?
-    user = Person.find(:session[:user_id])
-    if !user.admin?
+    @user = Person.find(:session[:user_id])
+    if !@user.admin
       redirect_to(user)
     end
   end

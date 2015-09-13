@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def admin?
     @user = current_user
-    @person = Person.find @user.person_id
+    @person = Person.find(@user.person_id)
     if !(@person.admin)
       redirect_to(@person)
     end

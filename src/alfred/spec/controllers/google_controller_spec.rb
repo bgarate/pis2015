@@ -3,10 +3,8 @@ require 'rails_helper'
 describe GoogleController, "Login a traves de google oatuh" do
 
   it "Deveria guardar el id del usuario logueado en session y redirigir a home" do
-    per = Person.new
-    per.name = 'Alfred'
-    per.email = 'alfred.pis.2015@gmail.com'
-    per.save!
+    @per = Person.new :name=>'Alfred', :email=>'alfred.pis.2015@gmail.com'
+    @per.save!
 
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
     visit '/auth/google_oauth2/callback'

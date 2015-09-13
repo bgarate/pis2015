@@ -13,4 +13,9 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  helper_method :current_user
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id]) if (session[:user_id]) && (!(User.find_by(id: session[:user_id]).oauth_expired?))
+  end
+
 end

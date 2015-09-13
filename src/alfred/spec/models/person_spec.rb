@@ -13,6 +13,7 @@ describe 'Person' do
     @nota = Note.new :text => 'Usar la fuerza', :author => @padawan, :visibility => 'me'
     @technology = Technology.new :name => 'X Wings'
     @technology2 = Technology.new :name => 'Falcon millenium'
+    @admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :admin=>true
 
 
     @ms.notes<<(@nota)
@@ -33,6 +34,7 @@ describe 'Person' do
 
     @padawan.save!
     @master.save!
+    @admin.save!
 
 
   end
@@ -76,5 +78,11 @@ describe 'Person' do
     expect(@project.technologies).to include(@technology2)
   end
 
+  it 'existe un usuario administrador' do
+    expect(@admin).to be_valid
+    expect(@admin.admin).to eq(true)
+    @aux = Person.find @admin.id
+    expect(@aux.admin).to eq(true)
+  end
 
 end

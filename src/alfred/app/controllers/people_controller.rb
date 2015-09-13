@@ -1,7 +1,9 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :admin?, only:[:show]
+  skip_before_action :admin?, only:[:show, :index]
 
+  def index
+  end
 
   def show
     @person = Person.find(params[:id])
@@ -22,4 +24,6 @@ class PeopleController < ApplicationController
   def person_params
     params.require(:person).permit(:session)
   end
+
+
 end

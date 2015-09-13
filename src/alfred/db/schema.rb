@@ -174,4 +174,15 @@ ActiveRecord::Schema.define(version: 20150912203437) do
   add_foreign_key "people", "tech_roles"
   add_foreign_key "person_skills", "people"
   add_foreign_key "person_skills", "skills"
+
+  create_table "users", force: :cascade do |t|
+    t.integer  "person_id"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "users", ["person_id"], name: "index_users_on_person_id", using: :btree
+
 end

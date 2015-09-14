@@ -37,18 +37,21 @@
       <div class="clearfix"></div>
     </li>
   </ul>-->
-
-  <ul id="milestone-list">
-    <% @milestones.each do |e| %>
-        <li>
-          <h2><%=e.title%></h2>
-          <p><%=e.description%></p>
-          <div class="calendar"><%=dayname(e.due_date)%> <%=e.due_date.day%> de <%=monthname(e.due_date)%> <%=e.due_date.year%></div>
-          <ul class="tags">
-            <!--<li>Speaker</li>-->
-          </ul>
-          <div class="clearfix"></div>
-        </li>
-    <% end %>
-  </ul>
+  <% if @milestones %>
+      <ul id="milestone-list">
+        <% @milestones.each do |e| %>
+            <li>
+              <h2><%=e.title%></h2>
+              <p><%=e.description%></p>
+              <div class="calendar"><%=dayname(e.due_date)%> <%=e.due_date.day%> de <%=monthname(e.due_date)%> <%=e.due_date.year%></div>
+              <ul class="tags">
+                <!--<li>Speaker</li>-->
+              </ul>
+              <div class="clearfix"></div>
+            </li>
+        <% end %>
+      </ul>
+  <% else %>
+          <p>No hay hitos que mostar</p>
+  <% end %>
 </div>

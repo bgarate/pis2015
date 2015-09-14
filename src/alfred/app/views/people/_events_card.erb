@@ -37,17 +37,21 @@
     </li>
   </ul>-->
 
-  <% @events.each do |e| %>
-      <ul>
-        <li class="clearfix">
-          <div class="day"><%=e.due_date.day%></div>
-          <div class="day-of-the-week"><%=dayname(e.due_date)%></div>
-          <div class="content">
-            <div class="month-and-year"><%=monthname(e.due_date)%> <%=e.due_date.year%></div>
-            <h2><%=e.title%></h2>
-            <p><%=e.description%></p>
-          </div>
-        </li>
-      </ul>
+  <% if @events %>
+      <% @events.each do |e| %>
+          <ul>
+            <li class="clearfix">
+              <div class="day"><%=e.due_date.day%></div>
+              <div class="day-of-the-week"><%=dayname(e.due_date)%></div>
+              <div class="content">
+                <div class="month-and-year"><%=monthname(e.due_date)%> <%=e.due_date.year%></div>
+                <h2><%=e.title%></h2>
+                <p><%=e.description%></p>
+              </div>
+            </li>
+          </ul>
+      <% end %>
+  <% else %>
+    <p>No hay hitos que mostar</p>
   <% end %>
 </div>

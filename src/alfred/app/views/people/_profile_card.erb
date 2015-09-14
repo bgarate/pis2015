@@ -4,6 +4,11 @@
       <%= image_tag "test/profile-picture.jpg" %>
     </div>
   </div>
-  <h1>Rodrigo Pérez</h1>
-  <h2>Software Developer</h2>
+  <h1><%= @name %></h1>
+  <h2><%= @trole %></h2>
+  <ul id="skills">
+    <% @skills.each do |s| %>
+        <li><%= image_tag s.icon %></li>
+    <% end %>
+  </ul>
 </div>

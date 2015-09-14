@@ -5,7 +5,7 @@ class CreateMilestones < ActiveRecord::Migration
       t.date :due_date
       t.text :description
       t.integer :status
-      t.integer :type
+      t.integer :milestone_type
       t.string :icon
 
       t.timestamps null: false

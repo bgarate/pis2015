@@ -51,10 +51,10 @@ ActiveRecord::Schema.define(version: 20150912203437) do
     t.date     "due_date"
     t.text     "description"
     t.integer  "status"
-    t.integer  "type"
+    t.integer  "milestone_type"
     t.string   "icon"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "category_id"
   end
 

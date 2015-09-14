@@ -10,7 +10,7 @@ describe GoogleController, "Login a traves de google oatuh" do
 
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
     visit '/auth/google_oauth2/callback'
-    expect(current_path).to eq root_path
+    expect(current_path).to eq people_index_path
 
   end
 

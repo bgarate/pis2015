@@ -1,84 +1,15 @@
 {
   "RSpec": {
     "coverage": {
-      "/mnt/sda7/Dropbox/PIS/Rails/git/pis2015/src/alfred/app/helpers/application_helper.rb": [
+      "/mnt/sda7/Dropbox/PIS/Rails/pis2015/src/alfred/app/helpers/application_helper.rb": [
         1,
         null
       ],
-      "/mnt/sda7/Dropbox/PIS/Rails/git/pis2015/src/alfred/app/controllers/google_controller.rb": [
+      "/mnt/sda7/Dropbox/PIS/Rails/pis2015/src/alfred/app/helpers/person_helper.rb": [
         1,
-        null,
-        1,
-        null,
-        1,
-        2,
-        null,
-        2,
-        2,
-        1,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
-        null,
-        null,
-        1,
-        1,
-        1,
-        null,
-        null,
-        1,
-        2,
-        null,
-        null
-      ],
-      "/mnt/sda7/Dropbox/PIS/Rails/git/pis2015/src/alfred/app/controllers/application_controller.rb": [
-        1,
-        null,
-        null,
-        1,
-        null,
-        null,
-        1,
-        1,
-        1,
-        null,
-        null,
-        null
-      ],
-      "/mnt/sda7/Dropbox/PIS/Rails/git/pis2015/src/alfred/app/models/user.rb": [
-        1,
-        1,
-        1,
-        3,
-        null,
-        null
-      ],
-      "/mnt/sda7/Dropbox/PIS/Rails/git/pis2015/src/alfred/app/models/person.rb": [
-        1,
-        1,
-        1,
-        1,
-        null
-      ],
-      "/mnt/sda7/Dropbox/PIS/Rails/git/pis2015/src/alfred/app/controllers/welcome_controller.rb": [
-        1,
-        1,
-        null,
-        1,
-        null,
         null
       ]
     },
-    "timestamp": 1441829083
+    "timestamp": 1442195240
   }
 }

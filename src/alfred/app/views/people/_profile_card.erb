@@ -4,14 +4,11 @@
       <%= image_tag "test/profile-picture.jpg" %>
     </div>
   </div>
-  <h1>Rodrigo Pérez</h1>
-  <h2>Software Developer</h2>
+  <h1><%= @name %></h1>
+  <h2><%= @trole %></h2>
   <ul id="skills">
-    <li><%= image_tag "skills/angular.png" %></li>
-    <li><%= image_tag "skills/css3.png" %></li>
-    <li><%= image_tag "skills/html5.png" %></li>
-    <li><%= image_tag "skills/javascript.png" %></li>
-    <li><%= image_tag "skills/java.png" %></li>
-    <li><%= image_tag "skills/jquery.png" %></li>
+    <% @skills.each do |s| %>
+        <li><%= image_tag s.icon %></li>
+    <% end %>
   </ul>
 </div>

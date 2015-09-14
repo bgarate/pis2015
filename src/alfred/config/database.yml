@@ -13,10 +13,10 @@ development:
   <<: *default
   database: alfred_development
   host: localhost
-  port: 5433
+  port: 5432
   pool: 5
   username: postgres
-  password: gogus333.
+  password: pis2015rules
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -25,10 +25,10 @@ test:
   <<: *default
   database: alfred_test
   host: localhost
-  port: 5433
+  port: 5432
   pool: 5
   username: postgres
-  password: gogus333.
+  password: pis2015rules
 
 production:
   <<: *default

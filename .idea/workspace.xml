@@ -2,92 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bcb03c6b-66dd-4e10-9e22-fe78798d23b5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/.resultset.json.lock" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/logos/alfred-logo-big.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/skills/angular.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/colorbox/border.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/layouts/calendar-red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/layouts/calendar-white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/colorbox/controls.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/skills/css3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/layouts/doc.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/favicon_green.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/favicon_red.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/favicon_yellow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/layouts/home.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/skills/html5.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/layouts/icono-10.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/layouts/icono-11.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/layouts/icono_Artboard 19.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/skills/java.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/skills/javascript.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/images/skills/jquery.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/colorbox/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/colorbox/loading_background.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/magnify.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/smoothness/images/ui-bg_flat_0_aaaaaa_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/smoothness/images/ui-bg_flat_75_ffffff_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/smoothness/images/ui-bg_glass_55_fbf9ee_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/smoothness/images/ui-bg_glass_65_ffffff_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/smoothness/images/ui-bg_glass_75_dadada_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/smoothness/images/ui-bg_glass_95_fef1ec_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/smoothness/images/ui-bg_highlight-soft_75_cccccc_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/smoothness/images/ui-icons_222222_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/smoothness/images/ui-icons_2e83ff_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/smoothness/images/ui-icons_454545_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/smoothness/images/ui-icons_888888_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/smoothness/images/ui-icons_cd0a0a_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/config/initializers/.fuse_hidden0000061900000001" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/.idea/.generators" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/.last_run.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/.idea/.name" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/.idea/.rakeTasks" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/.resultset.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/db/migrate/20150905151500_create_users.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/.idea/runConfigurations/Development__alfred.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/.idea/runConfigurations/Production__alfred.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_cards.scss.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/_events_card.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/_timeline_card.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/.idea/alfred.iml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/application.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/assets/0.10.0/application.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/cacert.pem" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/controllers/google_controller.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/spec/controllers/google_controller_spec.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/views/welcome/index.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/coverage/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/.idea/misc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/.idea/modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/config/initializers/omniauth.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/.idea/runConfigurations/spec__alfred.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/.idea/runConfigurations/test__alfred.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/views/google/unregistered.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/models/user.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/spec/models/user_spec.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/controllers/welcome_controller.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/.idea/workspace.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_login.scss.erb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_milestones.scss.erb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/controllers/milestones_controller.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/views/milestones/show.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/Gemfile.lock" afterPath="$PROJECT_DIR$/src/alfred/Gemfile.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/Gemfile" afterPath="$PROJECT_DIR$/src/alfred/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/views/layouts/_navigation.html.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/layouts/_navigation.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_navigation.scss" afterPath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_navigation.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/views/people/_stats_card.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/_stats_card.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/views/people/_timeline_card.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/_timeline_card.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/assets/javascripts/application.js" afterPath="$PROJECT_DIR$/src/alfred/app/assets/javascripts/application.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb" afterPath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/src/alfred/app/controllers/application_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/category.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/category.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/config/database.yml" afterPath="$PROJECT_DIR$/src/alfred/config/database.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/controllers/google_controller.rb" afterPath="$PROJECT_DIR$/src/alfred/app/controllers/google_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/views/people/index.html.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/index.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/mentorship.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/mentorship.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/milestone.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/milestone.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/spec/models/milestone_spec.rb" afterPath="$PROJECT_DIR$/src/alfred/spec/models/milestone_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/milestone_template.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/milestone_template.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/note.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/note.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/participation.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/participation.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/controllers/people_controller.rb" afterPath="$PROJECT_DIR$/src/alfred/app/controllers/people_controller.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/person.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/person.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/person_milestone.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/person_milestone.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/person_skill.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/person_skill.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/spec/models/person_spec.rb" afterPath="$PROJECT_DIR$/src/alfred/spec/models/person_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/test/models/person_test.rb" afterPath="$PROJECT_DIR$/src/alfred/test/models/person_test.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/pis2015.iml" afterPath="$PROJECT_DIR$/.idea/pis2015.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/project.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/project.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/resource.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/resource.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/config/routes.rb" afterPath="$PROJECT_DIR$/src/alfred/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/db/schema.rb" afterPath="$PROJECT_DIR$/src/alfred/db/schema.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/db/seeds.rb" afterPath="$PROJECT_DIR$/src/alfred/db/seeds.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/spec/spec_helper.rb" afterPath="$PROJECT_DIR$/src/alfred/spec/spec_helper.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/views/people/show.html.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/show.html.erb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/skill.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/skill.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/tech_role.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/tech_role.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/technology.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/technology.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/user.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/user.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/spec/models/user_spec.rb" afterPath="$PROJECT_DIR$/src/alfred/spec/models/user_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pis2015.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -101,9 +54,9 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/pis2015@development.coverage" NAME="development Coverage Results" MODIFIED="1441755800072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/alfred/config/environments" MODULE_NAME="pis2015" />
     <SUITE FILE_PATH="coverage/pis2015@application_controller.coverage" NAME="application_controller Coverage Results" MODIFIED="1441750702142" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/alfred/app/controllers" MODULE_NAME="pis2015" />
     <SUITE FILE_PATH="coverage/pis2015@Run_test__PersonTest___pis2015.coverage" NAME="Run test 'PersonTest': pis2015 Coverage Results" MODIFIED="1442011131293" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/alfred/test/models" MODULE_NAME="pis2015" />
-    <SUITE FILE_PATH="coverage/pis2015@development.coverage" NAME="development Coverage Results" MODIFIED="1441755800072" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/alfred/config/environments" MODULE_NAME="pis2015" />
     <SUITE FILE_PATH="coverage/pis2015@person_controller.coverage" NAME="people_controller Coverage Results" MODIFIED="1441755847198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/alfred/app/controllers" MODULE_NAME="pis2015" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -115,61 +68,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="people_controller.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/alfred/app/controllers/people_controller.rb">
+      <file leaf-file-name="_milestones.scss.erb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_milestones.scss.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="people_controller_spec.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/alfred/spec/controllers/people_controller_spec.rb">
+      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/alfred/app/views/milestones/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="person_spec.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/alfred/spec/models/person_spec.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_profile_card.erb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/alfred/app/views/people/_profile_card.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.19448946">
-              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="application_controller.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/alfred/app/controllers/application_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="person.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/alfred/app/models/person.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.075187966">
+              <caret line="2" column="33" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -179,13 +92,21 @@
         <entry file="file://$PROJECT_DIR$/src/alfred/config/routes.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Ruby Class Template" />
+        <option value="CSS File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -211,14 +132,28 @@
         <option value="$PROJECT_DIR$/src/alfred/config/database.sample.yml" />
         <option value="$PROJECT_DIR$/src/alfred/config/locales/es.yml" />
         <option value="$PROJECT_DIR$/src/alfred/app/views/people/new.html.erb" />
-        <option value="$PROJECT_DIR$/src/alfred/config/database.yml" />
         <option value="$PROJECT_DIR$/src/alfred/spec/models/person_spec.rb" />
         <option value="$PROJECT_DIR$/src/alfred/spec/controllers/people_controller_spec.rb" />
-        <option value="$PROJECT_DIR$/src/alfred/app/controllers/application_controller.rb" />
-        <option value="$PROJECT_DIR$/src/alfred/app/controllers/people_controller.rb" />
         <option value="$PROJECT_DIR$/src/alfred/app/models/person.rb" />
+        <option value="$PROJECT_DIR$/src/alfred/config/database.yml" />
+        <option value="$PROJECT_DIR$/src/alfred/app/controllers/application_controller.rb" />
+        <option value="$PROJECT_DIR$/src/alfred/app/views/people/_timeline_card.erb" />
         <option value="$PROJECT_DIR$/src/alfred/db/schema.rb" />
+        <option value="$PROJECT_DIR$/src/alfred/app/views/people/index.html.erb" />
+        <option value="$PROJECT_DIR$/src/alfred/app/views/people/show.html.erb" />
+        <option value="$PROJECT_DIR$/src/alfred/app/views/people/_profile_card.erb" />
+        <option value="$PROJECT_DIR$/src/alfred/app/assets/javascripts/application.js" />
+        <option value="$PROJECT_DIR$/src/alfred/app/views/people/_stats_card.erb" />
+        <option value="$PROJECT_DIR$/src/alfred/db/seeds.rb" />
+        <option value="$PROJECT_DIR$/src/alfred/app/controllers/google_controller.rb" />
+        <option value="$PROJECT_DIR$/src/alfred/app/controllers/people_controller.rb" />
+        <option value="$PROJECT_DIR$/src/alfred/app/controllers/milestones_controller.rb" />
+        <option value="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_login.scss.erb.css" />
+        <option value="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb" />
+        <option value="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_milestones.scss.erb" />
         <option value="$PROJECT_DIR$/src/alfred/config/routes.rb" />
+        <option value="$PROJECT_DIR$/src/alfred/Gemfile" />
+        <option value="$PROJECT_DIR$/src/alfred/app/views/milestones/show.html.erb" />
       </list>
     </option>
   </component>
@@ -231,9 +166,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="-4" />
+    <option name="y" value="24" />
     <option name="width" value="1301" />
-    <option name="height" value="772" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -276,6 +211,38 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pis2015" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pis2015" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pis2015" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pis2015" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="alfred" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -283,12 +250,19 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$USER_HOME$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/alfred/app/assets/stylesheets" />
+      <recent name="$PROJECT_DIR$/src/alfred/app/views/milestones" />
+    </key>
   </component>
   <component name="RunManager" selected="Test::Unit/Shoulda/Minitest.Run test 'PersonTest': pis2015">
     <configuration default="false" name="All tests in person: pis2015" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda/Minitest" temporary="true">
@@ -547,11 +521,11 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Ruby.people_controller" />
-        <item index="1" class="java.lang.String" itemvalue="Test::Unit/Shoulda/Minitest.All tests in person: pis2015" />
-        <item index="2" class="java.lang.String" itemvalue="Test::Unit/Shoulda/Minitest.Run test 'PersonTest': pis2015" />
-        <item index="3" class="java.lang.String" itemvalue="Ruby.development" />
-        <item index="4" class="java.lang.String" itemvalue="Ruby.application_controller" />
+        <item index="0" class="java.lang.String" itemvalue="Test::Unit/Shoulda/Minitest.Run test 'PersonTest': pis2015" />
+        <item index="1" class="java.lang.String" itemvalue="Ruby.development" />
+        <item index="2" class="java.lang.String" itemvalue="Ruby.application_controller" />
+        <item index="3" class="java.lang.String" itemvalue="Ruby.people_controller" />
+        <item index="4" class="java.lang.String" itemvalue="Test::Unit/Shoulda/Minitest.All tests in person: pis2015" />
       </list>
     </recent_temporary>
   </component>
@@ -582,16 +556,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
+    <frame x="65" y="24" width="1301" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3268945" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19754036" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27250996" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34240687" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -599,8 +573,8 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295129" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32786885" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3289777" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -623,9 +597,9 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14911607" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34240687" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34240687" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -649,74 +623,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/alfred/config/database.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/models/person.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/test/models/person_test.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/controllers/people_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/views/people/new.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/views/people/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="7" selection-start-line="51" selection-start-column="7" selection-end-line="51" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/views/layouts/application.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/views/layouts/application.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/alfred/app/views/layouts/application.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -742,13 +648,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/views/people/index.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5113636">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -822,13 +721,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/views/people/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="21" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/alfred/app/views/layouts/_navigation.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -843,25 +735,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/views/people/_stats_card.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/alfred/app/views/layouts/application.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2703125">
-          <caret line="28" column="43" selection-start-line="28" selection-start-column="43" selection-end-line="28" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -893,13 +770,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/test/models/person_test.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24700598">
-          <caret line="11" column="3" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/alfred/config/database.sample.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -925,15 +795,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.7379096">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/config/database.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.74882996">
-          <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -945,58 +806,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/spec/controllers/people_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/controllers/application_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/controllers/people_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/db/schema.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.4102964">
-          <caret line="91" column="25" selection-start-line="91" selection-start-column="25" selection-end-line="91" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/models/person.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.41734862">
           <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/test/models/person_test.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25660965">
+          <caret line="11" column="3" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/spec/controllers/people_controller_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3732504">
+          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -1004,15 +832,175 @@
     <entry file="file://$PROJECT_DIR$/src/alfred/spec/models/person_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
+          <caret line="26" column="29" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/config/database.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62986004">
+          <caret line="27" column="12" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/controllers/application_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16329704">
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/views/people/index.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/views/people/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.625">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/alfred/app/views/people/_profile_card.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19448946">
-          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="18" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/javascripts/application.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/views/people/_timeline_card.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.25">
+          <caret line="39" column="15" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/views/people/_stats_card.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.05">
+          <caret line="24" column="88" selection-start-line="24" selection-start-column="78" selection-end-line="24" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/db/schema.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39007092">
+          <caret line="90" column="24" selection-start-line="90" selection-start-column="24" selection-end-line="90" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/db/seeds.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="50" selection-start-line="15" selection-start-column="50" selection-end-line="17" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/test/controllers/person_controller_test.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/models/person.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="2" selection-start-line="31" selection-start-column="2" selection-end-line="31" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/controllers/google_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/controllers/people_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="54" selection-start-line="3" selection-start-column="54" selection-end-line="3" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/controllers/milestones_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_login.scss.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.4397163">
+          <caret line="97" column="1" selection-start-line="97" selection-start-column="1" selection-end-line="97" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.0">
+          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_milestones.scss.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/Gemfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75177306">
+          <caret line="59" column="12" selection-start-line="59" selection-start-column="4" selection-end-line="59" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/views/milestones/show.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.075187966">
+          <caret line="2" column="33" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="33" />
           <folding />
         </state>
       </provider>

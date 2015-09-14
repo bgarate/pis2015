@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require_tree .
 
+
 $(function() {
   $(".knob-stats input").knob({
     'width':'90%',

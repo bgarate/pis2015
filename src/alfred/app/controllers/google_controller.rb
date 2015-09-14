@@ -20,7 +20,7 @@ class GoogleController < ApplicationController
       user.save!
 
       session[:user_id] = user.id
-      redirect_to people_index_path
+      redirect_to people_path
     else
       redirect_to google_unregistered_path
     end

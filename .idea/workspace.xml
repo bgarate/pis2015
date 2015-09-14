@@ -2,44 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bcb03c6b-66dd-4e10-9e22-fe78798d23b5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_login.scss.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_milestones.scss.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/controllers/milestones_controller.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/alfred/app/views/milestones/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/Gemfile.lock" afterPath="$PROJECT_DIR$/src/alfred/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/Gemfile" afterPath="$PROJECT_DIR$/src/alfred/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/views/people/_stats_card.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/_stats_card.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/views/people/_timeline_card.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/_timeline_card.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/assets/javascripts/application.js" afterPath="$PROJECT_DIR$/src/alfred/app/assets/javascripts/application.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb" afterPath="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/controllers/application_controller.rb" afterPath="$PROJECT_DIR$/src/alfred/app/controllers/application_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/category.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/category.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/config/database.yml" afterPath="$PROJECT_DIR$/src/alfred/config/database.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/controllers/google_controller.rb" afterPath="$PROJECT_DIR$/src/alfred/app/controllers/google_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/views/people/index.html.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/index.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/mentorship.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/mentorship.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/milestone.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/milestone.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/spec/models/milestone_spec.rb" afterPath="$PROJECT_DIR$/src/alfred/spec/models/milestone_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/milestone_template.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/milestone_template.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/note.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/note.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/participation.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/participation.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/controllers/people_controller.rb" afterPath="$PROJECT_DIR$/src/alfred/app/controllers/people_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/person.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/person.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/person_milestone.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/person_milestone.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/person_skill.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/person_skill.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/spec/models/person_spec.rb" afterPath="$PROJECT_DIR$/src/alfred/spec/models/person_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/test/models/person_test.rb" afterPath="$PROJECT_DIR$/src/alfred/test/models/person_test.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/pis2015.iml" afterPath="$PROJECT_DIR$/.idea/pis2015.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/project.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/project.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/resource.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/resource.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/config/routes.rb" afterPath="$PROJECT_DIR$/src/alfred/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/db/seeds.rb" afterPath="$PROJECT_DIR$/src/alfred/db/seeds.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/views/people/show.html.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/people/show.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/skill.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/skill.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/tech_role.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/tech_role.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/technology.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/technology.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/models/user.rb" afterPath="$PROJECT_DIR$/src/alfred/app/models/user.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/spec/models/user_spec.rb" afterPath="$PROJECT_DIR$/src/alfred/spec/models/user_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/alfred/app/views/milestones/show.html.erb" afterPath="$PROJECT_DIR$/src/alfred/app/views/milestones/show.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pis2015.iws" />
@@ -68,21 +32,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_milestones.scss.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_milestones.scss.erb">
+      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/alfred/app/views/milestones/show.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.075187966">
+              <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="show.html.erb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/alfred/app/views/milestones/show.html.erb">
+      <file leaf-file-name="application.scss.erb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.075187966">
-              <caret line="2" column="33" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="33" />
+            <state vertical-scroll-proportion="-6.0">
+              <caret line="41" column="19" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -149,10 +113,10 @@
         <option value="$PROJECT_DIR$/src/alfred/app/controllers/people_controller.rb" />
         <option value="$PROJECT_DIR$/src/alfred/app/controllers/milestones_controller.rb" />
         <option value="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_login.scss.erb.css" />
-        <option value="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb" />
         <option value="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_milestones.scss.erb" />
         <option value="$PROJECT_DIR$/src/alfred/config/routes.rb" />
         <option value="$PROJECT_DIR$/src/alfred/Gemfile" />
+        <option value="$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb" />
         <option value="$PROJECT_DIR$/src/alfred/app/views/milestones/show.html.erb" />
       </list>
     </option>
@@ -965,26 +929,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.0">
-          <caret line="35" column="19" selection-start-line="35" selection-start-column="19" selection-end-line="35" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/alfred/config/routes.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_milestones.scss.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -997,10 +945,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/application.scss.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.0">
+          <caret line="41" column="19" selection-start-line="41" selection-start-column="19" selection-end-line="41" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/alfred/app/assets/stylesheets/_milestones.scss.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/alfred/app/views/milestones/show.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.075187966">
-          <caret line="2" column="33" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="33" />
+          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
           <folding />
         </state>
       </provider>

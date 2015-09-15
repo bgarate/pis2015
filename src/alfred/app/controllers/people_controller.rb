@@ -1,6 +1,5 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :loged?
   skip_before_action :admin?, only:[:show, :index, :me]
 
   def index

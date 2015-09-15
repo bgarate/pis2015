@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 describe GoogleController, "Login a traves de google oatuh" do
+  before(:each) do
+    allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
+  end
 
   it "Deveria guardar el id del usuario logueado en session y redirigir perfil" do
     tr = TechRole.new

@@ -6,17 +6,16 @@
 #
 default: &default
   adapter: postgresql
+  host: localhost
+  port: 5432
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
   database: alfred_development
-  host: localhost
-  port: 5432
-  pool: 5
   username: postgres
-  password: 123
+  password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,11 +23,8 @@ development:
 test:
   <<: *default
   database: alfred_test
-  host: localhost
-  port: 5432
-  pool: 5
   username: postgres
-  password: 123
+  password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>
 
 production:
   <<: *default

@@ -44,10 +44,6 @@ class Person < ActiveRecord::Base
 
   has_many :person_skills
   has_many :skills, through: :person_skills
-
-  has_one :user
-  has_many :person_milestones
-  has_many :milestones, through: :person_milestones
 end
 
 

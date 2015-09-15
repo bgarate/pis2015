@@ -43,7 +43,7 @@
             <li>
               <h2><%=e.title%></h2>
               <p><%=e.description%></p>
-              <div class="calendar"><%=e.due_date.strftime("%A, %B %d %Y") %></div>
+              <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
               <ul class="tags">
                 <!--<li>Speaker</li>-->
               </ul>

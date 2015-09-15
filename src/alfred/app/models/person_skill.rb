@@ -1,4 +1,4 @@
 class PersonSkill < ActiveRecord::Base
   belongs_to :person
-  has_one :skill
+  belongs_to :skill
 end

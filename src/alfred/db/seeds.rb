@@ -9,6 +9,9 @@
 p1 = Person.create!(name: "Bruno Garate", email: "bruno.garate@gmail.com", admin: true, start_date: 3.years.ago)
 p1.user = User.create!()
 
+p2 = Person.create!(name: "Alfred Garate", email: "alfred.pis.2015@gmail.com", admin: true, start_date: 3.years.ago)
+p2.user = User.create!()
+
 p1.milestones.create(title: "Un hito de prueba",
   description: "Esta es la descripción del hito",
   due_date: Time.now + 5*24*60*60)

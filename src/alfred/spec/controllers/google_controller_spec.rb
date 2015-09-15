@@ -46,7 +46,7 @@ describe GoogleController, "Login a traves de google oatuh" do
 
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
     visit '/auth/google_oauth2/callback'
-    expect(current_path).to eq people_index_path
+    expect(current_path).to include(people_path)
 
   end
 
@@ -59,6 +59,14 @@ describe GoogleController, "Login a traves de google oatuh" do
   end
 
   it "Deveria poner el user id en session en nil y redirigir a home" do
+    admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :admin=>true
+    admin.save!
+
+    ad_user = User.new :person => admin
+    ad_user.oauth_expires_at = Time.current().advance(days:1)
+    ad_user.save!
+    session[:user_id] = ad_user.id
+
     get :signout
     expect(session[:user_id]).to be_nil
     expect(response).to redirect_to(root_path)
@@ -69,4 +77,10 @@ describe GoogleController, "Login a traves de google oatuh" do
     expect(assigns(:msj)).to eq('Usuario no regitrado, contacte a un administrador.')
     expect(response).to render_template('unregistered')
   end
+
+  it "Deveria redireccionar a root path por no estar logueado" do
+    get :signout
+    expect(response).to redirect_to(root_path)
+  end
+
 end

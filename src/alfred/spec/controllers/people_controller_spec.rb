@@ -35,6 +35,19 @@ describe PeopleController do
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end
+
+    it "Deveria redirigir a index" do
+      admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :admin=>true
+      admin.save!
+
+      ad_user = User.new :person => admin
+      ad_user.oauth_expires_at = Time.current().advance(days:1)
+      ad_user.save!
+      session[:user_id] = ad_user.id
+
+      get :me
+      expect(response).to redirect_to(:action => "index")
+    end
   end
 
   describe "GET create" do

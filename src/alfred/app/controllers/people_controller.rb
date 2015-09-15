@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
 
-  #skip_before_action :loged?
+  skip_before_action :loged?
   skip_before_action :admin?, only:[:show, :index, :me]
 
   def index
@@ -8,7 +8,7 @@ class PeopleController < ApplicationController
   end
 
   def me
-    redirect_to action: index
+    redirect_to(:action => "index") and return
   end
 
   def show

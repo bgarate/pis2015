@@ -15,7 +15,7 @@ development:
   <<: *default
   database: alfred_development
   username: postgres
-  password: 123 #<%= ENV['ALFRED_DATABASE_PASSWORD'] %>
+  password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,7 +24,7 @@ test:
   <<: *default
   database: alfred_test
   username: postgres
-  password: 123 #<%= ENV['ALFRED_DATABASE_PASSWORD'] %>
+  password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>
 
 production:
   <<: *default

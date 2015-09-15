@@ -1,4 +1,27 @@
+# == Schema Information
+#
+# Table name: people
+#
+#  id           :integer          not null, primary key
+#  name         :string
+#  email        :string
+#  cellphone    :string
+#  phone        :string
+#  birth_date   :date
+#  start_date   :date
+#  end_date     :date
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  tech_role_id :integer
+#  admin        :boolean
+#
+
 class Person < ActiveRecord::Base
+
+  validates :name, :email, presence: true
+  validates :email, format: { with: /\A([-a-z0-9\.]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
+
+  has_one :user
   has_many :person_milestones
   has_many :milestones, through: :person_milestones
   belongs_to :tech_role
@@ -21,7 +44,6 @@ class Person < ActiveRecord::Base
 
   has_many :person_skills
   has_many :skills, through: :person_skills
-
 end
 
 

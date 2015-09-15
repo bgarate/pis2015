@@ -1,0 +1,98 @@
+
+@mixin list-of-properties($property, $colors) {
+    @each $color in $colors {
+    $i: index($colors, $color);
+    &:nth-child(#{$i}) {
+         #{$property}: $color;
+     }
+    }
+}
+
+#login-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+@include translate(-50%, -50%);
+
+    background-color: white;
+    padding: 130px;
+@include box-shadow(3px 3px 5px rgba(black,0.5));
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+
+&:after {
+     box-shadow: inset 0 8px 5px -5px rgba(black, 0.5), 1px 1px 2px rgba(black, 0.5);
+     content: '';
+     position: absolute;
+     right: 50px;
+     bottom: -36px;
+     z-index: -1;
+     width: 39px;
+     height: 36px;
+     background-image: url('<%= asset_path 'assets/logos/moove-it-logo.png' %>');;
+     background-size: 40px;
+     background-repeat: no-repeat;
+ }
+
+
+ul#login-top {
+
+    display: table;
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    table-layout: fixed;
+    padding: 0;
+
+li {
+    height: 15px;
+    display: table-cell;
+    list-style: none;
+
+@include list-of-properties(background-color,
+#23323D #34495E #2980B8 #3497DA #169F85
+#1ABB9B #F0C30F #E8B113 #E57E22 #D25400
+#FF493B #E64C3C #D14339)
+}
+}
+
+
+a {
+    background-color: #FF8D40;
+    padding: 10px 10px 10px 50px;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid #F67B28;
+    font-size: 16px;
+    font-weight: bold;
+    background-image: url('<%= asset_path 'assets/layouts/calendar-white.png' %>');
+    background-repeat: no-repeat;
+    background-position: 10px 50%;
+    background-size: 24px;
+    white-space: nowrap;
+    position: relative;
+    bottom: 50px;
+    left: 100px;
+
+
+&:before {
+     content: '';
+     position: absolute;
+     left: 40px;
+     top: 5px;
+     bottom: 5px;
+     border-left: 1px solid white;
+ }
+
+}
+
+img {
+    position: relative;
+    right: 40px;
+    display: block;
+    margin: auto;
+}
+
+}

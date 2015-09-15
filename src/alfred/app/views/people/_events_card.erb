@@ -1,0 +1,57 @@
+<div id="events-card" class="card events">
+  <h1>Eventos</h1>
+  <!--<div class="separator"><div>Esta semana</div></div>
+  <ul>
+    <li class="clearfix">
+      <div class="day">16</div>
+      <div class="day-of-the-week">Mie</div>
+      <div class="content">
+        <div class="month-and-year">Septiembre 2015</div>
+        <h2>Feedback semestral</h2>
+        <p>Reunión de relevamiento de requisitos
+          para nuevo proyecto con el cliente XYZ S.A.</p>
+      </div>
+    </li>
+  </ul>
+  <div class="separator"><div>Semana próxima</div></div>
+  <ul>
+    <li class="clearfix">
+      <div class="day">16</div>
+      <div class="day-of-the-week">Mie</div>
+      <div class="content">
+        <div class="month-and-year">Septiembre 2015</div>
+        <h2>Feedback semestral</h2>
+        <p>Reunión de relevamiento de requisitos
+          para nuevo proyecto con el cliente XYZ S.A.</p>
+      </div>
+    </li>
+    <li class="clearfix">
+      <div class="day">16</div>
+      <div class="day-of-the-week">Mie</div>
+      <div class="content">
+        <div class="month-and-year">Septiembre 2015</div>
+        <h2>Feedback semestral</h2>
+        <p>Reunión de relevamiento de requisitos
+          para nuevo proyecto con el cliente XYZ S.A.</p>
+      </div>
+    </li>
+  </ul>-->
+
+  <% if @events %>
+      <% @events.each do |e| %>
+          <ul>
+            <li class="clearfix">
+              <div class="day"><%=e.due_date.day%></div>
+              <div class="day-of-the-week"><%=dayname(e.due_date)%></div>
+              <div class="content">
+                <div class="month-and-year"><%=monthname(e.due_date)%> <%=e.due_date.year%></div>
+                <h2><%=e.title%></h2>
+                <p><%=e.description%></p>
+              </div>
+            </li>
+          </ul>
+      <% end %>
+  <% else %>
+    <p>No hay hitos que mostar</p>
+  <% end %>
+</div>

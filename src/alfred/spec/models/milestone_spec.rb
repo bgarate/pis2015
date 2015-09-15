@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: milestones
+#
+#  id             :integer          not null, primary key
+#  title          :string
+#  due_date       :date
+#  description    :text
+#  status         :integer
+#  milestone_type :integer
+#  icon           :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  category_id    :integer
+#
+
 require 'rails_helper'
 
 describe 'Milestone' do

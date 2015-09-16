@@ -1,0 +1,28 @@
+
+// OJO! Esto es una solución temporal para permitir la navegación entre las diferentes
+// parates del sitio. Se integrará una solución más general.
+
+Search = {};
+
+Search.commands = {
+    "Ver mi perfil" : "/people/me",
+    "Crear usuario" : "/people/new",
+    "Cerrar sesion" : "/google/signout",
+    "Ver personas" : "/people/",
+    "Ver hitos" : "/milestones/",
+    "Crear hito" : "/milestones/new",
+};
+
+
+$().ready(function() {
+
+    $("#nav-search").autocomplete({
+        source: Object.keys(Search.commands),
+        autoFocus: true,
+        select: function(e,ui) {
+            $("#nav-search-form").attr("action", Search.commands[ui.item.value]);
+            $("#nav-search-form").submit();
+        }
+    });
+
+});

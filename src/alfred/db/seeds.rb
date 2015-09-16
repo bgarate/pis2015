@@ -10,6 +10,12 @@ tr = TechRole.new
 tr.name= "Vendedor de Tortas Fritas"
 tr.save!
 
+tr2 = TechRole.new
+tr2.name= "iOS Developer"
+tr2.save!
+
+c = Category.create(name: "Conferencia")
+
 per = Person.new
 per.name = 'Alfred'
 per.email = 'alfred.pis.2015@gmail.com'
@@ -23,6 +29,8 @@ m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nu
 m.due_date= Time.now + (3*2*7*24*60*60)
 m.milestone_type= 1
 m.status=0
+m.icon = "test/silueta.gif"
+m.category = c
 per.milestones<<(m)
 
 m1 = Milestone.new
@@ -30,6 +38,7 @@ m1.title = 'Entrega del prototipo de alfred'
 m1.description= 'Hay que entregar el protipo de alfred a la gente de pis. Ademas de cafe y galletitas maria gratis'
 m1.due_date= Time.now - (3*2*7*24*60*60)
 m1.status=0
+m1.category = c
 per.milestones<<(m1)
 
 sk1 = Skill.new
@@ -58,3 +67,8 @@ p1.milestones.create(title: "Un hito de prueba",
 p1.milestones.create(title: "Otro hito de prueba",
                      description: "Una descripción un poquito mas larga que no entra en una sola linea",
                      due_date: Time.now - 5*24*60*60)
+
+p1.projects << pro
+p1.skills << sk1
+p1.skills << sk2
+p1.tech_role = tr2

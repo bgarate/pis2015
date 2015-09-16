@@ -169,6 +169,7 @@ ul#skills {
     position: relative;
     z-index: 5;
     margin: 10px 0;
+    padding-left: 0;
 
     li {
       display: block;
@@ -263,6 +264,10 @@ ul#skills {
   border-#{opposite_position($direction)}-color: $color;
 }
 
+
+$tag-height: 20px;
+
+
 ul#milestone-list {
 
   padding-left: 40px;
@@ -306,7 +311,7 @@ ul#milestone-list {
       left: -60px;
       width: 42px;
       height: 42px;
-      background-image: url('<%= asset_path 'assets/layouts/calendar-white.png' %>');
+      background-image: image-url('layouts/calendar-white.png');
       background-size: 60%;
       background-repeat: no-repeat;
       background-position: 50%;
@@ -324,25 +329,10 @@ ul#milestone-list {
       padding-left: 15px;
     }
 
-    .calendar {
-      background-image: url('<%= asset_path 'assets/layouts/calendar-red.png' %>');
-      background-repeat: no-repeat;
-      background-size: 24px 24px;
-      min-height: 24px;
-      float: left;
-      margin-left: 15px;
-      line-height: 24px;
-      padding-left: 30px;
-      font-weight: bold;
-      font-size: 10px;;
-    }
-
     ul.tags {
       float: right;
       margin-right: 15px;
     }
-
-    $tag-height: 20px;
 
     li {
       position: relative;
@@ -383,3 +373,74 @@ ul#milestone-list {
 
   }
 }
+
+
+ul#pending-list {
+
+  padding-left: 0;
+
+
+  > li {
+
+    position: relative;
+    border-radius: 10px;
+    text-align: left;
+    background-color: white;
+    list-style-type: none;
+    padding: 20px 10px 20px 15px;
+    background-color: $sunflower-dark;
+    margin: 10px;
+
+    h2 {
+      margin: 0 0 10px 0;
+      font-size: 18px;
+    }
+
+    p {
+      padding-left: 15px;
+    }
+
+    .calendar {
+      background-image: image-url('layouts/calendar-white.png');
+    }
+
+    li {
+      position: relative;
+      float: right;
+      background-color: #E862E5;
+      font-size: 10px;
+      list-style: none;
+      line-height: $tag-height;
+      height: $tag-height;
+      padding: 0 10px;
+      color: white;
+      font-weight: bold;
+      margin-top: 4px;
+
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+
+      &:before {
+        content: '';
+        position: absolute;
+        left: -$tag-height;
+        @include triangle(left, #E862E5, $tag-height);
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        left: -1px;
+        top: calc(50% - 2px);
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: white;
+      }
+
+
+    }
+
+  }
+}
+

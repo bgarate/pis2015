@@ -30,9 +30,87 @@ html, body {
 
 body {
   background-color: $body-background;
+
+  &.milestones {
+    background-color: white;
+  }
+
 }
 
 @import "navigation";
 @import "cards";
 @import "login";
 @import "milestones";
+
+.calendar {
+  background-image: image-url('layouts/calendar-red.png');
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  min-height: 24px;
+  float: left;
+  margin-left: 15px;
+  padding-left: 30px;
+  line-height: 24px;
+  font-weight: bold;
+  font-size: 10px;;
+
+  &.white {
+    background-image: image-url('assets/layouts/calendar-white.png');
+  }
+
+  &.right {
+    margin-left: inherit;
+    padding-left: inherit;
+    margin-right: 15px;
+    padding-right: 30px;
+    background-position: right;
+    float: right;
+  }
+
+}
+
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 160px;
+  _width: 160px;
+  padding: 4px 0;
+  margin: 2px 0 0 0;
+  list-style: none;
+  background-color: $nav-background;
+  border-color: $nav-hover;
+  border-style: solid;
+  border-width: 1px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+  color: white;
+
+  .ui-menu-item > a.ui-corner-all {
+    display: block;
+    padding: 3px 15px;
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: #555555;
+    white-space: nowrap;
+
+    &.ui-state-hover, &.ui-state-active {
+      color: #ffffff;
+      text-decoration: none;
+      background-color: #0088cc;
+      border-radius: 0px;
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      background-image: none;
+    }
+  }
+}

@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def loged?
     @user = current_user
     if not @user
-        redirect_to root_path
+        redirect_to welcome_index_path
     end
   end
 

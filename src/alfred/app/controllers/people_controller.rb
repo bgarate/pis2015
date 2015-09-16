@@ -3,7 +3,7 @@ class PeopleController < ApplicationController
   skip_before_action :admin?, only:[:show, :index, :me]
 
   def index
-    redirect_to action: 'show', id: session[:user_id]
+      redirect_to action: 'show', id: session[:user_id]
   end
 
   def me

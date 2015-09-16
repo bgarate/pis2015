@@ -27,7 +27,11 @@ test:
   password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>
 
 production:
-  <<: *default
-  database: alfred_production
-  username: alfred
-  password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  host: ec2-54-204-20-164.compute-1.amazonaws.com
+  port: 5432
+  pool: 5
+  timeout: 5000
+  database: d5l1f0r9l8inag
+  username: ctsholzofwcgxv
+  password: pFqrFFfG0rmu-ilwoEXjuPlgsb

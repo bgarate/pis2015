@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root to: "people#me"
 
+  get 'welcome/index'
+
   resources :people do
     collection do
       get 'me'

@@ -1,5 +1,79 @@
 
 #milestone-info {
-    background-color: white;
-    min-height: 10rem;
+    min-height: 250px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: $body-background;
+    color:#34495E;
+    position: absolute;
+
+    .left-pane {
+        flex: 1 0 0;
+        width: 33.3%;
+        text-align: right;
+        padding: 0 15px 0 30px;
+        border-right: solid 2px #D0D4D7;
+    }
+    .right-pane {
+        flex: 2 0 0;
+        width: 66.6%;
+        padding: 0 30px 0 15px;
+    }
+
+    .right-pane, .left-pane {
+        float: left;
+        height: 100%;
+        flex: 1 0 auto;
+    }
+
+    .milestone-icon {
+        width: 80px;
+        height: 80px;
+        float: right;
+        padding: 15px;
+        border: solid 2px #34495E;
+        border-radius: 50%;
+        img {
+            width: 100%;
+        }
+    }
+
+    h2 {
+        clear: both;
+        max-width: 50%;
+        float: right;
+        font-size: 20px;
+        margin: 10px 0 5px 0;
+    }
+    h3 {
+        clear: both;
+        float: right;
+        font-size: 14px;
+        max-width: 50%;
+        color: #1DA8E7;
+        margin: 0;
+    }
+
+    .milestone-status {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        width: 30px;
+        height: 30px;
+        background-size: cover;
+
+        &.done {
+            background-image: image-url('layouts/status-done.png');
+        }
+
+        &.pending {
+            background-image: image-url('assets/layouts/status-pending.png');
+        }
+
+        &.rejected {
+            background-image: image-url('assets/layouts/status-rejected.png');
+        }
+    }
+
 }

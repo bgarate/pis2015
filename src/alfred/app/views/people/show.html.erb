@@ -9,7 +9,7 @@
       <div class="card pending">
         <h1>Hitos pendientes</h1>
         <% if @overcomes and not @overcomes.empty? %>
-            <ul id="milestone-list">
+            <ul id="pending-list">
               <% @overcomes.each do |e| %>
                   <li>
                     <h2><%=e.title%></h2>

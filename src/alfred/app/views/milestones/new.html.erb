@@ -1,0 +1,43 @@
+<%= form_for @milestone do |m| %>
+
+  <p>
+    <%= m.label 'Title:' %><br>
+    <%= m.text_field :title %>
+  </p>
+
+  <p>
+    <%= m.label 'Due date:' %><br>
+    <%= m.text_area :due_date %>
+  </p>
+
+  <p>
+    <%= m.label 'Description:' %><br>
+    <%= m.text_area :description %>
+  </p>
+
+  <p>
+    <%= m.label 'Status:' %><br>
+    <%= m.text_area :status %>
+  </p>
+  <p>
+    <%= m.label 'Icon:' %><br>
+    <%= m.text_area :icon %>
+  </p>
+  <p>
+    <%= m.label 'Created at:' %><br>
+    <%= m.text_area :created_at %>
+  </p>
+  <p>
+    <%= m.label 'Updated at:' %><br>
+    <%= m.text_area :updated_at %>
+  </p>
+  <!-- <p>
+    <%= m.label 'Category:' %><br>
+    <%= m.text_area :category_id %>
+  </p> -->
+
+  <p>
+    <%= m.submit 'Create'%>
+  </p>
+
+<% end %>

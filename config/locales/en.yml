@@ -1,4 +1,5 @@
 en:
+  #crear persona
   people_new_name: "Name"
   people_new_email: "Email"
   people_new_celphone: "Cellphone"
@@ -6,3 +7,5 @@ en:
   people_new_birth_date: "Birth date"
   people_new_init_date: "Init date"
   people_new_submit: "Create user"
+  #hito
+  markdone: 'mark as done'

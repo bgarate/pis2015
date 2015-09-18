@@ -1,4 +1,4 @@
-don’tclass PeopleController < ApplicationController
+class PeopleController < ApplicationController
 
   skip_before_action :admin?, only:[:show, :index, :me]
 

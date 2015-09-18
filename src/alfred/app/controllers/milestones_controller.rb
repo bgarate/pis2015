@@ -33,14 +33,14 @@ class MilestonesController < ApplicationController
     redirect_to milestones_path
   end
 	
-	def edit
-		@milestone = Milestone.find(params[:id])
+  def edit
+    @milestone = Milestone.find(params[:id])
   end
 	
-	def update
-		@milestone = Milestone.find(params[:id])
-		if @milestone.update_attributes(params.require(:milestone).permit(:title,:due_date)) 
-    	redirect_to @milestone
+  def update
+    @milestone = Milestone.find(params[:id])
+    if @milestone.update_attributes(params.require(:milestone).permit(:title,:due_date)) 
+      redirect_to @milestone
     end
   end
 

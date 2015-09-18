@@ -16,7 +16,7 @@ development:
   port: 5432
   pool: 5
   username: postgres
-  password: fingpis2015
+  password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -28,10 +28,15 @@ test:
   port: 5432
   pool: 5
   username: postgres
-  password: fingpis2015
+  password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>
 
+#configuración para Heroku
 production:
-  <<: *default
-  database: alfred_production
-  username: alfred
+  adapter: postgresql
+  host: ec2-54-204-20-164.compute-1.amazonaws.com
+  port: 5432
+  pool: 5
+  timeout: 5000
+  database: d5l1f0r9l8inag
+  username: ctsholzofwcgxv
   password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>

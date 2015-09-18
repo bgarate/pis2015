@@ -27,6 +27,15 @@ es:
   people_new_birth_date: "Fecha de nacimiento"
   people_new_init_date: "Fecha de ingreso"
   people_new_submit: "Crear usuario"
+
+  project_new_name: "Nombre"
+  project_new_client: "Cliente"
+  project_new_status: "Estado"
+  project_new_start_date: "Fecha de inicio"
+  project_new_end_date: "Fecha de fin"
+  project_new_technologies: "Tecnologías"
+  project_new_submit: "Crear projecto"
+
   date:
     abbr_day_names:
     - dom

@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :projects do
+
+  end
+
   resources :milestones
 
   # Google auth

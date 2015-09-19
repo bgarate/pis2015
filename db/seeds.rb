@@ -72,3 +72,5 @@ p1.projects << pro
 p1.skills << sk1
 p1.skills << sk2
 p1.tech_role = tr2
+
+p2 = Person.create!(name: "Diego Bortot", email: "bortotdiegogm@gmail.com", admin: true, start_date: 23.years.ago)

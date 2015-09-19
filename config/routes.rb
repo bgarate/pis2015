@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :people do
     collection do
       get 'me'
+      get 'add_mentor'
     end
   end
 

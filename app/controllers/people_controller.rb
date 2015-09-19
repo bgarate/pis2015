@@ -36,6 +36,8 @@ class PeopleController < ApplicationController
       @overcomes = person.milestones.where("milestones.due_date < CURRENT_DATE AND milestones.status = 0")
       #Todos los hitos
       @milestones = person.milestones
+      #Todos los hitos
+      @mentorships = person.mentors
     else
       redirect_to root_path
     end
@@ -54,11 +56,18 @@ class PeopleController < ApplicationController
     end
   end
 
-  private
+  def add_mentor
+    if (params[:mentor_id] != params[:mentee_id])
+      @mentor=Person.find(params[:mentor_id])
+      @mentee=Person.find(params[:mentee_id])
+      @mentor.mentees_assignations.create! start_date: params[:start_date], mentee: @mentee
+      redirect_to @mentee
+    end
+  end
 
+  private
   def person_params
     params.require(:person).permit(:name, :email, :cellphone, :phone, :birth_date, :start_date)
   end
-
 
 end

@@ -11,4 +11,15 @@
         <li><%= image_tag s.icon %></li>
     <% end %>
   </ul>
+  <hr>
+  <h4>MENTORES</h4>
+    <% if @mentorships.empty? %>
+        <p>Sin mentores en la actualidad</p>
+    <%else%>
+        <% @mentorships.each do |s| %>
+            <li><%= s.name %></li>
+        <%end%>
+        <br>
+    <%end%>
+  <a href="#" class="btn btn-info" role="button"><span class="glyphicon glyphicon-add"></span>Agregar Mentores</a>
 </div>

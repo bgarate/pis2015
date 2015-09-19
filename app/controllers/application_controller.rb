@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
-  before_action :loged?
-  before_action :admin?
+  skip_before_action :loged?
+  skip_before_action :admin?
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

@@ -54,6 +54,16 @@ class PeopleController < ApplicationController
     end
   end
 
+  def add_mentor
+    if (params[:mentor_id] != params[:mentee_id])
+      @mentor=Person.find(params[:mentor_id])
+      @mentee=Person.find(params[:mentee_id])
+      @mentor.mentees_assignations.create! start_date: params[:start_date], mentee: @mentee
+      redirect_to @mentee
+    end
+
+
+  end
   private
 
   def person_params

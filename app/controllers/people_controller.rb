@@ -16,6 +16,10 @@ class PeopleController < ApplicationController
     if person
       #nombre
       @name = person.name
+      @identifier = person.id
+
+      #admin?
+      @admin = admin?
 
       #rol tecnico
       @trole = ''
@@ -63,6 +67,12 @@ class PeopleController < ApplicationController
       @mentor.mentees_assignations.create! start_date: params[:start_date], mentee: @mentee
       redirect_to @mentee
     end
+  end
+
+  def add_mentor_form
+    @mentee=Person.find(params[:mentee_id])
+    @posible_mentors=Person.all.where("id NOT IN (SELECT mentor_id FROM mentorships WHERE mentee_id=?) AND id<>?",params[:mentee_id], params[:mentee_id])
+    render :file => "app/views/people/add_mentor_form"
   end
 
 

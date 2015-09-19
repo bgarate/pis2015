@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :people do
     collection do
       get 'me'
-      get 'add_mentor'
+      post 'add_mentor'
+      get 'add_mentor_form'
     end
   end
 
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
   # Google auth
   get '/auth/google_oauth2/callback', to: 'google#callback'
   get 'auth/failure', to: redirect('/')
+  get 'google/signout'
   get 'google/signout'
   get 'google/unregistered'
   get 'google/test'

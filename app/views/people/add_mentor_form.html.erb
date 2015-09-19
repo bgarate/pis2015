@@ -1,0 +1,20 @@
+<% if @posible_mentors.empty? %>
+    <h1>No hay posibles mentores para agregar para <%= @mentee.name %></h1>
+    <button type="submit()">Volver</button>
+<% else %>
+    <h1>Agregando mentor a <%= @mentee.name %>:</h1>
+    <% I18n.locale = :es %>
+    <%= form_tag(controller: "people", action: "add_mentor", method: "get") do %>
+        <input type="hidden" name="mentee_id" value="<%= @mentee.id %>">
+        <div class="field">
+          <h2>Desde:</h2>
+          <br>
+          <%= date_field(:mentor, :since_date) %>
+        </div>
+        <div class="field">
+          <h2>Mentor:</h2>
+          <%= select_tag(:mentor_id, options_from_collection_for_select(@posible_mentors.all, :id, :name)) %>
+        </div>
+        <button type="submit()">Agregar Mentor</button>
+    <% end %>
+<% end %>

@@ -21,5 +21,7 @@
         <%end%>
         <br>
     <%end%>
-  <a href="#" class="btn btn-info" role="button"><span class="glyphicon glyphicon-add"></span>Agregar Mentores</a>
+    <%## if @admin %>
+        <a href="add_mentor_form?mentee_id=<%=@identifier%>" class="btn btn-info" role="button"><span class="glyphicon glyphicon-add"></span>Agregar Mentores</a>
+    <%##end%>
 </div>

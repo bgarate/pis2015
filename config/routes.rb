@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     end
   end
 
+  #hitos
   resources :milestones
+  get 'milestones/markasdone'
 
   # Google auth
   get '/auth/google_oauth2/callback', to: 'google#callback'

@@ -9,7 +9,7 @@
     </div>
     <div class="field">
       <%= f.label t('project_new_status') %><br>
-      <%= f.select :status, options_for_select(Project.status_names_for_select).keys.to_a %>
+      <%= f.select :status, options_for_select(Project.status_names_for_select) %>
     </div>
     <div class="field">
       <%= f.label t('project_new_technologies') %><br>

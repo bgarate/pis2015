@@ -35,6 +35,11 @@ es:
   project_new_end_date: "Fecha de fin"
   project_new_technologies: "Tecnologías"
   project_new_submit: "Crear projecto"
+  project:
+      display_status:
+        active: 'Activo'
+        inactive: 'Inactivo'
+        finished: 'Finalizado'
 
   date:
     abbr_day_names:

@@ -14,3 +14,8 @@ en:
   project_new_end_date: "End date"
   project_new_technologies: "Technologies"
   project_new_submit: "Create project"
+  project:
+    display_status:
+      active: 'Active'
+      inactive: 'Inactive'
+      finished: 'Finished'

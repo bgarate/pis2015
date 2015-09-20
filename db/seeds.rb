@@ -75,3 +75,13 @@ p1.projects << pro
 p1.skills << sk1
 p1.skills << sk2
 p1.tech_role = tr2
+
+tech1 = Technology.new
+tech1.name = 'Java'
+tech1.save!
+tech2 = Technology.new
+tech2.name = 'Ruby'
+tech2.save!
+tech3 = Technology.new
+tech3.name = 'Android'
+tech3.save!

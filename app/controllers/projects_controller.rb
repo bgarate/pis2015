@@ -18,6 +18,11 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(project_params)
     @project.save
+    if @project.valid?
+      redirect_to @project
+    else
+      redirect_to '/projects/new'
+    end
   end
 
   def edit

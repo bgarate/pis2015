@@ -12,7 +12,7 @@ class PeopleController < ApplicationController
   end
 
   def show
-    person = Person.find(params[:id])
+    person = Person.find_by(id: params[:id])
 
     if person
       #nombre

@@ -1,4 +1,7 @@
-require 'pp'
+  require 'pp'
+  require 'rubygems'
+  require 'google/api_client'
+  require 'google_drive'
 
 class GoogleController < ApplicationController
 
@@ -6,7 +9,7 @@ class GoogleController < ApplicationController
   skip_before_action :admin?
 
   def callback
-    auth = env["omniauth.auth"]
+    auth = env['omniauth.auth']
 
     person = Person.find_by(email: auth.info.email)
     if person
@@ -33,5 +36,35 @@ class GoogleController < ApplicationController
 
   def unregistered
     @msj = String.new('Usuario no regitrado, contacte a un administrador.')
+  end
+
+  def addDriveDoc
+    @milestone_id = params[:milestone_id]
+    m = Milestone.find_by(id: @milestone_id)
+    u = current_user
+
+    if m and u
+      session = GoogleDrive.login_with_oauth(u.oauth_token)
+
+      #Crear el archivo
+      #out_file = File.new('adjunto.doc', 'w')
+      #out_file.puts('')
+      #out_file.close
+
+      #Subirlo
+      session.upload_from_file('adjunto.odt', "adjuntoHitoNro#{@milestone_id}", :convert => true)
+
+      #gurdar crear adjunto
+      f = session.file_by_title("adjuntoHitoNro#{@milestone_id}")
+
+      r = Resource.new
+      r.url= f.human_url
+      m.resources<<(r)
+      m.save!
+
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
   end
 end

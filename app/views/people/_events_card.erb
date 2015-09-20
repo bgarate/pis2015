@@ -54,6 +54,15 @@
                       link_to t(:markdone), milestone_path(e, :milestone  => {:status => :done}), :method => :put
                     end
                 %></p>
+                <p><%=
+                    if not e.resources.empty?
+                      e.resources do |r|
+                        r.url + '<br>'
+                      end
+                    else
+                      link_to 'adjuntar doc', :controller => 'google', :action => 'addDriveDoc', :milestone_id => e.id
+                    end
+                %></p>
               </div></p>
             </li>
           </ul>

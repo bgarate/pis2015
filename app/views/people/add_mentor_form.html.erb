@@ -9,11 +9,11 @@
         <div class="field">
           <h2>Desde:</h2>
           <br>
-          <%= date_field(:mentor, :since_date) %>
+          <%= date_field_tag(:start_date, Date.today , :required => true) %>
         </div>
         <div class="field">
           <h2>Mentor:</h2>
-          <%= select_tag(:mentor_id, options_from_collection_for_select(@posible_mentors.all, :id, :name)) %>
+          <%= select_tag(:mentor_id, options_from_collection_for_select(@posible_mentors.all, :id, :name),:required => true) %>
         </div>
         <button type="submit()">Agregar Mentor</button>
     <% end %>

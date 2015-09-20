@@ -71,7 +71,7 @@ class PeopleController < ApplicationController
 
   def add_mentor_form
     @mentee=Person.find(params[:mentee_id])
-    @posible_mentors=Person.all.where("id NOT IN (SELECT mentor_id FROM mentorships WHERE mentee_id=?) AND id<>?",params[:mentee_id], params[:mentee_id])
+    @posible_mentors=Person.all#.where("id NOT IN (SELECT mentor_id FROM mentorships WHERE mentee_id=?) AND id<>?",params[:mentee_id], params[:mentee_id])
     render :file => "app/views/people/add_mentor_form"
   end
 

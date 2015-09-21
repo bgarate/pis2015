@@ -18,7 +18,7 @@
 
 class Person < ActiveRecord::Base
 
-  validates :name, :email, presence: true
+  validates :name, :email, :start_date, presence: true
   validates :email, format: { with: /\A([-a-z0-9\.]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
 
   has_one :user

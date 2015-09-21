@@ -8,6 +8,9 @@ class GoogleController < ApplicationController
   skip_before_action :loged?, only:[:callback,:unregistered]
   skip_before_action :admin?
 
+  #
+  # Login con Google y OAuth2
+  #
   def callback
     auth = env['omniauth.auth']
 
@@ -38,7 +41,15 @@ class GoogleController < ApplicationController
     @msj = String.new('Usuario no regitrado, contacte a un administrador.')
   end
 
-  def addDriveDoc
+  #
+  # Google Drive
+  #
+  def adddriveview
+    @milestone_id = params[:milestone_id]
+  end
+
+  def adddrive
+    url = params[:URL]
     @milestone_id = params[:milestone_id]
     m = Milestone.find_by(id: @milestone_id)
     u = current_user
@@ -52,12 +63,14 @@ class GoogleController < ApplicationController
       #out_file.close
 
       #Subirlo
-      session.upload_from_file('adjunto.odt', "adjuntoHitoNro#{@milestone_id}", :convert => true)
+      #session.upload_from_file('adjunto.odt', "adjuntoHitoNro#{@milestone_id}", :convert => true)
 
       #gurdar crear adjunto
-      f = session.file_by_title("adjuntoHitoNro#{@milestone_id}")
+      f = session.file_by_url(url)
 
       r = Resource.new
+      r.doc_id= f.resource_id
+      r.title= f.title
       r.url= f.human_url
       m.resources<<(r)
       m.save!

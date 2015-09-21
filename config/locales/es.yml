@@ -29,13 +29,15 @@ es:
   people_new_init_date: "Fecha de ingreso"
   people_new_submit: "Crear usuario"
   #hitos
-  pending: pendinte
-  done: hecho
-  rejected: rechazado
-  feedback: 'feedback'
-  event: evento
+  pending: Pendinte
+  done: Hecho
+  rejected: Rechazado
+  feedback: 'Feedback'
+  event: Evento
 
-  markdone: 'marcar como hecho'
+  markdone: 'Marcar como hecho'
+  attachmentsdocs: 'Documentos adjuntos'
+  adddoc: 'Agregar documento'
 
   #fechas
   date:

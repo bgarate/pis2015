@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150912203437) do
+ActiveRecord::Schema.define(version: 20150921163950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,8 @@ ActiveRecord::Schema.define(version: 20150912203437) do
   add_index "projects_technologies", ["technology_id"], name: "index_projects_technologies_on_technology_id", using: :btree
 
   create_table "resources", force: :cascade do |t|
+    t.string   "doc_id"
+    t.string   "title"
     t.string   "url"
     t.integer  "milestone_id"
     t.datetime "created_at",   null: false

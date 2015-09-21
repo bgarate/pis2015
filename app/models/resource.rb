@@ -3,7 +3,7 @@
 # Table name: resources
 #
 #  id           :integer          not null, primary key
-#  url          :string
+#  file_id      :string
 #  milestone_id :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null

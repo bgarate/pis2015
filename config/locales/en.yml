@@ -8,4 +8,6 @@ en:
   people_new_init_date: "Init date"
   people_new_submit: "Create user"
   #hito
-  markdone: 'mark as done'
+  markdone: 'Mark as done'
+  attachmentsdocs: 'Attachments documents'
+  adddoc: 'Add document'

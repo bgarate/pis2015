@@ -1,4 +1,5 @@
 en:
+  #crear persona
   people_new_name: "Name"
   people_new_email: "Email"
   people_new_celphone: "Cellphone"
@@ -19,3 +20,6 @@ en:
       active: 'Active'
       inactive: 'Inactive'
       finished: 'Finished'
+
+  #hito
+  markdone: 'mark as done'

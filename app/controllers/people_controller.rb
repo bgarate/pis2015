@@ -3,7 +3,8 @@ class PeopleController < ApplicationController
   skip_before_action :admin?, only:[:show, :index, :me]
 
   def index
-      redirect_to action: 'show', id: session[:user_id]
+    u = User.find_by(id: session[:user_id])
+    redirect_to action: 'show', id: u.person_id
   end
 
   def me
@@ -11,7 +12,7 @@ class PeopleController < ApplicationController
   end
 
   def show
-    person = Person.find(params[:id])
+    person = Person.find_by(id: params[:id])
 
     if person
       #nombre

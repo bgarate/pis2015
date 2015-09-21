@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
+  #crear persona
   people_new_name: "Nombre"
   people_new_email: "Correo electrónico"
   people_new_celphone: "Celular"
@@ -41,6 +42,16 @@ es:
         inactive: 'Inactivo'
         finished: 'Finalizado'
 
+  #hitos
+  pending: pendinte
+  done: hecho
+  rejected: rechazado
+  feedback: 'feedback'
+  event: evento
+
+  markdone: 'marcar como hecho'
+
+  #fechas
   date:
     abbr_day_names:
     - dom

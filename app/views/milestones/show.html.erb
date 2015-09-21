@@ -11,6 +11,13 @@
         </div>
         <div class="right-pane">
             <p><%= @milestone.description %></p>
+            <p><%=t(@milestone.status) %></p>
+            <p><%=
+                if @milestone.status != :done
+                  session[:return_to] ||= request.referer
+                  link_to t(:markdone), milestone_path(@milestone, :milestone  => {:status => :done}), :method => :put
+                end
+            %></p>
             <div class="calendar white right"><%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %></div>
         </div>
         <div class="clearfix"></div>

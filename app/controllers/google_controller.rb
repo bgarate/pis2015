@@ -57,16 +57,12 @@ class GoogleController < ApplicationController
     if m and u
       session = GoogleDrive.login_with_oauth(u.oauth_token)
 
-      #Crear el archivo
-      #out_file = File.new('adjunto.doc', 'w')
-      #out_file.puts('')
-      #out_file.close
-
-      #Subirlo
-      #session.upload_from_file('adjunto.odt', "adjuntoHitoNro#{@milestone_id}", :convert => true)
-
-      #gurdar crear adjunto
-      f = session.file_by_url(url)
+      begin
+        f = session.file_by_url(url)
+      rescue Google::APIClient::ClientError
+        @err = true
+        redirect_to google_driveerror_path(:err => true) and return
+      end
 
       r = Resource.new
       r.doc_id= f.resource_id
@@ -77,6 +73,13 @@ class GoogleController < ApplicationController
 
       redirect_to root_path
     else
+      redirect_to root_path
+    end
+  end
+
+  def driveerror
+    e = params[:err]
+    if not e
       redirect_to root_path
     end
   end

@@ -12,6 +12,9 @@
 #
 
 class Project < ActiveRecord::Base
+
+  validates :name, :client, :status, presence: true
+
   has_and_belongs_to_many :technologies, autosave: true
   has_many :participations
   has_many :people, through: :participations

@@ -22,8 +22,6 @@
   <div class="badge-stats">
     <span>Proyectos en curso</span><span class="badge"><%=@proysin%></span>
     <span>Proyectos realizados</span><span class="badge"><%=@proysend%></span>
-    <% unless @start_date == nil%>
-        <span>Tiempo en Moove-it</span><span class="badge"><%= time_ago_in_words(@start_date) %></span>
-    <% end %>
+    <span>Tiempo en Moove-it</span><span class="badge"><%= time_ago_in_words(@start_date) %></span>
   </div>
 </div>

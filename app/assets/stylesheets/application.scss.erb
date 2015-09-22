@@ -1,6 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "compass";
+@import "jquery-ui/core";
+@import "jquery-ui/autocomplete";
+@import "bootstrap-datepicker.standalone";
 
 $turqoise: #169F85;
 $peterriver: #2980B8;
@@ -55,7 +58,7 @@ body {
   font-size: 10px;;
 
   &.white {
-    background-image: image-url('assets/layouts/calendar-white.png');
+    background-image: image-url('layouts/calendar-white.png');
   }
 
   &.right {
@@ -67,6 +70,37 @@ body {
     float: right;
   }
 
+}
+
+.milestone-status {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+
+    &.done {
+        background-image: image-url('layouts/status-done.png');
+    }
+
+    &.pending {
+        background-image: image-url('layouts/status-pending.png');
+    }
+
+    &.rejected {
+        background-image: image-url('layouts/status-rejected.png');
+    }
+
+    &.right {
+        left: auto;
+        right: 15px;
+    }
+
+    &.small {
+        width: 25px;
+        height: 25px;
+    }
 }
 
 .ui-autocomplete {

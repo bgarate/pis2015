@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20150918194939) do
     t.string   "title"
     t.date     "due_date"
     t.text     "description"
-    t.integer  "status"
+    t.integer  "status", default: 0
     t.integer  "milestone_type"
     t.string   "icon"
     t.datetime "created_at",     null: false

@@ -41,19 +41,12 @@
       <% @events.each do |e| %>
           <ul>
             <li class="clearfix">
-              <div class="day"><%=e.due_date.day%></div>
-              <div class="day-of-the-week"><%=dayname(e.due_date)%></div>
+              <div class="day"><%=l(e.due_date, format: "%d")%></div>
+              <div class="day-of-the-week"><%=l(e.due_date, format: "%a")%></div>
               <div class="content">
-                <div class="month-and-year"><%=monthname(e.due_date)%> <%=e.due_date.year%></div>
+                <div class="month-and-year"><%=l(e.due_date, format: "%^B %Y")%></div>
                 <h2><%=e.title%></h2>
                 <p><%=e.description%></p>
-                <p><%=t(e.status) %></p>
-                <p><%=
-                    if e.status != :done
-                      session[:return_to] ||= request.referer
-                      link_to t(:markdone), milestone_path(e, :milestone  => {:status => :done}), :method => :put
-                    end
-                %></p>
               </div></p>
             </li>
           </ul>

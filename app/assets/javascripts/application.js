@@ -15,6 +15,9 @@
 //= require jquery-ui
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require jquery.knob
+//= require validator
+//= require bootstrap-datepicker
 //= require_tree .
 
 
@@ -23,4 +26,5 @@ $(function() {
     'width':'90%',
     'readOnly':true
   });
+
 });

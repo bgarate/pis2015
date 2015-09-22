@@ -10,9 +10,11 @@
 
   </head>
   <body class="<%= controller.controller_name %>">
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
+    <% if navigation_bar_visible %>
+      <header>
+        <%= render 'layouts/navigation' %>
+      </header>
+    <% end %>
     <%= yield %>
   </body>
 </html>

@@ -1,47 +1,49 @@
-<%= form_for :person, url:people_path do |f| %>
-    <div class="field">
-      <%= f.label t('people_new_name') %><br>
-      <%= f.text_field :name %>
-    </div>
-    <div class="field">
-      <%= f.label t('people_new_email') %><br>
-      <%= f.text_field :email %>
-    </div>
-    <div class="field">
-      <%= f.label t('people_new_celphone') %><br>
-      <%= f.text_field :cellphone %>
-    </div>
-    <div class="field">
-      <%= f.label t('people_new_telephone') %><br>
-      <%= f.text_field :phone %>
-    </div>
-    <div class="field">
-      <%= f.label t('people_new_birth_date') %><br>
-      <%= f.text_field :birth_date %>
-    </div>
-    <div class="field">
-      <%= f.label t('people_new_init_date') %><br>
-      <%= f.text_field :start_date %>
-    </div>
-    <div class="btn">
-      <%= f.button t('people_new_submit'), options= :type=>'button', :onclick=>'if(validate()){submit();};' %>
-    </div>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-8">
+      <%= form_for :person, url: people_path, html: { 'data-toggle': 'validator'} do |f| %>
+          <div class="form-group">
+            <%= f.label t('people_new_name'), class: "control-label" %>
+            <%= f.text_field :name, class: "form-control", required: "required" %>
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group">
+            <%= f.label t('people_new_email'), class: "control-label" %>
+            <%= f.text_field :email, class: "form-control", required: "required"%>
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-6">
+              <%= f.label t('people_new_celphone'), class: "control-label" %>
+              <%= f.text_field :cellphone, class: "form-control" %>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group col-xs-6">
+              <%= f.label t('people_new_telephone'), class: "control-label" %>
+              <%= f.text_field :phone, class: "form-control" %>
+              <div class="help-block with-errors"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-xs-6">
+              <%= f.label t('people_new_birth_date'), class: "control-label" %>
+              <div class="input-group">
+                    <%= f.text_field :birth_date, type: "date", class: "form-control", "data-provide":"datepicker"%>
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+              </div>
+              <div class="help-block with-errors"></div>
+            </div>
+            <div class="form-group col-xs-6">
+              <%= f.label t('people_new_init_date'), class: "control-label" %>
+              <%= f.text_field :start_date, class: "form-control" %>
+              <div class="help-block with-errors"></div>
+            </div>
+          </div>
 
-<script>
-  function validate(form){
-      var name, email;
-      // Get the value of the input field with id="name"
-      name = document.getElementById('person_name').value;
-      // Get the value of the input field with id="mail"
-      email = document.getElementById("person_email").value;
 
-      // Validate
-      return ((name!='') && (email!='')  && validateEmail(email))
-  }
+          <%= f.button t('people_new_submit'), options= :type => 'submit', class: "btn btn-default" %>
+          </div>
+      <% end %>
+      </div>
+</div>
 
-  function validateEmail(email) {
-      var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-      return re.test(email);
-  }
-</script>

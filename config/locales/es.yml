@@ -20,6 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
+
+  edit: "Editar"
+  delete: "Borrar"
+
   #crear persona
   people_new_name: "Nombre"
   people_new_email: "Correo electrónico"
@@ -37,6 +41,7 @@ es:
   project_end_date: "Fecha de fin"
   project_technologies: "Tecnologías"
   project_new_submit: "Crear projecto"
+  project_edit_submit: "Actualizar proyecto"
   project_index_header: "Listando proyectos"
   project_no_projects: "No se han encontrado proyectos"
   project:

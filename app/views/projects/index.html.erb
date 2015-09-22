@@ -13,6 +13,12 @@
       <td>
         <%= link_to p.name, p %>
       </td>
+      <td>
+        <%= link_to t('edit'), edit_project_path(p) %>
+      </td>
+      <td>
+        <%= link_to t('delete'), p, method: :delete %>
+      </td>
     </tr>
   <% end %>
 </table>

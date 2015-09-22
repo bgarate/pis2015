@@ -1,4 +1,8 @@
 en:
+
+  edit: "Edit"
+  delete: "Delete"
+
   #crear persona
   people_new_name: "Name"
   people_new_email: "Email"
@@ -16,6 +20,7 @@ en:
   project_end_date: "End date"
   project_technologies: "Technologies"
   project_new_submit: "Create project"
+  project_edit_submit: "Update project"
   project_index_header: "Listing projects"
   project_no_projects: "No projects found"
   project:

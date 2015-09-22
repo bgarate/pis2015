@@ -87,4 +87,4 @@ tech2.name = 'Ruby'
 tech2.save!
 tech3 = Technology.new
 tech3.name = 'Android'
-tech3.save!s
+tech3.save!

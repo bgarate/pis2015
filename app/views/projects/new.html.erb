@@ -1,26 +1,26 @@
 <%= form_for :project, url:projects_path do |f| %>
     <div class="field">
-      <%= f.label t('project_new_name') %><br>
+      <%= f.label t('project_name') %><br>
       <%= f.text_field :name %>
     </div>
     <div class="field">
-      <%= f.label t('project_new_client') %><br>
+      <%= f.label t('project_client') %><br>
       <%= f.text_field :client %>
     </div>
     <div class="field">
-      <%= f.label t('project_new_status') %><br>
+      <%= f.label t('project_status') %><br>
       <%= f.select :status, options_for_select(Project.status_names_for_select) %>
     </div>
     <div class="field">
-      <%= f.label t('project_new_technologies') %><br>
+      <%= f.label t('project_technologies') %><br>
       <%= f.select :technologies, Technology.all.collect {|t| [t.name, t]}, {}, {:multiple => true, :class => "input-lg"} %>
     </div>
     <div class="field">
-      <%= f.label t('project_new_start_date') %><br>
+      <%= f.label t('project_start_date') %><br>
       <%= f.text_field :start_date %>
     </div>
     <div class="field">
-      <%= f.label t('project_new_end_date') %><br>
+      <%= f.label t('project_end_date') %><br>
       <%= f.text_field :end_date %>
     </div>
     <div class="btn">

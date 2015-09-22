@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
 
-  before_action :get_project, only: [:edit, :update, :destroy]
+  before_action :get_project, only: [:show, :edit, :update, :destroy]
 
   def get_project
     @project = Project.find(params[:id])

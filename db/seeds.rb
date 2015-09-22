@@ -22,6 +22,7 @@ per.email = 'alfred.pis.2015@gmail.com'
 per.birth_date= Time.new(2012, 8, 29, 22, 35, 0)
 per.start_date= Time.new(2012, 8, 29, 22, 35, 0)
 per.tech_role = tr
+per.admin=true
 
 m = Milestone.new
 m.title = 'Conferencia Tecnológica'
@@ -52,6 +53,8 @@ per.skills<<(sk2)
 
 pro = Project.new
 pro.name= 'Super Tortas 0.1'
+pro.client= 'ATU'
+pro.status= 0
 pro.start_date= Time.now - (2*7*24*60*60)
 pro.end_date= Time.now - (2*7*24*60*60)
 per.projects<<(pro)
@@ -72,3 +75,13 @@ p1.projects << pro
 p1.skills << sk1
 p1.skills << sk2
 p1.tech_role = tr2
+
+tech1 = Technology.new
+tech1.name = 'Java'
+tech1.save!
+tech2 = Technology.new
+tech2.name = 'Ruby'
+tech2.save!
+tech3 = Technology.new
+tech3.name = 'Android'
+tech3.save!

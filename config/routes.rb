@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :projects do
+  end
+
   #hitos
   resources :milestones
   get 'milestones/markasdone'

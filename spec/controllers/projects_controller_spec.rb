@@ -19,6 +19,10 @@ describe ProjectsController do
     # Seteo la expiracion de la sesion a un dia a partir del momento actual
     @no_ad_user.oauth_expires_at = Time.current().advance(days:1)
     @no_ad_user.save!
+
+    # Creo un proyecto
+    @proy = Project.new :name=>'Nombre', :client=>'Cliente', :status=>"active"
+    @proy.save!
   end
 
   describe "GET new" do
@@ -39,7 +43,7 @@ describe ProjectsController do
   end
 
   describe "GET create" do
-    it "Crea proyecto con nombre, mail y cliente valido" do
+    it "Crea proyecto con nombre, estado y cliente valido" do
       session[:user_id] = @ad_user.id
       get :create, {:project=>{:name=>'Nombre', :client=>'Cliente', :status=>"active"},:session=>session}
       # Espero ser redirigido
@@ -51,6 +55,23 @@ describe ProjectsController do
       get :create, {:project=>{:name=>'Nombre', :status=>"inactive"},:session=>session}
       # Espero ser redirigido
       expect(response.status).to eq(302)
+    end
+
+  end
+
+  describe "GET update" do
+    it "Actualiza proyecto con nombre, estado y cliente valido" do
+      session[:user_id] = @ad_user.id
+      get :update, {:id=>@proy.id, :project=>{:name=>'Nombre', :client=>'Cliente', :status=>"active"},:session=>session}
+      # Espero ser redirigido
+      expect(response.status).to eq(302)
+    end
+
+    it "No crea proyecto con cliente vacio" do
+      session[:user_id] = @ad_user.id
+      get :update, {:id=>@proy.id, :project=>{:name=>'Nombre', :client=>'', :status=>"inactive"},:session=>session}
+      # Espero ser redirigido
+      expect(@proy.client).to eq('Cliente')
     end
 
   end

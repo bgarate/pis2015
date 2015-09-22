@@ -42,10 +42,10 @@ describe GoogleController, "Login a traves de google oatuh" do
     per.skills<<(sk1)
     per.skills<<(sk2)
 
-    pro = Project.new
-    pro.name= 'Super Tortas 0.1'
+    pro = Project.new :name=>'Super Tortas 0.1', :client=> 'ATU', :status=> "active"
     pro.start_date= Time.now - (2*7*24*60*60)
     pro.end_date= Time.now - (2*7*24*60*60)
+    pro.save!
     per.projects<<(pro)
 
     per.save!

@@ -1,0 +1,44 @@
+<%= form_for :project, url:projects_path do |f| %>
+    <div class="field">
+      <%= f.label t('project_new_name') %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label t('project_new_client') %><br>
+      <%= f.text_field :client %>
+    </div>
+    <div class="field">
+      <%= f.label t('project_new_status') %><br>
+      <%= f.select :status, options_for_select(Project.status_names_for_select) %>
+    </div>
+    <div class="field">
+      <%= f.label t('project_new_technologies') %><br>
+      <%= f.select :technologies, Technology.all.collect {|t| [t.name, t]}, {}, {:multiple => true, :class => "input-lg"} %>
+    </div>
+    <div class="field">
+      <%= f.label t('project_new_start_date') %><br>
+      <%= f.text_field :start_date %>
+    </div>
+    <div class="field">
+      <%= f.label t('project_new_end_date') %><br>
+      <%= f.text_field :end_date %>
+    </div>
+    <div class="btn">
+      <%= f.button t('project_new_submit'), options= :type=>'button', :onclick=>'if(validate()){submit();};' %>
+    </div>
+<% end %>
+
+<script>
+    function validate(form){
+        var name, client, status;
+        // Get the value of the input field with id="name"
+        name = document.getElementById('project_name').value;
+        // Get the value of the input field with id="client"
+        client = document.getElementById("project_client").value;
+        // Get the value of the input field with id="status"
+        status = document.getElementById("project_status").value;
+
+        // Validate
+        return ((name!='') && (client!='')  && (status!=''));
+    }
+</script>

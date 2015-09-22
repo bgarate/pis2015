@@ -7,6 +7,20 @@ en:
   people_new_birth_date: "Birth date"
   people_new_init_date: "Init date"
   people_new_submit: "Create user"
+
+  project_new_name: "Name"
+  project_new_client: "Client"
+  project_new_status: "Status"
+  project_new_start_date: "Start date"
+  project_new_end_date: "End date"
+  project_new_technologies: "Technologies"
+  project_new_submit: "Create project"
+  project:
+    display_status:
+      active: 'Active'
+      inactive: 'Inactive'
+      finished: 'Finished'
+
   #hito
   markdone: 'Mark as done'
   attachmentsdocs: 'Attachments documents'

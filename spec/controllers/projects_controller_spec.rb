@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe PeopleController do
+describe ProjectsController do
 
   before do
     # Creo una persona de tipo administrador
@@ -22,7 +22,7 @@ describe PeopleController do
   end
 
   describe "GET new" do
-    it "Despliega formulario de creacion de usuario" do
+    it "Despliega formulario de creacion de proyecto" do
       session[:user_id] = @ad_user.id
       get :new, :session => session
       # Espero que me muestre el formulario
@@ -36,40 +36,23 @@ describe PeopleController do
       expect(response.status).to eq(302)
     end
 
-    it "Deveria redirigir a index" do
-      admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :admin=>true
-      admin.save!
-
-      ad_user = User.new :person => admin
-      ad_user.oauth_expires_at = Time.current().advance(days:1)
-      ad_user.save!
-      session[:user_id] = ad_user.id
-
-      get :me
-      expect(response).to redirect_to(:action => "index")
-    end
   end
 
   describe "GET create" do
-    it "Crea usuario con nombre y mail valido" do
+    it "Crea proyecto con nombre, mail y cliente valido" do
       session[:user_id] = @ad_user.id
-      get :create, {:person=>{:name=>'Nombre', :email=>'mail@example.com'},:session=>session}
+      get :create, {:project=>{:name=>'Nombre', :client=>'Cliente', :status=>"active"},:session=>session}
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end
 
-    it "No crea usuario con mail vacio" do
+    it "No crea proyecto con cliente vacio" do
       session[:user_id] = @ad_user.id
-      get :create, {:person=>{:name=>'Nombre'},:session=>session}
+      get :create, {:project=>{:name=>'Nombre', :status=>"inactive"},:session=>session}
       # Espero ser redirigido
       expect(response.status).to eq(302)
-    end
-
-    it 'Redirigir a root path' do
-      session[:user_id] = @ad_user.id
-      get :show, :id => 9999999999999
-      expect(response).to redirect_to(root_path)
     end
 
   end
+
 end

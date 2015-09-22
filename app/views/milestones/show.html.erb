@@ -7,7 +7,9 @@
         <div class="left-pane">
             <div class="milestone-icon"><%= image_tag @milestone.icon %></div>
             <h2><%= @milestone.title %></h2>
-            <h3><%= @milestone.category.name %></h3>
+            <% if @milestone.category %>
+                <h3><%= @milestone.category.name %></h3>
+            <%end%>
         </div>
         <div class="right-pane">
             <p><%= @milestone.description %></p>

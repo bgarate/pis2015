@@ -1,4 +1,8 @@
 require 'rails_helper'
+require 'rubygems'
+require 'google/api_client'
+require 'google_drive'
+require 'rspec/active_model/mocks'
 
 describe GoogleController, "Login a traves de google oatuh" do
   before(:each) do
@@ -129,6 +133,47 @@ describe GoogleController, "Login a traves de google oatuh" do
   it 'Deveria redirigir a root path driveerr' do
     get :driveerror
     expect(response).to redirect_to(root_path)
+  end
+
+  it 'Deveria redirigir a la pagina de error por no encontrar el archivo' do
+    #Stubs de google drive
+    #GoogleDrive::File.any_instance.stub(:resource_id => 'unid', :title => 'untitulo', :human_url => '/una/url')
+
+    #GoogleDrive::Session.any_instance.stub.(:file_by_url).with('argument') {stub_model(GoogleDrive::File, :resource_id => 'unid', :title => 'untitulo', :human_url => '/una/url')}
+    #allow_any_instance_of(GoogleDrive::Session).to receive(:file_by_url) {stub_model(GoogleDrive::File, :resource_id => 'unid', :title => 'untitulo', :human_url => '/una/url')}
+
+    #GoogleDrive.any_instance.stub(:login_with_oauth => GoogleDrive::Session)
+    #arg = 'client_or_access_token'
+    #allow_any_instance_of(GoogleDrive).to receive(:login_with_oauth).with(arg) {stub_model(GoogleDrive::Session, :file_by_url => stub_model(GoogleDrive::File, :resource_id => 'unid', :title => 'untitulo', :human_url => '/una/url'))}
+    #GoogleDrive.stubs(:login_with_oauth).returns(stub_model(GoogleDrive::Session, :file_by_url => stub_model(GoogleDrive::File, :resource_id => 'unid', :title => 'untitulo', :human_url => '/una/url')))
+    #
+
+    tr = TechRole.new
+    tr.name= 'Vendedor de Tortas Fritas'
+    tr.save!
+
+    per = Person.new :name=>'Alfred', :email=>'alfred.pis.2015@gmail.com'
+    per.birth_date= Time.new(2012, 8, 29, 22, 35, 0)
+    per.start_date= Time.new(2012, 8, 29, 22, 35, 0)
+    per.tech_role = tr
+
+    m = Milestone.new
+    m.title = 'Conferencia Tecnológica'
+    m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
+    m.due_date= Time.now + (3*2*7*24*60*60)
+    m.milestone_type= 1
+    m.status=0
+    per.milestones<<(m)
+
+    per.user = User.new
+    per.user.oauth_token = 'UnToken'
+    per.user.oauth_expires_at = Time.current().advance(days:1)
+
+    per.save!
+    session[:user_id] = per.user.id
+
+    get :adddrive, :milestone_id => m.id, :URL => "https://docs.google.com/document/d/1_y-UzyrQPA21V5vSzIOkt0UT05c46io1a9c9fDckjbo/edit#heading=h.a7izv12vc1k4"
+    expect(response).to redirect_to(google_driveerror_path(err: true))
   end
 
 end

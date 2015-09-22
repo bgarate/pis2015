@@ -144,9 +144,12 @@ GEM
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     memoist (0.12.0)
+    metaclass (0.0.4)
     mime-types (2.6.1)
     mini_portile (0.6.2)
     minitest (5.8.0)
+    mocha (1.1.0)
+      metaclass (~> 0.0.1)
     multi_json (1.11.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -207,6 +210,10 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.0)
     retriable (1.4.1)
+    rspec-activemodel-mocks (1.0.1)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      rspec-mocks (>= 2.99, < 4.0)
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.1)
@@ -283,14 +290,16 @@ DEPENDENCIES
   capybara
   coffee-rails (~> 4.1.0)
   compass-rails (~> 2.0.5)
-  google_drive
+  google_drive (= 1.0.1)
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
+  mocha
   omniauth-google-oauth2 (~> 0.2.1)
   pg
   rails (= 4.2.1)
   rails_12factor
+  rspec-activemodel-mocks
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

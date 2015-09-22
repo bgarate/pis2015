@@ -58,7 +58,7 @@ class GoogleController < ApplicationController
     m = Milestone.find_by(id: @milestone_id)
     u = current_user
 
-    if m and u
+    if m and u and url
       session = GoogleDrive.login_with_oauth(u.oauth_token)
 
       begin

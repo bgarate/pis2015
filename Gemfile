@@ -10,7 +10,11 @@ ruby "2.2.2" #especifica la versión de ruby a usar en Heroku.
 gem "omniauth-google-oauth2", "~> 0.2.1"
 gem 'capybara'
 #Google drive
-gem 'google_drive'
+gem 'google_drive', '1.0.1'
+
+#mock y stub
+gem 'rspec-activemodel-mocks'
+gem 'mocha'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'

@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 20150919222022) do
     t.string   "client"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "status"
   end
 
   create_table "projects_technologies", force: :cascade do |t|

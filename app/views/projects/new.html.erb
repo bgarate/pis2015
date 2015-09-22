@@ -13,7 +13,7 @@
     </div>
     <div class="field">
       <%= f.label t('project_technologies') %><br>
-      <%= f.select :technologies, Technology.all.collect {|t| [t.name, t]}, {}, {:multiple => true, :class => "input-lg"} %>
+      <%= f.select :id_technologies, Technology.all.collect {|t| [t.name, t.id]}, {}, {:multiple => true, :class => "input-lg"} %>
     </div>
     <div class="field">
       <%= f.label t('project_start_date') %><br>

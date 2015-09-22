@@ -17,6 +17,9 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
+    id_tec = (params.fetch :project).fetch :id_technologies
+    filtradas = id_tec.reject { |i| i.empty? }
+    @project.technologies<<Technology.find(filtradas)
     @project.save
     if @project.valid?
       redirect_to @project
@@ -29,6 +32,9 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    id_tec = (params.fetch :project).fetch :technologies
+    filtradas = id_tec.reject { |i| i.empty? }
+    @project.technologies = Technology.find(filtradas)
     if @project.update(project_params)
       redirect_to @project
     else
@@ -37,11 +43,15 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+=begin
+    @project.destroy!
+    redirect_to :index
+=end
   end
 
   private
   def project_params
-    params.require(:project).permit(:name, :client, :status, :technologies, :start_date, :end_date)
+    params.require(:project).permit(:name, :client, :status, :id_technologies, :start_date, :end_date)
   end
 
 end

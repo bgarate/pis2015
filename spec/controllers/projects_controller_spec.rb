@@ -45,14 +45,14 @@ describe ProjectsController do
   describe "GET create" do
     it "Crea proyecto con nombre, estado y cliente valido" do
       session[:user_id] = @ad_user.id
-      get :create, {:project=>{:name=>'Nombre', :client=>'Cliente', :status=>"active"},:session=>session}
+      get :create, {:project=>{:name=>'Nombre', :client=>'Cliente', :status=>"active", :id_technologies=>[]},:session=>session}
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end
 
     it "No crea proyecto con cliente vacio" do
       session[:user_id] = @ad_user.id
-      get :create, {:project=>{:name=>'Nombre', :status=>"inactive"},:session=>session}
+      get :create, {:project=>{:name=>'Nombre', :status=>"inactive", :id_technologies=>[]},:session=>session}
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end
@@ -62,14 +62,14 @@ describe ProjectsController do
   describe "GET update" do
     it "Actualiza proyecto con nombre, estado y cliente valido" do
       session[:user_id] = @ad_user.id
-      get :update, {:id=>@proy.id, :project=>{:name=>'Nombre', :client=>'Cliente', :status=>"active"},:session=>session}
+      get :update, {:id=>@proy.id, :project=>{:name=>'Nombre', :client=>'Cliente', :status=>"active", :technologies=>[]},:session=>session}
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end
 
     it "No crea proyecto con cliente vacio" do
       session[:user_id] = @ad_user.id
-      get :update, {:id=>@proy.id, :project=>{:name=>'Nombre', :client=>'', :status=>"inactive"},:session=>session}
+      get :update, {:id=>@proy.id, :project=>{:name=>'Nombre', :client=>'', :status=>"inactive", :technologies=>[]},:session=>session}
       # Espero ser redirigido
       expect(@proy.client).to eq('Cliente')
     end

@@ -8,6 +8,7 @@ en:
   people_new_init_date: "Init date"
   people_new_submit: "Create user"
 
+  project_id: "ID"
   project_name: "Name"
   project_client: "Client"
   project_status: "Status"
@@ -15,6 +16,8 @@ en:
   project_end_date: "End date"
   project_technologies: "Technologies"
   project_new_submit: "Create project"
+  project_index_header: "Listing projects"
+  project_no_projects: "No projects found"
   project:
     display_status:
       active: 'Active'

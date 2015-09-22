@@ -29,6 +29,7 @@ es:
   people_new_init_date: "Fecha de ingreso"
   people_new_submit: "Crear usuario"
 
+  project_id: "ID"
   project_name: "Nombre"
   project_client: "Cliente"
   project_status: "Estado"
@@ -36,6 +37,8 @@ es:
   project_end_date: "Fecha de fin"
   project_technologies: "Tecnologías"
   project_new_submit: "Crear projecto"
+  project_index_header: "Listando proyectos"
+  project_no_projects: "No se han encontrado proyectos"
   project:
       display_status:
         active: 'Activo'

@@ -20,6 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
+
+  edit: "Editar"
+  delete: "Borrar"
+
   #crear persona
   people_new_name: "Nombre"
   people_new_email: "Correo electrónico"
@@ -29,13 +33,17 @@ es:
   people_new_init_date: "Fecha de ingreso"
   people_new_submit: "Crear usuario"
 
-  project_new_name: "Nombre"
-  project_new_client: "Cliente"
-  project_new_status: "Estado"
-  project_new_start_date: "Fecha de inicio"
-  project_new_end_date: "Fecha de fin"
-  project_new_technologies: "Tecnologías"
+  project_id: "ID"
+  project_name: "Nombre"
+  project_client: "Cliente"
+  project_status: "Estado"
+  project_start_date: "Fecha de inicio"
+  project_end_date: "Fecha de fin"
+  project_technologies: "Tecnologías"
   project_new_submit: "Crear projecto"
+  project_edit_submit: "Actualizar proyecto"
+  project_index_header: "Listando proyectos"
+  project_no_projects: "No se han encontrado proyectos"
   project:
       display_status:
         active: 'Activo'

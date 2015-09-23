@@ -1,0 +1,33 @@
+<%= form_for([@category]) do |c| %>
+  <p>
+    <%= c.label 'Name' %><br>
+    <%= c.text_field :name %>
+  </p>
+  <p>
+    <%= c.label 'Icon'%><br>
+    <%= c.text_field  :icon %>
+  </p>
+
+  <p>
+    <%= c.hidden_field(:created_at, :value =>Time.now) %>
+    <%= c.hidden_field(:updated_at, :value =>Time.now) %>
+  </p>
+
+  <p>
+    <%= c.button 'Create Note', :type=>'button', :onclick=>'if(validate()){submit();};' %>
+  </p>
+<% end %>
+
+<script>
+  function validate(){
+    var name, icon;
+    // Get the value of the input field with id="name"
+    name = document.getElementById('category_name').value;
+    // Get the value of the input field with id="mail"
+    icon = document.getElementById('category_icon').value;
+
+    // Validate
+    return ((name!='') && (icon!=''))
+  }
+
+</script>

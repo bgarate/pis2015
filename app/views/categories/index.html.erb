@@ -1,0 +1,21 @@
+<%= 'Categories:' %>
+<table class="table">
+  <tr>
+    <td><h4>Name</h4></td>
+    <td><h4>Icon</h4></td>
+    <td><h4>Created at</h4></td>
+    <td><h4>Updated at</h4></td>
+  </tr>
+  <% @category.each do |c| %>
+    <tr>
+      <td><%= c.name %></td>
+      <td><%= c.icon %></td>
+      <td><%= c.created_at%></td>
+      <td><%= c.updated_at%></td>
+    </tr>
+  <%end%>
+
+</table>
+
+<%= link_to 'People', me_people_path %>
+<%= link_to 'Categories', categories_path %>

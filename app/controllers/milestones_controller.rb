@@ -12,15 +12,18 @@ class MilestonesController < ApplicationController
 
   def create
     @milestone=Milestone.new(milestone_params)
+
     @milestone.save
     redirect_to @milestone
   end
 
-  def create_from_person
-    @person=Person.find(params[:person_id])
-    @milestone= @person.milestones.create(milestone_params)
+  def add_category
+    @milestone=Milestone.find(params[:milestone_id])
+    @category=Category.find(params[:category_id])
+    @category.milestones<<@milestone
     redirect_to @milestone
   end
+  # Por ahora queda asi, deberia ser @milestone.category= @category
 
   def show
     @milestone=Milestone.find(params[:id])
@@ -28,6 +31,9 @@ class MilestonesController < ApplicationController
 
   def destroy
     @milestone= Milestone.find(params[:id])
+    @milestone.notes.each do |n|
+      n.destroy
+    end
     @milestone.destroy
     redirect_to milestones_path
   end

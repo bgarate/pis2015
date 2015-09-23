@@ -1,0 +1,34 @@
+<%= form_for([@milestone, @milestone.notes.build]) do |n| %>
+  <p>
+    <%= n.label 'Note' %><br>
+    <%= n.text_field :text %>
+  </p>
+  <p>
+    <%= n.label 'Visibility'%><br>
+    <%= n.text_field  :visibility, :size=>12 %> Values: me, mentors, every_body
+  </p>
+
+  <p>
+    <%= n.hidden_field(:author_id, :value =>current_user.id) %>
+    <%= n.hidden_field(:created_at, :value =>Time.now) %>
+    <%= n.hidden_field(:updated_at, :value =>Time.now) %>
+  </p>
+
+  <p>
+    <%= n.button 'Create Note', :type=>'button', :onclick=>'if(validate()){submit();};' %>
+  </p>
+<% end %>
+
+<script>
+  function validate(){
+    var text, visibility;
+    // Get the value of the input field with id="name"
+    text = document.getElementById('note_text').value;
+    // Get the value of the input field with id="mail"
+    visibility = document.getElementById("note_visibility").value;
+
+    // Validate
+    return ((text!='') && (visibility=='me'|| visibility=='mentors'||visibility=='every_body'))
+  }
+
+</script>

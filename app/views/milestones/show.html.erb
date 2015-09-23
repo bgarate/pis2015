@@ -21,6 +21,34 @@
                 end
             %></p>
             <div class="calendar white right"><%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %></div>
+            <p>
+              <% if @milestone.category!=nil %>
+                  <table>
+                    <tr><td><%= 'Category:' %></td></tr>
+                    <tr><td>Name: <%= @milestone.category.name %></td></tr>
+                    <tr><td>Icon: <%= @milestone.category.icon %></td></tr>
+                    <tr><td>Created: <%= @milestone.category.created_at%></td></tr>
+                  </table>
+              <%else%>
+                <% count=0 %>
+                  <table>
+                    <tr><td><%= 'Add Category:' %></td></tr>
+                    <%= form_tag ({:action => 'add_category', :controller => 'milestones', :milestone_id => @milestone.id}) do   %>
+                      <tr><td><select name="category_id">
+                        <% Category.all.each do |ca| %>
+                          <option value= <%=ca.id%> > <%=ca.name%></option>
+                          <% count=count+1 %>
+                        <% end %>
+                      </select></td></tr>
+                      <% if count>0 %>
+                        <tr><td><%= submit_tag('Add') %></td></tr>
+                      <% else %>
+                        There are not available categories to add
+                      <% end %>
+                    <% end %>
+                  </table>
+              <%end%>
+            </p>
         </div>
         <div class="clearfix"></div>
       </div>

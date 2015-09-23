@@ -1,0 +1,27 @@
+<p>
+  <strong><%= 'Category:' %>:</strong>
+  <%= @category.name %>
+</p>
+
+<p>
+  <strong><%= 'Icon' %>:</strong>
+  <%= @category.icon %>
+</p>
+
+<p>
+  <strong><%= 'Created_at' %>:</strong>
+  <%= @category.created_at %>
+</p>
+<p>
+  <strong><%= 'updated_at' %>:</strong>
+  <%= @category.updated_at %>
+</p>
+
+<p>
+  <%= link_to 'destroy', category_path(@category),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+</p>
+
+<%= link_to 'People', me_people_path %>
+<%= link_to 'Categories', categories_path %>

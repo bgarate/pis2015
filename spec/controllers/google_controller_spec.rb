@@ -120,33 +120,27 @@ describe GoogleController, "Login a traves de google oatuh" do
     expect(response).to render_template('adddriveview')
   end
 
-  it 'Deveria redirigir a root path driveview' do
+  it 'Deveria redirigir a root path' do
     get :adddriveview
     expect(response).to redirect_to(root_path)
   end
 
-  it 'Deveria mostrar la pagina de error' do
-    get :driveerror, :err => true
-    expect(response).to render_template('driveerror')
-  end
-
-  it 'Deveria redirigir a root path driveerr' do
+  it 'Deveria redirigir a root path ' do
     get :driveerror
     expect(response).to redirect_to(root_path)
   end
 
-  it 'Deveria redirigir a la pagina de error por no encontrar el archivo' do
-    #Stubs de google drive
-    #GoogleDrive::File.any_instance.stub(:resource_id => 'unid', :title => 'untitulo', :human_url => '/una/url')
+  it 'Deveria redirigir a home y haber asociado el resource al hito' do
 
-    #GoogleDrive::Session.any_instance.stub.(:file_by_url).with('argument') {stub_model(GoogleDrive::File, :resource_id => 'unid', :title => 'untitulo', :human_url => '/una/url')}
-    #allow_any_instance_of(GoogleDrive::Session).to receive(:file_by_url) {stub_model(GoogleDrive::File, :resource_id => 'unid', :title => 'untitulo', :human_url => '/una/url')}
+    f = double()
+    allow(f).to receive(:resource_id).and_return('unid')
+    allow(f).to receive(:title).and_return('untitulo')
+    allow(f).to receive(:human_url).and_return('/una/url')
 
-    #GoogleDrive.any_instance.stub(:login_with_oauth => GoogleDrive::Session)
-    #arg = 'client_or_access_token'
-    #allow_any_instance_of(GoogleDrive).to receive(:login_with_oauth).with(arg) {stub_model(GoogleDrive::Session, :file_by_url => stub_model(GoogleDrive::File, :resource_id => 'unid', :title => 'untitulo', :human_url => '/una/url'))}
-    #GoogleDrive.stubs(:login_with_oauth).returns(stub_model(GoogleDrive::Session, :file_by_url => stub_model(GoogleDrive::File, :resource_id => 'unid', :title => 'untitulo', :human_url => '/una/url')))
-    #
+    s = double()
+    allow(s).to receive(:file_by_url).with(anything()).and_return(f)
+
+    GoogleDrive.stub(:login_with_oauth).with(anything()) { s }
 
     tr = TechRole.new
     tr.name= 'Vendedor de Tortas Fritas'
@@ -172,7 +166,44 @@ describe GoogleController, "Login a traves de google oatuh" do
     per.save!
     session[:user_id] = per.user.id
 
-    get :adddrive, :milestone_id => m.id, :URL => "https://docs.google.com/document/d/1_y-UzyrQPA21V5vSzIOkt0UT05c46io1a9c9fDckjbo/edit#heading=h.a7izv12vc1k4"
+    get :adddrive, :milestone_id => m.id, :URL => '/una/url'
+    expect(response).to redirect_to(root_path)
+    mr = Milestone.find_by(id: m.id)
+    expect(mr.resources[0].url).to eq('/una/url')
+  end
+
+  it 'Deveria redirigir a home la pagina de error' do
+
+    s = double()
+    allow(s).to receive(:file_by_url).with(anything()) { raise Google::APIClient::ClientError }
+
+    GoogleDrive.stub(:login_with_oauth).with(anything()) { s }
+
+    tr = TechRole.new
+    tr.name= 'Vendedor de Tortas Fritas'
+    tr.save!
+
+    per = Person.new :name=>'Alfred', :email=>'alfred.pis.2015@gmail.com'
+    per.birth_date= Time.new(2012, 8, 29, 22, 35, 0)
+    per.start_date= Time.new(2012, 8, 29, 22, 35, 0)
+    per.tech_role = tr
+
+    m = Milestone.new
+    m.title = 'Conferencia Tecnológica'
+    m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
+    m.due_date= Time.now + (3*2*7*24*60*60)
+    m.milestone_type= 1
+    m.status=0
+    per.milestones<<(m)
+
+    per.user = User.new
+    per.user.oauth_token = 'UnToken'
+    per.user.oauth_expires_at = Time.current().advance(days:1)
+
+    per.save!
+    session[:user_id] = per.user.id
+
+    get :adddrive, :milestone_id => m.id, :URL => '/una/url'
     expect(response).to redirect_to(google_driveerror_path(err: true))
   end
 

@@ -14,7 +14,6 @@ gem 'google_drive', '1.0.1'
 
 #mock y stub
 gem 'rspec-activemodel-mocks'
-gem 'mocha'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'

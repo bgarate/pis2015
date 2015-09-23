@@ -12,7 +12,6 @@ class MilestonesController < ApplicationController
 
   def create
     @milestone=Milestone.new(milestone_params)
-
     @milestone.save
     redirect_to @milestone
   end

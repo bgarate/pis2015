@@ -36,7 +36,7 @@ describe PeopleController do
       expect(response.status).to eq(302)
     end
 
-    it "Deveria redirigir a index" do
+    it "Deberia redirigir a index" do
       admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :admin=>true
       admin.save!
 

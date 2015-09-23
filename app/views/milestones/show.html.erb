@@ -24,15 +24,15 @@
             <p>
               <% if @milestone.category!=nil %>
                   <table>
-                    <tr><td><%= 'Category:' %></td></tr>
-                    <tr><td>Name: <%= @milestone.category.name %></td></tr>
-                    <tr><td>Icon: <%= @milestone.category.icon %></td></tr>
-                    <tr><td>Created: <%= @milestone.category.created_at%></td></tr>
+                    <tr><td>--<%= t('category') %>--</td></tr>
+                    <tr><td><%=t('cat_name')%>: <%= @milestone.category.name %></td></tr>
+                    <tr><td><%=t('cat_icon')%>: <%= @milestone.category.icon %></td></tr>
+                    <tr><td><%=t('cat_created')%>: <%= @milestone.category.created_at%></td></tr>
                   </table>
               <%else%>
                 <% count=0 %>
                   <table>
-                    <tr><td><%= 'Add Category:' %></td></tr>
+                    <tr><td><%= t('cat_add') %></td></tr>
                     <%= form_tag ({:action => 'add_category', :controller => 'milestones', :milestone_id => @milestone.id}) do   %>
                       <tr><td><select name="category_id">
                         <% Category.all.each do |ca| %>
@@ -41,16 +41,22 @@
                         <% end %>
                       </select></td></tr>
                       <% if count>0 %>
-                        <tr><td><%= submit_tag('Add') %></td></tr>
+                        <tr><td><%= submit_tag(t('add')) %></td></tr>
                       <% else %>
-                        There are not available categories to add
+                        <%=t('cat_unavailable')%>
                       <% end %>
                     <% end %>
                   </table>
               <%end%>
             </p>
         </div>
-        <div class="clearfix"></div>
+        <div class="clearfix">
+          <h2><%= 'Notes' %></h2>
+          <%= render @milestone.notes %>
+
+          <h2><%= 'Add Notes' %></h2>
+          <%= render 'notes/form' %>
+        </div>
       </div>
 
     </div>

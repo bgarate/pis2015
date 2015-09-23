@@ -1,11 +1,11 @@
 <%= form_for([@milestone, @milestone.notes.build]) do |n| %>
   <p>
-    <%= n.label 'Note' %><br>
+    <%= n.label t('note') %><br>
     <%= n.text_field :text %>
   </p>
   <p>
-    <%= n.label 'Visibility'%><br>
-    <%= n.text_field  :visibility, :size=>12 %> Values: me, mentors, every_body
+    <%= n.label t('note_visibility')%><br>
+    <%= n.text_field  :visibility, :size=>12 %> <%=t('values')+': me, mentors, every_body' %>
   </p>
 
   <p>
@@ -15,7 +15,7 @@
   </p>
 
   <p>
-    <%= n.button 'Create Note', :type=>'button', :onclick=>'if(validate()){submit();};' %>
+    <%= n.button t('note_create'), :type=>'button', :onclick=>'if(validate()){submit();};' %>
   </p>
 <% end %>
 

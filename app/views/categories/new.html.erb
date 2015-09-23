@@ -1,10 +1,10 @@
 <%= form_for([@category]) do |c| %>
   <p>
-    <%= c.label 'Name' %><br>
+    <%= c.label t('cat_name') %><br>
     <%= c.text_field :name %>
   </p>
   <p>
-    <%= c.label 'Icon'%><br>
+    <%= c.label t('cat_icon')%><br>
     <%= c.text_field  :icon %>
   </p>
 
@@ -14,7 +14,7 @@
   </p>
 
   <p>
-    <%= c.button 'Create Note', :type=>'button', :onclick=>'if(validate()){submit();};' %>
+    <%= c.button t('cat_create'), :type=>'button', :onclick=>'if(validate()){submit();};' %>
   </p>
 <% end %>
 

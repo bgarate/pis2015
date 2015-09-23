@@ -1,26 +1,26 @@
 <%= form_for @milestone do |m| %>
 
   <p>
-    <%= m.label 'Title:' %><br>
+    <%= m.label t('mil_title') %>:<br>
     <%= m.text_field :title %>
   </p>
 
   <p>
-    <%= m.label 'Due date:' %><br>
+    <%= m.label t('mil_due_date') %>:<br>
     <%= m.text_field :due_date %>
   </p>
 
   <p>
-    <%= m.label 'Description:' %><br>
+    <%= m.label t('mil_description')%>:<br>
     <%= m.text_area :description %>
   </p>
 
   <p>
-    <%= m.label 'Status:' %><br>
+    <%= m.label t('mil_status') %>:<br>
     <%= m.text_area :status %>
   </p>
   <p>
-    <%= m.label 'Icon:' %><br>
+    <%= m.label t('mil_icon') %>:<br>
     <%= m.text_area :icon %>
   </p>
   <p>
@@ -30,12 +30,12 @@
     <%= m.hidden_field(:updated_at, :value=>Time.now) %>
   </p>
   <!-- <p>
-    <%= m.label 'Category:' %><br>
+    <%= m.label t('category') %><br>
     <%= m.text_area :category_id %>
   </p> -->
 
   <p>
-    <%= m.button 'Create Milestone', :type=>'button', :onclick=>'if(validate()){submit();};' %>
+    <%= m.button t('mil_create'), :type=>'button', :onclick=>'if(validate()){submit();};' %>
   </p>
 
 

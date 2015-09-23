@@ -5,7 +5,7 @@ describe GoogleController, "Login a traves de google oatuh" do
     allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
   end
 
-  it "Deveria guardar el id del usuario logueado en session y redirigir perfil" do
+  it "Deberia guardar el id del usuario logueado en session y redirigir perfil" do
     tr = TechRole.new
     tr.name= "Vendedor de Tortas Fritas"
     tr.save!
@@ -53,7 +53,7 @@ describe GoogleController, "Login a traves de google oatuh" do
 
   end
 
-  it "Deveria redirigir a unregistered" do
+  it "Deberia redirigir a unregistered" do
 
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
     visit '/auth/google_oauth2/callback'
@@ -61,7 +61,7 @@ describe GoogleController, "Login a traves de google oatuh" do
     expect(current_path).to eq google_unregistered_path
   end
 
-  it "Deveria poner el user id en session en nil y redirigir a home" do
+  it "Deberia poner el user id en session en nil y redirigir a home" do
     admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :admin=>true
     admin.save!
 
@@ -75,13 +75,13 @@ describe GoogleController, "Login a traves de google oatuh" do
     expect(response).to redirect_to(root_path)
   end
 
-  it "Deveria renderizar unregistered con msj como parametro" do
+  it "Deberia renderizar unregistered con msj como parametro" do
     get :unregistered
     expect(assigns(:msj)).to eq('Usuario no regitrado, contacte a un administrador.')
     expect(response).to render_template('unregistered')
   end
 
-  it "Deveria redireccionar a root path por no estar logueado" do
+  it "Deberia redireccionar a root path por no estar logueado" do
     get :signout
     expect(response).to redirect_to(root_path)
   end

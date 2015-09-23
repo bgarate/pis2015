@@ -1,27 +1,22 @@
 <p>
-  <strong><%= 'Category:' %>:</strong>
+  <strong><%= t('category') %>:</strong>
   <%= @category.name %>
 </p>
 
 <p>
-  <strong><%= 'Icon' %>:</strong>
+  <strong><%= t('cat_icon') %>:</strong>
   <%= @category.icon %>
 </p>
 
 <p>
-  <strong><%= 'Created_at' %>:</strong>
+  <strong><%= t('cat_created') %>:</strong>
   <%= @category.created_at %>
 </p>
 <p>
-  <strong><%= 'updated_at' %>:</strong>
+  <strong><%= t('cat_updated') %>:</strong>
   <%= @category.updated_at %>
 </p>
 
-<p>
-  <%= link_to 'destroy', category_path(@category),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-</p>
 
-<%= link_to 'People', me_people_path %>
-<%= link_to 'Categories', categories_path %>
+<%= link_to t('people'), me_people_path %>
+<%= link_to t('categories'), categories_path %>

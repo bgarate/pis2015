@@ -1,10 +1,10 @@
 <%= 'Categories:' %>
 <table class="table">
   <tr>
-    <td><h4>Name</h4></td>
-    <td><h4>Icon</h4></td>
-    <td><h4>Created at</h4></td>
-    <td><h4>Updated at</h4></td>
+    <td><h4><%= t('cat_name') %></h4></td>
+    <td><h4><%= t('cat_icon') %></h4></td>
+    <td><h4><%= t('cat_created') %></h4></td>
+    <td><h4><%= t('cat_updated') %></h4></td>
   </tr>
   <% @category.each do |c| %>
     <tr>
@@ -17,5 +17,5 @@
 
 </table>
 
-<%= link_to 'People', me_people_path %>
-<%= link_to 'Categories', categories_path %>
+<%= link_to t('people'), me_people_path %>
+<%= link_to t('Categories'), categories_path %>

@@ -1,4 +1,20 @@
 en:
+  #Generales (Paginas, Links, Botones, etc)
+  person: "Person"
+  people: "People"
+  category: "Category"
+  categories: "Categories"
+  milestone: "Milestone"
+  milestones: "Milestones"
+  note: "Note"
+  notes: "Notes"
+  project: "Project"
+  projects: "Projects"
+  save: "Save"
+  sure?: "Are you sure?"
+  add: "Add"
+  values: "Values"
+
   #crear persona
   people_new_name: "Name"
   people_new_email: "Email"
@@ -21,5 +37,33 @@ en:
       inactive: 'Inactive'
       finished: 'Finished'
 
-  #hito
-  markdone: 'mark as done'
+  #hitos
+  markdone: "mark as done"
+  mil_title: "Title"
+  mil_due_date: "Due Date"
+  mil_description: "Description"
+  mil_icon: "Icon"
+  mil_status: "Status"
+  mil_create: "Create Milestone"
+  mil_delete: "Delete Milestone"
+
+  #categorias
+  cat_name: "Name"
+  cat_icon: "Icon"
+  cat_created: "Created at"
+  cat_updated: "Updated at"
+  cat_create: "Create Category"
+  cat_delete: "Delete Category"
+  cat_add: "Add Category"
+  cat_unavailable: "There are no available Categories"
+
+  #notas
+  note_visibility: "Visibility"
+  note_author: "Author"
+  note_created: "Created at"
+  note_updated: "Updated at"
+  note_create: "Create Note"
+  note_delete: "Delete Note"
+  me: "Private"
+  mentors: "Mentors"
+  every_body: "Public"

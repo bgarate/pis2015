@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
-  root to: "people#me"
+  root to: 'people#me'
 
   get 'welcome/index'
 
   resources :people do
+    post :assign_milestone
     collection do
       get 'me'
     end
@@ -14,8 +15,15 @@ Rails.application.routes.draw do
   end
 
   #hitos
-  resources :milestones
+  resources :milestones do
+    resources :notes
+    post :add_category
+  end
   get 'milestones/markasdone'
+
+  resources :categories do
+    resources :milestones
+  end
 
   # Google auth
   get '/auth/google_oauth2/callback', to: 'google#callback'

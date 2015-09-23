@@ -58,6 +58,18 @@ class PeopleController < ApplicationController
     end
   end
 
+  def assign_milestone
+    @milestone=Milestone.find(params[:milestone_id])
+    @person=Person.find(params[:person_id])
+    @person.milestones<<@milestone
+    redirect_to me_people_path
+  end
+
+  def show_milestones
+    @person=Person.find(params[:person_id])
+  end
+
+
   private
 
   def person_params

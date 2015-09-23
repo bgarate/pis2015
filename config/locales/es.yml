@@ -20,6 +20,22 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
+  #Generales (Paginas, Links, Botones, etc)
+  person: "Persona"
+  people: "Personas"
+  category: "Categoria"
+  categories: "Categorias"
+  milestone: "Hito"
+  milestones: "Hitos"
+  note: "Nota"
+  notes: "Notas"
+  proyect: "Proyecto"
+  proyects: "Proyectos"
+  save: "Guardar"
+  sure?: "¿Estas seguro?"
+  add: "Agregar"
+  values: "Valores"
+
   #crear persona
   people_new_name: "Nombre"
   people_new_email: "Correo electrónico"
@@ -43,13 +59,42 @@ es:
         finished: 'Finalizado'
 
   #hitos
-  pending: pendinte
-  done: hecho
-  rejected: rechazado
-  feedback: 'feedback'
-  event: evento
+  pending: "pendiente"
+  done: "hecho"
+  rejected: "rechazado"
+  feedback: "feedback"
+  event: "evento"
+  markdone: "marcar como hecho"
+  mil_title: "Titulo"
+  mil_due_date: "Fecha limite"
+  mil_description: "Descripcion"
+  mil_icon: "Icono"
+  mil_status: "Estado"
+  mil_create: "Crear Hito"
+  mil_delete: "Borrar Hito"
 
-  markdone: 'marcar como hecho'
+
+
+  #categorias
+  cat_name: "Nombre"
+  cat_icon: "Icono"
+  cat_created: "Creado"
+  cat_updated: "Actualizado"
+  cat_create: "Crear Categoria"
+  cat_delete: "Borrar Categoria"
+  cat_add: "Agregar Categoria"
+  cat_unavailable: "No hay categorias disponibles"
+
+  #notas
+  note_visibility: "Visibilidad"
+  note_author: "Autor"
+  note_created: "Creado"
+  note_updated: "Actualizado"
+  note_create: "Crear Nota"
+  note_delete: "Borrar Nota"
+  me: "Privado"
+  mentors: "Mentores"
+  every_body: "Publico"
 
   #fechas
   date:

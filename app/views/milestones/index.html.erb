@@ -8,9 +8,9 @@
       <td><%= m.description %></td>
       <td><%= m.status %> </td>
 
-      <td><%= link_to 'destroy', milestone_path(m),
+      <td><%= link_to t('mil_delete'), milestone_path(m),
                       method: :delete,
-                      data: { confirm: 'Are you sure?' } %></td>
+                      data: { confirm: t('sure?') } %></td>
 
     </tr>
   <% end %>

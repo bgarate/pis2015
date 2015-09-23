@@ -43,13 +43,21 @@ es:
         finished: 'Finalizado'
 
   #hitos
-  pending: pendinte
-  done: hecho
-  rejected: rechazado
-  feedback: 'feedback'
-  event: evento
+  pending: Pendinte
+  done: Hecho
+  rejected: Rechazado
+  feedback: 'Feedback'
+  event: Evento
 
-  markdone: 'marcar como hecho'
+  markdone: 'Marcar como hecho'
+  attachmentsdocs: 'Documentos adjuntos'
+  adddoc: 'Agregar documento'
+  driveerrormsj: 'Ha ocurrido un error. Asegúrese de cumplir con los siguientes puntos:
+                    - Ha ingresado un URL correcta
+                    - Tiene permisos de acceso al archivo en Google Drive'
+  attachgoogledrivedoc: 'Adjuntar documento de Google Drive'
+  documenturl: 'URL del documento'
+  attach: 'Adjuntar'
 
   #fechas
   date:

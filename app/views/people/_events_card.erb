@@ -54,6 +54,16 @@
                       link_to t(:markdone), milestone_path(e, :milestone  => {:status => :done}), :method => :put
                     end
                 %></p>
+                <p>
+                  <%=t(:attachmentsdocs)%>: <br>
+                    <ul>
+                      <%e.resources.each do |r|%>
+                          <li><%=link_to r.title, r.url, :target => "_blank"%></li>
+                      <%end%>
+                    </ul>
+                  <%=link_to t(:adddoc), :controller => 'google', :action => 'adddriveview', :milestone_id => e.id%>
+
+                </p>
               </div></p>
             </li>
           </ul>

@@ -55,6 +55,9 @@ es:
   driveerrormsj: 'Ha ocurrido un error. Asegúrese de cumplir con los siguientes puntos:
                     - Ha ingresado un URL correcta
                     - Tiene permisos de acceso al archivo en Google Drive'
+  attachgoogledrivedoc: 'Adjuntar documento de Google Drive'
+  documenturl: 'URL del documento'
+  attach: 'Adjuntar'
 
   #fechas
   date:

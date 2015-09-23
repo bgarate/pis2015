@@ -28,3 +28,6 @@ en:
   driveerrormsj: 'An error has occurred. Be sure to follow the following points:
                     - You have entered a correct URL
                     - You have access permissions to the file in Google Drive'
+  attachgoogledrivedoc: 'Attach Google Drive Document'
+  documenturl: 'Document URL'
+  attach: 'Attach'

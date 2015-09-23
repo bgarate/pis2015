@@ -14,6 +14,8 @@ en:
   sure?: "Are you sure?"
   add: "Add"
   values: "Values"
+  edit: "Edit"
+  delete: "Delete"
 
   #crear persona
   people_new_name: "Name"
@@ -24,13 +26,17 @@ en:
   people_new_init_date: "Init date"
   people_new_submit: "Create user"
 
-  project_new_name: "Name"
-  project_new_client: "Client"
-  project_new_status: "Status"
-  project_new_start_date: "Start date"
-  project_new_end_date: "End date"
-  project_new_technologies: "Technologies"
+  project_id: "ID"
+  project_name: "Name"
+  project_client: "Client"
+  project_status: "Status"
+  project_start_date: "Start date"
+  project_end_date: "End date"
+  project_technologies: "Technologies"
   project_new_submit: "Create project"
+  project_edit_submit: "Update project"
+  project_index_header: "Listing projects"
+  project_no_projects: "No projects found"
   project:
     display_status:
       active: 'Active'

@@ -30,7 +30,7 @@
             <div class="form-group col-xs-6">
               <%= f.label t('people_new_birth_date'), class: "control-label" %>
               <div class="input-group">
-                    <%= f.text_field :birth_date, class: "form-control", "data-provide":"datepicker", 'data-validation': "birthdate required", 'data-validation-format': "dd/mm/yyyy"%>
+                    <%= f.text_field :birth_date, class: "form-control", "data-provide":"datepicker", 'data-validation': "required birthdate", 'data-validation-format': "dd/mm/yyyy"%>
                     <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
               </div>
               
@@ -38,7 +38,7 @@
             <div class="form-group col-xs-6">
               <%= f.label t('people_new_init_date'), class: "control-label" %>
               <div class="input-group">
-                <%= f.text_field :start_date, class: "form-control", "data-provide":"datepicker", 'data-validation': "birthdate required" , 'data-validation-format': "dd/mm/yyyy"%>
+                <%= f.text_field :start_date, class: "form-control", "data-provide":"datepicker", 'data-validation': "required birthdate", 'data-validation-format': "dd/mm/yyyy"%>
                 <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
               </div>
             </div>

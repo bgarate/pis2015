@@ -1,42 +1,46 @@
 <div class="container">
   <div class="row">
-    <div class="card-col col-xs-8">
-      <%= form_for :person, url: people_path, html: { 'data-toggle': 'validator'} do |f| %>
+    <div class="card-col col-xs-4 col-xs-offset-4">
+
+      <%= form_for :person, url: people_path, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
+          <h1><span class="glyphicon glyphicon-user"></span> Crear usuario</h1>
           <div class="form-group">
             <%= f.label t('people_new_name'), class: "control-label" %>
-            <%= f.text_field :name, class: "form-control", required: "required" %>
-            <div class="help-block with-errors"></div>
+            <%= f.text_field :name, class: "form-control", 'data-validation': "required" %>
+            
           </div>
           <div class="form-group">
             <%= f.label t('people_new_email'), class: "control-label" %>
-            <%= f.text_field :email, class: "form-control", required: "required"%>
-            <div class="help-block with-errors"></div>
+            <%= f.text_field :email, class: "form-control", 'data-validation': "required email"%>
+            
           </div>
           <div class="row">
             <div class="form-group col-xs-6">
               <%= f.label t('people_new_celphone'), class: "control-label" %>
-              <%= f.text_field :cellphone, class: "form-control" %>
-              <div class="help-block with-errors"></div>
+              <%= f.text_field :cellphone, class: "form-control"%>
+              
             </div>
             <div class="form-group col-xs-6">
               <%= f.label t('people_new_telephone'), class: "control-label" %>
               <%= f.text_field :phone, class: "form-control" %>
-              <div class="help-block with-errors"></div>
+              
             </div>
           </div>
           <div class="row">
             <div class="form-group col-xs-6">
               <%= f.label t('people_new_birth_date'), class: "control-label" %>
               <div class="input-group">
-                    <%= f.text_field :birth_date, type: "date", class: "form-control", "data-provide":"datepicker"%>
+                    <%= f.text_field :birth_date, class: "form-control", "data-provide":"datepicker", 'data-validation': "birthdate required", 'data-validation-format': "dd/mm/yyyy"%>
                     <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
               </div>
-              <div class="help-block with-errors"></div>
+              
             </div>
             <div class="form-group col-xs-6">
               <%= f.label t('people_new_init_date'), class: "control-label" %>
-              <%= f.text_field :start_date, class: "form-control" %>
-              <div class="help-block with-errors"></div>
+              <div class="input-group">
+                <%= f.text_field :start_date, class: "form-control", "data-provide":"datepicker", 'data-validation': "birthdate required" , 'data-validation-format': "dd/mm/yyyy"%>
+                <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+              </div>
             </div>
           </div>
 

@@ -16,8 +16,8 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require jquery.knob
-//= require validator
 //= require bootstrap-datepicker
+//= require form-validator/jquery.form-validator.min
 //= require_tree .
 
 
@@ -26,5 +26,8 @@ $(function() {
     'width':'90%',
     'readOnly':true
   });
-
+  $.validate({
+      modules: 'html5, date',
+      lang: '<%= I18n.locale %>'
+  });
 });

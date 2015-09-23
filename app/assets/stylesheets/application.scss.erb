@@ -21,6 +21,8 @@ $sunflower-dark: #E8B113;
 $alizarin-dark: #FF6C61;
 $midnightblue-dark:#23323D;
 
+$peterriver-focus: #1d76b8;
+
 $nav-background: $midnightblue;
 $nav-hover: $peterriver;
 
@@ -44,64 +46,9 @@ body {
 @import "cards";
 @import "login";
 @import "milestones";
+@import "general";
+@import "forms";
 
-.calendar {
-  background-image: image-url('layouts/calendar-red.png');
-  background-repeat: no-repeat;
-  background-size: 24px 24px;
-  min-height: 24px;
-  float: left;
-  margin-left: 15px;
-  padding-left: 30px;
-  line-height: 24px;
-  font-weight: bold;
-  font-size: 10px;;
-
-  &.white {
-    background-image: image-url('layouts/calendar-white.png');
-  }
-
-  &.right {
-    margin-left: inherit;
-    padding-left: inherit;
-    margin-right: 15px;
-    padding-right: 30px;
-    background-position: right;
-    float: right;
-  }
-
-}
-
-.milestone-status {
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    width: 30px;
-    height: 30px;
-    background-size: cover;
-
-    &.done {
-        background-image: image-url('layouts/status-done.png');
-    }
-
-    &.pending {
-        background-image: image-url('layouts/status-pending.png');
-    }
-
-    &.rejected {
-        background-image: image-url('layouts/status-rejected.png');
-    }
-
-    &.right {
-        left: auto;
-        right: 15px;
-    }
-
-    &.small {
-        width: 25px;
-        height: 25px;
-    }
-}
 
 .ui-autocomplete {
   position: absolute;

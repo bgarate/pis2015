@@ -49,8 +49,10 @@ class PeopleController < ApplicationController
     @person = Person.new(person_params)
     @person.save
     if @person.valid?
+      flash.notice = "'#{person_params[:name]}' creado con éxito!"
       redirect_to @person
     else
+      flash.alert = "'#{person_params[:name]}' no se ha podido crear"
       redirect_to '/people/new'
     end
   end

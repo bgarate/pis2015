@@ -17,6 +17,7 @@ class PeopleController < ApplicationController
     if person
       #nombre
       @name = person.name
+      @id = person.id
 
       #rol tecnico
       @trole = ''
@@ -62,7 +63,7 @@ class PeopleController < ApplicationController
     @milestone=Milestone.find(params[:milestone_id])
     @person=Person.find(params[:person_id])
     @person.milestones<<@milestone
-    redirect_to me_people_path
+    redirect_to @person
   end
 
   def show_milestones

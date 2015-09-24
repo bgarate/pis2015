@@ -15,6 +15,9 @@
 #
 
 class Milestone < ActiveRecord::Base
+
+  validates :title, :description, presence: true
+
   has_many :person_milestones
   has_many :people, through: :person_milestones
   has_many :notes

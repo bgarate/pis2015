@@ -1,22 +1,30 @@
-<%= form_for([@category]) do |c| %>
-  <p>
-    <%= c.label t('cat_name') %><br>
-    <%= c.text_field :name %>
-  </p>
-  <p>
-    <%= c.label t('cat_icon')%><br>
-    <%= c.text_field  :icon %>
-  </p>
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
+    <h1><span class="glyphicon glyphicon-user"></span> <%= t('cat_create') %></h1>
 
-  <p>
-    <%= c.hidden_field(:created_at, :value =>Time.now) %>
-    <%= c.hidden_field(:updated_at, :value =>Time.now) %>
-  </p>
+    <%= form_for([@category]) do |c| %>
+        <div class="form-group">
+                <%= c.label t('cat_name') %><br>
+                <%= c.text_field :name %>
+        </div>
 
-  <p>
-    <%= c.button t('cat_create'), :type=>'button', :onclick=>'if(validate()){submit();};' %>
-  </p>
-<% end %>
+        <div class="form-group">
+                <%= c.label t('cat_icon')%><br>
+                <%= c.text_field  :icon %>
+        </div>
+
+
+        <%= c.hidden_field(:created_at, :value =>Time.now) %>
+        <%= c.hidden_field(:updated_at, :value =>Time.now) %>
+
+              <p>
+                <%= c.button t('create'), :type=>'button', :onclick=>'if(validate()){submit();};' %>
+              </p>
+     </div>
+    <% end %>
+  </div>
+</div>
 
 <script>
   function validate(){

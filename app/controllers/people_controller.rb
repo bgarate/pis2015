@@ -17,6 +17,7 @@ class PeopleController < ApplicationController
     if person
       #nombre
       @name = person.name
+      @id = person.id
 
       #rol tecnico
       @trole = ''

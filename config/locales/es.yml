@@ -35,6 +35,8 @@ es:
   sure?: "¿Estas seguro?"
   add: "Agregar"
   values: "Valores"
+  create: "Crear"
+
 
   #crear persona
   people_new_name: "Nombre"

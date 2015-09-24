@@ -43,7 +43,7 @@
 
 <h2><%= 'Assign:' %></h2>
 <% count=0 %>
-<%= form_tag ({:action => 'assign_milestone', :controller => 'people', :person_id => current_user.id}) do   %>
+<%= form_tag ({:action => 'assign_milestone', :controller => 'people', :person_id => @id}) do   %>
   <select name="milestone_id">
     <% Milestone.all.each do |m| %>
       <% if @overcomes.exists?(m.id) %> #no hago nada

@@ -14,6 +14,7 @@ en:
   sure?: "Are you sure?"
   add: "Add"
   values: "Values"
+  create: "Create"
 
   #crear persona
   people_new_name: "Name"

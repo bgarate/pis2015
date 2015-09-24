@@ -1,6 +1,5 @@
 class MilestonesController < ApplicationController
 
-  skip_before_action :loged?, only:[:callback,:unregistered]
   skip_before_action :admin?
 
   def index
@@ -39,7 +38,7 @@ class MilestonesController < ApplicationController
 	
   def update
     @milestone = Milestone.find(params[:id])
-    if @milestone.update_attributes(params.require(:milestone).permit(:title,:due_date)) 
+    if @milestone.update_attributes(milestone_params)
       redirect_to @milestone
     end
   end

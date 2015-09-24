@@ -20,6 +20,7 @@ class Milestone < ActiveRecord::Base
   has_many :notes
   has_many :resources
   belongs_to :category
-  enum status: [:done, :pending, :rejected]
+  enum status: [:pending, :done, :rejected]
+  enum milestone_type: [ :feedback, :event ]
 end
 

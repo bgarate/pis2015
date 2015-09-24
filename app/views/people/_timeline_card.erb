@@ -43,6 +43,13 @@
             <li>
               <h2><%=e.title%></h2>
               <p><%=e.description%></p>
+              <p><%=t(e.status) %></p>
+              <p><%=
+                  if e.status != :done
+                    session[:return_to] ||= request.referer
+                    link_to t(:markdone), milestone_path(e, :milestone  => {:status => :done}), :method => :put
+                  end
+              %></p>
               <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
               <ul class="tags">
                 <!--<li>Speaker</li>-->

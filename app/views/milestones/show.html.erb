@@ -7,11 +7,30 @@
         <div class="left-pane">
             <div class="milestone-icon"><%= image_tag @milestone.icon %></div>
             <h2><%= @milestone.title %></h2>
-            <h3><%= @milestone.category.name %></h3>
+            <% if @milestone.category %>
+                <h3><%= @milestone.category.name %></h3>
+            <%end%>
         </div>
         <div class="right-pane">
             <p><%= @milestone.description %></p>
-            <div class="calendar white right"><%= l(@milestone.due_date, format: "%A, %d %B %Y").capitalize %></div>
+            <p><%=t(@milestone.status) %></p>
+            <p><%=
+                if @milestone.status != :done
+                  session[:return_to] ||= request.referer
+                  link_to t(:markdone), milestone_path(@milestone, :milestone  => {:status => :done}), :method => :put
+                end
+            %></p>
+          <p>
+            <%=t(:attachmentsdocs)%>: <br>
+          <ul>
+            <%@milestone.resources.each do |r|%>
+                <li><%=link_to r.title, r.url, :target => "_blank"%></li>
+            <%end%>
+          </ul>
+          <%=link_to t(:adddoc), :controller => 'google', :action => 'adddriveview', :milestone_id => @milestone.id%>
+
+          </p>
+            <div class="calendar white right"><%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %></div>
         </div>
         <div class="clearfix"></div>
       </div>

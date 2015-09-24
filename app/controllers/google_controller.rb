@@ -1,12 +1,18 @@
-require 'pp'
+  require 'pp'
+  require 'rubygems'
+  require 'google/api_client'
+  require 'google_drive'
 
 class GoogleController < ApplicationController
 
   skip_before_action :loged?, only:[:callback,:unregistered]
   skip_before_action :admin?
 
+  #
+  # Login con Google y OAuth2
+  #
   def callback
-    auth = env["omniauth.auth"]
+    auth = env['omniauth.auth']
 
     person = Person.find_by(email: auth.info.email)
     if person
@@ -33,5 +39,52 @@ class GoogleController < ApplicationController
 
   def unregistered
     @msj = String.new('Usuario no regitrado, contacte a un administrador.')
+  end
+
+  #
+  # Google Drive
+  #
+  def adddriveview
+    if params[:milestone_id]
+      @milestone_id = params[:milestone_id]
+    else
+      redirect_to root_path
+    end
+  end
+
+  def adddrive
+    url = params[:URL]
+    @milestone_id = params[:milestone_id]
+    m = Milestone.find_by(id: @milestone_id)
+    u = current_user
+
+    if m and u and url
+      session = GoogleDrive.login_with_oauth(u.oauth_token)
+
+      begin
+        f = session.file_by_url(url)
+      rescue Google::APIClient::ClientError
+        @err = true
+        redirect_to google_driveerror_path(:err => true) and return
+      end
+
+      r = Resource.new
+      r.doc_id= f.resource_id
+      r.title= f.title
+      r.url= f.human_url
+      m.resources<<(r)
+      m.save!
+
+      redirect_to root_path
+    else
+      redirect_to root_path
+    end
+  end
+
+  def driveerror
+    e = params[:err]
+    if not e
+      redirect_to root_path
+    end
   end
 end

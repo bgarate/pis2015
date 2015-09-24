@@ -23,6 +23,9 @@ class Milestone < ActiveRecord::Base
   enum status: [:pending, :done, :rejected]
   enum milestone_type: [ :feedback, :event ]
 
+  # autor del feedback
+  belongs_to :feedback_author, class_name: 'Person'
+
   def get_next_status
     status_order = [:pending, :done, :rejected]
 

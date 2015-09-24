@@ -50,11 +50,12 @@ ActiveRecord::Schema.define(version: 20150921163950) do
     t.string   "title"
     t.date     "due_date"
     t.text     "description"
-    t.integer  "status", default: 0
+    t.integer  "status"
     t.integer  "milestone_type"
     t.string   "icon"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "feedback_author_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "category_id"
   end
 
@@ -123,9 +124,9 @@ ActiveRecord::Schema.define(version: 20150921163950) do
     t.date     "start_date"
     t.date     "end_date"
     t.string   "client"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "status"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "status",     default: 0, null: false
   end
 
   create_table "projects_technologies", force: :cascade do |t|

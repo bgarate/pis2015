@@ -3,7 +3,7 @@
     <div class="card-col col-xs-7">
 
       <div id="milestone-info">
-        <div class="milestone-status <%= @milestone.status %>"></div>
+        <%= milestone_status(@milestone) %>
         <div class="left-pane">
             <div class="milestone-icon"><%= image_tag @milestone.icon %></div>
             <h2><%= @milestone.title %></h2>

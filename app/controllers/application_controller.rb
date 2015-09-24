@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-
+  before_action :load_members
   before_action :loged?
   before_action :admin?
 
@@ -30,6 +30,15 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if (session[:user_id]) && (User.find_by(id: session[:user_id])) && (!(User.find_by(id: session[:user_id]).oauth_expired?))
+  end
+
+  helper_method :navigation_bar_visible
+
+  attr_accessor :navigation_bar_visible
+  private
+
+  def load_members
+    @navigation_bar_visible = true
   end
 
   #Devuelve el dia de la semana de un date

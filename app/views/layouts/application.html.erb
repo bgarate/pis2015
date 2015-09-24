@@ -10,9 +10,34 @@
 
   </head>
   <body class="<%= controller.controller_name %>">
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
+    <% if navigation_bar_visible %>
+      <header>
+        <%= render 'layouts/navigation' %>
+      </header>
+    <% end %>
+    <% if flash.notice or flash.alert %>
+        <div class="container">
+            <div class="row">
+              <div class="col-xs-6 col-xs-offset-3">
+
+                <% if flash.notice %>
+                  <div class="alert alert-success alert-dismissable">
+                    <%= flash.notice %>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  </div>
+                <% end %>
+
+                <% if flash.alert %>
+                  <div class="alert alert-danger alert-dismissable">
+                    <%= flash.alert %>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  </div>
+                <% end %>
+
+              </div>
+            </div>
+        </div>
+    <% end %>
     <%= yield %>
   </body>
 </html>

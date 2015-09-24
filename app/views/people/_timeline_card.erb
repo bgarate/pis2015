@@ -41,6 +41,7 @@
       <ul id="milestone-list">
         <% @milestones.each do |e| %>
             <li>
+              <%= milestone_status(e,:small,:right)%>
               <h2><%=e.title%></h2>
               <p><%=e.description%></p>
               <p><%=t(e.status) %></p>

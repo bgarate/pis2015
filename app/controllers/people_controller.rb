@@ -19,10 +19,6 @@ class PeopleController < ApplicationController
       @name = person.name
       @identifier = person.id
 
-      #admin indica si el usuario LOGUEADO es admin o no.
-      #user no puede ser nil por el filtro loged?
-      @admin = @user.person.admin
-
       #rol tecnico
       @trole = ''
       @trole = person.tech_role.name if person.tech_role

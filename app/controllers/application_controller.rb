@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
   #Si el user no es admin, redirecciona a root path
   def admin?
-    #@user = current_user #si loged? se ejecuta antes, @user ya está seteado.
+    @user = current_user
     if @user
       # @person = Person.find(@user.person_id)
       if !(@user.person.admin)
@@ -30,8 +30,20 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if (session[:user_id]) && (User.find_by(id: session[:user_id])) && (!(User.find_by(id: session[:user_id]).oauth_expired?))
+
   end
 
+  #devuelve true si hay usr logueado y es admin, false en otro caso.
+  helper_method :current_user_admin?
+  def current_user_admin?
+    user = current_user
+    if user
+      user.person.admin
+    else
+      false
+    end
+
+  end
   helper_method :navigation_bar_visible
 
   attr_accessor :navigation_bar_visible

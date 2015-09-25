@@ -20,6 +20,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
+
+  edit: "Editar"
+  delete: "Borrar"
+
   #crear persona
   people_new_name: "Nombre"
   people_new_email: "Correo electrónico"
@@ -29,13 +33,22 @@ es:
   people_new_init_date: "Fecha de ingreso"
   people_new_submit: "Crear usuario"
 
-  project_new_name: "Nombre"
-  project_new_client: "Cliente"
-  project_new_status: "Estado"
-  project_new_start_date: "Fecha de inicio"
-  project_new_end_date: "Fecha de fin"
-  project_new_technologies: "Tecnologías"
+  mentor_since: "Desde"
+  mentor_name: "Nombre del mentor"
+  mentor_submit: "Agregar mentor"
+
+
+  project_id: "ID"
+  project_name: "Nombre"
+  project_client: "Cliente"
+  project_status: "Estado"
+  project_start_date: "Fecha de inicio"
+  project_end_date: "Fecha de fin"
+  project_technologies: "Tecnologías"
   project_new_submit: "Crear projecto"
+  project_edit_submit: "Actualizar proyecto"
+  project_index_header: "Listando proyectos"
+  project_no_projects: "No se han encontrado proyectos"
   project:
       display_status:
         active: 'Activo'
@@ -43,13 +56,21 @@ es:
         finished: 'Finalizado'
 
   #hitos
-  pending: pendinte
-  done: hecho
-  rejected: rechazado
-  feedback: 'feedback'
-  event: evento
+  pending: Pendinte
+  done: Hecho
+  rejected: Rechazado
+  feedback: 'Feedback'
+  event: Evento
 
-  markdone: 'marcar como hecho'
+  markdone: 'Marcar como hecho'
+  attachmentsdocs: 'Documentos adjuntos'
+  adddoc: 'Agregar documento'
+  driveerrormsj: 'Ha ocurrido un error. Asegúrese de cumplir con los siguientes puntos:
+                    - Ha ingresado un URL correcta
+                    - Tiene permisos de acceso al archivo en Google Drive'
+  attachgoogledrivedoc: 'Adjuntar documento de Google Drive'
+  documenturl: 'URL del documento'
+  attach: 'Adjuntar'
 
   #fechas
   date:

@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   get 'google/signout'
   get 'google/signout'
   get 'google/unregistered'
-  get 'google/test'
+  #google drive
+  get 'google/adddriveview'
+  get 'google/adddrive'
+  get 'google/driveerror'
 
 end

@@ -8,21 +8,23 @@
         <h1>No hay posibles mentores para agregar para <%= @mentee.name %></h1>
         <button type="submit()">Volver</button>
     <% else %>
-
-        <h1><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-user"></span> Agregando mentor a <%= @mentee.name %>:</h1>
-        <%= form_tag(controller: "people", action: "add_mentor", method: "get") do %>
+        <%= form_tag({controller: "people", action: "add_mentor", method: "get"},{:class => 'main-form'}) do %>
+        <h1><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-user"></span> Agregando mentor a <br><br> <%= @mentee.name %>:</h1>
             <input type="hidden" name="mentee_id" value="<%= @mentee.id %>">
             <div class="field">
-              <h2>Desde:</h2>
+              <%= label_tag( t('mentor_since') ) %>
               <br>
               <%= date_field_tag(:start_date,:start_date,:required => true) %>
             </div>
+            <br>
             <div class="field">
-              <h2>Mentor:</h2>
+              <%= label_tag( t('mentor_name'),nil, class: 'small_label' ) %>
+              <br>
               <%= select_tag(:mentor_id, options_from_collection_for_select(@posible_mentors.all, :id, :name),:required => true) %>
             </div>
-            <button type="submit()">Agregar Mentor</button>
-              <% end %>
+            <br>
+              <%= button_tag t('mentor_submit'), options= :type => 'submit', class: "btn btn-default" %>
+      <% end %>
 
     <% end %>
 

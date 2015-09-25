@@ -4,6 +4,6 @@ class WelcomeController < ApplicationController
   skip_before_action :admin?
 
   def index
-    #PARA TESTEAR A MANO
+    @navigation_bar_visible = false
   end
 end

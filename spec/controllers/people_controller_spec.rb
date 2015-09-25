@@ -65,6 +65,12 @@ describe PeopleController do
       expect(response.status).to eq(302)
     end
 
+    it 'Redirigir a root path' do
+      session[:user_id] = @ad_user.id
+      get :show, :id => 9999999999999
+      expect(response).to redirect_to(root_path)
+    end
+
   end
 
   describe "add_mentor"do

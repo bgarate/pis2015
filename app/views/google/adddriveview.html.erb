@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-8 col-xs-offset-2">
+
+      <form action='adddrive' class='main-form'>
+        <h2> <%=t(:attachgoogledrivedoc) %> </h2>
+        <input name='milestone_id' type='hidden' value=<%=@milestone_id%> readonly class='form-control'>
+        <label for='URL' class='control-label'> <%=t(:documenturl)%> </label>
+        <input type='input' name='URL' class='form-control'>
+        <br>
+        <input type='submit' value=<%=t(:attach)%> class='btn btn-default'>
+      </form>
+
+    </div>
+  </div>
+</div>

@@ -23,7 +23,7 @@ describe 'Person' do
   before do
     @master = Person.new :name => 'Obiwan', :email => 'obi@jedi.com', :start_date=>Time.current()
     @padawan = Person.new :name => 'Luke', :email => 'luke@jedi.com', :start_date=>Time.current()
-    @project = Project.new :name => 'Equilibrar la fuerza'
+    @project = Project.new :name => 'Equilibrar la fuerza', :client => 'Rebeldes', :status=>"active"
     @ms = Milestone.new :title => 'Destruir Death Star'
     @techRole = TechRole.new :name => 'Jedi'
     @skill = Skill.new :name => 'Mover piedras con la mente'

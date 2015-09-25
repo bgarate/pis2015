@@ -20,7 +20,7 @@ class MilestonesController < ApplicationController
     @milestone=Milestone.find(params[:milestone_id])
     @category=Category.find(params[:category_id])
     @category.milestones<<@milestone
-    redirect_to @milestone
+    redirect_to milestone
   end
   # Por ahora queda asi, deberia ser @milestone.category= @category
 
@@ -29,11 +29,11 @@ class MilestonesController < ApplicationController
   end
 
   def destroy
-    @milestone= Milestone.find(params[:id])
-    @milestone.notes.each do |n|
+    milestone= Milestone.find(params[:id])
+    milestone.notes.each do |n|
       n.destroy
     end
-    @milestone.destroy
+    milestone.destroy
     redirect_to milestones_path
   end
 	
@@ -46,6 +46,13 @@ class MilestonesController < ApplicationController
     if @milestone.update_attributes(milestone_params)
       redirect_to @milestone
     end
+  end
+
+  def next_status
+    m = Milestone.find(params[:milestone_id])
+    m.status = m.get_next_status
+    m.save!
+    redirect_to :back
   end
 
   private

@@ -1,17 +1,40 @@
-<h1>MILESTONES:</h1>
-<table class="table">
-  <% @milestone.each do |m| %>
-    <tr>
-      <td><%= m.id %></td>
-      <td><%= link_to m.title, milestone_path(m)%></td>
-      <td><%= m.due_date %></td>
-      <td><%= m.description %></td>
-      <td><%= m.status %> </td>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
 
-      <td><%= link_to t('mil_delete'), milestone_path(m),
-                      method: :delete,
-                      data: { confirm: t('sure?') } %></td>
+      <div class="table-container">
+        <h1><%= t('milestones') %></h1>
+        <table class="table datatable">
+          <thead>
+              <tr>
+                <td></td>
+                <td>Nombre</td>
+                <td>Descripción</td>
+                <td>Fecha límite</td>
+                <td></td>
+              </tr>
+          </thead>
+          <tbody>
+          <% @milestone.each do |m| %>
+              <tr>
+                <td><%= milestone_status(m,:static) %></td>
+                <td><%= link_to m.title, milestone_path(m)%></td>
+                <td><%= m.description.truncate(50) %></td>
+                <td><div class="calendar left"><%= m.due_date %></div></td>
+                <td><%= link_to milestone_path(m),
+                                method: :delete,
+                                data: { confirm: t('sure?') } do %>
+                      <span class='large-text glyphicon glyphicon-remove'></span>
+                      <% end %>
+                </td>
 
-    </tr>
-  <% end %>
-</table>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+</div>

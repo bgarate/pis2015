@@ -3,12 +3,12 @@ class PeopleController < ApplicationController
   skip_before_action :admin?, only:[:show, :index, :me]
 
   def index
-    u = User.find_by(id: session[:user_id])
-    redirect_to action: 'show', id: u.person_id
+    @people = Person.all
   end
 
   def me
-    redirect_to(:action => "index") and return
+    u = User.find_by(id: session[:user_id])
+    redirect_to action: 'show', id: u.person_id
   end
 
   def show
@@ -60,10 +60,10 @@ class PeopleController < ApplicationController
   end
 
   def assign_milestone
-    @milestone=Milestone.find(params[:milestone_id])
-    @person=Person.find(params[:person_id])
-    @person.milestones<<@milestone
-    redirect_to @person
+    milestone=Milestone.find(params[:milestone_id])
+    person=Person.find(params[:person_id])
+    person.milestones<<milestone
+    redirect_to person
   end
 
   def show_milestones

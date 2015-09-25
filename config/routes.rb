@@ -23,7 +23,6 @@ Rails.application.routes.draw do
   get '/auth/google_oauth2/callback', to: 'google#callback'
   get 'auth/failure', to: redirect('/')
   get 'google/signout'
-  get 'google/signout'
   get 'google/unregistered'
   #google drive
   get 'google/adddriveview'

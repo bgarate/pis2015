@@ -17,10 +17,10 @@ class ApplicationController < ActionController::Base
 
   #Si el user no es admin, redirecciona a root path
   def admin?
-    @user = current_user
+    #@user = current_user #si loged? se ejecuta antes, @user ya está seteado.
     if @user
-      @person = Person.find(@user.person_id)
-      if !(@person.admin)
+      # @person = Person.find(@user.person_id)
+      if !(@user.person.admin)
         redirect_to root_path
       end
     end

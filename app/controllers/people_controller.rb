@@ -19,8 +19,9 @@ class PeopleController < ApplicationController
       @name = person.name
       @identifier = person.id
 
-      #admin?
-      @admin = person.admin
+      #admin indica si el usuario LOGUEADO es admin o no.
+      #user no puede ser nil por el filtro loged?
+      @admin = @user.person.admin
 
       #rol tecnico
       @trole = ''
@@ -68,8 +69,17 @@ class PeopleController < ApplicationController
     if (params[:mentor_id] != params[:mentee_id])
       @mentor=Person.find(params[:mentor_id])
       @mentee=Person.find(params[:mentee_id])
-      @mentor.mentees_assignations.create! start_date: params[:start_date], mentee: @mentee
-      redirect_to @mentee
+      begin
+        @mentor.mentees_assignations.create! start_date: params[:start_date], mentee: @mentee
+        redirect_to @mentee
+      rescue ActiveRecord::RecordNotUnique
+        redirect_to @mentee # el mentor ya fue asignado por otro usuario. El resultado es el mismo. Ignoro el error.
+      rescue Exception
+        render :status => 500, :file => "public/500"
+      end
+
+    else
+      render :status => 422, :file => "public/422"
     end
   end
 

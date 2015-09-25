@@ -85,15 +85,15 @@ describe PeopleController do
     it "Debería dar error si mentee y mentor son el mismo" do
       session[:user_id] = @ad_user.id
       get :add_mentor,{:mentee_id => 1, :mentor_id=>1, :start_date => Date.today()},:session => session
-      expect(response.status).to eq(500)
+      expect(response.status).to eq(422)
 
     end
 
-    it "Deberia dar error si la relacion mentee-mentor ya existe" do
+    it "Deberia redirigir a mentee si la relacion mentee-mentor ya existe" do
       session[:user_id] = @ad_user.id
       get :add_mentor,{:mentee_id => @admin.id, :mentor_id=>@no_admin.id ,:start_date => Date.today},:session => session
       get :add_mentor,{:mentee_id => @admin.id, :mentor_id=>@no_admin.id, :start_date => Date.today},:session => session
-      expect(response.status).to eq(500)
+      expect(response).to redirect_to(@admin)
 
     end
 

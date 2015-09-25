@@ -10,7 +10,7 @@ describe GoogleController, "Login a traves de google oatuh" do
     tr.name= "Vendedor de Tortas Fritas"
     tr.save!
 
-    per = Person.new :name=>'Alfred', :email=>'alfred.pis.2015@gmail.com'
+    per = Person.new :name=>'Alfred', :email=>'alfred.pis.2015@gmail.com', :start_date=>Time.current()
     per.birth_date= Time.new(2012, 8, 29, 22, 35, 0)
     per.start_date= Time.new(2012, 8, 29, 22, 35, 0)
     per.tech_role = tr
@@ -62,7 +62,7 @@ describe GoogleController, "Login a traves de google oatuh" do
   end
 
   it "Deveria poner el user id en session en nil y redirigir a home" do
-    admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :admin=>true
+    admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
     admin.save!
 
     ad_user = User.new :person => admin

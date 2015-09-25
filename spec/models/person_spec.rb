@@ -21,8 +21,8 @@ require 'rails_helper'
 describe 'Person' do
 
   before do
-    @master = Person.new :name => 'Obiwan', :email => 'obi@jedi.com'
-    @padawan = Person.new :name => 'Luke', :email => 'luke@jedi.com'
+    @master = Person.new :name => 'Obiwan', :email => 'obi@jedi.com', :start_date=>Time.current()
+    @padawan = Person.new :name => 'Luke', :email => 'luke@jedi.com', :start_date=>Time.current()
     @project = Project.new :name => 'Equilibrar la fuerza'
     @ms = Milestone.new :title => 'Destruir Death Star'
     @techRole = TechRole.new :name => 'Jedi'
@@ -31,7 +31,7 @@ describe 'Person' do
     @nota = Note.new :text => 'Usar la fuerza', :author => @padawan, :visibility => 'me'
     @technology = Technology.new :name => 'X Wings'
     @technology2 = Technology.new :name => 'Falcon millenium'
-    @admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :admin=>true
+    @admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
 
 
     @ms.notes<<(@nota)

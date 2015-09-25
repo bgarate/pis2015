@@ -4,7 +4,7 @@ describe PeopleController do
 
   before do
     # Creo una persona de tipo administrador
-    @admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :admin=>true
+    @admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
     @admin.save!
     # Creo un usuario asociado a dicha persona
     @ad_user = User.new :person => @admin
@@ -12,7 +12,7 @@ describe PeopleController do
     @ad_user.oauth_expires_at = Time.current().advance(days:1)
     @ad_user.save!
     # Creo una persona que NO es administrador
-    @no_admin = Person.new :name=>'NombreNoAdmin', :email=>'mail@noadmin.com', :admin=>false
+    @no_admin = Person.new :name=>'NombreNoAdmin', :email=>'mail@noadmin.com', :start_date=>Time.current(), :admin=>false
     @no_admin.save!
     # Creo un usuario asociado a dicha persona
     @no_ad_user = User.new :person => @no_admin
@@ -29,15 +29,15 @@ describe PeopleController do
       expect(response).to render_template("new")
     end
 
-    it "No deberia desplegar el formulario si el usuario no es admin" do
+    it "No despliega el formulario si el usuario no es admin" do
       session[:user_id] = @no_ad_user.id
       get :new, :session => session
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end
 
-    it "Deveria redirigir a index" do
-      admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :admin=>true
+    it "redirige a index" do
+      admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
       admin.save!
 
       ad_user = User.new :person => admin
@@ -51,16 +51,23 @@ describe PeopleController do
   end
 
   describe "GET create" do
-    it "Crea usuario con nombre y mail valido" do
+    it "Crea usuario con nombre, mail valido y fecha de comienzo valida" do
       session[:user_id] = @ad_user.id
-      get :create, {:person=>{:name=>'Nombre', :email=>'mail@example.com'},:session=>session}
+      get :create, {:person=>{:name=>'Nombre', :email=>'mail@example.com', :start_date=>Time.current()},:session=>session}
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end
 
     it "No crea usuario con mail vacio" do
       session[:user_id] = @ad_user.id
-      get :create, {:person=>{:name=>'Nombre'},:session=>session}
+      get :create, {:person=>{:name=>'Nombre', :start_date=>Time.current()},:session=>session}
+      # Espero ser redirigido
+      expect(response.status).to eq(302)
+    end
+
+    it "No crea usuario con fecha vacía" do
+      session[:user_id] = @ad_user.id
+      get :create, {:person=>{:name=>'Nombre', :email=>'mail@example.com'}, :session=>session}
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end

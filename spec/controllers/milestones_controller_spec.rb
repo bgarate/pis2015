@@ -8,12 +8,12 @@ describe MilestonesController, "Milestone Controller" do
 
   describe 'Milestone' do
 
-    it "has a 200 status code" do
+    it 'has a 200 status code' do
       get :index
       expect(response.status).to eq(200)
     end
 
-    it "creates a milestone" do
+    it 'creates a milestone' do
       post :new
       post :create, {:milestone=>{:title=>'milestone1', :description=>'unadescripcionde1'}}
       expect(response.status).to eq(302)
@@ -73,7 +73,7 @@ describe MilestonesController, "Milestone Controller" do
 
 
       delete :destroy, :id => m1.id
-      expect(response).to redirect_to('index')
+      expect(response).to redirect_to('/milestones')
 
     end
 

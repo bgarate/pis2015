@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :people do
     collection do
       get 'me'
+      post 'add_mentor'
+      get 'add_mentor_form'
     end
   end
 

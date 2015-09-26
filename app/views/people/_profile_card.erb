@@ -11,4 +11,17 @@
         <li><%= image_tag s.icon %></li>
     <% end %>
   </ul>
+  <hr>
+  <h4>MENTORES</h4>
+    <% if @mentorships.empty? %>
+        <p>Sin mentores en la actualidad</p>
+    <%else%>
+        <% @mentorships.each do |s| %>
+            <li><%= s.name %></li>
+        <%end%>
+        <br>
+    <%end%>
+    <%if current_user_admin? %>
+        <a href="add_mentor_form?mentee_id=<%=@identifier%>" class="btn btn-info" role="button"><span class="glyphicon glyphicon-add"></span>Agregar Mentores</a>
+    <%end%>
 </div>

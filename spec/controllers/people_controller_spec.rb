@@ -86,4 +86,36 @@ describe PeopleController do
     end
 
   end
+
+  describe "add_mentor"do
+    it "No deberia desplegar el formulario si el usuario no es admin" do
+      session[:user_id] = @no_ad_user.id
+
+      get :add_mentor_form ,{:mentee_id => 1}, :session => session
+      # Espero ser redirigido
+      expect(response).to redirect_to root_path
+    end
+
+    it "Debería dar error si mentee y mentor son el mismo" do
+      session[:user_id] = @ad_user.id
+      get :add_mentor,{:mentee_id => 1, :mentor_id=>1, :start_date => Date.today()},:session => session
+      expect(response.status).to eq(422)
+
+    end
+
+    it "Deberia redirigir a mentee si la relacion mentee-mentor ya existe" do
+      session[:user_id] = @ad_user.id
+      get :add_mentor,{:mentee_id => @admin.id, :mentor_id=>@no_admin.id ,:start_date => Date.today},:session => session
+      get :add_mentor,{:mentee_id => @admin.id, :mentor_id=>@no_admin.id, :start_date => Date.today},:session => session
+      expect(response).to redirect_to(@admin)
+
+    end
+
+    it "Deberia redirigirme a mentee si todo ok" do
+      session[:user_id] = @ad_user.id
+      get :add_mentor,{:mentee_id => @no_admin.id, :mentor_id=>@admin.id ,:start_date => Date.today},:session => session
+      expect(response).to redirect_to(@no_admin)
+    end
+
+  end
 end

@@ -3,7 +3,10 @@ class ProjectsController < ApplicationController
   before_action :get_project, only: [:show, :edit, :update, :destroy]
 
   def get_project
-    @project = Project.find(params[:id])
+    @project = Project.find_by(id: params[:id])
+    if !@project  || (! @project.validity?)
+      redirect_to '/projects'
+    end
   end
 
   def index

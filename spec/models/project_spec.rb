@@ -11,5 +11,9 @@ describe 'Project' do
     expect(Project.status_names_for_select).to eq([["Activo", "active"], ["Inactivo", "inactive"], ["Finalizado", "finished"]])
   end
 
+  it 'deberia imprimir el estado' do
+    expect(@project.display_status).to eq('Activo')
+  end
+
 
 end

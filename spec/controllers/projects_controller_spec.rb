@@ -83,7 +83,14 @@ describe ProjectsController do
       # Espero que boore logicamente el proyecto
       expect(@proy.validity).to eq(true)
     end
+
+    it "Deberia redireccionarme si el proyecto fue eliminado" do
+      session[:user_id] = @ad_user.id
+      get :destroy, {:id=>-1}
+      # Espero que me redireccione
+      expect(response.status).to eq(302)
+    end
   end
-  
+
 end
 

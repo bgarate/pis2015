@@ -5,9 +5,9 @@ class CreateTags < ActiveRecord::Migration
       t.string   :name
     end
 
-    create_table :tags_milestones, id: false, force: :cascade do |t|
-      t.belongs_to :tags, index: true
-      t.belongs_to :milestones, index: true
+    create_table :milestones_tags, id: false, force: :cascade do |t|
+      t.belongs_to :tag, index: true
+      t.belongs_to :milestone, index: true
 
     end
 

@@ -51,13 +51,21 @@ ActiveRecord::Schema.define(version: 20150926201533) do
     t.string   "title"
     t.date     "due_date"
     t.text     "description"
-    t.integer  "status",         default: 0
+    t.integer  "status"
     t.integer  "milestone_type"
     t.string   "icon"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "category_id"
   end
+
+  create_table "milestones_tags", id: false, force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "milestone_id"
+  end
+
+  add_index "milestones_tags", ["milestones_id"], name: "index_milestones_tags_on_milestones_id", using: :btree
+  add_index "milestones_tags", ["tags_id"], name: "index_milestones_tags_on_tags_id", using: :btree
 
   create_table "notes", force: :cascade do |t|
     t.text     "text"
@@ -124,9 +132,9 @@ ActiveRecord::Schema.define(version: 20150926201533) do
     t.date     "start_date"
     t.date     "end_date"
     t.string   "client"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "status"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "status",     default: 0, null: false
   end
 
   create_table "projects_technologies", force: :cascade do |t|
@@ -157,14 +165,6 @@ ActiveRecord::Schema.define(version: 20150926201533) do
   create_table "tags", force: :cascade do |t|
     t.string "name"
   end
-
-  create_table "tags_milestones", id: false, force: :cascade do |t|
-    t.integer "tags_id"
-    t.integer "milestones_id"
-  end
-
-  add_index "tags_milestones", ["milestones_id"], name: "index_tags_milestones_on_milestones_id", using: :btree
-  add_index "tags_milestones", ["tags_id"], name: "index_tags_milestones_on_tags_id", using: :btree
 
   create_table "tech_roles", force: :cascade do |t|
     t.string   "name"

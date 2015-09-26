@@ -37,10 +37,11 @@ class MilestonesController < ApplicationController
     redirect_to milestones_path
   end
 
-  def set_as_done
-    @milestone= Milestone.find(params[:milestone_id])
-    @milestone.update_attribute(:status, 1)
-    redirect_to @milestone
+  def update
+    @milestone = Milestone.find(params[:id])
+    if @milestone.update_attributes(milestone_params)
+      redirect_to @milestone
+    end
   end
 
   private

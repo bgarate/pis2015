@@ -59,14 +59,40 @@ describe MilestonesController, "Milestone Controller" do
         expect(response).to render_template("show")
       end
 
+    it 'destruye la milestone' do
+      m1 = Milestone.new
+      m1.title ='Milestone for testing'
+      m1.description='This is a milestone to test Milestones'
+      m1.due_date=Time.now - 5.days
+      m1.created_at= Time.now
+      m1.updated_at= Time.now
+      m1.status=1
+      m1.icon= 'Icon'
+      m1.save
+      m1.notes.create({:text=> 'una nota pa borrar'})
 
 
+      delete :destroy, :id => m1.id
+      expect(response).to redirect_to('index')
+
+    end
 
     end
 
 
 
+  it "Deberia modificar el status a done" do
+    m1 = Milestone.new
+    m1.title = 'Entrega del prototipo de alfred'
+    m1.description= 'Hay que entregar el protipo de alfred a la gente de pis. Ademas de cafe y galletitas maria gratis'
+    m1.due_date= Time.now - (3*2*7*24*60*60)
+    m1.status=0
+    m1.save!
 
+    put :update, :id => m1.id, :milestone => { :status => :done }
+    m1.reload
+    expect(m1.status).to eq "done"
+  end
 
 
 
@@ -105,20 +131,6 @@ describe MilestonesController, "Milestone Controller" do
   #
   #   end
   #
-
-
-  it "Deberia modificar el status a done" do
-    m2 = Milestone.new
-    m2.title = 'Entrega del prototipo de alfred'
-    m2.description= 'Hay que entregar el protipo de alfred a la gente de pis. Ademas de cafe y galletitas maria gratis'
-    m2.due_date= Time.now - (3*2*7*24*60*60)
-    m2.status=0
-    m2.save!
-
-    get :set_as_done, :milestone_id => m2.id
-    m2.reload
-    expect(m2.status).to eq 'done'
-  end
 
 
 

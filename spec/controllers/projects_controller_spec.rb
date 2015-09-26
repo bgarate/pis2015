@@ -70,10 +70,20 @@ describe ProjectsController do
     it "No crea proyecto con cliente vacio" do
       session[:user_id] = @ad_user.id
       get :update, {:id=>@proy.id, :project=>{:name=>'Nombre', :client=>'', :status=>"inactive", :technologies=>[]},:session=>session}
-      # Espero ser redirigido
+      # Espero que no se modifique el cliente
       expect(@proy.client).to eq('Cliente')
     end
 
   end
 
+  describe "GET Destroy" do
+    it "Borra logicamente un proyecto" do
+      session[:user_id] = @ad_user.id
+      get :destroy, {:id=>@proy.id}
+      # Espero que boore logicamente el proyecto
+      expect(@proy.validity).to eq(true)
+    end
+  end
+  
 end
+

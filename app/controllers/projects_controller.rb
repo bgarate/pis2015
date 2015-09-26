@@ -43,10 +43,9 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-=begin
-    @project.destroy!
-    redirect_to :index
-=end
+    @project.validity=false
+    @project.save
+    redirect_to '/projects'
   end
 
   private

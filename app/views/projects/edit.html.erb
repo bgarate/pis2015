@@ -1,44 +1,53 @@
-<%= form_for @project do |f| %>
-    <div class="field">
-      <%= f.label t('project_name') %><br>
-      <%= f.text_field :name %>
-    </div>
-    <div class="field">
-      <%= f.label t('project_client') %><br>
-      <%= f.text_field :client %>
-    </div>
-    <div class="field">
-      <%= f.label t('project_status') %><br>
-      <%= f.select :status, options_for_select(Project.status_names_for_select) %>
-    </div>
-    <div class="field">
-      <%= f.label t('project_technologies') %><br>
-      <%= f.select :technologies, Technology.all.collect {|t| [t.name, t.id]}, {}, {:multiple => true, :class => "input-lg"} %>
-    </div>
-    <div class="field">
-      <%= f.label t('project_start_date') %><br>
-      <%= f.text_field :start_date %>
-    </div>
-    <div class="field">
-      <%= f.label t('project_end_date') %><br>
-      <%= f.text_field :end_date %>
-    </div>
-    <div class="btn">
-      <%= f.button t('project_edit_submit'), options= :type=>'button', :onclick=>'if(validate()){submit();};' %>
-    </div>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
 
-<script>
-    function validate(form){
-        var name, client, status;
-        // Get the value of the input field with id="name"
-        name = document.getElementById('project_name').value;
-        // Get the value of the input field with id="client"
-        client = document.getElementById("project_client").value;
-        // Get the value of the input field with id="status"
-        status = document.getElementById("project_status").value;
+      <%= form_for @project, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
+        <h1><%= t('project_edit_head') %></h1>
 
-        // Validate
-        return ((name!='') && (client!='')  && (status!=''));
-    }
-</script>
+        <div class="form-group">
+            <%= f.label t('project_name'), class: "control-label" %>
+            <%= f.text_field :name, class: "form-control", 'data-validation': "required" %>
+        </div>
+
+        <div class="form-group">
+            <%= f.label t('project_client'), class: "control-label" %>
+            <%= f.text_field :client, class: "form-control", 'data-validation': "required" %>
+        </div>
+
+        <div class="form-group">
+            <%= f.label t('project_status') %>
+            <%= f.select :status, options_for_select(Project.status_names_for_select) %>
+        </div>
+
+        <div class="form-group">
+            <%= f.label t('project_technologies') %>
+            <%= f.select :technologies, Technology.all.collect {|t| [t.name, t.id]}, {}, {:multiple => true, :class => "input-lg"} %>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-xs-6">
+              <%= f.label t('project_start_date'), class: "control-label" %>
+              <div class="input-group">
+                <%= f.text_field :start_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
+                <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+              </div>
+            </div>
+
+            <div class="form-group col-xs-6">
+              <%= f.label t('project_end_date'), class: "control-label" %>
+              <div class="input-group">
+                <%= f.text_field :end_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
+                <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+              </div>
+            </div>
+        </div>
+
+        <div class="btn">
+          <%= f.button t('project_edit_submit'), options= :type => 'submit', class: "btn btn-default" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

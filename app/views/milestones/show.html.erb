@@ -3,7 +3,7 @@
     <div class="card-col col-xs-7">
 
       <div id="milestone-info">
-        <div class="milestone-status <%= @milestone.status %>"></div>
+        <%= milestone_status(@milestone) %>
         <div class="left-pane">
             <div class="milestone-icon"><%= image_tag @milestone.icon %></div>
             <h2><%= @milestone.title %></h2>
@@ -20,6 +20,16 @@
                   link_to t(:markdone), milestone_path(@milestone, :milestone  => {:status => :done}), :method => :put
                 end
             %></p>
+          <p>
+            <%=t(:attachmentsdocs)%>: <br>
+          <ul>
+            <%@milestone.resources.each do |r|%>
+                <li><%=link_to r.title, r.url, :target => "_blank"%></li>
+            <%end%>
+          </ul>
+          <%=link_to t(:adddoc), :controller => 'google', :action => 'adddriveview', :milestone_id => @milestone.id%>
+
+          </p>
             <div class="calendar white right"><%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %></div>
             <p>
               <% if @milestone.category!=nil %>

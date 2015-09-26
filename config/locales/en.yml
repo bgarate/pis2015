@@ -1,4 +1,5 @@
 en:
+
   #Generales (Paginas, Links, Botones, etc)
   person: "Person"
   people: "People"
@@ -15,6 +16,10 @@ en:
   add: "Add"
   values: "Values"
   create: "Create"
+  edit: "Edit"
+  delete: "Delete"
+  back: "Back"
+
 
   #crear persona
   people_new_name: "Name"
@@ -25,13 +30,22 @@ en:
   people_new_init_date: "Init date"
   people_new_submit: "Create user"
 
-  project_new_name: "Name"
-  project_new_client: "Client"
-  project_new_status: "Status"
-  project_new_start_date: "Start date"
-  project_new_end_date: "End date"
-  project_new_technologies: "Technologies"
+  mentor_since: "Since"
+  mentor_name: "Mentor's name"
+  mentor_submit: "Add mentor"
+  mentor_nomore_msg: "No more mentors available to add to"
+
+  project_id: "ID"
+  project_name: "Name"
+  project_client: "Client"
+  project_status: "Status"
+  project_start_date: "Start date"
+  project_end_date: "End date"
+  project_technologies: "Technologies"
   project_new_submit: "Create project"
+  project_edit_submit: "Update project"
+  project_index_header: "Listing projects"
+  project_no_projects: "No projects found"
   project:
     display_status:
       active: 'Active'
@@ -68,3 +82,14 @@ en:
   me: "Private"
   mentors: "Mentors"
   every_body: "Public"
+
+
+  attachmentsdocs: 'Attachments documents'
+  adddoc: 'Add document'
+  driveerrormsj: 'An error has occurred. Be sure to follow the following points:
+                    - You have entered a correct URL
+                    - You have access permissions to the file in Google Drive'
+  attachgoogledrivedoc: 'Attach Google Drive Document'
+  documenturl: 'Document URL'
+  attach: 'Attach'
+

@@ -36,16 +36,11 @@ class MilestonesController < ApplicationController
     @milestone.destroy
     redirect_to milestones_path
   end
-	
-  def edit
-    @milestone = Milestone.find(params[:id])
-  end
-	
-  def update
-    @milestone = Milestone.find(params[:id])
-    if @milestone.update_attributes(milestone_params)
-      redirect_to @milestone
-    end
+
+  def set_as_done
+    @milestone= Milestone.find(params[:milestone_id])
+    @milestone.update_attribute(:status, 1)
+    redirect_to @milestone
   end
 
   private

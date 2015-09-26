@@ -1,4 +1,4 @@
-<%= form_for :project, url:projects_path do |f| %>
+<%= form_for @project do |f| %>
     <div class="field">
       <%= f.label t('project_name') %><br>
       <%= f.text_field :name %>
@@ -13,7 +13,7 @@
     </div>
     <div class="field">
       <%= f.label t('project_technologies') %><br>
-      <%= f.select :id_technologies, Technology.all.collect {|t| [t.name, t.id]}, {}, {:multiple => true, :class => "input-lg"} %>
+      <%= f.select :technologies, Technology.all.collect {|t| [t.name, t.id]}, {}, {:multiple => true, :class => "input-lg"} %>
     </div>
     <div class="field">
       <%= f.label t('project_start_date') %><br>
@@ -24,7 +24,7 @@
       <%= f.text_field :end_date %>
     </div>
     <div class="btn">
-      <%= f.button t('project_new_submit'), options= :type=>'button', :onclick=>'if(validate()){submit();};' %>
+      <%= f.button t('project_edit_submit'), options= :type=>'button', :onclick=>'if(validate()){submit();};' %>
     </div>
 <% end %>
 

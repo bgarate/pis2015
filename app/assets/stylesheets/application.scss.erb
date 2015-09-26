@@ -1,6 +1,9 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "compass";
+@import "jquery-ui/core";
+@import "jquery-ui/autocomplete";
+@import "bootstrap-datepicker.standalone";
 
 $turqoise: #169F85;
 $peterriver: #2980B8;
@@ -17,6 +20,8 @@ $mooveit-orange-dark: #FC6A06;
 $sunflower-dark: #E8B113;
 $alizarin-dark: #FF6C61;
 $midnightblue-dark:#23323D;
+
+$peterriver-focus: #1d76b8;
 
 $nav-background: $midnightblue;
 $nav-hover: $peterriver;
@@ -41,33 +46,9 @@ body {
 @import "cards";
 @import "login";
 @import "milestones";
+@import "general";
+@import "forms";
 
-.calendar {
-  background-image: image-url('layouts/calendar-red.png');
-  background-repeat: no-repeat;
-  background-size: 24px 24px;
-  min-height: 24px;
-  float: left;
-  margin-left: 15px;
-  padding-left: 30px;
-  line-height: 24px;
-  font-weight: bold;
-  font-size: 10px;;
-
-  &.white {
-    background-image: image-url('assets/layouts/calendar-white.png');
-  }
-
-  &.right {
-    margin-left: inherit;
-    padding-left: inherit;
-    margin-right: 15px;
-    padding-right: 30px;
-    background-position: right;
-    float: right;
-  }
-
-}
 
 .ui-autocomplete {
   position: absolute;

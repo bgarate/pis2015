@@ -20,6 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
+
   #Generales (Paginas, Links, Botones, etc)
   person: "Persona"
   people: "Personas"
@@ -37,6 +38,9 @@ es:
   values: "Valores"
   create: "Crear"
 
+  edit: "Editar"
+  delete: "Borrar"
+  back: "Volver"
 
   #crear persona
   people_new_name: "Nombre"
@@ -47,13 +51,22 @@ es:
   people_new_init_date: "Fecha de ingreso"
   people_new_submit: "Crear usuario"
 
-  project_new_name: "Nombre"
-  project_new_client: "Cliente"
-  project_new_status: "Estado"
-  project_new_start_date: "Fecha de inicio"
-  project_new_end_date: "Fecha de fin"
-  project_new_technologies: "Tecnologías"
+  mentor_since: "Desde"
+  mentor_name: "Nombre del mentor"
+  mentor_submit: "Agregar mentor"
+  mentor_nomore_msg: "No hay más mentores disponibles para agregar para"
+
+  project_id: "ID"
+  project_name: "Nombre"
+  project_client: "Cliente"
+  project_status: "Estado"
+  project_start_date: "Fecha de inicio"
+  project_end_date: "Fecha de fin"
+  project_technologies: "Tecnologías"
   project_new_submit: "Crear projecto"
+  project_edit_submit: "Actualizar proyecto"
+  project_index_header: "Listando proyectos"
+  project_no_projects: "No se han encontrado proyectos"
   project:
       display_status:
         active: 'Activo'
@@ -61,6 +74,7 @@ es:
         finished: 'Finalizado'
 
   #hitos
+
   pending: "pendiente"
   done: "hecho"
   rejected: "rechazado"
@@ -97,6 +111,17 @@ es:
   me: "Privado"
   mentors: "Mentores"
   every_body: "Publico"
+
+
+  attachmentsdocs: 'Documentos adjuntos'
+  adddoc: 'Agregar documento'
+  driveerrormsj: 'Ha ocurrido un error. Asegúrese de cumplir con los siguientes puntos:
+                    - Ha ingresado un URL correcta
+                    - Tiene permisos de acceso al archivo en Google Drive'
+  attachgoogledrivedoc: 'Adjuntar documento de Google Drive'
+  documenturl: 'URL del documento'
+  attach: 'Adjuntar'
+
 
   #fechas
   date:

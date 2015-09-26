@@ -5,65 +5,95 @@ describe MilestonesController, "Milestone Controller" do
     allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
   end
 
-  # before do
-  #   #Creo milestone
-  #   @milestone = Milestone.new :title=>'milestone1',:due_date=>Time.now + (0*0*0*1*60*60),
-  #                              :description=>'desc1',:status=> 1, :icon=> 'unIcon',
-  #                              :created_at=> Time.now, :updated_at=>Time.now
-  #   @milestone.save!
-  # end
-  before do
-    # Creo una persona de tipo administrador
-    @admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :admin=>true
-    @admin.save!
-    # Creo un usuario asociado a dicha persona
-    @ad_user = User.new :person => @admin
-    # Seteo la expiracion de la sesion a un dia a partir del momento actual
-    @ad_user.oauth_expires_at = Time.current().advance(days:1)
-    @ad_user.save!
-    # Creo una persona que NO es administrador
-    @no_admin = Person.new :name=>'NombreNoAdmin', :email=>'mail@noadmin.com', :admin=>false
-    @no_admin.save!
-    # Creo un usuario asociado a dicha persona
-    @no_ad_user = User.new :person => @no_admin
-    # Seteo la expiracion de la sesion a un dia a partir del momento actual
-    @no_ad_user.oauth_expires_at = Time.current().advance(days:1)
-    @no_ad_user.save!
-  end
 
-  describe 'Get' do
+  describe 'Milestone' do
 
-    it 'gets the New page' do
-      session[:user_id] = @ad_user.id
-      get :new, :session => session
-      # Espero que me muestre el formulario
-      expect(response).to render_template("new")
+    it "has a 200 status code" do
+      get :index
+      expect(response.status).to eq(200)
     end
 
-  end
+    it "creates a milestone" do
+      post :new
+      post :create, {:milestone=>{:title=>'milestone1', :description=>'unadescripcionde1'}}
+      expect(response.status).to eq(302)
+
+    end
+
+
+    it 'deberia asignar una categoria' do
+      cat1= Category.new
+      cat1.name= 'feed'
+      cat1.icon= '0asdsadsa'
+      cat1.created_at=Time.now
+      cat1.updated_at=Time.now
+      cat1.save!
+
+      m1 = Milestone.new
+      m1.title ='Milestone for testing'
+      m1.description='This is a milestone to test Milestones'
+      m1.due_date=Time.now - 5.days
+      m1.created_at= Time.now
+      m1.updated_at= Time.now
+      m1.status=1
+      m1.icon= 'Icon'
+      m1.save!
+      post :add_category,{:milestone_id => m1.id, :category_id=>cat1.id},:session => session
+      expect(response).to redirect_to(m1)
+
+    end
+
+
+    it 'mostrar la milestone' do
+        m1 = Milestone.new
+        m1.title ='Milestone for testing'
+        m1.description='This is a milestone to test Milestones'
+        m1.due_date=Time.now - 5.days
+        m1.created_at= Time.now
+        m1.updated_at= Time.now
+        m1.status=1
+        m1.icon= 'Icon'
+        m1.save!
+        get :show, :id => m1.id
+
+        expect(response).to render_template("show")
+      end
+
+
+
+
+    end
+
+
+
+
+
+
+
+
 
   #
-  # describe 'Milestone' do
+  #
   #   it 'is valid with a title and description' do
   #     session[:user_id] = @ad_user.id
-  #     get :create, {:milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone'}}
+  #     get :create, {:milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :due_date=>Time.now}}
   #     expect(response.status).to eq(302)
   #   end
   #
   #   it 'is invalid without a title' do
   #     session[:user_id] = @ad_user.id
-  #     get :create, {:milestone=>{:title=>'', :description=>'unadescripciondemilestone'}}
-  #     expect(response.status).to eq(302)
+  #     get :create, {:milestone=>{ :description=>'unadescripciondemilestone'}}
+  #     expect(response).to redirect_to("new")
   #   end
   #   it 'is invalid without a description' do
   #     session[:user_id] = @ad_user.id
-  #     get :create, {:milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone'}}
+  #     get :create, {:milestone=>{:title=>'Milestone1'}}
   #     expect(response.status).to eq(302)
   #   end
   #
   #   it 'is invalid with a due_date before now' do
   #     m1 = Milestone.new
-  #     m1.id=4
+  #
   #     m1.title ='Milestone for testing'
   #     m1.description='This is a milestone to test Milestones'
   #     m1.due_date=Time.now - 5.days
@@ -75,23 +105,22 @@ describe MilestonesController, "Milestone Controller" do
   #
   #   end
   #
-  # end
-  #
-  #
-  #
-  #
-  # it "Deberia modificar el status a done" do
-  #   m1 = Milestone.new
-  #   m1.title = 'Entrega del prototipo de alfred'
-  #   m1.description= 'Hay que entregar el protipo de alfred a la gente de pis. Ademas de cafe y galletitas maria gratis'
-  #   m1.due_date= Time.now - (3*2*7*24*60*60)
-  #   m1.status=0
-  #   m1.save!
-  #
-  #   put :update, :id => m1.id, :milestone => { :status => :done }
-  #   m1.reload
-  #   expect(m1.status).to eq 'done'
-  # end
+
+
+  it "Deberia modificar el status a done" do
+    m2 = Milestone.new
+    m2.title = 'Entrega del prototipo de alfred'
+    m2.description= 'Hay que entregar el protipo de alfred a la gente de pis. Ademas de cafe y galletitas maria gratis'
+    m2.due_date= Time.now - (3*2*7*24*60*60)
+    m2.status=0
+    m2.save!
+
+    get :set_as_done, :milestone_id => m2.id
+    m2.reload
+    expect(m2.status).to eq 'done'
+  end
+
+
 
 end
 

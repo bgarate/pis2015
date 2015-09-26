@@ -25,5 +25,12 @@ class Milestone < ActiveRecord::Base
   belongs_to :category
   enum status: [:pending, :done, :rejected]
   enum milestone_type: [ :feedback, :event ]
+
+  def get_next_status
+    status_order = [:pending, :done, :rejected]
+
+    status_order[(status_order.find_index(self.status.to_sym) + 1) % status_order.count]
+
+  end
 end
 

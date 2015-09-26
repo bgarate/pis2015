@@ -90,3 +90,11 @@ tech2.save!
 tech3 = Technology.new
 tech3.name = 'Android'
 tech3.save!
+
+
+Tag.create!(name:'Dar Feedback')
+Tag.create!(name:'Recibir Feedback')
+Tag.create!(name:'Inicio proyecto')
+Tag.create!(name:'Fin proyecto')
+Tag.create!(name:'Speacker')
+Tag.create!(name:'Participación')

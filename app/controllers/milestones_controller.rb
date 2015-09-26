@@ -34,6 +34,7 @@ class MilestonesController < ApplicationController
 	
   def edit
     @milestone = Milestone.find(params[:id])
+    @tags = Tag.all
   end
 	
   def update

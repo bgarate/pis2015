@@ -5,7 +5,7 @@
 <%= params[:controller] %><br>
   <p>
 
-    <input type="hidden" name="milestone_id" value="<%= @milestone.id %>">
+
     <%= m.label 'Title:' %><br>
     <%= m.text_field :title %>
   </p>
@@ -18,7 +18,7 @@
     <div>
       <%= label_tag('Tags', nil, class: 'small_label') %>
       <br>
-      <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name, @tags.map { |t| t.id } ), :multiple => true) %>
+      <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name, @milestone.tags.map { |t| t.id } ), :multiple => true) %>
 
     </div>
 

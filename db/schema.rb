@@ -64,8 +64,9 @@ ActiveRecord::Schema.define(version: 20150926201533) do
     t.integer "milestone_id"
   end
 
-  add_index "milestones_tags", ["milestones_id"], name: "index_milestones_tags_on_milestones_id", using: :btree
-  add_index "milestones_tags", ["tags_id"], name: "index_milestones_tags_on_tags_id", using: :btree
+  add_index "milestones_tags", ["milestone_id"], name: "index_milestones_tags_on_milestone_id", using: :btree
+  add_index "milestones_tags", ["tag_id", "milestone_id"], name: "index_milestones_tags_on_tag_id_and_milestone_id", unique: true, using: :btree
+  add_index "milestones_tags", ["tag_id"], name: "index_milestones_tags_on_tag_id", using: :btree
 
   create_table "notes", force: :cascade do |t|
     t.text     "text"
@@ -193,6 +194,8 @@ ActiveRecord::Schema.define(version: 20150926201533) do
   add_foreign_key "mentorships", "people", column: "mentee_id"
   add_foreign_key "mentorships", "people", column: "mentor_id"
   add_foreign_key "milestones", "categories"
+  add_foreign_key "milestones_tags", "milestones"
+  add_foreign_key "milestones_tags", "tags"
   add_foreign_key "notes", "milestones"
   add_foreign_key "notes", "people", column: "author_id"
   add_foreign_key "participations", "people"

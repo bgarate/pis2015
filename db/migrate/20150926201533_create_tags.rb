@@ -11,7 +11,8 @@ class CreateTags < ActiveRecord::Migration
 
     end
 
-#    add_foreign_key :tag_milestones, :tags
-#    add_foreign_key :tag_milestones, :milestones
+    add_index :milestones_tags, [:tag_id, :milestone_id], :unique => true
+    add_foreign_key :milestones_tags, :tags
+    add_foreign_key :milestones_tags, :milestones
   end
 end

@@ -41,7 +41,6 @@ class MilestonesController < ApplicationController
     @milestone = Milestone.find(params[:id])
     if @milestone.update_attributes(milestone_params)
       @milestone.tag_ids = params[:tags]
-      @milestone.save!
       redirect_to @milestone
     end
   end

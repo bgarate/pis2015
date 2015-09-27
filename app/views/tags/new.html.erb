@@ -1,0 +1,12 @@
+<%= form_for @tag do |m| %>
+
+    <p>
+      <%= m.label 'Name:' %><br>
+      <%= m.text_field :name %>
+    </p>
+
+    <p>
+      <%= m.submit 'Create'%>
+    </p>
+
+<% end %>

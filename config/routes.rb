@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   resources :projects do
   end
 
+  resources :tags do
+  end
+
   #hitos
   resources :milestones
   get 'milestones/markasdone'

@@ -1,0 +1,24 @@
+<h1><%= t('tag_index_header') %></h1>
+<table>
+  <tr>
+    <th><%= t('tag_id') %></th>
+    <th><%= t('tag_name') %> </th>
+  </tr>
+  <% tags = Tag.all %>
+  <% tags.each do |t| %>
+      <tr>
+        <td>
+          <%= link_to t.name, t %>
+        </td>
+        <td>
+          <%= link_to t('edit'), edit_tag_path(t) %>
+        </td>
+        <td>
+          <%= link_to t('delete'), t, method: :delete %>
+        </td>
+      </tr>
+  <% end %>
+</table>
+<% if tags.size == 0 %>
+    <em><%= t('tag_no_tag') %></em>
+<% end %>

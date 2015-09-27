@@ -13,7 +13,14 @@ class MilestonesController < ApplicationController
   def create
     @milestone=Milestone.new(milestone_params)
     @milestone.save
-    redirect_to @milestone
+    if @milestone.valid?
+      flash.notice = "'#{milestone_params[:title]}' creado con éxito!"
+      redirect_to @milestone
+    else
+      flash.alert = "'#{milestone_params[:title]}' no se ha podido crear"
+      redirect_to '/milestones/new'
+    end
+
   end
 
   def add_category

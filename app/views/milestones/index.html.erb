@@ -1,9 +1,15 @@
 <h1>MILESTONES:</h1>
 <table class="table">
+  <%= link_to t('mil_create'), new_milestone_path %><br>
+  <%= link_to t('cat_create'), new_category_path %><br>
+  <%= link_to t('categories'), categories_path %><br>
+  <%= link_to t('person'), people_path %><br>
+
+
   <% @milestone.each do |m| %>
     <tr>
       <td><%= m.id %></td>
-      <td><%= link_to m.title, milestone_path(m)%></td>
+      <td><%= link_to m.title, milestone_path(m), method: :get%></td>
       <td><%= m.due_date %></td>
       <td><%= m.description %></td>
       <td><%= m.status %> </td>

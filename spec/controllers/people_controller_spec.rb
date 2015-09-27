@@ -91,7 +91,7 @@ describe PeopleController do
   describe "assign milestone" do
 
     it "deberia asignar una milestone" do
-
+      session[:user_id] = @ad_user.id
       p1 = Person.new
       p1.name = "Juan Perez"
       p1.email ="juanperez@gmail.com"
@@ -107,8 +107,9 @@ describe PeopleController do
       m1.status=1
       m1.icon= 'Icon'
       m1.save!
-      post :assign_milestone,{:milestone_id => m1.id, :person_id=>p1.id},:session => session
-      expect(response).to redirect_to(:action=>'index')
+
+      post :assign_milestone, {:milestone_id=> m1.id, :person_id=>p1.id} , :session => session
+      expect(response).to redirect_to('/welcome/index')
 
     end
 

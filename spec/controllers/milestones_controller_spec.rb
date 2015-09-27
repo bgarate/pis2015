@@ -20,6 +20,19 @@ describe MilestonesController, "Milestone Controller" do
 
     end
 
+    it 'is valid with a title and description' do
+      get :create, {:milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :due_date=>Time.now}}
+      expect(response.status).to eq(302)
+    end
+
+    it 'is invalid without a title' do
+      get :create, {:milestone=>{ :description=>'unadescripciondemilestone'}}
+      expect(response).to redirect_to('/milestones/new')
+    end
+    it 'is invalid without a description' do
+      get :create, {:milestone=>{:title=>'Milestone1'}}
+      expect(response.status).to redirect_to('/milestones/new')
+    end
 
     it 'deberia asignar una categoria' do
       cat1= Category.new

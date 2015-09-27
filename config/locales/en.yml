@@ -2,6 +2,7 @@ en:
 
   edit: "Edit"
   delete: "Delete"
+  back: "Back"
 
   #crear persona
   people_new_name: "Name"
@@ -12,6 +13,13 @@ en:
   people_new_init_date: "Init date"
   people_new_submit: "Create user"
 
+  mentor_since: "Since"
+  mentor_name: "Mentor's name"
+  mentor_submit: "Add mentor"
+  mentor_nomore_msg: "No more mentors available to add to"
+
+  project_create_head: "Create Project"
+  project_edit_head: "Edit Project"
   project_id: "ID"
   project_name: "Name"
   project_client: "Client"

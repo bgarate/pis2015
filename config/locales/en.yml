@@ -18,6 +18,8 @@ en:
   mentor_submit: "Add mentor"
   mentor_nomore_msg: "No more mentors available to add to"
 
+  project_create_head: "Create Project"
+  project_edit_head: "Edit Project"
   project_id: "ID"
   project_name: "Name"
   project_client: "Client"

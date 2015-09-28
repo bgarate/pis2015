@@ -19,6 +19,7 @@ en:
   edit: "Edit"
   delete: "Delete"
   back: "Back"
+  not_authorized: "You are not authorized to perform that action"
 
 
   #crear persona

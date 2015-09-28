@@ -3,7 +3,17 @@ class MilestonesController < ApplicationController
   before_action :get_milestone, only: [:add_category]
   before_action :get_milestone_by_id, only: [:update, :show, :destroy]
   before_action :get_category, only: [:add_category]
-  skip_before_action :admin?, only: [:index,:show, :destroy]
+  before_action :is_authorized?, only: [:show,:destroy]
+  skip_before_action :admin?, only: [:index, :show, :destroy]
+
+  def is_authorized?
+    @person=Person.find(current_user.person_id)
+    if @person.mentees.exists?(@milestone.id)|| current_user_admin? || @person.milestones.exists?(@milestone.id)
+    else
+      flash.notice = t('not_authorized')
+      redirect_to people_path
+    end
+  end
 
   def get_milestone
     @milestone=Milestone.find(params[:milestone_id])
@@ -45,11 +55,6 @@ class MilestonesController < ApplicationController
   # Por ahora queda asi, deberia ser @milestone.category= @category
 
   def show
-    @person=Person.find(current_user.person_id)
-    if @person.mentees.exists?(@milestone.id)|| current_user_admin? || @person.milestones.exists?(@milestone.id)
-    else
-      redirect_to people_path
-    end
   end
 
   def destroy

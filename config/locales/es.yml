@@ -37,10 +37,11 @@ es:
   add: "Agregar"
   values: "Valores"
   create: "Crear"
-
   edit: "Editar"
   delete: "Borrar"
   back: "Volver"
+  not_authorized: "No esta autorizado para realizar esa accion"
+
 
   #crear persona
   people_new_name: "Nombre"

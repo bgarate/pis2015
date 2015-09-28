@@ -3,7 +3,7 @@ class TagsController < ApplicationController
   before_action :get_tag, only: [:show, :edit, :update, :destroy]
 
   def get_tag
-    @tag = Tag.find(params[:id])
+    @tag = Tag.find_by(id: params[:id])
   end
 
   def index
@@ -13,7 +13,6 @@ class TagsController < ApplicationController
   end
 
   def new
-    @tag = Tag.new
   end
 
   def show
@@ -29,10 +28,10 @@ class TagsController < ApplicationController
     @tag = Tag.new(tag_params)
     @tag.save
     if @tag.valid?
-      flash.notice = "'Tag #{tag_params[:name]}' creado con éxito!"
+      flash.notice = "Tag #{tag_params[:name]} creado con éxito!"
       redirect_to @tag
     else
-      flash.alert = "'Tag #{tag_params[:name]}' no se ha podido crear"
+      flash.alert = "Tag #{tag_params[:name]} no se ha podido crear"
       redirect_to '/tags/new'
     end
   end
@@ -40,6 +39,8 @@ class TagsController < ApplicationController
   def update
     if @tag.update(tag_params)
       redirect_to @tag
+    else
+      render :edit
     end
   end
 

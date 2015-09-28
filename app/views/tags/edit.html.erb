@@ -1,19 +1,20 @@
-<%= form_for @tag do |f| %>
-    <div class="field">
-      <%= f.label t('tag_name') %><br>
-      <%= f.text_field :name %>
-    </div>
-    <div class="btn">
-      <%= f.button t('tag_edit_submit'), options= :type=>'button', :onclick=>'if(validate()){submit();};' %>
-    </div>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
 
-<script>
-    function validate(form){
-        var name;
-        // Get the value of the input field with id="name"
-        name = document.getElementById('tag_name').value;
-        // Validate
-        return (name!='');
-    }
-</script>
+      <%= form_for @tag, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
+          <h1><%= t('tag_edit_head') %></h1>
+
+          <div class="form-group">
+            <%= f.label t('name'), class: "control-label" %>
+            <%= f.text_field :name, class: "form-control", 'data-validation': "required" %>
+          </div>
+
+          <div class="btn">
+            <%= f.button t('tag_edit_submit'), options= :type => 'submit', class: "btn btn-default" %>
+          </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

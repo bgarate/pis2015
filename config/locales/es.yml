@@ -21,11 +21,29 @@
 
 es:
 
+  #Generales (Paginas, Links, Botones, etc)
+  person: "Persona"
+  people: "Personas"
+  category: "Categoría"
+  categories: "Categorias"
+  milestone: "Hito"
+  milestones: "Hitos"
+  note: "Nota"
+  notes: "Notas"
+  proyect: "Proyecto"
+  proyects: "Proyectos"
+  save: "Guardar"
+  sure?: "¿Estas seguro?"
+  add: "Agregar"
+  values: "Valores"
+  create: "Crear"
   edit: "Editar"
   delete: "Borrar"
   back: "Volver"
   name: 'Nombre'
   id: 'ID'
+  not_authorized: "No esta autorizado para realizar esa accion"
+
 
   #crear persona
   people_new_name: "Nombre"
@@ -61,13 +79,46 @@ es:
         finished: 'Finalizado'
 
   #hitos
-  pending: Pendinte
-  done: Hecho
-  rejected: Rechazado
-  feedback: 'Feedback'
-  event: Evento
 
-  markdone: 'Marcar como hecho'
+  pending: "pendiente"
+  done: "hecho"
+  rejected: "rechazado"
+  feedback: "feedback"
+  event: "evento"
+  markdone: "marcar como hecho"
+  mil_title: "Titulo"
+  mil_start_date: "Fecha de inicio"
+  mil_due_date: "Fecha limite"
+  mil_description: "Descripcion"
+  mil_icon: "Icono"
+  mil_status: "Estado"
+  mil_create: "Crear Hito"
+  mil_delete: "Borrar Hito"
+
+
+
+  #categorias
+  cat_name: "Nombre"
+  cat_icon: "Icono"
+  cat_created: "Creado"
+  cat_updated: "Actualizado"
+  cat_create: "Crear Categoria"
+  cat_delete: "Borrar Categoria"
+  cat_add: "Agregar Categoria"
+  cat_unavailable: "No hay categorias disponibles"
+
+  #notas
+  note_visibility: "Visibilidad"
+  note_author: "Autor"
+  note_created: "Creado"
+  note_updated: "Actualizado"
+  note_create: "Crear Nota"
+  note_delete: "Borrar Nota"
+  me: "Privado"
+  mentors: "Mentores"
+  every_body: "Publico"
+
+
   attachmentsdocs: 'Documentos adjuntos'
   adddoc: 'Agregar documento'
   driveerrormsj: 'Ha ocurrido un error. Asegúrese de cumplir con los siguientes puntos:
@@ -77,6 +128,7 @@ es:
   documenturl: 'URL del documento'
   attach: 'Adjuntar'
 
+
   #tags
   tag_create_head: "Crear Tag"
   tag_edit_head: "Editar Tag"
@@ -84,6 +136,7 @@ es:
   tag_edit_submit: "Actualizar tag"
   tag_index_header: "Listando tags"
   tag_no_tags: "No se han encontrado tags"
+
 
   #fechas
   date:

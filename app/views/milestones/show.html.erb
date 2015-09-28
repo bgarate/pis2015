@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
+    <%= link_to t('milestones'), milestones_path %><br>
     <div class="card-col col-xs-7">
-
       <div id="milestone-info">
         <%= milestone_status(@milestone) %>
         <div class="left-pane">
@@ -41,9 +41,32 @@
 
               <%end%>
               </p>
-            <div class="calendar white right"><%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %></div>
+
+          <div class="calendar white right">
+            <% if @milestone.start_date %>
+            <%= l(@milestone.start_date, format: "%A, %B %d %Y").capitalize %><br>
+            <% end %>
+            <% if @milestone.due_date %>
+            <%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %>
+            <% end %>
+          </div>
+            <p>
+              <% if @milestone.category!=nil %>
+                <%= render @milestone.category %>
+              <%else%>
+                <%= render 'categories/form' %>
+              <%end%>
+            </p>
         </div>
-        <div class="clearfix"></div>
+
+          <div class="clearfix">
+            <h2><%= 'Notes' %></h2>
+            <%= render @milestone.notes %>
+
+            <h2><%= 'Add Notes' %></h2>
+            <%= render 'notes/form' %>
+          </div>
+ 
       </div>
 
     </div>

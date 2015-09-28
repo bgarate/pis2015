@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923223927) do
+ActiveRecord::Schema.define(version: 20150928144445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150923223927) do
     t.integer  "mentee_id"
   end
 
+  add_index "mentorships", ["mentee_id", "mentor_id"], name: "index_mentorships_on_mentee_id_and_mentor_id", unique: true, using: :btree
   add_index "mentorships", ["mentee_id"], name: "index_mentorships_on_mentee_id", using: :btree
   add_index "mentorships", ["mentor_id"], name: "index_mentorships_on_mentor_id", using: :btree
 
@@ -57,6 +58,15 @@ ActiveRecord::Schema.define(version: 20150923223927) do
     t.datetime "updated_at",                 null: false
     t.integer  "category_id"
   end
+
+  create_table "milestones_tags", id: false, force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "milestone_id"
+  end
+
+  add_index "milestones_tags", ["milestone_id"], name: "index_milestones_tags_on_milestone_id", using: :btree
+  add_index "milestones_tags", ["tag_id", "milestone_id"], name: "index_milestones_tags_on_tag_id_and_milestone_id", unique: true, using: :btree
+  add_index "milestones_tags", ["tag_id"], name: "index_milestones_tags_on_tag_id", using: :btree
 
   create_table "notes", force: :cascade do |t|
     t.text     "text"
@@ -125,9 +135,10 @@ ActiveRecord::Schema.define(version: 20150923223927) do
     t.date     "start_date"
     t.date     "end_date"
     t.string   "client"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "status",     default: 0, null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "status",     default: 0,    null: false
+    t.boolean  "validity",   default: true, null: false
   end
 
   create_table "projects_technologies", force: :cascade do |t|
@@ -139,6 +150,8 @@ ActiveRecord::Schema.define(version: 20150923223927) do
   add_index "projects_technologies", ["technology_id"], name: "index_projects_technologies_on_technology_id", using: :btree
 
   create_table "resources", force: :cascade do |t|
+    t.string   "doc_id"
+    t.string   "title"
     t.string   "url"
     t.integer  "milestone_id"
     t.datetime "created_at",   null: false
@@ -151,6 +164,10 @@ ActiveRecord::Schema.define(version: 20150923223927) do
     t.string   "icon"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
   end
 
   create_table "tech_roles", force: :cascade do |t|
@@ -180,6 +197,8 @@ ActiveRecord::Schema.define(version: 20150923223927) do
   add_foreign_key "mentorships", "people", column: "mentee_id"
   add_foreign_key "mentorships", "people", column: "mentor_id"
   add_foreign_key "milestones", "categories"
+  add_foreign_key "milestones_tags", "milestones"
+  add_foreign_key "milestones_tags", "tags"
   add_foreign_key "notes", "milestones"
   add_foreign_key "notes", "people", column: "author_id"
   add_foreign_key "participations", "people"

@@ -8,10 +8,15 @@ Rails.application.routes.draw do
     post :assign_milestone
     collection do
       get 'me'
+      post 'add_mentor'
+      get 'add_mentor_form'
     end
   end
 
   resources :projects do
+  end
+
+  resources :tags do
   end
 
   #hitos
@@ -31,6 +36,9 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get 'google/signout'
   get 'google/unregistered'
-  get 'google/test'
+  #google drive
+  get 'google/adddriveview'
+  get 'google/adddrive'
+  get 'google/driveerror'
 
 end

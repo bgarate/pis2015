@@ -37,6 +37,7 @@ es:
   values: "Valores"
   edit: "Editar"
   delete: "Borrar"
+  back: "Volver"
   
   #crear persona
   people_new_name: "Nombre"
@@ -47,6 +48,13 @@ es:
   people_new_init_date: "Fecha de ingreso"
   people_new_submit: "Crear usuario"
 
+  mentor_since: "Desde"
+  mentor_name: "Nombre del mentor"
+  mentor_submit: "Agregar mentor"
+  mentor_nomore_msg: "No hay más mentores disponibles para agregar para"
+
+  project_create_head: "Crear Proyecto"
+  project_edit_head: "Editar Proyecto"
   project_id: "ID"
   project_name: "Nombre"
   project_client: "Cliente"
@@ -65,11 +73,11 @@ es:
         finished: 'Finalizado'
 
   #hitos
-  pending: "pendiente"
-  done: "hecho"
-  rejected: "rechazado"
-  feedback: "feedback"
-  event: "evento"
+  pending: Pendinte
+  done: Hecho
+  rejected: Rechazado
+  feedback: 'Feedback'
+  event: Evento
   markdone: "marcar como hecho"
   mil_title: "Titulo"
   mil_due_date: "Fecha limite"
@@ -88,6 +96,15 @@ es:
   cat_updated: "Actualizado"
   cat_create: "Crear Categoria"
   cat_delete: "Borrar Categoria"
+  markdone: 'Marcar como hecho'
+  attachmentsdocs: 'Documentos adjuntos'
+  adddoc: 'Agregar documento'
+  driveerrormsj: 'Ha ocurrido un error. Asegúrese de cumplir con los siguientes puntos:
+                    - Ha ingresado un URL correcta
+                    - Tiene permisos de acceso al archivo en Google Drive'
+  attachgoogledrivedoc: 'Adjuntar documento de Google Drive'
+  documenturl: 'URL del documento'
+  attach: 'Adjuntar'
   cat_add: "Agregar Categoria"
   cat_unavailable: "No hay categorias disponibles"
 

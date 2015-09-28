@@ -144,7 +144,7 @@ describe MilestonesController, "Milestone Controller" do
 
 
       delete :destroy, :id => m1.id, :session => session
-      expect(response).to redirect_to('/milestones')
+      expect(response).to redirect_to('/people')
 
     end
 
@@ -159,50 +159,11 @@ describe MilestonesController, "Milestone Controller" do
     m1.due_date= Time.now - (3*2*7*24*60*60)
     m1.status=0
     m1.save!
-
+    get :edit, :id =>m1.id
     put :update, :id => m1.id, :milestone => { :status => :done }
     m1.reload
     expect(m1.status).to eq "done"
   end
-
-
-
-
-
-  #
-  #
-  #   it 'is valid with a title and description' do
-  #     session[:user_id] = @ad_user.id
-  #     get :create, {:milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :due_date=>Time.now}}
-  #     expect(response.status).to eq(302)
-  #   end
-  #
-  #   it 'is invalid without a title' do
-  #     session[:user_id] = @ad_user.id
-  #     get :create, {:milestone=>{ :description=>'unadescripciondemilestone'}}
-  #     expect(response).to redirect_to("new")
-  #   end
-  #   it 'is invalid without a description' do
-  #     session[:user_id] = @ad_user.id
-  #     get :create, {:milestone=>{:title=>'Milestone1'}}
-  #     expect(response.status).to eq(302)
-  #   end
-  #
-  #   it 'is invalid with a due_date before now' do
-  #     m1 = Milestone.new
-  #
-  #     m1.title ='Milestone for testing'
-  #     m1.description='This is a milestone to test Milestones'
-  #     m1.due_date=Time.now - 5.days
-  #     m1.created_at= Time.now
-  #     m1.updated_at= Time.now
-  #     m1.status=1
-  #     m1.icon= 'Icon'
-  #     expect(m1.due_date).to be > Time.now
-  #
-  #   end
-  #
-
 
 
 end

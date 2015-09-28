@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Tag' do
 
   before do
-    @ms = Milestone.new :title => 'Destruir Death Star'
+    @ms = Milestone.new :title => 'Destruir Death Star', :description=>'destruir Death Star'
     @res = Resource.new :url => 'www.espadalaser.com'
     @ms.resources<<(@res)
     @cat = Category.new :name => 'Importante'

@@ -45,30 +45,35 @@
         <% end %>
       </div>
     </div>
+    <div class="card-col col-lg-5">
+      <div align="center">
+        <h2><%= 'Assign:' %></h2>
+        <% count=0 %>
+        <%= form_tag ({:action => 'assign_milestone', :controller => 'people', :person_id => @id}) do   %>
+          <select name="milestone_id">
+            <% Milestone.all.each do |m| %>
+              <% if m.people.exists?(@id) %> #no hago nada
+              <% else %>
+                <option value= <%=m.id%> > <%=m.title%></option>
+                <%= count=count+1%>
+              <% end %>
+            <% end %>
+          </select>
+
+          <% if count>0 %>
+            <%= submit_tag('Assign') %>
+          <% else %>
+            There are not available milestones
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+
+
     <div class="card-col col-xs-5 col-sm-5 col-md-5 col-lg-5">
       <%= render 'people/timeline_card' %>
     </div>
   </div>
 </div>
 
-
-<h2><%= 'Assign:' %></h2>
-<% count=0 %>
-<%= form_tag ({:action => 'assign_milestone', :controller => 'people', :person_id => @id}) do   %>
-  <select name="milestone_id">
-    <% Milestone.all.each do |m| %>
-      <% if @overcomes.exists?(m.id) %> #no hago nada
-      <% else %>
-        <option value= <%=m.id%> > <%=m.title%></option>
-        <%= count=count+1%>
-      <% end %>
-    <% end %>
-  </select>
-
-  <% if count>0 %>
-    <%= submit_tag('Assign') %>
-  <% else %>
-    There are not available milestones
-  <% end %>
-<% end %>
 

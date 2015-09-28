@@ -63,6 +63,15 @@ describe TagsController do
       get :show, :id => 999999
       expect(response).to redirect_to(root_path)
     end
+
+    it 'Redirigir a root path' do
+      t1=Tag.new
+      t1.name='unaTag'
+      t1.save!
+      session[:user_id] = @ad_user.id
+      get :show, :id => t1.id
+      expect(response).to render_template('show')
+    end
   end
 
   describe "GET update" do

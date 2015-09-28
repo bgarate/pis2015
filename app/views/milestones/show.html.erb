@@ -58,14 +58,15 @@
               <%end%>
             </p>
         </div>
-        <div class="clearfix">
-          <h2><%= 'Notes' %></h2>
-          <%= render @milestone.notes %>
 
-          <h2><%= 'Add Notes' %></h2>
-          <%= render 'notes/form' %>
+          <div class="clearfix">
+            <h2><%= 'Notes' %></h2>
+            <%= render @milestone.notes %>
 
-        </div>
+            <h2><%= 'Add Notes' %></h2>
+            <%= render 'notes/form' %>
+          </div>
+ 
       </div>
 
     </div>

@@ -23,7 +23,11 @@ class MilestonesController < ApplicationController
   end
 
   def show
-    @milestone=Milestone.find(params[:id])
+    if can_view_milestone?(params[:id])
+      @milestone=Milestone.find(params[:id])
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy

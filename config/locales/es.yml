@@ -24,6 +24,8 @@ es:
   edit: "Editar"
   delete: "Borrar"
   back: "Volver"
+  name: 'Nombre'
+  id: 'ID'
 
   #crear persona
   people_new_name: "Nombre"
@@ -39,6 +41,8 @@ es:
   mentor_submit: "Agregar mentor"
   mentor_nomore_msg: "No hay más mentores disponibles para agregar para"
 
+  project_create_head: "Crear Proyecto"
+  project_edit_head: "Editar Proyecto"
   project_id: "ID"
   project_name: "Nombre"
   project_client: "Cliente"
@@ -72,6 +76,14 @@ es:
   attachgoogledrivedoc: 'Adjuntar documento de Google Drive'
   documenturl: 'URL del documento'
   attach: 'Adjuntar'
+
+  #tags
+  tag_create_head: "Crear Tag"
+  tag_edit_head: "Editar Tag"
+  tag_new_submit: "Crear tag"
+  tag_edit_submit: "Actualizar tag"
+  tag_index_header: "Listando tags"
+  tag_no_tags: "No se han encontrado tags"
 
   #fechas
   date:

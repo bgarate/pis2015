@@ -1,15 +1,19 @@
 <h1><%= t('tag_index_header') %></h1>
-<table>
+<table class="table">
   <tr>
-    <th><%= t('tag_id') %></th>
-    <th><%= t('tag_name') %> </th>
+    <th><%= t('id') %></th>
+    <th><%= t('name') %> </th>
   </tr>
   <% tags = Tag.all %>
   <% tags.each do |t| %>
       <tr>
         <td>
+          <%= t.id %>
+        </td>
+        <td>
           <%= link_to t.name, t %>
         </td>
+
         <td>
           <%= link_to t('edit'), edit_tag_path(t) %>
         </td>
@@ -18,7 +22,8 @@
         </td>
       </tr>
   <% end %>
+
 </table>
 <% if tags.size == 0 %>
-    <em><%= t('tag_no_tag') %></em>
+    <em><%= t('tag_no_tags') %></em>
 <% end %>

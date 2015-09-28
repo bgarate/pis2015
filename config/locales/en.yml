@@ -3,6 +3,8 @@ en:
   edit: "Edit"
   delete: "Delete"
   back: "Back"
+  name: 'Name'
+  id: 'ID'
 
   #crear persona
   people_new_name: "Name"
@@ -18,6 +20,8 @@ en:
   mentor_submit: "Add mentor"
   mentor_nomore_msg: "No more mentors available to add to"
 
+  project_create_head: "Create Project"
+  project_edit_head: "Edit Project"
   project_id: "ID"
   project_name: "Name"
   project_client: "Client"
@@ -45,3 +49,11 @@ en:
   attachgoogledrivedoc: 'Attach Google Drive Document'
   documenturl: 'Document URL'
   attach: 'Attach'
+
+  #tags
+  tag_create_head: "Create Tag"
+  tag_edit_head: "Edit Tag"
+  tag_new_submit: "Create tag"
+  tag_edit_submit: "Update tag"
+  tag_index_header: "Listing tags"
+  tag_no_tags: "No tags found"

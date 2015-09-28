@@ -118,4 +118,29 @@ describe PeopleController do
     end
 
   end
+
+  describe "permisos" do
+    it 'Deveria renderizar people show por ser admin' do
+
+      session[:user_id] = @ad_user.id
+      get :show, :id => @no_ad_user.person_id
+      expect(response.status).to eq(200)
+    end
+
+    it 'Deveria renderizar people show por ser mentor' do
+      @no_ad_user.person.mentees<<(@ad_user.person)
+      @no_ad_user.save!
+
+      session[:user_id] = @no_ad_user.id
+      get :show, :id => @ad_user.person_id
+      expect(response.status).to eq(200)
+    end
+
+    it 'Deveria redireccionar a root path por no ser admin ni mentor' do
+
+      session[:user_id] = @no_ad_user.id
+      get :show, :id => @ad_user.person_id
+      expect(response).to redirect_to root_path
+    end
+  end
 end

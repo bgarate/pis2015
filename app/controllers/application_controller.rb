@@ -88,18 +88,4 @@ class ApplicationController < ActionController::Base
     @navigation_bar_visible = true
   end
 
-  #Devuelve el dia de la semana de un date
-  helper_method :dayname
-  def dayname(date)
-    days = ['Dom', 'Lun', 'Mar', 'Mier', 'Jue', 'Vie', 'Sab']
-    @dayname ||= days[date.wday]
-  end
-
-  #Devuelve el mes de un date
-  helper_method :monthname
-  def monthname(date)
-    monthes = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Setiembre', 'Octubre', 'Noviembre', 'Diciembre']
-    @monthname ||= monthes[date.month]
-  end
-
 end

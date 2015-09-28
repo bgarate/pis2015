@@ -4,6 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  title          :string
+#  start_date     :date
 #  due_date       :date
 #  description    :text
 #  status         :integer
@@ -15,6 +16,9 @@
 #
 
 class Milestone < ActiveRecord::Base
+
+  validates :title, :description, presence: true
+
   has_many :person_milestones
   has_many :people, through: :person_milestones
   has_many :notes

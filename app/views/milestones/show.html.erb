@@ -17,6 +17,7 @@
             <p><%=
                 if @milestone.status != :done
                   session[:return_to] ||= request.referer
+                else
                   link_to t(:markdone), milestone_path(@milestone, :milestone  => {:status => :done}), :method => :put
                 end
             %></p>

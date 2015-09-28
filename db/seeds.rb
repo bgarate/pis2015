@@ -15,6 +15,7 @@ tr2.name= "iOS Developer"
 tr2.save!
 
 c = Category.create(name: "Conferencia")
+f = Category.create(name: 'Feedback')
 
 per = Person.new
 per.name = 'Alfred'
@@ -41,6 +42,15 @@ m1.due_date= Time.now - (3*2*7*24*60*60)
 m1.status=0
 m1.category = c
 per.milestones<<(m1)
+
+m2 = Milestone.new
+m2.title = 'Otra entrega de alfred'
+m2.description = 'Esperemos meter mas puntos que 10'
+m2.due_date = Time.now
+m2.status = 0
+m2.category = f
+m2.milestone_type = :feedback
+m2.save!
 
 sk1 = Skill.new
 sk1.name='angular'

@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20150926201233) do
     t.string   "title"
     t.date     "due_date"
     t.text     "description"
-    t.integer  "status",         default: 0
+    t.integer  "status"
     t.integer  "milestone_type"
     t.string   "icon"
     t.integer  "feedback_author_id"
@@ -127,7 +127,7 @@ ActiveRecord::Schema.define(version: 20150926201233) do
     t.string   "client"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-    t.integer  "status"
+    t.integer  "status",     default: 0,    null: false
     t.boolean  "validity",   default: true, null: false
   end
 

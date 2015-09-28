@@ -1,6 +1,11 @@
 class MilestonesController < ApplicationController
 
+  before_action :get_milestone, only: [:add_feedback_author, :feedback?, :update]
   skip_before_action :admin?
+
+  def get_milestone
+    @milestone = Milestone.find_by(id: params[:id])
+  end
 
   def index
     @milestone= Milestone.all
@@ -37,10 +42,18 @@ class MilestonesController < ApplicationController
   end
 	
   def update
-    @milestone = Milestone.find(params[:id])
+
+    id_feedback_author = (params.fetch :milestone).fetch :feedback_author
+    @milestone.feedback_author = Person.find(id_feedback_author)
     if @milestone.update_attributes(milestone_params)
       redirect_to @milestone
+    else
+      render :edit
     end
+  end
+
+  def feedback?
+    return @milestone.milestone_type == :feedback
   end
 
   private

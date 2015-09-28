@@ -3,6 +3,7 @@ en:
   edit: "Edit"
   delete: "Delete"
   back: "Back"
+  title: 'Title'
 
   #crear persona
   people_new_name: "Name"
@@ -38,7 +39,11 @@ en:
       finished: 'Finished'
 
   #hito
+  milestone_edit_head: "Edit Milestone"
+  milestone_due_date: "Milestone's due date"
+  milestone_reviewer: "Feedback's reviewer"
   markdone: 'Mark as done'
+  add_feedback_author: 'Add feedback reviewer'
   attachmentsdocs: 'Attachments documents'
   adddoc: 'Add document'
   driveerrormsj: 'An error has occurred. Be sure to follow the following points:

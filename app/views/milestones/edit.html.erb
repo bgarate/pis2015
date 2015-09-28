@@ -1,18 +1,38 @@
-<% provide(:title, "Edit Milestone") %>
-<h1>Edit Milestone</h1>
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
 
-<%= form_for @milestone do |m| %>
-<%= params[:controller] %><br>
-  <p> 
-    <%= m.label 'Title:' %><br>
-    <%= m.text_field :title %>
-  </p>
+      <%= form_for @milestone, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
+          <h1><%= t('milestone_edit_head') %></h1>
 
-  <p>
-    <%= m.label 'Due date:' %><br>
-    <%= m.text_area :due_date %>
-  </p>
-  <%= m.submit 'Save changes'%>
-  </p>
+          <div class="form-group">
+            <%= f.label t('title'), class: "control-label" %>
+            <%= f.text_field :title, class: "form-control", 'data-validation': "required" %>
+          </div>
 
-<% end %>
+          <div class="form-group">
+            <%= if @milestone.feedback?
+                  f.label t('milestone_reviewer')
+                  f.select :feedback_author, Person.all.collect {|t| [t.name, t.id]}, {}, {:multiple => false, :class => "input-lg"}
+                end
+            %>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-xs-6">
+              <%= f.label t('milestone_due_date'), class: "control-label" %>
+              <div class="input-group">
+                <%= f.text_field :due_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
+                <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn">
+            <%= f.button t('milestone_edit_submit'), options= :type => 'submit', class: "btn btn-default" %>
+          </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>

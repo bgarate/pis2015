@@ -20,6 +20,11 @@
                   link_to t(:markdone), milestone_path(@milestone, :milestone  => {:status => :done}), :method => :put
                 end
             %></p>
+            <p><%=
+                if @milestone.feedback? and @milestone.feedback_author
+                  @milestone.feedback_author.name
+                end
+            %></p>
           <p>
             <%=t(:attachmentsdocs)%>: <br>
           <ul>

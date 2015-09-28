@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
 tr = TechRole.new
 tr.name= "Vendedor de Tortas Fritas"
 tr.save!

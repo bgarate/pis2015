@@ -40,6 +40,7 @@ class MilestonesController < ApplicationController
   def update
     @milestone = Milestone.find(params[:id])
     if @milestone.update_attributes(milestone_params)
+      @milestone.tag_ids = params[:tags]
       redirect_to @milestone
     end
   end

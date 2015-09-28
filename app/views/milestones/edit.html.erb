@@ -12,6 +12,13 @@
     <%= m.label 'Due date:' %><br>
     <%= m.text_area :due_date %>
   </p>
+
+    <div class="field">
+      <%= label_tag('Tags'), nil, class: 'small_label') %>
+      <br>
+      <%= select_tag(:tags, options_from_collection_for_select(@tags.all, :id, :name), :multiple => true) %>
+    </div>
+
   <%= m.submit 'Save changes'%>
   </p>
 

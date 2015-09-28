@@ -19,6 +19,7 @@ class Milestone < ActiveRecord::Base
   has_many :people, through: :person_milestones
   has_many :notes
   has_many :resources
+  has_and_belongs_to_many :tags
   belongs_to :category
   enum status: [:pending, :done, :rejected]
   enum milestone_type: [ :feedback, :event ]

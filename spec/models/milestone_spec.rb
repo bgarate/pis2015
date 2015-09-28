@@ -37,6 +37,9 @@ describe 'Milestone' do
     @cat = Category.new :name => 'Importante'
     @ms.category=@cat
 
+    @tag = Tag.new :name => 'Ataque'
+    @ms.tags<<(@tag)
+
     @ms.save!
     @ms.reload
     @ms2.save!
@@ -56,6 +59,8 @@ describe 'Milestone' do
   it 'debería tener 1 categoria' do
     expect(@ms.category).to eq(@cat)
   end
-
+  it 'debe tener tag Ataque' do
+    expect(@ms.tags).to include(@tag)
+  end
 
 end

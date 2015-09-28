@@ -1,5 +1,6 @@
 <div class="container-fluid">
   <div class="row">
+    <%= link_to t('milestones'), milestones_path %>
     <div class="card-col col-xs-2">
       <%= render 'people/profile_card' %>
       <%= render 'people/stats_card' %>
@@ -49,3 +50,25 @@
     </div>
   </div>
 </div>
+
+
+<h2><%= 'Assign:' %></h2>
+<% count=0 %>
+<%= form_tag ({:action => 'assign_milestone', :controller => 'people', :person_id => @id}) do   %>
+  <select name="milestone_id">
+    <% Milestone.all.each do |m| %>
+      <% if @overcomes.exists?(m.id) %> #no hago nada
+      <% else %>
+        <option value= <%=m.id%> > <%=m.title%></option>
+        <%= count=count+1%>
+      <% end %>
+    <% end %>
+  </select>
+
+  <% if count>0 %>
+    <%= submit_tag('Assign') %>
+  <% else %>
+    There are not available milestones
+  <% end %>
+<% end %>
+

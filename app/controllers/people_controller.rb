@@ -17,7 +17,8 @@ class PeopleController < ApplicationController
     if person
       #nombre
       @name = person.name
-      @identifier = person.id
+      @id = person.id
+
 
       #rol tecnico
       @trole = ''
@@ -61,6 +62,16 @@ class PeopleController < ApplicationController
     end
   end
 
+  def assign_milestone
+    @milestone=Milestone.find(params[:milestone_id])
+    @person=Person.find(params[:person_id])
+    @person.milestones<<@milestone
+    redirect_to @person
+  end
+
+
+  private
+
   def add_mentor
     if (params[:mentor_id] != params[:mentee_id])
       @mentor=Person.find(params[:mentor_id])
@@ -78,6 +89,7 @@ class PeopleController < ApplicationController
       render :status => 422, :file => "public/422"
     end
   end
+
 
   def add_mentor_form
     @mentee=Person.find(params[:mentee_id])

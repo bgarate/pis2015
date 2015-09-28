@@ -1,0 +1,22 @@
+<p>
+  <strong><%= t('category') %>:</strong>
+  <%= @category.name %>
+</p>
+
+<p>
+  <strong><%= t('cat_icon') %>:</strong>
+  <%= @category.icon %>
+</p>
+
+<p>
+  <strong><%= t('cat_created') %>:</strong>
+  <%= @category.created_at %>
+</p>
+<p>
+  <strong><%= t('cat_updated') %>:</strong>
+  <%= @category.updated_at %>
+</p>
+
+
+<%= link_to t('people'), me_people_path %>
+<%= link_to t('categories'), categories_path %>

@@ -1,9 +1,34 @@
 class MilestonesController < ApplicationController
 
-  skip_before_action :admin?
+  before_action :get_milestone, only: [:add_category]
+  before_action :get_milestone_by_id, only: [:update, :show, :destroy]
+  before_action :get_category, only: [:add_category]
+  before_action :is_authorized?, only: [:show,:destroy]
+  skip_before_action :admin?, only: [:index, :show, :destroy]
+
+  def is_authorized?
+    @person=Person.find(current_user.person_id)
+    if @person.mentees.exists?(@milestone.id)|| current_user_admin? || @person.milestones.exists?(@milestone.id)
+    else
+      flash.notice = t('not_authorized')
+      redirect_to people_path
+    end
+  end
+
+  def get_milestone
+    @milestone=Milestone.find(params[:milestone_id])
+  end
+
+  def get_milestone_by_id
+    @milestone=Milestone.find(params[:id])
+  end
+
+  def get_category
+    @category=Category.find(params[:category_id])
+  end
 
   def index
-    @milestone= Milestone.all
+      @milestone= Milestone.all
   end
 
   def new
@@ -13,38 +38,41 @@ class MilestonesController < ApplicationController
   def create
     @milestone=Milestone.new(milestone_params)
     @milestone.save
-    redirect_to @milestone
+    if @milestone.valid?
+      flash.notice = "'#{milestone_params[:title]}' creado con éxito!"
+      redirect_to @milestone
+    else
+      flash.alert = "'#{milestone_params[:title]}' no se ha podido crear"
+      redirect_to '/milestones/new'
+    end
+
   end
 
-  def create_from_person
-    @person=Person.find(params[:person_id])
-    @milestone= @person.milestones.create(milestone_params)
+  def add_category
+    @category.milestones<<@milestone
     redirect_to @milestone
   end
+  # Por ahora queda asi, deberia ser @milestone.category= @category
 
   def show
-    @milestone=Milestone.find(params[:id])
   end
 
   def destroy
-    @milestone= Milestone.find(params[:id])
+    @milestone.notes.each do |n|
+      n.destroy
+    end
     @milestone.destroy
     redirect_to milestones_path
   end
-	
-  def edit
-    @milestone = Milestone.find(params[:id])
-  end
-	
+
   def update
-    @milestone = Milestone.find(params[:id])
-    if @milestone.update_attributes(milestone_params)
+     if @milestone.update_attributes(milestone_params)
       redirect_to @milestone
     end
   end
 
   private
   def milestone_params
-    params.require(:milestone).permit(:title,:due_date,:description,:status, :icon, :created_at, :updated_at)
+    params.require(:milestone).permit(:title, :start_date, :due_date,:description,:status, :icon, :created_at, :updated_at)
   end
 end

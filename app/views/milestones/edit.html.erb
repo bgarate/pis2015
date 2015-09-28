@@ -1,10 +1,11 @@
+
+
 <% provide(:title, "Edit Milestone") %>
 <h1>Edit Milestone</h1>
 
 <%= form_for @milestone do |m| %>
 <%= params[:controller] %><br>
   <p>
-
 
     <%= m.label 'Title:' %><br>
     <%= m.text_field :title %>
@@ -18,7 +19,8 @@
     <div>
       <%= label_tag('Tags', nil, class: 'small_label') %>
       <br>
-      <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name, @milestone.tags.map { |t| t.id } ), :multiple => true) %>
+
+      <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name, @milestone.tags.map { |t| t.id } ), :multiple => true, class: "chzn-select") %>
 
     </div>
 
@@ -26,3 +28,6 @@
   </p>
 
 <% end %>
+
+
+<script> $(".chzn-select").chosen({placeholder_text_multiple: "Seleccione las tags del hito"});</script>

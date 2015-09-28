@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150926201533) do
+ActiveRecord::Schema.define(version: 20150928144445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,11 +51,11 @@ ActiveRecord::Schema.define(version: 20150926201533) do
     t.string   "title"
     t.date     "due_date"
     t.text     "description"
-    t.integer  "status"
+    t.integer  "status",         default: 0
     t.integer  "milestone_type"
     t.string   "icon"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "category_id"
   end
 
@@ -64,8 +64,9 @@ ActiveRecord::Schema.define(version: 20150926201533) do
     t.integer "milestone_id"
   end
 
-  add_index "milestones_tags", ["milestones_id"], name: "index_milestones_tags_on_milestones_id", using: :btree
-  add_index "milestones_tags", ["tags_id"], name: "index_milestones_tags_on_tags_id", using: :btree
+  add_index "milestones_tags", ["milestone_id"], name: "index_milestones_tags_on_milestone_id", using: :btree
+  add_index "milestones_tags", ["tag_id", "milestone_id"], name: "index_milestones_tags_on_tag_id_and_milestone_id", unique: true, using: :btree
+  add_index "milestones_tags", ["tag_id"], name: "index_milestones_tags_on_tag_id", using: :btree
 
   create_table "notes", force: :cascade do |t|
     t.text     "text"
@@ -104,6 +105,8 @@ ActiveRecord::Schema.define(version: 20150926201533) do
     t.integer  "tech_role_id"
     t.boolean  "admin"
   end
+
+  add_index "people", ["email"], name: "index_people_on_email", unique: true, using: :btree
 
   create_table "person_milestones", force: :cascade do |t|
     t.integer  "person_id"
@@ -193,6 +196,8 @@ ActiveRecord::Schema.define(version: 20150926201533) do
   add_foreign_key "mentorships", "people", column: "mentee_id"
   add_foreign_key "mentorships", "people", column: "mentor_id"
   add_foreign_key "milestones", "categories"
+  add_foreign_key "milestones_tags", "milestones"
+  add_foreign_key "milestones_tags", "tags"
   add_foreign_key "notes", "milestones"
   add_foreign_key "notes", "people", column: "author_id"
   add_foreign_key "participations", "people"

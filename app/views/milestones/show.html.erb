@@ -29,6 +29,17 @@
           </ul>
           <%=link_to t(:adddoc), :controller => 'google', :action => 'adddriveview', :milestone_id => @milestone.id%>
 
+
+          <% if @milestone.tags.empty? %>
+              <p>Sin tags</p>
+          <%else%>
+              <ul class="tags">
+              <% @milestone.tags.each do |t| %>
+                  <li><%= t.name %></li>
+              <%end%>
+              </ul>
+
+          <%end%>
           </p>
             <div class="calendar white right"><%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %></div>
         </div>

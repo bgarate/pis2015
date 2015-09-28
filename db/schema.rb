@@ -135,9 +135,10 @@ ActiveRecord::Schema.define(version: 20150928144445) do
     t.date     "start_date"
     t.date     "end_date"
     t.string   "client"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "status",     default: 0, null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "status",     default: 0,    null: false
+    t.boolean  "validity",   default: true, null: false
   end
 
   create_table "projects_technologies", force: :cascade do |t|

@@ -4,7 +4,7 @@
 
 
     <%= form_for @milestone do |m| %>
-        <h1><span class="glyphicon glyphicon-user"></span> <%= t('mil_create') %></h1>
+        <h1><span class="glyphicon glyphicon-check"></span> <%= t('mil_create') %></h1>
           <div class="form-group">
               <%= m.label t('mil_title'), class: "control-label" %>
               <%= m.text_field :title, class: "form-control", 'data-validation':"required" %>
@@ -31,13 +31,23 @@
             </div>
           </div>
           <div class="row">
+
             <div class="form-group col-xs-6">
-              <%= m.label t('mil_due_date'), class: "control-label" %>
+              <%= m.label t('mil_start_date'), class: "control-label" %>
               <div class="input-group">
-                <%= m.text_field :due_date, class: "form-control", "data-provide":"datepicker", 'data-validation': "required birthdate", 'data-validation-format': "dd/mm/yyyy"%>
+                <%= m.text_field :start_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy"%>
                 <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
               </div>
             </div>
+
+            <div class="form-group col-xs-6">
+              <%= m.label t('mil_due_date'), class: "control-label" %>
+              <div class="input-group">
+                <%= m.text_field :due_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy"%>
+                <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+              </div>
+            </div>
+
           </div>
               <%= m.hidden_field(:created_at, :value=>Time.now) %>
               <%= m.hidden_field(:updated_at, :value=>Time.now) %>
@@ -48,16 +58,3 @@
   </div>
  </div>
 
-          <script>
-            function validate(){
-              var title, description;
-              // Get the value of the input field with id="name"
-              title = document.getElementById('milestone_title').value;
-              // Get the value of the input field with id="mail"
-              description = document.getElementById("milestone_description").value;
-
-              // Validate
-              return ((title!='') && (description!=''))
-            }
-
-          </script>

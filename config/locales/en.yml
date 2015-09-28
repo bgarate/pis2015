@@ -55,6 +55,7 @@ en:
   #hitos
   markdone: "mark as done"
   mil_title: "Title"
+  mil_start_date: "Start Date"
   mil_due_date: "Due Date"
   mil_description: "Description"
   mil_icon: "Icon"

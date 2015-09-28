@@ -1,16 +1,17 @@
 class NotesController < ApplicationController
 
-  skip_before_action :loged?, only:[:callback,:unregistered]
-  skip_before_action :admin?
+  before_action :get_milestone, only: [:create, :destroy]
+
+  def get_milestone
+    @milestone=Milestone.find(params[:milestone_id])
+  end
 
   def create
-    @milestone= Milestone.find(params[:milestone_id])
     @note= @milestone.notes.create(notes_params)
     redirect_to @milestone
   end
 
   def destroy
-    @milestone= Milestone.find(params[:milestone_id])
     @note= @milestone.notes.find(params[:id])
     @note.destroy
     redirect_to @milestone

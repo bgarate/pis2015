@@ -24,7 +24,7 @@ es:
   #Generales (Paginas, Links, Botones, etc)
   person: "Persona"
   people: "Personas"
-  category: "Categoria"
+  category: "Categoría"
   categories: "Categorias"
   milestone: "Hito"
   milestones: "Hitos"
@@ -82,6 +82,7 @@ es:
   event: "evento"
   markdone: "marcar como hecho"
   mil_title: "Titulo"
+  mil_start_date: "Fecha de inicio"
   mil_due_date: "Fecha limite"
   mil_description: "Descripcion"
   mil_icon: "Icono"

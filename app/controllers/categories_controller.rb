@@ -1,8 +1,5 @@
 class CategoriesController < ApplicationController
 
-  skip_before_action :loged?, only:[:callback,:unregistered]
-  skip_before_action :admin?
-
   def index
     @category=Category.all
   end

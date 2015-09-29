@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  start_date :date
+#  end_date   :date
+#  client     :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  status     :integer          default(0), not null
+#  validity   :boolean          default(TRUE), not null
+#
+
 require 'rails_helper'
 
 describe 'Project' do

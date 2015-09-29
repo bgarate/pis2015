@@ -3,7 +3,8 @@ class PeopleController < ApplicationController
   skip_before_action :admin?, only:[:show, :index, :me]
 
   def index
-    @people = Person.all
+    # @people = Person.all
+    me
   end
 
   def me

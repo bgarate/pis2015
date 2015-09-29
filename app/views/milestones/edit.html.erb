@@ -21,7 +21,7 @@
           <div class="form-group">
             <%= label_tag('Tags', nil, class: 'small_label') %>
             <br>
-            <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name, @milestone.tags.map { |t| t.id } ), :multiple => true, class: "chzn-select") %>
+            <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name, @milestone.tags.map { |t| t.id } ), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('select_tags'), 'style'=> 'width:100%') %>
           </div>
 
           <div class="row">
@@ -43,3 +43,4 @@
   </div>
 </div>
 
+<script> $(".chzn-select").chosen();</script>

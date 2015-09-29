@@ -68,6 +68,7 @@ en:
   milestone_reviewer: "Feedback's reviewer"
   markdone: 'Mark as done'
   add_feedback_author: 'Add feedback reviewer'
+  select_tags: 'Select tags...'
 
   #hitos
   markdone: "mark as done"

@@ -34,10 +34,12 @@ class MilestonesController < ApplicationController
 
   def new
     @milestone=Milestone.new
+    @tags = Tag.all
   end
 
   def create
     @milestone=Milestone.new(milestone_params)
+    @milestone.tag_ids = params[:tags]
     @milestone.save
     if @milestone.valid?
       flash.notice = "'#{milestone_params[:title]}' creado con éxito!"

@@ -11,11 +11,17 @@
           </div>
 
           <div class="form-group">
-            <%= if @milestone.feedback?
-                  f.label t('milestone_reviewer')
-                  f.select :feedback_author, Person.all.collect {|t| [t.name, t.id]}, {}, {:multiple => false, :class => "input-lg"}
-                end
-            %>
+            <% if @milestone.feedback? %>
+              <%=      f.label t('milestone_reviewer')%>
+              <br>
+              <%= f.select :feedback_author, Person.all.collect {|t| [t.name, t.id]}, {}, {:multiple => false, :class => "input-lg"} %>
+            <% end %>
+          </div>
+
+          <div class="form-group">
+            <%= label_tag('Tags', nil, class: 'small_label') %>
+            <br>
+            <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name, @milestone.tags.map { |t| t.id } ), :multiple => true, class: "chzn-select") %>
           </div>
 
           <div class="row">
@@ -36,3 +42,4 @@
     </div>
   </div>
 </div>
+

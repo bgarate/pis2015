@@ -43,7 +43,7 @@ describe MilestonesController, "Milestone Controller" do
   end
 
   it "Deveria modificar el status a done" do
-    put :update, :id => @m1.id, :milestone => { :status => :done, :feedback_author => NIL}
+    put :update, :id => @m1.id, :milestone => { :status => :done }
     @m1.reload
     expect(@m1.status).to eq "done"
   end

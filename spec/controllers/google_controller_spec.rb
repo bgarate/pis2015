@@ -63,7 +63,6 @@ describe GoogleController, "Login a traves de google oatuh" do
   end
 
 
-  it 'Deveria redirigir a unregistered' do
 
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
     visit '/auth/google_oauth2/callback'

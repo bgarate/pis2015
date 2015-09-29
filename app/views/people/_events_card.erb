@@ -47,6 +47,7 @@
                 <div class="month-and-year"><%=l(e.due_date, format: "%^B %Y")%></div>
                 <h2><%=e.title%></h2>
                 <p><%=e.description%></p>
+
                 <p><%=t(e.status) %></p>
                 <p><%=
                     if e.status != 'done'
@@ -64,7 +65,11 @@
                   <%=link_to t(:adddoc), :controller => 'google', :action => 'adddriveview', :milestone_id => e.id%>
 
                 </p>
-              </div></p>
+   
+
+                <div class="pull-right"><%= milestone_short_info(e) %></div>
+              </div>
+
             </li>
           </ul>
       <% end %>

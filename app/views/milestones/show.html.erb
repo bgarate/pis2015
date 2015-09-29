@@ -14,13 +14,7 @@
         <div class="right-pane">
             <p><%= @milestone.description %></p>
             <p><%=t(@milestone.status) %></p>
-            <p><%=
-                if @milestone.status != :done
-                  session[:return_to] ||= request.referer
                 else
-                  link_to t(:markdone), milestone_path(@milestone, :milestone  => {:status => :done}), :method => :put
-                end
-            %></p>
           <p>
             <%=t(:attachmentsdocs)%>: <br>
           <ul>

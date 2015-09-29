@@ -1,4 +1,8 @@
 
+.large-text {
+    font-size: 2rem;
+}
+
 .calendar {
     background-image: image-url('layouts/calendar-red.png');
     background-repeat: no-repeat;
@@ -55,4 +59,41 @@
         width: 25px;
         height: 25px;
     }
+
+    &.static {
+        position: static;
+        display: block;
+    }
+}
+
+.short-info {
+
+    padding: 1ex;
+
+    .icon{
+        padding-right: 3px;
+    }
+
+    .action {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    .slide {
+        max-width: 0;
+        overflow: hidden;
+        display: inline-block;
+        @include transition(0.3s ease-in-out);
+    }
+
+    &:hover {
+        padding-right: 1ex;
+        .slide {
+            max-width: 1000px;
+        }
+    }
+}
+
+.pointer {
+    cursor: pointer;
 }

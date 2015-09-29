@@ -14,24 +14,16 @@
                   <li>
                     <h2><%=e.title%></h2>
                     <p><%=e.description%></p>
-                    <p><%=t(e.status) %></p>
-                    <p><%=
-                        if e.status != :done
-                          session[:return_to] ||= request.referer
-                          link_to t(:markdone), milestone_path(e, :milestone  => {:status => :done}), :method => :put
-                        end
-                    %></p>
-                    <p>
-                      <%=t(:attachmentsdocs)%>: <br>
+
                     <ul>
                       <%e.resources.each do |r|%>
                           <li><%=link_to r.title, r.url, :target => "_blank"%></li>
                       <%end%>
                     </ul>
-                    <%=link_to t(:adddoc), :controller => 'google', :action => 'adddriveview', :milestone_id => e.id%>
 
-                    </p>
-                    <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
+
+                    <div class="calendar right"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
+                    <%= milestone_short_info(e) %>
                     <ul class="tags">
                       <!--<li>Speaker</li>-->
                     </ul>
@@ -49,25 +41,3 @@
     </div>
   </div>
 </div>
-
-
-<h2><%= 'Assign:' %></h2>
-<% count=0 %>
-<%= form_tag ({:action => 'assign_milestone', :controller => 'people', :person_id => @id }) do   %>
-  <select name="milestone_id">
-    <% Milestone.all.each do |m| %>
-      <% if @overcomes.exists?(m.id) %> #no hago nada
-      <% else %>
-        <option value= <%=m.id%> > <%=m.title%></option>
-        <%= count=count+1%>
-      <% end %>
-    <% end %>
-  </select>
-
-  <% if count>0 %>
-    <%= submit_tag('Assign') %>
-  <% else %>
-    There are not available milestones
-  <% end %>
-<% end %>
-

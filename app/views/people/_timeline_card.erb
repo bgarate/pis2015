@@ -37,30 +37,43 @@
       <div class="clearfix"></div>
     </li>
   </ul>-->
+  <%= form_tag person_assign_milestone_path(person_id: @identifier) do   %>
+      <select name="milestone_id" class="chosen submit-on-select">
+        <% Milestone.yet_pending.each do |m| %>
+                <% if not m.people.find(@identifier) %>
+                      <option value= <%=m.id%> > <%=m.title%></option>
+                <% end %>
+        <% end %>
+      </select>
+  <% end %>
+
   <% if @milestones and not @milestones.empty? %>
       <ul id="milestone-list">
         <% @milestones.each do |e| %>
             <li>
               <%= milestone_status(e,:small,:right)%>
-              <h2><%=e.title%></h2>
+              <h2><%=link_to e.title, e%></h2>
               <p><%=e.description%></p>
-              <p><%=t(e.status) %></p>
-              <p><%=
-                  if e.status != :done
-                    session[:return_to] ||= request.referer
-                    link_to t(:markdone), milestone_path(e, :milestone  => {:status => :done}), :method => :put
-                  end
-              %></p>
-              <p>
-                <%=t(:attachmentsdocs)%>: <br>
-              <ul>
-                <%e.resources.each do |r|%>
-                    <li><%=link_to r.title, r.url, :target => "_blank"%></li>
-                <%end%>
-              </ul>
-              <%=link_to t(:adddoc), :controller => 'google', :action => 'adddriveview', :milestone_id => e.id%>
 
-              </p>
+              <div class="resources-list clearfix">
+                <h2><%=t(:attachmentsdocs)%></h2>
+                  <% if e.resources.empty? %>
+                    <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                        <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                    <% end %>
+                  <% else %>
+                    <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
+                    <ul>
+                      <%e.resources.each do |r|%>
+                          <li><%=link_to r.title, r.url, :target => "_blank"%></li>
+                      <%end%>
+                    </ul>
+                  <% end %>
+
+
+              </div>
+
+
               <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
               <ul class="tags">
                 <!--<li>Speaker</li>-->

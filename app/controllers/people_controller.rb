@@ -37,9 +37,10 @@ class PeopleController < ApplicationController
       #Hitos pendientes
       @overcomes = person.milestones.where("milestones.due_date < CURRENT_DATE AND milestones.status = 0")
       #Todos los hitos
-      @milestones = person.milestones
+      @milestones = person.milestones.order(created_at: :desc)
       #Todos los hitos
       @mentorships = person.mentors
+      @yet_pending = Milestone.yet_pending
     else
       redirect_to root_path
     end

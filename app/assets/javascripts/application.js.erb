@@ -41,4 +41,9 @@ $(function() {
           "search" : ""
       }
   });
+    $("select.chosen").chosen();
+    $("select.submit-on-select").change(
+            function(){$(this).parents("form").submit();}
+    )
+    $("select.submit-on-select").val("").trigger('chosen:updated');
 });

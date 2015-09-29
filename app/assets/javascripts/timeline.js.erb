@@ -1,0 +1,24 @@
+$().ready(function() {
+
+  $(".resources-list .toggle-documents, .resources-list h2").click(function(e) {
+    var obj = $(this).parent().children(".toggle-documents");
+
+      if(obj.length == 0)
+        return;
+
+    var list = obj.siblings("ul");
+
+    if(list.is(":hidden")) {
+        obj.removeClass("glyphicon-chevron-down");
+        obj.addClass("glyphicon-chevron-up");
+    } else {
+        obj.removeClass("glyphicon-chevron-up");
+        obj.addClass("glyphicon-chevron-down");
+    }
+
+  list.slideToggle();
+
+  });
+    $(".resources-list ul").hide();
+    $(".toggle-documents").parent().children("h2").addClass("pointer");
+});

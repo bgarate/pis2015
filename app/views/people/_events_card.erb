@@ -41,10 +41,14 @@
       <% @events.each do |e| %>
           <ul>
             <li class="clearfix">
-              <div class="day"><%=l(e.due_date, format: "%d")%></div>
-              <div class="day-of-the-week"><%=l(e.due_date, format: "%a")%></div>
+              <% if e.due_date %>
+                  <div class="day"><%=l(e.due_date, format: "%d")%></div>
+                  <div class="day-of-the-week"><%=l(e.due_date, format: "%a")%></div>
+              <% end %>
               <div class="content">
-                <div class="month-and-year"><%=l(e.due_date, format: "%^B %Y")%></div>
+                <% if e.due_date %>
+                    <div class="month-and-year"><%=l(e.due_date, format: "%^B %Y")%></div>
+                <% end %>
                 <h2><%=e.title%></h2>
                 <p><%=e.description%></p>
 

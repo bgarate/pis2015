@@ -1,9 +1,10 @@
 class MilestonesController < ApplicationController
 
-  before_action :get_milestone, only: [:add_category]
-  before_action :get_milestone_by_id, only: [:update, :edit, :show, :destroy]
+
+  before_action :get_milestone, only: [:add_category, :next_status]
+  before_action :get_milestone_by_id, only: [:feedback?, :update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
-  before_action :is_authorized?, only: [:show,:destroy]
+  before_action :is_authorized?, only: [:destroy]
   skip_before_action :admin?, only: [:index, :show, :destroy]
 
   def is_authorized?
@@ -20,7 +21,7 @@ class MilestonesController < ApplicationController
   end
 
   def get_milestone_by_id
-    @milestone=Milestone.find(params[:id])
+    @milestone=Milestone.find_by(id: params[:id])
   end
 
   def get_category
@@ -33,10 +34,12 @@ class MilestonesController < ApplicationController
 
   def new
     @milestone=Milestone.new
+    @tags = Tag.all
   end
 
   def create
     @milestone=Milestone.new(milestone_params)
+    @milestone.tag_ids = params[:tags]
     @milestone.save
     if @milestone.valid?
       flash.notice = "'#{milestone_params[:title]}' creado con éxito!"
@@ -55,6 +58,11 @@ class MilestonesController < ApplicationController
   # Por ahora queda asi, deberia ser @milestone.category= @category
 
   def show
+    if can_view_milestone?(params[:id])
+      @milestone=Milestone.find(params[:id])
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy
@@ -70,10 +78,22 @@ class MilestonesController < ApplicationController
   end
 	
   def update
+    if @milestone.feedback?
+      id_feedback_author = (params.fetch :milestone).fetch :feedback_author
+      unless id_feedback_author == nil
+        @milestone.feedback_author = Person.find(id_feedback_author)
+      end
+    end
     if @milestone.update_attributes(milestone_params)
       @milestone.tag_ids = params[:tags]
       redirect_to @milestone
+    else
+      render :edit
     end
+  end
+
+  def feedback?
+    return @milestone.milestone_type == :feedback
   end
 
   def next_status

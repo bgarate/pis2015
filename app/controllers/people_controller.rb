@@ -14,7 +14,7 @@ class PeopleController < ApplicationController
   def show
     person = Person.find_by(id: params[:id])
 
-    if person
+    if person and can_view_person?(person.id)
       #nombre
       @name = person.name
       @identifier = person.id
@@ -36,7 +36,7 @@ class PeopleController < ApplicationController
       #Eventos (Hitos)
       @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.milestone_type = 1")
       #Hitos pendientes
-      @overcomes = person.milestones.where("milestones.due_date < CURRENT_DATE AND milestones.status = 0")
+      @overcomes = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0")
       #Todos los hitos
       @milestones = person.milestones.order(created_at: :desc)
       #Todos los hitos

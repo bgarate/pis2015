@@ -40,7 +40,8 @@ class Person < ActiveRecord::Base
   # mentors es una collection de <mentor>
   has_many :mentors, through: :mentor_assignations, source: :mentor
 
-
+  # feedbacks
+  has_many :authored_feedbacks, foreign_key: :feedback_author_id, class_name: 'Milestone'
 
   has_many :person_skills
   has_many :skills, through: :person_skills

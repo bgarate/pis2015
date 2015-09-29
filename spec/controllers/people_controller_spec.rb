@@ -38,10 +38,10 @@ describe PeopleController do
 
 
     it "debe redirigir a index" do
-      admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
-      admin.save!
+      # admin = Person.new :name=>'NombreAdmin', :email=>'mail2@admin.com', :start_date=>Time.current(), :admin=>true
+      # admin.save!
 
-      ad_user = User.new :person => admin
+      ad_user = User.new :person => @admin
       ad_user.oauth_expires_at = Time.current().advance(days:1)
       ad_user.save!
       session[:user_id] = ad_user.id
@@ -92,15 +92,11 @@ describe PeopleController do
 
     it "deberia asignar una milestone" do
       session[:user_id] = @ad_user.id
-      p1 = Person.new
-      p1.name = "Juan Perez"
-      p1.email ="juanperez@gmail.com"
+      p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
       p1.start_date =Time.now
       p1.save!
 
-      m1 = Milestone.new
-      m1.title ='Milestone for testing'
-      m1.description='This is a milestone to test Milestones'
+      m1 = Milestone.new :title=>'Milestone for testing', :description=>'This is a milestone to test Milestones'
       m1.due_date=Time.now - 5.days
       m1.created_at= Time.now
       m1.updated_at= Time.now
@@ -109,7 +105,7 @@ describe PeopleController do
       m1.save!
 
       post :assign_milestone, {:milestone_id=> m1.id, :person_id=>p1.id} , :session => session
-      expect(response).to redirect_to('/welcome/index')
+      expect(response).to redirect_to("/people/#{p1.id}")
 
     end
 
@@ -145,5 +141,30 @@ describe PeopleController do
       expect(response).to redirect_to(@no_admin)
     end
 
+  end
+
+  describe "permisos" do
+    it 'Deveria renderizar people show por ser admin' do
+
+      session[:user_id] = @ad_user.id
+      get :show, :id => @no_ad_user.person_id
+      expect(response.status).to eq(200)
+    end
+
+    it 'Deveria renderizar people show por ser mentor' do
+      @no_ad_user.person.mentees<<(@ad_user.person)
+      @no_ad_user.save!
+
+      session[:user_id] = @no_ad_user.id
+      get :show, :id => @ad_user.person_id
+      expect(response.status).to eq(200)
+    end
+
+    it 'Deveria redireccionar a root path por no ser admin ni mentor' do
+
+      session[:user_id] = @no_ad_user.id
+      get :show, :id => @ad_user.person_id
+      expect(response).to redirect_to root_path
+    end
   end
 end

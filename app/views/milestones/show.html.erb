@@ -20,11 +20,6 @@
                   link_to t(:markdone), milestone_path(@milestone, :milestone  => {:status => :done}), :method => :put
                 end
             %></p>
-            <p><%=
-                if @milestone.feedback? and @milestone.feedback_author
-                  @milestone.feedback_author.name
-                end
-            %></p>
           <p>
             <%=t(:attachmentsdocs)%>: <br>
           <ul>
@@ -33,6 +28,12 @@
             <%end%>
           </ul>
           <%=link_to t(:adddoc), :controller => 'google', :action => 'adddriveview', :milestone_id => @milestone.id%>
+
+          <p><%=
+              if @milestone.feedback? and @milestone.feedback_author
+                @milestone.feedback_author.name
+              end
+          %></p>
 
           </p>
             <div class="calendar white right"><%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %></div>

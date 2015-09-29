@@ -50,7 +50,7 @@ class MilestonesController < ApplicationController
 
   def add_category
     @category.milestones<<@milestone
-    redirect_to milestone
+    redirect_to @milestone
   end
   # Por ahora queda asi, deberia ser @milestone.category= @category
 
@@ -58,7 +58,7 @@ class MilestonesController < ApplicationController
   end
 
   def destroy
-    milestone.notes.each do |n|
+    @milestone.notes.each do |n|
       n.destroy
     end
     milestone.destroy
@@ -77,9 +77,8 @@ class MilestonesController < ApplicationController
   end
 
   def next_status
-    m = Milestone.find(params[:milestone_id])
-    m.status = m.get_next_status
-    m.save!
+    @milestone.status = @milestone.get_next_status
+    @milestone.save!
     redirect_to :back
   end
 

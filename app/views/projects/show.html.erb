@@ -50,3 +50,21 @@
     <em><%= t('project_no_people') %></em>
 <% end %>
 </p>
+
+<%= form_tag ({:action => 'assign_person', :controller => 'projects', :project_id => @project.id}) do   %>
+    <label>
+      <%= t('project_assign_to') %>
+    </label>
+    <% count = 0 %>
+    <select name="person_id">
+      <% @usr.each do |p|
+        if not @project.people.exists?(p.id) %>
+              <option value= <%=p.id%> > <%=p.name%></option>
+              <% count = count + 1%>
+          <% end
+             end %>
+    </select>
+    <%if count>0 %>
+        <%= submit_tag('Assign') %>
+    <% end %>
+<% end %>

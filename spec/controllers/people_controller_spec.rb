@@ -36,7 +36,8 @@ describe PeopleController do
       expect(response.status).to eq(302)
     end
 
-    it "Deberia redirigir a index" do
+
+    it "debe redirigir a index" do
       admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
       admin.save!
 
@@ -87,7 +88,34 @@ describe PeopleController do
 
   end
 
-  describe "add_mentor"do
+  describe "assign milestone" do
+
+    it "deberia asignar una milestone" do
+      session[:user_id] = @ad_user.id
+      p1 = Person.new
+      p1.name = "Juan Perez"
+      p1.email ="juanperez@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+
+      m1 = Milestone.new
+      m1.title ='Milestone for testing'
+      m1.description='This is a milestone to test Milestones'
+      m1.due_date=Time.now - 5.days
+      m1.created_at= Time.now
+      m1.updated_at= Time.now
+      m1.status=1
+      m1.icon= 'Icon'
+      m1.save!
+
+      post :assign_milestone, {:milestone_id=> m1.id, :person_id=>p1.id} , :session => session
+      expect(response).to redirect_to('/welcome/index')
+
+    end
+
+  end
+
+  describe "add_mentor" do
     it "No deberia desplegar el formulario si el usuario no es admin" do
       session[:user_id] = @no_ad_user.id
 

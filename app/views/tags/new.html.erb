@@ -1,12 +1,18 @@
-<%= form_for @tag do |m| %>
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
 
-    <p>
-      <%= m.label 'Name:' %><br>
-      <%= m.text_field :name %>
-    </p>
+      <%= form_for :tag, url:tags_path, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
+          <h1><%= t('tag_create_head') %></h1>
 
-    <p>
-      <%= m.submit 'Create'%>
-    </p>
+          <div class="form-group">
+            <%= f.label t('name'), class: "control-label" %>
+            <%= f.text_field :name, class: "form-control", 'data-validation': "required" %>
+          </div>
 
-<% end %>
+          <%= f.button t('tag_new_submit'), options= :type => 'submit', class: "btn btn-default" %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

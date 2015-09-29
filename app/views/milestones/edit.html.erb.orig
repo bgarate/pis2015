@@ -6,13 +6,14 @@
 <%= form_for @milestone do |m| %>
 <%= params[:controller] %><br>
 <<<<<<< HEAD
-  <p> 
-    <%= m.label t('mil_title') %>:<br>
-=======
   <p>
 
     <%= m.label 'Title:' %><br>
->>>>>>> origin/alfred-70
+=======
+
+  <p> 
+    <%= m.label t('mil_title') %>:<br>
+>>>>>>> origin/master
     <%= m.text_field :title %>
   </p>
 
@@ -20,9 +21,6 @@
     <%= m.label t('mil_due_date') %>:<br>
     <%= m.text_area :due_date %>
   </p>
-<<<<<<< HEAD
-  <%= m.submit t('save')%>
-=======
 
     <div>
       <%= label_tag('Tags', nil, class: 'small_label') %>
@@ -32,8 +30,12 @@
 
     </div>
 
+<<<<<<< HEAD
   <%= m.submit 'Save changes'%>
->>>>>>> origin/alfred-70
+=======
+
+  <%= m.submit t('save')%>
+>>>>>>> origin/master
   </p>
 
 <% end %>

@@ -12,9 +12,6 @@ gem 'capybara'
 #Google drive
 gem 'google_drive', '1.0.1'
 
-#mock y stub
-gem 'rspec-activemodel-mocks'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record
@@ -67,6 +64,9 @@ group :development, :test do
   # RSpec y Cocoverage
   gem 'simplecov'
   gem 'rspec-rails'
+
+  #mock y stub
+  gem 'rspec-activemodel-mocks'
 
   # Annotate
   gem 'annotate'

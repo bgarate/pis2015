@@ -20,10 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
   #Generales (Paginas, Links, Botones, etc)
   person: "Persona"
   people: "Personas"
-  category: "Categoria"
+  category: "Categoría"
   categories: "Categorias"
   milestone: "Hito"
   milestones: "Hitos"
@@ -35,14 +39,22 @@ es:
   sure?: "¿Estas seguro?"
   add: "Agregar"
   values: "Valores"
+<<<<<<< HEAD
   edit: "Editar"
   delete: "Borrar"
-<<<<<<< HEAD
+  back: "Volver"
   
 =======
+  create: "Crear"
+  edit: "Editar"
+  delete: "Borrar"
   back: "Volver"
+  name: 'Nombre'
+  id: 'ID'
+  not_authorized: "No esta autorizado para realizar esa accion"
 
->>>>>>> origin/alfred-70
+
+>>>>>>> origin/master
   #crear persona
   people_new_name: "Nombre"
   people_new_email: "Correo electrónico"
@@ -78,13 +90,22 @@ es:
 
   #hitos
 <<<<<<< HEAD
+  pending: Pendinte
+  done: Hecho
+  rejected: Rechazado
+  feedback: 'Feedback'
+  event: Evento
+=======
+
   pending: "pendiente"
   done: "hecho"
   rejected: "rechazado"
   feedback: "feedback"
   event: "evento"
+>>>>>>> origin/master
   markdone: "marcar como hecho"
   mil_title: "Titulo"
+  mil_start_date: "Fecha de inicio"
   mil_due_date: "Fecha limite"
   mil_description: "Descripcion"
   mil_icon: "Icono"
@@ -101,6 +122,15 @@ es:
   cat_updated: "Actualizado"
   cat_create: "Crear Categoria"
   cat_delete: "Borrar Categoria"
+  markdone: 'Marcar como hecho'
+  attachmentsdocs: 'Documentos adjuntos'
+  adddoc: 'Agregar documento'
+  driveerrormsj: 'Ha ocurrido un error. Asegúrese de cumplir con los siguientes puntos:
+                    - Ha ingresado un URL correcta
+                    - Tiene permisos de acceso al archivo en Google Drive'
+  attachgoogledrivedoc: 'Adjuntar documento de Google Drive'
+  documenturl: 'URL del documento'
+  attach: 'Adjuntar'
   cat_add: "Agregar Categoria"
   cat_unavailable: "No hay categorias disponibles"
 
@@ -114,14 +144,10 @@ es:
   me: "Privado"
   mentors: "Mentores"
   every_body: "Publico"
+<<<<<<< HEAD
 =======
-  pending: Pendinte
-  done: Hecho
-  rejected: Rechazado
-  feedback: 'Feedback'
-  event: Evento
 
-  markdone: 'Marcar como hecho'
+
   attachmentsdocs: 'Documentos adjuntos'
   adddoc: 'Agregar documento'
   driveerrormsj: 'Ha ocurrido un error. Asegúrese de cumplir con los siguientes puntos:
@@ -130,7 +156,17 @@ es:
   attachgoogledrivedoc: 'Adjuntar documento de Google Drive'
   documenturl: 'URL del documento'
   attach: 'Adjuntar'
->>>>>>> origin/alfred-70
+
+
+  #tags
+  tag_create_head: "Crear Tag"
+  tag_edit_head: "Editar Tag"
+  tag_new_submit: "Crear tag"
+  tag_edit_submit: "Actualizar tag"
+  tag_index_header: "Listando tags"
+  tag_no_tags: "No se han encontrado tags"
+
+>>>>>>> origin/master
 
   #fechas
   date:

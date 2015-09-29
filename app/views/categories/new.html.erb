@@ -1,33 +1,25 @@
-<%= form_for([@category]) do |c| %>
-  <p>
-    <%= c.label t('cat_name') %><br>
-    <%= c.text_field :name %>
-  </p>
-  <p>
-    <%= c.label t('cat_icon')%><br>
-    <%= c.text_field  :icon %>
-  </p>
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
+    <h1><span class="glyphicon glyphicon-list"></span> <%= t('cat_create') %></h1>
 
-  <p>
-    <%= c.hidden_field(:created_at, :value =>Time.now) %>
-    <%= c.hidden_field(:updated_at, :value =>Time.now) %>
-  </p>
+    <%= form_for([@category]) do |c| %>
+        <div class="form-group">
+          <%= c.label t('cat_name'), class: "control-label" %>
+          <%= c.text_field :name, class: "form-control", 'data-validation':"required" %>
+        </div>
 
-  <p>
-    <%= c.button t('cat_create'), :type=>'button', :onclick=>'if(validate()){submit();};' %>
-  </p>
-<% end %>
+        <div class="form-group">
+          <%= c.label t('cat_icon'), class: "control-label" %>
+          <%= c.text_field :icon, class: "form-control" %>
+        </div>
 
-<script>
-  function validate(){
-    var name, icon;
-    // Get the value of the input field with id="name"
-    name = document.getElementById('category_name').value;
-    // Get the value of the input field with id="mail"
-    icon = document.getElementById('category_icon').value;
 
-    // Validate
-    return ((name!='') && (icon!=''))
-  }
+        <%= c.hidden_field(:created_at, :value =>Time.now) %>
+        <%= c.hidden_field(:updated_at, :value =>Time.now) %>
 
-</script>
+        <%= c.button t('cat_create'), :type => 'submit', class: "btn btn-default" %>
+     </div>
+    <% end %>
+  </div>
+</div>

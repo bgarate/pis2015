@@ -1,8 +1,5 @@
 class CategoriesController < ApplicationController
 
-  skip_before_action :loged?, only:[:callback,:unregistered]
-  skip_before_action :admin?
-
   def index
     @category=Category.all
   end
@@ -15,12 +12,6 @@ class CategoriesController < ApplicationController
     @category=Category.new(category_params)
     @category.save
     redirect_to @category
-  end
-
-  def destroy
-    @category=Category.find(params[:id])
-    @category.destroy
-    redirect_to categories_path
   end
 
   def show

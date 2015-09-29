@@ -58,7 +58,12 @@ class MilestonesController < ApplicationController
   end
 
   def destroy
+<<<<<<< HEAD
+    milestone= Milestone.find(params[:id])
     milestone.notes.each do |n|
+=======
+    @milestone.notes.each do |n|
+>>>>>>> origin/master
       n.destroy
     end
     milestone.destroy

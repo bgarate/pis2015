@@ -16,16 +16,15 @@ Rails.application.routes.draw do
   resources :projects do
   end
 
-  resources :tags do
-  end
+  resources :tags
 
   #hitos
   resources :milestones do
     resources :notes
     post :add_category
     post :next_status
+    get :set_as_done
   end
-  get 'milestones/markasdone'
 
   resources :categories do
     resources :milestones

@@ -5,9 +5,9 @@
 
 <%= form_for @milestone do |m| %>
 <%= params[:controller] %><br>
-  <p>
 
-    <%= m.label 'Title:' %><br>
+  <p> 
+    <%= m.label t('mil_title') %>:<br>
     <%= m.text_field :title %>
   </p>
 
@@ -24,7 +24,8 @@
 
     </div>
 
-  <%= m.submit 'Save changes'%>
+
+  <%= m.submit t('save')%>
   </p>
 
 <% end %>

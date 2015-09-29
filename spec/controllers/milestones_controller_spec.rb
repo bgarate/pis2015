@@ -6,8 +6,27 @@ describe MilestonesController, "Milestone Controller" do
   end
 
   before do
+    @m1 = Milestone.new
+    @m1.title = 'Entrega del prototipo de alfred'
+    @m1.description= 'Hay que entregar el protipo de alfred a la gente de pis. Ademas de cafe y galletitas maria gratis'
+    @m1.due_date= Time.now - (3*2*7*24*60*60)
+    @m1.milestone_type = :feedback
+    @m1.status=0
+    @m1.save!
+
+    @m2 = Milestone.new
+    @m2.title = 'Entrega del prototipo de alfred'
+    @m2.description= 'Hay que entregar el protipo de alfred a la gente de pis. Ademas de cafe y galletitas maria gratis'
+    @m2.due_date= Time.now - (3*2*7*24*60*60)
+    @m2.milestone_type = :event
+    @m2.status=0
+    @m2.save!
+
+    @person = Person.new :name=>'noad', :email=>'noad@noadmin.com', :start_date=>Time.current(), :admin=>false
+    @person.save!
+
     # Creo una persona de tipo administrador
-    @admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
+    @admin = Person.new :name=>'NombreAdmin', :email=>'mail2@admin.com', :start_date=>Time.current(), :admin=>true
     @admin.save!
     # Creo un usuario asociado a dicha persona
     @ad_user = User.new :person => @admin
@@ -15,13 +34,32 @@ describe MilestonesController, "Milestone Controller" do
     @ad_user.oauth_expires_at = Time.current().advance(days:1)
     @ad_user.save!
     # Creo una persona que NO es administrador
-    @no_admin = Person.new :name=>'NombreNoAdmin', :email=>'mail@noadmin.com', :start_date=>Time.current(), :admin=>false
+    @no_admin = Person.new :name=>'NombreNoAdmin', :email=>'mail2@noadmin.com', :start_date=>Time.current(), :admin=>false
     @no_admin.save!
     # Creo un usuario asociado a dicha persona
     @no_ad_user = User.new :person => @no_admin
     # Seteo la expiracion de la sesion a un dia a partir del momento actual
     @no_ad_user.oauth_expires_at = Time.current().advance(days:1)
     @no_ad_user.save!
+
+  end
+
+  it "Deveria modificar el status a done" do
+    put :update, :id => @m1.id, :milestone => { :status => :done, :feedback_author => NIL}
+    @m1.reload
+    expect(@m1.status).to eq "done"
+  end
+
+  it "añade un revisor a un hito de tipo feedback" do
+    put :update, :id => @m1.id, :milestone => {:feedback_author =>  @person }
+    @m1.reload
+    expect(@m1.feedback_author).to eq @person
+  end
+
+  it "no añade un revisor a un hito que no es tipo feedback" do
+    put :update, :id => @m2.id, :milestone => {:feedback_author =>  @person }
+    @m2.reload
+    expect(@m2.feedback_author).to eq NIL
   end
 
 
@@ -91,7 +129,7 @@ describe MilestonesController, "Milestone Controller" do
         get :show, :id => m1.id, :session=>session
 
         expect(response).to render_template("show")
-      end
+    end
 
     it 'no muestra la milestone' do
       session[:user_id] = @no_ad_user.id
@@ -147,24 +185,7 @@ describe MilestonesController, "Milestone Controller" do
       expect(response).to redirect_to('/people')
 
     end
-
-    end
-
-
-
-  it "Deberia modificar el status a done" do
-    m1 = Milestone.new
-    m1.title = 'Entrega del prototipo de alfred'
-    m1.description= 'Hay que entregar el protipo de alfred a la gente de pis. Ademas de cafe y galletitas maria gratis'
-    m1.due_date= Time.now - (3*2*7*24*60*60)
-    m1.status=0
-    m1.save!
-    get :edit, :id =>m1.id
-    put :update, :id => m1.id, :milestone => { :status => :done }
-    m1.reload
-    expect(m1.status).to eq "done"
   end
-
 
 end
 

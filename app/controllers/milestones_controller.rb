@@ -1,7 +1,8 @@
 class MilestonesController < ApplicationController
 
+
   before_action :get_milestone, only: [:add_category]
-  before_action :get_milestone_by_id, only: [:update, :edit, :show, :destroy]
+  before_action :get_milestone_by_id, only: [:add_feedback_author, :feedback?, :update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
   before_action :is_authorized?, only: [:show,:destroy]
   skip_before_action :admin?, only: [:index, :show, :destroy]
@@ -20,7 +21,7 @@ class MilestonesController < ApplicationController
   end
 
   def get_milestone_by_id
-    @milestone=Milestone.find(params[:id])
+    @milestone=Milestone.find_by(id: params[:id])
   end
 
   def get_category
@@ -70,10 +71,22 @@ class MilestonesController < ApplicationController
   end
 	
   def update
+    if @milestone.feedback?
+      id_feedback_author = (params.fetch :milestone).fetch :feedback_author
+      unless id_feedback_author == nil
+        @milestone.feedback_author = Person.find(id_feedback_author)
+      end
+    end
     if @milestone.update_attributes(milestone_params)
       @milestone.tag_ids = params[:tags]
       redirect_to @milestone
+    else
+      render :edit
     end
+  end
+
+  def feedback?
+    return @milestone.milestone_type == :feedback
   end
 
   private

@@ -28,6 +28,13 @@
             <%end%>
           </ul>
           <%=link_to t(:adddoc), :controller => 'google', :action => 'adddriveview', :milestone_id => @milestone.id%>
+
+          <p><%=
+              if @milestone.feedback? and @milestone.feedback_author
+                @milestone.feedback_author.name
+              end
+          %></p>
+
           </p>
             <p>
               <% if @milestone.tags.empty? %>

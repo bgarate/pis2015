@@ -19,11 +19,11 @@ en:
   edit: "Edit"
   delete: "Delete"
   back: "Back"
+  title: 'Title'
   name: 'Name'
   id: 'ID'
 
   not_authorized: "You are not authorized to perform that action"
-
 
   #crear persona
   people_new_name: "Name"
@@ -58,6 +58,14 @@ en:
       inactive: 'Inactive'
       finished: 'Finished'
 
+
+  #hito
+  milestone_edit_head: "Edit Milestone"
+  milestone_due_date: "Milestone's due date"
+  milestone_reviewer: "Feedback's reviewer"
+  markdone: 'Mark as done'
+  add_feedback_author: 'Add feedback reviewer'
+
   #hitos
   markdone: "mark as done"
   mil_title: "Title"
@@ -89,6 +97,7 @@ en:
   me: "Private"
   mentors: "Mentors"
   every_body: "Public"
+
 
 
   attachmentsdocs: 'Attachments documents'

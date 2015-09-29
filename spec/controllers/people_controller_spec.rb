@@ -38,7 +38,7 @@ describe PeopleController do
 
 
     it "debe redirigir a index" do
-      admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
+      admin = Person.new :name=>'NombreAdmin', :email=>'mail2@admin.com', :start_date=>Time.current(), :admin=>true
       admin.save!
 
       ad_user = User.new :person => admin

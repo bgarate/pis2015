@@ -28,9 +28,16 @@ describe MilestonesController, "Milestone Controller" do
   describe 'Milestone' do
 
     it 'has a 200 status code' do
-      get :index
+      session[:user_id] = @ad_user.id
+      get :index, :session=>session
       expect(response.status).to eq(200)
     end
+
+    it 'has a 200 status code' do
+      session[:user_id] = @no_ad_user.id
+      get :index, :session=>session
+      expect(response.status).to eq(200)
+    end  
 
     it 'creates a milestone' do
       post :new
@@ -144,7 +151,7 @@ describe MilestonesController, "Milestone Controller" do
 
 
       delete :destroy, :id => m1.id, :session => session
-      expect(response).to redirect_to('/people')
+      expect(response).to redirect_to('/')
 
     end
 

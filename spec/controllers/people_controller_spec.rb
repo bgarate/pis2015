@@ -36,9 +36,8 @@ describe PeopleController do
       expect(response.status).to eq(302)
     end
 
-
     it "debe redirigir a index" do
-      admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
+      admin = Person.new :name=>'NombreAdmin', :email=>'mail2@admin.com', :start_date=>Time.current(), :admin=>true
       admin.save!
 
       ad_user = User.new :person => admin
@@ -109,7 +108,7 @@ describe PeopleController do
       m1.save!
 
       post :assign_milestone, {:milestone_id=> m1.id, :person_id=>p1.id} , :session => session
-      expect(response).to redirect_to('/welcome/index')
+      expect(response).to redirect_to(p1)
 
     end
 
@@ -119,9 +118,22 @@ describe PeopleController do
     it "No deberia desplegar el formulario si el usuario no es admin" do
       session[:user_id] = @no_ad_user.id
 
-      get :add_mentor_form ,{:mentee_id => 1}, :session => session
+      post :add_mentor_form ,{:mentee_id => 1}, :session => session
       # Espero ser redirigido
       expect(response).to redirect_to root_path
+    end
+
+    it "Deberia desplegar el formulario si el usuario es admin" do
+      session[:user_id] = @ad_user.id
+      p1 = Person.new
+      p1.name = "Juan Perez"
+      p1.email ="juanperez2@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+
+      post :add_mentor_form ,{:mentee_id => p1.id}, :session => session
+      # Espero ser redirigido
+      expect(response.status).to eq(200)
     end
 
     it "Debería dar error si mentee y mentor son el mismo" do

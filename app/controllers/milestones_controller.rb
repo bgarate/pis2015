@@ -4,7 +4,7 @@ class MilestonesController < ApplicationController
   before_action :get_milestone_by_id, only: [:update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
   before_action :is_authorized?, only: [:show,:destroy]
-  skip_before_action :admin?, only: [:index, :show, :destroy]
+  skip_before_action :admin?, only: [:index, :show]
 
   def is_authorized?
     @person=Person.find(current_user.person_id)
@@ -28,7 +28,14 @@ class MilestonesController < ApplicationController
   end
 
   def index
+    if current_user_admin?
       @milestone= Milestone.all
+    else
+      @milestone1= Milestone.all.where("id IN (SELECT milestone_id FROM person_milestones WHERE (person_id IN 
+                                              (SELECT mentee_id FROM mentorships WHERE mentor_id=?)))",current_user.person_id)
+      @milestone2= Milestone.all.where("id IN (SELECT milestone_id FROM person_milestones WHERE person_id=?)", current_user.person_id)
+      @milestone=@milestone1|@milestone2                                         
+    end    
   end
 
   def new

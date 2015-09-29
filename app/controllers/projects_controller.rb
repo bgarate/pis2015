@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
 
   before_action :get_project, only: [:show, :edit, :update, :destroy]
+  skip_before_action :admin?, only: [:show]
 
   def get_project
     @project = Project.find_by(id: params[:id])

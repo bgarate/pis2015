@@ -92,15 +92,11 @@ describe PeopleController do
 
     it "deberia asignar una milestone" do
       session[:user_id] = @ad_user.id
-      p1 = Person.new
-      p1.name = "Juan Perez"
-      p1.email ="juanperez@gmail.com"
+      p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
       p1.start_date =Time.now
       p1.save!
 
-      m1 = Milestone.new
-      m1.title ='Milestone for testing'
-      m1.description='This is a milestone to test Milestones'
+      m1 = Milestone.new :title=>'Milestone for testing', :description=>'This is a milestone to test Milestones'
       m1.due_date=Time.now - 5.days
       m1.created_at= Time.now
       m1.updated_at= Time.now
@@ -109,7 +105,7 @@ describe PeopleController do
       m1.save!
 
       post :assign_milestone, {:milestone_id=> m1.id, :person_id=>p1.id} , :session => session
-      expect(response).to redirect_to('/welcome/index')
+      expect(response).to redirect_to("/people/#{p1.id}")
 
     end
 

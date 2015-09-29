@@ -6,17 +6,15 @@ describe MilestonesController, "Milestone Controller" do
   end
 
   before do
-    @m1 = Milestone.new
-    @m1.title = 'Entrega del prototipo de alfred'
-    @m1.description= 'Hay que entregar el protipo de alfred a la gente de pis. Ademas de cafe y galletitas maria gratis'
+    @m1 = Milestone.new :title=>'Entrega del prototipo de alfred', :description=>'Hay que entregar el protipo de alfred
+                                  a la gente de pis. Ademas de cafe y galletitas maria gratis'
     @m1.due_date= Time.now - (3*2*7*24*60*60)
     @m1.milestone_type = :feedback
     @m1.status=0
     @m1.save!
 
-    @m2 = Milestone.new
-    @m2.title = 'Entrega del prototipo de alfred'
-    @m2.description= 'Hay que entregar el protipo de alfred a la gente de pis. Ademas de cafe y galletitas maria gratis'
+    @m2 = Milestone.new :title=>'Entrega del prototipo de alfred', :description=>'Hay que entregar el protipo de alfred
+                                  a la gente de pis. Ademas de cafe y galletitas maria gratis'
     @m2.due_date= Time.now - (3*2*7*24*60*60)
     @m2.milestone_type = :event
     @m2.status=0

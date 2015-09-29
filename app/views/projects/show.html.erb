@@ -35,4 +35,18 @@
     <% @project.technologies.each do |t| %>
       <li><%= t.name %></li>
     <% end %>
+    <% if @project.technologies.size == 0 %>
+    <em><%= t('project_no_technologies') %></em>
+    <% end %>
+</p>
+<p>
+  <label>
+    <%= t('project_people') %>
+  </label>
+  <% @project.people.each do |t| %>
+    <li><%= link_to t.name, t %></li>
+<% end %>
+<% if @project.people.size == 0 %>
+    <em><%= t('project_no_people') %></em>
+<% end %>
 </p>

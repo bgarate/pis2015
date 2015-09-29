@@ -52,6 +52,9 @@ en:
   project_edit_submit: "Update project"
   project_index_header: "Listing projects"
   project_no_projects: "No projects found"
+  project_no_technologies: "There are no technologies associated to the project"
+  project_people: "People associated to the project"
+  project_no_people: "There are no people associated to the project"
   project:
     display_status:
       active: 'Active'

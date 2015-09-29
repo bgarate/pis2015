@@ -87,8 +87,9 @@
 
               </div>
 
-
-              <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
+              <% if e.due_date %>
+                <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
+              <% end %>
               <ul class="tags">
                 <!--<li>Speaker</li>-->
               </ul>

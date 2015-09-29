@@ -29,8 +29,9 @@
                       <%end%>
                     </ul>
 
-
-                    <div class="calendar right"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
+                    <% if e.due_date %>
+                        <div class="calendar right"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
+                    <% end %>
                     <%= milestone_short_info(e) %>
                     <ul class="tags">
                       <!--<li>Speaker</li>-->

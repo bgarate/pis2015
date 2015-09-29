@@ -89,7 +89,7 @@ es:
 
   markdone: 'Marcar como hecho'
   add_feedback_author: 'Añadir revisor del feedback'
-
+  select_tags: 'Seleccione tags...'
 
   pending: "pendiente"
   done: "hecho"

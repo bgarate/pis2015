@@ -3,21 +3,21 @@ class PeopleController < ApplicationController
   skip_before_action :admin?, only:[:show, :index, :me]
 
   def index
-    u = User.find_by(id: session[:user_id])
-    redirect_to action: 'show', id: u.person_id
+    @people = Person.all
   end
 
   def me
-    redirect_to(:action => "index") and return
+    u = User.find_by(id: session[:user_id])
+    redirect_to action: 'show', id: u.person_id
   end
 
   def show
     person = Person.find_by(id: params[:id])
 
-    if person
+    if person and can_view_person?(person.id)
       #nombre
       @name = person.name
-      @id = person.id
+      @identifier = person.id
 
 
       #rol tecnico
@@ -36,11 +36,12 @@ class PeopleController < ApplicationController
       #Eventos (Hitos)
       @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.milestone_type = 1")
       #Hitos pendientes
-      @overcomes = person.milestones.where("milestones.due_date < CURRENT_DATE AND milestones.status = 0")
+      @overcomes = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0")
       #Todos los hitos
-      @milestones = person.milestones
+      @milestones = person.milestones.order(created_at: :desc)
       #Todos los hitos
       @mentorships = person.mentors
+      @yet_pending = Milestone.pending.where('id NOT in (?)', person.milestones.pluck(:id))
 
       @person_vew = Person.find_by(id: params[:id])
       person = Person.find(current_user.person_id)
@@ -72,10 +73,10 @@ class PeopleController < ApplicationController
   end
 
   def assign_milestone
-    @milestone=Milestone.find(params[:milestone_id])
-    @person=Person.find(params[:person_id])
-    @person.milestones<<@milestone
-    redirect_to @person
+    milestone=Milestone.find(params[:milestone_id])
+    person=Person.find(params[:person_id])
+    person.milestones<<milestone
+    redirect_to person
   end
 
   def assign_project

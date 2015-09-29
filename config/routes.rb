@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   resources :milestones do
     resources :notes
     post :add_category
+    post :next_status
     get :set_as_done
   end
 

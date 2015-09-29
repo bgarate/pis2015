@@ -1,10 +1,10 @@
 class MilestonesController < ApplicationController
 
 
-  before_action :get_milestone, only: [:add_category]
-  before_action :get_milestone_by_id, only: [:add_feedback_author, :feedback?, :update, :edit, :show, :destroy]
+  before_action :get_milestone, only: [:add_category, :next_status]
+  before_action :get_milestone_by_id, only: [:feedback?, :update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
-  before_action :is_authorized?, only: [:show,:destroy]
+  before_action :is_authorized?, only: [:destroy]
   skip_before_action :admin?, only: [:index, :show, :destroy]
 
   def is_authorized?
@@ -58,13 +58,18 @@ class MilestonesController < ApplicationController
   # Por ahora queda asi, deberia ser @milestone.category= @category
 
   def show
+    if can_view_milestone?(params[:id])
+      @milestone=Milestone.find(params[:id])
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy
     @milestone.notes.each do |n|
       n.destroy
     end
-    @milestone.destroy
+    milestone.destroy
     redirect_to milestones_path
   end
 	
@@ -74,7 +79,9 @@ class MilestonesController < ApplicationController
 	
   def update
     if @milestone.feedback?
-      id_feedback_author = (params.fetch :milestone).fetch :feedback_author
+      if (params[:milestone][:feedback_author] != nil)
+        id_feedback_author = (params.fetch :milestone).fetch :feedback_author
+      end
       unless id_feedback_author == nil
         @milestone.feedback_author = Person.find(id_feedback_author)
       end
@@ -89,6 +96,12 @@ class MilestonesController < ApplicationController
 
   def feedback?
     return @milestone.milestone_type == :feedback
+  end
+
+  def next_status
+    @milestone.status = @milestone.get_next_status
+    @milestone.save!
+    redirect_to :back
   end
 
   private

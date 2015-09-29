@@ -38,13 +38,13 @@
     </li>
   </ul>-->
   <%= form_tag person_assign_milestone_path(person_id: @identifier) do   %>
-      <select name="milestone_id" class="chosen submit-on-select">
-        <% Milestone.yet_pending.each do |m| %>
-                <% if not m.people.find(@identifier) %>
-                      <option value= <%=m.id%> > <%=m.title%></option>
-                <% end %>
-        <% end %>
-      </select>
+      <% if not @yet_pending.empty? %>
+          <select name="milestone_id" class="chosen submit-on-select" data-placeholder="Agregar un hito">
+            <% @yet_pending.each do |m| %>
+                  <option value= <%=m.id%> > <%=m.title%></option>
+            <% end %>
+          </select>
+      <% end %>
   <% end %>
 
   <% if @milestones and not @milestones.empty? %>

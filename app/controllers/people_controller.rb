@@ -40,7 +40,7 @@ class PeopleController < ApplicationController
       @milestones = person.milestones.order(created_at: :desc)
       #Todos los hitos
       @mentorships = person.mentors
-      @yet_pending = Milestone.yet_pending
+      @yet_pending = Milestone.pending.where('id NOT in (?)', person.milestones.pluck(:id))
     else
       redirect_to root_path
     end

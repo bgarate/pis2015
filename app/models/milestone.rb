@@ -24,8 +24,6 @@ class Milestone < ActiveRecord::Base
   enum status: [:pending, :done, :rejected]
   enum milestone_type: [ :feedback, :event ]
 
-  scope :yet_pending, -> {where(status: :pending)}
-
   def get_next_status
     status_order = [:pending, :done, :rejected]
 

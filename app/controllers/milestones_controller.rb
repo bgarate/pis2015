@@ -79,7 +79,9 @@ class MilestonesController < ApplicationController
 	
   def update
     if @milestone.feedback?
-      id_feedback_author = (params.fetch :milestone).fetch :feedback_author
+      if (params[:milestone][:feedback_author] != nil)
+        id_feedback_author = (params.fetch :milestone).fetch :feedback_author
+      end
       unless id_feedback_author == nil
         @milestone.feedback_author = Person.find(id_feedback_author)
       end

@@ -70,8 +70,6 @@ class PeopleController < ApplicationController
   end
 
 
-  private
-
   def add_mentor
     if (params[:mentor_id] != params[:mentee_id])
       @mentor=Person.find(params[:mentor_id])

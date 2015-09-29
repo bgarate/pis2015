@@ -17,9 +17,8 @@
                     <p><%=e.description%></p>
                     <p><%=t(e.status) %></p>
                     <p><%=
-                        if e.status != :done
+                        if e.status != 'done'
                           session[:return_to] ||= request.referer
-                        else
                           link_to t(:markdone), milestone_path(e, :milestone  => {:status => :done}), :method => :put
                         end
                     %></p>

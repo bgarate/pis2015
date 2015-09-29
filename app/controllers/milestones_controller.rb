@@ -4,7 +4,7 @@ class MilestonesController < ApplicationController
   before_action :get_milestone, only: [:add_category]
   before_action :get_milestone_by_id, only: [:add_feedback_author, :feedback?, :update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
-  before_action :is_authorized?, only: [:show,:destroy]
+  before_action :is_authorized?, only: [:destroy]
   skip_before_action :admin?, only: [:index, :show, :destroy]
 
   def is_authorized?
@@ -58,6 +58,11 @@ class MilestonesController < ApplicationController
   # Por ahora queda asi, deberia ser @milestone.category= @category
 
   def show
+    if can_view_milestone?(params[:id])
+      @milestone=Milestone.find(params[:id])
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy

@@ -111,6 +111,15 @@ describe PeopleController do
 
   end
 
+  describe "Assign_project" do
+    it "Asigna una persona a un proyecto" do
+      session[:user_id] = @ad_user.id
+      put :assign_project, :person_id=> @admin, :project_id => @proy,:session=>session
+      # Espero ser redirigido
+      expect(response.status).to eq(302)
+    end
+  end
+
   describe "add_mentor" do
     it "No deberia desplegar el formulario si el usuario no es admin" do
       session[:user_id] = @no_ad_user.id

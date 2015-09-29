@@ -1,43 +1,71 @@
-<%= form_for @milestone do |m| %>
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
 
-  <p>
-    <%= m.label 'Title:' %><br>
-    <%= m.text_field :title %>
-  </p>
 
-  <p>
-    <%= m.label 'Due date:' %><br>
-    <%= m.text_area :due_date %>
-  </p>
+    <%= form_for @milestone do |m| %>
+        <h1><span class="glyphicon glyphicon-check"></span> <%= t('mil_create') %></h1>
+          <div class="form-group">
+              <%= m.label t('mil_title'), class: "control-label" %>
+              <%= m.text_field :title, class: "form-control", 'data-validation':"required" %>
+          </div>
 
-  <p>
-    <%= m.label 'Description:' %><br>
-    <%= m.text_area :description %>
-  </p>
+          <div class="form-group">
+            <%= m.label t('mil_description'), class: "control-label" %>
+            <%= m.text_field :description, class: "form-control", 'data-validation':"required" %>
+          </div>
 
-  <p>
-    <%= m.label 'Status:' %><br>
-    <%= m.text_area :status %>
-  </p>
-  <p>
-    <%= m.label 'Icon:' %><br>
-    <%= m.text_area :icon %>
-  </p>
-  <p>
-    <%= m.label 'Created at:' %><br>
-    <%= m.text_area :created_at %>
-  </p>
-  <p>
-    <%= m.label 'Updated at:' %><br>
-    <%= m.text_area :updated_at %>
-  </p>
-  <!-- <p>
-    <%= m.label 'Category:' %><br>
-    <%= m.text_area :category_id %>
-  </p> -->
 
-  <p>
-    <%= m.submit 'Create'%>
-  </p>
+          <div class="row">
+            <div class="form-group col-xs-6">
+              <%= m.label t('mil_status'), class: "control-label" %>
+              <%= m.text_field :status, class: "form-control", 'data-validation': "status" %>
+              <%= t('values')+': rejected, pending, done' %>
+            </div>
 
-<% end %>
+
+
+            <div class="form-group col-xs-6">
+              <%=  m.label t('mil_icon'), class: "control-label" %>
+              <%=  m.text_area :icon, class: "form-control" %>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="form-group col-xs-6">
+              <%= m.label t('mil_start_date'), class: "control-label" %>
+              <div class="input-group">
+                <%= m.text_field :start_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy"%>
+                <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+              </div>
+            </div>
+
+            <div class="form-group col-xs-6">
+              <%= m.label t('mil_due_date'), class: "control-label" %>
+              <div class="input-group">
+                <%= m.text_field :due_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy"%>
+                <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+
+            <div class="form-group col-xs-12">
+              <%= m.label 'Tags', class: "control-label" %>
+
+              <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('select_tags'), 'style'=> 'width:100%') %>
+
+            </div>
+          </div>
+
+              <%= m.hidden_field(:created_at, :value=>Time.now) %>
+              <%= m.hidden_field(:updated_at, :value=>Time.now) %>
+        <%= m.button t('mil_create'), :type => 'submit', class: "btn btn-default" %>
+
+     </div>
+     <% end %>
+  </div>
+ </div>
+
+<script> $(".chzn-select").chosen();</script>

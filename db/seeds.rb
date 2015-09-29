@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
 tr = TechRole.new
 tr.name= "Vendedor de Tortas Fritas"
 tr.save!
@@ -15,6 +16,7 @@ tr2.name= "iOS Developer"
 tr2.save!
 
 c = Category.create(name: "Conferencia")
+f = Category.create(name: 'Feedback')
 
 per = Person.new
 per.name = 'Alfred'
@@ -41,6 +43,15 @@ m1.due_date= Time.now - (3*2*7*24*60*60)
 m1.status=0
 m1.category = c
 per.milestones<<(m1)
+
+m2 = Milestone.new
+m2.title = 'Otra entrega de alfred'
+m2.description = 'Esperemos meter mas puntos que 10'
+m2.due_date = Time.now
+m2.status = 0
+m2.category = f
+m2.milestone_type = :feedback
+m2.save!
 
 sk1 = Skill.new
 sk1.name='angular'
@@ -80,6 +91,9 @@ p1.tech_role = tr2
 p2 = Person.create!(name: "Diego Bortot", email: "bortotdiegogm@gmail.com", admin: true, start_date: 23.years.ago)
 p3 = Person.create!(name: "Oscar Montañés", email: "omontanes@gmail.com", admin: true, start_date: 23.years.ago)
 p3 = Person.create!(name: "Sebastían Soleri", email: "omontanes.guri@gmail.com", admin: false, start_date: 23.years.ago)
+p4 = Person.create!(name: "Gonzalo Herrera", email: "gonzalo.herrera.1993@gmail.com", admin: true, start_date: 2.years.ago)
+p5 = Person.create!(name: "elmassi", email: "maxikotvi@gmail.com", admin: false, start_date: 23.years.ago)
+
 
 tech1 = Technology.new
 tech1.name = 'Java'
@@ -90,3 +104,11 @@ tech2.save!
 tech3 = Technology.new
 tech3.name = 'Android'
 tech3.save!
+
+
+Tag.create!(name:'Dar Feedback')
+Tag.create!(name:'Recibir Feedback')
+Tag.create!(name:'Inicio proyecto')
+Tag.create!(name:'Fin proyecto')
+Tag.create!(name:'Speacker')
+Tag.create!(name:'Participación')

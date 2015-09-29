@@ -3,8 +3,8 @@ class MilestonesController < ApplicationController
   before_action :get_milestone, only: [:add_category]
   before_action :get_milestone_by_id, only: [:update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
-  before_action :is_authorized?, only: [:show,:destroy]
-  skip_before_action :admin?, only: [:index, :show]
+  before_action :is_authorized?, only: [:destroy]
+  skip_before_action :admin?, only: [:index, :show, :destroy]
 
   def is_authorized?
     @person=Person.find(current_user.person_id)

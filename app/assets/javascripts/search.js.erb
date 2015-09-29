@@ -4,25 +4,41 @@
 
 Search = {};
 
-Search.commands = {
-    "Ver mi perfil" : "/people/me",
-    "Crear usuario" : "/people/new",
-    "Cerrar sesion" : "/google/signout",
-    "Ver personas" : "/people/",
-    "Ver hitos" : "/milestones/",
-    "Crear hito" : "/milestones/new",
-};
+Search.commands =
+    {
+        "Ver mi perfil" : "/people/me",
+        "Crear usuario" : "/people/new",
+        "Cerrar sesion" : "/google/signout",
+        "Ver personas": "/people/",
+        "Ver hitos" : "/milestones/",
+        "Ver categorias" : "/categories/",
+        "Ver proyectos" : "/projects/",
+        "Crear categoria" : "/categories/new",
+        "Crear proyecto" : "/projects/new",
+        "Crear hito" : "/milestones/new"
+    };
 
+// constructs the suggestion engine
+var commands = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.nonword,
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: Object.keys(Search.commands)
+});
 
 $().ready(function() {
 
-    $("#nav-search").autocomplete({
-        source: Object.keys(Search.commands),
-        autoFocus: true,
-        select: function(e,ui) {
-            $("#nav-search-form").attr("action", Search.commands[ui.item.value]);
-            $("#nav-search-form").submit();
-        }
+    $("#nav-search").typeahead({
+        minLength: 1,
+        highlight: true,
+        hint: true
+    },
+    {
+        name: 'my-dataset',
+        source: commands
+    }).on('typeahead:selected', function(e,str) {
+        var form = $("#nav-search-form");
+        form.attr("action", Search.commands[str]);
+        form.submit();
     });
 
 });

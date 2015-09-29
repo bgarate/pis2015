@@ -1,4 +1,5 @@
-<% if (note.author_id==current_user.person_id) || #si es personal, la hice yo?
+<% if current_user_admin? || #si es admin
+        (note.author_id==current_user.person_id) || #si es personal, la hice yo?
         note.visibility=='mentors' && Person.find(current_user.person_id).mentees.exists?(note.author_id) || #si es para mentores, soy su mentor
         note.visibility=='every_body'%>
 

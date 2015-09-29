@@ -19,11 +19,11 @@ en:
   edit: "Edit"
   delete: "Delete"
   back: "Back"
+  title: 'Title'
   name: 'Name'
   id: 'ID'
 
   not_authorized: "You are not authorized to perform that action"
-
 
   #crear persona
   people_new_name: "Name"
@@ -52,11 +52,23 @@ en:
   project_edit_submit: "Update project"
   project_index_header: "Listing projects"
   project_no_projects: "No projects found"
+  project_no_technologies: "There are no technologies associated to the project"
+  project_people: "People associated to the project"
+  project_no_people: "There are no people associated to the project"
   project:
     display_status:
       active: 'Active'
       inactive: 'Inactive'
       finished: 'Finished'
+
+
+  #hito
+  milestone_edit_head: "Edit Milestone"
+  milestone_due_date: "Milestone's due date"
+  milestone_reviewer: "Feedback's reviewer"
+  markdone: 'Mark as done'
+  add_feedback_author: 'Add feedback reviewer'
+  select_tags: 'Select tags...'
 
   #hitos
   markdone: "mark as done"
@@ -69,6 +81,15 @@ en:
   mil_create: "Create Milestone"
   mil_delete: "Delete Milestone"
 
+  markdone: 'Mark as done'
+  attachmentsdocs: 'Attachments documents'
+  adddoc: 'Add document'
+  driveerrormsj: 'An error has occurred. Be sure to follow the following points:
+                    - You have entered a correct URL
+                    - You have access permissions to the file in Google Drive'
+  attachgoogledrivedoc: 'Attach Google Drive Document'
+  documenturl: 'Document URL'
+  attach: 'Attach'
   #categorias
   cat_name: "Name"
   cat_icon: "Icon"
@@ -90,6 +111,7 @@ en:
   me: "Private"
   mentors: "Mentors"
   every_body: "Public"
+
 
 
   attachmentsdocs: 'Attachments documents'

@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
 
   before_action :get_project, only: [:show, :edit, :update, :destroy]
+  skip_before_action :admin?, only: [:show]
 
   def get_project
     @project = Project.find_by(id: params[:id])
@@ -13,6 +14,12 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    person = Person.find(current_user.person_id)
+    if !(person.admin) then
+      person.mentees.empty? ? @usr= [person] : @usr = person.mentees
+    else
+      @usr = Person.all
+    end
   end
 
   def new
@@ -50,6 +57,19 @@ class ProjectsController < ApplicationController
     @project.save
     redirect_to '/projects'
   end
+
+  def assign_person
+    pj_id= params[:project_id]
+    person_id= params[:person_id]
+    project= Project.find(pj_id)
+    person= Person.find(person_id)
+    if not project.people.exists?(person.id)
+      project.people<< person
+      project.save
+    end
+    redirect_to project
+  end
+
 
   private
   def project_params

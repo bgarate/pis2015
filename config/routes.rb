@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :people do
     post :assign_milestone
+    post :assign_project
     collection do
       get 'me'
       post 'add_mentor'
@@ -14,6 +15,7 @@ Rails.application.routes.draw do
   end
 
   resources :projects do
+    post :assign_person
   end
 
   resources :tags
@@ -22,6 +24,7 @@ Rails.application.routes.draw do
   resources :milestones do
     resources :notes
     post :add_category
+    post :next_status
     get :set_as_done
   end
 

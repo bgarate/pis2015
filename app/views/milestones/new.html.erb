@@ -49,6 +49,16 @@
             </div>
 
           </div>
+          <div class="row">
+
+            <div class="form-group col-xs-12">
+              <%= m.label 'Tags', class: "control-label" %>
+
+              <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('select_tags'), 'style'=> 'width:100%') %>
+
+            </div>
+          </div>
+
               <%= m.hidden_field(:created_at, :value=>Time.now) %>
               <%= m.hidden_field(:updated_at, :value=>Time.now) %>
         <%= m.button t('mil_create'), :type => 'submit', class: "btn btn-default" %>
@@ -58,3 +68,4 @@
   </div>
  </div>
 
+<script> $(".chzn-select").chosen();</script>

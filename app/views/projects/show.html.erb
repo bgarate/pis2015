@@ -35,4 +35,36 @@
     <% @project.technologies.each do |t| %>
       <li><%= t.name %></li>
     <% end %>
+    <% if @project.technologies.size == 0 %>
+    <em><%= t('project_no_technologies') %></em>
+    <% end %>
 </p>
+<p>
+  <label>
+    <%= t('project_people') %>
+  </label>
+  <% @project.people.each do |t| %>
+    <li><%= link_to t.name, t %></li>
+<% end %>
+<% if @project.people.size == 0 %>
+    <em><%= t('project_no_people') %></em>
+<% end %>
+</p>
+
+<%= form_tag ({:action => 'assign_person', :controller => 'projects', :project_id => @project.id}) do   %>
+    <label>
+      <%= t('project_assign_to') %>
+    </label>
+    <% count = 0 %>
+    <select name="person_id">
+      <% @usr.each do |p|
+        if not @project.people.exists?(p.id) %>
+              <option value= <%=p.id%> > <%=p.name%></option>
+              <% count = count + 1%>
+          <% end
+             end %>
+    </select>
+    <%if count>0 %>
+        <%= submit_tag('Assign') %>
+    <% end %>
+<% end %>

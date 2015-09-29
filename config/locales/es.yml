@@ -40,10 +40,10 @@ es:
   edit: "Editar"
   delete: "Borrar"
   back: "Volver"
+  title: "Título"
   name: 'Nombre'
   id: 'ID'
   not_authorized: "No esta autorizado para realizar esa accion"
-
 
   #crear persona
   people_new_name: "Nombre"
@@ -72,6 +72,9 @@ es:
   project_edit_submit: "Actualizar proyecto"
   project_index_header: "Listando proyectos"
   project_no_projects: "No se han encontrado proyectos"
+  project_no_technologies: "No hay tecnologías asociadas al proyecto"
+  project_people: "Personas asociadas al proyecto"
+  project_no_people: "No hay personas asociadas al proyecto"
   project:
       display_status:
         active: 'Activo'
@@ -79,6 +82,14 @@ es:
         finished: 'Finalizado'
 
   #hitos
+
+  milestone_edit_head: "Editar Hito"
+  milestone_due_date: "Due date del hito"
+  milestone_reviewer: 'Revisor del feedback'
+
+  markdone: 'Marcar como hecho'
+  add_feedback_author: 'Añadir revisor del feedback'
+  select_tags: 'Seleccione tags...'
 
   pending: "pendiente"
   done: "hecho"
@@ -118,6 +129,7 @@ es:
   me: "Privado"
   mentors: "Mentores"
   every_body: "Publico"
+
 
 
   attachmentsdocs: 'Documentos adjuntos'

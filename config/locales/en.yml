@@ -86,6 +86,7 @@ en:
   note_updated: "Updated at"
   note_create: "Create Note"
   note_delete: "Delete Note"
+  add_notes: "Add Notes"
   me: "Private"
   mentors: "Mentors"
   every_body: "Public"

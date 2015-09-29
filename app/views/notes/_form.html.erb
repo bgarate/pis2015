@@ -1,7 +1,9 @@
 <%= form_for([@milestone, @milestone.notes.build]) do |n| %>
+
+  <strong><%= t('add_notes') %></strong>
   <p>
     <%= n.label t('note') %><br>
-    <%= n.text_field :text %>
+    <%= n.text_area :text %>
   </p>
   <p>
     <%= n.label t('note_visibility')%><br>

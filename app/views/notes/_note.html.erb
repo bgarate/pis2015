@@ -2,6 +2,7 @@
         note.visibility=='mentors' && Person.find(note.author_id).mentors.exists?(current_user.id) || #si es para mentores, soy su mentor
         note.visibility=='every_body'%>
 
+
 <p>
   <strong><%= t('note') %>:</strong>
   <%= note.text %>

@@ -23,19 +23,21 @@ describe 'Milestone' do
    #  @padawan = Person.new :name => 'Luke'
    #  @project = Project.new :name => 'Equilibrar la fuerza'
 
-    @ms = Milestone.new :title => 'Destruir Death Star'
-    @ms2 = Milestone.new :title => 'Visitar a Yoda'
+    @ms = Milestone.new :title => 'Destruir Death Star', :description => 'Mision para destruir al Death Star'
+    @ms2 = Milestone.new :title => 'Visitar a Yoda', :description => 'A Yoda visitar debes'
     @nota = Note.new :text => 'Apuntar al agujero usando la fuerza', :visibility => 'me'
     @nota2 = Note.new :text => 'Usá la fuerza Look', :visibility => 'every_body'
     @ms.notes<<(@nota)
     @ms.notes<<(@nota2)
 
     @res = Resource.new :url => 'www.espadalaser.com'
-    @ms.resources<<(@res)
     @ms2.resources<<(@res)
 
     @cat = Category.new :name => 'Importante'
     @ms.category=@cat
+
+    @tag = Tag.new :name => 'Ataque'
+    @ms.tags<<(@tag)
 
     @ms.save!
     @ms.reload
@@ -56,6 +58,8 @@ describe 'Milestone' do
   it 'debería tener 1 categoria' do
     expect(@ms.category).to eq(@cat)
   end
-
+  it 'debe tener tag Ataque' do
+    expect(@ms.tags).to include(@tag)
+  end
 
 end

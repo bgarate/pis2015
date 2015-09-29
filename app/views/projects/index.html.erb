@@ -1,23 +1,27 @@
 <h1><%= t('project_index_header') %></h1>
-<table>
+<table class="table">
   <tr>
     <th><%= t('project_id') %></th>
     <th><%= t('project_name') %> </th>
+    <th><%= t('project_client') %></th>
   </tr>
-  <% projects = Project.all %>
+  <% projects = Project.where(validity: 'true') %>
   <% projects.each do |p| %>
     <tr>
       <td>
-        <%= link_to p.id, p %>
+        <%= p.id %>
       </td>
       <td>
         <%= link_to p.name, p %>
       </td>
       <td>
+        <%= p.client %>
+      </td>
+      <td>
         <%= link_to t('edit'), edit_project_path(p) %>
       </td>
       <td>
-        <!--<%= link_to t('delete'), p, method: :delete %>-->
+        <%= link_to t('delete'), p, method: :delete %>
       </td>
     </tr>
   <% end %>

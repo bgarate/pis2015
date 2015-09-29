@@ -18,7 +18,7 @@
                 <br>
 
                 <div class="input-group">
-                  <%= date_field_tag  :start_date, l(Date.today), class: "form-control", required: 'true',  "data-provide":"datepicker", 'data-validation': "required since", 'data-validation-format': "dd/mm/yyyy" %>
+                  <%= text_field_tag  :start_date, l(Date.today), class: "form-control", required: 'true',  "data-provide":"datepicker", 'data-validation': "required since", 'data-validation-format': "dd/mm/yyyy" %>
                   <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
                 </div>
               </div>

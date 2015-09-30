@@ -1,36 +1,9 @@
-<%= form_for([@milestone, @milestone.notes.build]) do |n| %>
-
-  <strong><%= t('add_notes') %></strong>
-  <p>
-    <%= n.label t('note') %><br>
-    <%= n.text_field :text %>
-  </p>
-  <p>
-    <%= n.label t('note_visibility')%><br>
-    <%= n.text_field  :visibility, :size=>12 %> <%=t('values')+': me, mentors, every_body' %>
-  </p>
-
-  <p>
-    <%= n.hidden_field(:author_id, :value =>current_user.person_id) %>
-    <%= n.hidden_field(:created_at, :value =>Time.now) %>
-    <%= n.hidden_field(:updated_at, :value =>Time.now) %>
-  </p>
-
-  <p>
-    <%= n.button t('note_create'), :type=>'button', :onclick=>'if(validate()){submit();};' %>
-  </p>
+<%= form_for([@milestone, @milestone.notes.build], html: { 'data-toggle': 'validator'}) do |n| %>
+    <%= n.text_field :text, 'data-validation': "required", class: "submit-on-enter"%>
+    <%= n.select(:visibility,options_for_select(
+                                    [["&#xe033;".html_safe,:me],
+                                     ["&#xe106;".html_safe,:mentors],
+                                     ["&#xe105".html_safe,:every_body]]),
+                 {}, {class: "glyphicon"}
+        )%>
 <% end %>
-
-<script>
-  function validate(){
-    var text, visibility;
-    // Get the value of the input field with id="name"
-    text = document.getElementById('note_text').value;
-    // Get the value of the input field with id="mail"
-    visibility = document.getElementById("note_visibility").value;
-
-    // Validate
-    return ((text!='') && (visibility=='me'|| visibility=='mentors'||visibility=='every_body'))
-  }
-
-</script>

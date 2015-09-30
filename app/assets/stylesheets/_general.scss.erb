@@ -97,3 +97,58 @@
 .pointer {
     cursor: pointer;
 }
+
+@mixin triangle($direction, $color: currentcolor, $size: 30px) {
+
+    width: 0;
+    height: 0;
+
+    border-style: solid;
+    border-color: transparent;
+    border-width: $size / 2;
+    border-#{opposite_position($direction)}-color: $color;
+}
+
+$tag-height: 20px;
+
+ul.tags {
+    float: right;
+    margin-right: 15px;
+
+    li {
+        position: relative;
+        float: right;
+        background-color: #E862E5;
+        font-size: 10px;
+        list-style: none;
+        line-height: $tag-height;
+        height: $tag-height;
+        padding: 0 10px;
+        color: white;
+        font-weight: bold;
+        margin-top: 15px;
+        margin-left: 20px;
+
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: -$tag-height;
+            @include triangle(left, #E862E5, $tag-height);
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            left: -1px;
+            top: calc(50% - 2px);
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: white;
+        }
+
+    }
+}

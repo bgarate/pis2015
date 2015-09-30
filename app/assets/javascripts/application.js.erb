@@ -46,4 +46,10 @@ $(function() {
             function(){$(this).parents("form").submit();}
     )
     $("select.submit-on-select").val("").trigger('chosen:updated');
+    $("input.submit-on-enter").keypress(function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            $(this).parents("form").submit()
+        }
+    });
 });

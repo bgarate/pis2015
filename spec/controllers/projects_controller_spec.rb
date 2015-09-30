@@ -76,7 +76,37 @@ describe ProjectsController do
 
   end
 
-  describe "GET Destroy" do
+  describe "GET show" do
+    it "Muestra un proyecto" do
+      session[:user_id] = @ad_user.id
+      get :show, {:id=>@proy.id}
+      # Espero ser redirigido
+      expect(response).to render_template("show")
+    end
+    describe "GET show" do
+      it "Muestra un proyecto" do
+        session[:user_id] = @no_ad_user.id
+        get :show, {:id=>@proy.id}
+        # Espero ser redirigido
+        expect(response).to render_template("show")
+      end
+    end
+    describe "assign_project" do
+      it "Asigna una persona a un proyecto" do
+        session[:user_id] = @ad_user.id
+        p1= Project.new
+        p1.name="projecto prueba"
+        p1.client='Cliente'
+        p1.status="active"
+        p1.save!
+
+        post :assign_person, :project_id => p1.id, :person_id=> @admin.id, :session=>session
+        # Espero ser redirigido
+        expect(response.status).to eq(302)
+      end
+    end
+
+    describe "GET Destroy" do
     it "Borra logicamente un proyecto" do
       session[:user_id] = @ad_user.id
       get :destroy, {:id=>@proy.id}
@@ -92,5 +122,6 @@ describe ProjectsController do
     end
   end
 
+  end
 end
 

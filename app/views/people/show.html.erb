@@ -14,15 +14,24 @@
                   <li>
                     <h2><%=e.title%></h2>
                     <p><%=e.description%></p>
-
+                    <p><%=t(e.status) %></p>
+                    <p><%=
+                        if e.status != 'done'
+                          session[:return_to] ||= request.referer
+                          link_to t(:markdone), milestone_path(e, :milestone  => {:status => :done}), :method => :put
+                        end
+                    %></p>
+                    <p>
+                      <%=t(:attachmentsdocs)%>: <br>
                     <ul>
                       <%e.resources.each do |r|%>
                           <li><%=link_to r.title, r.url, :target => "_blank"%></li>
                       <%end%>
                     </ul>
 
-
-                    <div class="calendar right"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
+                    <% if e.due_date %>
+                        <div class="calendar right"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
+                    <% end %>
                     <%= milestone_short_info(e) %>
                     <ul class="tags">
                       <!--<li>Speaker</li>-->
@@ -36,8 +45,30 @@
         <% end %>
       </div>
     </div>
+
+
     <div class="card-col col-xs-5 col-sm-5 col-md-5 col-lg-5">
       <%= render 'people/timeline_card' %>
     </div>
   </div>
 </div>
+
+<%= form_tag ({:action => 'assign_project', :controller => 'people', :person_id => @person_vew.id}) do   %>
+    <% if !(@projects.empty?)%>
+        <label>
+          <%= t('people_assign_to') %>
+        </label>
+        <% count = 0 %>
+        <select name="project_id">
+          <% @projects.each do |p|
+            if not @person_vew.projects.exists?(p.id)%>
+                  <option value= <%=p.id%> > <%=p.name%></option>
+                  <% count = count + 1%>
+              <%  end
+                  end %>
+        </select>
+        <%if count>0 %>
+            <%= submit_tag('Assign') %>
+        <% end %>
+    <% end %>
+<% end %>

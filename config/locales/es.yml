@@ -125,6 +125,7 @@ es:
   note_updated: "Actualizado"
   note_create: "Crear Nota"
   note_delete: "Borrar Nota"
+  add_notes: "Agregar Notas"
   me: "Privado"
   mentors: "Mentores"
   every_body: "Publico"

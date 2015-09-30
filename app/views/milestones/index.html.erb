@@ -18,7 +18,7 @@
           <% @milestone.each do |m| %>
               <tr>
                 <td><%= milestone_status(m,:static) %></td>
-                <td><%= link_to m.title, milestone_path(m)%></td>
+                <td><%= link_to m.title, milestone_path(m), method: :get%></td>
                 <td><%= m.description.truncate(50) %></td>
                 <td><div class="calendar left"><%= m.due_date %></div></td>
                 <td><%= link_to milestone_path(m),

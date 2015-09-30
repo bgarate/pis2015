@@ -42,6 +42,15 @@ class PeopleController < ApplicationController
       #Todos los hitos
       @mentorships = person.mentors
       @yet_pending = Milestone.pending.where('id NOT in (?)', person.milestones.pluck(:id))
+
+      @person_vew = Person.find_by(id: params[:id])
+      person = Person.find(current_user.person_id)
+      if (person.admin) or !(person.mentees.exists?(@person_vew.id)) or (person.id = @person_vew.id)
+        @projects = Project.all
+      else
+        @projects = []
+      end
+
     else
       redirect_to root_path
     end
@@ -67,6 +76,18 @@ class PeopleController < ApplicationController
     milestone=Milestone.find(params[:milestone_id])
     person=Person.find(params[:person_id])
     person.milestones<<milestone
+    redirect_to person
+  end
+
+  def assign_project
+    pj_id= params[:project_id]
+    id= params[:person_id]
+    project= Project.find(pj_id)
+    person= Person.find(id)
+    if not project.people.exists?(id)
+      project.people<< person
+      project.save
+    end
     redirect_to person
   end
 

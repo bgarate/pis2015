@@ -21,6 +21,17 @@ describe PeopleController do
     @no_ad_user.save!
   end
 
+
+  describe "GET index" do
+    it "Despliega el index" do
+      session[:user_id] = @ad_user.id
+      get :index, :session => session
+      # Espero que me muestre el formulario
+      expect(response).to render_template("index")
+    end
+  end
+
+
   describe "GET new" do
     it "Despliega formulario de creacion de usuario" do
       session[:user_id] = @ad_user.id
@@ -36,8 +47,11 @@ describe PeopleController do
       expect(response.status).to eq(302)
     end
 
-
     it "debe redirigir a index" do
+# <<<<<<< HEAD
+#       admin = Person.new :name=>'NombreAdmin', :email=>'mail2@admin.com', :start_date=>Time.current(), :admin=>true
+#       admin.save!
+# =======
       # admin = Person.new :name=>'NombreAdmin', :email=>'mail2@admin.com', :start_date=>Time.current(), :admin=>true
       # admin.save!
 
@@ -45,9 +59,8 @@ describe PeopleController do
       ad_user.oauth_expires_at = Time.current().advance(days:1)
       ad_user.save!
       session[:user_id] = ad_user.id
-
       get :me
-      expect(response).to redirect_to(:action => "index")
+      expect(response).to redirect_to(@admin)
     end
   end
 
@@ -111,13 +124,39 @@ describe PeopleController do
 
   end
 
+  describe "Assign_project" do
+    it "Asigna una persona a un proyecto" do
+      session[:user_id] = @ad_user.id
+      p1=Project.new
+      p1.name='unnombredeproy'
+      p1.client=@admin.name
+      p1.save!
+      post :assign_project, :person_id=> @admin.id, :project_id => p1.id, :session=>session
+      # Espero ser redirigido
+      expect(response.status).to eq(302)
+    end
+  end
+
   describe "add_mentor" do
     it "No deberia desplegar el formulario si el usuario no es admin" do
       session[:user_id] = @no_ad_user.id
 
-      get :add_mentor_form ,{:mentee_id => 1}, :session => session
+      post :add_mentor_form ,{:mentee_id => 1}, :session => session
       # Espero ser redirigido
       expect(response).to redirect_to root_path
+    end
+
+    it "Deberia desplegar el formulario si el usuario es admin" do
+      session[:user_id] = @ad_user.id
+      p1 = Person.new
+      p1.name = "Juan Perez"
+      p1.email ="juanperez2@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+
+      post :add_mentor_form ,{:mentee_id => p1.id}, :session => session
+      # Espero ser redirigido
+      expect(response.status).to eq(200)
     end
 
     it "Debería dar error si mentee y mentor son el mismo" do
@@ -144,14 +183,14 @@ describe PeopleController do
   end
 
   describe "permisos" do
-    it 'Deveria renderizar people show por ser admin' do
+    it 'Deberia renderizar people show por ser admin' do
 
       session[:user_id] = @ad_user.id
       get :show, :id => @no_ad_user.person_id
       expect(response.status).to eq(200)
     end
 
-    it 'Deveria renderizar people show por ser mentor' do
+    it 'Deberia renderizar people show por ser mentor' do
       @no_ad_user.person.mentees<<(@ad_user.person)
       @no_ad_user.save!
 
@@ -160,11 +199,15 @@ describe PeopleController do
       expect(response.status).to eq(200)
     end
 
-    it 'Deveria redireccionar a root path por no ser admin ni mentor' do
-
+    it 'Deberia redireccionar a root path por no ser admin ni mentor' do
+      p1=Person.new
+      p1.name='fulano'
+      p1.email='fulano@detal.com'
+      p1.start_date=Time.now
+      p1.save!
       session[:user_id] = @no_ad_user.id
-      get :show, :id => @ad_user.person_id
-      expect(response).to redirect_to root_path
+      get :show, :id => p1.id
+      expect(response.status).to eq(302)
     end
   end
 end

@@ -1,6 +1,8 @@
 class NotesController < ApplicationController
 
   before_action :get_milestone, only: [:create, :destroy]
+  skip_before_action :admin?, only: [:create]
+
 
   def get_milestone
     @milestone=Milestone.find(params[:milestone_id])

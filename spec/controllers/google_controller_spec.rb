@@ -56,19 +56,17 @@ describe GoogleController, "Login a traves de google oatuh" do
 
     per.save!
 
+    user = User.new :person => per
+    user.oauth_expires_at = Time.current().advance(days:1)
+
+    allow_any_instance_of(ApplicationController).to receive(:current_user) { user }
+
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
     visit '/auth/google_oauth2/callback'
     expect(current_path).to include(people_path)
 
   end
 
-
-
-    request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
-    visit '/auth/google_oauth2/callback'
-
-    expect(current_path).to eq google_unregistered_path
-  end
 
 
   it 'Deberia poner el user id en session en nil y redirigir a home' do

@@ -52,23 +52,3 @@
     </div>
   </div>
 </div>
-
-<%= form_tag ({:action => 'assign_project', :controller => 'people', :person_id => @person_vew.id}) do   %>
-    <% if !(@projects.empty?)%>
-        <label>
-          <%= t('people_assign_to') %>
-        </label>
-        <% count = 0 %>
-        <select name="project_id">
-          <% @projects.each do |p|
-            if not @person_vew.projects.exists?(p.id)%>
-                  <option value= <%=p.id%> > <%=p.name%></option>
-                  <% count = count + 1%>
-              <%  end
-                  end %>
-        </select>
-        <%if count>0 %>
-            <%= submit_tag('Assign') %>
-        <% end %>
-    <% end %>
-<% end %>

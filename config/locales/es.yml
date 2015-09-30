@@ -54,6 +54,9 @@ es:
   people_new_init_date: "Fecha de ingreso"
   people_new_submit: "Crear usuario"
 
+  people_assign_to: "Asignar a proyecto"
+
+
   mentor_since: "Desde"
   mentor_name: "Nombre del mentor"
   mentor_submit: "Agregar mentor"

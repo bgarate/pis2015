@@ -64,13 +64,6 @@ describe GoogleController, "Login a traves de google oatuh" do
 
 
 
-    request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
-    visit '/auth/google_oauth2/callback'
-
-    expect(current_path).to eq google_unregistered_path
-  end
-
-
   it 'Deberia poner el user id en session en nil y redirigir a home' do
     admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
 

@@ -1,4 +1,6 @@
 <%= form_for([@milestone, @milestone.notes.build]) do |n| %>
+
+  <strong><%= t('add_notes') %></strong>
   <p>
     <%= n.label t('note') %><br>
     <%= n.text_field :text %>
@@ -9,7 +11,7 @@
   </p>
 
   <p>
-    <%= n.hidden_field(:author_id, :value =>current_user.id) %>
+    <%= n.hidden_field(:author_id, :value =>current_user.person_id) %>
     <%= n.hidden_field(:created_at, :value =>Time.now) %>
     <%= n.hidden_field(:updated_at, :value =>Time.now) %>
   </p>

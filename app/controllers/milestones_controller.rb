@@ -29,7 +29,14 @@ class MilestonesController < ApplicationController
   end
 
   def index
+    if current_user_admin?
       @milestone= Milestone.all
+    else
+      @milestone1= Milestone.all.where('id IN (SELECT milestone_id FROM person_milestones WHERE (person_id IN
+                                              (SELECT mentee_id FROM mentorships WHERE mentor_id=?)))',current_user.person_id)
+      @milestone2= Milestone.all.where('id IN (SELECT milestone_id FROM person_milestones WHERE person_id=?)', current_user.person_id)
+      @milestone=@milestone1|@milestone2                                         
+    end    
   end
 
   def new
@@ -69,7 +76,7 @@ class MilestonesController < ApplicationController
     @milestone.notes.each do |n|
       n.destroy
     end
-    milestone.destroy
+    @milestone.destroy
     redirect_to milestones_path
   end
 	
@@ -101,7 +108,7 @@ class MilestonesController < ApplicationController
   def next_status
     @milestone.status = @milestone.get_next_status
     @milestone.save!
-    redirect_to :back
+    redirect_to @milestone
   end
 
   private

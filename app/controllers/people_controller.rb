@@ -45,7 +45,7 @@ class PeopleController < ApplicationController
 
       @person_vew = Person.find_by(id: params[:id])
       person = Person.find(current_user.person_id)
-      if (person.admin) or !(person.mentees.exists?(@person_vew)) or (person.id = @person_vew.id)
+      if (person.admin) or !(person.mentees.exists?(@person_vew.id)) or (person.id = @person_vew.id)
         @projects = Project.all
       else
         @projects = []

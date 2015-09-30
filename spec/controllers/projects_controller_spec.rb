@@ -94,7 +94,10 @@ describe ProjectsController do
     describe "assign_project" do
       it "Asigna una persona a un proyecto" do
         session[:user_id] = @ad_user.id
-        put :assign_person, :person_id=> @admin, :project_id => @proy,:session=>session
+        p1= Project.new
+        p1.name="projecto prueba"
+
+        post :assign_person, :project_id => p1.id, :person_id=> @admin.id, :session=>session
         # Espero ser redirigido
         expect(response.status).to eq(302)
       end
@@ -116,5 +119,6 @@ describe ProjectsController do
     end
   end
 
+  end
 end
 

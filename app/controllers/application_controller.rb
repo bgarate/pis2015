@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+
   before_action :load_members
   before_action :loged?
   before_action :admin?

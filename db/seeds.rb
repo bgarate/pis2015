@@ -87,7 +87,6 @@ p1.skills << sk1
 p1.skills << sk2
 p1.tech_role = tr2
 
-
 p2 = Person.create!(name: "Diego Bortot", email: "bortotdiegogm@gmail.com", admin: true, start_date: 23.years.ago)
 p3 = Person.create!(name: "Oscar Montañés", email: "omontanes@gmail.com", admin: true, start_date: 23.years.ago)
 p3 = Person.create!(name: "Sebastían Soleri", email: "omontanes.guri@gmail.com", admin: false, start_date: 23.years.ago)
@@ -112,3 +111,66 @@ Tag.create!(name:'Inicio proyecto')
 Tag.create!(name:'Fin proyecto')
 Tag.create!(name:'Speacker')
 Tag.create!(name:'Participación')
+
+
+# Datos de Prueba para Bill Hicks
+p6 = Person.create!(name: "Bill Hicks", email: "bill.hicks@gmail.com", admin: false, start_date: 2.years.ago)
+
+p6.milestones.create(title: "Aprendio a programar",
+                     description: "Esta es la descripción del hito",
+                     due_date: Time.now + 5*24*60*60)
+
+p6.milestones.create(title: "Otro hito de prueba",
+                     description: "Una descripción un poquito mas larga que no entra en una sola linea",
+                     due_date: Time.now - 5*24*60*60)
+
+p6.projects << pro
+p6.skills << sk1
+p6.skills << sk2
+p6.tech_role = tr2
+
+
+# Datos de Prueba para John Doe
+p7 = Person.create!(name: "John Doe", email: "johndoe@gmail.com", admin: false, start_date: 1.years.ago)
+
+p7.milestones.create(title: "Hito 1",
+                     description: "Esta es la descripción del hito",
+                     due_date: Time.now + 5*24*60*60,status: :done)
+
+p7.milestones.create(title: "Hito 2",
+                     description: "Una descripción un poquito mas larga que no entra en una sola linea",
+                     due_date: Time.now - 5*24*60*60,status: :pending)
+
+p7.milestones.create(title: "Hito 3",
+                     description: "Esta es la descripción del hito",
+                     due_date: Time.now + 5*24*60*60,status: :rejected)
+
+
+p7.projects << pro
+p7.skills << sk1
+p7.skills << sk2
+p7.tech_role = tr2
+
+# Datos de Prueba para John Doe
+p8 = Person.create!(name: "Bill Cooper", email: "billcooper@gmail.com", admin: false, start_date: 1.years.ago)
+
+p8.milestones.create(title: "Hito 1",
+                     description: "Hito 1",
+                     due_date: Time.now + 5*24*60*60,status: :done)
+
+p8.milestones.create(title: "Hito 2",
+                     description: "Una descripción un poquito mas larga que no entra en una sola linea",
+                     due_date: Time.now - 5*24*60*60,status: :done)
+
+p8.milestones.create(title: "Hito 3",
+                     description: "Esta es la descripción del hito",
+                     due_date: Time.now + 5*24*60*60,status: :done)
+
+
+p8.projects << pro
+p8.skills << sk1
+p8.skills << sk2
+p8.tech_role = tr2
+
+p6.mentees<<p7
+p6.mentees<<p8

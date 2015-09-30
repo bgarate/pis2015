@@ -1,0 +1,38 @@
+<h1>DASHBOARD:</h1>
+
+<h2>Usuarios Mentoreados</h2>
+<table class="table">
+  <% @my_mentees.each do |m| %>
+      <tr>
+        <td>
+          <div id="profile-picture">
+            <div class="img-container">
+              <%= image_tag "test/silueta.gif" %>
+              </div>
+            </div>
+        </td>
+        <td><%= m.name %></td>
+        <td>
+          <ul>
+          <% m.milestones.each do |mil|
+            if mil.status != :pending %>
+            <li><%= mil.title %></li>
+            <% end %>
+          <% end %>
+          </ul>
+        </td>
+
+
+      </tr>
+  <% end %>
+</table>
+
+<h2>Hitos Pendientes</h2>
+<table class="table">
+  <% @my_milestones.each do |h| %>
+      <tr>
+        <td><%= h.title %></td>
+        <td><%= h.description %></td>
+      </tr>
+  <% end %>
+</table>

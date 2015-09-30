@@ -52,7 +52,7 @@
         <% @milestones.each do |e| %>
             <li>
               <%= milestone_status(e,:small,:right)%>
-              <h2><%=link_to e.title, e%></h2>
+              <h2><%=link_to e.title, e, method: :get%></h2>
               <p><%=t(e.status) %></p>
               <p><%=
                   if e.status != 'done'

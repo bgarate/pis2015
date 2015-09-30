@@ -15,6 +15,12 @@
 //= require jquery-ui
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require jquery.knob
+//= require bootstrap-datepicker
+//= require form-validator/jquery.form-validator.min
+//= require typeahead.bundle
+//= require chosen/chosen.jquery.min
+//= require datatables
 //= require_tree .
 
 
@@ -23,4 +29,21 @@ $(function() {
     'width':'90%',
     'readOnly':true
   });
+  $.validate({
+      modules: 'html5, date',
+      lang: '<%= I18n.locale %>'
+  });
+  $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+  $(".datatable").DataTable({
+      paging: false,
+
+      "language": {
+          "search" : ""
+      }
+  });
+    $("select.chosen").chosen();
+    $("select.submit-on-select").change(
+            function(){$(this).parents("form").submit();}
+    )
+    $("select.submit-on-select").val("").trigger('chosen:updated');
 });

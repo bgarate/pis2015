@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div class="table-container">
+        <h1><%= t('categories') %></h1>
+        <table class="table">
+          <thead>
+          <tr>
+            <td></td>
+            <td><%= t('cat_name') %></td>
+            <td><%= t('cat_created') %></td>
+            <td><%= t('cat_updated') %></td>
+          </tr>
+          </thead>
+          <tbody>
+          <% @category.each do |c| %>
+              <tr>
+                <td><%= c.icon %></td>
+                <td><%= c.name %></td>
+                <td><%= c.created_at%></td>
+                <td><%= c.updated_at%></td>
+              </tr>
+          <%end%>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+</div>

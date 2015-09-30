@@ -20,6 +20,31 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 es:
+
+  #Generales (Paginas, Links, Botones, etc)
+  person: "Persona"
+  people: "Personas"
+  category: "Categoría"
+  categories: "Categorias"
+  milestone: "Hito"
+  milestones: "Hitos"
+  note: "Nota"
+  notes: "Notas"
+  proyect: "Proyecto"
+  proyects: "Proyectos"
+  save: "Guardar"
+  sure?: "¿Estas seguro?"
+  add: "Agregar"
+  values: "Valores"
+  create: "Crear"
+  edit: "Editar"
+  delete: "Borrar"
+  back: "Volver"
+  title: "Título"
+  name: 'Nombre'
+  id: 'ID'
+  not_authorized: "No esta autorizado para realizar esa accion"
+
   #crear persona
   people_new_name: "Nombre"
   people_new_email: "Correo electrónico"
@@ -28,14 +53,103 @@ es:
   people_new_birth_date: "Fecha de nacimiento"
   people_new_init_date: "Fecha de ingreso"
   people_new_submit: "Crear usuario"
-  #hitos
-  pending: pendinte
-  done: hecho
-  rejected: rechazado
-  feedback: 'feedback'
-  event: evento
 
-  markdone: 'marcar como hecho'
+  mentor_since: "Desde"
+  mentor_name: "Nombre del mentor"
+  mentor_submit: "Agregar mentor"
+  mentor_nomore_msg: "No hay más mentores disponibles para agregar para"
+
+  project_create_head: "Crear Proyecto"
+  project_edit_head: "Editar Proyecto"
+  project_id: "ID"
+  project_name: "Nombre"
+  project_client: "Cliente"
+  project_status: "Estado"
+  project_start_date: "Fecha de inicio"
+  project_end_date: "Fecha de fin"
+  project_technologies: "Tecnologías"
+  project_new_submit: "Crear projecto"
+  project_edit_submit: "Actualizar proyecto"
+  project_index_header: "Listando proyectos"
+  project_no_projects: "No se han encontrado proyectos"
+  project_no_technologies: "No hay tecnologías asociadas al proyecto"
+  project_people: "Personas asociadas al proyecto"
+  project_no_people: "No hay personas asociadas al proyecto"
+  project:
+      display_status:
+        active: 'Activo'
+        inactive: 'Inactivo'
+        finished: 'Finalizado'
+
+  #hitos
+
+  milestone_edit_head: "Editar Hito"
+  milestone_due_date: "Due date del hito"
+  milestone_reviewer: 'Revisor del feedback'
+
+  markdone: 'Marcar como hecho'
+  add_feedback_author: 'Añadir revisor del feedback'
+  select_tags: 'Seleccione tags...'
+
+  pending: "pendiente"
+  done: "hecho"
+  rejected: "rechazado"
+  feedback: "feedback"
+  event: "evento"
+  markdone: "marcar como hecho"
+  mil_title: "Titulo"
+  mil_start_date: "Fecha de inicio"
+  mil_due_date: "Fecha limite"
+  mil_description: "Descripcion"
+  mil_icon: "Icono"
+  mil_status: "Estado"
+  mil_create: "Crear Hito"
+  mil_delete: "Borrar Hito"
+
+
+
+  #categorias
+  cat_name: "Nombre"
+  cat_icon: "Icono"
+  cat_created: "Creado"
+  cat_updated: "Actualizado"
+  cat_create: "Crear Categoria"
+  cat_delete: "Borrar Categoria"
+  cat_add: "Agregar Categoria"
+  cat_unavailable: "No hay categorias disponibles"
+
+  #notas
+  note_visibility: "Visibilidad"
+  note_author: "Autor"
+  note_created: "Creado"
+  note_updated: "Actualizado"
+  note_create: "Crear Nota"
+  note_delete: "Borrar Nota"
+  add_notes: "Agregar Notas"
+  me: "Privado"
+  mentors: "Mentores"
+  every_body: "Publico"
+
+
+
+  attachmentsdocs: 'Documentos adjuntos'
+  adddoc: 'Agregar documento'
+  driveerrormsj: 'Ha ocurrido un error. Asegúrese de cumplir con los siguientes puntos:
+                    - Ha ingresado un URL correcta
+                    - Tiene permisos de acceso al archivo en Google Drive'
+  attachgoogledrivedoc: 'Adjuntar documento de Google Drive'
+  documenturl: 'URL del documento'
+  attach: 'Adjuntar'
+
+
+  #tags
+  tag_create_head: "Crear Tag"
+  tag_edit_head: "Editar Tag"
+  tag_new_submit: "Crear tag"
+  tag_edit_submit: "Actualizar tag"
+  tag_index_header: "Listando tags"
+  tag_no_tags: "No se han encontrado tags"
+
 
   #fechas
   date:

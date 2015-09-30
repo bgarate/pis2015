@@ -1,0 +1,40 @@
+<% if current_user_admin? || #si es admin
+        (note.author_id==current_user.person_id) || #si es personal, la hice yo?
+        note.visibility=='mentors' && Person.find(current_user.person_id).mentees.exists?(note.author_id) || #si es para mentores, soy su mentor
+        note.visibility=='every_body'%>
+
+
+<p>
+  <strong><%= t('note') %>:</strong>
+  <%= note.text %>
+</p>
+
+<p>
+  <strong><%= t('note_author') %>:</strong>
+  <%= Person.find(note.author_id).name %>
+</p>
+
+<p>
+  <strong><%= t('note_created') %>:</strong>
+  <%= note.created_at %>
+</p>
+<p>
+  <strong><%= t('note_updated') %>:</strong>
+  <%= note.updated_at %>
+</p>
+<p>
+  <strong><%= t('note_visibility') %>:</strong>
+  <%= t(note.visibility) %>
+</p>
+<p>
+  <strong><%= t('milestone') %>:</strong>
+  <%= note.milestone_id %>
+</p>
+
+<p>
+  <%= link_to t('note_delete'), [note.milestone, note],
+              method: :delete,
+              data: { confirm: t('sure?')} %>
+</p>
+
+<% end%>

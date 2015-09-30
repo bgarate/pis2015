@@ -1,0 +1,19 @@
+  def destroy
+    @milestone= Milestone.find(params[:id])
+    @milestone.notes.each do |n|
+      n.destroy
+    end
+    @milestone.destroy
+    redirect_to milestones_path
+  end
+	
+  def edit
+    @milestone = Milestone.find(params[:id])
+  end
+	
+  def update
+    @milestone = Milestone.find(params[:id])
+    if @milestone.update_attributes(milestone_params)
+      redirect_to @milestone
+    end
+  end

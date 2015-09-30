@@ -1,0 +1,99 @@
+
+.large-text {
+    font-size: 2rem;
+}
+
+.calendar {
+    background-image: image-url('layouts/calendar-red.png');
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    min-height: 24px;
+    float: left;
+    margin-left: 15px;
+    padding-left: 30px;
+    line-height: 24px;
+    font-weight: bold;
+    font-size: 10px;;
+
+    &.white {
+        background-image: image-url('layouts/calendar-white.png');
+    }
+
+    &.right {
+        margin-left: inherit;
+        padding-left: inherit;
+        margin-right: 15px;
+        padding-right: 30px;
+        background-position: right;
+        float: right;
+    }
+
+}
+
+.milestone-status {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+
+    &.done {
+        background-image: image-url('layouts/status-done.png');
+    }
+
+    &.pending {
+        background-image: image-url('layouts/status-pending.png');
+    }
+
+    &.rejected {
+        background-image: image-url('layouts/status-rejected.png');
+    }
+
+    &.right {
+        left: auto;
+        right: 15px;
+    }
+
+    &.small {
+        width: 25px;
+        height: 25px;
+    }
+
+    &.static {
+        position: static;
+        display: block;
+    }
+}
+
+.short-info {
+
+    padding: 1ex;
+
+    .icon{
+        padding-right: 3px;
+    }
+
+    .action {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    .slide {
+        max-width: 0;
+        overflow: hidden;
+        display: inline-block;
+        @include transition(0.3s ease-in-out);
+    }
+
+    &:hover {
+        padding-right: 1ex;
+        .slide {
+            max-width: 1000px;
+        }
+    }
+}
+
+.pointer {
+    cursor: pointer;
+}

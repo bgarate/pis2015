@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+#HEROKU
 group :production do
   gem 'rails_12factor' #necesario para Heroku
 end
@@ -8,6 +9,8 @@ ruby "2.2.2" #especifica la versión de ruby a usar en Heroku.
 # Gema para la autenticación con google
 gem "omniauth-google-oauth2", "~> 0.2.1"
 gem 'capybara'
+#Google drive
+gem 'google_drive', '1.0.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -50,7 +53,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  #gem 'byebug'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
@@ -61,6 +64,9 @@ group :development, :test do
   # RSpec y Cocoverage
   gem 'simplecov'
   gem 'rspec-rails'
+
+  #mock y stub
+  gem 'rspec-activemodel-mocks'
 
   # Annotate
   gem 'annotate'

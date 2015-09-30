@@ -41,7 +41,7 @@
 
     h2 {
         clear: both;
-        max-width: 50%;
+        max-width: 70%;
         float: right;
         font-size: 20px;
         margin: 10px 0 5px 0;
@@ -55,25 +55,66 @@
         margin: 0;
     }
 
-    .milestone-status {
-        position: absolute;
-        top: 15px;
-        left: 15px;
-        width: 30px;
-        height: 30px;
-        background-size: cover;
-
-        &.done {
-            background-image: image-url('layouts/status-done.png');
-        }
-
-        &.pending {
-            background-image: image-url('assets/layouts/status-pending.png');
-        }
-
-        &.rejected {
-            background-image: image-url('assets/layouts/status-rejected.png');
-        }
-    }
-
 }
+
+
+.etiquetas{
+    margin:0;
+    padding:0;
+    position:absolute;
+    right:24px;
+    bottom:-12px;
+    list-style:none;
+}
+.etiquetas li, .etiquetas a{
+    float:left;
+    height:24px;
+    line-height:24px;
+    position:relative;
+    font-size:11px;
+}
+.etiquetas li{
+    margin-left:20px;
+    padding:0 10px 0 12px;
+    background:#0089e0;
+    color:#fff;
+    text-decoration:none;
+    -moz-border-radius-bottomright:4px;
+    -webkit-border-bottom-right-radius:4px;
+    border-bottom-right-radius:4px;
+    -moz-border-radius-topright:4px;
+    -webkit-border-top-right-radius:4px;
+    border-top-right-radius:4px;
+}
+.etiquetas li:before{
+    content:"";
+    float:left;
+    position:absolute;
+    top:0;
+    left:-12px;
+    width:0;
+    height:0;
+    border-color:transparent #0089e0 transparent transparent;
+    border-style:solid;
+    border-width:12px 12px 12px 0;
+}
+.etiquetas li:after{
+    content:"";
+    position:absolute;
+    top:10px;
+    left:0;
+    float:left;
+    width:4px;
+    height:4px;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+    background:#fff;
+    -moz-box-shadow:-1px -1px 2px #004977;
+    -webkit-box-shadow:-1px -1px 2px #004977;
+    box-shadow:-1px -1px 2px #004977;
+}
+
+.etiquetas li:hover{background:#555;}
+.etiquetas li:hover:before{border-color:transparent #555 transparent transparent;}
+

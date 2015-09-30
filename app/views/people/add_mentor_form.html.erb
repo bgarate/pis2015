@@ -1,0 +1,40 @@
+<% I18n.locale = :es %>
+
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
+      <% if @posible_mentors.empty? %>
+          <h3> <%= t('mentor_nomore_msg')+' '+@mentee.name %></h3>
+          <%= link_to t(:back), 'javascript:history.go(-1);' %>
+      <% else %>
+          <%= form_tag({controller: "people", action: "add_mentor", method: "get"}, {:class => 'main-form'}) do %>
+              <h1>
+                <span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-user"></span>
+                Agregando mentor a <br><br> <%= @mentee.name %>:</h1>
+              <input type="hidden" name="mentee_id" value="<%= @mentee.id %>">
+
+              <div class="field">
+                <%= label_tag(t('mentor_since')) %>
+                <br>
+
+                <div class="input-group">
+                  <%= text_field_tag  :start_date, l(Date.today), class: "form-control", required: 'true',  "data-provide":"datepicker", 'data-validation': "required since", 'data-validation-format': "dd/mm/yyyy" %>
+                  <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+                </div>
+              </div>
+              <br>
+
+              <div class="field">
+                <%= label_tag(t('mentor_name'), nil, class: 'small_label') %>
+                <br>
+                <%= select_tag(:mentor_id, options_from_collection_for_select(@posible_mentors.all, :id, :name), :required => true) %>
+              </div>
+              <br>
+              <%= button_tag t('mentor_submit'), options= :type => 'submit', class: "btn btn-default" %>
+          <% end %>
+
+      <% end %>
+
+    </div>
+  </div>
+</div>

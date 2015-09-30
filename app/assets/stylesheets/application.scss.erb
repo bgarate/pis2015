@@ -1,6 +1,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "compass";
+@import "jquery-ui/core";
+@import "jquery-ui/autocomplete";
+@import "bootstrap-datepicker.standalone";
+@import "chosen/chosen.min";
 
 $turqoise: #169F85;
 $peterriver: #2980B8;
@@ -17,6 +21,8 @@ $mooveit-orange-dark: #FC6A06;
 $sunflower-dark: #E8B113;
 $alizarin-dark: #FF6C61;
 $midnightblue-dark:#23323D;
+
+$peterriver-focus: #1d76b8;
 
 $nav-background: $midnightblue;
 $nav-hover: $peterriver;
@@ -37,80 +43,27 @@ body {
 
 }
 
+@import "general";
+@import "forms";
+@import "tables";
+
 @import "navigation";
 @import "cards";
 @import "login";
 @import "milestones";
 
-.calendar {
-  background-image: image-url('layouts/calendar-red.png');
-  background-repeat: no-repeat;
-  background-size: 24px 24px;
-  min-height: 24px;
-  float: left;
-  margin-left: 15px;
-  padding-left: 30px;
-  line-height: 24px;
-  font-weight: bold;
-  font-size: 10px;;
 
-  &.white {
-    background-image: image-url('assets/layouts/calendar-white.png');
-  }
-
-  &.right {
-    margin-left: inherit;
-    padding-left: inherit;
-    margin-right: 15px;
-    padding-right: 30px;
-    background-position: right;
-    float: right;
-  }
-
+.tt-hint {
+    color: #999;
 }
 
-.ui-autocomplete {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  float: left;
-  display: none;
-  min-width: 160px;
-  _width: 160px;
-  padding: 4px 0;
-  margin: 2px 0 0 0;
-  list-style: none;
-  background-color: $nav-background;
-  border-color: $nav-hover;
-  border-style: solid;
-  border-width: 1px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  background-clip: padding-box;
-  *border-right-width: 2px;
-  *border-bottom-width: 2px;
-  color: white;
-
-  .ui-menu-item > a.ui-corner-all {
-    display: block;
-    padding: 3px 15px;
-    clear: both;
-    font-weight: normal;
-    line-height: 18px;
-    color: #555555;
-    white-space: nowrap;
-
-    &.ui-state-hover, &.ui-state-active {
-      color: #ffffff;
-      text-decoration: none;
-      background-color: #0088cc;
-      border-radius: 0px;
-      -webkit-border-radius: 0px;
-      -moz-border-radius: 0px;
-      background-image: none;
-    }
-  }
+.tt-menu { /* UPDATE: newer versions use tt-menu instead of tt-dropdown-menu */
+    margin-top: 12px;
+    padding: 8px 10px;
+    background-color: $midnightblue;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    color: white;
 }

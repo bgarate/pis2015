@@ -7,6 +7,7 @@ class CreateMilestones < ActiveRecord::Migration
       t.integer :status
       t.integer :milestone_type
       t.string :icon
+      t.belongs_to :feedback_author, class_name: 'Person'
 
       t.timestamps null: false
     end

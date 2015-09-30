@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
 tr = TechRole.new
 tr.name= "Vendedor de Tortas Fritas"
 tr.save!
@@ -15,6 +16,7 @@ tr2.name= "iOS Developer"
 tr2.save!
 
 c = Category.create(name: "Conferencia")
+f = Category.create(name: 'Feedback')
 
 per = Person.new
 per.name = 'Alfred'
@@ -22,6 +24,7 @@ per.email = 'alfred.pis.2015@gmail.com'
 per.birth_date= Time.new(2012, 8, 29, 22, 35, 0)
 per.start_date= Time.new(2012, 8, 29, 22, 35, 0)
 per.tech_role = tr
+per.admin=true
 
 m = Milestone.new
 m.title = 'Conferencia Tecnológica'
@@ -41,6 +44,15 @@ m1.status=0
 m1.category = c
 per.milestones<<(m1)
 
+m2 = Milestone.new
+m2.title = 'Otra entrega de alfred'
+m2.description = 'Esperemos meter mas puntos que 10'
+m2.due_date = Time.now
+m2.status = 0
+m2.category = f
+m2.milestone_type = :feedback
+m2.save!
+
 sk1 = Skill.new
 sk1.name='angular'
 sk1.icon='skills/angular.png'
@@ -52,6 +64,8 @@ per.skills<<(sk2)
 
 pro = Project.new
 pro.name= 'Super Tortas 0.1'
+pro.client= 'ATU'
+pro.status= 0
 pro.start_date= Time.now - (2*7*24*60*60)
 pro.end_date= Time.now - (2*7*24*60*60)
 per.projects<<(pro)
@@ -73,64 +87,90 @@ p1.skills << sk1
 p1.skills << sk2
 p1.tech_role = tr2
 
-# Datos de Prueba para Bill Hicks
-p2 = Person.create!(name: "Bill Hicks", email: "bill.hicks@gmail.com", admin: false, start_date: 2.years.ago)
+p2 = Person.create!(name: "Diego Bortot", email: "bortotdiegogm@gmail.com", admin: true, start_date: 23.years.ago)
+p3 = Person.create!(name: "Oscar Montañés", email: "omontanes@gmail.com", admin: true, start_date: 23.years.ago)
+p3 = Person.create!(name: "Sebastían Soleri", email: "omontanes.guri@gmail.com", admin: false, start_date: 23.years.ago)
+p4 = Person.create!(name: "Gonzalo Herrera", email: "gonzalo.herrera.1993@gmail.com", admin: true, start_date: 2.years.ago)
+p5 = Person.create!(name: "elmassi", email: "maxikotvi@gmail.com", admin: false, start_date: 23.years.ago)
 
-p2.milestones.create(title: "Aprendio a programar",
+
+tech1 = Technology.new
+tech1.name = 'Java'
+tech1.save!
+tech2 = Technology.new
+tech2.name = 'Ruby'
+tech2.save!
+tech3 = Technology.new
+tech3.name = 'Android'
+tech3.save!
+
+
+Tag.create!(name:'Dar Feedback')
+Tag.create!(name:'Recibir Feedback')
+Tag.create!(name:'Inicio proyecto')
+Tag.create!(name:'Fin proyecto')
+Tag.create!(name:'Speacker')
+Tag.create!(name:'Participación')
+
+
+# Datos de Prueba para Bill Hicks
+p6 = Person.create!(name: "Bill Hicks", email: "bill.hicks@gmail.com", admin: false, start_date: 2.years.ago)
+
+p6.milestones.create(title: "Aprendio a programar",
                      description: "Esta es la descripción del hito",
                      due_date: Time.now + 5*24*60*60)
 
-p2.milestones.create(title: "Otro hito de prueba",
+p6.milestones.create(title: "Otro hito de prueba",
                      description: "Una descripción un poquito mas larga que no entra en una sola linea",
                      due_date: Time.now - 5*24*60*60)
 
-p2.projects << pro
-p2.skills << sk1
-p2.skills << sk2
-p2.tech_role = tr2
+p6.projects << pro
+p6.skills << sk1
+p6.skills << sk2
+p6.tech_role = tr2
 
 
 # Datos de Prueba para John Doe
-p3 = Person.create!(name: "John Doe", email: "johndoe@gmail.com", admin: false, start_date: 1.years.ago)
+p7 = Person.create!(name: "John Doe", email: "johndoe@gmail.com", admin: false, start_date: 1.years.ago)
 
-p3.milestones.create(title: "Hito 1",
+p7.milestones.create(title: "Hito 1",
                      description: "Esta es la descripción del hito",
                      due_date: Time.now + 5*24*60*60,status: :done)
 
-p3.milestones.create(title: "Hito 2",
+p7.milestones.create(title: "Hito 2",
                      description: "Una descripción un poquito mas larga que no entra en una sola linea",
                      due_date: Time.now - 5*24*60*60,status: :pending)
 
-p3.milestones.create(title: "Hito 3",
+p7.milestones.create(title: "Hito 3",
                      description: "Esta es la descripción del hito",
                      due_date: Time.now + 5*24*60*60,status: :rejected)
 
 
-p3.projects << pro
-p3.skills << sk1
-p3.skills << sk2
-p3.tech_role = tr2
+p7.projects << pro
+p7.skills << sk1
+p7.skills << sk2
+p7.tech_role = tr2
 
 # Datos de Prueba para John Doe
-p4 = Person.create!(name: "Bill Cooper", email: "billcooper@gmail.com", admin: false, start_date: 1.years.ago)
+p8 = Person.create!(name: "Bill Cooper", email: "billcooper@gmail.com", admin: false, start_date: 1.years.ago)
 
-p4.milestones.create(title: "Hito 1",
+p8.milestones.create(title: "Hito 1",
                      description: "Hito 1",
                      due_date: Time.now + 5*24*60*60,status: :done)
 
-p4.milestones.create(title: "Hito 2",
+p8.milestones.create(title: "Hito 2",
                      description: "Una descripción un poquito mas larga que no entra en una sola linea",
                      due_date: Time.now - 5*24*60*60,status: :done)
 
-p4.milestones.create(title: "Hito 3",
+p8.milestones.create(title: "Hito 3",
                      description: "Esta es la descripción del hito",
                      due_date: Time.now + 5*24*60*60,status: :done)
 
 
-p4.projects << pro
-p4.skills << sk1
-p4.skills << sk2
-p4.tech_role = tr2
+p8.projects << pro
+p8.skills << sk1
+p8.skills << sk2
+p8.tech_role = tr2
 
-p2.mentees<<p3
-p2.mentees<<p4
+p6.mentees<<p7
+p6.mentees<<p8

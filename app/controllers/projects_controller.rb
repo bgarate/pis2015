@@ -17,7 +17,10 @@ class ProjectsController < ApplicationController
   def show
     person = Person.find(current_user.person_id)
     if !(person.admin) then
-      person.mentees.empty? ? @usr= [person] : @usr = person.mentees
+      @usr = [person]
+      if ! person.mentees.empty?
+        @usr = @usr + person.mentees.all
+      end
     else
       @usr = Person.all
     end

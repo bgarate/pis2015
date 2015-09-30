@@ -1,0 +1,39 @@
+<div id="milestone-info">
+  <%= milestone_status(@milestone) %>
+  <div class="left-pane">
+    <div class="milestone-icon"><%= image_tag @milestone.icon %></div>
+    <h2><%= @milestone.title %></h2>
+    <% if @milestone.category %>
+        <h3><%= @milestone.category.name %></h3>
+    <%else%>
+        <%= render 'categories/form' %>
+    <%end%>
+  </div>
+  <div class="right-pane">
+
+    <p><%= @milestone.description %></p>
+    <p><%=
+        if @milestone.feedback? and @milestone.feedback_author
+          @milestone.feedback_author.name
+        end
+    %></p>
+
+
+    <div class="calendar right">
+      <% if @milestone.start_date %>
+          <%= l(@milestone.start_date, format: "%A, %B %d %Y").capitalize %><br>
+      <% end %>
+      <% if @milestone.due_date %>
+          <%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %>
+      <% end %>
+    </div>
+
+    <% unless @milestone.tags.empty? %>
+        <ul class="tags clearfix">
+          <% @milestone.tags.each do |t| %>
+              <li><%= t.name %></li>
+          <%end%>
+        </ul>
+    <%end%>
+  </div>
+</div>

@@ -48,6 +48,10 @@ class MilestonesController < ApplicationController
     @milestone=Milestone.new(milestone_params)
     @milestone.tag_ids = params[:tags]
     @milestone.save
+    if Category.exists?(params[:category_id])
+      @category=Category.find(params[:category_id])
+      @category.milestones<<@milestone
+    end
     if @milestone.valid?
       flash.notice = "'#{milestone_params[:title]}' creado con éxito!"
       redirect_to @milestone
@@ -65,11 +69,12 @@ class MilestonesController < ApplicationController
   # Por ahora queda asi, deberia ser @milestone.category= @category
 
   def show
-    if can_view_milestone?(params[:id])
-      @milestone=Milestone.find(params[:id])
-    else
+    unless can_view_milestone?(params[:id])
       redirect_to root_path
     end
+
+    @notes = @milestone.notes.includes(:author).order(created_at: :desc).select {|n| filter_note_by_visibility(n)}
+
   end
 
   def destroy
@@ -111,8 +116,17 @@ class MilestonesController < ApplicationController
     redirect_to @milestone
   end
 
+  def filter_note_by_visibility(note)
+      (note.visibility=='every_body') ||
+      (note.author_id==current_person.id) || #la hice yo?
+      (note.visibility=='mentors' && Person.find(note.author_id).mentors.exists?(current_person.id)) || #si es para mentores, soy su mentor
+      (current_person.admin?)
+  end
+
   private
+
   def milestone_params
     params.require(:milestone).permit(:title, :start_date, :due_date,:description,:status, :icon, :created_at, :updated_at)
   end
+
 end

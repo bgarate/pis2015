@@ -30,6 +30,15 @@
               <%=  m.text_area :icon, class: "form-control" %>
             </div>
           </div>
+            <div> <%=t('category')%>
+            <tr><td><select name="category_id">
+              <option value=<%=nil%> > Ninguna </option>
+              <% Category.all.each do |ca| %>
+                <option value=<%=ca.id%> > <%=ca.name%></option>
+              <% end %>
+            </select></td></tr>
+            </div>
+
           <div class="row">
 
             <div class="form-group col-xs-6">

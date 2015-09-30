@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
   end
 
   def index
+    @projects = Project.where(validity: 'true')
   end
 
   def show

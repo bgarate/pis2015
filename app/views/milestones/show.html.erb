@@ -1,76 +1,27 @@
 <div class="container-fluid">
   <div class="row">
-    <%= link_to t('milestones'), milestones_path %><br>
     <div class="card-col col-xs-7">
-      <div id="milestone-info">
-        <%= milestone_status(@milestone) %>
-        <div class="left-pane">
-            <div class="milestone-icon"><%= image_tag @milestone.icon %></div>
-            <h2><%= @milestone.title %></h2>
-            <% if @milestone.category %>
-                <h3><%= @milestone.category.name %></h3>
-            <%end%>
-        </div>
-        <div class="right-pane">
-            <p><%= @milestone.description %></p>
-            <p><%=t(@milestone.status) %></p>
-                else
-          <p>
-            <%=t(:attachmentsdocs)%>: <br>
-          <ul>
-            <%@milestone.resources.each do |r|%>
-                <li><%=link_to r.title, r.url, :target => "_blank"%></li>
-            <%end%>
-          </ul>
-          <%=link_to t(:adddoc), :controller => 'google', :action => 'adddriveview', :milestone_id => @milestone.id%>
-
-          <p><%=
-              if @milestone.feedback? and @milestone.feedback_author
-                @milestone.feedback_author.name
-              end
-          %></p>
-
-          </p>
-            <p>
-              <% if @milestone.tags.empty? %>
-                  <p>Sin tags</p>
-              <%else%>
-                  <ul class="etiquetas">
-                  <% @milestone.tags.each do |t| %>
-                      <li><%= t.name %></li>
-                  <%end%>
-                  </ul>
-
-              <%end%>
-              </p>
-
-          <div class="calendar white right">
-            <% if @milestone.start_date %>
-            <%= l(@milestone.start_date, format: "%A, %B %d %Y").capitalize %><br>
-            <% end %>
-            <% if @milestone.due_date %>
-            <%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %>
-            <% end %>
-          </div>
-            <p>
-              <% if @milestone.category!=nil %>
-                <%= render @milestone.category %>
-              <%else%>
-                <%= render 'categories/form' %>
-              <%end%>
-            </p>
-        </div>
-
-          <div class="clearfix">
-            <h2><%= 'Notes' %></h2>
-            <%= render @milestone.notes %>
-
-            <h2><%= 'Add Notes' %></h2>
-            <%= render 'notes/form' %>
-          </div>
- 
+      <%= render 'info' %>
+    </div>
+    <div class="card-col col-xs-5">
+      <div id="milestone-notes">
+        <%= render 'notes/form' %>
+        <ul>
+          <% @notes.each do |n| %>
+              <li class="clearfix">
+                <h2><%= n.author.name %></h2>
+                <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
+                <p><%= n.text %></p>
+                <%= link_to [n.milestone, n],
+                            method: :delete,
+                            data: { confirm: t('sure?')},
+                            class: 'delete' do %>
+                    <span class="glyphicon glyphicon-remove"></span>
+                <% end %>
+              </li>
+          <% end %>
+        </ul>
       </div>
-
     </div>
   </div>
 </div>

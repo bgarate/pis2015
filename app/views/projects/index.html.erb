@@ -1,31 +1,82 @@
-<h1><%= t('project_index_header') %></h1>
-<table class="table">
-  <tr>
-    <th><%= t('project_id') %></th>
-    <th><%= t('project_name') %> </th>
-    <th><%= t('project_client') %></th>
-  </tr>
-  <% projects = Project.where(validity: 'true') %>
-  <% projects.each do |p| %>
-    <tr>
-      <td>
-        <%= p.id %>
-      </td>
-      <td>
-        <%= link_to p.name, p %>
-      </td>
-      <td>
-        <%= p.client %>
-      </td>
-      <td>
-        <%= link_to t('edit'), edit_project_path(p) %>
-      </td>
-      <td>
-        <%= link_to t('delete'), p, method: :delete %>
-      </td>
-    </tr>
-  <% end %>
-</table>
-<% if projects.size == 0 %>
-<em><%= t('project_no_projects') %></em>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div class="table-container">
+        <h1><%= t('project_index_header') %></h1>
+        <table class="table datatable">
+          <thead>
+          <tr>
+            <td></td>
+
+            <td><%= t('project_name') %></td>
+            <td><%= t('project_client') %></td>
+            <td><%= t('project_start_date') %></td>
+            <td><%= t('project_end_date') %></td>
+            <td></td>
+            <td></td>
+          </tr>
+          </thead>
+          <tbody>
+          <% @projects.each do |m| %>
+              <tr>
+                <td><%= m.status %></td>
+                <td><%= link_to m.name, project_path(m)%></td>
+                <td><%= m.client %></td>
+                <td><div class="calendar left"><%= m.start_date %></div></td>
+                <td><div class="calendar left"><%= m.end_date %></div></td>
+                <td><%= link_to edit_project_path(m) do%>
+                    <span class='large-text glyphicon glyphicon-pencil'></span>
+                  <% end %>
+                </td>
+                <td><%= link_to project_path(m),
+                                method: :delete,
+                                data: { confirm: t('sure?') } do %>
+                      <span class='large-text glyphicon glyphicon-remove'></span>
+                  <% end %>
+                </td>
+
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<!--VERSION VIEJA-->
+<!--<h1><%= t('project_index_header') %></h1>-->
+<!--<table class="table">-->
+  <!--<tr>-->
+    <!--<th><%= t('project_id') %></th>-->
+    <!--<th><%= t('project_name') %> </th>-->
+    <!--<th><%= t('project_client') %></th>-->
+  <!--</tr>-->
+  <!--<% projects = Project.where(validity: 'true') %>-->
+  <!--<% projects.each do |p| %>-->
+    <!--<tr>-->
+      <!--<td>-->
+        <!--<%= p.id %>-->
+      <!--</td>-->
+      <!--<td>-->
+        <!--<%= link_to p.name, p %>-->
+      <!--</td>-->
+      <!--<td>-->
+        <!--<%= p.client %>-->
+      <!--</td>-->
+      <!--<td>-->
+        <!--<%= link_to t('edit'), edit_project_path(p) %>-->
+      <!--</td>-->
+      <!--<td>-->
+        <!--<%= link_to t('delete'), p, method: :delete %>-->
+      <!--</td>-->
+    <!--</tr>-->
+  <!--<% end %>-->
+<!--</table>-->
+<!--<% if projects.size == 0 %>-->
+<!--<em><%= t('project_no_projects') %></em>-->
+<!--<% end %>-->

@@ -48,6 +48,10 @@ class MilestonesController < ApplicationController
     @milestone=Milestone.new(milestone_params)
     @milestone.tag_ids = params[:tags]
     @milestone.save
+    if Category.exists?(params[:category_id])
+      @category=Category.find(params[:category_id])
+      @category.milestones<<@milestone
+    end
     if @milestone.valid?
       flash.notice = "'#{milestone_params[:title]}' creado con éxito!"
       redirect_to @milestone

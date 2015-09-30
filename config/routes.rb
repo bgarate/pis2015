@@ -97,6 +97,7 @@ Rails.application.routes.draw do
 
   resources :tags
 
+
   #hitos
   resources :milestones do
     resources :notes
@@ -118,5 +119,9 @@ Rails.application.routes.draw do
   get 'google/adddriveview'
   get 'google/adddrive'
   get 'google/driveerror'
+
+
+  #dashboard
+  resources :dashboard
 
 end

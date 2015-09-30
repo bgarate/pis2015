@@ -53,21 +53,7 @@
             <li>
               <%= milestone_status(e,:small,:right)%>
               <h2><%=link_to e.title, e, method: :get%></h2>
-              <p><%=t(e.status) %></p>
-              <p><%=
-                  if e.status != 'done'
-                    session[:return_to] ||= request.referer
-                    link_to t(:markdone), milestone_path(e, :milestone  => {:status => :done}), :method => :put
-                  end
-              %></p>
-              <p>
-                <%=t(:attachmentsdocs)%>: <br>
-              <ul>
-                <%e.resources.each do |r|%>
-                    <li><%=link_to r.title, r.url, :target => "_blank"%></li>
-                <%end%>
-              </ul>
-              <%=link_to t(:adddoc), :controller => 'google', :action => 'adddriveview', :milestone_id => e.id%>
+              <p><%=t(e.description) %></p>
 
               <div class="resources-list clearfix">
                 <h2><%=t(:attachmentsdocs)%></h2>

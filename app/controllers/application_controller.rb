@@ -34,7 +34,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_person
-    current_user.person
+    if current_user
+      current_user.person
+    else
+      nil
+    end
   end
 
 

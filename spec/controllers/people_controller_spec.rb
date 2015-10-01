@@ -25,9 +25,10 @@ describe PeopleController do
   describe "GET index" do
     it "Despliega el index" do
       session[:user_id] = @ad_user.id
-      get :index, :session => session
+      #get :index, :session => session
+      get :index
       # Espero que me muestre el formulario
-      expect(response).to render_template("index")
+      expect(response).to redirect_to(@admin)
     end
   end
 
@@ -48,12 +49,6 @@ describe PeopleController do
     end
 
     it "debe redirigir a index" do
-# <<<<<<< HEAD
-#       admin = Person.new :name=>'NombreAdmin', :email=>'mail2@admin.com', :start_date=>Time.current(), :admin=>true
-#       admin.save!
-# =======
-      # admin = Person.new :name=>'NombreAdmin', :email=>'mail2@admin.com', :start_date=>Time.current(), :admin=>true
-      # admin.save!
 
       ad_user = User.new :person => @admin
       ad_user.oauth_expires_at = Time.current().advance(days:1)

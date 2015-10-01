@@ -18,6 +18,15 @@ describe 'Note' do
     m1.icon= 'Icon'
     m1.save!
 
+    admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
+
+    admin.save!
+
+    ad_user = User.new :person => admin
+    ad_user.oauth_expires_at = Time.current().advance(days:1)
+    ad_user.save!
+    session[:user_id] = ad_user.id
+
 
     post :create, :milestone_id =>m1.id, :note=>{:text=>'un texto pa la nota', :milestone_id=>m1.id}
     expect(response.status).to eq(302)

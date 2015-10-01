@@ -88,6 +88,7 @@ Rails.application.routes.draw do
       get 'me'
       post 'add_mentor'
       get 'add_mentor_form'
+      get ':id' => 'people#show', :constraints  => { :id => /[0-z\.]+/ }
     end
   end
 

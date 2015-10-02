@@ -124,6 +124,4 @@ Rails.application.routes.draw do
   #dashboard
   resources :dashboard
 
-  get 'commands' => 'commands#index',defaults: { format: :json}
-
 end

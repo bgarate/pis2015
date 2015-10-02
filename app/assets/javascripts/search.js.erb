@@ -1,55 +1,43 @@
+
+// OJO! Esto es una solución temporal para permitir la navegación entre las diferentes
+// partes del sitio. Se integrará una solución más general.
+
+Search = {};
+
+Search.commands =
+    {
+        "Ver mi perfil" : "/people/me",
+        "Crear usuario" : "/people/new",
+        "Cerrar sesion" : "/google/signout",
+        "Ver personas": "/people/",
+        "Ver hitos" : "/milestones/",
+        "Ver categorias" : "/categories/",
+        "Ver proyectos" : "/projects/",
+        "Crear categoria" : "/categories/new",
+        "Crear proyecto" : "/projects/new",
+        "Crear hito" : "/milestones/new"
+    };
+
+// constructs the suggestion engine
 var commands = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    datumTokenizer: Bloodhound.tokenizers.nonword,
     queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: "/commands"
-});
-
-var people = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: "/people.json"
-});
-
-var milestones = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: "/milestones.json"
+    local: Object.keys(Search.commands)
 });
 
 $().ready(function() {
 
-    people.initialize();
-
     $("#nav-search").typeahead({
         minLength: 1,
-        highlight: true
+        highlight: true,
+        hint: true
     },
     {
-        name: 'commands',
-        displayKey: 'name',
-        source: commands,
-        templates: {
-            header: "<div class='search-header'>Comandos</div>"
-        }
-    },
-    {
-        name: 'people',
-        displayKey: 'name',
-        source: people,
-        templates: {
-            header: "<div class='search-header'>Personas</div>"
-        }
-    },
-    {
-        name: 'milestones',
-        displayKey: 'name',
-        source: milestones,
-        templates: {
-            header: "<div class='search-header'>Hitos</div>"
-        }
-    }).on('typeahead:selected', function(e,data) {
+        name: 'my-dataset',
+        source: commands
+    }).on('typeahead:selected', function(e,str) {
         var form = $("#nav-search-form");
-        form.attr("action", data.url);
+        form.attr("action", Search.commands[str]);
         form.submit();
     });
 

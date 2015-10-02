@@ -30,13 +30,13 @@ class ProjectsController < ApplicationController
   end
 
   def new
+    @technologies = Technology.all
   end
 
   def create
     @project = Project.new(project_params)
-    id_tec = (params.fetch :project).fetch :id_technologies
-    filtradas = id_tec.reject { |i| i.empty? }
-    @project.technologies<<Technology.find(filtradas)
+    id_tec = (params.fetch :technologies)
+    @project.technologies<<Technology.find(id_tec)
     @project.save
     if @project.valid?
       redirect_to @project

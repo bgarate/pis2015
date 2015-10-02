@@ -75,6 +75,7 @@ es:
   project_no_technologies: "No hay tecnologías asociadas al proyecto"
   project_people: "Personas asociadas al proyecto"
   project_no_people: "No hay personas asociadas al proyecto"
+  select_technologies: 'Seleccione tecnologías...'
   project:
       display_status:
         active: 'Activo'

@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
     end
 
   end
-  
+
 =begin
   #devuelve true si puedo ver el perfil de la persona person_id, false de lo contrario.
   helper_method :can_view_person?

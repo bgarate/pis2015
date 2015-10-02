@@ -46,12 +46,12 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    @technologies = Technology.all
   end
 
   def update
-    id_tec = (params.fetch :project).fetch :technologies
-    filtradas = id_tec.reject { |i| i.empty? }
-    @project.technologies = Technology.find(filtradas)
+    id_tec = (params.fetch :technologies)
+    @project.technologies = Technology.find(id_tec)
     if @project.update(project_params)
       redirect_to @project
     else

@@ -3,7 +3,7 @@
     <div class="card-col col-xs-4 col-xs-offset-4">
 
 
-    <%= form_for @milestone do |m| %>
+    <%= form_for @milestone, html: { class:'main-form','data-toggle': 'validator'}  do |m| %>
         <h1><span class="glyphicon glyphicon-check"></span> <%= t('mil_create') %></h1>
           <div class="form-group">
               <%= m.label t('mil_title'), class: "control-label" %>
@@ -66,6 +66,18 @@
               <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('select_tags'), 'style'=> 'width:100%') %>
 
             </div>
+
+          </div>
+          <div class="row">
+
+              <div class="form-group col-xs-12">
+                <%= m.label t('assign_to'), class: "control-label" %><br>
+                  <% Person.all.each do |p| %>
+                    <input type="checkbox" name=<%=p.name%> value=<%=p.id%> > <%=p.name%> <br>
+                <% end %>
+
+              </div>
+
           </div>
 
               <%= m.hidden_field(:created_at, :value=>Time.now) %>
@@ -76,5 +88,5 @@
      <% end %>
   </div>
  </div>
-
+1
 <script> $(".chzn-select").chosen();</script>

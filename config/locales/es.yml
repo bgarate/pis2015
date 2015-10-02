@@ -87,6 +87,8 @@ es:
   milestone_due_date: "Due date del hito"
   milestone_reviewer: 'Revisor del feedback'
 
+  assign_to: 'Asignar a'
+
   markdone: 'Marcar como hecho'
   add_feedback_author: 'Añadir revisor del feedback'
   select_tags: 'Seleccione tags...'

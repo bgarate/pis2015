@@ -40,6 +40,12 @@ describe MilestonesController, "Milestone Controller" do
     @m1.status=0
     @m1.save!
 
+    @c1 = Category.new :name=>'feedback', :icon=>'unicono'
+    @c1.created_at=Time.now
+    @c1.updated_at=Time.now
+    @c1.save!
+
+
     @m2 = Milestone.new :title=>'Entrega del prototipo de alfred', :description=>'Hay que entregar el protipo de alfred
                                   a la gente de pis. Ademas de cafe y galletitas maria gratis'
     @m2.due_date= Time.now - (3*2*7*24*60*60)
@@ -71,7 +77,7 @@ describe MilestonesController, "Milestone Controller" do
 
   it "Deberia modificar el status a done" do
     get :edit, :id => @m1.id
-    put :update, :id => @m1.id, :milestone => { :status => :done }
+    put :update, :id => @m1.id, :milestone => { :status => :done }, @admin.name=>@admin.id
     @m1.reload
     expect(@m1.status).to eq "done"
   end
@@ -126,8 +132,9 @@ describe MilestonesController, "Milestone Controller" do
     end  
 
     it 'creates a milestone' do
+
       post :new
-      post :create, {:milestone=>{:title=>'milestone1', :description=>'unadescripcionde1'}}
+      post :create, {:milestone=>{:title=>'milestone1', :description=>'unadescripcionde1'}, :category_id =>@c1.id, @admin.name=>@admin.id}
       expect(response.status).to eq(302)
 
     end
@@ -250,6 +257,7 @@ describe MilestonesController, "Milestone Controller" do
       get :show, :id => @m.id
       expect(response).to redirect_to root_path
     end
+
   end
 
 end

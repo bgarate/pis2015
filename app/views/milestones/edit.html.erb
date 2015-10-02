@@ -34,6 +34,20 @@
             </div>
           </div>
 
+          <div class="row">
+
+            <div class="form-group col-xs-12">
+              <%= f.label t('assign_to'), class: "control-label" %><br>
+              <%count=0%>
+              <% Person.all.each do |p| %>
+                <% count=count+1 %>
+                <input type="checkbox" name=<%=p.name%> value=<%=p.id%> > <%=p.name%> <%if count%2==0%><br><%end%>
+              <% end %>
+
+            </div>
+
+          </div>
+
           <div class="btn">
             <%= f.button t('milestone_edit_submit'), options= :type => 'submit', class: "btn btn-default" %>
           </div>

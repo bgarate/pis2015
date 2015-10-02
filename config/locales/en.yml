@@ -69,6 +69,7 @@ en:
   markdone: 'Mark as done'
   add_feedback_author: 'Add feedback reviewer'
   select_tags: 'Select tags...'
+  assign_to: 'Assign to'
 
   #hitos
   markdone: "mark as done"

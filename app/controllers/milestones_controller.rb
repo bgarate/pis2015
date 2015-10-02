@@ -42,6 +42,7 @@ class MilestonesController < ApplicationController
   def new
     @milestone=Milestone.new
     @tags = Tag.all
+    @people = Person.all
   end
 
   def create
@@ -52,6 +53,12 @@ class MilestonesController < ApplicationController
       @category=Category.find(params[:category_id])
       @category.milestones<<@milestone
     end
+    Person.all.each do |p|
+      if params[p.name]!=nil
+      person=Person.find(params[p.name])
+      person.milestones<<@milestone
+      end
+    end
     if @milestone.valid?
       flash.notice = "'#{milestone_params[:title]}' creado con éxito!"
       redirect_to @milestone
@@ -59,6 +66,10 @@ class MilestonesController < ApplicationController
       flash.alert = "'#{milestone_params[:title]}' no se ha podido crear"
       redirect_to '/milestones/new'
     end
+
+
+
+
 
   end
 
@@ -96,6 +107,12 @@ class MilestonesController < ApplicationController
       end
       unless id_feedback_author == nil
         @milestone.feedback_author = Person.find(id_feedback_author)
+      end
+    end
+    Person.all.each do |p|
+      if params[p.name]!=nil
+        person=Person.find(params[p.name])
+        person.milestones<<@milestone
       end
     end
     if @milestone.update_attributes(milestone_params)

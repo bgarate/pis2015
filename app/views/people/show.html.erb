@@ -14,11 +14,6 @@
                   <li>
                     <h2><%=e.title%></h2>
                     <p><%=e.description%></p>
-                    <ul>
-                      <%e.resources.each do |r|%>
-                          <li><%=link_to r.title, r.url, :target => "_blank"%></li>
-                      <%end%>
-                    </ul>
 
                     <% if e.due_date %>
                         <div class="calendar right"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>

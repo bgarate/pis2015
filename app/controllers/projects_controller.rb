@@ -5,6 +5,12 @@ class ProjectsController < ApplicationController
 
   def get_project
     @project = Project.find_by(id: params[:id])
+    if !@project
+      @project = Project.find_by(name: params[:id])
+      if !@project
+          @project = Project.find_by(client: params[:id])
+      end
+    end
     if !@project  || (! @project.validity?)
       redirect_to '/projects'
     end
@@ -24,13 +30,13 @@ class ProjectsController < ApplicationController
   end
 
   def new
+    @technologies = Technology.all
   end
 
   def create
     @project = Project.new(project_params)
-    id_tec = (params.fetch :project).fetch :id_technologies
-    filtradas = id_tec.reject { |i| i.empty? }
-    @project.technologies<<Technology.find(filtradas)
+    id_tec = (params.fetch :technologies)
+    @project.technologies<<Technology.find(id_tec)
     @project.save
     if @project.valid?
       redirect_to @project
@@ -40,12 +46,12 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    @technologies = Technology.all
   end
 
   def update
-    id_tec = (params.fetch :project).fetch :technologies
-    filtradas = id_tec.reject { |i| i.empty? }
-    @project.technologies = Technology.find(filtradas)
+    id_tec = (params.fetch :technologies)
+    @project.technologies = Technology.find(id_tec)
     if @project.update(project_params)
       redirect_to @project
     else

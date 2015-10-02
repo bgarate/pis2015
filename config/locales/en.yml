@@ -55,6 +55,7 @@ en:
   project_no_technologies: "There are no technologies associated to the project"
   project_people: "People associated to the project"
   project_no_people: "There are no people associated to the project"
+  select_technologies: 'Select technologies...'
   project:
     display_status:
       active: 'Active'

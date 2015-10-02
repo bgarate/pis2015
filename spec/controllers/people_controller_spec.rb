@@ -194,7 +194,7 @@ describe PeopleController do
       expect(response.status).to eq(200)
     end
 
-    it 'Deberia redireccionar a root path por no ser admin ni mentor' do
+    it 'Deberia redireccionar al perfil deseado apesar de no ser admin ni mentor' do
       p1=Person.new
       p1.name='fulano'
       p1.email='fulano@detal.com'
@@ -202,7 +202,7 @@ describe PeopleController do
       p1.save!
       session[:user_id] = @no_ad_user.id
       get :show, :id => p1.id
-      expect(response.status).to eq(302)
+      expect(response.status).to eq(200)
     end
   end
 end

@@ -1,11 +1,11 @@
-form.main-form {
+#div_project {
     margin-top: 30px;
     border-bottom: 3px solid $peterriver;
     padding: 0px 30px 30px 30px;
     background-color: white;
 
     h1 {
-        color:white;
+        color: white;
         text-align: center;
         background-color: $peterriver;
         margin: 0px -30px 20px -30px;
@@ -14,7 +14,7 @@ form.main-form {
         font-weight: bold;
     }
 
-    button[type=submit] {
+    #buttonOne {
         position: absolute;
         right: 8px;
         bottom: 0;
@@ -29,6 +29,21 @@ form.main-form {
             box-shadow: none;
         }
     }
+
+    #buttonTwo {
+        border-radius: 0;
+        background-color: $peterriver;
+        border: none;
+        color: white;
+
+        &:active, &:focus {
+            background-color: $peterriver-focus;
+            color: white;
+            box-shadow: none;
+        }
+    }
+
+
 
     input {
         border-radius: 0;

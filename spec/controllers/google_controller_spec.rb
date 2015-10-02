@@ -7,7 +7,7 @@ require 'rspec/active_model/mocks'
 describe GoogleController, "Login a traves de google oatuh" do
   before(:each) do
     allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
-    allow_any_instance_of(ApplicationController).to receive(:can_view_person?) { true }
+    #allow_any_instance_of(ApplicationController).to receive(:can_view_person?) { true }
   end
 
   #

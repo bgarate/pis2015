@@ -53,7 +53,8 @@ class ApplicationController < ActionController::Base
     end
 
   end
-
+  
+=begin
   #devuelve true si puedo ver el perfil de la persona person_id, false de lo contrario.
   helper_method :can_view_person?
   def can_view_person? (person_id)
@@ -68,6 +69,7 @@ class ApplicationController < ActionController::Base
       false
     end
   end
+=end
 
   #devuelve true si puedo ver el hito milestone_id, false de lo contrario.
   helper_method :can_view_milestone?

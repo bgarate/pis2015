@@ -5,6 +5,12 @@ class ProjectsController < ApplicationController
 
   def get_project
     @project = Project.find_by(id: params[:id])
+    if !@project
+      @project = Project.find_by(name: params[:id])
+      if !@project
+          @project = Project.find_by(client: params[:id])
+      end
+    end
     if !@project  || (! @project.validity?)
       redirect_to '/projects'
     end

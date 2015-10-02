@@ -4,7 +4,12 @@ class PeopleController < ApplicationController
 
   def index
     # @people = Person.all
-    me
+
+    respond_to do |f|
+      f.html { me }
+      f.json { render json: name_and_path(Person.all)}
+    end
+
   end
 
   def me
@@ -123,5 +128,15 @@ class PeopleController < ApplicationController
   def person_params
     params.require(:person).permit(:name, :email, :cellphone, :phone, :birth_date, :start_date)
   end
+
+
+  def name_and_path (people)
+
+    people.map do |p|
+      {"name" => p.name, "url" => person_path(p)}
+    end
+
+  end
+
 
 end

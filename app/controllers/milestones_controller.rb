@@ -66,10 +66,6 @@ class MilestonesController < ApplicationController
       redirect_to '/milestones/new'
     end
 
-
-
-
-
   end
 
   def add_category

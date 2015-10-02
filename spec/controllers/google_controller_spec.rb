@@ -67,8 +67,6 @@ describe GoogleController, "Login a traves de google oatuh" do
 
   end
 
-
-
   it 'Deberia poner el user id en session en nil y redirigir a home' do
     admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
 
@@ -130,12 +128,7 @@ describe GoogleController, "Login a traves de google oatuh" do
     expect(response).to redirect_to(root_path)
   end
 
-  it 'Deveria redirigir a root path ' do
-    get :driveerror
-    expect(response).to redirect_to(root_path)
-  end
-
-  it 'Deveria redirigir a home y haber asociado el resource al hito' do
+  it 'Deveria redirigir a home y haber asociado el resource al hito con titulo' do
 
     f = double()
     allow(f).to receive(:resource_id).and_return('unid')
@@ -175,9 +168,10 @@ describe GoogleController, "Login a traves de google oatuh" do
     expect(response).to redirect_to(root_path)
     mr = Milestone.find_by(id: m.id)
     expect(mr.resources[0].url).to eq('/una/url')
+    expect(mr.resources[0].title).to eq('untitulo')
   end
 
-  it 'Deveria redirigir a home la pagina de error' do
+  it 'Deveria redirigir a home y haber asociado el resource al hito con titulo = url' do
 
     s = double()
     allow(s).to receive(:file_by_url).with(anything()) { raise Google::APIClient::ClientError }
@@ -209,7 +203,10 @@ describe GoogleController, "Login a traves de google oatuh" do
     session[:user_id] = per.user.id
 
     get :adddrive, :milestone_id => m.id, :URL => '/una/url'
-    expect(response).to redirect_to(google_driveerror_path(err: true))
+    expect(response).to redirect_to(root_path)
+    mr = Milestone.find_by(id: m.id)
+    expect(mr.resources[0].url).to eq('/una/url')
+    expect(mr.resources[0].title).to eq('/una/url')
   end
 
 end

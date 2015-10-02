@@ -57,9 +57,10 @@
 
               <div class="resources-list clearfix">
                 <h2><%=t(:attachmentsdocs)%></h2>
+                    
                   <% if e.resources.empty? %>
                     <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                        <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                          <span class="toggle-documents glyphicon glyphicon-plus"></span>
                     <% end %>
                   <% else %>
                     <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
@@ -67,8 +68,13 @@
                       <%e.resources.each do |r|%>
                           <li><%=link_to r.title, r.url, :target => "_blank"%></li>
                       <%end%>
+
+                      <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                          <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                      <% end %>
                     </ul>
                   <% end %>
+                  
               </div>
 
               <% if e.due_date %>

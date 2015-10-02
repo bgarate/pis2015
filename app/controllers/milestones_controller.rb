@@ -36,7 +36,13 @@ class MilestonesController < ApplicationController
                                               (SELECT mentee_id FROM mentorships WHERE mentor_id=?)))',current_user.person_id)
       @milestone2= Milestone.all.where('id IN (SELECT milestone_id FROM person_milestones WHERE person_id=?)', current_user.person_id)
       @milestone=@milestone1|@milestone2                                         
-    end    
+    end
+
+    respond_to do |f|
+      f.json { render json: name_and_path(Milestone.all)}
+      f.html { render }
+    end
+
   end
 
   def new
@@ -140,5 +146,15 @@ class MilestonesController < ApplicationController
   def milestone_params
     params.require(:milestone).permit(:title, :start_date, :due_date,:description,:status, :icon, :created_at, :updated_at)
   end
+
+
+  def name_and_path (people)
+
+    people.map do |p|
+      {"name" => p.title, "url" => person_path(p)}
+    end
+
+  end
+
 
 end

@@ -40,8 +40,10 @@
               <%= f.label t('assign_to'), class: "control-label" %><br>
               <%count=0%>
               <% Person.all.each do |p| %>
-                <% count=count+1 %>
-                <input type="checkbox" name=<%=p.name%> value=<%=p.id%> > <%=p.name%> <%if count%2==0%><br><%end%>
+                <%if !@milestone.people.exists?(p.id)%>
+                  <% count=count+1 %>
+                  <input type="checkbox" name=<%=p.name%> value=<%=p.id%> > <%=p.name%> <%if count%2==0%><br><%end%>
+                <% end %>
               <% end %>
 
             </div>

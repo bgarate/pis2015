@@ -42,7 +42,6 @@ class MilestonesController < ApplicationController
   def new
     @milestone=Milestone.new
     @tags = Tag.all
-    @people = Person.all
   end
 
   def create

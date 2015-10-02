@@ -72,10 +72,11 @@
 
               <div class="form-group col-xs-12">
                 <%= m.label t('assign_to'), class: "control-label" %><br>
-                  <% Person.all.each do |p| %>
-                    <input type="checkbox" name=<%=p.name%> value=<%=p.id%> > <%=p.name%> <br>
+                <%count=0%>
+                <% Person.all.each do |p| %>
+                    <% count=count+1 %>
+                    <input type="checkbox" name=<%=p.name%> value=<%=p.id%> > <%=p.name%> <%if count%2==0%><br><%end%>
                 <% end %>
-
               </div>
 
           </div>

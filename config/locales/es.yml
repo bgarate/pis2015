@@ -86,6 +86,7 @@ es:
   #hitos
 
   milestone_edit_head: "Editar Hito"
+  milestone_view_head: "Ver Hito"
   milestone_due_date: "Due date del hito"
   milestone_reviewer: 'Revisor del feedback'
 
@@ -107,6 +108,8 @@ es:
   mil_status: "Estado"
   mil_create: "Crear Hito"
   mil_delete: "Borrar Hito"
+  mil_notes: "Notas"
+
 
 
 

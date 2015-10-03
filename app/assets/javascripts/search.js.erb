@@ -16,6 +16,12 @@ var milestones = new Bloodhound({
     prefetch: "/milestones.json"
 });
 
+var projects = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: "/projects.json"
+});
+
 $().ready(function() {
 
     people.initialize();
@@ -46,6 +52,14 @@ $().ready(function() {
         source: milestones,
         templates: {
             header: "<div class='search-header'>Hitos</div>"
+        }
+    },
+    {
+        name: 'projects',
+        displayKey: 'name',
+        source: projects,
+        templates: {
+            header: "<div class='search-header'>Proyectos</div>"
         }
     }).on('typeahead:selected', function(e,data) {
         var form = $("#nav-search-form");

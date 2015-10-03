@@ -39,7 +39,7 @@ class MilestonesController < ApplicationController
     end
 
     respond_to do |f|
-      f.json { render json: name_and_path(Milestone.all)}
+      f.json { render json: name_and_path(@milestone)}
       f.html { render }
     end
 

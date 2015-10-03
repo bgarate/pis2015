@@ -82,6 +82,7 @@ Rails.application.routes.draw do
   get 'welcome/index'
 
   resources :people do
+    resources :milestones
     post :assign_milestone
     post :assign_project
     collection do

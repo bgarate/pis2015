@@ -22,8 +22,9 @@ en:
   title: 'Title'
   name: 'Name'
   id: 'ID'
-
   not_authorized: "You are not authorized to perform that action"
+  unregistered: "Unregistered user, contact an administrator."
+
 
   #crear persona
   people_new_name: "Name"
@@ -33,6 +34,7 @@ en:
   people_new_birth_date: "Birth date"
   people_new_init_date: "Init date"
   people_new_submit: "Create user"
+  select_people: "Select people..."
 
   mentor_since: "Since"
   mentor_name: "Mentor's name"
@@ -69,6 +71,7 @@ en:
   markdone: 'Mark as done'
   add_feedback_author: 'Add feedback reviewer'
   select_tags: 'Select tags...'
+  assign_to: 'Assign to'
 
   #hitos
   markdone: "mark as done"
@@ -80,6 +83,8 @@ en:
   mil_status: "Status"
   mil_create: "Create Milestone"
   mil_delete: "Delete Milestone"
+  mil_assigned: " will be assigned by default"
+  mil_assigned_to: "Assigned to this milestone"
 
   markdone: 'Mark as done'
   attachmentsdocs: 'Attachments documents'

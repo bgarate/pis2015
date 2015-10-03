@@ -5,7 +5,7 @@ class MilestonesController < ApplicationController
   before_action :get_milestone_by_id, only: [:feedback?, :update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
   before_action :is_authorized?, only: [:destroy]
-  skip_before_action :admin?, only: [:index, :show, :destroy]
+  skip_before_action :admin?, only: [:create, :index, :show, :destroy, :edit]
 
   def is_authorized?
     @person=Person.find(current_user.person_id)
@@ -48,15 +48,23 @@ class MilestonesController < ApplicationController
   def new
     @milestone=Milestone.new
     @tags = Tag.all
+    @people = Person.all.where('id NOT in (?)', @identifier)
   end
 
+
   def create
-    @milestone=Milestone.new(milestone_params)
+    @person=Person.find(params[:person_id])
+    @milestone= @person.milestones.create(milestone_params)
     @milestone.tag_ids = params[:tags]
-    @milestone.save
     if Category.exists?(params[:category_id])
       @category=Category.find(params[:category_id])
       @category.milestones<<@milestone
+    end
+    if params[:people]!=nil
+      params[:people].each do |p|
+      @person2=Person.find(p)
+      @milestone.people<<@person2
+      end
     end
     if @milestone.valid?
       flash.notice = "'#{milestone_params[:title]}' creado con éxito!"
@@ -93,8 +101,9 @@ class MilestonesController < ApplicationController
 	
   def edit
     @tags = Tag.all
+    @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
   end
-	
+
   def update
     if @milestone.feedback?
       if (params[:milestone][:feedback_author] != nil)
@@ -102,6 +111,12 @@ class MilestonesController < ApplicationController
       end
       unless id_feedback_author == nil
         @milestone.feedback_author = Person.find(id_feedback_author)
+      end
+    end
+    if params[:people]!=nil
+      params[:people].each do |p|
+        @person2=Person.find(p)
+        @milestone.people<<@person2
       end
     end
     if @milestone.update_attributes(milestone_params)
@@ -140,7 +155,6 @@ class MilestonesController < ApplicationController
     milestone.map do |p|
       {"name" => p.title, "url" => milestone_path(p)}
     end
-
   end
 
 

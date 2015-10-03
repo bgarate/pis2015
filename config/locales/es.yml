@@ -89,6 +89,7 @@ es:
   milestone_view_head: "Ver Hito"
   milestone_due_date: "Due date del hito"
   milestone_reviewer: 'Revisor del feedback'
+  milestone_category: 'Categoría'
 
   markdone: 'Marcar como hecho'
   add_feedback_author: 'Añadir revisor del feedback'

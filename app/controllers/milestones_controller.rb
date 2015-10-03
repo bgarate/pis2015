@@ -96,7 +96,7 @@ class MilestonesController < ApplicationController
   end
 	
   def update
-    if @milestone.feedback?
+    if (params[:milestone][:category] ==2)
       if (params[:milestone][:feedback_author] != nil)
         id_feedback_author = (params.fetch :milestone).fetch :feedback_author
       end
@@ -105,6 +105,7 @@ class MilestonesController < ApplicationController
       end
     end
     if @milestone.update_attributes(milestone_params)
+
       @milestone.tag_ids = params[:tags]
       redirect_to @milestone
     else
@@ -112,9 +113,7 @@ class MilestonesController < ApplicationController
     end
   end
 
-  def feedback?
-    return @milestone.milestone_type == :feedback
-  end
+
 
   def next_status
     @milestone.status = @milestone.get_next_status

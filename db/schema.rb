@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150928223341) do
+ActiveRecord::Schema.define(version: 20151003181316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20150928223341) do
     t.date     "due_date"
     t.text     "description"
     t.integer  "status",             default: 0
-    t.integer  "milestone_type"
     t.string   "icon"
     t.integer  "feedback_author_id"
     t.datetime "created_at",                     null: false

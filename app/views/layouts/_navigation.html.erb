@@ -30,15 +30,14 @@
             </ul>
 
           <ul class="nav navbar-nav navbar-right right-menu">
-            <li class="logout">
-              <%=
-                if current_user
-                    link_to "Cerrar sesión", :controller => 'google', :action => 'signout'
-                else
-                    link_to "Iniciar sesión", :controller => 'welcome', :action => 'index'
-                end
-              %>
-            </li>
+            <% if current_user %>
+                <li class="logout">
+                  <%= current_person.name %>
+                  <%= link_to :controller => 'google', :action => 'signout' do %>
+                    <span class="glyphicon glyphicon-off"></span>
+                  <% end %>
+                </li>
+            <% end %>
           </ul>
 
             <form id="nav-search-form" class="navbar-form navbar-right search" role="search">

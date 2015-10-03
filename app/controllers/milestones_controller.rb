@@ -151,12 +151,10 @@ class MilestonesController < ApplicationController
   end
 
 
-  def name_and_path (people)
-
-    people.map do |p|
-      {"name" => p.name, "url" => person_path(p)}
+  def name_and_path (milestone)
+    milestone.map do |p|
+      {"name" => p.title, "url" => milestone_path(p)}
     end
-
   end
 
 

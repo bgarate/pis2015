@@ -4,14 +4,14 @@ class MilestonesController < ApplicationController
   before_action :get_milestone, only: [:add_category, :next_status]
   before_action :get_milestone_by_id, only: [:feedback?, :update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
-  before_action :is_authorized?, only: [:destroy]
-  skip_before_action :admin?, only: [:create, :index, :show, :destroy, :edit]
+  before_action :is_authorized?, only: [:edit,:update,:destroy, :add_category]
+  skip_before_action :admin?, only: [:add_category,:create, :index, :show, :destroy, :edit]
 
   def is_authorized?
     @person=Person.find(current_user.person_id)
     if @person.mentees.exists?(@milestone.id)|| current_user_admin? || @person.milestones.exists?(@milestone.id)
     else
-      flash.notice = t('not_authorized')
+      flash.alert = t('not_authorized')
       redirect_to people_path
     end
   end
@@ -29,15 +29,7 @@ class MilestonesController < ApplicationController
   end
 
   def index
-    if current_user_admin?
-      @milestone= Milestone.all
-    else
-      @milestone1= Milestone.all.where('id IN (SELECT milestone_id FROM person_milestones WHERE (person_id IN
-                                              (SELECT mentee_id FROM mentorships WHERE mentor_id=?)))',current_user.person_id)
-      @milestone2= Milestone.all.where('id IN (SELECT milestone_id FROM person_milestones WHERE person_id=?)', current_user.person_id)
-      @milestone=@milestone1|@milestone2                                         
-    end
-
+    @milestone= Milestone.all
     respond_to do |f|
       f.json { render json: name_and_path(Milestone.all)}
       f.html { render }
@@ -46,9 +38,9 @@ class MilestonesController < ApplicationController
   end
 
   def new
-    @milestone=Milestone.new
-    @tags = Tag.all
-    @people = Person.all.where('id NOT in (?)', @identifier)
+      @milestone=Milestone.new
+      @tags = Tag.all
+      @people = Person.all.where('id NOT in (?)', @identifier)
   end
 
 
@@ -83,12 +75,7 @@ class MilestonesController < ApplicationController
   # Por ahora queda asi, deberia ser @milestone.category= @category
 
   def show
-    unless can_view_milestone?(params[:id])
-      redirect_to root_path
-    end
-
     @notes = @milestone.notes.includes(:author).order(created_at: :desc).select {|n| filter_note_by_visibility(n)}
-
   end
 
   def destroy
@@ -98,7 +85,7 @@ class MilestonesController < ApplicationController
     @milestone.destroy
     redirect_to milestones_path
   end
-	
+
   def edit
     @tags = Tag.all
     @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})

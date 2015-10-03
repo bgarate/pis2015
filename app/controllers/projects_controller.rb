@@ -18,6 +18,12 @@ class ProjectsController < ApplicationController
 
   def index
     @projects = Project.where(validity: 'true')
+
+    respond_to do |f|
+      f.json { render json: name_and_path(@projects)}
+      f.html { render }
+    end
+
   end
 
   def show
@@ -85,5 +91,13 @@ class ProjectsController < ApplicationController
   def project_params
     params.require(:project).permit(:name, :client, :status, :start_date, :end_date)
   end
+
+
+  def name_and_path (project)
+    project.map do |p|
+      {"name" => p.name, "url" => project_path(p)}
+    end
+  end
+
 
 end

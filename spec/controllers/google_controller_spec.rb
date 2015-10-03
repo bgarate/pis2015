@@ -63,7 +63,7 @@ describe GoogleController, "Login a traves de google oatuh" do
 
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
     visit '/auth/google_oauth2/callback'
-    expect(current_path).to include(people_path)
+    expect(current_path).to include('/people/')
 
   end
 
@@ -86,7 +86,7 @@ describe GoogleController, "Login a traves de google oatuh" do
   it 'Deberia renderizar unregistered con msj como parametro' do
 
     get :unregistered
-    expect(assigns(:msj)).to eq('Usuario no regitrado, contacte a un administrador.')
+    expect(assigns(:msj)).to eq('Usuario no registrado, contacte a un administrador.')
     expect(response).to render_template('unregistered')
   end
 

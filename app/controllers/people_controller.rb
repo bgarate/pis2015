@@ -26,11 +26,13 @@ class PeopleController < ApplicationController
       end
     end
 
-    if person # and can_view_person?(person.id) # Cualquiera puede ver cualquier perfil
+    if person
       #nombre
       @name = person.name
       @identifier = person.id
-
+      @people= Person.all.where('id NOT in (?)', @identifier)
+      @person = person
+      @tags=Tag.all
 
       #rol tecnico
       @trole = ''

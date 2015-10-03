@@ -18,6 +18,16 @@
         end
     %></p>
 
+    <div class="">
+      <table>
+        <tr><td><%=t('mil_assigned_to')%>:</td></tr>
+      <%@milestone.people.each do |p| %>
+           <tr><td>
+             <%= p.name %>
+           </td></tr>
+        <%end%>
+      </table>
+    </div>
 
     <div class="calendar right">
       <% if @milestone.start_date %>

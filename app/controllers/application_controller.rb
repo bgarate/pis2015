@@ -33,6 +33,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id]) if (session[:user_id]) && (User.find_by(id: session[:user_id])) && (!(User.find_by(id: session[:user_id]).oauth_expired?))
   end
 
+  helper_method :current_person
   def current_person
     if current_user
       current_user.person
@@ -55,6 +56,8 @@ class ApplicationController < ActionController::Base
   end
 
 =begin
+  # No esta más en peopleController, hay que ver si se usa
+
   #devuelve true si puedo ver el perfil de la persona person_id, false de lo contrario.
   helper_method :can_view_person?
   def can_view_person? (person_id)

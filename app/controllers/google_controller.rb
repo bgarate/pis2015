@@ -38,7 +38,7 @@ class GoogleController < ApplicationController
   end
 
   def unregistered
-    @msj = String.new('Usuario no regitrado, contacte a un administrador.')
+    @msj = String.new(t('unregistered'))
   end
 
   #

@@ -21,6 +21,10 @@
                 <td><%= link_to m.title, milestone_path(m), method: :get%></td>
                 <td><%= m.description.truncate(50) %></td>
                 <td><div class="calendar left"><%= m.due_date %></div></td>
+                <td><%= link_to edit_milestone_path(m) do%>
+                    <span class='large-text glyphicon glyphicon-pencil'></span>
+                  <% end %>
+                </td>
                 <td><%= link_to milestone_path(m),
                                 method: :delete,
                                 data: { confirm: t('sure?') } do %>

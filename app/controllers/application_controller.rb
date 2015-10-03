@@ -74,6 +74,7 @@ class ApplicationController < ActionController::Base
 =end
 
   #devuelve true si puedo ver el hito milestone_id, false de lo contrario.
+  #se usa? en view no, y para checkear en milestone ya hay otra funcion
   helper_method :can_view_milestone?
   def can_view_milestone? (milestone_id)
     user = current_user

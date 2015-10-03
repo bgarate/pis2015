@@ -194,7 +194,7 @@ describe PeopleController do
       expect(response.status).to eq(200)
     end
 
-    it 'Deberia renderizar people show por ser user' do
+    it 'Deberia redireccionar al perfil deseado apesar de no ser admin ni mentor' do
       p1=Person.new
       p1.name='fulano'
       p1.email='fulano@detal.com'

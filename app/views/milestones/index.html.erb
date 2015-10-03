@@ -17,6 +17,7 @@
           <tbody>
           <% @milestone.each do |m| %>
               <tr>
+                <td><%= milestone_status_rej(m,:static) %></td>
                 <td><%= milestone_status(m,:static) %></td>
                 <td><%= link_to m.title, milestone_path(m), method: :get%></td>
                 <td><%= m.description.truncate(50) %></td>

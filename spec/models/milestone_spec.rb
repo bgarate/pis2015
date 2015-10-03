@@ -25,7 +25,7 @@ describe 'Milestone' do
    #  @padawan = Person.new :name => 'Luke'
    #  @project = Project.new :name => 'Equilibrar la fuerza'
 
-    @ms = Milestone.new :title => 'Destruir Death Star', :description => 'Mision para destruir al Death Star'
+    @ms = Milestone.new :title => 'Destruir Death Star', :description => 'Mision para destruir al Death Star', :status=>'pending'
     @ms2 = Milestone.new :title => 'Visitar a Yoda', :description => 'A Yoda visitar debes'
     @nota = Note.new :text => 'Apuntar al agujero usando la fuerza', :visibility => 'me'
     @nota2 = Note.new :text => 'Usá la fuerza Look', :visibility => 'every_body'
@@ -62,6 +62,11 @@ describe 'Milestone' do
   end
   it 'debe tener tag Ataque' do
     expect(@ms.tags).to include(@tag)
+  end
+
+  it 'debe cambiar el estado a done' do
+    @ms.get_next_status
+    expect(@ms.status).to eq('pending')
   end
 
 end

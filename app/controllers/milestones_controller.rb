@@ -11,8 +11,9 @@ class MilestonesController < ApplicationController
     @person=Person.find(current_user.person_id)
     if @person.mentees.exists?(@milestone.id)|| current_user_admin? || @person.milestones.exists?(@milestone.id)
     else
+
       flash.alert = t('not_authorized')
-      redirect_to people_path
+      redirect_to '/people'
     end
   end
 
@@ -31,7 +32,7 @@ class MilestonesController < ApplicationController
   def index
     @milestone= Milestone.all
     respond_to do |f|
-      f.json { render json: name_and_path(Milestone.all)}
+      f.json { render json: name_and_path(@milestone)}
       f.html { render }
     end
 
@@ -119,9 +120,35 @@ class MilestonesController < ApplicationController
   end
 
   def next_status
-    @milestone.status = @milestone.get_next_status
+    if @milestone.status == 'pending'
+      @milestone.status= 'done'
+    else
+      @milestone.status= 'pending'
+    end
+
     @milestone.save!
-    redirect_to @milestone
+    #redirect_to @milestone
+    if session[:return_to]
+      redirect_to session[:return_to]
+    else
+      redirect_to root_path
+    end
+  end
+
+  def next_status_rej
+    @milestone = Milestone.find_by(id: params[:milestone_id])
+    if @milestone.status == 'rejected'
+      @milestone.status= 'pending'
+    else
+      @milestone.status= 'rejected'
+    end
+    @milestone.save!
+    #redirect_to @milestone
+    if session[:return_to]
+      redirect_to session[:return_to]
+    else
+      redirect_to root_path
+    end
   end
 
   def filter_note_by_visibility(note)

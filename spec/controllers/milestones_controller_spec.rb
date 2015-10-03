@@ -83,10 +83,32 @@ describe MilestonesController, "Milestone Controller" do
     expect(@m1.status).to eq "done"
   end
 
-  it "Deberia modificar el status al siguiente" do
+  it "Deberia modificar el status a done" do
     get :next_status, :milestone_id => @m1.id
     @m1.reload
-    expect(response).to redirect_to @m1
+    expect(@m1.status).to eq "done"
+  end
+
+  it "Deberia modificar el status a pending (from done)" do
+    @m1.status= 'done'
+    @m1.save!
+    get :next_status, :milestone_id => @m1.id
+    @m1.reload
+    expect(@m1.status).to eq 'pending'
+  end
+
+  it "Deberia modificar el status a reject" do
+    get :next_status_rej, :milestone_id => @m1.id
+    @m1.reload
+    expect(@m1.status).to eq 'rejected'
+  end
+
+  it "Deberia modificar el status a pending (from rejected)" do
+    @m1.status= 'rejected'
+    @m1.save!
+    get :next_status_rej, :milestone_id => @m1.id
+    @m1.reload
+    expect(@m1.status).to eq 'pending'
   end
 
   it "Deberia dar true" do

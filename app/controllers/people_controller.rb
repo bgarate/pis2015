@@ -19,6 +19,12 @@ class PeopleController < ApplicationController
 
   def show
     person = Person.find_by(id: params[:id])
+    if !person
+      person = Person.find_by(name: params[:id])
+      if !person
+        person = Person.where("email LIKE :prefix", prefix:"#{params[:id]}@%").first
+      end
+    end
 
     if person
       #nombre

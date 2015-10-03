@@ -55,8 +55,9 @@ class ApplicationController < ActionController::Base
 
   end
 
+
+  # No esta más en peopleController, hay que ver si se usa
   #devuelve true si puedo ver el perfil de la persona person_id, false de lo contrario.
-  #no esta más en peopleController, hay que ver si se usa
   helper_method :can_view_person?
   def can_view_person? (person_id)
     user = current_user
@@ -71,25 +72,23 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # #devuelve true si puedo ver el hito milestone_id, false de lo contrario.
-  # helper_method :can_view_milestone?
-  # def can_view_milestone? (milestone_id)
-  #   user = current_user
-  #   current_person = Person.find_by(id: user.person_id)
-  #   view_milestone = Milestone.find_by(id: milestone_id)
-  #   if user and (user.person.admin or (current_person.milestones.include? view_milestone))
-  #     true
-  #   elsif not user
-  #     redirect_to root_path
-  #   else
-  #     menteesmilestone = false
-  #     current_person.mentees.each do |mentee|
-  #       menteesmilestone = menteesmilestone || (mentee.milestones.include? view_milestone)
-  #     end
-  #     menteesmilestone
-  #   end
-  # end
-  #todos lo pueden ver ahora
+
+  #devuelve true si puedo ver el hito milestone_id, false de lo contrario.
+  #tampoco se usa
+  helper_method :can_view_milestone?
+  def can_view_milestone? (milestone_id)
+    user = current_user
+    current_person = Person.find_by(id: user.person_id)
+    view_person = Person.find_by(id: person_id)
+    if user and (user.person.admin or (user.person_id == person_id) or (current_person.mentees.include? view_person))
+      true
+    elsif not user
+      redirect_to root_path
+    else
+      false
+    end
+  end
+
 
   helper_method :navigation_bar_visible
 
@@ -100,4 +99,9 @@ class ApplicationController < ActionController::Base
     @navigation_bar_visible = true
   end
 
+  # Gurdar url anterior
+  helper_method :store_return_to
+  def store_return_to
+    session[:return_to] = request.url
+  end
 end

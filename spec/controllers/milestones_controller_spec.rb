@@ -132,25 +132,53 @@ describe MilestonesController, "Milestone Controller" do
     end  
 
     it 'creates a milestone' do
+      p1 = Person.new
+      p1.name = "Juan Perez"
+      p1.email ="juanperez1@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+      p2 = Person.new
+      p2.name = "Juan2 Perez"
+      p2.email ="juanperez2@gmail.com"
+      p2.start_date =Time.now
+      p2.save!
 
-      post :new
-      post :create, {:milestone=>{:title=>'milestone1', :description=>'unadescripcionde1'}, :category_id =>@c1.id, @admin.name=>@admin.id}
+      p3 = Person.new
+      p3.name = "Juan3 Perez"
+      p3.email ="juanperez3@gmail.com"
+      p3.start_date =Time.now
+      p3.save!
+      get :new
+      post :create, :person_id=>@admin.id, :milestone=>{:title=>'milestone1', :description=>'unadescripcionde1'},
+                     :category_id =>@c1.id, :people=>[p1.id,p2.id,p3.id]
       expect(response.status).to eq(302)
 
     end
 
     it 'is valid with a title and description' do
-      get :create, {:milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :due_date=>Time.now}}
+      post :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :due_date=>Time.now}
       expect(response.status).to eq(302)
     end
 
     it 'is invalid without a title' do
-      get :create, {:milestone=>{ :description=>'unadescripciondemilestone'}}
+      post :create, :person_id=>@admin.id, :milestone=>{ :description=>'unadescripciondemilestone'}
       expect(response).to redirect_to('/milestones/new')
     end
+
     it 'is invalid without a description' do
-      get :create, {:milestone=>{:title=>'Milestone1'}}
+      get :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1'}
       expect(response.status).to redirect_to('/milestones/new')
+    end
+
+    it 'modifica el hito' do
+      p1 = Person.new
+      p1.name = "Juan Perez"
+      p1.email ="juanperez1@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+      get :edit, :id => @m1.id
+      put :update, :id => @m1.id, :milestone => { :status => :done }, :people=>[p1.id]
+      @m1.reload
     end
 
     it 'deberia asignar una categoria' do

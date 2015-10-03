@@ -33,6 +33,7 @@ en:
   people_new_birth_date: "Birth date"
   people_new_init_date: "Init date"
   people_new_submit: "Create user"
+  select_people: "Select people..."
 
   mentor_since: "Since"
   mentor_name: "Mentor's name"
@@ -81,6 +82,7 @@ en:
   mil_status: "Status"
   mil_create: "Create Milestone"
   mil_delete: "Delete Milestone"
+  mil_assigned: " will be assigned by default"
 
   markdone: 'Mark as done'
   attachmentsdocs: 'Attachments documents'

@@ -1,3 +1,6 @@
+<div align="timeline-card">
+  <%= render 'milestones/form' %>
+</div>
 <div id="timeline-card" class="card timeline">
   <!--<ul id="milestone-list">
     <li>
@@ -37,15 +40,13 @@
       <div class="clearfix"></div>
     </li>
   </ul>-->
-  <%= form_tag person_assign_milestone_path(person_id: @identifier) do   %>
-      <% if not @yet_pending.empty? %>
-          <select name="milestone_id" class="chosen submit-on-select" data-placeholder="Agregar un hito">
-            <% @yet_pending.each do |m| %>
-                  <option value= <%=m.id%> > <%=m.title%></option>
-            <% end %>
-          </select>
-      <% end %>
-  <% end %>
+<ul id="new-milestone">
+  <li>
+
+
+  </li>
+</ul>
+
 
   <% if @milestones and not @milestones.empty? %>
       <ul id="milestone-list">

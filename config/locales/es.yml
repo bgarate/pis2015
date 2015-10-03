@@ -53,6 +53,8 @@ es:
   people_new_birth_date: "Fecha de nacimiento"
   people_new_init_date: "Fecha de ingreso"
   people_new_submit: "Crear usuario"
+  select_people: "Seleccione personas..."
+
 
   mentor_since: "Desde"
   mentor_name: "Nombre del mentor"
@@ -107,6 +109,7 @@ es:
   mil_status: "Estado"
   mil_create: "Crear Hito"
   mil_delete: "Borrar Hito"
+  mil_assigned: " será asignado por defecto"
 
 
 

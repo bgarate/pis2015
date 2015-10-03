@@ -24,7 +24,9 @@ class PeopleController < ApplicationController
       #nombre
       @name = person.name
       @identifier = person.id
-
+      @people= Person.all.where('id NOT in (?)', @identifier)
+      @person = person
+      @tags=Tag.all
 
       #rol tecnico
       @trole = ''

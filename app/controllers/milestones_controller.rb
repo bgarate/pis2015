@@ -48,20 +48,22 @@ class MilestonesController < ApplicationController
   def new
     @milestone=Milestone.new
     @tags = Tag.all
+    @people = Person.all.where('id NOT in (?)', @identifier)
   end
 
+
   def create
-    @milestone=Milestone.new(milestone_params)
+    @person=Person.find(params[:person_id])
+    @milestone= @person.milestones.create(milestone_params)
     @milestone.tag_ids = params[:tags]
-    @milestone.save
     if Category.exists?(params[:category_id])
       @category=Category.find(params[:category_id])
       @category.milestones<<@milestone
     end
-    Person.all.each do |p|
-      if params[p.name]!=nil
-      person=Person.find(params[p.name])
-      person.milestones<<@milestone
+    if params[:people]!=nil
+      params[:people].each do |p|
+      @person2=Person.find(p)
+      @milestone.people<<@person2
       end
     end
     if @milestone.valid?
@@ -99,8 +101,10 @@ class MilestonesController < ApplicationController
 	
   def edit
     @tags = Tag.all
+    @milestone.people.map{|p| p.id}
+    @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
   end
-	
+
   def update
     if @milestone.feedback?
       if (params[:milestone][:feedback_author] != nil)
@@ -110,10 +114,10 @@ class MilestonesController < ApplicationController
         @milestone.feedback_author = Person.find(id_feedback_author)
       end
     end
-    Person.all.each do |p|
-      if params[p.name]!=nil
-        person=Person.find(params[p.name])
-        person.milestones<<@milestone
+    if params[:people]!=nil
+      params[:people].each do |p|
+        @person2=Person.find(p)
+        @milestone.people<<@person2
       end
     end
     if @milestone.update_attributes(milestone_params)

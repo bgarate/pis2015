@@ -101,7 +101,6 @@ class MilestonesController < ApplicationController
 	
   def edit
     @tags = Tag.all
-    @milestone.people.map{|p| p.id}
     @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
   end
 

@@ -112,7 +112,7 @@ es:
   mil_create: "Crear Hito"
   mil_delete: "Borrar Hito"
   mil_assigned: " será asignado por defecto"
-
+  mil_assigned_to: "Asignado(s) a este hito"
 
 
   #categorias

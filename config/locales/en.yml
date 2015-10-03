@@ -83,6 +83,7 @@ en:
   mil_create: "Create Milestone"
   mil_delete: "Delete Milestone"
   mil_assigned: " will be assigned by default"
+  mil_assigned_to: "Assigned to this milestone"
 
   markdone: 'Mark as done'
   attachmentsdocs: 'Attachments documents'

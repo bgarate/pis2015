@@ -20,10 +20,12 @@
             <%= f.select :status, options_for_select(Project.status_names_for_select) %>
         </div>
 
-        <div class="form-group">
-            <%= f.label t('project_technologies') %>
-            <%= f.select :technologies, Technology.all.collect {|t| [t.name, t.id]}, {}, {:multiple => true, :class => "input-lg"} %>
-        </div>
+          <div class="form-group col-xs-12">
+            <%= f.label t('project_technologies'), class: "control-label" %>
+            <%= select_tag(:technologies, options_from_collection_for_select(@technologies, :id, :name), :multiple => true,
+                           :selected => @selected_tech,
+                           class: "chzn-select", 'data-placeholder'=> t('select_technologies'), 'style'=> 'width:100%') %>
+          </div>
 
         <div class="row">
             <div class="form-group col-xs-6">
@@ -51,3 +53,5 @@
     </div>
   </div>
 </div>
+
+<script> $(".chzn-select").chosen();</script>   

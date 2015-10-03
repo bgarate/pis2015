@@ -12,7 +12,7 @@ class MilestonesController < ApplicationController
     if @person.mentees.exists?(@milestone.id)|| current_user_admin? || @person.milestones.exists?(@milestone.id)
     else
       flash.notice = t('not_authorized')
-      redirect_to people_path
+      redirect_to '/people'
     end
   end
 

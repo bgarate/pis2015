@@ -33,10 +33,11 @@
 .milestone-status {
     position: absolute;
     top: 15px;
-    left: 15px;
+    left: 45px;
     width: 30px;
     height: 30px;
-    background-size: cover;
+    background-position: left;
+    background-size: contain;
 
     &.done {
         background-image: image-url('layouts/status-done.png');
@@ -44,6 +45,42 @@
 
     &.pending {
         background-image: image-url('layouts/status-pending.png');
+    }
+
+    &.rejected {
+        background-image: image-url('layouts/status-rejected.png');
+    }
+
+    &.right {
+        left: auto;
+        right: 45px;
+    }
+
+    &.small {
+        width: 25px;
+        height: 25px;
+    }
+
+    &.static {
+        position: static;
+        display: block;
+    }
+}
+
+.milestone-rej-status {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+
+    &.done {
+        background-image: image-url('layouts/status-non-rejected.png');
+    }
+
+    &.pending {
+        background-image: image-url('layouts/status-non-rejected.png');
     }
 
     &.rejected {

@@ -104,6 +104,7 @@ Rails.application.routes.draw do
     resources :notes
     post :add_category
     post :next_status
+    post :next_status_rej
     get :set_as_done
   end
 

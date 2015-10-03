@@ -30,7 +30,7 @@ class TagsController < ApplicationController
     @tag.save
     if @tag.valid?
       flash.notice = "Tag #{tag_params[:name]} creado con éxito!"
-      redirect_to @tag
+      redirect_to '/tags'
     else
       flash.alert = "Tag #{tag_params[:name]} no se ha podido crear"
       redirect_to '/tags/new'

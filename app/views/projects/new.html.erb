@@ -23,7 +23,8 @@
           <div class="form-group col-xs-12">
               <%= f.label t('project_technologies'), class: "control-label" %>
 
-              <%= select_tag(:technologies, options_from_collection_for_select(@technologies, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('select_technologies'), 'style'=> 'width:100%') %>
+              <%= select_tag(:technologies, options_from_collection_for_select(@technologies, :id, :name), :multiple => true,
+                             class: "chzn-select", 'data-placeholder'=> t('select_technologies'), 'style'=> 'width:100%') %>
           </div>
 
           <div class="row">

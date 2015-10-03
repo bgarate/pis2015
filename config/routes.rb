@@ -88,12 +88,19 @@ Rails.application.routes.draw do
       get 'me'
       post 'add_mentor'
       get 'add_mentor_form'
-      get ':id' => 'people#show', :constraints  => { :id => /[0-z\.]+/ }
+      get 'new' => 'people#new'
+      post 'new' => 'people#create'
+      get ':id' => 'people#show', :constraints  => { :id => /[-\w\s\.]+/ }
     end
   end
 
   resources :projects do
     post :assign_person
+    collection do
+      get 'new' => 'projects#new'
+      post 'new' => 'projects#create'
+      get ':id' => 'projects#show', :constraints  => { :id => /[-\w\s\.]+/ }
+    end
   end
 
   resources :tags

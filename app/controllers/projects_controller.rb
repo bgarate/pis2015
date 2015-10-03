@@ -35,8 +35,7 @@ class ProjectsController < ApplicationController
 
   def create
     @project = Project.new(project_params)
-    id_tec = (params.fetch :technologies)
-    @project.technologies<<Technology.find(id_tec)
+    @project.technology_ids = params[:technologies]
     @project.save
     if @project.valid?
       redirect_to @project
@@ -47,11 +46,15 @@ class ProjectsController < ApplicationController
 
   def edit
     @technologies = Technology.all
+    tech_aux = @project.technologies
+    @selected_tech = []
+    tech_aux.each do |t|
+      @selected_tech<<t.id
+    end
   end
 
   def update
-    id_tec = (params.fetch :technologies)
-    @project.technologies = Technology.find(id_tec)
+    @project.technology_ids = params[:technologies]
     if @project.update(project_params)
       redirect_to @project
     else
@@ -80,7 +83,7 @@ class ProjectsController < ApplicationController
 
   private
   def project_params
-    params.require(:project).permit(:name, :client, :status, :id_technologies, :start_date, :end_date)
+    params.require(:project).permit(:name, :client, :status, :start_date, :end_date)
   end
 
 end

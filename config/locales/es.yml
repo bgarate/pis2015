@@ -44,6 +44,7 @@ es:
   name: 'Nombre'
   id: 'ID'
   not_authorized: "No esta autorizado para realizar esa accion"
+  unregistered: "Usuario no registrado, contacte a un administrador."
 
   #crear persona
   people_new_name: "Nombre"
@@ -136,7 +137,6 @@ es:
   me: "Privado"
   mentors: "Mentores"
   every_body: "Publico"
-
 
 
   attachmentsdocs: 'Documentos adjuntos'

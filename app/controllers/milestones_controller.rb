@@ -5,7 +5,7 @@ class MilestonesController < ApplicationController
   before_action :get_milestone_by_id, only: [:feedback?, :update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
   before_action :is_authorized?, only: [:destroy]
-  skip_before_action :admin?, only: [:index, :show, :destroy]
+  skip_before_action :admin?, only: [:create, :index, :show, :destroy, :edit]
 
   def is_authorized?
     @person=Person.find(current_user.person_id)
@@ -154,7 +154,7 @@ class MilestonesController < ApplicationController
   def name_and_path (people)
 
     people.map do |p|
-      {"name" => p.title, "url" => person_path(p)}
+      {"name" => p.name, "url" => person_path(p)}
     end
 
   end

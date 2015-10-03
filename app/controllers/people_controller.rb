@@ -20,7 +20,7 @@ class PeopleController < ApplicationController
   def show
     person = Person.find_by(id: params[:id])
 
-    if person and can_view_person?(person.id)
+    if person
       #nombre
       @name = person.name
       @identifier = person.id

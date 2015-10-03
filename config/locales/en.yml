@@ -22,8 +22,9 @@ en:
   title: 'Title'
   name: 'Name'
   id: 'ID'
-
   not_authorized: "You are not authorized to perform that action"
+  unregistered: "Unregistered user, contact an administrator."
+
 
   #crear persona
   people_new_name: "Name"

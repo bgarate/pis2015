@@ -7,7 +7,7 @@ require 'rspec/active_model/mocks'
 describe GoogleController, "Login a traves de google oatuh" do
   before(:each) do
     allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
-    allow_any_instance_of(ApplicationController).to receive(:can_view_person?) { true }
+    #allow_any_instance_of(ApplicationController).to receive(:can_view_person?) { true }
   end
 
   #
@@ -86,7 +86,7 @@ describe GoogleController, "Login a traves de google oatuh" do
   it 'Deberia renderizar unregistered con msj como parametro' do
 
     get :unregistered
-    expect(assigns(:msj)).to eq('Usuario no regitrado, contacte a un administrador.')
+    expect(assigns(:msj)).to eq('Usuario no registrado, contacte a un administrador.')
     expect(response).to render_template('unregistered')
   end
 

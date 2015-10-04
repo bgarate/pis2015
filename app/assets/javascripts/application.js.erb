@@ -52,4 +52,11 @@ $(function() {
             $(this).parents("form").submit()
         }
     });
+
+    $("form.slide-on-click > .form-slide").hide();
+
+    $("form.slide-on-click h1").on('click', function (e){
+        $(this).parent().toggleClass("active-slide");
+        $(this).siblings(".form-slide").slideToggle();
+    });
 });

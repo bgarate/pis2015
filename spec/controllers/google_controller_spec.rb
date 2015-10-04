@@ -108,7 +108,6 @@ describe GoogleController, "Login a traves de google oatuh" do
     per.birth_date= Time.new(2012, 8, 29, 22, 35, 0)
     per.start_date= Time.new(2012, 8, 29, 22, 35, 0)
     per.tech_role = tr
-
     m = Milestone.new
     m.title = 'Conferencia Tecnológica'
     m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
@@ -116,8 +115,15 @@ describe GoogleController, "Login a traves de google oatuh" do
     m.milestone_type= 1
     m.status=0
     per.milestones<<(m)
-
     per.save!
+
+    admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
+    admin.save!
+
+    ad_user = User.new :person => admin
+    ad_user.oauth_expires_at = Time.current().advance(days:1)
+    ad_user.save!
+    session[:user_id] = ad_user.id
 
     get :adddriveview, :milestone_id => m.id
     expect(response).to render_template('adddriveview')

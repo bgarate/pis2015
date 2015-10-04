@@ -36,7 +36,6 @@ class Milestone < ActiveRecord::Base
     status_order = [:pending, :done, :rejected]
 
     status_order[(status_order.find_index(self.status.to_sym) + 1) % status_order.count]
-
   end
 end
 

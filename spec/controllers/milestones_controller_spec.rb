@@ -76,8 +76,9 @@ describe MilestonesController, "Milestone Controller" do
   end
 
   it "Deberia modificar el status a done" do
+    session[:user_id] = @ad_user.id
     get :edit, :id => @m1.id
-    put :update, :id => @m1.id, :milestone => { :status => :done }, @admin.name=>@admin.id
+    put :update, :id => @m1.id, :milestone => { :status => :done }, @admin.name=>@admin.id, :session=>session
     @m1.reload
     expect(@m1.status).to eq "done"
   end
@@ -120,6 +121,7 @@ describe MilestonesController, "Milestone Controller" do
   end
 
   it "No deberia modificar el nombre" do
+    session[:user_id] = @ad_user.id
     put :update, :id => @m1.id, :milestone => { :title => '' }
     @m1.reload
     expect(response).to render_template('edit')
@@ -127,12 +129,14 @@ describe MilestonesController, "Milestone Controller" do
 
 
   it "añade un revisor a un hito de tipo feedback" do
+    session[:user_id] = @ad_user.id
     put :update, :id => @m1.id, :milestone => {:feedback_author =>  @person }
     @m1.reload
     expect(@m1.feedback_author).to eq @person
   end
 
   it "no añade un revisor a un hito que no es tipo feedback" do
+    session[:user_id] = @ad_user.id
     put :update, :id => @m2.id, :milestone => {:feedback_author =>  @person }
     @m2.reload
     expect(@m2.feedback_author).to eq NIL
@@ -154,6 +158,7 @@ describe MilestonesController, "Milestone Controller" do
     end  
 
     it 'creates a milestone' do
+      session[:user_id] = @ad_user.id
       p1 = Person.new
       p1.name = "Juan Perez"
       p1.email ="juanperez1@gmail.com"
@@ -164,7 +169,6 @@ describe MilestonesController, "Milestone Controller" do
       p2.email ="juanperez2@gmail.com"
       p2.start_date =Time.now
       p2.save!
-
       p3 = Person.new
       p3.name = "Juan3 Perez"
       p3.email ="juanperez3@gmail.com"
@@ -193,6 +197,7 @@ describe MilestonesController, "Milestone Controller" do
     end
 
     it 'modifica el hito' do
+      session[:user_id] = @ad_user.id
       p1 = Person.new
       p1.name = "Juan Perez"
       p1.email ="juanperez1@gmail.com"
@@ -204,13 +209,13 @@ describe MilestonesController, "Milestone Controller" do
     end
 
     it 'deberia asignar una categoria' do
+      session[:user_id] = @ad_user.id
       cat1= Category.new
       cat1.name= 'feed'
       cat1.icon= '0asdsadsa'
       cat1.created_at=Time.now
       cat1.updated_at=Time.now
       cat1.save!
-
       m1 = Milestone.new
       m1.title ='Milestone for testing'
       m1.description='This is a milestone to test Milestones'
@@ -222,7 +227,6 @@ describe MilestonesController, "Milestone Controller" do
       m1.save!
       post :add_category,{:milestone_id => m1.id, :category_id=>cat1.id},:session => session
       expect(response).to redirect_to(m1)
-
     end
 
 
@@ -237,9 +241,7 @@ describe MilestonesController, "Milestone Controller" do
         m1.status=1
         m1.icon= 'Icon'
         m1.save!
-
         get :show, :id => m1.id, :session=>session
-
         expect(response).to render_template("show")
     end
 
@@ -255,8 +257,6 @@ describe MilestonesController, "Milestone Controller" do
       m1.icon= 'Icon'
       m1.save
       m1.notes.create({:text=> 'una nota pa borrar'})
-
-
       delete :destroy, :id => m1.id, :session => session
       expect(response).to redirect_to('/milestones')
 
@@ -274,8 +274,6 @@ describe MilestonesController, "Milestone Controller" do
       m1.icon= 'Icon'
       m1.save
       m1.notes.create({:text=> 'una nota pa borrar'})
-
-
       delete :destroy, :id => m1.id, :session => session
       expect(response).to redirect_to('/people')
 
@@ -283,30 +281,22 @@ describe MilestonesController, "Milestone Controller" do
   end
 
   describe "permisos" do
-    it 'Deberia renderizar show por ser admin' do
-
-      session[:user_id] = @ad_user.id
+    it 'Deberia renderizar show' do
       get :show, :id => @m.id
       expect(response.status).to eq(200)
     end
 
-    it 'Deberia renderizar  show por ser mentor' do
+    it 'Deberia renderizar edit por ser mentor' do
       @no_ad_user.person.mentees<<(@ad_user.person)
       @no_ad_user.save!
       @ad_user.person.milestones<<(@m)
       @ad_user.save!
-
       session[:user_id] = @no_ad_user.id
-      get :show, :id => @m.id
+      get :edit, :id => @m.id
       expect(response.status).to eq(200)
     end
 
-    it 'Deberia redireccionar a root path por no ser admin ni mentor' do
 
-      session[:user_id] = @no_ad_user.id
-      get :show, :id => @m.id
-      expect(response).to redirect_to root_path
-    end
 
   end
 

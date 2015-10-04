@@ -74,26 +74,24 @@
           <tr>
             <td>
             <%= form_tag ({:action => 'assign_person', :controller => 'projects', :project_id => @project.id}) do   %>
-                <label>
-                  <%= t('project_assign_to') %>
-                </label>
-                <br>
-                <% count = 0 %>
-                <select name="person_id">
-                  <% @usr.each do |p|
-                    if not @project.people.exists?(p.id) %>
-                          <option value= <%=p.id%> > <%=p.name%></option>
-                          <% count = count + 1%>
-                      <% end
-                         end %>
-                </select>
-                <%if count>0 %>
-                      <%= button_tag t('project_assign_submit'), options= :type => 'submit', id: "buttonTwo" %>
-                <% end %>
-            <% end %>
+                <% if !@usr.empty?%>
+                  <label>
+                    <%= t('assign_to_project') %>
+                  </label>
+                  <br>
+                  <select name="person_id">
+                    <% @usr.each do |p|%>
+                        <option value= <%=p.id%> > <%=p.name%></option>
+
+                    <% end %>
+                  </select>
+
+                  <%= button_tag t('project_assign_submit'), options= :type => 'submit', id: "buttonTwo" %>
+               <% end %>
             </td>
           </tr>
           <%= button_tag t('back'), options= :type => 'submit', id: "buttonOne", class: "btn btn-default" %>
+          <% end%>
           </tbody>
         </table>
       </div>
@@ -102,4 +100,3 @@
 </div>
 <br>
 <br>
-

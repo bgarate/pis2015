@@ -27,10 +27,13 @@
             <td><%= m.name %></td>
             <td>
               <ul>
-              <% m.milestones.each do |mil|
-                if mil.status != :pending %>
+              <%
+                 miles = m.milestones.where("status <> ?", Milestone.statuses[:pending]).order("due_date ASC, created_at DESC").limit(2)
+
+                 miles.each do |mil| %>
+
                 <li><%= link_to mil.title, milestone_path(mil), method: :get%></li>
-                <% end %>
+
               <% end %>
               </ul>
             </td>

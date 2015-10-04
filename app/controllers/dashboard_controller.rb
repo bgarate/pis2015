@@ -22,6 +22,16 @@ class DashboardController < ApplicationController
 
     @my_mentees = person.mentees
 
+    #@mentees  = []
+
+    #@my_mentees.each do |m|
+      #p = Person.new
+      #p.id << m.id
+      #p.name <<  m.name
+      #p.milestones << m.milestones.where("status != ?",:pending).order("due_date ASC, created_at DESC").limit(2)
+
+      #@mentees << p
+    #end
 
     @my_milestones = person.milestones.where('due_date > ?',Date.today)
 

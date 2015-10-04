@@ -38,6 +38,8 @@ en:
   assign_to_project: "Assign to project"
 
 
+  people_assign_to: "People assign to"
+
   mentor_since: "Since"
   mentor_name: "Mentor's name"
   mentor_submit: "Add mentor"

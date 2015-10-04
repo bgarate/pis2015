@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row">
+    <div class="table-container">
+
+    <h1><%= "Usuarios Mentoreados" %></h1>
+
+    <table class="table datatable">
+      <thead>
+      <tr>
+        <td></td>
+        <td>Nombre</td>
+        <td>Últimos Hitos Completados</td>
+
+      </tr>
+      </thead>
+      <tbody>
+
+      <% @my_mentees.each do |m| %>
+          <tr>
+            <td>
+              <div id="profile-picture-<%= m.id %>" class="profile_picture">
+                <div class="img-container">
+                  <%= image_tag "test/silueta.gif" %>
+                  </div>
+                </div>
+            </td>
+            <td><%= m.name %></td>
+            <td>
+              <ul>
+              <% m.milestones.each do |mil|
+                if mil.status != :pending %>
+                <li><%= link_to mil.title, milestone_path(mil), method: :get%></li>
+                <% end %>
+              <% end %>
+              </ul>
+            </td>
+          </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+    </div>
+
+
+    <div class="table-container">
+
+      <h1><%= "Hitos Pendientes" %></h1>
+
+      <table class="table datatable">
+        <thead>
+        <tr>
+          <td>Nombre</td>
+          <td>Descripción</td>
+          <td>Fecha límite</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        <% @my_milestones.each do |mil| %>
+            <tr>
+              <td><%= link_to mil.title, milestone_path(mil), method: :get%></td>
+              <td><%= mil.description.truncate(50) %></td>
+              <td><div class="calendar left"><%= l(mil.due_date, format: "%A, %B %d %Y") %></div></td>
+            </tr>
+        <% end %>
+
+        </tbody>
+      </table>
+    </div>
+
+
+
+  </div>
+</div>

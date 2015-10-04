@@ -1,10 +1,16 @@
 class ProjectsController < ApplicationController
 
   before_action :get_project, only: [:show, :edit, :update, :destroy]
-  skip_before_action :admin?, only: [:show]
+  skip_before_action :admin?, only: [:show, :assign_person]
 
   def get_project
     @project = Project.find_by(id: params[:id])
+    if !@project
+      @project = Project.find_by(name: params[:id])
+      if !@project
+          @project = Project.find_by(client: params[:id])
+      end
+    end
     if !@project  || (! @project.validity?)
       redirect_to '/projects'
     end
@@ -23,20 +29,28 @@ class ProjectsController < ApplicationController
   def show
     person = Person.find(current_user.person_id)
     if !(person.admin) then
-      person.mentees.empty? ? @usr= [person] : @usr = person.mentees
+      usuarios = [person]
+      if !person.mentees.empty?
+        usuarios = usuarios + person.mentees.all
+      end
     else
-      @usr = Person.all
+      usuarios = Person.all
+    end
+    @usr = []
+    usuarios.each  do |u|
+      if !(@project.people.exists?(u.id))
+        @usr = @usr + [u]
+      end
     end
   end
 
   def new
+    @technologies = Technology.all
   end
 
   def create
     @project = Project.new(project_params)
-    id_tec = (params.fetch :project).fetch :id_technologies
-    filtradas = id_tec.reject { |i| i.empty? }
-    @project.technologies<<Technology.find(filtradas)
+    @project.technology_ids = params[:technologies]
     @project.save
     if @project.valid?
       redirect_to @project
@@ -46,12 +60,16 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    @technologies = Technology.all
+    tech_aux = @project.technologies
+    @selected_tech = []
+    tech_aux.each do |t|
+      @selected_tech<<t.id
+    end
   end
 
   def update
-    id_tec = (params.fetch :project).fetch :technologies
-    filtradas = id_tec.reject { |i| i.empty? }
-    @project.technologies = Technology.find(filtradas)
+    @project.technology_ids = params[:technologies]
     if @project.update(project_params)
       redirect_to @project
     else
@@ -70,17 +88,16 @@ class ProjectsController < ApplicationController
     person_id= params[:person_id]
     project= Project.find(pj_id)
     person= Person.find(person_id)
-    if not project.people.exists?(person.id)
+    if ! project.people.exists?(person.id)
       project.people<< person
       project.save
     end
     redirect_to project
   end
 
-
   private
   def project_params
-    params.require(:project).permit(:name, :client, :status, :id_technologies, :start_date, :end_date)
+    params.require(:project).permit(:name, :client, :status, :start_date, :end_date)
   end
 
 

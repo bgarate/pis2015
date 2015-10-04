@@ -47,12 +47,15 @@
   </li>
 </ul>
 
-
   <% if @milestones and not @milestones.empty? %>
       <ul id="milestone-list">
         <% @milestones.each do |e| %>
             <li>
-              <%= milestone_status(e,:small,:right)%>
+              <% store_return_to %>
+              <%= if e.status != 'rejected'
+                    milestone_status(e,:right)
+                  end %>
+              <%= milestone_status_rej(e, :right) %>
               <h2><%=link_to e.title, e, method: :get%></h2>
               <p><%=t(e.description) %></p>
 
@@ -91,4 +94,17 @@
   <% else %>
           <p>No hay hitos que mostar</p>
   <% end %>
+
+
+  <!-- <=% form_tag ({:action => 'assign_project', :controller => 'people', :person_id => @person_vew.id}) do   %>-->
+  <!--  <=% if !@project_to_show.empty?%>-->
+  <!--  <select name="project_id" class="chosen submit-on-select" data-placeholder = <=%t('assign_to_project')%>>-->
+  <!--      <=% @project_to_show.each do |p| %>-->
+  <!--          <option value= <=%=p.id%> > <=%=p.name%></option>-->
+  <!--      <=% end %>-->
+  <!--  </select>-->
+  <!--<=% end %>-->
+  <!--<=% end %>-->
 </div>
+
+

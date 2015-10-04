@@ -55,6 +55,9 @@ es:
   people_new_init_date: "Fecha de ingreso"
   people_new_submit: "Crear usuario"
   select_people: "Seleccione personas..."
+  assign_to_project: "Asignar a proyecto"
+
+  people_assign_to: "Asignar a proyecto"
 
 
   mentor_since: "Desde"
@@ -78,8 +81,8 @@ es:
   project_no_technologies: "No hay tecnologías asociadas al proyecto"
   project_people: "Personas asociadas al proyecto"
   project_no_people: "No hay personas asociadas al proyecto"
-  project_assign_to: "Asignar persona al proyecto"
-  project_assign_submit: "Asignar"
+  select_technologies: 'Seleccione tecnologías...'
+  project_assign_submit: 'Asignar a proyecto'
   project:
       display_status:
         active: 'Activo'

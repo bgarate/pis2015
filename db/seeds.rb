@@ -114,7 +114,7 @@ Tag.create!(name:'Participación')
 
 
 # Datos de Prueba para Bill Hicks
-p6 = Person.create!(name: "Bill Hicks", email: "bill.hicks@gmail.com", admin: false, start_date: 2.years.ago)
+p6 = Person.create!(name: "Andy", email: "andresvasilev@gmail.com", admin: false, start_date: 2.years.ago)
 
 p6.milestones.create(title: "Aprendio a programar",
                      description: "Esta es la descripción del hito",

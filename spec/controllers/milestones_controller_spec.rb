@@ -169,7 +169,6 @@ describe MilestonesController, "Milestone Controller" do
       p2.email ="juanperez2@gmail.com"
       p2.start_date =Time.now
       p2.save!
-
       p3 = Person.new
       p3.name = "Juan3 Perez"
       p3.email ="juanperez3@gmail.com"
@@ -217,7 +216,6 @@ describe MilestonesController, "Milestone Controller" do
       cat1.created_at=Time.now
       cat1.updated_at=Time.now
       cat1.save!
-
       m1 = Milestone.new
       m1.title ='Milestone for testing'
       m1.description='This is a milestone to test Milestones'
@@ -229,7 +227,6 @@ describe MilestonesController, "Milestone Controller" do
       m1.save!
       post :add_category,{:milestone_id => m1.id, :category_id=>cat1.id},:session => session
       expect(response).to redirect_to(m1)
-
     end
 
 
@@ -245,7 +242,6 @@ describe MilestonesController, "Milestone Controller" do
         m1.icon= 'Icon'
         m1.save!
         get :show, :id => m1.id, :session=>session
-
         expect(response).to render_template("show")
     end
 
@@ -261,8 +257,6 @@ describe MilestonesController, "Milestone Controller" do
       m1.icon= 'Icon'
       m1.save
       m1.notes.create({:text=> 'una nota pa borrar'})
-
-
       delete :destroy, :id => m1.id, :session => session
       expect(response).to redirect_to('/milestones')
 
@@ -280,8 +274,6 @@ describe MilestonesController, "Milestone Controller" do
       m1.icon= 'Icon'
       m1.save
       m1.notes.create({:text=> 'una nota pa borrar'})
-
-
       delete :destroy, :id => m1.id, :session => session
       expect(response).to redirect_to('/people')
 
@@ -289,22 +281,21 @@ describe MilestonesController, "Milestone Controller" do
   end
 
   describe "permisos" do
-    it 'Deberia renderizar show por ser admin' do
-
-      session[:user_id] = @ad_user.id
+    it 'Deberia renderizar show' do
       get :show, :id => @m.id
       expect(response.status).to eq(200)
     end
 
-    it 'Deberia renderizar  show por ser mentor' do
+    it 'Deberia renderizar edit por ser mentor' do
       @no_ad_user.person.mentees<<(@ad_user.person)
       @no_ad_user.save!
       @ad_user.person.milestones<<(@m)
       @ad_user.save!
       session[:user_id] = @no_ad_user.id
-      get :show, :id => @m.id
+      get :edit, :id => @m.id
       expect(response.status).to eq(200)
     end
+
 
 
   end

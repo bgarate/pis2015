@@ -5,13 +5,11 @@ class MilestonesController < ApplicationController
   before_action :get_milestone_by_id, only: [:feedback?, :update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
   before_action :is_authorized?, only: [:edit,:update,:destroy, :add_category]
-  skip_before_action :admin?, only: [:add_category,:create, :index, :show, :destroy, :edit]
+  skip_before_action :admin?
 
   def is_authorized?
-    @person=Person.find(current_user.person_id)
-    if @person.mentees.exists?(@milestone.id)|| current_user_admin? || @person.milestones.exists?(@milestone.id)
+    if can_modify_milestone? @milestone.id
     else
-
       flash.alert = t('not_authorized')
       redirect_to '/people'
     end
@@ -57,6 +55,7 @@ class MilestonesController < ApplicationController
       params[:people].each do |p|
       @person2=Person.find(p)
       @milestone.people<<@person2
+      @milestone.save
       end
     end
     if @milestone.valid?
@@ -105,6 +104,7 @@ class MilestonesController < ApplicationController
       params[:people].each do |p|
         @person2=Person.find(p)
         @milestone.people<<@person2
+        @milestone.save
       end
     end
     if @milestone.update_attributes(milestone_params)

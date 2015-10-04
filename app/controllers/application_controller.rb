@@ -75,22 +75,29 @@ class ApplicationController < ActionController::Base
 
   #devuelve true si puedo ver el hito milestone_id, false de lo contrario.
   #se usa? en view no, y para checkear en milestone ya hay otra funcion
-  helper_method :can_view_milestone?
-  def can_view_milestone? (milestone_id)
+  helper_method :can_modify_milestone?
+  def can_modify_milestone? (milestone_id)
     user = current_user
     current_person = Person.find_by(id: user.person_id)
-    view_milestone = Milestone.find_by(id: milestone_id)
-    if user and (user.person.admin or (current_person.milestones.include? view_milestone))
-      true
-    elsif not user
-      redirect_to root_path
-    else
-      menteesmilestone = false
-      current_person.mentees.each do |mentee|
-        menteesmilestone = menteesmilestone || (mentee.milestones.include? view_milestone)
+    edit_milestone = Milestone.find_by(id: milestone_id)
+    mentee_mil=false
+    current_person.mentees.all.each do |m|
+      if m.milestones.exists? edit_milestone.id
+        mentee_mil=true
       end
-      menteesmilestone
     end
+    user && (user.person.admin ||
+        (current_person.milestones.include? edit_milestone) ||
+        mentee_mil )
+    #   true
+    # elsif not user
+    #   redirect_to root_path
+    # else
+    #   menteesmilestone = false
+    #   current_person.mentees.each do |mentee|
+    #     menteesmilestone = menteesmilestone || (mentee.milestones.include? view_milestone)
+    #   end
+    #   menteesmilestone
   end
 
 

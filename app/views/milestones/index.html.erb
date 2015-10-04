@@ -22,6 +22,7 @@
                 <td><%= link_to m.title, milestone_path(m), method: :get%></td>
                 <td><%= m.description.truncate(50) %></td>
                 <td><div class="calendar left"><%= m.due_date %></div></td>
+                <% if can_modify_milestone? m.id %>
                 <td><%= link_to edit_milestone_path(m) do%>
                     <span class='large-text glyphicon glyphicon-pencil'></span>
                   <% end %>
@@ -32,6 +33,7 @@
                       <span class='large-text glyphicon glyphicon-remove'></span>
                       <% end %>
                 </td>
+                <%end%>
 
               </tr>
           <% end %>

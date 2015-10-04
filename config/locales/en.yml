@@ -35,6 +35,8 @@ en:
   people_new_init_date: "Init date"
   people_new_submit: "Create user"
   select_people: "Select people..."
+  assign_to_project: "Assign to project"
+
 
   mentor_since: "Since"
   mentor_name: "Mentor's name"
@@ -58,6 +60,7 @@ en:
   project_people: "People associated to the project"
   project_no_people: "There are no people associated to the project"
   select_technologies: 'Select technologies...'
+  project_assign_submit: 'Assign to project'
   project:
     display_status:
       active: 'Active'

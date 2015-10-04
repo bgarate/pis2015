@@ -85,7 +85,6 @@ Rails.application.routes.draw do
     resources :milestones
     post :assign_milestone
     post :assign_project
-      get 'index' => 'people#index'
     collection do
       get 'me'
       post 'add_mentor'

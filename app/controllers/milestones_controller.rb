@@ -37,9 +37,9 @@ class MilestonesController < ApplicationController
   end
 
   def new
-      @milestone=Milestone.new
-      @tags = Tag.all
-      @people = Person.all.where('id NOT in (?)', @identifier)
+    @milestone=Milestone.new
+    @tags = Tag.all
+    @people = Person.all.where('id NOT in (?)', @identifier)
   end
 
 

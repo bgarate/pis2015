@@ -140,7 +140,7 @@ describe PeopleController do
       p1.name='unnombredeproy'
       p1.client=@admin.name
       p1.save!
-      post :assign_project, :person_id=> @admin.id, :project_id => p1.id, :session=>session
+      get :assign_project, :person_id=> @admin.id, :project_id => p1.id, :session=>session
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end

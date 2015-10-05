@@ -17,8 +17,12 @@
           <tbody>
           <% @milestone.each do |m| %>
               <tr>
-                <td><%= milestone_status_rej(m,:static) %></td>
-                <td><%= milestone_status(m,:static) %></td>
+                <% store_return_to %>
+                <td><%= milestone_status_rej(m,:static) %>
+                <%= if m.status != 'rejected'
+                      milestone_status(m,:static)
+                    end %></td>
+
                 <td><%= link_to m.title, milestone_path(m), method: :get%></td>
                 <td><%= m.description.truncate(50) %></td>
                 <td><div class="calendar left"><%= m.due_date %></div></td>

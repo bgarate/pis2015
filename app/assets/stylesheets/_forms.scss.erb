@@ -47,4 +47,34 @@ form.main-form {
             box-shadow: none;
         }
     }
+
+    &.slide-on-click {
+        padding-bottom: 0;
+        margin-bottom: 30px;
+
+
+        h1 {
+            cursor: pointer;
+            margin-bottom: 0;
+            width: calc(100% + 60px);
+            float: right;
+            @include transition(0.5s ease-in-out all);
+        }
+        .form-slide {
+            padding-top: 20px;
+            margin-bottom: 15px;
+            clear: both;
+        }
+
+        &:not(.active-slide) {
+            background-color: transparent;
+            h1 {
+                width: 150px;
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+    }
+
 }

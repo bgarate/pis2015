@@ -96,14 +96,17 @@ class MilestonesController < ApplicationController
   end
 	
   def update
-    if (params[:milestone][:category] ==2)
-      if (params[:milestone][:feedback_author] != nil)
-        id_feedback_author = (params.fetch :milestone).fetch :feedback_author
-      end
-      unless id_feedback_author == nil
-        @milestone.feedback_author = Person.find(id_feedback_author)
-      end
-    end
+    # if (params[:milestone][:category_id] == '2')
+    #   @milestone.feedback_author_id=params[:milestone][:feedback_author]
+    #   # if (params[:milestone][:feedback_author] != nil)
+    #   #   id_feedback_author = (params.fetch :milestone).fetch :feedback_author
+    #   # end
+    #   # unless id_feedback_author == nil
+    #   #   @milestone.feedback_author = Person.find(id_feedback_author)
+    #   # end
+    # else
+    #   @milestone.feedback_author_id=nil
+    # end
     if @milestone.update_attributes(milestone_params)
 
       @milestone.tag_ids = params[:tags]
@@ -131,7 +134,7 @@ class MilestonesController < ApplicationController
   private
 
   def milestone_params
-    params.require(:milestone).permit(:title, :start_date, :due_date,:description,:status, :icon, :created_at, :updated_at)
+    params.require(:milestone).permit(:title, :start_date, :due_date,:description,:status, :icon, :category_id, :feedback_author_id, :created_at, :updated_at)
   end
 
 

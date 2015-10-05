@@ -5,13 +5,13 @@ class ProjectsController < ApplicationController
 
   def get_project
     @project = Project.find_by(id: params[:id])
-    if !@project
-      @project = Project.find_by(name: params[:id])
-      if !@project
-          @project = Project.find_by(client: params[:id])
+    unless @project
+      @project = Project.where("lower(name)= :name", name:"#{params[:id].downcase}").first
+      unless @project
+          @project = Project.where("lower(client)= :client", client:"#{params[:id].downcase}").first
       end
     end
-    if !@project  || (! @project.validity?)
+    unless @project  && @project.validity?
       redirect_to '/projects'
     end
   end
@@ -28,9 +28,9 @@ class ProjectsController < ApplicationController
 
   def show
     person = Person.find(current_user.person_id)
-    if !(person.admin) then
+    unless (person.admin) then
       usuarios = [person]
-      if !person.mentees.empty?
+      unless person.mentees.empty?
         usuarios = usuarios + person.mentees.all
       end
     else
@@ -38,7 +38,7 @@ class ProjectsController < ApplicationController
     end
     @usr = []
     usuarios.each  do |u|
-      if !(@project.people.exists?(u.id))
+      unless (@project.people.exists?(u.id))
         @usr = @usr + [u]
       end
     end

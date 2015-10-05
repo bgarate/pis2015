@@ -64,4 +64,9 @@ describe 'Milestone' do
     expect(@ms.tags).to include(@tag)
   end
 
+  it 'debe cambiar el estado a done' do
+
+    expect(@ms.get_next_status).to eq(:done)
+  end
+
 end

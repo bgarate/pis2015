@@ -6,7 +6,6 @@
     align-items: center;
     background-color: $body-background;
     color:#34495E;
-    position: absolute;
 
     .left-pane {
         flex: 1 0 0;
@@ -55,10 +54,78 @@
         margin: 0;
     }
 
+    form {
+        clear: both;
+        float: right;
+    }
+
+}
+
+#milestone-notes {
+    background-color: $body-background;
+    color:#34495E;
+    padding: 20px;
+    padding-bottom: 0;
+
+    form {
+        input {
+            width: calc(100% - 50px);
+        }
+        select {
+            width: 45px;
+        }
+    }
+
+    ul {
+
+        list-style: none;
+        padding: 0;
+        margin: 15px -20px 0 -20px;
+
+        li {
+
+            padding: 5px 20px;
+            position: relative;
+
+            &:nth-child(2n+1) {
+                background-color: $body-background-dark;
+            }
+            &:nth-child(2n) {
+                background-color: $body-background;
+            }
+
+            h2 {
+                margin: 0;
+                margin-top: 5px;
+                font-weight: bold;
+                font-size: 14px;
+                float: left;
+            }
+
+            .time {
+                font-size: 10px;
+                float: right;
+                padding-right: 30px;
+                line-height: 2;
+            }
+
+            p {
+                clear: both;
+                margin: 0;
+                padding: 10px 0 10px 10px;
+            }
+
+            a.delete {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    }
 }
 
 
-.etiquetas{
+/*.etiquetas{
     margin:0;
     padding:0;
     position:absolute;
@@ -118,3 +185,4 @@
 .etiquetas li:hover{background:#555;}
 .etiquetas li:hover:before{border-color:transparent #555 transparent transparent;}
 
+*/

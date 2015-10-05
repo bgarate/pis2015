@@ -1,24 +1,39 @@
 class PeopleController < ApplicationController
 
   skip_before_action :admin?, only:[:show, :index, :me]
+  #skip_before_action :admin?, only:[:assign_project]
 
   def index
+    # @people = Person.all
+
+    respond_to do |f|
+      f.html { me }
+      f.json { render json: name_and_path(Person.all)}
+    end
+
+  end
+
+  def me
     u = User.find_by(id: session[:user_id])
     redirect_to action: 'show', id: u.person_id
   end
 
-  def me
-    redirect_to(:action => "index") and return
-  end
-
   def show
     person = Person.find_by(id: params[:id])
+    if !person
+      person = Person.find_by(name: params[:id])
+      if !person
+        person = Person.where("email LIKE :prefix", prefix:"#{params[:id]}@%").first
+      end
+    end
 
     if person
       #nombre
       @name = person.name
-      @id = person.id
-
+      @identifier = person.id
+      @people= Person.all.where('id NOT in (?)', @identifier)
+      @person = person
+      @tags=Tag.all
 
       #rol tecnico
       @trole = ''
@@ -36,11 +51,28 @@ class PeopleController < ApplicationController
       #Eventos (Hitos)
       @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.milestone_type = 1")
       #Hitos pendientes
-      @overcomes = person.milestones.where("milestones.due_date < CURRENT_DATE AND milestones.status = 0")
+      @overcomes = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0")
       #Todos los hitos
-      @milestones = person.milestones
+      @milestones = person.milestones.order(created_at: :desc)
       #Todos los hitos
       @mentorships = person.mentors
+      @yet_pending = Milestone.pending.where('id NOT in (?)', person.milestones.pluck(:id))
+
+     # @person_vew = person
+      # person_log = Person.find(current_user.person_id)
+      #if (person_log.admin) || !(person_log.mentees.exists?(@person_vew.id)) || (person_log.id = person.id)
+      #  projects = Project.all
+      #else
+      #  projects = []
+      #end
+      #@project_to_show=[]
+      #projects.each do |p|
+      #  if !person.projects.exists?(p.id)
+      #    @project_to_show = @project_to_show + [p]
+      #  end
+      #end
+
+
     else
       redirect_to root_path
     end
@@ -63,11 +95,23 @@ class PeopleController < ApplicationController
   end
 
   def assign_milestone
-    @milestone=Milestone.find(params[:milestone_id])
-    @person=Person.find(params[:person_id])
-    @person.milestones<<@milestone
-    redirect_to @person
+    milestone=Milestone.find(params[:milestone_id])
+    person=Person.find(params[:person_id])
+    person.milestones<<milestone
+    redirect_to person
   end
+
+  # def assign_project
+  #  pj_id= params[:project_id]
+  #  id= params[:person_id]
+  #  project= Project.find(pj_id)
+  #  person= Person.find(id)
+  #  if not project.people.exists?(id)
+  #    project.people<< person
+  #    project.save
+  #  end
+  #  redirect_to person
+  #end
 
 
   def add_mentor
@@ -100,5 +144,15 @@ class PeopleController < ApplicationController
   def person_params
     params.require(:person).permit(:name, :email, :cellphone, :phone, :birth_date, :start_date)
   end
+
+
+  def name_and_path (people)
+
+    people.map do |p|
+      {"name" => p.name, "url" => person_path(p)}
+    end
+
+  end
+
 
 end

@@ -1,13 +1,15 @@
 class NotesController < ApplicationController
 
   before_action :get_milestone, only: [:create, :destroy]
+  skip_before_action :admin?, only: [:create]
+
 
   def get_milestone
     @milestone=Milestone.find(params[:milestone_id])
   end
 
   def create
-    @note= @milestone.notes.create(notes_params)
+    @note= @milestone.notes.create(notes_params.merge({author_id: current_person.id}))
     redirect_to @milestone
   end
 
@@ -21,7 +23,6 @@ class NotesController < ApplicationController
   private
   def notes_params
     params.require(:note).permit(:text, :author_id, :visibility, :created_at, :updated_at, :milestone_id)
-
   end
 
 end

@@ -26,7 +26,7 @@ class GoogleController < ApplicationController
       user.save!
 
       session[:user_id] = user.id
-      redirect_to people_path
+      redirect_to root_path
     else
       redirect_to google_unregistered_path
     end
@@ -38,7 +38,7 @@ class GoogleController < ApplicationController
   end
 
   def unregistered
-    @msj = String.new('Usuario no regitrado, contacte a un administrador.')
+    @msj = String.new(t('unregistered'))
   end
 
   #
@@ -63,28 +63,22 @@ class GoogleController < ApplicationController
 
       begin
         f = session.file_by_url(url)
+        #se logro encontrar el resorce
+        r = Resource.new
+        r.doc_id= f.resource_id
+        r.title= f.title
+        r.url= f.human_url
+        m.resources<<(r)
+        m.save!
       rescue Google::APIClient::ClientError
-        @err = true
-        redirect_to google_driveerror_path(:err => true) and return
-      end
-
-      r = Resource.new
-      r.doc_id= f.resource_id
-      r.title= f.title
-      r.url= f.human_url
-      m.resources<<(r)
-      m.save!
-
-      redirect_to root_path
-    else
-      redirect_to root_path
+        #no se logro encontrar el resorce
+        r = Resource.new
+        r.title= url
+        r.url= url
+        m.resources<<(r)
+        m.save!
+      end   
     end
-  end
-
-  def driveerror
-    e = params[:err]
-    if not e
       redirect_to root_path
-    end
   end
 end

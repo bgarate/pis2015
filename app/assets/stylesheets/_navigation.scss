@@ -41,12 +41,22 @@
 ul.navbar-nav{
   li {
 
-    a {
+    color: #9d9d9d;
 
+    &.logout {
       padding: 8px 20px;
-      border-top: 3px transparent solid;
-      background-color: transparent;
 
+      a {
+        padding: 0;
+        padding-left: 15px;
+      }
+    }
+
+    a {
+      border-top: 3px transparent solid;
+      padding: 8px 20px;
+      background-color: transparent;
+      display: inline-block;
     }
 
     &.active a {

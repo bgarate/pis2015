@@ -1,0 +1,65 @@
+#div_project {
+    margin-top: 30px;
+    border-bottom: 3px solid $peterriver;
+    padding: 0px 30px 30px 30px;
+    background-color: white;
+
+    h1 {
+        color: white;
+        text-align: center;
+        background-color: $peterriver;
+        margin: 0px -30px 20px -30px;
+        padding: 15px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    #buttonOne {
+        position: absolute;
+        right: 8px;
+        bottom: 0;
+        border-radius: 0;
+        background-color: $peterriver;
+        border: none;
+        color: white;
+
+        &:active, &:focus {
+            background-color: $peterriver-focus;
+            color: white;
+            box-shadow: none;
+        }
+    }
+
+    #buttonTwo {
+        border-radius: 0;
+        background-color: $peterriver;
+        border: none;
+        color: white;
+
+        &:active, &:focus {
+            background-color: $peterriver-focus;
+            color: white;
+            box-shadow: none;
+        }
+    }
+
+
+
+    input {
+        border-radius: 0;
+        box-shadow: none;
+
+        border-width: 1px 1px 3px 1px;
+
+        &:focus {
+
+            box-shadow: none;
+        }
+    }
+
+    .has-success, .has-error {
+        .form-control {
+            box-shadow: none;
+        }
+    }
+}

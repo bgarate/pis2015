@@ -1,28 +1,84 @@
+var commands = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: "/commands"
+});
 
-// OJO! Esto es una solución temporal para permitir la navegación entre las diferentes
-// partes del sitio. Se integrará una solución más general.
+var people = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: "/people.json"
+});
 
-Search = {};
+var milestones = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: "/milestones.json"
+});
 
-Search.commands = {
-    "Ver mi perfil" : "/people/me",
-    "Crear usuario" : "/people/new",
-    "Cerrar sesion" : "/google/signout",
-    "Ver personas" : "/people/",
-    "Ver hitos" : "/milestones/",
-    "Crear hito" : "/milestones/new",
-};
+var dashboard = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: "/dashboard.json"
+});
 
+var projects = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: "/projects.json"
+});
 
 $().ready(function() {
 
-    $("#nav-search").autocomplete({
-        source: Object.keys(Search.commands),
-        autoFocus: true,
-        select: function(e,ui) {
-            $("#nav-search-form").attr("action", Search.commands[ui.item.value]);
-            $("#nav-search-form").submit();
+    people.initialize();
+
+    $("#nav-search").typeahead({
+        minLength: 1,
+        highlight: true
+    },
+    {
+        name: 'commands',
+        displayKey: 'name',
+        source: commands,
+        templates: {
+            header: "<div class='search-header'>Comandos</div>"
         }
+    },
+    {
+        name: 'people',
+        displayKey: 'name',
+        source: people,
+        templates: {
+            header: "<div class='search-header'>Personas</div>"
+        }
+    },
+    {
+        name: 'milestones',
+        displayKey: 'name',
+        source: milestones,
+        templates: {
+            header: "<div class='search-header'>Hitos</div>"
+        }
+    },
+    {
+        name: 'dashboard',
+        displayKey: 'name',
+        source: dashboard,
+        templates: {
+            header: "<div class='search-header'>Dashboard</div>"
+        }
+    },
+    {
+        name: 'projects',
+        displayKey: 'name',
+        source: projects,
+        templates: {
+            header: "<div class='search-header'>Proyectos</div>"
+        }
+    }).on('typeahead:selected', function(e,data) {
+        var form = $("#nav-search-form");
+        form.attr("action", data.url);
+        form.submit();
     });
 
 });

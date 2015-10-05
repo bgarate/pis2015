@@ -2,17 +2,18 @@
 #
 # Table name: milestones
 #
-#  id             :integer          not null, primary key
-#  title          :string
-#  start_date     :date
-#  due_date       :date
-#  description    :text
-#  status         :integer
-#  milestone_type :integer
-#  icon           :string
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  category_id    :integer
+#  id                 :integer          not null, primary key
+#  title              :string
+#  due_date           :date
+#  description        :text
+#  status             :integer          default(0)
+#  milestone_type     :integer
+#  icon               :string
+#  feedback_author_id :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  category_id        :integer
+#  start_date         :date
 #
 
 class Milestone < ActiveRecord::Base
@@ -27,6 +28,9 @@ class Milestone < ActiveRecord::Base
   belongs_to :category
   enum status: [:pending, :done, :rejected]
   enum milestone_type: [ :feedback, :event ]
+
+  # autor del feedback
+  belongs_to :feedback_author, class_name: 'Person'
 
   def get_next_status
     status_order = [:pending, :done, :rejected]

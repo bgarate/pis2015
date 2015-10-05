@@ -1,38 +1,102 @@
-<p>
-  <label>
-    <%= t('project_name') %>
-  </label>
-  <%= @project.name %>
-</p>
-<p>
-  <label>
-    <%= t('project_client') %>
-  </label>
-  <%= @project.client %>
-</p>
-<p>
-  <label>
-    <%= t('project_status') %>
-  </label>
-  <%= @project.display_status %>
-</p>
-<p>
-  <label>
-    <%= t('project_start_date') %>
-  </label>
-  <%= @project.start_date %>
-</p>
-<p>
-  <label>
-    <%= t('project_end_date') %>
-  </label>
-  <%= @project.end_date %>
-</p>
-<p>
-    <label>
-    <%= t('project_technologies') %>
-    </label>
-    <% @project.technologies.each do |t| %>
-      <li><%= t.name %></li>
-    <% end %>
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
+      <div id="div_project">
+        <h1><span class="glyphicon glyphicon-check"></span> Ver Proyecto</h1>
+        <table class="table table-striped">
+          <tbody>
+          <tr>
+            <td>
+              <label>
+                <%= t('project_name') %>
+              </label>
+              <%= @project.name %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>
+                <%= t('project_client') %>
+              </label>
+              <%= @project.client %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>
+                <%= t('project_status') %>
+              </label>
+              <%= @project.display_status %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>
+                <%= t('project_start_date') %>
+              </label>
+              <%= @project.start_date %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>
+                <%= t('project_end_date') %>
+              </label>
+              <%= @project.end_date %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>
+                <%= t('project_technologies') %>
+              </label>
+              <% @project.technologies.each do |t| %>
+                  <li><%= t.name %></li>
+              <% end %>
+              <% if @project.technologies.size == 0 %>
+                  <em><%= t('project_no_technologies') %></em>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>
+                <%= t('project_people') %>
+              </label>
+              <% @project.people.each do |t| %>
+                  <li><%= link_to t.name, t %></li>
+              <% end %>
+              <% if @project.people.size == 0 %>
+                  <em><%= t('project_no_people') %></em>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+            <%= form_tag ({:action => 'assign_person', :controller => 'projects', :project_id => @project.id}) do   %>
+                <% if !@usr.empty?%>
+                  <label>
+                    <%= t('assign_to_project') %>
+                  </label>
+                  <br>
+                  <select name="person_id">
+                    <% @usr.each do |p|%>
+                        <option value= <%=p.id%> > <%=p.name%></option>
+
+                    <% end %>
+                  </select>
+
+                  <%= button_tag t('project_assign_submit'), options= :type => 'submit', id: "buttonTwo" %>
+               <% end %>
+            </td>
+          </tr>
+          <%= button_tag t('back'), options= :type => 'submit', id: "buttonOne", class: "btn btn-default" %>
+          <% end%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>

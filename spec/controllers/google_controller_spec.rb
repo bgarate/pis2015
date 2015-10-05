@@ -7,6 +7,7 @@ require 'rspec/active_model/mocks'
 describe GoogleController, "Login a traves de google oatuh" do
   before(:each) do
     allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
+    #allow_any_instance_of(ApplicationController).to receive(:can_view_person?) { true }
   end
 
   #
@@ -55,21 +56,16 @@ describe GoogleController, "Login a traves de google oatuh" do
 
     per.save!
 
-    request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
-    visit '/auth/google_oauth2/callback'
-    expect(current_path).to include(people_path)
+    user = User.new :person => per
+    user.oauth_expires_at = Time.current().advance(days:1)
 
-  end
-
-
-  it 'Deveria redirigir a unregistered' do
+    allow_any_instance_of(ApplicationController).to receive(:current_user) { user }
 
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:google_oauth2]
     visit '/auth/google_oauth2/callback'
+    expect(current_path).to include('/people/')
 
-    expect(current_path).to eq google_unregistered_path
   end
-
 
   it 'Deberia poner el user id en session en nil y redirigir a home' do
     admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
@@ -90,7 +86,7 @@ describe GoogleController, "Login a traves de google oatuh" do
   it 'Deberia renderizar unregistered con msj como parametro' do
 
     get :unregistered
-    expect(assigns(:msj)).to eq('Usuario no regitrado, contacte a un administrador.')
+    expect(assigns(:msj)).to eq('Usuario no registrado, contacte a un administrador.')
     expect(response).to render_template('unregistered')
   end
 
@@ -132,12 +128,7 @@ describe GoogleController, "Login a traves de google oatuh" do
     expect(response).to redirect_to(root_path)
   end
 
-  it 'Deveria redirigir a root path ' do
-    get :driveerror
-    expect(response).to redirect_to(root_path)
-  end
-
-  it 'Deveria redirigir a home y haber asociado el resource al hito' do
+  it 'Deveria redirigir a home y haber asociado el resource al hito con titulo' do
 
     f = double()
     allow(f).to receive(:resource_id).and_return('unid')
@@ -177,9 +168,10 @@ describe GoogleController, "Login a traves de google oatuh" do
     expect(response).to redirect_to(root_path)
     mr = Milestone.find_by(id: m.id)
     expect(mr.resources[0].url).to eq('/una/url')
+    expect(mr.resources[0].title).to eq('untitulo')
   end
 
-  it 'Deveria redirigir a home la pagina de error' do
+  it 'Deveria redirigir a home y haber asociado el resource al hito con titulo = url' do
 
     s = double()
     allow(s).to receive(:file_by_url).with(anything()) { raise Google::APIClient::ClientError }
@@ -211,7 +203,10 @@ describe GoogleController, "Login a traves de google oatuh" do
     session[:user_id] = per.user.id
 
     get :adddrive, :milestone_id => m.id, :URL => '/una/url'
-    expect(response).to redirect_to(google_driveerror_path(err: true))
+    expect(response).to redirect_to(root_path)
+    mr = Milestone.find_by(id: m.id)
+    expect(mr.resources[0].url).to eq('/una/url')
+    expect(mr.resources[0].title).to eq('/una/url')
   end
 
 end

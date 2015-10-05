@@ -40,10 +40,11 @@ es:
   edit: "Editar"
   delete: "Borrar"
   back: "Volver"
+  title: "Título"
   name: 'Nombre'
   id: 'ID'
   not_authorized: "No esta autorizado para realizar esa accion"
-
+  unregistered: "Usuario no registrado, contacte a un administrador."
 
   #crear persona
   people_new_name: "Nombre"
@@ -53,6 +54,11 @@ es:
   people_new_birth_date: "Fecha de nacimiento"
   people_new_init_date: "Fecha de ingreso"
   people_new_submit: "Crear usuario"
+  select_people: "Seleccione personas..."
+  assign_to_project: "Asignar a proyecto"
+
+  people_assign_to: "Asignar a proyecto"
+
 
   mentor_since: "Desde"
   mentor_name: "Nombre del mentor"
@@ -72,6 +78,11 @@ es:
   project_edit_submit: "Actualizar proyecto"
   project_index_header: "Listando proyectos"
   project_no_projects: "No se han encontrado proyectos"
+  project_no_technologies: "No hay tecnologías asociadas al proyecto"
+  project_people: "Personas asociadas al proyecto"
+  project_no_people: "No hay personas asociadas al proyecto"
+  select_technologies: 'Seleccione tecnologías...'
+  project_assign_submit: 'Asignar a proyecto'
   project:
       display_status:
         active: 'Activo'
@@ -79,6 +90,16 @@ es:
         finished: 'Finalizado'
 
   #hitos
+
+  milestone_edit_head: "Editar Hito"
+  milestone_due_date: "Due date del hito"
+  milestone_reviewer: 'Revisor del feedback'
+
+  assign_to: 'Asignar a'
+
+  markdone: 'Marcar como hecho'
+  add_feedback_author: 'Añadir revisor del feedback'
+  select_tags: 'Seleccione tags...'
 
   pending: "pendiente"
   done: "hecho"
@@ -94,7 +115,8 @@ es:
   mil_status: "Estado"
   mil_create: "Crear Hito"
   mil_delete: "Borrar Hito"
-
+  mil_assigned: " será asignado por defecto"
+  mil_assigned_to: "Asignado(s) a este hito"
 
 
   #categorias
@@ -114,6 +136,7 @@ es:
   note_updated: "Actualizado"
   note_create: "Crear Nota"
   note_delete: "Borrar Nota"
+  add_notes: "Agregar Notas"
   me: "Privado"
   mentors: "Mentores"
   every_body: "Publico"

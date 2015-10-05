@@ -253,125 +253,110 @@ ul#skills {
 
 }
 
-@mixin triangle($direction, $color: currentcolor, $size: 30px) {
-
-  width: 0;
-  height: 0;
-
-  border-style: solid;
-  border-color: transparent;
-  border-width: $size / 2;
-  border-#{opposite_position($direction)}-color: $color;
-}
-
-
-$tag-height: 20px;
-
-
 ul#milestone-list {
 
   padding-left: 40px;
 
   > li {
 
-    position: relative;
-    border-radius: 10px;
-    text-align: left;
-    background-color: white;
-    list-style-type: none;
-    padding: 20px 10px 20px 15px;
-    color: black;
-
-    margin: 10px;
-
-    @include transition(0.3s ease-in-out);
-
-    &:hover {
-      margin-top: 20px;
-      margin-bottom: 20px;
-      padding-top: 30px;
-      padding-bottom: 30px;
-      @include box-shadow(1px 1px 3px rgba(0,0,0,0.3));
-
-    }
-
-    &:before {
-      content: '';
-      position: absolute;
-      top: 20px;
-      left: -30px;
-      @include triangle(left, white);
-      clear: both;
-    }
-
-    &:after {
-      content: '';
-      position: absolute;
-      top: 16px;
-      left: -60px;
-      width: 42px;
-      height: 42px;
-      background-image: image-url('layouts/calendar-white.png');
-      background-size: 60%;
-      background-repeat: no-repeat;
-      background-position: 50%;
-      border-radius: 50%;
-      border: 6px $body-background solid;
-      background-color: $alizarin;
-    }
-
-    h2 {
-      margin: 0 0 10px 0;
-      font-size: 18px;
-    }
-
-    p {
-      padding-left: 15px;
-    }
-
-    ul.tags {
-      float: right;
-      margin-right: 15px;
-    }
-
-    li {
       position: relative;
-      float: right;
-      background-color: #E862E5;
-      font-size: 10px;
-      list-style: none;
-      line-height: $tag-height;
-      height: $tag-height;
-      padding: 0 10px;
-      color: white;
-      font-weight: bold;
-      margin-top: 4px;
+      border-radius: 10px;
+      text-align: left;
+      background-color: white;
+      list-style-type: none;
+      padding: 20px 10px 20px 15px;
+      color: black;
 
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
+      margin: 10px;
+
+      @include transition(0.3s ease-in-out);
+
+      &:hover {
+          margin-top: 20px;
+          margin-bottom: 20px;
+          padding-top: 30px;
+          padding-bottom: 30px;
+          @include box-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
+
+      }
 
       &:before {
-        content: '';
-        position: absolute;
-        left: -$tag-height;
-        @include triangle(left, #E862E5, $tag-height);
+          content: '';
+          position: absolute;
+          top: 20px;
+          left: -30px;
+          @include triangle(left, white);
+          clear: both;
       }
 
       &:after {
-        content: '';
-        position: absolute;
-        left: -1px;
-        top: calc(50% - 2px);
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-        background-color: white;
+          content: '';
+          position: absolute;
+          top: 16px;
+          left: -60px;
+          width: 42px;
+          height: 42px;
+          background-image: image-url('layouts/calendar-white.png');
+          background-size: 60%;
+          background-repeat: no-repeat;
+          background-position: 50%;
+          border-radius: 50%;
+          border: 6px $body-background solid;
+          background-color: $alizarin;
       }
 
+      h2{
+          margin: 0 0px 10px 0px;
+          font-size: 18px;
 
-    }
+          a {
+              text-decoration: none;
+          }
+      }
+
+      p {
+          padding-left: 15px;
+      }
+
+      .resources-list {
+          margin: 0;
+
+          background-color: $peterriver;
+          color: white;
+          margin: 0 -10px 10px -15px;
+
+          padding: 10px 15px;
+
+          h2 {
+              font-size: 14px;
+              margin: 0;
+              font-weight: bold;
+              float: left;
+          }
+
+          a {
+              color: white;
+              text-decoration: none;
+          }
+
+          .toggle-documents {
+              float: right;
+              cursor: pointer;
+          }
+
+          ul {
+              padding: 10px 5px;
+              list-style-type: none;
+              clear: both;
+
+          }
+
+
+
+      }
 
   }
+
 }
 
 

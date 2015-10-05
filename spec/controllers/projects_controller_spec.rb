@@ -25,6 +25,15 @@ describe ProjectsController do
     @proy.save!
   end
 
+  describe "GET index" do
+    it "despliega el listado de proyectos" do
+      session[:user_id] = @ad_user.id
+      get :index, :session => session
+      # Espero que me muestre el formulario
+      expect(response).to render_template("index")
+    end
+  end
+
   describe "GET new" do
     it "Despliega formulario de creacion de proyecto" do
       session[:user_id] = @ad_user.id
@@ -45,38 +54,79 @@ describe ProjectsController do
   describe "GET create" do
     it "Crea proyecto con nombre, estado y cliente valido" do
       session[:user_id] = @ad_user.id
-      get :create, {:project=>{:name=>'Nombre', :client=>'Cliente', :status=>"active", :id_technologies=>[]},:session=>session}
+      get :create, {:project=>{:name=>'Nombre', :client=>'Cliente', :status=>"active"}, :technologies=>[],:session=>session}
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end
 
     it "No crea proyecto con cliente vacio" do
       session[:user_id] = @ad_user.id
-      get :create, {:project=>{:name=>'Nombre', :status=>"inactive", :id_technologies=>[]},:session=>session}
+      get :create, {:project=>{:name=>'Nombre', :status=>"inactive"}, :technologies=>[],:session=>session}
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end
 
   end
 
+
+  describe "GET edit" do
+    it "despliega el formulario de edicion de proyectos" do
+      session[:user_id] = @ad_user.id
+      get :edit, {:id=>@proy.id}, :session => session
+      # Espero que me muestre el formulario
+      expect(response).to render_template("edit")
+    end
+  end
+
+
   describe "GET update" do
     it "Actualiza proyecto con nombre, estado y cliente valido" do
       session[:user_id] = @ad_user.id
-      get :update, {:id=>@proy.id, :project=>{:name=>'Nombre', :client=>'Cliente', :status=>"active", :technologies=>[]},:session=>session}
+      get :update, {:id=>@proy.id, :project=>{:name=>'Nombre', :client=>'Cliente', :status=>"active"}, :technologies=>[],:session=>session}
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end
 
     it "No crea proyecto con cliente vacio" do
       session[:user_id] = @ad_user.id
-      get :update, {:id=>@proy.id, :project=>{:name=>'Nombre', :client=>'', :status=>"inactive", :technologies=>[]},:session=>session}
+      get :update, {:id=>@proy.id, :project=>{:name=>'Nombre', :client=>'', :status=>"inactive"}, :technologies=>[],:session=>session}
       # Espero que no se modifique el cliente
       expect(@proy.client).to eq('Cliente')
     end
 
   end
 
-  describe "GET Destroy" do
+  describe "GET show" do
+    it "Muestra un proyecto" do
+      session[:user_id] = @ad_user.id
+      get :show, {:id=>@proy.id}
+      # Espero ser redirigido
+      expect(response).to render_template("show")
+    end
+    describe "GET show" do
+      it "Muestra un proyecto" do
+        session[:user_id] = @no_ad_user.id
+        get :show, {:id=>@proy.id}
+        # Espero ser redirigido
+        expect(response).to render_template("show")
+      end
+    end
+    describe "assign_project" do
+      it "Asigna una persona a un proyecto" do
+        session[:user_id] = @ad_user.id
+        p1= Project.new
+        p1.name="projecto prueba"
+        p1.client='Cliente'
+        p1.status="active"
+        p1.save!
+
+        post :assign_person, :project_id => p1.id, :person_id=> @admin.id, :session=>session
+        # Espero ser redirigido
+        expect(response.status).to eq(302)
+      end
+    end
+
+    describe "GET Destroy" do
     it "Borra logicamente un proyecto" do
       session[:user_id] = @ad_user.id
       get :destroy, {:id=>@proy.id}
@@ -92,5 +142,6 @@ describe ProjectsController do
     end
   end
 
+  end
 end
 

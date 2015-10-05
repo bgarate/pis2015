@@ -1,15 +1,9 @@
-<table>
-  <tr><td><%= t('cat_add') %></td></tr>
+<% unless Category.all.empty? %>
   <%= form_tag ({:action => 'add_category', :controller => 'milestones', :milestone_id => params[:id]}) do   %>
-    <% if Category.all.empty? %>
-          <%=t('cat_unavailable')%>
-        <% else %>
-          <tr><td><select name="category_id">
+      <select name="category_id" class="chosen submit-on-select">
             <% Category.all.each do |ca| %>
               <option value=<%=ca.id%> > <%=ca.name%></option>
             <% end %>
-          </select></td></tr>
-      <tr><td><%= submit_tag(t('add')) %></td></tr>
+          </select>
     <% end %>
-  <% end %>
-</table>
+<% end %>

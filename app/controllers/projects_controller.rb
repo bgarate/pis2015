@@ -60,12 +60,6 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @technologies = Technology.all
-    tech_aux = @project.technologies
-    @selected_tech = []
-    tech_aux.each do |t|
-      @selected_tech<<t.id
-    end
   end
 
   def update

@@ -158,6 +158,7 @@ es:
   tag_edit_submit: "Actualizar tag"
   tag_index_header: "Listando tags"
   tag_no_tags: "No se han encontrado tags"
+  tag_delete_sure: "¿Estás seguro de que deseas eliminar la Tag?"
 
 
   #fechas

@@ -24,7 +24,7 @@
                 </td>
                 <td><%= link_to tag_path(t),
                                 method: :delete,
-                                data: { confirm: t('sure?') } do %>
+                                data: { confirm: t('tag_delete_sure') } do %>
                       <span class='large-text glyphicon glyphicon-remove'></span>
                   <% end %>
                 </td>
@@ -40,35 +40,3 @@
   </div>
 </div>
 
-
-
-<!--
-<h1><%= t('tag_index_header') %></h1>
-<table class="table">
-  <tr>
-    <th><%= t('id') %></th>
-    <th><%= t('name') %> </th>
-  </tr>
-  <% tags = Tag.all %>
-  <% tags.each do |t| %>
-      <tr>
-        <td>
-          <%= t.id %>
-        </td>
-        <td>
-          <%= link_to t.name, t %>
-        </td>
-
-        <td>
-          <%= link_to t('edit'), edit_tag_path(t) %>
-        </td>
-        <td>
-          <%= link_to t('delete'), t, method: :delete %>
-        </td>
-      </tr>
-  <% end %>
-
-</table>
-<% if tags.size == 0 %>
-    <em><%= t('tag_no_tags') %></em>
-<% end %>-->

@@ -142,3 +142,4 @@ en:
   tag_edit_submit: "Update tag"
   tag_index_header: "Listing tags"
   tag_no_tags: "No tags found"
+  tag_delete_sure: "Are you sure you wish to delete Tag?"

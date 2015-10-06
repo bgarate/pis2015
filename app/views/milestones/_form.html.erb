@@ -42,7 +42,7 @@
           <div class="form-group col-xs-6">
             <%= m.label t('mil_start_date'), class: "control-label" %>
             <div class="input-group">
-              <%= m.text_field :start_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy"%>
+              <%= m.text_field :start_date, id: 'start_date', class: "form-control", "data-provide":"datepicker", 'data-validation':'check_start_date' ,'data-validation-format': "dd/mm/yyyy"%>
               <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
             </div>
           </div>
@@ -50,7 +50,7 @@
           <div class="form-group col-xs-6">
             <%= m.label t('mil_due_date'), class: "control-label" %>
             <div class="input-group">
-              <%= m.text_field :due_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy"%>
+              <%= m.text_field :due_date, id: 'due_date', class: "form-control", "data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy"%>
               <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
             </div>
           </div>
@@ -79,3 +79,72 @@
     </div>
 <% end %>
 <script> $(".chzn-select").chosen();</script>
+<script>
+  // Add custom validation rule
+  $.formUtils.addValidator({
+    name : 'check_start_date',
+    validatorFunction : function() {
+      var start=document.getElementById('start_date').value;
+      if (start=='') return true;
+      var parts= start.split('/');
+      var start_year= parts[2];
+      var start_month= parts[1]-1;
+      var start_day= parts[0];
+      var date=new Date();
+      var start_date=new Date(start_year, start_month, start_day,23,59,59);
+      return start_date>=date;
+
+    },
+    errorMessage : '',
+    errorMessageKey: 'badStartDate'
+  });
+
+  // Setup form validation
+  $.validate();
+</script>
+
+<script>
+
+  // Add custom validation rule
+  $.formUtils.addValidator({
+    name : 'check_due_date',
+    validatorFunction : function() {
+      var due=document.getElementById('due_date').value;
+      if (due=='') return true;
+      var parts= due.split('/');
+      var due_year= parts[2];
+      var due_month= parts[1]-1;
+      var due_day= parts[0];
+      var due_date=new Date(due_year, due_month, due_day,23,59,59);
+      var start=document.getElementById('start_date').value;
+      var parts= start.split('/');
+      var start_year= parts[2];
+      var start_month= parts[1]-1;
+      var start_day= parts[0];
+      var start_date=new Date(start_year, start_month, start_day,23,59,59);
+      var date=new Date();
+      return due_date>=date && start_date<due_date;
+    },
+    errorMessage : '',
+    errorMessageKey: 'badDueDate'
+  });
+  // Setup form validation
+  $.validate();
+</script>
+
+<script>
+
+  // Add custom validation rule
+  $.formUtils.addValidator({
+    name : 'status',
+    validatorFunction : function(status) {
+      return (status=='pending')||(status=='done')||(status=='rejected');
+    },
+    errorMessage : '',
+    errorMessageKey: 'badStatus'
+  });
+
+  // Setup form validation
+  $.validate();
+
+</script>

@@ -1,7 +1,11 @@
 <div id="profile-card" class="card profile">
   <div id="profile-picture">
     <div class="img-container">
-      <%= image_tag "test/siluetaCorbata1.jpg" %>
+      <% if @image_id %>
+          <%= cl_image_tag(@image_id) %>
+    <% else %>
+        <%= cl_image_tag "lfblntfejcpmmkh0wfny.jpg" %>
+      <% end %>
     </div>
   </div>
   <h1><%= @name %></h1>
@@ -16,10 +20,11 @@
     <% if @mentorships.empty? %>
         <p>Sin mentores en la actualidad</p>
     <%else%>
-        <% @mentorships.each do |s| %>
-            <li><%= s.name %></li>
-        <%end%>
-        <br>
+        <ul id="mentors">
+            <% @mentorships.each do |s| %>
+                <li><%= link_to cl_image_tag(s.image_id), s %></li>
+            <%end%>
+        </ul>
     <%end%>
     <%if current_user_admin? %>
         <a href="add_mentor_form?mentee_id=<%=@identifier%>" class="btn btn-info" role="button"><span class="glyphicon glyphicon-add"></span>Agregar Mentores</a>

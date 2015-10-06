@@ -46,6 +46,8 @@ class PeopleController < ApplicationController
       @proysin = person.projects.where("Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE").length
       @proysend = person.projects.where("Projects.end_date < CURRENT_DATE").length
 
+      @image_id = person.image_id
+
       #tiempo en moove-it
       @start_date = person.start_date
       #Eventos (Hitos)
@@ -83,8 +85,17 @@ class PeopleController < ApplicationController
   end
 
   def create
-    @person = Person.new(person_params)
+
+    @person = Person.new(person_params.except(:image_id))
+
+    if person_params[:image_id].present?
+      preloaded = Cloudinary::PreloadedFile.new(params[:image_id])
+      raise "Invalid upload signature" if !preloaded.valid?
+      @person.image_id = preloaded.identifier
+    end
+
     @person.save
+
     if @person.valid?
       flash.notice = "'#{person_params[:name]}' creado con éxito!"
       redirect_to @person
@@ -142,7 +153,7 @@ class PeopleController < ApplicationController
 
   private
   def person_params
-    params.require(:person).permit(:name, :email, :cellphone, :phone, :birth_date, :start_date)
+    params.require(:person).permit(:name, :email, :cellphone, :phone, :birth_date, :start_date, :image)
   end
 
 

@@ -33,7 +33,6 @@ es:
   proyect: "Proyecto"
   proyects: "Proyectos"
   save: "Guardar"
-  sure?: "¿Estas seguro?"
   add: "Agregar"
   values: "Valores"
   create: "Crear"
@@ -96,7 +95,7 @@ es:
   milestone_reviewer: 'Revisor del feedback'
 
   assign_to: 'Asignar a'
-
+  mil_sure?: "¿Esta seguro que desea borrar este hito?"
   markdone: 'Marcar como hecho'
   add_feedback_author: 'Añadir revisor del feedback'
   select_tags: 'Seleccione tags...'
@@ -140,7 +139,7 @@ es:
   me: "Privado"
   mentors: "Mentores"
   every_body: "Publico"
-
+  note_sure?: "¿Esta seguro que desea borrar esta nota?"
 
   attachmentsdocs: 'Documentos adjuntos'
   adddoc: 'Agregar documento'
@@ -159,6 +158,7 @@ es:
   tag_edit_submit: "Actualizar tag"
   tag_index_header: "Listando tags"
   tag_no_tags: "No se han encontrado tags"
+  tag_delete_sure: "¿Estás seguro de que deseas eliminar la Tag?"
 
 
   #fechas

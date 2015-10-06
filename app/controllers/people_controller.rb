@@ -20,10 +20,10 @@ class PeopleController < ApplicationController
 
   def show
     person = Person.find_by(id: params[:id])
-    if !person
-      person = Person.find_by(name: params[:id])
-      if !person
-        person = Person.where("email LIKE :prefix", prefix:"#{params[:id]}@%").first
+    unless person
+      person = Person.where("lower(name)= :name", name:"#{params[:id].downcase}").first
+      unless person
+        person = Person.where("lower(email) LIKE :prefix", prefix:"#{params[:id].downcase}@%").first
       end
     end
 

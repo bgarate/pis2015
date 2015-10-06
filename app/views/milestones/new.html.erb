@@ -30,15 +30,17 @@
               <%=  m.text_area :icon, class: "form-control" %>
             </div>
           </div>
-            <div> <%=t('category')%>
-            <tr><td><select name="category_id">
-              <option value=<%=nil%> > Ninguna </option>
-              <% Category.all.each do |ca| %>
-                <option value=<%=ca.id%> > <%=ca.name%></option>
-              <% end %>
-            </select></td></tr>
-            </div>
+          <div>
+            <%= m.label t('milestone_category')%>
+            <br>
+            <%= m.select :category_id, Category.all.collect {|t| [t.name, t.id]}, {}, {:multiple => false, :class => "chzn-select category", 'style'=> 'width:100%'} %>
 
+          </div>
+          <div class="form-group feedback_autor">
+            <%=  m.label t('milestone_reviewer')%>
+            <br>
+            <%= m.select :feedback_author_id, Person.all.collect {|t| [t.name, t.id]}, {}, { :multiple => false, :class => "chzn-select select_author", 'style'=> 'width:100%'} %>
+          </div>
           <div class="row">
 
             <div class="form-group col-xs-6">
@@ -78,3 +80,16 @@
  </div>
 
 <script> $(".chzn-select").chosen();</script>
+<script>
+    $('.category').change( function() {
+        var selectedValue = $(this).find('option:selected').val();
+        if (selectedValue==2){
+            $('.feedback_autor').show('slow');
+        }
+        if (selectedValue!=2){
+            $('.feedback_autor').hide('slow');
+            $('.select_author').val(' ').trigger("select_author:updated");
+        }
+    });
+
+</script>

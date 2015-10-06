@@ -11,6 +11,12 @@
           </div>
 
           <div class="form-group">
+            <%= f.label t('mil_description'), class: "control-label" %>
+            <%= f.text_field :description, class: "form-control", 'data-validation': "required" %>
+          </div>
+
+
+          <div class="form-group">
             <%= f.label t('milestone_category')%>
             <br>
             <%= f.select :category_id, Category.all.collect {|t| [t.name, t.id]}, {}, {:multiple => false, :class => "chzn-select category", 'style'=> 'width:100%'} %>
@@ -30,16 +36,16 @@
 
           <div class="row">
             <div class="form-group col-xs-6">
-              <%= f.label t('milestone_due_date'), class: "control-label" %>
+              <%= f.label t('mil_due_date'), class: "control-label" %>
               <div class="input-group">
-                <%= f.text_field :due_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
+                <%= f.text_field :due_date, class: "form-control", 'value':l(@milestone.due_date), "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
                 <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
               </div>
             </div>
           </div>
 
           <div class="btn">
-            <%= f.button t('milestone_edit_submit'), options= :type => 'submit', class: "btn btn-default" %>
+            <%= f.button t(:save), options= :type => 'submit', class: "btn btn-default" %>
           </div>
       <% end %>
 
@@ -52,14 +58,16 @@
 </script>
 <script>
     $('.category').change( function() {
-    var selectedValue = $(this).find('option:selected').val();
-        if (selectedValue==2){
+    var selectedValue = $(this).find('option:selected').text();
+        if (selectedValue=='Feedback'){
             $('.feedback_autor').show('slow');
         }
-        if (selectedValue!=2){
+        else {
             $('.feedback_autor').hide('slow');
-            $('.select_author').val(' ').trigger("select_author:updated");
+            $('.select_author').val('').trigger("select_author:updated");
         }
     });
-
+    $().ready(function(){
+        $('.category').trigger('change');
+    })
 </script>

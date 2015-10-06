@@ -31,7 +31,12 @@ class PeopleController < ApplicationController
       #nombre
       @name = person.name
       @identifier = person.id
-      @people= Person.all.where('id NOT in (?)', @identifier)
+      user = Person.find(current_user.person_id)
+      if current_user_admin?
+        @people= Person.all.where('id NOT in (?)', @identifier)
+      else
+        @people= user.mentees
+      end
       @person = person
       @tags=Tag.all
 

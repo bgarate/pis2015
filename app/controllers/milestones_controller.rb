@@ -36,9 +36,6 @@ class MilestonesController < ApplicationController
   end
 
   def new
-    @milestone=Milestone.new
-    @tags = Tag.all
-    @people = Person.all.where('id NOT in (?)', @identifier)
     redirect_to '/people'
   end
 
@@ -88,7 +85,12 @@ class MilestonesController < ApplicationController
 
   def edit
     @tags = Tag.all
-    @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
+    user= Person.find(current_user.person_id)
+    if current_user_admin?
+      @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
+    else
+      @people= user.mentees
+    end
   end
 
   def update

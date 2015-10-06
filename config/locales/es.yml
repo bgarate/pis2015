@@ -116,7 +116,7 @@ es:
   mil_delete: "Borrar Hito"
   mil_assigned: " será asignado por defecto"
   mil_assigned_to: "Asignado(s) a este hito"
-
+  mil_cannot_assign: "No puede asignar más personas"
 
   #categorias
   cat_name: "Nombre"

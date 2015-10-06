@@ -65,9 +65,13 @@
 
           </div>
           <div class="form-group col-xs-12">
+            <% if @people.empty? %>
+              <%= m.label t('mil_cannot_assign')%>
+            <%else%>
             <%= m.label t('assign_to'), class: "control-label" %>:<br>
             (<%= @person.name+t('mil_assigned') %>)
             <%= select_tag(:people, options_from_collection_for_select(@people, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('select_people'), 'style'=> 'width:100%') %>
+            <%end%>
             <%= m.hidden_field(:created_at, :value=>Time.now) %>
             <%= m.hidden_field(:updated_at, :value=>Time.now) %>
             <br><br>

@@ -34,7 +34,9 @@
 
 
     <div class="card-col col-xs-5 col-sm-5 col-md-5 col-lg-5">
+    <%if can_view_person?(@identifier) %>
       <%= render 'milestones/form' %>
+    <%end%>
       <%= render 'people/timeline_card' %>
     </div>
   </div>

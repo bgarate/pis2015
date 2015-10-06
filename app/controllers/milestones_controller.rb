@@ -39,6 +39,7 @@ class MilestonesController < ApplicationController
     @milestone=Milestone.new
     @tags = Tag.all
     @people = Person.all.where('id NOT in (?)', @identifier)
+    redirect_to '/people'
   end
 
 
@@ -59,10 +60,10 @@ class MilestonesController < ApplicationController
     end
     if @milestone.valid?
       flash.notice = "'#{milestone_params[:title]}' creado con éxito!"
-      redirect_to @milestone
+      redirect_to @person
     else
       flash.alert = "'#{milestone_params[:title]}' no se ha podido crear"
-      redirect_to '/milestones/new'
+      redirect_to @person
     end
 
   end

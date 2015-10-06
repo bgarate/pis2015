@@ -188,12 +188,12 @@ describe MilestonesController, "Milestone Controller" do
 
     it 'is invalid without a title' do
       post :create, :person_id=>@admin.id, :milestone=>{ :description=>'unadescripciondemilestone'}
-      expect(response).to redirect_to('/milestones/new')
+      expect(response).to redirect_to(@admin)
     end
 
     it 'is invalid without a description' do
       get :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1'}
-      expect(response.status).to redirect_to('/milestones/new')
+      expect(response.status).to redirect_to(@admin)
     end
 
     it 'modifica el hito' do

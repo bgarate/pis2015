@@ -1,6 +1,7 @@
 class PeopleController < ApplicationController
 
   skip_before_action :admin?, only:[:show, :index, :me]
+  #skip_before_action :admin?, only:[:assign_project]
 
   def index
     # @people = Person.all
@@ -19,12 +20,20 @@ class PeopleController < ApplicationController
 
   def show
     person = Person.find_by(id: params[:id])
+    unless person
+      person = Person.where("lower(name)= :name", name:"#{params[:id].downcase}").first
+      unless person
+        person = Person.where("lower(email) LIKE :prefix", prefix:"#{params[:id].downcase}@%").first
+      end
+    end
 
-    if person and can_view_person?(person.id)
+    if person
       #nombre
       @name = person.name
       @identifier = person.id
-
+      @people= Person.all.where('id NOT in (?)', @identifier)
+      @person = person
+      @tags=Tag.all
 
       #rol tecnico
       @trole = ''
@@ -49,13 +58,20 @@ class PeopleController < ApplicationController
       @mentorships = person.mentors
       @yet_pending = Milestone.pending.where('id NOT in (?)', person.milestones.pluck(:id))
 
-      @person_vew = Person.find_by(id: params[:id])
-      person = Person.find(current_user.person_id)
-      if (person.admin) or !(person.mentees.exists?(@person_vew.id)) or (person.id = @person_vew.id)
-        @projects = Project.all
-      else
-        @projects = []
-      end
+     # @person_vew = person
+      # person_log = Person.find(current_user.person_id)
+      #if (person_log.admin) || !(person_log.mentees.exists?(@person_vew.id)) || (person_log.id = person.id)
+      #  projects = Project.all
+      #else
+      #  projects = []
+      #end
+      #@project_to_show=[]
+      #projects.each do |p|
+      #  if !person.projects.exists?(p.id)
+      #    @project_to_show = @project_to_show + [p]
+      #  end
+      #end
+
 
     else
       redirect_to root_path
@@ -85,17 +101,17 @@ class PeopleController < ApplicationController
     redirect_to person
   end
 
-  def assign_project
-    pj_id= params[:project_id]
-    id= params[:person_id]
-    project= Project.find(pj_id)
-    person= Person.find(id)
-    if not project.people.exists?(id)
-      project.people<< person
-      project.save
-    end
-    redirect_to person
-  end
+  # def assign_project
+  #  pj_id= params[:project_id]
+  #  id= params[:person_id]
+  #  project= Project.find(pj_id)
+  #  person= Person.find(id)
+  #  if not project.people.exists?(id)
+  #    project.people<< person
+  #    project.save
+  #  end
+  #  redirect_to person
+  #end
 
 
   def add_mentor

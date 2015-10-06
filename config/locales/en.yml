@@ -12,7 +12,6 @@ en:
   project: "Project"
   projects: "Projects"
   save: "Save"
-  sure?: "Are you sure?"
   add: "Add"
   values: "Values"
   create: "Create"
@@ -22,8 +21,9 @@ en:
   title: 'Title'
   name: 'Name'
   id: 'ID'
-
   not_authorized: "You are not authorized to perform that action"
+  unregistered: "Unregistered user, contact an administrator."
+
 
   #crear persona
   people_new_name: "Name"
@@ -33,6 +33,11 @@ en:
   people_new_birth_date: "Birth date"
   people_new_init_date: "Init date"
   people_new_submit: "Create user"
+  select_people: "Select people..."
+  assign_to_project: "Assign to project"
+
+
+  people_assign_to: "People assign to"
 
   mentor_since: "Since"
   mentor_name: "Mentor's name"
@@ -55,6 +60,8 @@ en:
   project_no_technologies: "There are no technologies associated to the project"
   project_people: "People associated to the project"
   project_no_people: "There are no people associated to the project"
+  select_technologies: 'Select technologies...'
+  project_assign_submit: 'Assign to project'
   project:
     display_status:
       active: 'Active'
@@ -69,6 +76,9 @@ en:
   markdone: 'Mark as done'
   add_feedback_author: 'Add feedback reviewer'
   select_tags: 'Select tags...'
+  assign_to: 'Assign to'
+  mil_sure?: "Are you sure you want to delete this milestone?"
+
 
   #hitos
   markdone: "mark as done"
@@ -80,6 +90,8 @@ en:
   mil_status: "Status"
   mil_create: "Create Milestone"
   mil_delete: "Delete Milestone"
+  mil_assigned: " will be assigned by default"
+  mil_assigned_to: "Assigned to this milestone"
 
   markdone: 'Mark as done'
   attachmentsdocs: 'Attachments documents'
@@ -111,6 +123,7 @@ en:
   me: "Private"
   mentors: "Mentors"
   every_body: "Public"
+  note_sure?: "Are you sure you want to delete this note?"
 
 
 
@@ -131,3 +144,4 @@ en:
   tag_edit_submit: "Update tag"
   tag_index_header: "Listing tags"
   tag_no_tags: "No tags found"
+  tag_delete_sure: "Are you sure you wish to delete Tag?"

@@ -240,17 +240,23 @@ ul#skills {
 
 #timeline-card {
 
+    position: relative;
+
   &:before {
     content: '';
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 30px;
+    left: 22px;
     width: 4px;
     background-color: $alizarin;
     border-radius: 2px;
   }
 
+}
+
+form.timeline-form {
+    margin-top: 0;
 }
 
 ul#milestone-list {
@@ -306,7 +312,7 @@ ul#milestone-list {
       }
 
       h2{
-          margin: 0 0 10px 0;
+          margin: 0 0px 10px 0px;
           font-size: 18px;
 
           a {

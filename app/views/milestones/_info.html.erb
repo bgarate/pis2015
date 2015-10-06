@@ -1,5 +1,10 @@
 <div id="milestone-info">
-  <%= milestone_status(@milestone) %>
+  <% store_return_to %>
+  <%= if @milestone.status != 'rejected'
+        milestone_status(@milestone)
+      end %>
+  <%= milestone_status_rej(@milestone) %>
+
   <div class="left-pane">
     <div class="milestone-icon"><%= image_tag @milestone.icon %></div>
     <h2><%= @milestone.title %></h2>
@@ -18,6 +23,16 @@
         end
     %></p>
 
+    <div class="">
+      <table>
+        <tr><td><%=t('mil_assigned_to')%>:</td></tr>
+      <%@milestone.people.each do |p| %>
+           <tr><td>
+             <%= p.name %>
+           </td></tr>
+        <%end%>
+      </table>
+    </div>
 
     <div class="calendar right">
       <% if @milestone.start_date %>

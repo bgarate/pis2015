@@ -39,7 +39,7 @@
             <%= f.label t('milestones.cannot_assign')%>
           <%else%>
             <%= f.label t('milestones.assign_to'), class: "control-label" %>
-            <%= select_tag(:people, options_from_collection_for_select(@people, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('select_people'), 'style'=> 'width:100%') %>
+            <%= select_tag(:people, options_from_collection_for_select(@people, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('milestones.select_people'), 'style'=> 'width:100%') %>
           <%end%>
           </div>
 
@@ -47,7 +47,7 @@
         <div class="row">
 
           <div class="form-group col-xs-6">
-            <%= f.label t('start_date'), class: "control-label" %>
+            <%= f.label t('milestones.start_date'), class: "control-label" %>
             <div class="input-group">
               <%if @milestone.start_date==nil %>
                 <%= f.text_field :start_date, class: "form-control", id:'start_date' ,"data-provide":"datepicker", 'data-validation':'check_start_date','data-validation-format': "dd/mm/yyyy" %>

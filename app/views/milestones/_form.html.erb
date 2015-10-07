@@ -17,7 +17,7 @@
         <div class="row">
           <div class="form-group col-xs-6">
 
-            <%=  m.label t('icon'), class: "control-label" %>
+            <%=  m.label t('milestones.icon'), class: "control-label" %>
             <%=  m.text_area :icon, class: "form-control" %>
           </div>
         </div>
@@ -29,7 +29,7 @@
 
         </div>
         <div class="form-group feedback_autor">
-          <%=  m.label t('reviewer')%>
+          <%=  m.label t('milestones.reviewer')%>
           <br>
           <%= m.select :feedback_author_id, @authors, {:include_blank=>true}, {:multiple => false, :class => "chzn-select select_author",'data-placeholder'=> t('select_people'), 'style'=> 'width:100%'} %>
         </div>

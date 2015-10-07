@@ -176,6 +176,7 @@ en:
   #categories
   categories:
 
+    header: "Categories"
     name: "Name"
     icon: "Icon"
     created: "Created at"
@@ -193,6 +194,7 @@ en:
   #notes
   notes:
 
+    header: "Notes"
     visibility: "Visibility"
     author: "Author"
     created: "Created at"

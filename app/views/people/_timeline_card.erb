@@ -1,52 +1,7 @@
 
-<div id="timeline-card" class="card timeline">
-  <!--<ul id="milestone-list">
-    <li>
-      <h2>Advanced iOS Bootcamp</h2>
-      <p>
-        Certificación “Advanced iOS Bootcamp” de
-        BigNerdRanch.
-      </p>
-      <div class="calendar">La semana que viene</div>
-      <ul class="tags">
-        <li>Speaker</li>
-      </ul>
-      <div class="clearfix"></div>
-    </li>
-    <li>
-      <h2>Advanced iOS Bootcamp</h2>
-      <p>
-        Certificación “Advanced iOS Bootcamp” de
-        BigNerdRanch.
-      </p>
-      <div class="calendar">La semana que viene</div>
-      <ul class="tags">
-        <li>Speaker</li>
-      </ul>
-      <div class="clearfix"></div>
-    </li>
-    <li>
-      <h2>Advanced iOS Bootcamp</h2>
-      <p>
-        Certificación “Advanced iOS Bootcamp” de
-        BigNerdRanch.
-      </p>
-      <div class="calendar">La semana que viene</div>
-      <ul class="tags">
-        <li>Speaker</li>
-      </ul>
-      <div class="clearfix"></div>
-    </li>
-  </ul>-->
 
-<ul id="new-milestone">
-  <li>
-
-
-  </li>
-</ul>
-
-  <% if @milestones and not @milestones.empty? %>
+<% if @milestones and not @milestones.empty? %>
+    <div id="timeline-card" class="card timeline">
       <ul id="milestone-list">
         <% @milestones.each do |e| %>
             <li>
@@ -60,28 +15,28 @@
 
               <div class="resources-list clearfix">
                 <h2><%=t(:attachmentsdocs)%></h2>
-                  <% if e.resources.empty? && can_modify_milestone?(e.id) %>
+                <% if e.resources.empty? && can_modify_milestone?(e.id) %>
                     <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                          <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                        <span class="toggle-documents glyphicon glyphicon-plus"></span>
                     <% end %>
-                  <% else %>
+                <% else %>
                     <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
                     <ul>
                       <%e.resources.each do |r|%>
                           <li><%=link_to r.title, r.url, :target => "_blank"%></li>
                       <%end%>
                       <% if can_modify_milestone?(e.id) %>
-                        <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                            <span class="toggle-documents glyphicon glyphicon-plus"></span>
-                        <% end %>
+                          <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                              <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                          <% end %>
                       <% end %>
                     </ul>
-                  <% end %>
+                <% end %>
 
               </div>
 
               <% if e.due_date %>
-                <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
+                  <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
               <% end %>
               <ul class="tags">
                 <!--<li>Speaker</li>-->
@@ -90,20 +45,14 @@
             </li>
         <% end %>
       </ul>
-  <% else %>
-          <p><% t('milestones.zero') %></p>
-  <% end %>
+    </div>
+
+<% else %>
+    <div class="alert alert-info" role="alert"><p><% t('milestones.zero') %></p></div>
+
+<% end %>
 
 
-  <!-- <=% form_tag ({:action => 'assign_project', :controller => 'people', :person_id => @person_vew.id}) do   %>-->
-  <!--  <=% if !@project_to_show.empty?%>-->
-  <!--  <select name="project_id" class="chosen submit-on-select" data-placeholder = <=%t('assign_to_project')%>>-->
-  <!--      <=% @project_to_show.each do |p| %>-->
-  <!--          <option value= <=%=p.id%> > <=%=p.name%></option>-->
-  <!--      <=% end %>-->
-  <!--  </select>-->
-  <!--<=% end %>-->
-  <!--<=% end %>-->
-</div>
+
 
 

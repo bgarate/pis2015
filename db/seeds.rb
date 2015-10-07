@@ -24,6 +24,7 @@ per.email = 'alfred.pis.2015@gmail.com'
 per.birth_date= Time.new(2012, 8, 29, 22, 35, 0)
 per.start_date= Time.new(2012, 8, 29, 22, 35, 0)
 per.tech_role = tr
+per.image_id = "lfblntfejcpmmkh0wfny.jpg"
 per.admin=true
 
 m = Milestone.new
@@ -72,7 +73,7 @@ per.projects<<(pro)
 
 per.save!
 
-p1 = Person.create!(name: "Bruno Garate", email: "bruno.garate@gmail.com", admin: true, start_date: 3.years.ago)
+p1 = Person.create!(name: "Bruno Garate", email: "bruno.garate@gmail.com", admin: true, start_date: 3.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
 
 p1.milestones.create(title: "Un hito de prueba",
   description: "Esta es la descripción del hito",
@@ -87,12 +88,11 @@ p1.skills << sk1
 p1.skills << sk2
 p1.tech_role = tr2
 
-p2 = Person.create!(name: "Diego Bortot", email: "bortotdiegogm@gmail.com", admin: true, start_date: 23.years.ago)
-p3 = Person.create!(name: "Oscar Montañés", email: "omontanes@gmail.com", admin: true, start_date: 23.years.ago)
-p3 = Person.create!(name: "Sebastían Soleri", email: "omontanes.guri@gmail.com", admin: false, start_date: 23.years.ago)
-p4 = Person.create!(name: "Gonzalo Herrera", email: "gonzalo.herrera.1993@gmail.com", admin: true, start_date: 2.years.ago)
-p5 = Person.create!(name: "Maxi", email: "maxikotvi@gmail.com", admin: false, start_date: 23.years.ago)
-
+p2 = Person.create!(name: "Diego Bortot", email: "bortotdiegogm@gmail.com", admin: true, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg")
+p3 = Person.create!(name: "Oscar Montañés", email: "omontanes@gmail.com", admin: true, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg")
+p3 = Person.create!(name: "Sebastían Soleri", email: "omontanes.guri@gmail.com", admin: false, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg")
+p4 = Person.create!(name: "Gonzalo Herrera", email: "gonzalo.herrera.1993@gmail.com", admin: true, start_date: 2.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
+p5 = Person.create!(name: "Maxi", email: "maxikotvi@gmail.com", admin: false, start_date: 23.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
 
 tech1 = Technology.new
 tech1.name = 'Java'
@@ -114,7 +114,7 @@ Tag.create!(name:'Participación')
 
 
 # Datos de Prueba para Bill Hicks
-p6 = Person.create!(name: "Andy", email: "andresvasilev@gmail.com", admin: false, start_date: 2.years.ago)
+p6 = Person.create!(name: "Andy", email: "andresvasilev@gmail.com", admin: false, start_date: 2.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
 
 p6.milestones.create(title: "Aprendio a programar",
                      description: "Esta es la descripción del hito",
@@ -131,7 +131,7 @@ p6.tech_role = tr2
 
 
 # Datos de Prueba para John Doe
-p7 = Person.create!(name: "John Doe", email: "johndoe@gmail.com", admin: false, start_date: 1.years.ago)
+p7 = Person.create!(name: "John Doe", email: "johndoe@gmail.com", admin: false, start_date: 1.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
 
 p7.milestones.create(title: "Hito 1",
                      description: "Esta es la descripción del hito",
@@ -152,7 +152,7 @@ p7.skills << sk2
 p7.tech_role = tr2
 
 # Datos de Prueba para John Doe
-p8 = Person.create!(name: "Bill Cooper", email: "billcooper@gmail.com", admin: false, start_date: 1.years.ago)
+p8 = Person.create!(name: "Bill Cooper", email: "billcooper@gmail.com", admin: false, start_date: 1.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
 
 p8.milestones.create(title: "Hito 1",
                      description: "Hito 1",

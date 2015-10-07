@@ -1,7 +1,7 @@
 form.main-form {
     margin-top: 30px;
     border-bottom: 3px solid $peterriver;
-    padding: 0px 30px 30px 30px;
+    padding: 0 30px 35px 30px;
     background-color: white;
 
     h1 {
@@ -51,7 +51,7 @@ form.main-form {
     &.slide-on-click {
         padding-bottom: 0;
         margin-bottom: 30px;
-
+        position: relative;
 
         h1 {
             cursor: pointer;
@@ -62,8 +62,12 @@ form.main-form {
         }
         .form-slide {
             padding-top: 20px;
-            margin-bottom: 15px;
+            margin-bottom: 35px;
             clear: both;
+        }
+
+        button[type=submit] {
+            right: 0;
         }
 
         &:not(.active-slide) {

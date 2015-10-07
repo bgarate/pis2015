@@ -44,6 +44,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'responders', '~> 2.0'
 
+gem 'cloudinary'
+
 #Translate support in js
 gem "i18n-js", ">= 3.0.0.rc11"
 

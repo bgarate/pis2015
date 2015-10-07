@@ -1,9 +1,11 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="card-col col-xs-7">
+  <div class="card-col col-xs-8 col-xs-offset-2">
+    <div class="row">
       <%= render 'info' %>
     </div>
-    <div class="card-col col-xs-5">
+    <h3><%= t('mil_notes') %></h3>
+    <hr>
+    <div class="row">
       <div id="milestone-notes">
         <%= render 'notes/form' %>
         <ul>
@@ -17,12 +19,24 @@
                             data: { confirm: t('milestone.delete.sure')},
                             class: 'delete' do %>
                     <span class="glyphicon glyphicon-remove"></span>
+
                 <% end %>
+                <% if n.visibility=='every_body' %>
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                <%else if n.visibility=='mentors' %>
+                    <span class="glyphicon glyphicon-eye-close"></span>
+                <% else %>
+                    <span class="glyphicon glyphicon-lock"></span>
+                <%end
+                  end %>
               </li>
           <% end %>
         </ul>
       </div>
-
     </div>
   </div>
 </div>
+</div>
+<br>
+<br>
+<br>

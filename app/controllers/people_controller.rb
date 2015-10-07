@@ -56,7 +56,7 @@ class PeopleController < ApplicationController
       #tiempo en moove-it
       @start_date = person.start_date
       #Eventos (Hitos)
-      @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.milestone_type = 1")
+      @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0")
       #Hitos pendientes
       @overcomes = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0")
       #Todos los hitos

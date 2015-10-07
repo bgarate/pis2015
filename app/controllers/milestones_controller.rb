@@ -94,14 +94,14 @@ class MilestonesController < ApplicationController
   end
 
   def update
-    if @milestone.feedback?
-      if (params[:milestone][:feedback_author] != nil)
-        id_feedback_author = (params.fetch :milestone).fetch :feedback_author
-      end
-      unless id_feedback_author == nil
-        @milestone.feedback_author = Person.find(id_feedback_author)
-      end
+    category=Category.find(params[:milestone][:category_id])
+    if category.name == 'Feedback'
+      @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
+    else
+      @milestone.feedback_author_id=nil
     end
+    @milestone.category = category
+
     if params[:people]!=nil
       params[:people].each do |p|
         @person2=Person.find(p)
@@ -117,8 +117,9 @@ class MilestonesController < ApplicationController
     end
   end
 
+  helper_method :feedback?
   def feedback?
-    return @milestone.milestone_type == :feedback
+    return @milestone.category.name == :Feedback
   end
 
   def next_status

@@ -7,7 +7,6 @@
 #  due_date           :date
 #  description        :text
 #  status             :integer          default(0)
-#  milestone_type     :integer
 #  icon               :string
 #  feedback_author_id :integer
 #  created_at         :datetime         not null

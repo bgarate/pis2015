@@ -11,16 +11,21 @@
           </div>
 
           <div class="form-group">
-            <%= f.label t('description'), class: "control-label" %>
+            <%= f.label t('mil_description'), class: "control-label" %>
             <%= f.text_field :description, class: "form-control", 'data-validation': "required" %>
           </div>
 
+
           <div class="form-group">
-            <% if @milestone.feedback? %>
-              <%= f.label t('milestone_reviewer')%>
+            <%= f.label t('milestone_category')%>
+            <br>
+            <%= f.select :category_id, Category.all.collect {|t| [t.name, t.id]}, {}, {:multiple => false, :class => "chzn-select category", 'style'=> 'width:100%'} %>
+          </div>
+
+          <div class="form-group feedback_autor">
+              <%=  f.label t('milestone_reviewer')%>
               <br>
-              <%= f.select :feedback_author, Person.all.collect {|t| [t.name, t.id]}, {}, {:multiple => false, :class => "input-lg"} %>
-            <% end %>
+              <%= f.select :feedback_author_id, Person.all.collect {|t| [t.name, t.id]}, {}, {:include_blank => true, :multiple => false, :class => "chzn-select select_author", 'style'=> 'width:100%'} %>
           </div>
 
           <div class="form-group">
@@ -40,17 +45,35 @@
 
 
         <div class="row">
-            <div class="form-group col-xs-6">
-              <%= f.label t('milestone_due_date'), class: "control-label" %>
-              <div class="input-group">
-                <%= f.text_field :due_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
-                <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
-              </div>
+
+          <div class="form-group col-xs-6">
+            <%= f.label t('mil_start_date'), class: "control-label" %>
+            <div class="input-group">
+              <%if @milestone.start_date==nil %>
+                <%= f.text_field :start_date, class: "form-control", id:'start_date' ,"data-provide":"datepicker", 'data-validation':'check_start_date','data-validation-format': "dd/mm/yyyy" %>
+              <%else%>
+                <%= f.text_field :start_date, class: "form-control", id:'start_date' ,'value':l(@milestone.start_date), "data-provide":"datepicker", 'data-validation':'check_start_date', 'data-validation-format': "dd/mm/yyyy" %>
+              <%end%>
+              <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
             </div>
           </div>
 
+          <div class="form-group col-xs-6">
+              <%= f.label t('mil_due_date'), class: "control-label" %>
+              <div class="input-group">
+                <%if @milestone.due_date==nil %>
+                 <%= f.text_field :due_date, class: "form-control", id:'due_date' ,"data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy" %>
+                <%else%>
+                  <%= f.text_field :due_date, class: "form-control", id:'due_date' ,'value':l(@milestone.due_date), "data-provide":"datepicker", 'data-validation':'check_due_date','data-validation-format': "dd/mm/yyyy" %>
+                <%end%>
+                <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+              </div>
+          </div>
+
+        </div>
+
           <div class="btn">
-            <%= f.button t('milestone_edit_submit'),:type => 'submit', class: "btn btn-default" %>
+            <%= f.button t(:save), :type => 'submit', class: "btn btn-default" %>
           </div>
       <% end %>
 
@@ -58,4 +81,73 @@
   </div>
 </div>
 
-<script> $(".chzn-select").chosen();</script>
+<script>
+    $(".chzn-select").chosen();
+</script>
+<script>
+    $('.category').change( function() {
+    var selectedValue = $(this).find('option:selected').text();
+        if (selectedValue=='Feedback'){
+            $('.feedback_autor').show('slow');
+        }
+        else {
+            $('.feedback_autor').hide('slow');
+            $('.select_author').val('').trigger("select_author:updated");
+        }
+    });
+    $().ready(function(){
+        $('.category').trigger('change');
+    })
+</script>
+
+<script>
+  // Add custom validation rule
+  $.formUtils.addValidator({
+    name : 'check_start_date',
+    validatorFunction : function() {
+      var start=document.getElementById('start_date').value;
+      if (start=='') return true;
+      var parts= start.split('/');
+      var start_year= parts[2];
+      var start_month= parts[1]-1;
+      var start_day= parts[0];
+      var date=new Date();
+      var start_date=new Date(start_year, start_month, start_day,23,59,59);
+      return start_date>=date;
+
+    },
+    errorMessage : '',
+    errorMessageKey: 'badStartDate'
+  });
+
+  // Setup form validation
+  $.validate();
+</script>
+
+<script>
+  // Add custom validation rule
+  $.formUtils.addValidator({
+    name : 'check_due_date',
+    validatorFunction : function() {
+      var due=document.getElementById('due_date').value;
+      if (due=='') return true;
+      var parts= due.split('/');
+      var due_year= parts[2];
+      var due_month= parts[1]-1;
+      var due_day= parts[0];
+      var due_date=new Date(due_year, due_month, due_day,23,59,59);
+      var start=document.getElementById('start_date').value;
+      var parts= start.split('/');
+      var start_year= parts[2];
+      var start_month= parts[1]-1;
+      var start_day= parts[0];
+      var start_date=new Date(start_year, start_month, start_day,23,59,59);
+      var date=new Date();
+      return due_date>=date && start_date<due_date;
+    },
+    errorMessage : '',
+    errorMessageKey: 'badDueDate'
+  });
+  // Setup form validation
+  $.validate();
+</script>

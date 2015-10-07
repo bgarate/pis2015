@@ -170,7 +170,7 @@ GEM
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
-    omniauth-google-oauth2 (0.2.7)
+    omniauth-google-oauth2 (0.2.8)
       addressable (~> 2.3)
       jwt (~> 1.0)
       multi_json (~> 1.3)

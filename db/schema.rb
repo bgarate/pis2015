@@ -52,7 +52,6 @@ ActiveRecord::Schema.define(version: 20151006022934) do
     t.date     "due_date"
     t.text     "description"
     t.integer  "status",             default: 0
-    t.integer  "milestone_type"
     t.string   "icon"
     t.integer  "feedback_author_id"
     t.datetime "created_at",                     null: false

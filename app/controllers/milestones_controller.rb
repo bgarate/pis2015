@@ -36,9 +36,7 @@ class MilestonesController < ApplicationController
   end
 
   def new
-    @milestone=Milestone.new
-    @tags = Tag.all
-    @people = Person.all.where('id NOT in (?)', @identifier)
+    redirect_to '/people'
   end
 
 
@@ -59,10 +57,10 @@ class MilestonesController < ApplicationController
     end
     if @milestone.valid?
       flash.notice = "'#{milestone_params[:title]}' creado con éxito!"
-      redirect_to @milestone
+      redirect_to @person
     else
       flash.alert = "'#{milestone_params[:title]}' no se ha podido crear"
-      redirect_to '/milestones/new'
+      redirect_to @person
     end
 
   end
@@ -87,7 +85,12 @@ class MilestonesController < ApplicationController
 
   def edit
     @tags = Tag.all
-    @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
+    user= Person.find(current_user.person_id)
+    if current_user_admin?
+      @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
+    else
+      @people= user.mentees
+    end
   end
 
   def update

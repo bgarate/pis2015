@@ -3,43 +3,43 @@
     <div class="card-col col-xs-4 col-xs-offset-4">
 
       <%= form_for @milestone, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
-          <h1><%= t('milestone_edit_head') %></h1>
+          <h1><%= t('milestones.edit.header') %></h1>
 
           <div class="form-group">
-            <%= f.label t('title'), class: "control-label" %>
+            <%= f.label t('milestones.title'), class: "control-label" %>
             <%= f.text_field :title, class: "form-control", 'data-validation': "required" %>
           </div>
 
           <div class="form-group">
-            <%= f.label t('description'), class: "control-label" %>
+            <%= f.label t('milestones.description'), class: "control-label" %>
             <%= f.text_field :description, class: "form-control", 'data-validation': "required" %>
           </div>
 
           <div class="form-group">
             <% if @milestone.feedback? %>
-              <%= f.label t('milestone_reviewer')%>
+              <%= f.label t('milestones.reviewer')%>
               <br>
               <%= f.select :feedback_author, Person.all.collect {|t| [t.name, t.id]}, {}, {:multiple => false, :class => "input-lg"} %>
             <% end %>
           </div>
 
           <div class="form-group">
-            <%= label_tag('Tags', nil, class: 'small_label') %>
+            <%= f.label t('milestones.tags'), class: "small_label" %>
             <br>
-            <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name, @milestone.tags.map { |t| t.id } ), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('select_tags'), 'style'=> 'width:100%') %>
+            <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name, @milestone.tags.map { |t| t.id } ), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('milestones.select_tags'), 'style'=> 'width:100%') %>
           </div>
 
           <div class="form-group">
-            <%= f.label t('assign_to'), class: "control-label" %>
+            <%= f.label t('milestones.assign_to'), class: "control-label" %>
 
-            <%= select_tag(:people, options_from_collection_for_select(@people, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('select_people'), 'style'=> 'width:100%') %>
+            <%= select_tag(:people, options_from_collection_for_select(@people, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('milestones.select_people'), 'style'=> 'width:100%') %>
 
           </div>
 
 
         <div class="row">
             <div class="form-group col-xs-6">
-              <%= f.label t('milestone_due_date'), class: "control-label" %>
+              <%= f.label t('milestones.due_date'), class: "control-label" %>
               <div class="input-group">
                 <%= f.text_field :due_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
                 <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
@@ -48,7 +48,7 @@
           </div>
 
           <div class="btn">
-            <%= f.button t('milestone_edit_submit'),:type => 'submit', class: "btn btn-default" %>
+            <%= f.button t('milestones.edit.submit'),:type => 'submit', class: "btn btn-default" %>
           </div>
       <% end %>
 

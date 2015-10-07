@@ -3,14 +3,14 @@
     <div class="card-col col-xs-4 col-xs-offset-4">
 
       <%= form_for :tag, url:tags_path, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
-          <h1><%= t('tag_create_head') %></h1>
+          <h1><%= t('tags.new.header') %></h1>
 
           <div class="form-group">
             <%= f.label t('name'), class: "control-label" %>
             <%= f.text_field :name, class: "form-control", 'data-validation': "required" %>
           </div>
 
-          <%= f.button t('tag_new_submit'), options= :type => 'submit', class: "btn btn-default" %>
+          <%= f.button t('tags.new.submit'), options= :type => 'submit', class: "btn btn-default" %>
       <% end %>
 
     </div>

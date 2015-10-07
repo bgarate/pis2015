@@ -3,7 +3,7 @@
     <div class="card-col col-xs-4 col-xs-offset-4">
 
       <%= form_for @tag, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
-          <h1><%= t('tag_edit_head') %></h1>
+          <h1><%= t('tags.edit.header') %></h1>
 
           <div class="form-group">
             <%= f.label t('name'), class: "control-label" %>
@@ -11,7 +11,7 @@
           </div>
 
           <div class="btn">
-            <%= f.button t('tag_edit_submit'), options= :type => 'submit', class: "btn btn-default" %>
+            <%= f.button t('tags.edit.submit'), options= :type => 'submit', class: "btn btn-default" %>
           </div>
       <% end %>
 

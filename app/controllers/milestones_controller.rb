@@ -58,10 +58,10 @@ class MilestonesController < ApplicationController
       end
     end
     if @milestone.valid?
-      flash.notice = "'#{milestone_params[:title]}' creado con éxito!"
+      flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')
       redirect_to @milestone
     else
-      flash.alert = "'#{milestone_params[:title]}' no se ha podido crear"
+      flash.alert = "'#{milestone_params[:title]}' " + t('messages.create.error')
       redirect_to '/milestones/new'
     end
 

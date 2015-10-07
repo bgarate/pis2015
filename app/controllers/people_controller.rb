@@ -86,10 +86,10 @@ class PeopleController < ApplicationController
     @person = Person.new(person_params)
     @person.save
     if @person.valid?
-      flash.notice = "'#{person_params[:name]}' creado con éxito!"
+      flash.notice = "'#{person_params[:name]}' " + t('messages.create.success')
       redirect_to @person
     else
-      flash.alert = "'#{person_params[:name]}' no se ha podido crear"
+      flash.alert = "'#{person_params[:name]}' " + t('messages.create.error')
       redirect_to '/people/new'
     end
   end

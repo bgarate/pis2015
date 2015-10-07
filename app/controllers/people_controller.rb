@@ -32,11 +32,15 @@ class PeopleController < ApplicationController
       @name = person.name
       @identifier = person.id
       user = Person.find(current_user.person_id)
+      #ASSIGN PEOPLE
       if current_user_admin?
         @people= Person.all.where('id NOT in (?)', @identifier)
       else
         @people= user.mentees
       end
+      #CATEGORIES PEOPLE
+      @cats=Category.all.collect {|t| [t.name, t.id]}
+      @authors=Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
       @person = person
       @tags=Tag.all
 

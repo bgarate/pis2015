@@ -197,6 +197,7 @@ es:
   #categorias
   categories:
 
+    header: "Categorías"
     name: "Nombre"
     icon: "Icono"
     created: "Creado"
@@ -214,6 +215,7 @@ es:
   #notas
   notes:
 
+    header: "Notas"
     visibility: "Visibilidad"
     author: "Autor"
     created: "Creado"

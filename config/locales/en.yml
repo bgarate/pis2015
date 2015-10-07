@@ -70,7 +70,7 @@ en:
       submit: "Add Mentor"
 
 
-#projects
+  #projects
   project:
 
     id: "ID"
@@ -127,6 +127,7 @@ en:
     due_date: "Due date"
     reviewer: "Feedback's reviewer"
     assign_to: 'Assign to'
+    cannot_assign: "You cannot assign more people"
     mark_done: 'Mark as done'
     add_feedback_author: 'Add feedback reviewer'
     tags: "Tags"

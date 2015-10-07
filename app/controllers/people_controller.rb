@@ -19,11 +19,15 @@ class PeopleController < ApplicationController
   end
 
   def show
-    person = Person.find_by(id: params[:id])
+    identifier = params[:id]
+    person = Person.find_by(id: identifier)
     unless person
-      person = Person.where("lower(name)= :name", name:"#{params[:id].downcase}").first
+      # El identificador lo comparo en minuscula con la base de datos
+      identifier = identifier.downcase
+      # En el caso que sea un nombre, se sustituyen las _ por espacios
+      person = Person.where("lower(name)= :name", name:"#{identifier.gsub(/_/, "\s")}").first
       unless person
-        person = Person.where("lower(email) LIKE :prefix", prefix:"#{params[:id].downcase}@%").first
+        person = Person.where("lower(email) LIKE :prefix", prefix:"#{identifier}@%").first
       end
     end
 
@@ -31,7 +35,12 @@ class PeopleController < ApplicationController
       #nombre
       @name = person.name
       @identifier = person.id
-      @people= Person.all.where('id NOT in (?)', @identifier)
+      user = Person.find(current_user.person_id)
+      if current_user_admin?
+        @people= Person.all.where('id NOT in (?)', @identifier)
+      else
+        @people= user.mentees
+      end
       @person = person
       @tags=Tag.all
 

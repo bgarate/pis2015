@@ -30,10 +30,12 @@
           </div>
 
           <div class="form-group">
+          <% if @people.empty? %>
+            <%= f.label t('milestones.cannot_assign')%>
+          <%else%>
             <%= f.label t('milestones.assign_to'), class: "control-label" %>
-
-            <%= select_tag(:people, options_from_collection_for_select(@people, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('milestones.select_people'), 'style'=> 'width:100%') %>
-
+            <%= select_tag(:people, options_from_collection_for_select(@people, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('select_people'), 'style'=> 'width:100%') %>
+          <%end%>
           </div>
 
 

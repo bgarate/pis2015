@@ -36,7 +36,7 @@
           <div class="form-group col-xs-6">
             <%= m.label t('milestones.start_date'), class: "control-label" %>
             <div class="input-group">
-              <%= m.text_field :start_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy"%>
+              <%= m.text_field :start_date, id: 'start_date', class: "form-control", "data-provide":"datepicker", 'data-validation':'check_start_date' ,'data-validation-format': "dd/mm/yyyy"%>
               <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
             </div>
           </div>
@@ -44,7 +44,7 @@
           <div class="form-group col-xs-6">
             <%= m.label t('milestones.due_date'), class: "control-label" %>
             <div class="input-group">
-              <%= m.text_field :due_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy"%>
+              <%= m.text_field :due_date, id: 'due_date', class: "form-control", "data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy"%>
               <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
             </div>
           </div>
@@ -59,17 +59,90 @@
 
           </div>
           <div class="form-group col-xs-12">
+            <% if @people.empty? %>
+              <%= m.label t('milestones.cannot_assign')%>
+            <%else%>
             <%= m.label t('milestones.assign_to'), class: "control-label" %>:<br>
             (<%= @person.name+t('milestones.assigned') %>)
-            <%= select_tag(:people, options_from_collection_for_select(@people, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('milestones.select_people'), 'style'=> 'width:100%') %>
-
+            <%= select_tag(:people, options_from_collection_for_select(@people, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('select_people'), 'style'=> 'width:100%') %>
+            <%end%>
           </div>
-
         </div>
+      <%= m.hidden_field(:created_at, :value=>Time.now) %>
+      <%= m.hidden_field(:updated_at, :value=>Time.now) %>
+      <%= m.button t('milestones.add.submit'), :type => 'submit', class: "btn btn-default" %>
 
-        <%= m.hidden_field(:created_at, :value=>Time.now) %>
-        <%= m.hidden_field(:updated_at, :value=>Time.now) %>
-        <%= m.button t('milestones.add.submit'), :type => 'submit', class: "btn btn-default" %>
     </div>
+
 <% end %>
+
 <script> $(".chzn-select").chosen();</script>
+<script>
+  // Add custom validation rule
+  $.formUtils.addValidator({
+    name : 'check_start_date',
+    validatorFunction : function() {
+      var start=document.getElementById('start_date').value;
+      if (start=='') return true;
+      var parts= start.split('/');
+      var start_year= parts[2];
+      var start_month= parts[1]-1;
+      var start_day= parts[0];
+      var date=new Date();
+      var start_date=new Date(start_year, start_month, start_day,23,59,59);
+      return start_date>=date;
+
+    },
+    errorMessage : '',
+    errorMessageKey: 'badStartDate'
+  });
+
+  // Setup form validation
+  $.validate();
+</script>
+
+<script>
+
+  // Add custom validation rule
+  $.formUtils.addValidator({
+    name : 'check_due_date',
+    validatorFunction : function() {
+      var due=document.getElementById('due_date').value;
+      if (due=='') return true;
+      var parts= due.split('/');
+      var due_year= parts[2];
+      var due_month= parts[1]-1;
+      var due_day= parts[0];
+      var due_date=new Date(due_year, due_month, due_day,23,59,59);
+      var start=document.getElementById('start_date').value;
+      var parts= start.split('/');
+      var start_year= parts[2];
+      var start_month= parts[1]-1;
+      var start_day= parts[0];
+      var start_date=new Date(start_year, start_month, start_day,23,59,59);
+      var date=new Date();
+      return due_date>=date && start_date<due_date;
+    },
+    errorMessage : '',
+    errorMessageKey: 'badDueDate'
+  });
+  // Setup form validation
+  $.validate();
+</script>
+
+<script>
+
+  // Add custom validation rule
+  $.formUtils.addValidator({
+    name : 'status',
+    validatorFunction : function(status) {
+      return (status=='pending')||(status=='done')||(status=='rejected');
+    },
+    errorMessage : '',
+    errorMessageKey: 'badStatus'
+  });
+
+  // Setup form validation
+  $.validate();
+
+</script>

@@ -44,17 +44,22 @@ class MilestonesController < ApplicationController
     @person=Person.find(params[:person_id])
     @milestone= @person.milestones.create(milestone_params)
     @milestone.tag_ids = params[:tags]
-    if Category.exists?(params[:category_id])
-      @category=Category.find(params[:category_id])
-      @category.milestones<<@milestone
+    #CATEGORIES
+    if Category.exists?(params[:milestone][:category_id])
+      category=Category.find(params[:milestone][:category_id])
+      @milestone.category=category
+      if category.name=='Feedback'
+        @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
+      end
     end
+    #ASSIGNED
     if params[:people]!=nil
       params[:people].each do |p|
       @person2=Person.find(p)
       @milestone.people<<@person2
-      @milestone.save
       end
     end
+    @milestone.save
     if @milestone.valid?
       flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')
       redirect_to @person
@@ -64,6 +69,7 @@ class MilestonesController < ApplicationController
     end
 
   end
+
 
   def add_category
     @category.milestones<<@milestone
@@ -84,24 +90,31 @@ class MilestonesController < ApplicationController
   end
 
   def edit
+    @cats=Category.all.collect {|t| [t.name, t.id]}
+    @authors=Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id}).collect {|t| [t.name, t.id]}
     @tags = Tag.all
     user= Person.find(current_user.person_id)
     if current_user_admin?
       @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
     else
-      @people= user.mentees
+      @people= user.mentees.where('mentee_id NOT in (?)', @milestone.people.map{|p| p.id})
+    end
+    if @milestone.category!=nil
+      @category_name = @milestone.category.name
     end
   end
 
   def update
-    if @milestone.feedback?
-      if (params[:milestone][:feedback_author] != nil)
-        id_feedback_author = (params.fetch :milestone).fetch :feedback_author
-      end
-      unless id_feedback_author == nil
-        @milestone.feedback_author = Person.find(id_feedback_author)
+    if params[:milestone][:category_id]!=nil
+    category=Category.find(params[:milestone][:category_id])
+      if category.name == 'Feedback'
+        @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
+      else
+        @milestone.feedback_author_id=nil
       end
     end
+    @milestone.category = category
+
     if params[:people]!=nil
       params[:people].each do |p|
         @person2=Person.find(p)
@@ -109,6 +122,7 @@ class MilestonesController < ApplicationController
         @milestone.save
       end
     end
+    @milestone.category = category
     if @milestone.update_attributes(milestone_params)
       @milestone.tag_ids = params[:tags]
       redirect_to @milestone
@@ -117,8 +131,9 @@ class MilestonesController < ApplicationController
     end
   end
 
+  helper_method :feedback?
   def feedback?
-    return @milestone.milestone_type == :feedback
+    return @milestone.category.name == :Feedback
   end
 
   def next_status

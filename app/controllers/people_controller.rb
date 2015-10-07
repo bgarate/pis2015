@@ -36,11 +36,16 @@ class PeopleController < ApplicationController
       @name = person.name
       @identifier = person.id
       user = Person.find(current_user.person_id)
+      #ASSIGN PEOPLE
       if current_user_admin?
         @people= Person.all.where('id NOT in (?)', @identifier)
       else
-        @people= user.mentees
+        @people= user.mentees.where('mentee_id NOT in (?) ', @identifier)
+        @people<<user
       end
+      #CATEGORIES PEOPLE
+      @cats=Category.all.collect {|t| [t.name, t.id]}
+      @authors=Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
       @person = person
       @tags=Tag.all
 
@@ -60,7 +65,8 @@ class PeopleController < ApplicationController
       #tiempo en moove-it
       @start_date = person.start_date
       #Eventos (Hitos)
-      @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.milestone_type = 1")
+      @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0")
+      # @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.category_id = 2")
       #Hitos pendientes
       @overcomes = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0")
       #Todos los hitos

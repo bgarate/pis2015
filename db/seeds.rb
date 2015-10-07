@@ -31,7 +31,6 @@ m = Milestone.new
 m.title = 'Conferencia Tecnológica'
 m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
 m.due_date= Time.now + (3*2*7*24*60*60)
-m.milestone_type= 1
 m.status=0
 m.icon = "test/silueta.gif"
 m.category = c
@@ -51,7 +50,6 @@ m2.description = 'Esperemos meter mas puntos que 10'
 m2.due_date = Time.now
 m2.status = 0
 m2.category = f
-m2.milestone_type = :feedback
 m2.save!
 
 sk1 = Skill.new

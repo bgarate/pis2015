@@ -92,6 +92,8 @@ en:
   mil_delete: "Delete Milestone"
   mil_assigned: " will be assigned by default"
   mil_assigned_to: "Assigned to this milestone"
+  mil_done_or_rejected: 'hitos en estado hecho o rechazado'
+  mil_done_or_rejected: 'milestones in state done or rejected'
 
   markdone: 'Mark as done'
   attachmentsdocs: 'Attachments documents'

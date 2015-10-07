@@ -35,6 +35,9 @@
 
     <div class="card-col col-xs-5 col-sm-5 col-md-5 col-lg-5">
       <%= render 'milestones/form' %>
+      <div id="npmillink-card" class="card">
+        <%=link_to "(#{@nonpendingmilestonescount}) #{t(:mil_done_or_rejected)}", person_showallmilestones_path(:person_id => @person.id) , class: "btn btn-info" %>
+      </div>
       <%= render 'people/timeline_card' %>
     </div>
   </div>

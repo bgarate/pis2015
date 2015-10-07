@@ -118,6 +118,7 @@ es:
   mil_notes: "Notas"
   mil_assigned: " será asignado por defecto"
   mil_assigned_to: "Asignado(s) a este hito"
+  mil_done_or_rejected: 'hitos en estado hecho o rechazado'
 
 
   #categorias

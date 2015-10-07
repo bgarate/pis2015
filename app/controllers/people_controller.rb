@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :admin?, only:[:show, :index, :me]
+  skip_before_action :admin?, only:[:show, :index, :me, :showallmilestones]
   #skip_before_action :admin?, only:[:assign_project]
 
   def index
@@ -54,9 +54,11 @@ class PeopleController < ApplicationController
       @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.milestone_type = 1")
       #Hitos pendientes
       @overcomes = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0")
-      #Todos los hitos
-      @milestones = person.milestones.order(created_at: :desc)
-      #Todos los hitos
+      #Todos los hitos pendientes
+      @milestones = person.milestones.where('milestones.status = 0').order(created_at: :desc)
+      #Cantidad de hitos cerrados o rechazados
+      @nonpendingmilestonescount = person.milestones.size - person.milestones.where('milestones.status = 0').size
+      #Mentores
       @mentorships = person.mentors
       @yet_pending = Milestone.pending.where('id NOT in (?)', person.milestones.pluck(:id))
 
@@ -74,6 +76,44 @@ class PeopleController < ApplicationController
       #  end
       #end
 
+
+    else
+      redirect_to root_path
+    end
+  end
+
+  def showallmilestones
+    person = Person.find_by(id: params[:person_id])
+    if person
+      #nombre
+      @name = person.name
+      @identifier = person.id
+      @people= Person.all.where('id NOT in (?)', @identifier)
+      @person = person
+      @tags=Tag.all
+
+      #rol tecnico
+      @trole = ''
+      @trole = person.tech_role.name if person.tech_role
+
+      #habilidades
+      @skills = person.skills
+
+      #proyectos
+      @proysin = person.projects.where("Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE").length
+      @proysend = person.projects.where("Projects.end_date < CURRENT_DATE").length
+
+      @image_id = person.image_id
+
+      #tiempo en moove-it
+      @start_date = person.start_date
+
+      #Todos los hitos no pendientes
+      @milestones = person.milestones.where('milestones.status <> 0').order(created_at: :desc)
+
+      #Mentores
+      @mentorships = person.mentors
+      @yet_pending = Milestone.pending.where('id NOT in (?)', person.milestones.pluck(:id))
 
     else
       redirect_to root_path

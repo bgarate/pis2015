@@ -131,20 +131,6 @@
 </script>
 
 <script>
-  // Add custom validation rule
-  $.formUtils.addValidator({
-    name : 'status',
-    validatorFunction : function(status) {
-      return (status=='pending')||(status=='done')||(status=='rejected');
-    },
-    errorMessage : '',
-    errorMessageKey: 'badStatus'
-  });
-
-  // Setup form validation
-  $.validate();
-</script>
-<script>
   $('.category').change( function() {
     var selectedValue = $(this).find('option:selected').val();
     if (selectedValue==2){

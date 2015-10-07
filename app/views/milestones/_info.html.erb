@@ -18,7 +18,7 @@
 
     <p><%= @milestone.description %></p>
     <p><%=
-        if @milestone.category.name=='Feedback' and @milestone.feedback_author
+        if @milestone.category && @milestone.category.name=='Feedback' && @milestone.feedback_author
           @milestone.feedback_author.name
         end
     %></p>

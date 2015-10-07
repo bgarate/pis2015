@@ -120,6 +120,8 @@ es:
   mil_assigned_to: "Asignado(s) a este hito"
   mil_cannot_assign: "No puede asignar más personas"
   mil_notes: "Notas"
+  mil_assigned_to: "Asignado(s) a este hito"
+
 
 
   #categorias

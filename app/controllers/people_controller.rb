@@ -36,7 +36,8 @@ class PeopleController < ApplicationController
       if current_user_admin?
         @people= Person.all.where('id NOT in (?)', @identifier)
       else
-        @people= user.mentees
+        @people= user.mentees.where('mentee_id NOT in (?) ', @identifier)
+        @people<<user
       end
       #CATEGORIES PEOPLE
       @cats=Category.all.collect {|t| [t.name, t.id]}

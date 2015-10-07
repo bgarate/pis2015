@@ -97,7 +97,7 @@ class MilestonesController < ApplicationController
     if current_user_admin?
       @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
     else
-      @people= user.mentees
+      @people= user.mentees.where('mentee_id NOT in (?)', @milestone.people.map{|p| p.id})
     end
     if @milestone.category!=nil
       @category_name = @milestone.category.name

@@ -94,6 +94,7 @@ es:
   milestone_view_head: "Ver Hito"
   milestone_due_date: "Due date del hito"
   milestone_reviewer: 'Revisor del feedback'
+  milestone_category: 'Categoría'
 
   assign_to: 'Asignar a'
   mil_sure?: "¿Esta seguro que desea borrar este hito?"
@@ -109,16 +110,19 @@ es:
   markdone: "marcar como hecho"
   mil_title: "Titulo"
   mil_start_date: "Fecha de inicio"
-  mil_due_date: "Fecha limite"
-  mil_description: "Descripcion"
+  mil_due_date: "Fecha límite"
+  mil_description: "Descripción"
   mil_icon: "Icono"
   mil_status: "Estado"
   mil_create: "Crear Hito"
   mil_delete: "Borrar Hito"
-  mil_notes: "Notas"
   mil_assigned: " será asignado por defecto"
   mil_assigned_to: "Asignado(s) a este hito"
   mil_cannot_assign: "No puede asignar más personas"
+  mil_notes: "Notas"
+  mil_assigned_to: "Asignado(s) a este hito"
+
+
 
   #categorias
   cat_name: "Nombre"

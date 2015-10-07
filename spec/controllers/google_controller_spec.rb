@@ -28,7 +28,6 @@ describe GoogleController, "Login a traves de google oatuh" do
     m.title = 'Conferencia Tecnológica'
     m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
     m.due_date= Time.now + (3*2*7*24*60*60)
-    m.milestone_type= 1
     m.status=0
     per.milestones<<(m)
 
@@ -112,7 +111,6 @@ describe GoogleController, "Login a traves de google oatuh" do
     m.title = 'Conferencia Tecnológica'
     m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
     m.due_date= Time.now + (3*2*7*24*60*60)
-    m.milestone_type= 1
     m.status=0
     per.milestones<<(m)
     per.save!
@@ -159,7 +157,6 @@ describe GoogleController, "Login a traves de google oatuh" do
     m.title = 'Conferencia Tecnológica'
     m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
     m.due_date= Time.now + (3*2*7*24*60*60)
-    m.milestone_type= 1
     m.status=0
     per.milestones<<(m)
 
@@ -197,7 +194,6 @@ describe GoogleController, "Login a traves de google oatuh" do
     m.title = 'Conferencia Tecnológica'
     m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
     m.due_date= Time.now + (3*2*7*24*60*60)
-    m.milestone_type= 1
     m.status=0
     per.milestones<<(m)
 

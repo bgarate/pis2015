@@ -7,7 +7,7 @@
     <div class="card-col col-lg-5">
       <%= render 'people/events_card' %>
       <div class="card pending">
-        <h1>Hitos pendientes</h1>
+        <h1><%= t('milestones.pendings') %></h1>
         <% if @overcomes and not @overcomes.empty? %>
             <ul id="pending-list">
               <% @overcomes.each do |e| %>
@@ -27,7 +27,7 @@
               <% end %>
             </ul>
         <% else %>
-            <p>No hay hitos que mostar</p>
+            <p><% t('milestones.zero') %></p>
         <% end %>
       </div>
     </div>

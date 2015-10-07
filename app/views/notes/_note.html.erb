@@ -10,20 +10,20 @@
 </p>
 
 <p>
-  <strong><%= t('note_author') %>:</strong>
+  <strong><%= t('notes.author') %>:</strong>
   <%= Person.find(note.author_id).name %>
 </p>
 
 <p>
-  <strong><%= t('note_created') %>:</strong>
+  <strong><%= t('notes.created') %>:</strong>
   <%= note.created_at %>
 </p>
 <p>
-  <strong><%= t('note_updated') %>:</strong>
+  <strong><%= t('notes.updated') %>:</strong>
   <%= note.updated_at %>
 </p>
 <p>
-  <strong><%= t('note_visibility') %>:</strong>
+  <strong><%= t('notes_visibility') %>:</strong>
   <%= t(note.visibility) %>
 </p>
 <p>
@@ -32,9 +32,9 @@
 </p>
 
 <p>
-  <%= link_to t('note_delete'), [note.milestone, note],
+  <%= link_to t('notes.delete.title'), [note.milestone, note],
               method: :delete,
-              data: { confirm: t('note_sure?')} %>
+              data: { confirm: t('notes.delete.sure')} %>
 </p>
 
 <% end%>

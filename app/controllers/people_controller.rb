@@ -51,11 +51,11 @@ class PeopleController < ApplicationController
       #tiempo en moove-it
       @start_date = person.start_date
       #Eventos (Hitos)
-      @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.milestone_type = 1")
+      @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.milestone_type = 1").order(due_date: :desc, created_at: :desc)
       #Hitos pendientes
-      @overcomes = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0")
+      @overcomes = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0").order(due_date: :desc, created_at: :desc)
       #Todos los hitos pendientes
-      @milestones = person.milestones.where('milestones.status = 0').order(created_at: :desc)
+      @milestones = person.milestones.where('milestones.status = 0').order(due_date: :desc, created_at: :desc)
       #Cantidad de hitos cerrados o rechazados
       @nonpendingmilestonescount = person.milestones.size - person.milestones.where('milestones.status = 0').size
       #Mentores
@@ -109,7 +109,7 @@ class PeopleController < ApplicationController
       @start_date = person.start_date
 
       #Todos los hitos no pendientes
-      @milestones = person.milestones.where('milestones.status <> 0').order(created_at: :desc)
+      @milestones = person.milestones.where('milestones.status <> 0').order(due_date: :desc, created_at: :desc)
 
       #Mentores
       @mentorships = person.mentors

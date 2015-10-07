@@ -62,6 +62,7 @@ en:
   project_no_people: "There are no people associated to the project"
   select_technologies: 'Select technologies...'
   project_assign_submit: 'Assign to project'
+  project_delete_sure: "Are you sure you wish to delete Project?"
   project:
     display_status:
       active: 'Active'

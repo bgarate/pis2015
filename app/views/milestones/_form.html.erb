@@ -25,13 +25,13 @@
         <div>
           <%= m.label t('category')%>
           <br>
-          <%= m.select :category_id, @cats, {:include_blank=>false}, {:multiple => false, :class => "chzn-select category", 'style'=> 'width:100%'} %>
+          <%= m.select :category_id, @cats, {}, {:multiple => false, :class => "chzn-select category", 'style'=> 'width:100%'} %>
 
         </div>
         <div class="form-group feedback_autor">
           <%=  m.label t('milestones.reviewer')%>
           <br>
-          <%= m.select :feedback_author_id, @authors, {:include_blank=>true}, {:multiple => false, :class => "chzn-select select_author",'data-placeholder'=> t('select_people'), 'style'=> 'width:100%'} %>
+          <%= m.select :feedback_author_id, @authors, {}, {:multiple => false, :class => "chzn-select select_author",'data-placeholder'=> t('select_people'), 'style'=> 'width:100%'} %>
         </div>
 
         <div class="row">

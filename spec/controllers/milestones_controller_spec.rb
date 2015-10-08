@@ -292,6 +292,15 @@ describe MilestonesController, "Milestone Controller" do
     end
   end
 
+  describe 'Notes' do
+    it 'displays a note' do
+      session[:user_id] = @ad_user.id
+      @m1.notes.create({:text=> 'una nota para desplegar'})
+      get :show, :id => @m1.id, :session=>session
+      expect(response.status).to eq(200)
+    end
+  end
+
   describe "permisos" do
     it 'Deberia renderizar show' do
       get :show, :id => @m.id

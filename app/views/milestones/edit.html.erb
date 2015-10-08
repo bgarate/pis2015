@@ -19,13 +19,13 @@
           <div class="form-group">
             <%= f.label t('category')%>
             <br>
-            <%= f.select :category_id, @cats, {:include_blank=>false}, {:multiple => false, :class => "chzn-select category", 'style'=> 'width:100%'} %>
+            <%= f.select :category_id, @cats, {}, {:multiple => false, :class => "chzn-select category", 'style'=> 'width:100%'} %>
           </div>
 
           <div class="form-group feedback_autor">
               <%=  f.label t('milestones.reviewer')%>
               <br>
-              <%= f.select :feedback_author_id, @authors, {:include_blank=>true}, {:include_blank => true, :multiple => false, :class => "chzn-select select_author", 'data-placeholder'=> t('select_people'), 'style'=> 'width:100%'} %>
+              <%= f.select :feedback_author_id, @authors, {}, {:include_blank => true, :multiple => false, :class => "chzn-select select_author", 'data-placeholder'=> t('milestones.add_feedback_author'), 'style'=> 'width:100%'} %>
           </div>
 
           <div class="form-group">
@@ -83,6 +83,10 @@
 
 <script>
     $(".chzn-select").chosen();
+    if ($('.category').val()!=2) {
+        $('.feedback_autor').hide();
+    }
+
 </script>
 <script>
     $('.category').change( function() {
@@ -143,7 +147,7 @@
       var start_day= parts[0];
       var start_date=new Date(start_year, start_month, start_day,23,59,59);
       var date=new Date();
-      return due_date>=date && start_date<due_date;
+      return due_date>=date && (start=='' || start_date<due_date);
     },
     errorMessage : '',
     errorMessageKey: 'badDueDate'

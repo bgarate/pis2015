@@ -275,6 +275,7 @@ describe MilestonesController, "Milestone Controller" do
 
     it 'no destruye la milestone' do
       session[:user_id] = @no_ad_user.id
+      session[:return_to]= '/milestones'
       m1 = Milestone.new
       m1.title ='Milestone for testing'
       m1.description='This is a milestone to test Milestones'
@@ -286,7 +287,7 @@ describe MilestonesController, "Milestone Controller" do
       m1.save
       m1.notes.create({:text=> 'una nota pa borrar'})
       delete :destroy, :id => m1.id, :session => session
-      expect(response).to redirect_to('/people')
+      expect(response).to redirect_to('/milestones')
 
     end
   end

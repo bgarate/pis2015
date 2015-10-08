@@ -8,9 +8,10 @@ class MilestonesController < ApplicationController
   skip_before_action :admin?
 
   def is_authorized?
+    session[:return_to] ||= request.referer
     unless can_modify_milestone? @milestone.id
       flash.alert = t('not_authorized')
-      redirect_to '/people'
+      redirect_to session.delete(:return_to)
     end
   end
 

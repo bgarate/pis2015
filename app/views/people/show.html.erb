@@ -5,9 +5,8 @@
       <%= render 'people/stats_card' %>
     </div>
     <div class="card-col col-lg-5">
-      <%= render 'people/events_card' %>
       <div class="card pending">
-        <h1>Hitos pendientes</h1>
+        <h1><%= t('milestones.pendings') %></h1>
         <% if @overcomes and not @overcomes.empty? %>
             <ul id="pending-list">
               <% @overcomes.each do |e| %>
@@ -27,16 +26,19 @@
               <% end %>
             </ul>
         <% else %>
-            <p>No hay hitos que mostar</p>
+            <p><% t('milestones.zero') %></p>
         <% end %>
       </div>
+      <%= render 'people/events_card' %>
     </div>
 
 
     <div class="card-col col-xs-5 col-sm-5 col-md-5 col-lg-5">
-      <%= render 'milestones/form' %>
-      <div id="npmillink-card" class="card">
-        <%=link_to "(#{@nonpendingmilestonescount}) #{t(:mil_done_or_rejected)}", person_showallmilestones_path(:person_id => @person.id) , class: "btn btn-info" %>
+        <%if can_view_person?(@identifier) %>
+          <%= render 'milestones/form' %>
+        <%end%>
+      <div id="npmillink-card" class="card nonpending">
+        <h1><%=link_to "(#{@nonpendingmilestonescount}) #{t('milestones.done_or_rejected')}", person_showallmilestones_path(:person_id => @person.id), class: "card nonpending" %></h1>
       </div>
       <%= render 'people/timeline_card' %>
     </div>

@@ -8,9 +8,10 @@ class MilestonesController < ApplicationController
   skip_before_action :admin?
 
   def is_authorized?
+    session[:return_to] ||= request.referer
     unless can_modify_milestone? @milestone.id
       flash.alert = t('not_authorized')
-      redirect_to '/people'
+      redirect_to session.delete(:return_to)
     end
   end
 
@@ -36,9 +37,7 @@ class MilestonesController < ApplicationController
   end
 
   def new
-    @milestone=Milestone.new
-    @tags = Tag.all
-    @people = Person.all.where('id NOT in (?)', @identifier)
+    redirect_to '/people'
   end
 
 
@@ -46,26 +45,30 @@ class MilestonesController < ApplicationController
     @person=Person.find(params[:person_id])
     @milestone= @person.milestones.create(milestone_params)
     @milestone.tag_ids = params[:tags]
-    if Category.exists?(params[:category_id])
-      @category=Category.find(params[:category_id])
-      @category.milestones<<@milestone
+    #CATEGORIES
+    category=Category.find(params[:milestone][:category_id])
+    @milestone.category=category
+    if category.name=='Feedback'
+      @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
     end
+    #ASSIGNED
     if params[:people]!=nil
       params[:people].each do |p|
       @person2=Person.find(p)
       @milestone.people<<@person2
-      @milestone.save
       end
     end
+    @milestone.save
     if @milestone.valid?
-      flash.notice = "'#{milestone_params[:title]}' creado con éxito!"
-      redirect_to @milestone
+      flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')
+      redirect_to @person
     else
-      flash.alert = "'#{milestone_params[:title]}' no se ha podido crear"
-      redirect_to '/milestones/new'
+      flash.alert = "'#{milestone_params[:title]}' " + t('messages.create.error')
+      redirect_to @person
     end
 
   end
+
 
   def add_category
     @category.milestones<<@milestone
@@ -86,36 +89,48 @@ class MilestonesController < ApplicationController
   end
 
   def edit
+    @cats=Category.all.collect {|t| [t.name, t.id]}
+    @authors=Person.all.collect {|t| [t.name, t.id]}
     @tags = Tag.all
-    @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
+    user= Person.find(current_user.person_id)
+    if current_user_admin?
+      @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
+    else
+      @people= user.mentees.where('mentee_id NOT in (?)', @milestone.people.map{|p| p.id})
+      unless user.id==@identifier
+        @people<<user
+      end
+    end
+    @category_name = @milestone.category.name
   end
 
   def update
-    if @milestone.feedback?
-      if (params[:milestone][:feedback_author] != nil)
-        id_feedback_author = (params.fetch :milestone).fetch :feedback_author
+    category=Category.find(params[:milestone][:category_id])
+      if category.name == 'Feedback'
+        @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
+      else
+        @milestone.feedback_author_id=nil
       end
-      unless id_feedback_author == nil
-        @milestone.feedback_author = Person.find(id_feedback_author)
+      @milestone.category = category
+      if params[:people]!=nil
+        params[:people].each do |p|
+          @person2=Person.find(p)
+          @milestone.people<<@person2
+          @milestone.save
+        end
       end
-    end
-    if params[:people]!=nil
-      params[:people].each do |p|
-        @person2=Person.find(p)
-        @milestone.people<<@person2
-        @milestone.save
+      @milestone.category = category
+      if @milestone.update_attributes(milestone_params)
+        @milestone.tag_ids = params[:tags]
+        redirect_to @milestone
+      else
+        render :edit
       end
-    end
-    if @milestone.update_attributes(milestone_params)
-      @milestone.tag_ids = params[:tags]
-      redirect_to @milestone
-    else
-      render :edit
-    end
   end
 
+  helper_method :feedback?
   def feedback?
-    return @milestone.milestone_type == :feedback
+    return @milestone.category.name == 'Feedback'
   end
 
   def next_status

@@ -16,9 +16,9 @@
     <% end %>
   </ul>
   <hr>
-  <h4>MENTORES</h4>
+  <h4><%= t('mentor.header') %></h4>
     <% if @mentorships.empty? %>
-        <p>Sin mentores en la actualidad</p>
+        <p><%= t('mentor.zero') %></p>
     <%else%>
         <ul id="mentors">
             <% @mentorships.each do |s| %>
@@ -27,6 +27,6 @@
         </ul>
     <%end%>
     <%if current_user_admin? %>
-        <a href="add_mentor_form?mentee_id=<%=@identifier%>" class="btn btn-info" role="button"><span class="glyphicon glyphicon-add"></span>Agregar Mentores</a>
+        <a href="add_mentor_form?mentee_id=<%=@identifier%>" class="btn btn-info" role="button"><span class="glyphicon glyphicon-add"></span><%= t('mentor.add.header') %></a>
     <%end%>
 </div>

@@ -30,8 +30,11 @@ es:
   milestones: "Hitos"
   note: "Nota"
   notes: "Notas"
-  proyect: "Proyecto"
-  proyects: "Proyectos"
+  project: "Proyecto"
+  projects: "Proyectos"
+
+  stats: "Estadísticas"
+  events: "Eventos"
   save: "Guardar"
   add: "Agregar"
   values: "Valores"
@@ -42,126 +45,219 @@ es:
   title: "Título"
   name: 'Nombre'
   id: 'ID'
-  not_authorized: "No esta autorizado para realizar esa accion"
+  search: 'Buscar'
+  none:  'Ninguna'
+
+  not_authorized: "No esta autorizado para realizar esa acción"
   unregistered: "Usuario no registrado, contacte a un administrador."
+  login_with_google: "Ingresar con Google"
+  signed_in_as: "Logueado como"
+  moove-it-time: "Tiempo en Moove-it"
 
-  #crear persona
-  people_new_name: "Nombre"
-  people_new_email: "Correo electrónico"
-  people_new_celphone: "Celular"
-  people_new_telephone: "Teléfono"
-  people_new_birth_date: "Fecha de nacimiento"
-  people_new_init_date: "Fecha de ingreso"
-  people_new_submit: "Crear usuario"
-  select_people: "Seleccione personas..."
-  assign_to_project: "Asignar a proyecto"
-
-  people_assign_to: "Asignar a proyecto"
+  messages:
+    create:
+      success: "creado con éxito!"
+      error: "no se ha podido crear"
 
 
-  mentor_since: "Desde"
-  mentor_name: "Nombre del mentor"
-  mentor_submit: "Agregar mentor"
-  mentor_nomore_msg: "No hay más mentores disponibles para agregar para"
+  #people
+  people:
 
-  project_create_head: "Crear Proyecto"
-  project_edit_head: "Editar Proyecto"
-  project_id: "ID"
-  project_name: "Nombre"
-  project_client: "Cliente"
-  project_status: "Estado"
-  project_start_date: "Fecha de inicio"
-  project_end_date: "Fecha de fin"
-  project_technologies: "Tecnologías"
-  project_new_submit: "Crear projecto"
-  project_edit_submit: "Actualizar proyecto"
-  project_index_header: "Listando proyectos"
-  project_no_projects: "No se han encontrado proyectos"
-  project_no_technologies: "No hay tecnologías asociadas al proyecto"
-  project_people: "Personas asociadas al proyecto"
-  project_no_people: "No hay personas asociadas al proyecto"
-  select_technologies: 'Seleccione tecnologías...'
-  project_assign_submit: 'Asignar a proyecto'
+    new:
+      header: "Crear usuario"
+      name: "Nombre"
+      email: "Correo electrónico"
+      cellphone: "Celular"
+      telephone: "Teléfono"
+      birth_date: "Fecha de nacimiento"
+      init_date: "Fecha de ingreso"
+      select: "Seleccione personas..."
+      asign_to_project: "Asignar a proyecto"
+      submit: "Crear"
+
+
+  #mentor
+  mentor:
+    header: "Mentores"
+    since: "Desde"
+    name: "Nombre del mentor"
+    nomore_msg: "No hay más mentores disponibles para agregar para"
+    adding_to: "Agregando mentor a"
+
+    zero: "Sin mentores en la actualidad"
+
+    add:
+      header: "Agregar Mentores"
+      submit: "Agregar Mentor"
+
+
+  #projects
   project:
-      display_status:
-        active: 'Activo'
-        inactive: 'Inactivo'
-        finished: 'Finalizado'
+
+    id: "ID"
+    name: "Nombre"
+    client: "Cliente"
+    status: "Estado"
+    start_date: "Fecha de inicio"
+    end_date: "Fecha de fin"
+
+    ongoing: "Proyectos en curso"
+    fulfilled: "Proyectos realizados"
+
+    people:
+      title: "Personas asociadas al proyecto"
+      zero: "No hay personas asociadas al proyecto"
+
+    technologies:
+      title: "Tecnologías"
+      zero: "No hay tecnologías asociadas al proyecto"
+      select: 'Seleccione tecnologías...'
+
+    assign:
+      title: "Asignar a proyecto"
+      submit: 'Asignar'
+
+    zero: "No se han encontrado proyectos"
+    view: "Ver Proyecto"
+
+    display_status:
+      active: 'Activo'
+      inactive: 'Inactivo'
+      finished: 'Finalizado'
+
+    new:
+      header: "Crear Proyecto"
+      submit: "Crear Projecto"
+
+    edit:
+      header: "Editar Proyecto"
+      submit: "Actualizar Proyecto"
+
+    index:
+      header: "Listando proyectos"
+
+    delete:
+      sure: "¿Está seguro que desea eliminar este proyecto?"
+
 
   #hitos
+  milestones:
 
-  milestone_edit_head: "Editar Hito"
-  milestone_view_head: "Ver Hito"
-  milestone_due_date: "Due date del hito"
-  milestone_reviewer: 'Revisor del feedback'
+    header: "Hitos"
+    title: "Título"
+    due_date: "Fecha límite"
+    reviewer: "Revisor del feedback"
+    assign_to: 'Asignar a'
+    cannot_assign: "No puede asignar más personas"
+    mark_done: 'Marcar como hecho'
+    add_feedback_author: 'Añadir revisor del feedback'
+    tags: "Tags"
+    select_tags: 'Seleccione tags...'
+    select_people: "Seleccione personas..."
+    pending: "pendiente"
+    done: "hecho"
+    rejected: "rechazado"
+    feedback: "feedback"
+    event: "evento"
+    done_or_rejected: 'hitos en estado hecho o rechazado'
 
-  assign_to: 'Asignar a'
-  mil_sure?: "¿Esta seguro que desea borrar este hito?"
-  markdone: 'Marcar como hecho'
-  add_feedback_author: 'Añadir revisor del feedback'
-  select_tags: 'Seleccione tags...'
+    pendings: "Hitos pendientes"
 
-  pending: "pendiente"
-  done: "hecho"
-  rejected: "rechazado"
-  feedback: "feedback"
-  event: "evento"
-  markdone: "marcar como hecho"
-  mil_title: "Titulo"
-  mil_start_date: "Fecha de inicio"
-  mil_due_date: "Fecha limite"
-  mil_description: "Descripcion"
-  mil_icon: "Icono"
-  mil_status: "Estado"
-  mil_create: "Crear Hito"
-  mil_delete: "Borrar Hito"
-  mil_notes: "Notas"
-  mil_assigned: " será asignado por defecto"
-  mil_assigned_to: "Asignado(s) a este hito"
-  mil_done_or_rejected: 'hitos en estado hecho o rechazado'
+    start_date: "Fecha de inicio"
+    description: "Descripción"
+    icon: "Icono"
+    status: "Estado"
+    assigned: " será asignado por defecto"
+    assigned_to: "Asignado(s) a este hito"
+    zero: "No hay hitos que mostrar"
+
+    new:
+      header: "Crear Hito"
+      submit: "Crear"
+
+    edit:
+      header: "Editar Hito"
+      submit: "Editar"
+
+    delete:
+      title: "Borrar Hito"
+      sure: "¿Esta seguro que desea eliminar este hito?"
+
+
+  #dashboard
+  dashboard:
+
+    name: "Nombre"
+    description: "Descripción"
+    due_time: "Fecha límite"
+    mentees_title: "Usuarios Mentoreados"
+    last_completed_milestones: "Últimos Hitos Completados"
+    milestones_title: "Hitos Pendientes"
 
 
   #categorias
-  cat_name: "Nombre"
-  cat_icon: "Icono"
-  cat_created: "Creado"
-  cat_updated: "Actualizado"
-  cat_create: "Crear Categoria"
-  cat_delete: "Borrar Categoria"
-  cat_add: "Agregar Categoria"
-  cat_unavailable: "No hay categorias disponibles"
+  categories:
+
+    header: "Categorías"
+    name: "Nombre"
+    icon: "Icono"
+    created: "Creado"
+    updated: "Actualizado"
+    delete:
+      title: "Borrar Categoria"
+
+    new:
+      header: "Agregar Categoría"
+      sumbit: "Agregar Categoría"
+
+    zero: "No hay categorías disponibles"
+
 
   #notas
-  note_visibility: "Visibilidad"
-  note_author: "Autor"
-  note_created: "Creado"
-  note_updated: "Actualizado"
-  note_create: "Crear Nota"
-  note_delete: "Borrar Nota"
-  add_notes: "Agregar Notas"
-  me: "Privado"
-  mentors: "Mentores"
-  every_body: "Publico"
-  note_sure?: "¿Esta seguro que desea borrar esta nota?"
+  notes:
+
+    header: "Notas"
+    visibility: "Visibilidad"
+    author: "Autor"
+    created: "Creado"
+    updated: "Actualizado"
+    create: "Crear Nota"
+    add: "Agregar Notas"
+    me: "Privado"
+    mentors: "Mentores"
+    every_body: "Publico"
+
+    delete:
+      title: "Borrar Nota"
+      sure: "¿Esta seguro que desea eliminar esta nota?"
+
+
+  #tags
+  tags:
+
+    index:
+      header: "Listando tags"
+    new:
+      header: "Crear tag"
+      submit: "Crear"
+    edit:
+      header: "Editar Tag"
+      submit: "Editar"
+
+    delete:
+      sure: "¿Está seguro que desea eliminar el tag?"
+
+    zero: "No se han encontrado tags"
+
 
   attachmentsdocs: 'Documentos adjuntos'
   adddoc: 'Agregar documento'
   driveerrormsj: 'Ha ocurrido un error. Asegúrese de cumplir con los siguientes puntos:
-                    - Ha ingresado un URL correcta
-                    - Tiene permisos de acceso al archivo en Google Drive'
+                      - Ha ingresado un URL correcta
+                      - Tiene permisos de acceso al archivo en Google Drive'
   attachgoogledrivedoc: 'Adjuntar documento de Google Drive'
   documenturl: 'URL del documento'
   attach: 'Adjuntar'
-
-
-  #tags
-  tag_create_head: "Crear Tag"
-  tag_edit_head: "Editar Tag"
-  tag_new_submit: "Crear tag"
-  tag_edit_submit: "Actualizar tag"
-  tag_index_header: "Listando tags"
-  tag_no_tags: "No se han encontrado tags"
-  tag_delete_sure: "¿Estás seguro de que deseas eliminar la Tag?"
 
 
   #fechas

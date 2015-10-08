@@ -3,16 +3,16 @@
     <div class="col-xs-12">
 
       <div class="table-container">
-        <h1><%= t('project_index_header') %></h1>
-        <table class="table datatable">
+        <h1><%= t('project.index.header') %></h1>
+        <table class="table datatable" data-info="false">
           <thead>
           <tr>
             <td></td>
 
-            <td><%= t('project_name') %></td>
-            <td><%= t('project_client') %></td>
-            <td><%= t('project_start_date') %></td>
-            <td><%= t('project_end_date') %></td>
+            <td><%= t('project.name') %></td>
+            <td><%= t('project.client') %></td>
+            <td><%= t('project.start_date') %></td>
+            <td><%= t('project.end_date') %></td>
             <td></td>
             <td></td>
           </tr>
@@ -31,7 +31,8 @@
                 </td>
                 <td><%= link_to project_path(m),
                                 method: :delete,
-                                data: { confirm: t('sure?') } do %>
+                                data: { confirm: t('project.delete.sure') } do %>
+
                       <span class='large-text glyphicon glyphicon-remove'></span>
                   <% end %>
                 </td>
@@ -47,36 +48,3 @@
   </div>
 </div>
 
-
-<!--VERSION VIEJA-->
-<!--<h1><%= t('project_index_header') %></h1>-->
-<!--<table class="table">-->
-  <!--<tr>-->
-    <!--<th><%= t('project_id') %></th>-->
-    <!--<th><%= t('project_name') %> </th>-->
-    <!--<th><%= t('project_client') %></th>-->
-  <!--</tr>-->
-  <!--<% projects = Project.where(validity: 'true') %>-->
-  <!--<% projects.each do |p| %>-->
-    <!--<tr>-->
-      <!--<td>-->
-        <!--<%= p.id %>-->
-      <!--</td>-->
-      <!--<td>-->
-        <!--<%= link_to p.name, p %>-->
-      <!--</td>-->
-      <!--<td>-->
-        <!--<%= p.client %>-->
-      <!--</td>-->
-      <!--<td>-->
-        <!--<%= link_to t('edit'), edit_project_path(p) %>-->
-      <!--</td>-->
-      <!--<td>-->
-        <!--<%= link_to t('delete'), p, method: :delete %>-->
-      <!--</td>-->
-    <!--</tr>-->
-  <!--<% end %>-->
-<!--</table>-->
-<!--<% if projects.size == 0 %>-->
-<!--<em><%= t('project_no_projects') %></em>-->
-<!--<% end %>-->

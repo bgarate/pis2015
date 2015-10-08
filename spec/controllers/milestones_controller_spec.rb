@@ -25,7 +25,6 @@ describe MilestonesController, "Milestone Controller" do
     @m.title = 'Conferencia Tecnológica'
     @m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
     @m.due_date= Time.now + (3*2*7*24*60*60)
-    @m.milestone_type= 1
     @m.status=0
     @m.icon = "test/silueta.gif"
     @m.save!
@@ -33,23 +32,24 @@ describe MilestonesController, "Milestone Controller" do
   end
 
   before do
-    @m1 = Milestone.new :title=>'Entrega del prototipo de alfred', :description=>'Hay que entregar el protipo de alfred
-                                  a la gente de pis. Ademas de cafe y galletitas maria gratis'
-    @m1.due_date= Time.now - (3*2*7*24*60*60)
-    @m1.milestone_type = :feedback
-    @m1.status=0
-    @m1.save!
 
-    @c1 = Category.new :name=>'feedback', :icon=>'unicono'
+    @c1 = Category.new :name=>'Feedback', :icon=>'unicono'
     @c1.created_at=Time.now
     @c1.updated_at=Time.now
     @c1.save!
+
+    @m1 = Milestone.new :title=>'Entrega del prototipo de alfred', :description=>'Hay que entregar el protipo de alfred
+                                  a la gente de pis. Ademas de cafe y galletitas maria gratis'
+    @m1.due_date= Time.now - (3*2*7*24*60*60)
+    @m1.category=@c1
+    @m1.status=0
+    @m1.save!
 
 
     @m2 = Milestone.new :title=>'Entrega del prototipo de alfred', :description=>'Hay que entregar el protipo de alfred
                                   a la gente de pis. Ademas de cafe y galletitas maria gratis'
     @m2.due_date= Time.now - (3*2*7*24*60*60)
-    @m2.milestone_type = :event
+    @m2.category=@c1
     @m2.status=0
     @m2.save!
 
@@ -77,13 +77,32 @@ describe MilestonesController, "Milestone Controller" do
 
   it "Deberia modificar el status a done" do
     session[:user_id] = @ad_user.id
+    p1 = Person.new
+    p1.name = "Juan Perez"
+    p1.email ="juanperez1@gmail.com"
+    p1.start_date =Time.now
+    p1.save!
+    cat1= Category.new
+    cat1.name= 'feed'
+    cat1.icon= '0asdsadsa'
+    cat1.created_at=Time.now
+    cat1.updated_at=Time.now
+    cat1.save!
+    cat2= Category.new
+    cat2.name= 'newcat'
+    cat2.icon= 'descripcion'
+    cat2.created_at=Time.now
+    cat2.updated_at=Time.now
+    cat2.save!
+    @m1.category=cat2
+    @m1.save!
     get :edit, :id => @m1.id
-    put :update, :id => @m1.id, :milestone => { :status => :done }, @admin.name=>@admin.id, :session=>session
+    put :update, :id => @m1.id,:category_id=>cat1.id, :milestone => { :status => :done, :category_id=>cat1.id}, :session=>session
     @m1.reload
     expect(@m1.status).to eq "done"
   end
 
-  it "Deberia modificar el status a done" do
+  it "Deberia modificar el status al siguiente (done)" do
     get :next_status, :milestone_id => @m1.id
     @m1.reload
     expect(@m1.status).to eq "done"
@@ -111,18 +130,9 @@ describe MilestonesController, "Milestone Controller" do
     expect(@m1.status).to eq 'pending'
   end
 
-  it "Deberia dar true" do
-    m1=Milestone.new
-    m1.title='miles'
-    m1.description='desc'
-    m1.milestone_type=:feedback
-    m1.save!
-    expect(m1.feedback?).to eq true
-  end
-
   it "No deberia modificar el nombre" do
     session[:user_id] = @ad_user.id
-    put :update, :id => @m1.id, :milestone => { :title => '' }
+    put :update, :id => @m1.id, :milestone => { :title => '' , :category_id=>@c1.id}
     @m1.reload
     expect(response).to render_template('edit')
   end
@@ -130,14 +140,14 @@ describe MilestonesController, "Milestone Controller" do
 
   it "añade un revisor a un hito de tipo feedback" do
     session[:user_id] = @ad_user.id
-    put :update, :id => @m1.id, :milestone => {:feedback_author =>  @person }
+    put :update, :id => @m1.id, :category_id=>@c1.id, :milestone => {:category_id=>@c1.id, :feedback_author_id => @person.id }
     @m1.reload
     expect(@m1.feedback_author).to eq @person
   end
 
   it "no añade un revisor a un hito que no es tipo feedback" do
     session[:user_id] = @ad_user.id
-    put :update, :id => @m2.id, :milestone => {:feedback_author =>  @person }
+    put :update, :id => @m2.id, :milestone => {:feedback_author =>  @person , :category_id=>@c1.id}
     @m2.reload
     expect(@m2.feedback_author).to eq NIL
   end
@@ -174,26 +184,27 @@ describe MilestonesController, "Milestone Controller" do
       p3.email ="juanperez3@gmail.com"
       p3.start_date =Time.now
       p3.save!
+
       get :new
-      post :create, :person_id=>@admin.id, :milestone=>{:title=>'milestone1', :description=>'unadescripcionde1'},
-                     :category_id =>@c1.id, :people=>[p1.id,p2.id,p3.id]
+      post :create, :person_id=>@admin.id, :milestone=>{:title=>'milestone1', :description=>'unadescripcionde1',:category_id =>@c1.id},
+                      :people=>[p1.id,p2.id,p3.id]
       expect(response.status).to eq(302)
 
     end
 
     it 'is valid with a title and description' do
-      post :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :due_date=>Time.now}
+      post :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :due_date=>Time.now, :category_id=>@c1.id}
       expect(response.status).to eq(302)
     end
 
     it 'is invalid without a title' do
-      post :create, :person_id=>@admin.id, :milestone=>{ :description=>'unadescripciondemilestone'}
-      expect(response).to redirect_to('/milestones/new')
+      post :create, :person_id=>@admin.id, :milestone=>{ :description=>'unadescripciondemilestone', :category_id=>@c1.id}
+      expect(response).to redirect_to(@admin)
     end
 
     it 'is invalid without a description' do
-      get :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1'}
-      expect(response.status).to redirect_to('/milestones/new')
+      get :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1', :category_id=>@c1.id}
+      expect(response.status).to redirect_to(@admin)
     end
 
     it 'modifica el hito' do
@@ -204,7 +215,7 @@ describe MilestonesController, "Milestone Controller" do
       p1.start_date =Time.now
       p1.save!
       get :edit, :id => @m1.id
-      put :update, :id => @m1.id, :milestone => { :status => :done }, :people=>[p1.id]
+      put :update, :id => @m1.id, :milestone => { :status => :done, :category_id=>@c1.id }, :people=>[p1.id]
       @m1.reload
     end
 
@@ -264,6 +275,7 @@ describe MilestonesController, "Milestone Controller" do
 
     it 'no destruye la milestone' do
       session[:user_id] = @no_ad_user.id
+      session[:return_to]= '/milestones'
       m1 = Milestone.new
       m1.title ='Milestone for testing'
       m1.description='This is a milestone to test Milestones'
@@ -275,7 +287,7 @@ describe MilestonesController, "Milestone Controller" do
       m1.save
       m1.notes.create({:text=> 'una nota pa borrar'})
       delete :destroy, :id => m1.id, :session => session
-      expect(response).to redirect_to('/people')
+      expect(response).to redirect_to('/milestones')
 
     end
   end
@@ -289,10 +301,10 @@ describe MilestonesController, "Milestone Controller" do
     it 'Deberia renderizar edit por ser mentor' do
       @no_ad_user.person.mentees<<(@ad_user.person)
       @no_ad_user.save!
-      @ad_user.person.milestones<<(@m)
+      @ad_user.person.milestones<<(@m1)
       @ad_user.save!
       session[:user_id] = @no_ad_user.id
-      get :edit, :id => @m.id
+      get :edit, :id => @m1.id, :category_id=>@c1.id
       expect(response.status).to eq(200)
     end
 

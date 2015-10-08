@@ -3,7 +3,7 @@
     <div class="col-xs-12">
 
       <div class="table-container">
-        <h1><%= t('tag_index_header') %></h1>
+        <h1><%= t('tags.index.header') %></h1>
         <table class="table datatable">
           <thead>
           <tr>
@@ -24,7 +24,7 @@
                 </td>
                 <td><%= link_to tag_path(t),
                                 method: :delete,
-                                data: { confirm: t('tag_delete_sure') } do %>
+                                data: { confirm: t('tags.delete.sure') } do %>
                       <span class='large-text glyphicon glyphicon-remove'></span>
                   <% end %>
                 </td>

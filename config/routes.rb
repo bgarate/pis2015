@@ -92,7 +92,7 @@ Rails.application.routes.draw do
       get 'add_mentor_form'
       get 'new' => 'people#new'
       post 'new' => 'people#create'
-      get ':id' => 'people#show', :constraints  => { :id => /[-\w\s\.]+/ }
+      get ':id' => 'people#show', :constraints  => { :id => /[-\w\.]+/ }
     end
   end
 
@@ -101,7 +101,7 @@ Rails.application.routes.draw do
     collection do
       get 'new' => 'projects#new'
       post 'new' => 'projects#create'
-      get ':id' => 'projects#show', :constraints  => { :id => /[-\w\s\.]+/ }
+      get ':id' => 'projects#show', :constraints  => { :id => /[-\w\.]+/ }
     end
   end
 

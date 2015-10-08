@@ -2,14 +2,14 @@
   <div class="row">
     <div class="table-container">
 
-    <h1><%= "Usuarios Mentoreados" %></h1>
+    <h1><%= t('dashboard.mentees_title')  %></h1>
 
     <table class="table datatable">
       <thead>
       <tr>
         <td></td>
-        <td>Nombre</td>
-        <td>Últimos Hitos Completados</td>
+        <td><%= t('dashboard.name') %></td>
+        <td><%= t('dashboard.last_completed_milestones') %></td>
 
       </tr>
       </thead>
@@ -47,14 +47,14 @@
 
     <div class="table-container">
 
-      <h1><%= "Hitos Pendientes" %></h1>
+      <h1><%= t('dashboard.milestones_title')  %></h1>
 
       <table class="table datatable">
         <thead>
         <tr>
-          <td>Nombre</td>
-          <td>Descripción</td>
-          <td>Fecha límite</td>
+          <td><%= t('dashboard.name')  %></td>
+          <td><%= t('dashboard.description')  %></td>
+          <td><%= t('dashboard.due_time')  %></td>
         </tr>
         </thead>
         <tbody>

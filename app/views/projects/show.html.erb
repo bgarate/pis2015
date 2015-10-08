@@ -2,13 +2,13 @@
   <div class="row">
     <div class="card-col col-xs-4 col-xs-offset-4">
       <div id="div_project">
-        <h1><span class="glyphicon glyphicon-check"></span> Ver Proyecto</h1>
+        <h1><span class="glyphicon glyphicon-check"></span><%= t('project.view') %></h1>
         <table class="table table-striped">
           <tbody>
           <tr>
             <td>
               <label>
-                <%= t('project_name') %>
+                <%= t('project.name') %>
               </label>
               <%= @project.name %>
             </td>
@@ -16,7 +16,7 @@
           <tr>
             <td>
               <label>
-                <%= t('project_client') %>
+                <%= t('project.client') %>
               </label>
               <%= @project.client %>
             </td>
@@ -24,7 +24,7 @@
           <tr>
             <td>
               <label>
-                <%= t('project_status') %>
+                <%= t('project.status') %>
               </label>
               <%= @project.display_status %>
             </td>
@@ -32,7 +32,7 @@
           <tr>
             <td>
               <label>
-                <%= t('project_start_date') %>
+                <%= t('project.start_date') %>
               </label>
               <%= @project.start_date %>
             </td>
@@ -40,7 +40,7 @@
           <tr>
             <td>
               <label>
-                <%= t('project_end_date') %>
+                <%= t('project.end_date') %>
               </label>
               <%= @project.end_date %>
             </td>
@@ -48,26 +48,26 @@
           <tr>
             <td>
               <label>
-                <%= t('project_technologies') %>
+                <%= t('project.technologies.title') %>
               </label>
               <% @project.technologies.each do |t| %>
                   <li><%= t.name %></li>
               <% end %>
               <% if @project.technologies.size == 0 %>
-                  <em><%= t('project_no_technologies') %></em>
+                  <em><%= t('project.technologies.zero') %></em>
               <% end %>
             </td>
           </tr>
           <tr>
             <td>
               <label>
-                <%= t('project_people') %>
+                <%= t('project.people.title') %>
               </label>
               <% @project.people.each do |t| %>
                   <li><%= link_to t.name, t %></li>
               <% end %>
               <% if @project.people.size == 0 %>
-                  <em><%= t('project_no_people') %></em>
+                  <em><%= t('project.people.zero') %></em>
               <% end %>
             </td>
           </tr>
@@ -76,7 +76,7 @@
             <%= form_tag ({:action => 'assign_person', :controller => 'projects', :project_id => @project.id}) do   %>
                 <% if !@usr.empty?%>
                   <label>
-                    <%= t('assign_to_project') %>
+                    <%= t('project.assign.title') %>
                   </label>
                   <br>
                   <select name="person_id">
@@ -86,7 +86,7 @@
                     <% end %>
                   </select>
 
-                  <%= button_tag t('project_assign_submit'), options= :type => 'submit', id: "buttonTwo" %>
+                  <%= button_tag t('project.assign.submit'), options= :type => 'submit', id: "buttonTwo" %>
                <% end %>
             </td>
           </tr>

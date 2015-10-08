@@ -19,11 +19,15 @@ class PeopleController < ApplicationController
   end
 
   def show
-    person = Person.find_by(id: params[:id])
+    identifier = params[:id]
+    person = Person.find_by(id: identifier)
     unless person
-      person = Person.where("lower(name)= :name", name:"#{params[:id].downcase}").first
+      # El identificador lo comparo en minuscula con la base de datos
+      identifier = identifier.downcase
+      # En el caso que sea un nombre, se sustituyen las _ por espacios
+      person = Person.where("lower(name)= :name", name:"#{identifier.gsub(/_/, "\s")}").first
       unless person
-        person = Person.where("lower(email) LIKE :prefix", prefix:"#{params[:id].downcase}@%").first
+        person = Person.where("lower(email) LIKE :prefix", prefix:"#{identifier}@%").first
       end
     end
 
@@ -31,7 +35,19 @@ class PeopleController < ApplicationController
       #nombre
       @name = person.name
       @identifier = person.id
-      @people= Person.all.where('id NOT in (?)', @identifier)
+      user = Person.find(current_user.person_id)
+      #ASSIGN PEOPLE
+      if current_user_admin?
+        @people= Person.all.where('id NOT in (?)', @identifier)
+      else
+        @people= user.mentees.where('mentee_id NOT in (?) ', @identifier)
+        unless user.id==@identifier
+          @people<<user
+        end
+      end
+      #CATEGORIES PEOPLE
+      @cats=Category.all.collect {|t| [t.name, t.id]}
+      @authors=Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
       @person = person
       @tags=Tag.all
 
@@ -51,7 +67,9 @@ class PeopleController < ApplicationController
       #tiempo en moove-it
       @start_date = person.start_date
       #Eventos (Hitos)
-      @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.milestone_type = 1").order(due_date: :desc, created_at: :desc)
+      @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.category_id = 1").order(due_date: :desc, created_at: :desc)
+      #@events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0")
+      # @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.category_id = 2")
       #Hitos pendientes
       @overcomes = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0").order(due_date: :desc, created_at: :desc)
       #Todos los hitos pendientes
@@ -137,10 +155,10 @@ class PeopleController < ApplicationController
     @person.save
 
     if @person.valid?
-      flash.notice = "'#{person_params[:name]}' creado con éxito!"
+      flash.notice = "'#{person_params[:name]}' " + t('messages.create.success')
       redirect_to @person
     else
-      flash.alert = "'#{person_params[:name]}' no se ha podido crear"
+      flash.alert = "'#{person_params[:name]}' " + t('messages.create.error')
       redirect_to '/people/new'
     end
   end

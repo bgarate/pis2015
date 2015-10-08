@@ -3,7 +3,7 @@
     <div class="row">
       <%= render 'info' %>
     </div>
-    <h3><%= t('mil_notes') %></h3>
+    <h3><%= t('notes.header') %></h3>
     <hr>
     <div class="row">
       <div id="milestone-notes">
@@ -14,12 +14,13 @@
                 <h2><%= n.author.name %></h2>
                 <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
                 <p><%= n.text %></p>
+                <% if current_user_admin? %>
                 <%= link_to [n.milestone, n],
                             method: :delete,
-                            data: { confirm: t('note_sure?')},
+                            data: { confirm: t('notes.delete.sure')},
                             class: 'delete' do %>
                     <span class="glyphicon glyphicon-remove"></span>
-
+                    <% end %>
                 <% end %>
                 <% if n.visibility=='every_body' %>
                     <span class="glyphicon glyphicon-eye-open"></span>

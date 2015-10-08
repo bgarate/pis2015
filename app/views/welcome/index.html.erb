@@ -5,11 +5,11 @@
       </ul>
       <p><%= @msj %></p>
       <% if current_user %>
-          Signed in as <strong><%= current_user.person.name %></strong>!
+          <%= t('signed_in_as') %><strong><%= current_user.person.name %></strong>!
           <%= link_to "Sign out", :controller => 'google', :action => 'signout', id: "sign_out" %>
       <% else %>
           <%= image_tag "logos/alfred-logo-big.png" %>
-          <%= link_to "Ingresar con Google", "/auth/google_oauth2", id: "sign_in" %>
+          <%= link_to t('login_with_google'), "/auth/google_oauth2", id: "sign_in" %>
       <% end %>
     </div>
 </div>

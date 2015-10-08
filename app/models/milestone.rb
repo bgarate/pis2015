@@ -7,7 +7,6 @@
 #  due_date           :date
 #  description        :text
 #  status             :integer          default(0)
-#  milestone_type     :integer
 #  icon               :string
 #  feedback_author_id :integer
 #  created_at         :datetime         not null
@@ -27,7 +26,6 @@ class Milestone < ActiveRecord::Base
   has_and_belongs_to_many :tags
   belongs_to :category
   enum status: [:pending, :done, :rejected]
-  enum milestone_type: [ :feedback, :event ]
 
   # autor del feedback
   belongs_to :feedback_author, class_name: 'Person'
@@ -36,6 +34,7 @@ class Milestone < ActiveRecord::Base
     status_order = [:pending, :done, :rejected]
 
     status_order[(status_order.find_index(self.status.to_sym) + 1) % status_order.count]
+
   end
 end
 

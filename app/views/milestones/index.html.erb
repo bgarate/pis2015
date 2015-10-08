@@ -3,14 +3,14 @@
     <div class="col-xs-12">
 
       <div class="table-container">
-        <h1><%= t('milestones') %></h1>
-        <table class="table datatable">
+        <h1><%= t('milestones.header') %></h1>
+        <table class="table datatable" data-info="false">
           <thead>
               <tr>
                 <td></td>
-                <td>Nombre</td>
-                <td>Descripción</td>
-                <td>Fecha límite</td>
+                <td><%= t('milestones.title') %></td>
+                <td><%= t('milestones.description') %></td>
+                <td><%= t('milestones.due_date') %></td>
               </tr>
           </thead>
           <tbody>
@@ -32,7 +32,7 @@
                 </td>
                 <td><%= link_to milestone_path(m),
                                 method: :delete,
-                                data: { confirm: t('mil_sure?') } do %>
+                                data: { confirm: t('milestones.delete.sure') } do %>
                       <span class='large-text glyphicon glyphicon-remove'></span>
                       <% end %>
                 </td>

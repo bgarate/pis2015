@@ -15,17 +15,15 @@
     <%end%>
   </div>
   <div class="right-pane">
-
     <p><%= @milestone.description %></p>
     <p><%=
-        if @milestone.feedback? and @milestone.feedback_author
+        if feedback? and @milestone.feedback_author
           @milestone.feedback_author.name
         end
     %></p>
-
     <div class="">
       <table>
-        <tr><td><%=t('mil_assigned_to')%>:</td></tr>
+        <tr><td><%=t('milestones.assigned_to')%>:</td></tr>
       <%@milestone.people.each do |p| %>
            <tr><td>
              <%= p.name %>

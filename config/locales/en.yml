@@ -1,6 +1,6 @@
 en:
 
-  #Generales (Paginas, Links, Botones, etc)
+  #General (Pages, Links, Buttons, etc)
   person: "Person"
   people: "People"
   category: "Category"
@@ -11,6 +11,9 @@ en:
   notes: "Notes"
   project: "Project"
   projects: "Projects"
+
+  stats: "Stats"
+  events: "Events"
   save: "Save"
   add: "Add"
   values: "Values"
@@ -21,127 +24,217 @@ en:
   title: 'Title'
   name: 'Name'
   id: 'ID'
+  search: 'Search'
+  none:  'None'
+
   not_authorized: "You are not authorized to perform that action"
   unregistered: "Unregistered user, contact an administrator."
   invalidurl: 'Invalid url'
 
-  #crear persona
-  people_new_name: "Name"
-  people_new_email: "Email"
-  people_new_celphone: "Cellphone"
-  people_new_telephone: "Telephone"
-  people_new_birth_date: "Birth date"
-  people_new_init_date: "Init date"
-  people_new_submit: "Create user"
-  select_people: "Select people..."
-  assign_to_project: "Assign to project"
+  login_with_google: "Login with Google"
+  signed_in_as: "Signed in as"
+  moove-it-time: "In Moove-it since"
+
+  messages:
+    create:
+      success: "created successfully!"
+      error: "couldn't be created"
 
 
-  people_assign_to: "People assign to"
+  #people
+  people:
 
-  mentor_since: "Since"
-  mentor_name: "Mentor's name"
-  mentor_submit: "Add mentor"
-  mentor_nomore_msg: "No more mentors available to add to"
+    new:
+      header: "Create user"
+      name: "Name"
+      email: "Email"
+      cellphone: "Cellphone"
+      telephone: "Telephone"
+      birth_date: "Birth date"
+      init_date: "Init date"
+      select: "Select people..."
+      asign_to_project: "Assign to project"
+      submit: "Create"
 
-  project_create_head: "Create Project"
-  project_edit_head: "Edit Project"
-  project_id: "ID"
-  project_name: "Name"
-  project_client: "Client"
-  project_status: "Status"
-  project_start_date: "Start date"
-  project_end_date: "End date"
-  project_technologies: "Technologies"
-  project_new_submit: "Create project"
-  project_edit_submit: "Update project"
-  project_index_header: "Listing projects"
-  project_no_projects: "No projects found"
-  project_no_technologies: "There are no technologies associated to the project"
-  project_people: "People associated to the project"
-  project_no_people: "There are no people associated to the project"
-  select_technologies: 'Select technologies...'
-  project_assign_submit: 'Assign to project'
+
+  #mentor
+  mentor:
+    header: "Mentors"
+    since: "Since"
+    name: "Mentor's name"
+    nomore_msg: "No more mentors available to add to"
+    adding_to: "Adding mentor to"
+
+    zero: "Without mentors"
+
+    add:
+      header: "Add Mentors"
+      submit: "Add Mentor"
+
+
+  #projects
   project:
+
+    id: "ID"
+    name: "Name"
+    client: "Client"
+    status: "Status"
+    start_date: "Start date"
+    end_date: "End date"
+
+    ongoing: "Ongoing Projects"
+    fulfilled: "Fulfilled Projects"
+
+    people:
+      title: "People associated to the project"
+      zero: "There are no people associated to the project"
+
+    technologies:
+      title: "Technologies"
+      zero: "There are no technologies associated to the project"
+      select: 'Select technologies...'
+
+    assign:
+      title: "Assign to project"
+      submit: 'Asignar'
+
+    zero: "No projects found"
+    view: "View Project"
+
     display_status:
       active: 'Active'
       inactive: 'Inactive'
       finished: 'Finished'
 
+    new:
+      header: "Create Project"
+      submit: "Create Project"
 
-  #hito
-  milestone_edit_head: "Edit Milestone"
-  milestone_due_date: "Milestone's due date"
-  milestone_reviewer: "Feedback's reviewer"
-  markdone: 'Mark as done'
-  add_feedback_author: 'Add feedback reviewer'
-  select_tags: 'Select tags...'
-  assign_to: 'Assign to'
-  mil_sure?: "Are you sure you want to delete this milestone?"
+    edit:
+      header: "Edit Project"
+      submit: "Update Project"
 
+    index:
+      header: "Listing projects"
 
-  #hitos
-  markdone: "mark as done"
-  mil_title: "Title"
-  mil_start_date: "Start Date"
-  mil_due_date: "Due Date"
-  mil_description: "Description"
-  mil_icon: "Icon"
-  mil_status: "Status"
-  mil_create: "Create Milestone"
-  mil_delete: "Delete Milestone"
-  mil_assigned: " will be assigned by default"
-  mil_assigned_to: "Assigned to this milestone"
-
-  markdone: 'Mark as done'
-  attachmentsdocs: 'Attachments documents'
-  adddoc: 'Add document'
-  driveerrormsj: 'An error has occurred. Be sure to follow the following points:
-                    - You have entered a correct URL
-                    - You have access permissions to the file in Google Drive'
-  attachgoogledrivedoc: 'Attach Google Drive Document'
-  documenturl: 'Document URL'
-  attach: 'Attach'
-  #categorias
-  cat_name: "Name"
-  cat_icon: "Icon"
-  cat_created: "Created at"
-  cat_updated: "Updated at"
-  cat_create: "Create Category"
-  cat_delete: "Delete Category"
-  cat_add: "Add Category"
-  cat_unavailable: "There are no available Categories"
-
-  #notas
-  note_visibility: "Visibility"
-  note_author: "Author"
-  note_created: "Created at"
-  note_updated: "Updated at"
-  note_create: "Create Note"
-  note_delete: "Delete Note"
-  add_notes: "Add Notes"
-  me: "Private"
-  mentors: "Mentors"
-  every_body: "Public"
-  note_sure?: "Are you sure you want to delete this note?"
+    delete:
+      sure: "Are you sure you want to delete this project?"
 
 
+  #milestones
+  milestones:
 
-  attachmentsdocs: 'Attachments documents'
-  adddoc: 'Add document'
-  driveerrormsj: 'An error has occurred. Be sure to follow the following points:
-                    - You have entered a correct URL
-                    - You have access permissions to the file in Google Drive'
-  attachgoogledrivedoc: 'Attach Google Drive Document'
-  documenturl: 'Document URL'
-  attach: 'Attach'
+    header: "Milestones"
+    title: "Title"
+    due_date: "Due date"
+    reviewer: "Feedback's reviewer"
+    assign_to: 'Assign to'
+    cannot_assign: "You cannot assign more people"
+    mark_done: 'Mark as done'
+    add_feedback_author: 'Add feedback reviewer'
+    tags: "Tags"
+    select_tags: 'Select tags...'
+    select_people: "Select people..."
+    pending: "pending"
+    done: "done"
+    rejected: "rejected"
+    feedback: "feedback"
+    event: "event"
+
+    pendings: "Pending Milestones"
+
+    start_date: "Start date"
+    description: "Description"
+    icon: "Icon"
+    status: "Status"
+    assigned: " will be assigned by default"
+    assigned_to: "Assigned to this milestone"
+    zero: "No hay hitos que mostrar"
+
+    new:
+      header: "Create Milestone"
+      submit: "Create"
+
+    edit:
+      header: "Edit Milestone"
+      submit: "Edit"
+
+    delete:
+      title: "Delete Milestone"
+      sure: "Are you sure you want to delete this milestone?"
+
+
+  #dashboard
+  dashboard:
+
+    name: "Name"
+    description: "Description"
+    due_time: "Due date"
+    mentees_title: "Mentees"
+    last_completed_milestones: "Latest Milestones Completed"
+    milestones_title: "Pending Milestones"
+
+
+  #categories
+  categories:
+
+    header: "Categories"
+    name: "Name"
+    icon: "Icon"
+    created: "Created at"
+    updated: "Updated at"
+    delete:
+      title: "Delete Category"
+
+    new:
+      header: "Create Category"
+      sumbit: "Add Category"
+
+    zero: "There are no available Categories"
+
+
+  #notes
+  notes:
+
+    header: "Notes"
+    visibility: "Visibility"
+    author: "Author"
+    created: "Created at"
+    updated: "Updated at"
+    create: "Create Note"
+    add: "Add Notes"
+    me: "Private"
+    mentors: "Mentors"
+    every_body: "Public"
+
+    delete:
+      title: "Delete Note"
+      sure: "Are you sure you want to delete this note?"
 
 
   #tags
-  tag_create_head: "Create Tag"
-  tag_edit_head: "Edit Tag"
-  tag_new_submit: "Create tag"
-  tag_edit_submit: "Update tag"
-  tag_index_header: "Listing tags"
-  tag_no_tags: "No tags found"
-  tag_delete_sure: "Are you sure you wish to delete Tag?"
+  tags:
+
+    index:
+      header: "Listing tags"
+    new:
+      header: "Create tag"
+      submit: "Create"
+    edit:
+      header: "Edit Tag"
+      submit: "Update"
+
+    delete:
+      sure: "Are you sure you wish to delete Tag?"
+
+    zero: "No tags found"
+
+
+  attachmentsdocs: 'Attachments documents'
+  adddoc: 'Add document'
+  driveerrormsj: 'An error has occurred. Be sure to follow the following points:
+                    - You have entered a correct URL
+                    - You have access permissions to the file in Google Drive'
+  attachgoogledrivedoc: 'Attach Google Drive Document'
+  documenturl: 'Document URL'
+  attach: 'Attach'

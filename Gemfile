@@ -46,6 +46,9 @@ gem 'responders', '~> 2.0'
 
 gem 'cloudinary'
 
+#Translate support in js
+gem "i18n-js", ">= 3.0.0.rc11"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

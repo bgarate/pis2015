@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
 
   end
 
-=begin
+
   # No esta más en peopleController, hay que ver si se usa
   #devuelve true si puedo ver el perfil de la persona person_id, false de lo contrario.
   helper_method :can_view_person?
@@ -71,7 +71,7 @@ class ApplicationController < ActionController::Base
       false
     end
   end
-=end
+
 
   #devuelve true si puedo ver el hito milestone_id, false de lo contrario.
   helper_method :can_modify_milestone?

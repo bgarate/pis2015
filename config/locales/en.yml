@@ -23,7 +23,7 @@ en:
   id: 'ID'
   not_authorized: "You are not authorized to perform that action"
   unregistered: "Unregistered user, contact an administrator."
-
+  invalidurl: 'Invalid url'
 
   #crear persona
   people_new_name: "Name"

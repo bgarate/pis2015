@@ -126,12 +126,7 @@ class MilestonesController < ApplicationController
     end
 
     @milestone.save!
-    #redirect_to @milestone
-    if session[:return_to]
-      redirect_to session[:return_to]
-    else
-      redirect_to root_path
-    end
+    redirect_to :back
   end
 
   def next_status_rej
@@ -142,12 +137,7 @@ class MilestonesController < ApplicationController
       @milestone.status= 'rejected'
     end
     @milestone.save!
-    #redirect_to @milestone
-    if session[:return_to]
-      redirect_to session[:return_to]
-    else
-      redirect_to root_path
-    end
+    redirect_to :back
   end
 
   def filter_note_by_visibility(note)

@@ -71,7 +71,7 @@ class PeopleController < ApplicationController
       #@events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0")
       # @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.category_id = 2")
       #Hitos pendientes
-      @overcomes = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0").order(due_date: :desc, created_at: :desc)
+      @overcomes = person.milestones.where("milestones.due_date < CURRENT_DATE AND milestones.status = 0").order(due_date: :desc, created_at: :desc)
       #Todos los hitos pendientes
       @milestones = person.milestones.where('milestones.status = 0').order(due_date: :desc, created_at: :desc)
       #Cantidad de hitos cerrados o rechazados

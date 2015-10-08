@@ -45,7 +45,7 @@ class GoogleController < ApplicationController
   # Google Drive
   #
   def adddriveview
-    if params[:milestone_id]
+    if params[:milestone_id] && can_modify_milestone?(params[:milestone_id])
       @milestone_id = params[:milestone_id]
     else
       redirect_to root_path

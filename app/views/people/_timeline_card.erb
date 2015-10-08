@@ -1,6 +1,4 @@
-<div align="timeline-card">
-  <%= render 'milestones/form' %>
-</div>
+
 <div id="timeline-card" class="card timeline">
   <!--<ul id="milestone-list">
     <li>
@@ -40,6 +38,7 @@
       <div class="clearfix"></div>
     </li>
   </ul>-->
+
 <ul id="new-milestone">
   <li>
 
@@ -61,8 +60,7 @@
 
               <div class="resources-list clearfix">
                 <h2><%=t(:attachmentsdocs)%></h2>
-                    
-                  <% if e.resources.empty? %>
+                  <% if e.resources.empty? && can_modify_milestone?(e.id) %>
                     <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
                           <span class="toggle-documents glyphicon glyphicon-plus"></span>
                     <% end %>
@@ -72,13 +70,14 @@
                       <%e.resources.each do |r|%>
                           <li><%=link_to r.title, r.url, :target => "_blank"%></li>
                       <%end%>
-
-                      <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                          <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                      <% if can_modify_milestone?(e.id) %>
+                        <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                            <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                        <% end %>
                       <% end %>
                     </ul>
                   <% end %>
-                  
+
               </div>
 
               <% if e.due_date %>

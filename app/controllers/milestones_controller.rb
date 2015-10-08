@@ -91,7 +91,7 @@ class MilestonesController < ApplicationController
 
   def edit
     @cats=Category.all.collect {|t| [t.name, t.id]}
-    @authors=Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id}).collect {|t| [t.name, t.id]}
+    @authors=Person.all.collect {|t| [t.name, t.id]}
     @tags = Tag.all
     user= Person.find(current_user.person_id)
     if current_user_admin?

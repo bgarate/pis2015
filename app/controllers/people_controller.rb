@@ -41,7 +41,9 @@ class PeopleController < ApplicationController
         @people= Person.all.where('id NOT in (?)', @identifier)
       else
         @people= user.mentees.where('mentee_id NOT in (?) ', @identifier)
-        @people<<user
+        unless user.id==@identifier
+          @people<<user
+        end
       end
       #CATEGORIES PEOPLE
       @cats=Category.all.collect {|t| [t.name, t.id]}

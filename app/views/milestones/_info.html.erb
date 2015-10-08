@@ -15,14 +15,12 @@
     <%end%>
   </div>
   <div class="right-pane">
-
     <p><%= @milestone.description %></p>
     <p><%=
         if feedback? and @milestone.feedback_author
           @milestone.feedback_author.name
         end
     %></p>
-
     <div class="">
       <table>
         <tr><td><%=t('milestones.assigned_to')%>:</td></tr>

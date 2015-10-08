@@ -45,12 +45,10 @@ class MilestonesController < ApplicationController
     @milestone= @person.milestones.create(milestone_params)
     @milestone.tag_ids = params[:tags]
     #CATEGORIES
-    if Category.exists?(params[:milestone][:category_id])
-      category=Category.find(params[:milestone][:category_id])
-      @milestone.category=category
-      if category.name=='Feedback'
-        @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
-      end
+    category=Category.find(params[:milestone][:category_id])
+    @milestone.category=category
+    if category.name=='Feedback'
+      @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
     end
     #ASSIGNED
     if params[:people]!=nil
@@ -102,41 +100,36 @@ class MilestonesController < ApplicationController
         @people<<user
       end
     end
-    if @milestone.category!=nil
-      @category_name = @milestone.category.name
-    end
+    @category_name = @milestone.category.name
   end
 
   def update
-    if params[:milestone][:category_id]!=nil
     category=Category.find(params[:milestone][:category_id])
       if category.name == 'Feedback'
         @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
       else
         @milestone.feedback_author_id=nil
       end
-    end
-    @milestone.category = category
-
-    if params[:people]!=nil
-      params[:people].each do |p|
-        @person2=Person.find(p)
-        @milestone.people<<@person2
-        @milestone.save
+      @milestone.category = category
+      if params[:people]!=nil
+        params[:people].each do |p|
+          @person2=Person.find(p)
+          @milestone.people<<@person2
+          @milestone.save
+        end
       end
-    end
-    @milestone.category = category
-    if @milestone.update_attributes(milestone_params)
-      @milestone.tag_ids = params[:tags]
-      redirect_to @milestone
-    else
-      render :edit
-    end
+      @milestone.category = category
+      if @milestone.update_attributes(milestone_params)
+        @milestone.tag_ids = params[:tags]
+        redirect_to @milestone
+      else
+        render :edit
+      end
   end
 
   helper_method :feedback?
   def feedback?
-    return @milestone.category.name == :Feedback
+    return @milestone.category.name == 'Feedback'
   end
 
   def next_status

@@ -29,6 +29,8 @@ en:
 
   not_authorized: "You are not authorized to perform that action"
   unregistered: "Unregistered user, contact an administrator."
+  invalidurl: 'Invalid url'
+
   login_with_google: "Login with Google"
   signed_in_as: "Signed in as"
   moove-it-time: "In Moove-it since"
@@ -118,7 +120,6 @@ en:
     delete:
       sure: "Are you sure you want to delete this project?"
 
-
   #milestones
   milestones:
 
@@ -138,6 +139,7 @@ en:
     rejected: "rejected"
     feedback: "feedback"
     event: "event"
+    done_or_rejected: 'milestones in state done or rejected'
 
     pendings: "Pending Milestones"
 

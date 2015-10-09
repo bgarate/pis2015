@@ -29,6 +29,7 @@ describe MilestonesController, "Milestone Controller" do
     @m.icon = "test/silueta.gif"
     @m.save!
 
+    request.env["HTTP_REFERER"] = root_path
   end
 
   before do

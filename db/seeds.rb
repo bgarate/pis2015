@@ -17,6 +17,8 @@ tr2.save!
 
 ################# Categories #################
 
+e = Category.create(name: "Evento")
+e.save!
 c = Category.create(name: "Conferencia")
 f = Category.create(name: 'Feedback')
 
@@ -29,7 +31,7 @@ m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nu
 m.due_date= Time.now + (3*2*7*24*60*60)
 m.status=0
 m.icon = "test/silueta.gif"
-m.category = c
+m.category = e
 
 m1 = Milestone.new
 m1.title = 'Entrega del prototipo de alfred'

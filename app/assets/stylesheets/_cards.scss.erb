@@ -27,8 +27,8 @@
 
 
   &.card.events {
-    background-color: $mooveit-orange;
-    border-color: $mooveit-orange-dark;
+      background-color: $sunflower;
+      border-color: $sunflower-dark;
     min-height: 15em;
   }
 
@@ -40,8 +40,8 @@
   }
 
   &.card.pending {
-    background-color: $sunflower;
-    border-color: $sunflower-dark;
+      background-color: $alizarin;
+      border-color: $alizarin-dark;
     min-height: 20em;
   }
 
@@ -51,6 +51,16 @@
     min-height: 40em;
   }
 
+    &.card.nonpending{
+        background-color: $turqoise-dark;
+        text-decoration: none;
+        height: auto;
+        padding: 6px;
+        border-bottom: solid 0px transparent;
+        a:hover {
+            color: $body-background;
+        }
+    }
 }
 
 #profile-card {
@@ -187,7 +197,7 @@ ul#mentors {
     li {
       display: block;
       margin-left: 40px;
-      background-color: $mooveit-orange-dark;
+      background-color: $sunflower-dark;
       border-radius: 5px;
       position: relative;
       padding: 10px 10px 10px 0;
@@ -198,7 +208,7 @@ ul#mentors {
         left: -40px;
         top: 10px;
         text-transform: uppercase;
-        color: $mooveit-orange;
+        color:  $sunflower;
         padding: 2.5px 20px 2.5px 5px;
         border-radius: 5px;
         z-index: -1;
@@ -217,7 +227,7 @@ ul#mentors {
 
       .content {
         position: relative;
-        border-left: $mooveit-orange solid 2px;
+        border-left:  $sunflower solid 2px;
         float: left;
         width: calc(100% - 40px);
         padding: 0 15px 0 20px;
@@ -392,7 +402,7 @@ ul#pending-list {
     background-color: white;
     list-style-type: none;
     padding: 20px 10px 20px 15px;
-    background-color: $sunflower-dark;
+    background-color: $alizarin-dark;
     margin: 10px;
 
     h2 {

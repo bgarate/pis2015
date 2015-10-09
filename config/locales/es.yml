@@ -159,6 +159,7 @@ es:
     rejected: "rechazado"
     feedback: "feedback"
     event: "evento"
+    done_or_rejected: 'hitos en estado hecho o rechazado'
 
     pendings: "Hitos pendientes"
 

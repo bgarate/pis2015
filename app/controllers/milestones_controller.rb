@@ -97,7 +97,7 @@ class MilestonesController < ApplicationController
       @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
     else
       @people= user.mentees.where('mentee_id NOT in (?)', @milestone.people.map{|p| p.id})
-      unless user.id==@identifier
+      unless @milestone.people.exists?(user.id)
         @people<<user
       end
     end

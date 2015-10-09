@@ -139,7 +139,9 @@ en:
     rejected: "rejected"
     feedback: "feedback"
     event: "event"
-    done_or_rejected: 'milestones in state done or rejected'
+    state:
+      done_or_rejected: 'milestones in state done or rejected'
+      pending: 'milestones in state pending'
 
     pendings: "Pending Milestones"
 

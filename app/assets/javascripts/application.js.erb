@@ -26,39 +26,47 @@
 
 //= require i18n/translations
 
-$(function() {
-  $(".knob-stats input").knob({
-    'width':'90%',
-    'readOnly':true
-  });
-  $.validate({
-      modules: 'html5, date',
-      lang: '<%= I18n.locale %>'
-  });
-  $.fn.datepicker.defaults.format = "dd/mm/yyyy";
-  $(".datatable").DataTable({
-      paging: false,
+(function(){
 
-      "language": {
-          "search" : ""
-      }
-  });
-    $("select.chosen").chosen();
-    $("select.submit-on-select").change(
-            function(){$(this).parents("form").submit();}
-    )
-    $("select.submit-on-select").val("").trigger('chosen:updated');
-    $("input.submit-on-enter").keypress(function(event) {
-        if (event.which == 13) {
-            event.preventDefault();
-            $(this).parents("form").submit()
-        }
-    });
+    var ready = function() {
+        $(".knob-stats input").knob({
+            'width': '90%',
+            'readOnly': true
+        });
+        $.validate({
+            modules: 'html5, date',
+            lang: '<%= I18n.locale %>'
+        });
+        $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+        $(".datatable").DataTable({
+            paging: false,
 
-    $("form.slide-on-click > .form-slide").hide();
+            "language": {
+                "search": ""
+            }
+        });
+        $("select.chosen").chosen();
+        $("select.submit-on-select").change(
+                function () {
+                    $(this).parents("form").submit();
+                }
+        )
+        $("select.submit-on-select").val("").trigger('chosen:updated');
+        $("input.submit-on-enter").keypress(function (event) {
+            if (event.which == 13) {
+                event.preventDefault();
+                $(this).parents("form").submit()
+            }
+        });
 
-    $("form.slide-on-click h1").on('click', function (e){
-        $(this).parent().toggleClass("active-slide");
-        $(this).siblings(".form-slide").slideToggle();
-    });
-});
+        $("form.slide-on-click > .form-slide").hide();
+
+        $("form.slide-on-click h1").on('click', function (e) {
+            $(this).parent().toggleClass("active-slide");
+            $(this).siblings(".form-slide").slideToggle();
+        });
+    };
+
+    $(document).ready(ready);
+    $(document).on('page:load', ready);
+})();

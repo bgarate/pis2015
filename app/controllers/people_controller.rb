@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :admin?, only:[:show, :index, :me, :showallmilestones]
+  skip_before_action :admin?, only:[:show, :index, :me]
   #skip_before_action :admin?, only:[:assign_project]
 
   def index
@@ -68,73 +68,44 @@ class PeopleController < ApplicationController
       @start_date = person.start_date
       #Eventos (Hitos)
       @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.category_id = 1").order(due_date: :desc, created_at: :desc)
-      #@events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0")
-      # @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.category_id = 2")
+
       #Hitos pendientes
       @overcomes = person.milestones.where("milestones.due_date < CURRENT_DATE AND milestones.status = 0").order(due_date: :desc, created_at: :desc)
-      #Todos los hitos pendientes
-      @milestones = person.milestones.where('milestones.status = 0').order(due_date: :desc, created_at: :desc)
-      #Cantidad de hitos cerrados o rechazados
-      @nonpendingmilestonescount = person.milestones.size - person.milestones.where('milestones.status = 0').size
+
       #Mentores
       @mentorships = person.mentors
       @yet_pending = Milestone.pending.where('id NOT in (?)', person.milestones.pluck(:id))
 
-     # @person_vew = person
-      # person_log = Person.find(current_user.person_id)
-      #if (person_log.admin) || !(person_log.mentees.exists?(@person_vew.id)) || (person_log.id = person.id)
-      #  projects = Project.all
-      #else
-      #  projects = []
-      #end
-      #@project_to_show=[]
-      #projects.each do |p|
-      #  if !person.projects.exists?(p.id)
-      #    @project_to_show = @project_to_show + [p]
-      #  end
-      #end
-
+      show_pending_timeline
 
     else
       redirect_to root_path
     end
   end
 
-  def showallmilestones
-    person = Person.find_by(id: params[:person_id])
-    if person
-      #nombre
-      @name = person.name
-      @identifier = person.id
-      @people= Person.all.where('id NOT in (?)', @identifier)
-      @person = person
-      @tags=Tag.all
+  def show_not_pending_timeline
+    @person = Person.find_by(id: params[:id] || params[:person_id])
+    @milestones = @person.milestones.where('milestones.status <> 0').order(due_date: :desc, created_at: :desc)
+    @filtered_count = @person.milestones.size - @milestones.size
 
-      #rol tecnico
-      @trole = ''
-      @trole = person.tech_role.name if person.tech_role
+    @filter = :not_pending
 
-      #habilidades
-      @skills = person.skills
+    respond_to do |f|
+      f.js {render 'people/show_timeline'}
+      f.html {}
+    end
+  end
 
-      #proyectos
-      @proysin = person.projects.where("Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE").length
-      @proysend = person.projects.where("Projects.end_date < CURRENT_DATE").length
+  def show_pending_timeline
+    @person = Person.find_by(id: params[:id] || params[:person_id])
+    @milestones = @person.milestones.where('milestones.status = 0').order(due_date: :desc, created_at: :desc)
+    @filtered_count = @person.milestones.size - @milestones.size
 
-      @image_id = person.image_id
+    @filter = :pending
 
-      #tiempo en moove-it
-      @start_date = person.start_date
-
-      #Todos los hitos no pendientes
-      @milestones = person.milestones.where('milestones.status <> 0').order(due_date: :desc, created_at: :desc)
-
-      #Mentores
-      @mentorships = person.mentors
-      @yet_pending = Milestone.pending.where('id NOT in (?)', person.milestones.pluck(:id))
-
-    else
-      redirect_to root_path
+    respond_to do |f|
+      f.js {render 'people/show_timeline'}
+      f.html {}
     end
   end
 

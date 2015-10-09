@@ -1,56 +1,56 @@
-
-
+<div id="npmillink-card" class="card nonpending">
+  <% if @filter == :pending %>
+      <%=link_to "#{t('milestones.state.done_or_rejected')} (#{@filtered_count})", person_show_not_pending_timeline_path(:person_id => @person.id),remote:true, class: "card nonpending" %>
+  <% else %>
+      <%=link_to "#{t('milestones.state.pending')} (#{@filtered_count})", person_show_pending_timeline_path(:person_id => @person.id),remote:true, class: "card nonpending" %>
+  <% end %>
+</div>
 <% if @milestones and not @milestones.empty? %>
-    <div id="timeline-card" class="card timeline">
-      <ul id="milestone-list">
-        <% @milestones.each do |e| %>
-            <li>
-              <%= if e.status != 'rejected'
-                    milestone_status(e,:right)
-                  end %>
-              <%= milestone_status_rej(e, :right) %>
-              <h2><%=link_to e.title, e, method: :get%></h2>
-              <p><%=t(e.description) %></p>
+  <div id="timeline-card" class="card timeline">
+    <ul id="milestone-list">
+      <% @milestones.each do |e| %>
+          <li>
+            <%= if e.status != 'rejected'
+                  milestone_status(e,:right)
+                end %>
+            <%= milestone_status_rej(e, :right) %>
+            <h2><%=link_to e.title, e, method: :get%></h2>
+            <p><%=t(e.description) %></p>
 
-              <div class="resources-list clearfix">
-                <h2><%=t(:attachmentsdocs)%></h2>
-                <% if e.resources.empty? && can_modify_milestone?(e.id) %>
-                    <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                        <span class="toggle-documents glyphicon glyphicon-plus"></span>
+            <div class="resources-list clearfix">
+              <h2><%=t(:attachmentsdocs)%></h2>
+              <% if e.resources.empty? && can_modify_milestone?(e.id) %>
+                  <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                      <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                  <% end %>
+              <% else %>
+                  <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
+                  <ul>
+                    <%e.resources.each do |r|%>
+                        <li><%=link_to r.title, r.url, :target => "_blank"%></li>
+                    <%end%>
+                    <% if can_modify_milestone?(e.id) %>
+                        <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                            <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                        <% end %>
                     <% end %>
-                <% else %>
-                    <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
-                    <ul>
-                      <%e.resources.each do |r|%>
-                          <li><%=link_to r.title, r.url, :target => "_blank"%></li>
-                      <%end%>
-                      <% if can_modify_milestone?(e.id) %>
-                          <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                              <span class="toggle-documents glyphicon glyphicon-plus"></span>
-                          <% end %>
-                      <% end %>
-                    </ul>
-                <% end %>
-
-              </div>
-
-              <% if e.due_date %>
-                  <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
+                  </ul>
               <% end %>
-              <ul class="tags">
-                <!--<li>Speaker</li>-->
-              </ul>
-              <div class="clearfix"></div>
-            </li>
-        <% end %>
-      </ul>
-    </div>
+
+            </div>
+
+            <% if e.due_date %>
+                <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
+            <% end %>
+            <ul class="tags">
+              <!--<li>Speaker</li>-->
+            </ul>
+            <div class="clearfix"></div>
+          </li>
+      <% end %>
+    </ul>
+  </div>
 
 <% else %>
-    <div class="alert alert-info" role="alert"><p><%= t('milestones.zero') %></p></div>
+  <div class="alert alert-info" role="alert"><p><%= t('milestones.zero') %></p></div>
 <% end %>
-
-
-
-
-

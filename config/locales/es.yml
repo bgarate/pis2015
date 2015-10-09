@@ -50,6 +50,8 @@ es:
 
   not_authorized: "No esta autorizado para realizar esa acción"
   unregistered: "Usuario no registrado, contacte a un administrador."
+  invalidurl: 'Url inválida'
+
   login_with_google: "Ingresar con Google"
   signed_in_as: "Logueado como"
   moove-it-time: "Tiempo en Moove-it"
@@ -74,7 +76,6 @@ es:
       select: "Seleccione personas..."
       asign_to_project: "Asignar a proyecto"
       submit: "Crear"
-
 
   #mentor
   mentor:

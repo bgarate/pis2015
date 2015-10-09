@@ -294,13 +294,26 @@ describe MilestonesController, "Milestone Controller" do
   end
 
   describe 'Notes' do
-    it 'displays a note' do
+    it 'despliega la nota' do
       session[:user_id] = @ad_user.id
-      @m1.notes.create({:text=> 'una nota para desplegar'})
-      get :show, :id => @m1.id, :session=>session
-      expect(response.status).to eq(200)
+      m1 = Milestone.new
+      m1.title ='Milestone for testing'
+      m1.description='This is a milestone to test Milestones'
+      m1.due_date=Time.now - 5.days
+      m1.created_at= Time.now
+      m1.updated_at= Time.now
+      m1.status=1
+      m1.icon= 'Icon'
+      m1.save!
+
+      n = Note.new :text=>'Texto', :visibility=>2, :author_id=>@admin.id, :milestone_id=>m1.id
+      n.save!
+
+      get :show, :id => m1.id, :session=>session
+      expect(response).to render_template("show")
     end
   end
+
 
   describe "permisos" do
     it 'Deberia renderizar show' do

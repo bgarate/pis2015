@@ -7,6 +7,13 @@
     background-color: $body-background;
     color:#34495E;
 
+    .edit {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 14px;
+    }
+
     .left-pane {
         flex: 1 0 0;
         width: 33.3%;
@@ -134,43 +141,57 @@
     }
 }
 
-ul#milestone-asignees {
-    list-style: none;
+#milestone-asignees {
+
     padding: 0;
-    li {
+    margin-top: 10px;
+
+    .item {
         float: left;
-        width: calc(33.333% - 30px);
-        margin: 15px;
         background-color: $body-background;
         padding: 10px 15px;
+        width: 100%;
+        border-bottom: 3px solid $body-background-dark;
+        margin-top: 10px;
+
+        &:hover {
+            text-decoration: none;
+            background-color: #D9D8E4;
+        }
 
         img {
             border-radius: 50%;
-            height: 50px;
-            display: block;
-            float: left;
+            width: 100%;
         }
 
         .info {
-            float: left;
-            margin-left: 15px;
+            display: table-cell;
             vertical-align: middle;
+            width: 60%;
+            height: 60px;
+        }
+
+        .picture {
+            display: table-cell;
+            vertical-align: middle;
+            height: 60px;
+            width: 40%;
         }
 
         h2 {
-            text-align: right;
             font-weight: bold;
             font-size: 12px;
             margin: 0;
-            display: inline-block;
+            text-align: right;
         }
 
         h3 {
             margin: 0;
             text-align: right;
+            clear: both;
             font-size: 10px;
             color: #3497DA;
-            display: inline-block;
+
         }
     }
 }

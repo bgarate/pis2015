@@ -32,16 +32,18 @@
                   <% end %>
               <% else %>
                   <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
-                  <ul>
-                    <%e.resources.each do |r|%>
-                        <li><%=link_to r.title, r.url, :target => "_blank"%></li>
-                    <%end%>
-                    <% if can_modify_milestone?(e.id) %>
-                        <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                            <span class="toggle-documents glyphicon glyphicon-plus"></span>
-                        <% end %>
-                    <% end %>
-                  </ul>
+                  <div class="slider">
+                    <ul>
+                      <%e.resources.each do |r|%>
+                          <li><%=link_to r.title, r.url, :target => "_blank"%></li>
+                      <%end%>
+                      <% if can_modify_milestone?(e.id) %>
+                          <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                              <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                          <% end %>
+                      <% end %>
+                    </ul>
+                  </div>
               <% end %>
 
             </div>
@@ -60,24 +62,31 @@
                   <% end %>
               <% else %>
                   <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
-                  <ul>
+                  <div class="slider">
+                    <ul>
 
-                        <li>
-                          <h3><%= n.author.name %></h3>
-                          <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
-                          <p><%= truncate(n.text, length: 350) %></p>
+                      <li>
+                        <h3><%= n.author.name %></h3>
+                        <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
+                        <p><%= truncate(n.text, length: 350) %></p>
 
-                          <% if current_user_admin?
-                               link_to [n.milestone, n],
-                                       method: :delete,
-                                       data: { confirm: t('notes.delete.sure')},
-                                       class: 'delete' do %>
-                                  <span class="glyphicon glyphicon-remove"></span>
-                              <% end
-                                 end %>
+                        <% if current_user_admin?
+                             link_to [n.milestone, n],
+                                     method: :delete,
+                                     data: { confirm: t('notes.delete.sure')},
+                                     class: 'delete' do %>
+                                <span class="glyphicon glyphicon-remove"></span>
+                            <% end
+                               end %>
 
-                        </li>
-                  </ul>
+                      </li>
+                    </ul>
+                    <% if e.notes.count > 1 %>
+                        <div class="link">
+                          <%= link_to "Ver #{e.notes.count - 1} notas restantes", e %></div>
+                    <% end %>
+                  </div>
+
               <% end %>
 
             </div>

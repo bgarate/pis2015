@@ -4,6 +4,12 @@
       end %>
   <%= milestone_status_rej(@milestone) %>
 
+  <% if can_modify_milestone?(@milestone.id) %>
+    <%= link_to edit_milestone_path(@milestone) do %>
+        <span class="edit glyphicon glyphicon-edit"></span>
+    <% end %>
+  <% end %>
+
   <div class="left-pane">
     <div class="milestone-icon"><%= image_tag @milestone.icon %></div>
     <h2><%= @milestone.title %></h2>
@@ -41,15 +47,18 @@
     <%end%>
   </div>
 </div>
-
-<ul id="milestone-asignees">
+<div id="milestone-asignees" class="row">
   <%@milestone.people.each do |p| %>
-      <li>
-        <%= person_picture @image_id %>
-        <div class="info">
-          <h2><%= p.name %></h2>
-          <h3><%= "HOLA" || p.tech_role %></h3>
+        <div class="col-xs-3">
+          <a href="<%= person_path(p) %>" class="item">
+            <div class="picture">
+              <%= person_picture @image_id %>
+            </div>
+            <div class="info">
+              <h2><%= p.name %></h2>
+              <h3><%= "No tech role" || p.tech_role.name %></h3>
+            </div>
+          </a>
         </div>
-      </li>
   <%end%>
-</ul>
+</div>

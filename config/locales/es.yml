@@ -162,8 +162,8 @@ es:
     event: "evento"
 
     state:
-      done_or_rejected: 'hitos en estado hecho o rechazado'
-      pending: 'hitos pendientes'
+      done_or_rejected: 'Hitos en estado hecho o rechazado'
+      pending: 'Hitos pendientes'
     mark_done_sure: '¿Desea marcar como Hecho?'
     mark_rejected_sure: "¿Desea marcar como Rechazado? \nNota: Si el hito esta Rechazado volverá a Pendiente"
     pendings: "Hitos pendientes"
@@ -187,6 +187,9 @@ es:
     delete:
       title: "Borrar Hito"
       sure: "¿Esta seguro que desea eliminar este hito?"
+
+    see_all: "Ver todos los hitos"
+
 
 
   #dashboard

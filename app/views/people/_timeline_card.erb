@@ -55,9 +55,9 @@
             <% n = e.notes.last %>
 
             <div class="notes-list clearfix">
-              <h2><span class="glyphicon glyphicon glyphicon-paperclip"></span>Notas</h2>
+              <h2><span class="glyphicon glyphicon-comment"></span>Notas</h2>
               <% if n.nil? %>
-                  <%= link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                  <%= link_to  milestone_path(e), method: :get do%>
                       <span class="toggle-documents glyphicon glyphicon-plus"></span>
                   <% end %>
               <% else %>

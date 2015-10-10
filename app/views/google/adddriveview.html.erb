@@ -5,7 +5,9 @@
       <form action='adddrive' class='main-form'>
         <h2> <%=t(:attachgoogledrivedoc) %> </h2>
         <input name='milestone_id' type='hidden' value=<%=@milestone_id%> readonly class='form-control'>
-        <input name='redirect_url' type='hidden' value=<%=@redirect_url%> readonly class='form-control'>
+        <% if @redirect_url%>
+            <input name='redirect_url' type='hidden' value=<%=@redirect_url%> readonly class='form-control'>
+        <% end%>
 
         <label for='URL' class='control-label'> <%=t(:documenturl)%> </label>
 

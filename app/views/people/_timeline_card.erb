@@ -17,6 +17,13 @@
             <h2><%=link_to e.title, e, method: :get%></h2>
             <p><%=t(e.description) %></p>
 
+            <% if e.due_date %>
+                <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
+            <% end %>
+
+            <div class="clearfix"></div>
+
+
             <div class="resources-list clearfix">
                 <h2><span class="glyphicon glyphicon glyphicon-paperclip"></span>  <%=t(:attachmentsdocs)%></h2>
               <% if e.resources.empty? && can_modify_milestone?(e.id) %>
@@ -39,41 +46,52 @@
 
             </div>
 
-            <% if e.due_date %>
-                <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
-            <% end %>
+
+
+
+            <!-- Muestro ultima nota -->
+            <% n = e.notes.last %>
+
+            <div class="notes-list clearfix">
+              <h2><span class="glyphicon glyphicon glyphicon-paperclip"></span>Notas</h2>
+              <% if n.nil? %>
+                  <%= link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                      <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                  <% end %>
+              <% else %>
+                  <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
+                  <ul>
+
+                        <li>
+                          <h5>
+                            <%= n.author.name %>
+                          </h5>
+                          <small><%= truncate(n.text, length: 350) %></small>
+                          <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
+                          <% if current_user_admin?
+                               link_to [n.milestone, n],
+                                       method: :delete,
+                                       data: { confirm: t('notes.delete.sure')},
+                                       class: 'delete' do %>
+                                  <span class="glyphicon glyphicon-remove"></span>
+                              <% end
+                                 end %>
+
+                        </li>
+                    <% if can_modify_milestone?(e.id) %>
+                        <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                            <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                        <% end %>
+                    <% end %>
+                  </ul>
+              <% end %>
+
+            </div>
             <ul class="tags">
               <!--<li>Speaker</li>-->
             </ul>
 
-              <!-- Muestro ultima nota -->
-              <% n = e.notes.last %>
-              <% unless n.nil? %>
-                  <h5>
-                    <%= n.author.name %>
-                    <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
-                  </h5>
-                  <h4><small><%= truncate(n.text, length: 350) %></small></h4>
-                  <% if current_user_admin?
-                       link_to [n.milestone, n],
-                               method: :delete,
-                               data: { confirm: t('notes.delete.sure')},
-                               class: 'delete' do %>
-                          <span class="glyphicon glyphicon-remove"></span>
-                      <% end
-                         end
-                         if n.visibility=='every_body' %>
-                      <span class="glyphicon glyphicon-eye-open"></span>
-                  <% else if n.visibility=='mentors' %>
-                          <span class="glyphicon glyphicon-eye-close"></span>
-                      <% else %>
-                          <span class="glyphicon glyphicon-lock"></span>
-                      <% end
-                         end %>
 
-                  <div class="clearfix">
-                  </div>
-              <% end %>
           </li>
       <% end %>
     </ul>

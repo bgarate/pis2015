@@ -106,4 +106,5 @@ class ApplicationController < ActionController::Base
   def store_return_to
     session[:return_to] = request.url
   end
+  
 end

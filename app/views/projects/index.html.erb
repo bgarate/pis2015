@@ -3,7 +3,10 @@
     <div class="col-xs-12">
 
       <div class="table-container">
-        <h1><%= t('project.index.header') %></h1>
+        <h1><%= link_to new_project_path do%>
+              <span class='large-text glyphicon glyphicon-plus table-add-button pull-left'></span>
+          <% end %>
+          <%= t('project.index.header') %></h1>
         <table class="table datatable" data-info="false">
           <thead>
           <tr>

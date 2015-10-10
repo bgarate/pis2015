@@ -164,7 +164,8 @@ es:
     state:
       done_or_rejected: 'hitos en estado hecho o rechazado'
       pending: 'hitos pendientes'
-
+    mark_done_sure: '¿Desea marcar como Hecho?'
+    mark_rejected_sure: "¿Desea marcar como Rechazado? \nNota: Si el hito esta Rechazado volverá a Pendiente"
     pendings: "Hitos pendientes"
 
     start_date: "Fecha de inicio"

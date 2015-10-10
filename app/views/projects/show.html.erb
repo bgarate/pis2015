@@ -73,7 +73,7 @@
           </tr>
           <tr>
             <td>
-            <%= form_tag ({:action => 'assign_person', :controller => 'projects', :project_id => @project.id}) do   %>
+              <%= form_tag ({:action => 'assign_person', :controller => 'projects', :project_id => @project.id}) do   %>
                 <% if !@usr.empty?%>
                   <label>
                     <%= t('project.assign.title') %>
@@ -88,12 +88,15 @@
 
                   <%= button_tag t('project.assign.submit'), options= :type => 'submit', id: "buttonTwo" %>
                <% end %>
+              <% end%>
             </td>
           </tr>
-          <%= button_tag t('back'), options= :type => 'submit', id: "buttonOne", class: "btn btn-default" %>
-          <% end%>
+
+
           </tbody>
         </table>
+        <%= button_to t(:back), 'javascript:history.go(-1);' %>
+        <!--#TEMPORAL: definir a donde tiene que volver, o a donde hay que redirigir.-->
       </div>
     </div>
   </div>

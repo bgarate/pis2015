@@ -5,9 +5,9 @@
   <%= milestone_status_rej(@milestone) %>
 
   <% if can_modify_milestone?(@milestone.id) %>
-    <%= link_to edit_milestone_path(@milestone) do %>
-        <span class="edit glyphicon glyphicon-edit"></span>
-    <% end %>
+      <%= link_to edit_milestone_path(@milestone) do %>
+          <span class="edit glyphicon glyphicon-edit"></span>
+      <% end %>
   <% end %>
 
   <div class="left-pane">
@@ -28,14 +28,14 @@
     %></p>
 
     <% if @milestone.start_date %>
-    <div class="calendar right">
+        <div class="calendar right">
           <%= l(@milestone.start_date, format: "%A, %B %d %Y").capitalize %>
-    </div>
+        </div>
     <% end %>
     <% if @milestone.due_date %>
-      <div class="calendar">
-        <%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %>
-      </div>
+        <div class="calendar">
+          <%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %>
+        </div>
     <% end %>
 
     <% unless @milestone.tags.empty? %>
@@ -47,8 +47,13 @@
     <%end%>
   </div>
 </div>
-<div id="milestone-asignees" class="row">
-  <%@milestone.people.each do |p| %>
+<div >
+  <br>
+  <h4>         Personas asociadas al hito</h4>
+  <hr>
+  <div id="milestone-asignees" class="row">
+
+    <%@milestone.people.each do |p| %>
         <div class="col-xs-3">
           <a href="<%= person_path(p) %>" class="item">
             <div class="picture">
@@ -60,5 +65,6 @@
             </div>
           </a>
         </div>
-  <%end%>
+    <%end%>
+  </div>
 </div>

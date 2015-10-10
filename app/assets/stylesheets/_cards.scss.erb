@@ -348,8 +348,6 @@ ul#milestone-list {
       }
 
       .resources-list, .notes-list {
-          margin: 0;
-
 
           color: white;
           margin: 0 -10px 10px -15px;
@@ -361,6 +359,9 @@ ul#milestone-list {
               margin: 0;
               font-weight: bold;
               float: left;
+              .glyphicon {
+                  padding-right: 10px;
+              }
           }
 
           a {
@@ -380,16 +381,37 @@ ul#milestone-list {
 
           }
 
+          h3{
+              font-weight: bold;
+              font-size: 15px;
+              float: left;
+              margin: 0;
+          }
+
+          .time {
+              float: right;
+          }
+
+          p {
+              clear: both;
+          }
 
 
       }
 
       .resources-list {
           background-color: $peterriver;
+          margin-top: 10px;
       }
 
       .notes-list {
           background-color: $sunflower;
+
+          li {
+              background-color: $sunflower-dark;
+              margin: 0 -20px;
+              padding: 20px;
+          }
       }
 
   }

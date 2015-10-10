@@ -1,6 +1,7 @@
 $().ready(function() {
 
-  $(".resources-list .toggle-documents, .resources-list h2").click(function(e) {
+  $(".resources-list .toggle-documents, .resources-list h2, " +
+    ".notes-list .toggle-documents, .notes-list h2").click(function(e) {
     var obj = $(this).parent().children(".toggle-documents");
 
       if($(this).parent().children("ul").length == 0)
@@ -19,6 +20,6 @@ $().ready(function() {
   list.slideToggle();
 
   });
-    $(".resources-list ul").hide();
-    $(".toggle-documents").parent().children("h2").addClass("pointer");
+    $(".resources-list ul, .notes-list ul").hide();
+    $(".toggle-documents, .notes-list").parent().children("h2").addClass("pointer");
 });

@@ -63,11 +63,10 @@
                   <ul>
 
                         <li>
-                          <h5>
-                            <%= n.author.name %>
-                          </h5>
-                          <small><%= truncate(n.text, length: 350) %></small>
+                          <h3><%= n.author.name %></h3>
                           <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
+                          <p><%= truncate(n.text, length: 350) %></p>
+
                           <% if current_user_admin?
                                link_to [n.milestone, n],
                                        method: :delete,
@@ -78,11 +77,6 @@
                                  end %>
 
                         </li>
-                    <% if can_modify_milestone?(e.id) %>
-                        <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                            <span class="toggle-documents glyphicon glyphicon-plus"></span>
-                        <% end %>
-                    <% end %>
                   </ul>
               <% end %>
 

@@ -10,27 +10,27 @@
         <%= render 'notes/form' %>
         <ul>
           <% @notes.each do |n| %>
-              <li class="clearfix">
-                <h2><%= n.author.name %></h2>
-                <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
-                <p><%= n.text %></p>
-                <% if current_user_admin? %>
-                <%= link_to [n.milestone, n],
-                            method: :delete,
-                            data: { confirm: t('notes.delete.sure')},
-                            class: 'delete' do %>
+            <li class="clearfix">
+            <h2><%= n.author.name %></h2>
+            <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
+            <p><%= n.text %></p>
+            <% if current_user_admin?
+                link_to [n.milestone, n],
+                method: :delete,
+                data: { confirm: t('notes.delete.sure')},
+                class: 'delete' do %>
                     <span class="glyphicon glyphicon-remove"></span>
-                    <% end %>
-                <% end %>
-                <% if n.visibility=='every_body' %>
-                    <span class="glyphicon glyphicon-eye-open"></span>
-                <%else if n.visibility=='mentors' %>
-                    <span class="glyphicon glyphicon-eye-close"></span>
-                <% else %>
-                    <span class="glyphicon glyphicon-lock"></span>
-                <%end
-                  end %>
-              </li>
+                <% end
+            end
+            if n.visibility=='every_body' %>
+                <span class="glyphicon glyphicon-eye-open"></span>
+            <% else if n.visibility=='mentors' %>
+                <span class="glyphicon glyphicon-eye-close"></span>
+            <% else %>
+                <span class="glyphicon glyphicon-lock"></span>
+            <% end
+            end %>
+            </li>
           <% end %>
         </ul>
       </div>

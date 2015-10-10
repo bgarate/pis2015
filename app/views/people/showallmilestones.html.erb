@@ -7,7 +7,7 @@
 
     <div class="card-col col-xs-5 col-sm-5 col-md-5 col-lg-10">
       <div id="npmillink-card" class="card nonpending">
-        <h1><%= t('milestones.done_or_rejected') %> &nbsp;&nbsp;&nbsp;&nbsp; <%=link_to :back, person_path(@people) , class: "btn btn-info" %></h1>
+        <h1><%= t('milestones.done_or_rejected') %> &nbsp;&nbsp;&nbsp;&nbsp; <%=link_to t('back'), person_path(@people) , class: "btn btn-info" %></h1>
       </div>
       
       <% if @milestones and not @milestones.empty? %>

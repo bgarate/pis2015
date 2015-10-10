@@ -38,7 +38,13 @@
           <%= render 'milestones/form' %>
         <%end%>
       <div id="npmillink-card" class="card nonpending">
-        <h1><%=link_to "#{t('milestones.done_or_rejected')} (#{@nonpendingmilestonescount})", person_showallmilestones_path(:person_id => @person.id), class: "card nonpending" %></h1>
+        <h1>
+          <% if @nonpendingmilestonescount > 0 %>
+            <%=link_to "#{t('milestones.done_or_rejected')} (#{@nonpendingmilestonescount})", person_showallmilestones_path(:person_id => @person.id), class: "card nonpending" %>
+          <% else %>
+            <%="#{t('milestones.done_or_rejected')} (#{@nonpendingmilestonescount})" %>
+          <% end %>
+        </h1>
       </div>
       <%= render 'people/timeline_card' %>
     </div>

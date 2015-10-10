@@ -33,20 +33,13 @@
     </div>
 
 
-    <div class="card-col col-xs-5 col-sm-5 col-md-5 col-lg-5">
+    <div class="card-col col-xs-5">
         <%if can_view_person?(@identifier) %>
           <%= render 'milestones/form' %>
         <%end%>
-      <div id="npmillink-card" class="card nonpending">
-        <h1>
-          <% if @nonpendingmilestonescount > 0 %>
-            <%=link_to "#{t('milestones.done_or_rejected')} (#{@nonpendingmilestonescount})", person_showallmilestones_path(:person_id => @person.id), class: "card nonpending" %>
-          <% else %>
-            <%="#{t('milestones.done_or_rejected')} (#{@nonpendingmilestonescount})" %>
-          <% end %>
-        </h1>
+      <div id="timeline-container">
+        <%= render 'people/timeline_card' %>
       </div>
-      <%= render 'people/timeline_card' %>
     </div>
   </div>
 </div>

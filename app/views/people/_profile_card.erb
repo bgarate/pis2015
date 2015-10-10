@@ -1,11 +1,7 @@
 <div id="profile-card" class="card profile">
   <div id="profile-picture">
     <div class="img-container">
-      <% if @image_id %>
-          <%= cl_image_tag(@image_id) %>
-    <% else %>
-        <%= cl_image_tag "lfblntfejcpmmkh0wfny.jpg" %>
-      <% end %>
+      <%= person_picture @image_id %>
     </div>
   </div>
   <h1><%= @name %></h1>
@@ -22,7 +18,7 @@
     <%else%>
         <ul id="mentors">
             <% @mentorships.each do |s| %>
-                <li><%= link_to cl_image_tag(s.image_id), s %></li>
+                <li><%= link_to person_picture(s.image_id), s %></li>
             <%end%>
         </ul>
     <%end%>

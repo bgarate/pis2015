@@ -14,11 +14,12 @@
           <div id="timeline-card" class="card timeline">
             <ul id="milestone-list">
               <% @milestones.each do |e| %>
-                  <li>
+                  <li><% if can_modify_milestone?e.id %>
                     <%= if e.status != 'rejected'
                           milestone_status(e,:right)
                         end %>
                     <%= milestone_status_rej(e, :right) %>
+                      <%end %>
                     <h2><strike><%=link_to e.title, e, method: :get%></strike></h2>
                     <p><%=t(e.description) %></p>
 

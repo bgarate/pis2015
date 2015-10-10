@@ -72,9 +72,8 @@ describe DashboardController, "Dashboard Controller" do
 
     it 'Deberia redireccionar a root path por no ser mentor' do
       session[:user_id] = @no_mentor.id
-      session[:return_to]= '/people/index'
       get :index, :id => @no_mentor.id
-      expect(response).to redirect_to '/people/index'
+      expect(response).to redirect_to '/people'
     end
 
   end

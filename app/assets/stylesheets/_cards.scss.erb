@@ -347,20 +347,25 @@ ul#milestone-list {
           padding-left: 15px;
       }
 
-      .resources-list {
-          margin: 0;
+      .resources-list, .notes-list {
 
-          background-color: $peterriver;
           color: white;
           margin: 0 -10px 10px -15px;
 
           padding: 10px 15px;
+
+          .slider {
+              clear: both;
+          }
 
           h2 {
               font-size: 14px;
               margin: 0;
               font-weight: bold;
               float: left;
+              .glyphicon {
+                  padding-right: 10px;
+              }
           }
 
           a {
@@ -380,7 +385,39 @@ ul#milestone-list {
 
           }
 
+          h3{
+              font-weight: bold;
+              font-size: 15px;
+              float: left;
+              margin: 0;
+          }
 
+          .time {
+              float: right;
+          }
+
+          p {
+              clear: both;
+          }
+
+          .link {
+              text-align: center;
+          }
+      }
+
+      .resources-list {
+          background-color: $peterriver;
+          margin-top: 10px;
+      }
+
+      .notes-list {
+          background-color: $sunflower;
+
+          li {
+              background-color: $sunflower-dark;
+              margin: 0 -20px;
+              padding: 20px;
+          }
 
       }
 

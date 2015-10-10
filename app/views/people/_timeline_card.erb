@@ -1,25 +1,38 @@
-
-
+<div id="npmillink-card" class="card nonpending">
+  <% if @filter == :pending %>
+      <%=link_to "#{t('milestones.state.done_or_rejected')} (#{@filtered_count})", person_show_not_pending_timeline_path(:person_id => @person.id),remote:true, class: "card nonpending" %>
+  <% else %>
+      <%=link_to "#{t('milestones.state.pending')} (#{@filtered_count})", person_show_pending_timeline_path(:person_id => @person.id),remote:true, class: "card nonpending" %>
+  <% end %>
+</div>
 <% if @milestones and not @milestones.empty? %>
-    <div id="timeline-card" class="card timeline">
-      <ul id="milestone-list">
-        <% @milestones.each do |e| %>
-            <li>
-              <%= if e.status != 'rejected'
-                    milestone_status(e,:right)
-                  end %>
-              <%= milestone_status_rej(e, :right) %>
-              <h2><%=link_to e.title, e, method: :get%></h2>
-              <p><%=t(e.description) %></p>
+  <div id="timeline-card" class="card timeline">
+    <ul id="milestone-list">
+      <% @milestones.each do |e| %>
+          <li>
+            <%= if e.status != 'rejected'
+                  milestone_status(e,:right)
+                end %>
+            <%= milestone_status_rej(e, :right) %>
+            <h2><%=link_to e.title, e, method: :get%></h2>
+            <p><%=t(e.description) %></p>
 
-              <div class="resources-list clearfix">
+            <% if e.due_date %>
+                <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
+            <% end %>
+
+            <div class="clearfix"></div>
+
+
+            <div class="resources-list clearfix">
                 <h2><span class="glyphicon glyphicon glyphicon-paperclip"></span>  <%=t(:attachmentsdocs)%></h2>
-                <% if e.resources.empty? && can_modify_milestone?(e.id) %>
-                    <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                        <span class="toggle-documents glyphicon glyphicon-plus"></span>
-                    <% end %>
-                <% else %>
-                    <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
+              <% if e.resources.empty? && can_modify_milestone?(e.id) %>
+                  <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                      <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                  <% end %>
+              <% else %>
+                  <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
+                  <div class="slider">
                     <ul>
                       <%e.resources.each do |r|%>
                           <li><%=link_to r.title, r.url, :target => "_blank"%></li>
@@ -30,61 +43,63 @@
                           <% end %>
                       <% end %>
                     </ul>
-                <% end %>
-
-              </div>
-
-              <% if e.due_date %>
-                  <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
-              <% end %>
-              <ul class="tags">
-                <!--<li>Speaker</li>-->
-              </ul>
-
-              <!-- Muestro ultima nota -->
-              <% n = e.notes.last %>
-              <% unless n.nil? %>
-                  <h5>
-                    <%= n.author.name %>
-                    <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
-                  </h5>
-                  <h4><small><%= truncate(n.text, length: 350) %></small></h4>
-                  <% if current_user_admin?
-                       link_to [n.milestone, n],
-                               method: :delete,
-                               data: { confirm: t('notes.delete.sure')},
-                               class: 'delete' do %>
-                          <span class="glyphicon glyphicon-remove"></span>
-                      <% end
-                         end
-                         if n.visibility=='every_body' %>
-                      <span class="glyphicon glyphicon-eye-open"></span>
-                  <% else if n.visibility=='mentors' %>
-                          <span class="glyphicon glyphicon-eye-close"></span>
-                      <% else %>
-                          <span class="glyphicon glyphicon-lock"></span>
-                      <% end
-                         end %>
-
-                  <% notas_extra = (e.notes.count - 1)
-                  if notas_extra > 0 %>
-                      +<%= notas_extra %><%= t('notes.more') %>
-                  <% end %>
-                  <div class="clearfix">
                   </div>
               <% end %>
-              <% @milestone=e %>
-              <%= render 'notes/form' %>
-            </li>
-        <% end %>
-      </ul>
-    </div>
+
+            </div>
+
+
+
+
+            <!-- Muestro ultima nota -->
+            <% n = e.notes.last %>
+
+            <div class="notes-list clearfix">
+              <h2><span class="glyphicon glyphicon glyphicon-paperclip"></span>Notas</h2>
+              <% if n.nil? %>
+                  <%= link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                      <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                  <% end %>
+              <% else %>
+                  <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
+                  <div class="slider">
+                    <ul>
+
+                      <li>
+                        <h3><%= n.author.name %></h3>
+                        <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
+                        <p><%= truncate(n.text, length: 350) %></p>
+
+                        <% if current_user_admin?
+                             link_to [n.milestone, n],
+                                     method: :delete,
+                                     data: { confirm: t('notes.delete.sure')},
+                                     class: 'delete' do %>
+                                <span class="glyphicon glyphicon-remove"></span>
+                            <% end
+                               end %>
+
+                      </li>
+                    </ul>
+                    <% if e.notes.count > 1 %>
+                        <div class="link">
+                          <%= link_to "Ver #{e.notes.count - 1} notas restantes", e %></div>
+                    <% end %>
+                  </div>
+
+              <% end %>
+
+            </div>
+            <ul class="tags">
+              <!--<li>Speaker</li>-->
+            </ul>
+
+
+          </li>
+      <% end %>
+    </ul>
+  </div>
 
 <% else %>
-    <div class="alert alert-info" role="alert"><p><%= t('milestones.zero') %></p></div>
+  <div class="alert alert-info" role="alert"><p><%= t('milestones.zero') %></p></div>
 <% end %>
-
-
-
-
-

@@ -1,6 +1,6 @@
 <div class="container-fluid">
-  <div class="card-col col-xs-8 col-xs-offset-2">
-    <div class="row">
+  <div class="row">
+    <div class="card-col col-xs-7">
       <%= render 'info' %>
     </div>
 
@@ -41,38 +41,12 @@
     <h3><%= t('notes.header') %></h3>
     <hr>
     <div class="row">
-      <div id="milestone-notes">
-        <%= render 'notes/form' %>
-        <ul>
-          <% @notes.each do |n| %>
-            <li class="clearfix">
-            <h2><%= n.author.name %></h2>
-            <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
-            <p><%= n.text %></p>
-            <% if current_user_admin?
-                link_to [n.milestone, n],
-                method: :delete,
-                data: { confirm: t('notes.delete.sure')},
-                class: 'delete' do %>
-                    <span class="glyphicon glyphicon-remove"></span>
-                <% end
-            end
-            if n.visibility=='every_body' %>
-                <span class="glyphicon glyphicon-eye-open"></span>
-            <% else if n.visibility=='mentors' %>
-                <span class="glyphicon glyphicon-eye-close"></span>
-            <% else %>
-                <span class="glyphicon glyphicon-lock"></span>
-            <% end
-            end %>
-            </li>
-          <% end %>
-        </ul>
+      <div class="card-col col-xs-5">
+        <div id="milestone-notes">
+          <%= render 'notes/form' %>
+          <%= render 'notes' %>
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
-<br>
-<br>
-<br>

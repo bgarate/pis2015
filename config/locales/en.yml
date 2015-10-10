@@ -139,7 +139,9 @@ en:
     rejected: "rejected"
     feedback: "feedback"
     event: "event"
-    done_or_rejected: 'milestones in state done or rejected'
+    state:
+      done_or_rejected: 'milestones in state done or rejected'
+      pending: 'milestones in state pending'
     mark_done_sure: 'Mark as Done?'
     mark_rejected_sure: "Mark as Rejected? \nNote: If it's already Rejected, it will go back to pending"
     pendings: "Pending Milestones"

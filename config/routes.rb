@@ -85,7 +85,8 @@ Rails.application.routes.draw do
     resources :milestones
     post :assign_milestone
     post :assign_project
-    get :showallmilestones
+    get :show_pending_timeline
+    get :show_not_pending_timeline
     collection do
       get 'me'
       post 'add_mentor'

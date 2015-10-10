@@ -228,6 +228,7 @@ es:
     me: "Privado"
     mentors: "Mentores"
     every_body: "Publico"
+    more: " notas mas"
 
     delete:
       title: "Borrar Nota"

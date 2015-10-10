@@ -66,6 +66,10 @@
                       <% end
                          end %>
 
+                  <% notas_extra = (e.notes.count - 1)
+                  if notas_extra > 0 %>
+                      +<%= notas_extra %><%= t('notes.more') %>
+                  <% end %>
                   <div class="clearfix">
                   </div>
               <% end %>

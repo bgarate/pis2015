@@ -6,11 +6,10 @@ class DashboardController < ApplicationController
 
   def is_authorized?
     @person=Person.find(current_user.person_id)
-    session[:return_to] ||= request.referer
     if @person.mentees.any?
     else
       flash.alert = t('not_authorized')
-      redirect_to session.delete(:return_to)
+      redirect_to '/people'
     end
   end
 

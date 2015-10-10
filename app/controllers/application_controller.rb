@@ -101,10 +101,4 @@ class ApplicationController < ActionController::Base
     @navigation_bar_visible = true
   end
 
-  # Gurdar url anterior
-  helper_method :store_return_to
-  def store_return_to
-    session[:return_to] = request.url
-  end
-  
 end

@@ -47,7 +47,8 @@ class GoogleController < ApplicationController
   def adddriveview
     if params[:milestone_id] && can_modify_milestone?(params[:milestone_id])
       @milestone_id = params[:milestone_id]
-      @redirect_url = request.env['HTTP_REFERER']
+      #@redirect_url = request.env['HTTP_REFERER']
+      @redirect_url = request.headers["Referer"]
     else
       redirect_to root_path
     end

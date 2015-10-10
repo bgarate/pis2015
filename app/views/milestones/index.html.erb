@@ -16,7 +16,7 @@
           <tbody>
           <% @milestone.each do |m| %>
               <tr>
-                <% store_return_to %>
+
                 <td><%= milestone_status_rej(m,:static) %>
                 <%= if m.status != 'rejected'
                       milestone_status(m,:static)

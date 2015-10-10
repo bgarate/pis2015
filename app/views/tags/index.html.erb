@@ -3,7 +3,13 @@
     <div class="col-xs-12">
 
       <div class="table-container">
-        <h1><%= t('tags.index.header') %></h1>
+
+        <h1>
+            <%= link_to new_tag_path do%>
+                <span class='large-text glyphicon glyphicon-plus table-add-button pull-left'>  </span>
+            <% end %>
+          <%= t('tags.index.header') %>
+        </h1>
         <table class="table datatable">
           <thead>
           <tr>

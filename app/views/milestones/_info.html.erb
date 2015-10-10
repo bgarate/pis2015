@@ -1,9 +1,10 @@
 <div id="milestone-info">
+  <% if can_modify_milestone?@milestone.id %>
   <%= if @milestone.status != 'rejected'
         milestone_status(@milestone)
       end %>
   <%= milestone_status_rej(@milestone) %>
-
+  <%end %>
   <div class="left-pane">
     <div class="milestone-icon"><%= image_tag @milestone.icon %></div>
     <h2><%= @milestone.title %></h2>

@@ -109,18 +109,6 @@ describe PeopleController do
       expect(response).to redirect_to('/welcome/index')
     end
 
-    it 'Deberia renderizar people showalllmilestones' do
-      session[:user_id] = @ad_user.id
-      get :showallmilestones, :person_id => @no_ad_user.person_id
-      expect(response.status).to eq(200)
-    end
-
-    it 'Deberia redirigir a home' do
-      session[:user_id] = @ad_user.id
-      get :showallmilestones, :person_id => 9999999999999999999
-      expect(response).to redirect_to(root_path)
-    end
-
   end
 
   describe "assign milestone" do

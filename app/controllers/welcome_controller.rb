@@ -4,6 +4,10 @@ class WelcomeController < ApplicationController
   skip_before_action :admin?
 
   def index
-    @navigation_bar_visible = false
+    if ! current_user
+      @navigation_bar_visible = false
+    else
+      redirect_to root_path
+    end
   end
 end

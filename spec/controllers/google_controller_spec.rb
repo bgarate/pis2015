@@ -85,7 +85,6 @@ describe GoogleController, "Login a traves de google oatuh" do
   it 'Deberia renderizar unregistered con msj como parametro' do
 
     get :unregistered
-    expect(assigns(:msj)).to eq('Usuario no registrado, contacte a un administrador.')
     expect(response).to render_template('unregistered')
   end
 

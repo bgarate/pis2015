@@ -39,8 +39,10 @@
                       <%= link_to edit_milestone_path(m) do%>
                           <span class='large-text glyphicon glyphicon-pencil'></span>
                       <% end %>
-
-                      <%= link_to milestone_path(m),
+                  <% end %>
+                  </td> <td>
+                  <% if current_user_admin? %>
+                    <%= link_to milestone_path(m),
                                   method: :delete,
                                   data: { confirm: t('milestones.delete.sure') } do %>
                           <span class='large-text glyphicon glyphicon-trash'></span>

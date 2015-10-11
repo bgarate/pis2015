@@ -1,5 +1,19 @@
-<h1>PIS 2015 </h1>
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-8 col-xs-offset-2">
 
-<p><%= @msj %></p>
+      <div class="table-container">
+        <h1><%= t(:unregistered_title) %>
+        </h1>
+        <br>
+        <p style="text-align: center"><%= t(:unregistered) %></p>
+        <br>
+            <p style="text-align: right; margin-right: 10px"><b>
+                <%= link_to t(:back_to_signup) , :controller => 'welcome', :action => 'index'%>
+                <br>
+            </b></p>
 
-<%= link_to "Pagina Principal", :controller => 'welcome', :action => 'index' %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,7 @@ rvm:
   - 2.2.2
 
 before_script:
-  - cp config/database.travis.yml config/database.sample.yml
+  - mv config/database.travis.yml config/database.yml
 
 install: bundle install
 

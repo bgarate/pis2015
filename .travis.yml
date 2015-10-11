@@ -3,3 +3,5 @@ rvm:
   - 2.2.2
 install: bundle install
 script: 'COVERAGE=TRUE rspec spec'
+addons:
+  postgresql: "9.4"

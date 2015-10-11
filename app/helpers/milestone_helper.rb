@@ -12,4 +12,13 @@ module MilestoneHelper
         </span>
       </div>}.html_safe
   end
+
+  def note_visibility_glyphicon(note)
+
+    glyph = {every_body: "glyphicon-eye-open",
+    mentors: "glyphicon-eye-close",
+    me: "glyphicon-lock"}
+
+    %{<div class="visibility glyphicon #{glyph[note.visibility.to_sym]}"></div>}.html_safe
+  end
 end

@@ -4,7 +4,13 @@
         milestone_status(@milestone)
       end %>
   <%= milestone_status_rej(@milestone) %>
-  <%end %>
+  <% if can_modify_milestone?(@milestone.id) %>
+      <%= link_to edit_milestone_path(@milestone) do %>
+          <span class="edit glyphicon glyphicon-edit"></span>
+      <% end %>
+  <% end %>
+  <% end %>
+
   <div class="left-pane">
     <div class="milestone-icon"><%= image_tag @milestone.icon %></div>
     <h2><%= @milestone.title %></h2>
@@ -21,25 +27,17 @@
           @milestone.feedback_author.name
         end
     %></p>
-    <div class="">
-      <table>
-        <tr><td><%=t('milestones.assigned_to')%>:</td></tr>
-      <%@milestone.people.each do |p| %>
-           <tr><td>
-             <%= p.name %>
-           </td></tr>
-        <%end%>
-      </table>
-    </div>
 
-    <div class="calendar right">
-      <% if @milestone.start_date %>
-          <%= l(@milestone.start_date, format: "%A, %B %d %Y").capitalize %><br>
-      <% end %>
-      <% if @milestone.due_date %>
+    <% if @milestone.start_date %>
+        <div class="calendar right">
+          <%= l(@milestone.start_date, format: "%A, %B %d %Y").capitalize %>
+        </div>
+    <% end %>
+    <% if @milestone.due_date %>
+        <div class="calendar">
           <%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %>
-      <% end %>
-    </div>
+        </div>
+    <% end %>
 
     <% unless @milestone.tags.empty? %>
         <ul class="tags clearfix">
@@ -47,6 +45,27 @@
               <li><%= t.name %></li>
           <%end%>
         </ul>
+    <%end%>
+  </div>
+</div>
+<div >
+  <br>
+  <h4>         Personas asociadas al hito</h4>
+  <hr>
+  <div id="milestone-asignees" class="row">
+
+    <%@milestone.people.each do |p| %>
+        <div class="col-xs-3">
+          <a href="<%= person_path(p) %>" class="item">
+            <div class="picture">
+              <%= person_picture @image_id %>
+            </div>
+            <div class="info">
+              <h2><%= p.name %></h2>
+              <h3><%= "No tech role" || p.tech_role.name %></h3>
+            </div>
+          </a>
+        </div>
     <%end%>
   </div>
 </div>

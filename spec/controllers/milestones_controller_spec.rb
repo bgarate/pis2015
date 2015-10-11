@@ -104,29 +104,33 @@ describe MilestonesController, "Milestone Controller" do
   end
 
   it "Deberia modificar el status al siguiente (done)" do
-    get :next_status, :milestone_id => @m1.id
+    session[:user_id] = @ad_user.id
+    get :next_status, :milestone_id => @m1.id, :session=>session
     @m1.reload
     expect(@m1.status).to eq "done"
   end
 
   it "Deberia modificar el status a pending (from done)" do
+    session[:user_id] = @ad_user.id
     @m1.status= 'done'
     @m1.save!
-    get :next_status, :milestone_id => @m1.id
+    get :next_status, :milestone_id => @m1.id, :session=>session
     @m1.reload
     expect(@m1.status).to eq 'pending'
   end
 
   it "Deberia modificar el status a reject" do
-    get :next_status_rej, :milestone_id => @m1.id
+    session[:user_id] = @ad_user.id
+    get :next_status_rej, :milestone_id => @m1.id, :session=>session
     @m1.reload
     expect(@m1.status).to eq 'rejected'
   end
 
   it "Deberia modificar el status a pending (from rejected)" do
+    session[:user_id] = @ad_user.id
     @m1.status= 'rejected'
     @m1.save!
-    get :next_status_rej, :milestone_id => @m1.id
+    get :next_status_rej, :milestone_id => @m1.id, :session=>session
     @m1.reload
     expect(@m1.status).to eq 'pending'
   end
@@ -304,9 +308,7 @@ describe MilestonesController, "Milestone Controller" do
       m1.status=1
       m1.icon= 'Icon'
       m1.save!
-
-      n = Note.new :text=>'Texto', :visibility=>2, :author_id=>@admin.id, :milestone_id=>m1.id
-      n.save!
+      m1.notes.create({:text=> 'una nota pa borrar'})
 
       get :show, :id => m1.id, :session=>session
       expect(response).to render_template("show")

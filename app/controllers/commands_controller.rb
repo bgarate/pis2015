@@ -18,6 +18,7 @@ class CommandsController < ApplicationController
       { "name" => "Crear categoria" , "url" => "/categories/new"    },
       { "name" => "Crear proyecto"  , "url" => "/projects/new"      },
       { "name" => "Crear hito"      , "url" => "/milestones/new"    },
+      { "name" => "Ver Dashboard"      , "url" => "/dashboard/"    },
     ]
 
     respond_with commands

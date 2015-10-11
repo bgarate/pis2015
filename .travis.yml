@@ -5,6 +5,8 @@ rvm:
 
 before_script:
   - mv config/database.travis.yml config/database.yml
+  - rake db:create
+  - rake db:migrate
 
 install: bundle install
 

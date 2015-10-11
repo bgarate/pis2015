@@ -1,7 +1,14 @@
 language: ruby
+
 rvm:
   - 2.2.2
+
+before_script:
+  - cp config/database.yml.travis config/database.sample.yml
+
 install: bundle install
+
 script: 'COVERAGE=TRUE rspec spec'
+
 addons:
   postgresql: "9.4"

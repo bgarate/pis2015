@@ -87,29 +87,48 @@ describe PeopleController do
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end
+  end
 
-    it 'Redirigir a root path' do
-      session[:user_id] = @ad_user.id
-      get :show, :id => 9999999999999
-      expect(response).to redirect_to(root_path)
-    end
+  describe "GET show" do
 
-    it 'Redirigir a root path' do
-      session[:user_id] = 9999999999999
-      get :show, :id => 9999999999999
-      expect(response).to redirect_to('/welcome/index')
-    end
+      it 'Redirigir a root path' do
+        session[:user_id] = @ad_user.id
+        get :show, :id => 9999999999999
+        expect(response).to redirect_to(root_path)
+      end
 
-    it 'Redirigir a root path' do
-      p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
-      p1.start_date =Time.now
-      p1.save!
-      session[:user_id] = p1.id
-      get :show, :id => p1.id, :session=> session
-      expect(response).to redirect_to('/welcome/index')
-    end
+      it 'Redirigir a root path' do
+        session[:user_id] = 9999999999999
+        get :show, :id => 9999999999999
+        expect(response).to redirect_to('/welcome/index')
+      end
+
+      it 'Redirigir a root path' do
+        p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
+        p1.start_date =Time.now
+        p1.save!
+        session[:user_id] = p1.id
+        get :show, :id => p1.id, :session=> session
+        expect(response).to redirect_to('/welcome/index')
+      end
+
+      it 'Redirigir a root path' do
+        allow_any_instance_of(ApplicationController).to receive(:admin?) { '' }
+        allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
+
+        p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
+        p1.start_date =Time.now
+        p1.admin = true
+        p1.save!
+
+        get :show_not_pending_timeline, :person_id => p1.id
+        expect(response.status).to eq(200)
+      end
 
   end
+
+
+
 
   describe "assign milestone" do
 
@@ -149,7 +168,6 @@ describe PeopleController do
       p1.start_date =Time.now
       p1.save!
       post :add_mentor_form ,{:mentee_id => p1.id}, :session => session
-      # Espero ser redirigido
       expect(response.status).to eq(200)
     end
 

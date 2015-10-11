@@ -304,9 +304,7 @@ describe MilestonesController, "Milestone Controller" do
       m1.status=1
       m1.icon= 'Icon'
       m1.save!
-
-      n = Note.new :text=>'Texto', :visibility=>2, :author_id=>@admin.id, :milestone_id=>m1.id
-      n.save!
+      m1.notes.create({:text=> 'una nota pa borrar'})
 
       get :show, :id => m1.id, :session=>session
       expect(response).to render_template("show")

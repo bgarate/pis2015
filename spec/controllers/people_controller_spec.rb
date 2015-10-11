@@ -109,7 +109,6 @@ describe PeopleController do
       expect(response).to redirect_to('/welcome/index')
     end
 
-
   end
 
   describe "assign milestone" do

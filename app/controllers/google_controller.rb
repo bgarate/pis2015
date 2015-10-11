@@ -38,7 +38,9 @@ class GoogleController < ApplicationController
   end
 
   def unregistered
-    @msj = String.new(t('unregistered'))
+    if  current_user
+      redirect_to root_path
+    end
   end
 
   #

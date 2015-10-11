@@ -49,7 +49,9 @@ es:
   none:  'Ninguna'
 
   not_authorized: "No esta autorizado para realizar esa acción"
-  unregistered: "Usuario no registrado, contacte a un administrador."
+  unregistered: "Usted no estra registrado en el sistema. Contacte con un administrador para que este cree su cuenta."
+  unregistered_title: 'Usuario no registrado'
+  back_to_signup: 'Volver a inicio de sesión'
   invalidurl: 'Url inválida'
 
   login_with_google: "Ingresar con Google"
@@ -164,8 +166,8 @@ es:
     state:
       done_or_rejected: 'Hitos en estado hecho o rechazado'
       pending: 'Hitos pendientes'
-    mark_done_sure: '¿Desea marcar como Hecho?'
-    mark_rejected_sure: "¿Desea marcar como Rechazado? \nNota: Si el hito esta Rechazado volverá a Pendiente"
+    mark_done_sure: '¿Está seguro que desea marcar el hito como Hecho/Pendiente?'
+    mark_rejected_sure: '¿Está seguro que desea marcar el hito como Rechazado/Pendiente?'
     pendings: "Hitos pendientes"
 
     start_date: "Fecha de inicio"

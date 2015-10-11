@@ -28,7 +28,9 @@ en:
   none:  'None'
 
   not_authorized: "You are not authorized to perform that action"
-  unregistered: "Unregistered user, contact an administrator."
+  unregistered: "You are not registered in the system. Contact an administrator for this create your account."
+  unregistered_title: 'User unregistered'
+  back_to_signup: 'Back to login'
   invalidurl: 'Invalid url'
 
   login_with_google: "Login with Google"
@@ -139,10 +141,13 @@ en:
     rejected: "rejected"
     feedback: "feedback"
     event: "event"
-    done_or_rejected: 'milestones in state done or rejected'
-    mark_done_sure: 'Mark as Done?'
-    mark_rejected_sure: "Mark as Rejected? \nNote: If it's already Rejected, it will go back to pending"
+    state:
+      done_or_rejected: 'milestones in state done or rejected'
+      pending: 'milestones in state pending'
+    mark_done_sure: 'Are you sure you want to mark the milestone as Done/Pending?'
+    mark_rejected_sure: 'Are you sure you want to mark the milestone as Rejected/Pending?'
     pendings: "Pending Milestones"
+    overcomes: 'Expired milestones'
 
     start_date: "Start date"
     description: "Description"

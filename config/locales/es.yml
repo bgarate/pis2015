@@ -169,6 +169,7 @@ es:
     mark_done_sure: '¿Está seguro que desea marcar el hito como Hecho/Pendiente?'
     mark_rejected_sure: '¿Está seguro que desea marcar el hito como Rechazado/Pendiente?'
     pendings: "Hitos pendientes"
+    overcomes: 'Hitos vencidos'
 
     start_date: "Fecha de inicio"
     description: "Descripción"

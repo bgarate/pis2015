@@ -1,10 +1,10 @@
 class MilestonesController < ApplicationController
 
 
-  before_action :get_milestone, only: [:add_category, :next_status]
+  before_action :get_milestone, only: [:add_category, :next_status, :next_status_rej]
   before_action :get_milestone_by_id, only: [:feedback?, :update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
-  before_action :is_authorized?, only: [:edit,:update,:destroy, :add_category]
+  before_action :is_authorized?, only: [:edit,:update,:next_status, :next_status_rej, :destroy,:add_category]
   skip_before_action :admin?
 
   def is_authorized?
@@ -148,7 +148,6 @@ class MilestonesController < ApplicationController
   end
 
   def next_status_rej
-    @milestone = Milestone.find_by(id: params[:milestone_id])
     if @milestone.status == 'rejected'
       @milestone.status= 'pending'
     else

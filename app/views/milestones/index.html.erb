@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-
+      <span class="glyphicons glyphicons-bin"></span>
       <div class="table-container">
         <h1><%= t('milestones.header') %></h1>
         <table class="table datatable" data-info="false">
@@ -30,10 +30,12 @@
                     <span class='large-text glyphicon glyphicon-pencil'></span>
                   <% end %>
                 </td>
+                <%end%>
+                <% if current_user_admin? %>
                 <td><%= link_to milestone_path(m),
                                 method: :delete,
                                 data: { confirm: t('milestones.delete.sure') } do %>
-                      <span class='large-text glyphicon glyphicon-remove'></span>
+                    <span class="large-text glyphicon glyphicon-trash"></span>
                       <% end %>
                 </td>
                 <%end%>

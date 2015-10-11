@@ -1,4 +1,10 @@
 
+#btnListMilestones{
+    float: right;
+    margin-bottom: 10px;
+}
+
+
 #milestone-info {
     min-height: 250px;
     display: flex;
@@ -6,6 +12,13 @@
     align-items: center;
     background-color: $body-background;
     color:#34495E;
+
+    .edit {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 14px;
+    }
 
     .left-pane {
         flex: 1 0 0;
@@ -59,6 +72,10 @@
         float: right;
     }
 
+    .selector{
+        width: 100%;
+    }
+
 }
 
 #milestone-notes {
@@ -68,6 +85,9 @@
     padding-bottom: 0;
 
     form {
+
+        padding-bottom: 20px;
+
         input {
             width: calc(100% - 50px);
         }
@@ -80,7 +100,7 @@
 
         list-style: none;
         padding: 0;
-        margin: 15px -20px 0 -20px;
+        margin: 0 -20px;
 
         li {
 
@@ -115,15 +135,72 @@
                 padding: 10px 0 10px 10px;
             }
 
-            a.delete {
+            .options {
                 position: absolute;
                 top: 10px;
                 right: 10px;
+                > div {
+                    display: block;
+                }
             }
         }
     }
 }
 
+#milestone-asignees {
+
+    padding: 0;
+    margin-top: 10px;
+
+    .item {
+        float: left;
+        background-color: $body-background;
+        padding: 10px 15px;
+        width: 100%;
+        border-bottom: 3px solid $body-background-dark;
+        margin-top: 10px;
+
+        &:hover {
+            text-decoration: none;
+            background-color: #D9D8E4;
+        }
+
+        img {
+            border-radius: 50%;
+            width: 100%;
+        }
+
+        .info {
+            display: table-cell;
+            vertical-align: middle;
+            width: 60%;
+            height: 60px;
+        }
+
+        .picture {
+            display: table-cell;
+            vertical-align: middle;
+            height: 60px;
+            width: 40%;
+        }
+
+        h2 {
+            font-weight: bold;
+            font-size: 12px;
+            margin: 0;
+            text-align: right;
+        }
+
+        h3 {
+            margin: 0;
+            text-align: right;
+            clear: both;
+            font-size: 10px;
+            color: #3497DA;
+
+        }
+    }
+}
 
 /*.etiquetas{
     margin:0;

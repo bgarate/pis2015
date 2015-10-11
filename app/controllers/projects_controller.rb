@@ -4,14 +4,16 @@ class ProjectsController < ApplicationController
   skip_before_action :admin?, only: [:show, :assign_person]
 
   def get_project
-    @project = Project.find_by(id: params[:id])
-    if !@project
-      @project = Project.find_by(name: params[:id])
-      if !@project
-          @project = Project.find_by(client: params[:id])
+    identifier = params[:id]
+    @project = Project.find_by(id: identifier)
+    unless @project
+      identifier = identifier.downcase.gsub(/_/, "\s")
+      @project = Project.where("lower(name)= :name", name:"#{identifier}").first
+      unless @project
+          @project = Project.where("lower(client)= :client", client:"#{identifier}").first
       end
     end
-    if !@project  || (! @project.validity?)
+    unless @project  && @project.validity?
       redirect_to '/projects'
     end
   end
@@ -28,9 +30,9 @@ class ProjectsController < ApplicationController
 
   def show
     person = Person.find(current_user.person_id)
-    if !(person.admin) then
+    unless (person.admin) then
       usuarios = [person]
-      if !person.mentees.empty?
+      unless person.mentees.empty?
         usuarios = usuarios + person.mentees.all
       end
     else
@@ -38,7 +40,7 @@ class ProjectsController < ApplicationController
     end
     @usr = []
     usuarios.each  do |u|
-      if !(@project.people.exists?(u.id))
+      unless (@project.people.exists?(u.id))
         @usr = @usr + [u]
       end
     end
@@ -60,12 +62,6 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @technologies = Technology.all
-    tech_aux = @project.technologies
-    @selected_tech = []
-    tech_aux.each do |t|
-      @selected_tech<<t.id
-    end
   end
 
   def update

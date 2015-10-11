@@ -38,15 +38,19 @@ class GoogleController < ApplicationController
   end
 
   def unregistered
-    @msj = String.new(t('unregistered'))
+    if  current_user
+      redirect_to root_path
+    end
   end
 
   #
   # Google Drive
   #
   def adddriveview
-    if params[:milestone_id]
+    if params[:milestone_id] && can_modify_milestone?(params[:milestone_id])
       @milestone_id = params[:milestone_id]
+      #@redirect_url = request.env['HTTP_REFERER']
+      @redirect_url = request.headers["Referer"]
     else
       redirect_to root_path
     end
@@ -77,8 +81,15 @@ class GoogleController < ApplicationController
         r.url= url
         m.resources<<(r)
         m.save!
-      end   
+      rescue GoogleDrive::Error
+        redirect_to google_adddriveview_path(:milestone_id => @milestone_id, :error => true)
+        return
+      end
     end
-      redirect_to root_path
+      if params[:redirect_url]
+        redirect_to params[:redirect_url]
+      else
+        redirect_to root_path
+      end
   end
 end

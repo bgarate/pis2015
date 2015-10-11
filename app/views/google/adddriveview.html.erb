@@ -5,9 +5,24 @@
       <form action='adddrive' class='main-form'>
         <h2> <%=t(:attachgoogledrivedoc) %> </h2>
         <input name='milestone_id' type='hidden' value=<%=@milestone_id%> readonly class='form-control'>
+        <% if @redirect_url%>
+            <input name='redirect_url' type='hidden' value=<%=@redirect_url%> readonly class='form-control'>
+        <% end%>
+
         <label for='URL' class='control-label'> <%=t(:documenturl)%> </label>
-        <input type='input' name='URL' class='form-control'>
-        <br>
+
+
+        <% if params[:error] %>
+            <div class="form-group has-error">
+        <% else %>
+            <div class="form-group">
+        <% end %>
+            <input type='input' name='URL' class='form-control' data-validation="required">
+            <% if params[:error] %>
+              <span class="help-block form-error"><%= t(:invalidurl) %></span>
+            <% end %>
+        </div>
+
         <input type='submit' value=<%=t(:attach)%> class='btn btn-default'>
       </form>
 

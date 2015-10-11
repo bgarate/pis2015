@@ -4,14 +4,12 @@ class MilestonesController < ApplicationController
   before_action :get_milestone, only: [:add_category, :next_status]
   before_action :get_milestone_by_id, only: [:feedback?, :update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
-  before_action :is_authorized?, only: [:destroy]
-  skip_before_action :admin?, only: [:create, :index, :show, :destroy, :edit]
+  before_action :is_authorized?, only: [:edit,:update,:destroy, :add_category]
+  skip_before_action :admin?
 
   def is_authorized?
-    @person=Person.find(current_user.person_id)
-    if @person.mentees.exists?(@milestone.id)|| current_user_admin? || @person.milestones.exists?(@milestone.id)
-    else
-      flash.notice = t('not_authorized')
+    unless can_modify_milestone? @milestone.id
+      flash.alert = t('not_authorized')
       redirect_to '/people'
     end
   end
@@ -29,15 +27,7 @@ class MilestonesController < ApplicationController
   end
 
   def index
-    if current_user_admin?
-      @milestone= Milestone.all
-    else
-      @milestone1= Milestone.all.where('id IN (SELECT milestone_id FROM person_milestones WHERE (person_id IN
-                                              (SELECT mentee_id FROM mentorships WHERE mentor_id=?)))',current_user.person_id)
-      @milestone2= Milestone.all.where('id IN (SELECT milestone_id FROM person_milestones WHERE person_id=?)', current_user.person_id)
-      @milestone=@milestone1|@milestone2                                         
-    end
-
+    @milestone= Milestone.all
     respond_to do |f|
       f.json { render json: name_and_path(@milestone)}
       f.html { render }
@@ -46,9 +36,7 @@ class MilestonesController < ApplicationController
   end
 
   def new
-    @milestone=Milestone.new
-    @tags = Tag.all
-    @people = Person.all.where('id NOT in (?)', @identifier)
+    redirect_to '/people'
   end
 
 
@@ -56,25 +44,30 @@ class MilestonesController < ApplicationController
     @person=Person.find(params[:person_id])
     @milestone= @person.milestones.create(milestone_params)
     @milestone.tag_ids = params[:tags]
-    if Category.exists?(params[:category_id])
-      @category=Category.find(params[:category_id])
-      @category.milestones<<@milestone
+    #CATEGORIES
+    category=Category.find(params[:milestone][:category_id])
+    @milestone.category=category
+    if category.name=='Feedback'
+      @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
     end
+    #ASSIGNED
     if params[:people]!=nil
       params[:people].each do |p|
       @person2=Person.find(p)
       @milestone.people<<@person2
       end
     end
+    @milestone.save
     if @milestone.valid?
-      flash.notice = "'#{milestone_params[:title]}' creado con éxito!"
-      redirect_to @milestone
+      flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')
+      redirect_to @person
     else
-      flash.alert = "'#{milestone_params[:title]}' no se ha podido crear"
-      redirect_to '/milestones/new'
+      flash.alert = "'#{milestone_params[:title]}' " + t('messages.create.error')
+      redirect_to @person
     end
 
   end
+
 
   def add_category
     @category.milestones<<@milestone
@@ -83,12 +76,11 @@ class MilestonesController < ApplicationController
   # Por ahora queda asi, deberia ser @milestone.category= @category
 
   def show
-    unless can_view_milestone?(params[:id])
+    if @milestone
+      @notes = @milestone.notes.includes(:author).order(created_at: :desc).select {|n| filter_note_by_visibility(n)}
+    else
       redirect_to root_path
     end
-
-    @notes = @milestone.notes.includes(:author).order(created_at: :desc).select {|n| filter_note_by_visibility(n)}
-
   end
 
   def destroy
@@ -98,37 +90,50 @@ class MilestonesController < ApplicationController
     @milestone.destroy
     redirect_to milestones_path
   end
-	
+
   def edit
+    @cats=Category.all.collect {|t| [t.name, t.id]}
+    @authors=Person.all.collect {|t| [t.name, t.id]}
     @tags = Tag.all
-    @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
+    user= Person.find(current_user.person_id)
+    if current_user_admin?
+      @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
+    else
+      @people= user.mentees.where('mentee_id NOT in (?)', @milestone.people.map{|p| p.id})
+      unless @milestone.people.exists?(user.id)
+        @people<<user
+      end
+    end
+    @category_name = @milestone.category.name
   end
 
   def update
-    if @milestone.feedback?
-      if (params[:milestone][:feedback_author] != nil)
-        id_feedback_author = (params.fetch :milestone).fetch :feedback_author
+    category=Category.find(params[:milestone][:category_id])
+      if category.name == 'Feedback'
+        @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
+      else
+        @milestone.feedback_author_id=nil
       end
-      unless id_feedback_author == nil
-        @milestone.feedback_author = Person.find(id_feedback_author)
+      @milestone.category = category
+      if params[:people]!=nil
+        params[:people].each do |p|
+          @person2=Person.find(p)
+          @milestone.people<<@person2
+          @milestone.save
+        end
       end
-    end
-    if params[:people]!=nil
-      params[:people].each do |p|
-        @person2=Person.find(p)
-        @milestone.people<<@person2
+      @milestone.category = category
+      if @milestone.update_attributes(milestone_params)
+        @milestone.tag_ids = params[:tags]
+        redirect_to @milestone
+      else
+        render :edit
       end
-    end
-    if @milestone.update_attributes(milestone_params)
-      @milestone.tag_ids = params[:tags]
-      redirect_to @milestone
-    else
-      render :edit
-    end
   end
 
+  helper_method :feedback?
   def feedback?
-    return @milestone.milestone_type == :feedback
+    return @milestone.category.name == 'Feedback'
   end
 
   def next_status
@@ -139,12 +144,7 @@ class MilestonesController < ApplicationController
     end
 
     @milestone.save!
-    #redirect_to @milestone
-    if session[:return_to]
-      redirect_to session[:return_to]
-    else
-      redirect_to root_path
-    end
+    redirect_to :back
   end
 
   def next_status_rej
@@ -155,12 +155,7 @@ class MilestonesController < ApplicationController
       @milestone.status= 'rejected'
     end
     @milestone.save!
-    #redirect_to @milestone
-    if session[:return_to]
-      redirect_to session[:return_to]
-    else
-      redirect_to root_path
-    end
+    redirect_to :back
   end
 
   def filter_note_by_visibility(note)

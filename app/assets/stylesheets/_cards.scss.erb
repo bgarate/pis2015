@@ -27,8 +27,8 @@
 
 
   &.card.events {
-    background-color: $mooveit-orange;
-    border-color: $mooveit-orange-dark;
+      background-color: $sunflower;
+      border-color: $sunflower-dark;
     min-height: 15em;
   }
 
@@ -40,8 +40,8 @@
   }
 
   &.card.pending {
-    background-color: $sunflower;
-    border-color: $sunflower-dark;
+      background-color: $alizarin;
+      border-color: $alizarin-dark;
     min-height: 20em;
   }
 
@@ -51,6 +51,16 @@
     min-height: 40em;
   }
 
+    &.card.nonpending{
+        background-color: $turqoise-dark;
+        text-decoration: none;
+        height: auto;
+        padding: 6px;
+        border-bottom: solid 0px transparent;
+        a:hover {
+            color: $body-background;
+        }
+    }
 }
 
 #profile-card {
@@ -80,6 +90,19 @@ ul#skills {
       width: 100%;
     }
   }
+}
+
+ul#mentors {
+    list-style: none;
+    padding: 0;
+    li {
+        display: inline-block;
+        padding: 3px;
+        img {
+            width: 30px;
+            border-radius: 50%;
+        }
+    }
 }
 
 #profile-picture {
@@ -174,7 +197,7 @@ ul#skills {
     li {
       display: block;
       margin-left: 40px;
-      background-color: $mooveit-orange-dark;
+      background-color: $sunflower-dark;
       border-radius: 5px;
       position: relative;
       padding: 10px 10px 10px 0;
@@ -185,7 +208,7 @@ ul#skills {
         left: -40px;
         top: 10px;
         text-transform: uppercase;
-        color: $mooveit-orange;
+        color:  $sunflower;
         padding: 2.5px 20px 2.5px 5px;
         border-radius: 5px;
         z-index: -1;
@@ -204,7 +227,7 @@ ul#skills {
 
       .content {
         position: relative;
-        border-left: $mooveit-orange solid 2px;
+        border-left:  $sunflower solid 2px;
         float: left;
         width: calc(100% - 40px);
         padding: 0 15px 0 20px;
@@ -324,20 +347,25 @@ ul#milestone-list {
           padding-left: 15px;
       }
 
-      .resources-list {
-          margin: 0;
+      .resources-list, .notes-list {
 
-          background-color: $peterriver;
           color: white;
           margin: 0 -10px 10px -15px;
 
           padding: 10px 15px;
+
+          .slider {
+              clear: both;
+          }
 
           h2 {
               font-size: 14px;
               margin: 0;
               font-weight: bold;
               float: left;
+              .glyphicon {
+                  padding-right: 10px;
+              }
           }
 
           a {
@@ -357,7 +385,39 @@ ul#milestone-list {
 
           }
 
+          h3{
+              font-weight: bold;
+              font-size: 15px;
+              float: left;
+              margin: 0;
+          }
 
+          .time {
+              float: right;
+          }
+
+          p {
+              clear: both;
+          }
+
+          .link {
+              text-align: center;
+          }
+      }
+
+      .resources-list {
+          background-color: $peterriver;
+          margin-top: 10px;
+      }
+
+      .notes-list {
+          background-color: $sunflower;
+
+          li {
+              background-color: $sunflower-dark;
+              margin: 0 -20px;
+              padding: 20px;
+          }
 
       }
 
@@ -379,7 +439,7 @@ ul#pending-list {
     background-color: white;
     list-style-type: none;
     padding: 20px 10px 20px 15px;
-    background-color: $sunflower-dark;
+    background-color: $alizarin-dark;
     margin: 10px;
 
     h2 {

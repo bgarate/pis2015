@@ -8,8 +8,8 @@ class DashboardController < ApplicationController
     @person=Person.find(current_user.person_id)
     if @person.mentees.any?
     else
-      flash.notice = t('not_authorized')
-      redirect_to people_path
+      flash.alert = t('not_authorized')
+      redirect_to '/people'
     end
   end
 

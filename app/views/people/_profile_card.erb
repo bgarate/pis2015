@@ -1,7 +1,7 @@
 <div id="profile-card" class="card profile">
   <div id="profile-picture">
     <div class="img-container">
-      <%= image_tag "test/siluetaCorbata1.jpg" %>
+      <%= person_picture @image_id %>
     </div>
   </div>
   <h1><%= @name %></h1>
@@ -12,16 +12,17 @@
     <% end %>
   </ul>
   <hr>
-  <h4>MENTORES</h4>
+  <h4><%= t('mentor.header') %></h4>
     <% if @mentorships.empty? %>
-        <p>Sin mentores en la actualidad</p>
+        <p><%= t('mentor.zero') %></p>
     <%else%>
-        <% @mentorships.each do |s| %>
-            <li><%= s.name %></li>
-        <%end%>
-        <br>
+        <ul id="mentors">
+            <% @mentorships.each do |s| %>
+                <li><%= link_to person_picture(s.image_id), s %></li>
+            <%end%>
+        </ul>
     <%end%>
     <%if current_user_admin? %>
-        <a href="add_mentor_form?mentee_id=<%=@identifier%>" class="btn btn-info" role="button"><span class="glyphicon glyphicon-add"></span>Agregar Mentores</a>
+        <a href="add_mentor_form?mentee_id=<%=@identifier%>" class="btn btn-info" role="button"><span class="glyphicon glyphicon-add"></span><%= t('mentor.add.header') %></a>
     <%end%>
 </div>

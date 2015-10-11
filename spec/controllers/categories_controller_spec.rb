@@ -26,7 +26,7 @@ describe CategoriesController, "Categories Controller" do
       c1.save!
 
       get :show, :id=> c1.id
-      expect(response).to render_template('show')
+      expect(response).to redirect_to(categories_path)
     end
 
 

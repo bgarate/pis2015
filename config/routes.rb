@@ -85,13 +85,15 @@ Rails.application.routes.draw do
     resources :milestones
     post :assign_milestone
     post :assign_project
+    get :show_pending_timeline
+    get :show_not_pending_timeline
     collection do
       get 'me'
       post 'add_mentor'
       get 'add_mentor_form'
       get 'new' => 'people#new'
       post 'new' => 'people#create'
-      get ':id' => 'people#show', :constraints  => { :id => /[-\w\s\.]+/ }
+      get ':id' => 'people#show', :constraints  => { :id => /[-\w\.]+/ }
     end
   end
 
@@ -100,7 +102,7 @@ Rails.application.routes.draw do
     collection do
       get 'new' => 'projects#new'
       post 'new' => 'projects#create'
-      get ':id' => 'projects#show', :constraints  => { :id => /[-\w\s\.]+/ }
+      get ':id' => 'projects#show', :constraints  => { :id => /[-\w\.]+/ }
     end
   end
 

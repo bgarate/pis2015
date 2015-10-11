@@ -55,9 +55,8 @@ class ApplicationController < ActionController::Base
 
   end
 
-=begin
-  # No esta más en peopleController, hay que ver si se usa
 
+  # No esta más en peopleController, hay que ver si se usa
   #devuelve true si puedo ver el perfil de la persona person_id, false de lo contrario.
   helper_method :can_view_person?
   def can_view_person? (person_id)
@@ -72,26 +71,26 @@ class ApplicationController < ActionController::Base
       false
     end
   end
-=end
+
 
   #devuelve true si puedo ver el hito milestone_id, false de lo contrario.
-  helper_method :can_view_milestone?
-  def can_view_milestone? (milestone_id)
+  helper_method :can_modify_milestone?
+  def can_modify_milestone? (milestone_id)
     user = current_user
     current_person = Person.find_by(id: user.person_id)
-    view_milestone = Milestone.find_by(id: milestone_id)
-    if user and (user.person.admin or (current_person.milestones.include? view_milestone))
-      true
-    elsif not user
-      redirect_to root_path
-    else
-      menteesmilestone = false
-      current_person.mentees.each do |mentee|
-        menteesmilestone = menteesmilestone || (mentee.milestones.include? view_milestone)
+    edit_milestone = Milestone.find_by(id: milestone_id)
+    mentee_mil=false
+    current_person.mentees.all.each do |m|
+      if m.milestones.exists? edit_milestone.id
+        mentee_mil=true
       end
-      menteesmilestone
     end
+    user && (user.person.admin ||
+        (current_person.milestones.include? edit_milestone) ||
+        mentee_mil )
   end
+
+
 
   helper_method :navigation_bar_visible
 
@@ -102,9 +101,4 @@ class ApplicationController < ActionController::Base
     @navigation_bar_visible = true
   end
 
-  # Gurdar url anterior
-  helper_method :store_return_to
-  def store_return_to
-    session[:return_to] = request.url
-  end
 end

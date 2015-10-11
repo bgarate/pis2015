@@ -87,14 +87,48 @@ describe PeopleController do
       # Espero ser redirigido
       expect(response.status).to eq(302)
     end
+  end
 
-    it 'Redirigir a root path' do
-      session[:user_id] = @ad_user.id
-      get :show, :id => 9999999999999
-      expect(response).to redirect_to(root_path)
-    end
+  describe "GET show" do
+
+      it 'Redirigir a root path' do
+        session[:user_id] = @ad_user.id
+        get :show, :id => 9999999999999
+        expect(response).to redirect_to(root_path)
+      end
+
+      it 'Redirigir a root path' do
+        session[:user_id] = 9999999999999
+        get :show, :id => 9999999999999
+        expect(response).to redirect_to('/welcome/index')
+      end
+
+      it 'Redirigir a root path' do
+        p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
+        p1.start_date =Time.now
+        p1.save!
+        session[:user_id] = p1.id
+        get :show, :id => p1.id, :session=> session
+        expect(response).to redirect_to('/welcome/index')
+      end
+
+      it 'Redirigir a root path' do
+        allow_any_instance_of(ApplicationController).to receive(:admin?) { '' }
+        allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
+
+        p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
+        p1.start_date =Time.now
+        p1.admin = true
+        p1.save!
+
+        get :show_not_pending_timeline, :person_id => p1.id
+        expect(response.status).to eq(200)
+      end
 
   end
+
+
+
 
   describe "assign milestone" do
 
@@ -103,7 +137,6 @@ describe PeopleController do
       p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
       p1.start_date =Time.now
       p1.save!
-
       m1 = Milestone.new :title=>'Milestone for testing', :description=>'This is a milestone to test Milestones'
       m1.due_date=Time.now - 5.days
       m1.created_at= Time.now
@@ -118,11 +151,10 @@ describe PeopleController do
     end
 
   end
-  
+
   describe "add_mentor" do
     it "No deberia desplegar el formulario si el usuario no es admin" do
       session[:user_id] = @no_ad_user.id
-
       post :add_mentor_form ,{:mentee_id => 1}, :session => session
       # Espero ser redirigido
       expect(response).to redirect_to root_path
@@ -135,9 +167,7 @@ describe PeopleController do
       p1.email ="juanperez2@gmail.com"
       p1.start_date =Time.now
       p1.save!
-
       post :add_mentor_form ,{:mentee_id => p1.id}, :session => session
-      # Espero ser redirigido
       expect(response.status).to eq(200)
     end
 
@@ -145,7 +175,6 @@ describe PeopleController do
       session[:user_id] = @ad_user.id
       get :add_mentor,{:mentee_id => 1, :mentor_id=>1, :start_date => Date.today()},:session => session
       expect(response.status).to eq(422)
-
     end
 
     it "Deberia redirigir a mentee si la relacion mentee-mentor ya existe" do
@@ -166,7 +195,6 @@ describe PeopleController do
 
   describe "permisos" do
     it 'Deberia renderizar people show por ser admin' do
-
       session[:user_id] = @ad_user.id
       get :show, :id => @no_ad_user.person_id
       expect(response.status).to eq(200)
@@ -175,7 +203,6 @@ describe PeopleController do
     it 'Deberia renderizar people show por ser mentor' do
       @no_ad_user.person.mentees<<(@ad_user.person)
       @no_ad_user.save!
-
       session[:user_id] = @no_ad_user.id
       get :show, :id => @ad_user.person_id
       expect(response.status).to eq(200)

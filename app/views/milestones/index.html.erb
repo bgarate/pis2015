@@ -3,49 +3,64 @@
     <div class="col-xs-12">
       <div class="table-container">
         <h1><%= t('milestones.header') %></h1>
-        <table class="table datatable" data-info="false">
+        <table class="table datatable table-striped" id="hitos" data-info="false">
           <thead>
-              <tr>
-                <td></td>
-                <td><%= t('milestones.title') %></td>
-                <td><%= t('milestones.description') %></td>
-                <td><%= t('milestones.due_date') %></td>
-              </tr>
+          <tr>
+            <td><%= t('milestones.state_title') %></td>
+            <td><%= t('milestones.title') %></td>
+            <td><%= t('milestones.description') %></td>
+            <td><%= t('milestones.due_date') %></td>
+            <td><%= t('milestones.actions') %></td>
+          </tr>
           </thead>
           <tbody>
           <% @milestone.each do |m| %>
               <tr>
                 <td><% if can_modify_milestone?m.id %>
-                    <%= milestone_status_rej(m,:static) %>
-                    <%= if m.status != 'rejected'
-                          milestone_status(m,:static)
-                        end %>
-                  <% end %></td>
-                <td><%= link_to m.title, milestone_path(m), method: :get%></td>
-                <td><%= m.description.truncate(50) %></td>
-                <td><div class="calendar left"><%= m.due_date %></div></td>
-                <% if can_modify_milestone? m.id %>
-                <td><%= link_to edit_milestone_path(m) do%>
-                    <span class='large-text glyphicon glyphicon-pencil'></span>
+                      <%= milestone_status_rej(m,:static) %>
+                      <%= if m.status != 'rejected'
+                            milestone_status(m,:static)
+                          end %>
                   <% end %>
                 </td>
-                <%end%>
-                <% if current_user_admin? %>
-                <td><%= link_to milestone_path(m),
-                                method: :delete,
-                                data: { confirm: t('milestones.delete.sure') } do %>
-                    <span class="large-text glyphicon glyphicon-trash"></span>
-                      <% end %>
+                <td>
+                  <%= link_to m.title, milestone_path(m), method: :get%>
                 </td>
-                <%end%>
+                <td>
+                  <%= m.description.truncate(50) %>
+                </td>
+                <td>
+                  <div class="calendar left"><%= m.due_date %></div>
+                </td>
 
+
+                <td>
+                  <% if can_modify_milestone? m.id %>
+                      <%= link_to edit_milestone_path(m) do%>
+                          <span class='large-text glyphicon glyphicon-pencil'></span>
+                      <% end %>
+                  <% end %>
+                  
+                  <% if current_user_admin? %>
+                    <%= link_to milestone_path(m),
+                                  method: :delete,
+                                  data: { confirm: t('milestones.delete.sure') } do %>
+                          <span class='large-text glyphicon glyphicon-trash'></span>
+                      <% end %>
+                  <%end%>
+                </td>
               </tr>
           <% end %>
           </tbody>
         </table>
       </div>
-
-
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
     </div>
   </div>
 </div>
+

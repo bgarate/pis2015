@@ -147,6 +147,8 @@ es:
   milestones:
 
     header: "Hitos"
+    state_title: "Estado"
+    actions: "Acciones"
     title: "Título"
     due_date: "Fecha límite"
     reviewer: "Revisor del feedback"

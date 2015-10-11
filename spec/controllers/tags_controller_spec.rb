@@ -64,13 +64,20 @@ describe TagsController do
       expect(response).to redirect_to(root_path)
     end
 
-    it 'Redirigir a root path' do
+    it 'Renderiza show' do
       t1=Tag.new
       t1.name='unaTag'
       t1.save!
       session[:user_id] = @ad_user.id
       get :show, :id => t1.id
       expect(response).to render_template('show')
+    end
+
+    it 'Renderiza index' do
+      allow_any_instance_of(ApplicationController).to receive(:admin?) { '' }
+      allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
+      get :index
+      expect(response).to render_template('index')
     end
   end
 

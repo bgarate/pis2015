@@ -189,7 +189,7 @@ es:
 
     delete:
       title: "Borrar Hito"
-      sure: "¿Esta seguro que desea eliminar este hito?"
+      sure: "¿Esta seguro que desea eliminar este hito permanentemente?"
 
     see_all: "Ver todos los hitos"
 

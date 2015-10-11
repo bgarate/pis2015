@@ -1,4 +1,12 @@
+
 <div class="container-fluid">
+  <div class="row">
+    <div class="card-col col-xs-12">
+      <%= link_to '/milestones/' do %>
+          <button type="button" id="btnListMilestones" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-th-list"></span>  <%=t('milestones.see_all')%></button>
+      <%end%>
+    </div>
+  </div>
   <div class="row">
     <div class="card-col col-xs-7">
       <%= render 'info' %>

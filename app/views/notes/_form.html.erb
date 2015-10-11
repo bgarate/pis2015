@@ -1,4 +1,5 @@
-
+<h4><%=t('notes.add')%>:</h4>
+<hr>
 <%= form_for([@milestone, @milestone.notes.build], html: { 'data-toggle': 'validator'}) do |n| %>
     <%= n.text_field :text, 'data-validation': "required",
                      class: "submit-on-enter", placeholder: "Agregar nota..." %>

@@ -22,6 +22,8 @@
 //= require chosen/chosen.jquery.min
 //= require datatables
 //= require cloudinary
+//= require bootstrap-iconpicker/js/iconset-glyphicon.min
+//= require bootstrap-iconpicker/js/bootstrap-iconpicker.min
 //= require_tree .
 
 //= require i18n/translations
@@ -90,6 +92,12 @@
         };
 
         $('form').preventDoubleSubmission();
+
+        $('[role=iconpicker]').iconpicker({
+            iconset:"glyphicon",
+            search: false
+        });
+
     };
 
     $(document).ready(ready);

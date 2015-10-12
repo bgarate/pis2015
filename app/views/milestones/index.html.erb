@@ -2,6 +2,9 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="table-container">
+        <%= link_to '/milestones/new' do %>
+            <button type="button" id="btnNewtMilestone" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span>  <%=t('milestones.new.header')%></button>
+        <%end%>
         <h1><%= t('milestones.header') %></h1>
         <table class="table datatable table-striped" id="hitos" data-info="false">
           <thead>
@@ -23,9 +26,15 @@
                           end %>
                   <% end %>
                 </td>
-                <td>
-                  <%= link_to m.title, milestone_path(m), method: :get%>
-                </td>
+                <% if (m.status == 'rejected') || (m.status == 'done')  %>
+                    <td style="text-decoration: line-through;">
+                      <%= link_to m.title, milestone_path(m), method: :get%>
+                    </td>
+                <% else %>
+                    <td>
+                      <%= link_to m.title, milestone_path(m), method: :get%>
+                    </td>
+                <% end %>
                 <td>
                   <%= m.description.truncate(50) %>
                 </td>

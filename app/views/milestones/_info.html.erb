@@ -1,13 +1,14 @@
 <div id="milestone-info">
+  <% if can_modify_milestone?@milestone.id %>
   <%= if @milestone.status != 'rejected'
         milestone_status(@milestone)
       end %>
   <%= milestone_status_rej(@milestone) %>
-
   <% if can_modify_milestone?(@milestone.id) %>
       <%= link_to edit_milestone_path(@milestone) do %>
           <span class="edit glyphicon glyphicon-edit"></span>
       <% end %>
+  <% end %>
   <% end %>
 
   <div class="left-pane">

@@ -149,6 +149,8 @@ es:
   milestones:
 
     header: "Hitos"
+    state_title: "Estado"
+    actions: "Acciones"
     title: "Título"
     due_date: "Fecha límite"
     reviewer: "Revisor del feedback"
@@ -195,7 +197,7 @@ es:
 
     delete:
       title: "Borrar Hito"
-      sure: "¿Esta seguro que desea eliminar este hito?"
+      sure: "¿Esta seguro que desea eliminar este hito permanentemente?"
 
     see_all: "Ver todos los hitos"
 
@@ -230,6 +232,8 @@ es:
     new:
       header: "Agregar Categoría"
       sumbit: "Agregar Categoría"
+      exists: "Ya existe una categoria con ese nombre"
+
 
     zero: "No hay categorías disponibles"
 

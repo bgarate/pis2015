@@ -174,8 +174,7 @@ en:
 
     delete:
       title: "Delete Milestone"
-      sure: "Are you sure you want to delete this milestone?"
-
+      sure: "Are you sure you want to permanently delete this milestone?"
 
   #dashboard
   dashboard:
@@ -205,6 +204,7 @@ en:
     new:
       header: "Create Category"
       sumbit: "Add Category"
+      exists: "A category with that name already exists"
 
     zero: "There are no available Categories"
 

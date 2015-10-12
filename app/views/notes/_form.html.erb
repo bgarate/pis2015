@@ -4,9 +4,9 @@
     <%= n.text_field :text, 'data-validation': "required",
                      class: "submit-on-enter", placeholder: t('notes.add_placeholder') %>
     <%= n.select(:visibility,options_for_select(
-                                    [["&#xe033;".html_safe,:me],
+                                    [["&#xe105".html_safe,:every_body],
                                      ["&#xe106;".html_safe,:mentors],
-                                     ["&#xe105".html_safe,:every_body]]),
+                                     ["&#xe033;".html_safe,:me]]),
                  {}, {class: "glyphicon"}
         )%>
 

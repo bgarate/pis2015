@@ -10,6 +10,7 @@
     <ul id="milestone-list">
       <% @milestones.each do |e| %>
           <li>
+            <div class="icon"><%= milestone_icon(e).html_safe %></div>
             <% if can_modify_milestone?e.id %>
               <%= if e.status != 'rejected'
                     milestone_status(e,:right)
@@ -28,22 +29,18 @@
 
             <div class="resources-list clearfix">
                 <h2><span class="glyphicon glyphicon glyphicon-paperclip"></span>  <%=t(:attachmentsdocs)%></h2>
-              <% if e.resources.empty? && can_modify_milestone?(e.id) %>
-                  <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                      <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                  <% if can_modify_milestone?(e.id) %>
+                      <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                          <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                      <% end %>
                   <% end %>
-              <% else %>
+              <% unless e.resources.empty? %>
                   <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
                   <div class="slider">
                     <ul>
                       <%e.resources.each do |r|%>
                           <li><%=link_to r.title, r.url, :target => "_blank"%></li>
                       <%end%>
-                      <% if can_modify_milestone?(e.id) %>
-                          <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                              <span class="toggle-documents glyphicon glyphicon-plus"></span>
-                          <% end %>
-                      <% end %>
                     </ul>
                   </div>
               <% end %>
@@ -58,15 +55,12 @@
                n = visible_notes.first %>
 
             <div class="notes-list clearfix">
-              <h2><span class="glyphicon glyphicon-comment"></span><% t('notes.header') %></h2>
-              <% if n.nil? %>
-                  <%= link_to  milestone_path(e), method: :get do%>
-                      <span class="toggle-documents glyphicon glyphicon-plus"></span>
-                  <% end %>
-              <% else %>
-                  <%= link_to  milestone_path(e), method: :get do%>
-                      <span class="toggle-documents glyphicon glyphicon-plus"></span>
-                  <% end %>
+              <h2><span class="glyphicon glyphicon-comment"></span><% t('notes_header') %></h2>
+              <%= link_to  milestone_path(e), method: :get do%>
+                  <span class="toggle-documents glyphicon glyphicon-plus"></span>
+              <% end %>
+              <% unless n.nil? %>
+                  <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
                   <div class="slider">
                     <ul>
 

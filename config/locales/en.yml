@@ -57,7 +57,7 @@ en:
       init_date: "Init date"
       select: "Select people..."
       asign_to_project: "Assign to project"
-      other_notes: " other notes"
+      other_notes: "View %{count} other notes"
       submit: "Create"
 
 

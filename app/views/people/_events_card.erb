@@ -47,7 +47,7 @@
               <% end %>
               <div class="content">
                 <% if e.due_date %>
-                    <div class="month-and-year"><%=l(e.due_date, format: "%^B %Y")%></div>
+                    <div class="month-and-year"><%=l(e.due_date, format: "%B %Y")%></div>
                 <% end %>
                 <h2><%=e.title%></h2>
                 <p><%=e.description%></p>

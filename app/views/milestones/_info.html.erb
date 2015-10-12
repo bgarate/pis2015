@@ -50,7 +50,7 @@
 </div>
 <div >
   <br>
-  <h4>         Personas asociadas al hito</h4>
+  <h4><%= t('milestones.assigned_people') %></h4>
   <hr>
   <div id="milestone-asignees" class="row">
 
@@ -62,7 +62,7 @@
             </div>
             <div class="info">
               <h2><%= p.name %></h2>
-              <h3><%= "No tech role" || p.tech_role.name %></h3>
+              <h3><%=  t('milestones.no_tech_role') || p.tech_role.name %></h3>
             </div>
           </a>
         </div>

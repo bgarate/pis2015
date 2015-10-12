@@ -2,7 +2,7 @@
 <hr>
 <%= form_for([@milestone, @milestone.notes.build], html: { 'data-toggle': 'validator'}) do |n| %>
     <%= n.text_field :text, 'data-validation': "required",
-                     class: "submit-on-enter", placeholder: "Agregar nota..." %>
+                     class: "submit-on-enter", placeholder: t('notes.add_placeholder') %>
     <%= n.select(:visibility,options_for_select(
                                     [["&#xe105".html_safe,:every_body],
                                      ["&#xe106;".html_safe,:mentors],

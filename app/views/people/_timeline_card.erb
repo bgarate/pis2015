@@ -57,7 +57,7 @@
             <% n = e.notes.last %>
 
             <div class="notes-list clearfix">
-              <h2><span class="glyphicon glyphicon-comment"></span>Notas</h2>
+              <h2><span class="glyphicon glyphicon-comment"></span><% t('notes.header') %></h2>
               <% if n.nil? %>
                   <%= link_to  milestone_path(e), method: :get do%>
                       <span class="toggle-documents glyphicon glyphicon-plus"></span>
@@ -69,7 +69,7 @@
 
                       <li>
                         <h3><%= n.author.name %></h3>
-                        <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
+                        <div class="time"><%=  t('ago_i') + time_ago_in_words(n.created_at) + t('ago_f')  %></div>
                         <p><%= truncate(n.text, length: 350) %></p>
 
                         <% if current_user_admin?
@@ -95,7 +95,9 @@
             <ul class="tags">
               <!--<li>Speaker</li>-->
             </ul>
-
+            <div class="milestone-last-update">
+              <%= t('milestones.last_update') + " " + t('ago_i') +  time_ago_in_words(e.updated_at) + t('ago_f') %>
+            </div>
 
           </li>
       <% end %>

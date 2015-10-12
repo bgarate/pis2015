@@ -47,6 +47,7 @@ es:
   id: 'ID'
   search: 'Buscar'
   none:  'Ninguna'
+  view: 'Ver'
 
   not_authorized: "No esta autorizado para realizar esa acción"
   unregistered: "Usted no estra registrado en el sistema. Contacte con un administrador para que este cree su cuenta."
@@ -77,6 +78,7 @@ es:
       init_date: "Fecha de ingreso"
       select: "Seleccione personas..."
       asign_to_project: "Asignar a proyecto"
+      other_notes: " notas restantes"
       submit: "Crear"
 
   #mentor
@@ -154,6 +156,7 @@ es:
     reviewer: "Revisor del feedback"
     assign_to: 'Asignar a'
     cannot_assign: "No puede asignar más personas"
+    assigned_people: "Personas asociadas al hito"
     mark_done: 'Marcar como hecho'
     add_feedback_author: 'Añadir revisor del feedback'
     tags: "Tags"
@@ -164,6 +167,7 @@ es:
     rejected: "rechazado"
     feedback: "feedback"
     event: "evento"
+    last_update: "Modificado"
 
     state:
       done_or_rejected: 'Hitos en estado hecho o rechazado'
@@ -180,6 +184,8 @@ es:
     assigned: " será asignado por defecto"
     assigned_to: "Asignado(s) a este hito"
     zero: "No hay hitos que mostrar"
+
+    no_tech_role: "Sin rol técnico"
 
     new:
       header: "Crear Hito"
@@ -203,9 +209,13 @@ es:
     name: "Nombre"
     description: "Descripción"
     due_time: "Fecha límite"
-    mentees_title: "Usuarios Mentoreados"
     last_completed_milestones: "Últimos Hitos Completados"
-    milestones_title: "Hitos Pendientes"
+    mentees:
+      header: "Usuarios Mentoreados"
+      zero: "No hay usuarios mentoreados"
+    milestones:
+      header: "Hitos Pendientes"
+      zero: "No hay hitos pendientes"
 
 
   #categorias
@@ -238,6 +248,7 @@ es:
     updated: "Actualizado"
     create: "Crear Nota"
     add: "Agregar Notas"
+    add_placeholder: "Agregar nota..."
     me: "Privado"
     mentors: "Mentores"
     every_body: "Publico"
@@ -274,6 +285,8 @@ es:
   documenturl: 'URL del documento'
   attach: 'Adjuntar'
 
+  ago_i: "hace "
+  ago_f: " "
 
   #fechas
   date:

@@ -3,7 +3,7 @@
       <% @notes.each do |n| %>
           <li class="clearfix">
             <h2><%= n.author.name %></h2>
-            <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
+            <div class="time"><%= t('ago_i') + time_ago_in_words(n.created_at) + t('ago_f') %></div>
             <p><%= n.text %></p>
             <div class="options">
               <% if current_user_admin? %>

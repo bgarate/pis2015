@@ -19,78 +19,95 @@
 }
 
 #mentees_table {
-    background-color:#1ABB9B;
-    border-color:#169F85;
 
-    color:white;
-}
-
-#mentees_table h1 {
-    background-color: #169F85;
-}
-
-#mentees_table input {
     background-color: #1ABB9B;
-}
-
-#mentees_table li{
-    background-color: #E05956;
-    display:block;
-    float:left;
-    margin-left:7px;
-    padding:4px 5px;
+    border-color: #169F85;
+    min-height: 90px;
     color: white;
 
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-}
+    h1 {
+        background-color: #169F85;
+    }
 
-#mentees_table li a{
-    color: white;
-}
+    input {
+        background-color: #1ABB9B;
+    }
 
-#mentees_table .datatable {
-    thead td {
+    li {
+        background-color: #E05956;
+        display: block;
+        float: left;
+        margin-left: 7px;
+        padding: 4px 5px;
+        color: white;
 
-        cursor: pointer;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
 
-        &:hover {
-            background-color: #1ABB9B;
+    li a {
+        color: white;
+    }
+
+    .datatable {
+        thead td {
+
+            cursor: pointer;
+
+            &:hover {
+                background-color: #1ABB9B;
+            }
         }
     }
+
+    .zero{
+        padding: 10px 10px;
+        font-size:14px;
+        font-weight: normal;
+    }
+
 }
+
 
 #milestones_table {
-    background-color:#FF8D40;
-    border-color:#FC6A06;
-    color:white;
-}
 
-#milestones_table h1 {
-    background-color: #FC6A06;
-}
-
-#milestones_table input {
     background-color: #FF8D40;
-}
-
-#milestones_table a{
+    border-color: #FC6A06;
     color: white;
-}
+    min-height: 90px;
 
-#milestones_table .datatable {
-    thead td {
+    h1 {
+        background-color: #FC6A06;
+    }
 
-        cursor: pointer;
+    input {
+        background-color: #FF8D40;
+    }
 
-        &:hover {
-            background-color: #FF8D40;
+    a {
+        color: white;
+    }
+
+    .datatable {
+        thead td {
+
+            cursor: pointer;
+
+            &:hover {
+                background-color: #FF8D40;
+            }
         }
     }
+
+    .calendar {
+        background-image: url('layouts/calendar-white.png');
+    }
+
+    .zero{
+        padding: 10px 10px;
+        font-size:14px;
+        font-weight: normal;
+    }
+
+
 }
-
-#milestones_table .calendar{
-    background-image:url('layouts/calendar-white.png');
-}
-
-

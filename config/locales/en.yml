@@ -26,6 +26,7 @@ en:
   id: 'ID'
   search: 'Search'
   none:  'None'
+  view: 'View'
 
   not_authorized: "You are not authorized to perform that action"
   unregistered: "You are not registered in the system. Contact an administrator for this create your account."
@@ -56,6 +57,7 @@ en:
       init_date: "Init date"
       select: "Select people..."
       asign_to_project: "Assign to project"
+      other_notes: " other notes"
       submit: "Create"
 
 
@@ -131,6 +133,7 @@ en:
     reviewer: "Feedback's reviewer"
     assign_to: 'Assign to'
     cannot_assign: "You cannot assign more people"
+    assigned_people: "People associated with the milestone"
     mark_done: 'Mark as done'
     add_feedback_author: 'Add feedback reviewer'
     tags: "Tags"
@@ -141,6 +144,8 @@ en:
     rejected: "rejected"
     feedback: "feedback"
     event: "event"
+    last_update: "Edited"
+
     state:
       done_or_rejected: 'milestones in state done or rejected'
       pending: 'milestones in state pending'
@@ -156,6 +161,8 @@ en:
     assigned: " will be assigned by default"
     assigned_to: "Assigned to this milestone"
     zero: "No hay hitos que mostrar"
+
+    no_tech_role: "No tech role"
 
     new:
       header: "Create Milestone"
@@ -176,10 +183,13 @@ en:
     name: "Name"
     description: "Description"
     due_time: "Due date"
-    mentees_title: "Mentees"
     last_completed_milestones: "Latest Milestones Completed"
-    milestones_title: "Pending Milestones"
-
+    mentees:
+      header: "Mentees"
+      zero: "You don't have any mentees"
+    milestones:
+      header: "Pending Milestones"
+      zero: "You don't have any pending milestone"
 
   #categories
   categories:
@@ -209,6 +219,7 @@ en:
     updated: "Updated at"
     create: "Create Note"
     add: "Add Notes"
+    add_placeholder: "Add note..."
     me: "Private"
     mentors: "Mentors"
     every_body: "Public"
@@ -244,3 +255,6 @@ en:
   attachgoogledrivedoc: 'Attach Google Drive Document'
   documenturl: 'Document URL'
   attach: 'Attach'
+
+  ago_i: " "
+  ago_f: " ago"

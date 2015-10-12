@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
 
-  before_action :is_authorized?
+  #before_action :is_authorized?
   skip_before_action :admin?
 
 

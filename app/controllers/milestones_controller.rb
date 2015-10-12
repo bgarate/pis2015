@@ -77,7 +77,7 @@ class MilestonesController < ApplicationController
 
   def show
     if @milestone
-      @notes = @milestone.notes.includes(:author).order(created_at: :desc).select {|n| filter_note_by_visibility(n)}
+      @notes = @milestone.get_visible_notes(current_person)
     else
       redirect_to root_path
     end
@@ -157,12 +157,13 @@ class MilestonesController < ApplicationController
     redirect_to :back
   end
 
-  def filter_note_by_visibility(note)
-      (note.visibility=='every_body') ||
-      (note.author_id==current_person.id) || #la hice yo?
-      (note.visibility=='mentors' && Person.find(note.author_id).mentors.exists?(current_person.id)) || #si es para mentores, soy su mentor
-      (current_person.admin?)
-  end
+  ## SE PASO AL MODELO Milestone
+  # def filter_note_by_visibility(note)
+  #     (note.visibility=='every_body') ||
+  #     (note.author_id==current_person.id) || #la hice yo?
+  #     (note.visibility=='mentors' && Person.find(note.author_id).mentors.exists?(current_person.id)) || #si es para mentores, soy su mentor
+  #     (current_person.admin?)
+  # end
 
   private
 

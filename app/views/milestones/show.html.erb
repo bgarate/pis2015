@@ -11,10 +11,49 @@
     <div class="card-col col-xs-7">
       <%= render 'info' %>
     </div>
-    <div class="card-col col-xs-5">
-      <div id="milestone-notes">
-        <%= render 'notes/form' %>
-        <%= render 'notes' %>
+
+    <%= form_for @milestone do |f| %>
+        <%= f.hidden_field :category_id %>
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <%= f.label t('milestones.start_date'), class: "control-label" %>
+          <div class="input-group">
+            <%if @milestone.start_date==nil %>
+                <%= f.text_field :start_date, class: "form-control", id:'start_date' ,"data-provide":"datepicker", 'data-validation':'check_start_date','data-validation-format': "dd/mm/yyyy" %>
+            <%else%>
+                <%= f.text_field :start_date, class: "form-control", id:'start_date' ,'value':l(@milestone.start_date), "data-provide":"datepicker", 'data-validation':'check_start_date', 'data-validation-format': "dd/mm/yyyy" %>
+            <%end%>
+            <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+          </div>
+        </div>
+
+        <div class="form-group col-xs-6">
+          <%= f.label t('milestones.due_date'), class: "control-label" %>
+          <div class="input-group">
+            <%if @milestone.due_date==nil %>
+                <%= f.text_field :due_date, class: "form-control", id:'due_date' ,"data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy" %>
+            <%else%>
+                <%= f.text_field :due_date, class: "form-control", id:'due_date' ,'value':l(@milestone.due_date), "data-provide":"datepicker", 'data-validation':'check_due_date','data-validation-format': "dd/mm/yyyy" %>
+            <%end%>
+            <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn">
+        <%= f.button t('milestones.edit.submit'),:type => 'submit', class: "btn btn-default" %>
+      </div>
+
+    <% end %>
+
+    <h3><%= t('notes.header') %></h3>
+    <hr>
+    <div class="row">
+      <div class="card-col col-xs-5">
+        <div id="milestone-notes">
+          <%= render 'notes/form' %>
+          <%= render 'notes' %>
+        </div>
       </div>
     </div>
   </div>

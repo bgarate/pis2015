@@ -20,6 +20,9 @@ class MilestonesController < ApplicationController
 
   def get_milestone_by_id
     @milestone=Milestone.find_by(id: params[:id])
+    if @milestone.nil?
+      redirect_to '/milestones'
+    end
   end
 
   def get_category

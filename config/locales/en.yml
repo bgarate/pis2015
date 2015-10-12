@@ -222,6 +222,7 @@ en:
     me: "Private"
     mentors: "Mentors"
     every_body: "Public"
+    more: " more notes"
 
     delete:
       title: "Delete Note"

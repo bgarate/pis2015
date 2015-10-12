@@ -121,7 +121,8 @@ describe PeopleController do
         p1.admin = true
         p1.save!
 
-        get :show_not_pending_timeline, :person_id => p1.id
+        session[:user_id] = @ad_user.id
+        get :show, :id=>p1.id, :session=>session
         expect(response.status).to eq(200)
       end
 

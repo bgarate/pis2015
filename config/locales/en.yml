@@ -26,9 +26,12 @@ en:
   id: 'ID'
   search: 'Search'
   none:  'None'
+  view: 'View'
 
   not_authorized: "You are not authorized to perform that action"
-  unregistered: "Unregistered user, contact an administrator."
+  unregistered: "You are not registered in the system. Contact an administrator for this create your account."
+  unregistered_title: 'User unregistered'
+  back_to_signup: 'Back to login'
   invalidurl: 'Invalid url'
 
   login_with_google: "Login with Google"
@@ -54,6 +57,7 @@ en:
       init_date: "Init date"
       select: "Select people..."
       asign_to_project: "Assign to project"
+      other_notes: "View %{count} other notes"
       submit: "Create"
 
 
@@ -129,6 +133,7 @@ en:
     reviewer: "Feedback's reviewer"
     assign_to: 'Assign to'
     cannot_assign: "You cannot assign more people"
+    assigned_people: "People associated with the milestone"
     mark_done: 'Mark as done'
     add_feedback_author: 'Add feedback reviewer'
     tags: "Tags"
@@ -139,12 +144,14 @@ en:
     rejected: "rejected"
     feedback: "feedback"
     event: "event"
+    last_update: "Edited"
+
     state:
       done_or_rejected: 'milestones in state done or rejected'
       pending: 'milestones in state pending'
-    mark_done_sure: 'Mark as Done?'
-    mark_rejected_sure: "Mark as Rejected? \nNote: If it's already Rejected, it will go back to pending"
+    mark_as_sure: 'Are you sure you want to mark the milestone as '
     pendings: "Pending Milestones"
+    overcomes: 'Expired milestones'
 
     start_date: "Start date"
     description: "Description"
@@ -153,6 +160,8 @@ en:
     assigned: " will be assigned by default"
     assigned_to: "Assigned to this milestone"
     zero: "No hay hitos que mostrar"
+
+    no_tech_role: "No tech role"
 
     new:
       header: "Create Milestone"
@@ -164,8 +173,7 @@ en:
 
     delete:
       title: "Delete Milestone"
-      sure: "Are you sure you want to delete this milestone?"
-
+      sure: "Are you sure you want to permanently delete this milestone?"
 
   #dashboard
   dashboard:
@@ -173,10 +181,13 @@ en:
     name: "Name"
     description: "Description"
     due_time: "Due date"
-    mentees_title: "Mentees"
     last_completed_milestones: "Latest Milestones Completed"
-    milestones_title: "Pending Milestones"
-
+    mentees:
+      header: "Mentees"
+      zero: "You don't have any mentees"
+    milestones:
+      header: "Pending Milestones"
+      zero: "You don't have any pending milestone"
 
   #categories
   categories:
@@ -192,6 +203,7 @@ en:
     new:
       header: "Create Category"
       sumbit: "Add Category"
+      exists: "A category with that name already exists"
 
     zero: "There are no available Categories"
 
@@ -205,7 +217,8 @@ en:
     created: "Created at"
     updated: "Updated at"
     create: "Create Note"
-    add: "Add Note"
+    add: "Add Notes"
+    add_placeholder: "Add note..."
     me: "Private"
     mentors: "Mentors"
     every_body: "Public"
@@ -242,3 +255,6 @@ en:
   attachgoogledrivedoc: 'Attach Google Drive Document'
   documenturl: 'Document URL'
   attach: 'Attach'
+
+  ago_i: " "
+  ago_f: " ago"

@@ -104,29 +104,33 @@ describe MilestonesController, "Milestone Controller" do
   end
 
   it "Deberia modificar el status al siguiente (done)" do
-    get :next_status, :milestone_id => @m1.id
+    session[:user_id] = @ad_user.id
+    get :next_status, :milestone_id => @m1.id, :session=>session
     @m1.reload
     expect(@m1.status).to eq "done"
   end
 
   it "Deberia modificar el status a pending (from done)" do
+    session[:user_id] = @ad_user.id
     @m1.status= 'done'
     @m1.save!
-    get :next_status, :milestone_id => @m1.id
+    get :next_status, :milestone_id => @m1.id, :session=>session
     @m1.reload
     expect(@m1.status).to eq 'pending'
   end
 
   it "Deberia modificar el status a reject" do
-    get :next_status_rej, :milestone_id => @m1.id
+    session[:user_id] = @ad_user.id
+    get :next_status_rej, :milestone_id => @m1.id, :session=>session
     @m1.reload
     expect(@m1.status).to eq 'rejected'
   end
 
   it "Deberia modificar el status a pending (from rejected)" do
+    session[:user_id] = @ad_user.id
     @m1.status= 'rejected'
     @m1.save!
-    get :next_status_rej, :milestone_id => @m1.id
+    get :next_status_rej, :milestone_id => @m1.id, :session=>session
     @m1.reload
     expect(@m1.status).to eq 'pending'
   end
@@ -189,6 +193,81 @@ describe MilestonesController, "Milestone Controller" do
       get :new
       post :create, :person_id=>@admin.id, :milestone=>{:title=>'milestone1', :description=>'unadescripcionde1',:category_id =>@c1.id},
                       :people=>[p1.id,p2.id,p3.id]
+      expect(response.status).to eq(302)
+
+    end
+
+    it 'creates a milestone no admin' do
+      session[:user_id] = @no_ad_user.id
+      p1 = Person.new
+      p1.name = "Juan Perez"
+      p1.email ="juanperez1@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+      p2 = Person.new
+      p2.name = "Juan2 Perez"
+      p2.email ="juanperez2@gmail.com"
+      p2.start_date =Time.now
+      p2.save!
+      p3 = Person.new
+      p3.name = "Juan3 Perez"
+      p3.email ="juanperez3@gmail.com"
+      p3.start_date =Time.now
+      p3.save!
+
+      get :new
+      post :create, :person_id=>@admin.id, :milestone=>{:title=>'milestone1', :description=>'unadescripcionde1',:category_id =>@c1.id},
+           :people=>[p1.id,p2.id,p3.id]
+      expect(response.status).to eq(302)
+
+    end
+
+    it 'creates a milestone no person param' do
+      session[:user_id] = @no_ad_user.id
+      p1 = Person.new
+      p1.name = "Juan Perez"
+      p1.email ="juanperez1@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+      p2 = Person.new
+      p2.name = "Juan2 Perez"
+      p2.email ="juanperez2@gmail.com"
+      p2.start_date =Time.now
+      p2.save!
+      p3 = Person.new
+      p3.name = "Juan3 Perez"
+      p3.email ="juanperez3@gmail.com"
+      p3.start_date =Time.now
+      p3.save!
+
+      get :new
+      post :create, :redirect_url => root_path, :milestone=>{:title=>'milestone1', :description=>'unadescripcionde1',:category_id =>@c1.id},
+           :people=>[]
+      expect(response.status).to eq(302)
+
+    end
+
+    it 'creates a milestone people nil' do
+      session[:user_id] = @no_ad_user.id
+      p1 = Person.new
+      p1.name = "Juan Perez"
+      p1.email ="juanperez1@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+      p2 = Person.new
+      p2.name = "Juan2 Perez"
+      p2.email ="juanperez2@gmail.com"
+      p2.start_date =Time.now
+      p2.save!
+      p3 = Person.new
+      p3.name = "Juan3 Perez"
+      p3.email ="juanperez3@gmail.com"
+      p3.start_date =Time.now
+      p3.save!
+
+      get :new
+      post :create, :person_id=> nil, :redirect_url => root_path, :milestone=>{:title=>'milestone1', :description=>'unadescripcionde1',:category_id =>@c1.id},
+           :people=>nil
       expect(response.status).to eq(302)
 
     end
@@ -304,9 +383,7 @@ describe MilestonesController, "Milestone Controller" do
       m1.status=1
       m1.icon= 'Icon'
       m1.save!
-
-      n = Note.new :text=>'Texto', :visibility=>2, :author_id=>@admin.id, :milestone_id=>m1.id
-      n.save!
+      m1.notes.create({:text=> 'una nota pa borrar'})
 
       get :show, :id => m1.id, :session=>session
       expect(response).to render_template("show")

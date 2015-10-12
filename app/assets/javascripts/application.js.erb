@@ -29,14 +29,18 @@
 (function(){
 
     var ready = function() {
+
+
         $(".knob-stats input").knob({
             'width': '90%',
             'readOnly': true
         });
+
         $.validate({
             modules: 'html5, date',
             lang: '<%= I18n.locale %>'
         });
+
         $.fn.datepicker.defaults.format = "dd/mm/yyyy";
         $(".datatable").DataTable({
             paging: false,
@@ -65,6 +69,27 @@
             $(this).parent().toggleClass("active-slide");
             $(this).siblings(".form-slide").slideToggle();
         });
+
+
+        // jQuery plugin to prevent double submission of forms
+        jQuery.fn.preventDoubleSubmission = function() {
+            $(this).on('submit',function(e){
+                var $form = $(this);
+
+                if ($form.data('submitted') === true) {
+                    // Previously submitted - don't submit again
+                    e.preventDefault();
+                } else {
+                    // Mark it so that the next submit can be ignored
+                    $form.data('submitted', true);
+                }
+            });
+
+            // Keep chainability
+            return this;
+        };
+
+        $('form').preventDoubleSubmission();
     };
 
     $(document).ready(ready);

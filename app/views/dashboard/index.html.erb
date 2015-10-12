@@ -1,74 +1,83 @@
 <div class="container">
   <div class="row">
-    <div class="table-container">
 
-    <h1><%= t('dashboard.mentees_title')  %></h1>
+    <div class="table-container" id="mentees_table">
 
-    <table class="table datatable">
-      <thead>
-      <tr>
-        <td></td>
-        <td><%= t('dashboard.name') %></td>
-        <td><%= t('dashboard.last_completed_milestones') %></td>
-
-      </tr>
-      </thead>
-      <tbody>
-
-      <% @my_mentees.each do |m| %>
+    <h1><%= t('dashboard.mentees.header')  %></h1>
+    <% if @my_mentees.any? %>
+        <table class="table datatable" data-info="false">
+          <thead>
           <tr>
-            <td>
-              <div id="profile-picture-<%= m.id %>" class="profile_picture">
-                <div class="img-container">
-                  <%= image_tag "test/silueta.gif" %>
-                  </div>
-                </div>
-            </td>
-            <td><%= m.name %></td>
-            <td>
-              <ul>
-              <%
-                 miles = m.milestones.where("status <> ?", Milestone.statuses[:pending]).order("due_date ASC, created_at DESC").limit(2)
+            <td></td>
+            <td><%= t('dashboard.name') %></td>
+            <td><%= t('dashboard.last_completed_milestones') %></td>
 
-                 miles.each do |mil| %>
-
-                <li><%= link_to mil.title, milestone_path(mil), method: :get%></li>
-
-              <% end %>
-              </ul>
-            </td>
           </tr>
-      <% end %>
+          </thead>
+          <tbody>
 
-      </tbody>
-    </table>
+          <% @my_mentees.each do |m| %>
+              <tr>
+                <td>
+                  <div id="profile-picture-<%= m.id %>" class="profile_picture">
+                    <div class="img-container">
+                      <%= image_tag "test/silueta.gif" %>
+                      </div>
+                    </div>
+                </td>
+                <td><%= m.name %></td>
+                <td>
+                  <ul>
+                  <%
+                     miles = m.milestones.where("status <> ?", Milestone.statuses[:pending]).order("due_date ASC, created_at DESC").limit(2)
+
+                     miles.each do |mil| %>
+
+                    <li><%= link_to mil.title, milestone_path(mil), method: :get%></li>
+
+                  <% end %>
+                  </ul>
+                </td>
+              </tr>
+          <% end %>
+
+          </tbody>
+        </table>
+    <% else %>
+          <div class="zero"><%= t('dashboard.mentees.zero') %></div>
+    <% end %>
     </div>
 
 
-    <div class="table-container">
+    <div class="table-container" id="milestones_table">
 
-      <h1><%= t('dashboard.milestones_title')  %></h1>
+      <h1><%= t('dashboard.milestones.header')  %></h1>
+      <% if @my_milestones.any? %>
 
-      <table class="table datatable">
-        <thead>
-        <tr>
-          <td><%= t('dashboard.name')  %></td>
-          <td><%= t('dashboard.description')  %></td>
-          <td><%= t('dashboard.due_time')  %></td>
-        </tr>
-        </thead>
-        <tbody>
-
-        <% @my_milestones.each do |mil| %>
+          <table class="table datatable" data-info="false">
+            <thead>
             <tr>
-              <td><%= link_to mil.title, milestone_path(mil), method: :get%></td>
-              <td><%= mil.description.truncate(50) %></td>
-              <td><div class="calendar left"><%= l(mil.due_date, format: "%A, %B %d %Y") %></div></td>
+              <td><%= t('dashboard.name')  %></td>
+              <td><%= t('dashboard.description')  %></td>
+              <td><%= t('dashboard.due_time')  %></td>
             </tr>
-        <% end %>
+            </thead>
+            <tbody>
 
-        </tbody>
-      </table>
+            <% @my_milestones.each do |mil| %>
+                <tr>
+                  <td><%= link_to mil.title, milestone_path(mil), method: :get%></td>
+                  <td><%= mil.description.truncate(50) %></td>
+                  <td><div class="calendar left"><%= l(mil.due_date, format: "%A, %B %d %Y") %></div></td>
+                </tr>
+            <% end %>
+
+            </tbody>
+          </table>
+      <% else %>
+          <div class="zero"><%= t('dashboard.milestones.zero') %></div>
+      <% end %>
+
     </div>
 
 

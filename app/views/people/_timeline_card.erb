@@ -10,10 +10,12 @@
     <ul id="milestone-list">
       <% @milestones.each do |e| %>
           <li>
-            <%= if e.status != 'rejected'
-                  milestone_status(e,:right)
-                end %>
-            <%= milestone_status_rej(e, :right) %>
+            <% if can_modify_milestone?e.id %>
+              <%= if e.status != 'rejected'
+                    milestone_status(e,:right)
+                  end %>
+              <%= milestone_status_rej(e, :right) %>
+            <%end%>
             <h2><%=link_to e.title, e, method: :get%></h2>
             <p><%=t(e.description) %></p>
 
@@ -88,22 +90,25 @@
 
 
             <!-- Muestro ultima nota -->
-            <% n = e.notes.last %>
+            <% visible_notes = e.get_visible_notes(current_person)
+               n = visible_notes.first %>
 
             <div class="notes-list clearfix">
-              <h2><span class="glyphicon glyphicon-comment"></span>Notas</h2>
+              <h2><span class="glyphicon glyphicon-comment"></span><% t('notes.header') %></h2>
               <% if n.nil? %>
                   <%= link_to  milestone_path(e), method: :get do%>
                       <span class="toggle-documents glyphicon glyphicon-plus"></span>
                   <% end %>
               <% else %>
-                  <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
+                  <%= link_to  milestone_path(e), method: :get do%>
+                      <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                  <% end %>
                   <div class="slider">
                     <ul>
 
                       <li>
                         <h3><%= n.author.name %></h3>
-                        <div class="time">hace <%= time_ago_in_words(n.created_at) %></div>
+                        <div class="time"><%=  t('ago_i') + time_ago_in_words(n.created_at) + t('ago_f')  %></div>
                         <p><%= truncate(n.text, length: 350) %></p>
 
                         <% if current_user_admin?
@@ -117,9 +122,9 @@
 
                       </li>
                     </ul>
-                    <% if e.notes.count > 1 %>
+                    <% if visible_notes.count > 1 %>
                         <div class="link">
-                          <%= link_to "Ver #{e.notes.count - 1} notas restantes", e %></div>
+                          <%= link_to t('people.new.other_notes', :count => "#{visible_notes.count - 1}"), e %></div>
                     <% end %>
                   </div>
 
@@ -129,7 +134,9 @@
             <ul class="tags">
               <!--<li>Speaker</li>-->
             </ul>
-
+            <div class="milestone-last-update">
+              <%= t('milestones.last_update') + " " + t('ago_i') +  time_ago_in_words(e.updated_at) + t('ago_f') %>
+            </div>
 
           </li>
       <% end %>

@@ -47,9 +47,12 @@ es:
   id: 'ID'
   search: 'Buscar'
   none:  'Ninguna'
+  view: 'Ver'
 
   not_authorized: "No esta autorizado para realizar esa acción"
-  unregistered: "Usuario no registrado, contacte a un administrador."
+  unregistered: "Usted no estra registrado en el sistema. Contacte con un administrador para que este cree su cuenta."
+  unregistered_title: 'Usuario no registrado'
+  back_to_signup: 'Volver a inicio de sesión'
   invalidurl: 'Url inválida'
 
   login_with_google: "Ingresar con Google"
@@ -75,6 +78,7 @@ es:
       init_date: "Fecha de ingreso"
       select: "Seleccione personas..."
       asign_to_project: "Asignar a proyecto"
+      other_notes: "Ver %{count} notas restantes"
       submit: "Crear"
 
   #mentor
@@ -145,11 +149,14 @@ es:
   milestones:
 
     header: "Hitos"
+    state_title: "Estado"
+    actions: "Acciones"
     title: "Título"
     due_date: "Fecha límite"
     reviewer: "Revisor del feedback"
     assign_to: 'Asignar a'
     cannot_assign: "No puede asignar más personas"
+    assigned_people: "Personas asociadas al hito"
     mark_done: 'Marcar como hecho'
     add_feedback_author: 'Añadir revisor del feedback'
     tags: "Tags"
@@ -160,13 +167,14 @@ es:
     rejected: "rechazado"
     feedback: "feedback"
     event: "evento"
+    last_update: "Modificado"
 
     state:
       done_or_rejected: 'Hitos en estado hecho o rechazado'
       pending: 'Hitos pendientes'
-    mark_done_sure: '¿Desea marcar como Hecho?'
-    mark_rejected_sure: "¿Desea marcar como Rechazado? \nNota: Si el hito esta Rechazado volverá a Pendiente"
+    mark_as_sure: '¿Está seguro que desea marcar el hito como '
     pendings: "Hitos pendientes"
+    overcomes: 'Hitos vencidos'
 
     start_date: "Fecha de inicio"
     description: "Descripción"
@@ -175,6 +183,8 @@ es:
     assigned: " será asignado por defecto"
     assigned_to: "Asignado(s) a este hito"
     zero: "No hay hitos que mostrar"
+
+    no_tech_role: "Sin rol técnico"
 
     new:
       header: "Crear Hito"
@@ -186,7 +196,7 @@ es:
 
     delete:
       title: "Borrar Hito"
-      sure: "¿Esta seguro que desea eliminar este hito?"
+      sure: "¿Esta seguro que desea eliminar este hito permanentemente?"
 
     see_all: "Ver todos los hitos"
 
@@ -198,9 +208,13 @@ es:
     name: "Nombre"
     description: "Descripción"
     due_time: "Fecha límite"
-    mentees_title: "Usuarios Mentoreados"
     last_completed_milestones: "Últimos Hitos Completados"
-    milestones_title: "Hitos Pendientes"
+    mentees:
+      header: "Usuarios Mentoreados"
+      zero: "No hay usuarios mentoreados"
+    milestones:
+      header: "Hitos Pendientes"
+      zero: "No hay hitos pendientes"
 
 
   #categorias
@@ -217,6 +231,8 @@ es:
     new:
       header: "Agregar Categoría"
       sumbit: "Agregar Categoría"
+      exists: "Ya existe una categoria con ese nombre"
+
 
     zero: "No hay categorías disponibles"
 
@@ -230,7 +246,8 @@ es:
     created: "Creado"
     updated: "Actualizado"
     create: "Crear Nota"
-    add: "Agregar Nota"
+    add: "Agregar Notas"
+    add_placeholder: "Agregar nota..."
     me: "Privado"
     mentors: "Mentores"
     every_body: "Publico"
@@ -268,6 +285,8 @@ es:
   documenturl: 'URL del documento'
   attach: 'Adjuntar'
 
+  ago_i: "hace "
+  ago_f: " "
 
   #fechas
   date:

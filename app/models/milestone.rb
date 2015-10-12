@@ -36,8 +36,8 @@ class Milestone < ActiveRecord::Base
     status_order[(status_order.find_index(self.status.to_sym) + 1) % status_order.count]
 
   end
-   def get_next_status_done_pend
-    if self.status == 'pending'
+  def get_next_status_done_pend
+   if self.status == 'pending'
       :done
     else
       :pending
@@ -49,6 +49,18 @@ class Milestone < ActiveRecord::Base
     else
       :rejected
     end
+  end
+
+  def get_visible_notes(current_person)
+    self.notes.includes(:author).order(created_at: :desc).select {|n| filter_note_by_visibility(n,current_person)}
+  end
+
+  private
+  def filter_note_by_visibility(note,current_person)
+    (note.visibility=='every_body') ||
+    (note.author_id==current_person.id) || #la hice yo?
+    (note.visibility=='mentors' && Person.find(note.author_id).mentors.exists?(current_person.id)) || #si es para mentores, soy su mentor
+    (current_person.admin?)
   end
 end
 

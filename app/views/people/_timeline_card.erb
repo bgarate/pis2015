@@ -54,7 +54,8 @@
 
 
             <!-- Muestro ultima nota -->
-            <% n = e.notes.last %>
+            <% visible_notes = e.get_visible_notes(current_person)
+               n = visible_notes.first %>
 
             <div class="notes-list clearfix">
               <h2><span class="glyphicon glyphicon-comment"></span><% t('notes.header') %></h2>
@@ -85,9 +86,9 @@
 
                       </li>
                     </ul>
-                    <% if e.notes.count > 1 %>
+                    <% if visible_notes.count > 1 %>
                         <div class="link">
-                          <%= link_to "Ver #{e.notes.count - 1} notas restantes", e %></div>
+                          <%= link_to t('people.new.other_notes', :count => "#{visible_notes.count - 1}"), e %></div>
                     <% end %>
                   </div>
 

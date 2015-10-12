@@ -78,7 +78,7 @@ es:
       init_date: "Fecha de ingreso"
       select: "Seleccione personas..."
       asign_to_project: "Asignar a proyecto"
-      other_notes: " notas restantes"
+      other_notes: "Ver %{count} notas restantes"
       submit: "Crear"
 
   #mentor

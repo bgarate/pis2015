@@ -63,7 +63,9 @@
                       <span class="toggle-documents glyphicon glyphicon-plus"></span>
                   <% end %>
               <% else %>
-                  <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
+                  <%= link_to  milestone_path(e), method: :get do%>
+                      <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                  <% end %>
                   <div class="slider">
                     <ul>
 

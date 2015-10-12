@@ -117,7 +117,6 @@ Rails.application.routes.draw do
     post :next_status_rej
     get :set_as_done
     collection do
-      get '/' => 'welcome#index'
       get 'new' => 'milestones#new'
       post 'new' => 'milestones#create'
     end

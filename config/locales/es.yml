@@ -172,8 +172,7 @@ es:
     state:
       done_or_rejected: 'Hitos en estado hecho o rechazado'
       pending: 'Hitos pendientes'
-    mark_done_sure: '¿Está seguro que desea marcar el hito como Hecho/Pendiente?'
-    mark_rejected_sure: '¿Está seguro que desea marcar el hito como Rechazado/Pendiente?'
+    mark_as_sure: '¿Está seguro que desea marcar el hito como '
     pendings: "Hitos pendientes"
     overcomes: 'Hitos vencidos'
 

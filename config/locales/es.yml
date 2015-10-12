@@ -222,6 +222,8 @@ es:
     new:
       header: "Agregar Categoría"
       sumbit: "Agregar Categoría"
+      exists: "Ya existe una categoria con ese nombre"
+
 
     zero: "No hay categorías disponibles"
 

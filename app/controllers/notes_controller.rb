@@ -10,6 +10,8 @@ class NotesController < ApplicationController
 
   def create
     @note= @milestone.notes.create(notes_params.merge({author_id: current_person.id}))
+    @milestone.updated_at = Time.now
+    @milestone.save!
     redirect_to @milestone
   end
 

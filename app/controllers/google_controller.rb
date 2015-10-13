@@ -73,6 +73,7 @@ class GoogleController < ApplicationController
         r.title= f.title
         r.url= f.human_url
         m.resources<<(r)
+        m.updated_at= Time.now
         m.save!
       rescue Google::APIClient::ClientError
         #no se logro encontrar el resorce
@@ -80,6 +81,7 @@ class GoogleController < ApplicationController
         r.title= url
         r.url= url
         m.resources<<(r)
+        m.updated_at= Time.now
         m.save!
       rescue GoogleDrive::Error
         redirect_to google_adddriveview_path(:milestone_id => @milestone_id, :error => true)

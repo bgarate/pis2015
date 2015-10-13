@@ -56,9 +56,9 @@
             <%= f.label t('milestones.start_date'), class: "control-label" %>
             <div class="input-group">
               <%if @milestone.start_date==nil %>
-                <%= f.text_field :start_date, class: "form-control", id:'start_date' ,"data-provide":"datepicker", 'data-validation':'check_start_date','data-validation-format': "dd/mm/yyyy" %>
+                <%= f.text_field :start_date, class: "form-control", id:'start_date' ,"data-provide":"datepicker",'data-validation-format': "dd/mm/yyyy" %>
               <%else%>
-                <%= f.text_field :start_date, class: "form-control", id:'start_date' ,'value':l(@milestone.start_date), "data-provide":"datepicker", 'data-validation':'check_start_date', 'data-validation-format': "dd/mm/yyyy" %>
+                <%= f.text_field :start_date, class: "form-control", id:'start_date' ,'value':l(@milestone.start_date), "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
               <%end%>
               <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
             </div>
@@ -112,30 +112,6 @@
 <script>
   // Add custom validation rule
   $.formUtils.addValidator({
-    name : 'check_start_date',
-    validatorFunction : function() {
-      var start=document.getElementById('start_date').value;
-      if (start=='') return true;
-      var parts= start.split('/');
-      var start_year= parts[2];
-      var start_month= parts[1]-1;
-      var start_day= parts[0];
-      var date=new Date();
-      var start_date=new Date(start_year, start_month, start_day,23,59,59);
-      return start_date>=date;
-
-    },
-    errorMessage : '',
-    errorMessageKey: 'badStartDate'
-  });
-
-  // Setup form validation
-  $.validate();
-</script>
-
-<script>
-  // Add custom validation rule
-  $.formUtils.addValidator({
     name : 'check_due_date',
     validatorFunction : function() {
       var due=document.getElementById('due_date').value;
@@ -152,7 +128,7 @@
       var start_day= parts[0];
       var start_date=new Date(start_year, start_month, start_day,23,59,59);
       var date=new Date();
-      return due_date>=date && (start=='' || start_date<due_date);
+      return (start=='' || start_date<=due_date);
     },
     errorMessage : '',
     errorMessageKey: 'badDueDate'

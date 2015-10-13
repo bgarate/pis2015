@@ -2,6 +2,21 @@ class PeopleController < ApplicationController
 
   skip_before_action :admin?, only:[:show, :index, :me]
   #skip_before_action :admin?, only:[:assign_project]
+  before_action :get_person, only:[:show, :show_pending_timeline, :show_not_pending_timeline]
+
+  def get_person
+    identifier = params[:id]
+    @person = Person.find_by(id: params[:id] || params[:person_id])
+    unless @person
+      # El identificador lo comparo en minuscula con la base de datos
+      identifier = identifier.downcase
+      # En el caso que sea un nombre, se sustituyen las _ por espacios
+      @person = Person.where("lower(name)= :name", name:"#{identifier.gsub(/_/, "\s")}").first
+      unless @person
+        @person = Person.where("lower(email) LIKE :prefix", prefix:"#{identifier}@%").first
+      end
+    end
+  end
 
   def index
 
@@ -26,22 +41,10 @@ class PeopleController < ApplicationController
   end
 
   def show
-    identifier = params[:id]
-    person = Person.find_by(id: identifier)
-    unless person
-      # El identificador lo comparo en minuscula con la base de datos
-      identifier = identifier.downcase
-      # En el caso que sea un nombre, se sustituyen las _ por espacios
-      person = Person.where("lower(name)= :name", name:"#{identifier.gsub(/_/, "\s")}").first
-      unless person
-        person = Person.where("lower(email) LIKE :prefix", prefix:"#{identifier}@%").first
-      end
-    end
-
-    if person
+    if @person
       #nombre
-      @name = person.name
-      @identifier = person.id
+      @name = @person.name
+      @identifier = @person.id
       user = Person.find(current_user.person_id)
       #ASSIGN PEOPLE
       if current_user_admin?
@@ -55,33 +58,32 @@ class PeopleController < ApplicationController
       #CATEGORIES PEOPLE
       @cats=Category.all.collect {|t| [t.name, t.id]}
       @authors=Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
-      @person = person
       @tags=Tag.all
 
       #rol tecnico
       @trole = ''
-      @trole = person.tech_role.name if person.tech_role
+      @trole = @person.tech_role.name if @person.tech_role
 
       #habilidades
-      @skills = person.skills
+      @skills = @person.skills
 
       #proyectos
-      @proysin = person.projects.where("Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE").length
-      @proysend = person.projects.where("Projects.end_date < CURRENT_DATE").length
+      @proysin = @person.projects.where("Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE").length
+      @proysend = @person.projects.where("Projects.end_date < CURRENT_DATE").length
 
-      @image_id = person.image_id
+      @image_id = @person.image_id
 
       #tiempo en moove-it
-      @start_date = person.start_date
+      @start_date = @person.start_date
       #Eventos (Hitos)
-      @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.category_id = 1").order(due_date: :desc, created_at: :desc)
+      @events = @person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.category_id = 1").order(due_date: :desc, created_at: :desc)
 
       #Hitos pendientes
-      @overcomes = person.milestones.where("milestones.due_date < CURRENT_DATE AND milestones.status = 0").order(due_date: :desc, created_at: :desc)
+      @overcomes = @person.milestones.where("milestones.due_date < CURRENT_DATE AND milestones.status = 0").order(due_date: :desc, created_at: :desc)
 
       #Mentores
-      @mentorships = person.mentors
-      @yet_pending = Milestone.pending.where('id NOT in (?)', person.milestones.pluck(:id))
+      @mentorships = @person.mentors
+      @yet_pending = Milestone.pending.where('id NOT in (?)', @person.milestones.pluck(:id))
 
       show_pending_timeline
 
@@ -91,7 +93,6 @@ class PeopleController < ApplicationController
   end
 
   def show_not_pending_timeline
-    @person = Person.find_by(id: params[:id] || params[:person_id])
     @milestones = @person.milestones.where('milestones.status <> 0').order(due_date: :desc, created_at: :desc)
     @filtered_count = @person.milestones.size - @milestones.size
 
@@ -104,7 +105,6 @@ class PeopleController < ApplicationController
   end
 
   def show_pending_timeline
-    @person = Person.find_by(id: params[:id] || params[:person_id])
     @milestones = @person.milestones.where('milestones.status = 0').order(due_date: :desc, created_at: :desc)
     @filtered_count = @person.milestones.size - @milestones.size
 

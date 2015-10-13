@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="left-pane">
-    <div class="milestone-icon"><%= image_tag @milestone.icon %></div>
+    <div class="milestone-icon"><%= milestone_icon(@milestone).html_safe %></div>
     <h2><%= @milestone.title %></h2>
     <% if @milestone.category %>
         <h3><%= @milestone.category.name %></h3>

@@ -12,7 +12,7 @@
 
           <div class="form-group">
             <%= f.label t('milestones.description'), class: "control-label" %>
-            <%= f.text_field :description, class: "form-control", 'data-validation': "required" %>
+            <%= f.text_area :description, class: "form-control", 'data-validation': "required" %>
           </div>
 
 
@@ -43,8 +43,14 @@
           <%end%>
           </div>
 
+          <div class="row">
+            <div class="form-group col-xs-6">
+              <%=  f.label t('milestones.icon'), class: "control-label" %>
+              <button name="milestone[icon]" data-icon="<%= @milestone.icon %>" class="btn btn-default" role="iconpicker"></button>
+            </div>
+          </div>
 
-        <div class="row">
+          <div class="row">
 
           <div class="form-group col-xs-6">
             <%= f.label t('milestones.start_date'), class: "control-label" %>

@@ -10,6 +10,7 @@
     <ul id="milestone-list">
       <% @milestones.each do |e| %>
           <li>
+            <div class="icon"><%= milestone_icon(e).html_safe %></div>
             <% if can_modify_milestone?e.id %>
               <%= if e.status != 'rejected'
                     milestone_status(e,:right)
@@ -25,25 +26,57 @@
 
             <div class="clearfix"></div>
 
+            <% @milestone = e %>
+            <%= form_for @milestone do |f| %>
+                <%= f.hidden_field :category_id %>
+                <div class="row">
+                  <div class="form-group col-xs-6">
+                    <%= f.label t('milestones.start_date'), class: "control-label" %>
+                    <div class="input-group">
+                      <%if @milestone.start_date==nil %>
+                          <%= f.text_field :start_date, class: "form-control", id:'start_date' ,"data-provide":"datepicker", 'data-validation':'check_start_date','data-validation-format': "dd/mm/yyyy" %>
+                      <%else%>
+                          <%= f.text_field :start_date, class: "form-control", id:'start_date' ,'value':l(@milestone.start_date), "data-provide":"datepicker", 'data-validation':'check_start_date', 'data-validation-format': "dd/mm/yyyy" %>
+                      <%end%>
+                      <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+                    </div>
+                  </div>
+
+                  <div class="form-group col-xs-6">
+                    <%= f.label t('milestones.due_date'), class: "control-label" %>
+                    <div class="input-group">
+                      <%if @milestone.due_date==nil %>
+                          <%= f.text_field :due_date, class: "form-control", id:'due_date' ,"data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy" %>
+                      <%else%>
+                          <%= f.text_field :due_date, class: "form-control", id:'due_date' ,'value':l(@milestone.due_date), "data-provide":"datepicker", 'data-validation':'check_due_date','data-validation-format': "dd/mm/yyyy" %>
+                      <%end%>
+                      <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="btn">
+                  <%= f.button t('milestones.edit.submit'),:type => 'submit', class: "btn btn-default" %>
+                </div>
+
+            <% end %>
+
+            <div class="clearfix"></div>
 
             <div class="resources-list clearfix">
                 <h2><span class="glyphicon glyphicon glyphicon-paperclip"></span>  <%=t(:attachmentsdocs)%></h2>
-              <% if e.resources.empty? && can_modify_milestone?(e.id) %>
-                  <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                      <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                  <% if can_modify_milestone?(e.id) %>
+                      <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                          <span class="toggle-documents glyphicon glyphicon-plus"></span>
+                      <% end %>
                   <% end %>
-              <% else %>
+              <% unless e.resources.empty? %>
                   <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
                   <div class="slider">
                     <ul>
                       <%e.resources.each do |r|%>
                           <li><%=link_to r.title, r.url, :target => "_blank"%></li>
                       <%end%>
-                      <% if can_modify_milestone?(e.id) %>
-                          <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                              <span class="toggle-documents glyphicon glyphicon-plus"></span>
-                          <% end %>
-                      <% end %>
                     </ul>
                   </div>
               <% end %>
@@ -54,15 +87,15 @@
 
 
             <!-- Muestro ultima nota -->
-            <% n = e.notes.last %>
+            <% visible_notes = e.get_visible_notes(current_person)
+               n = visible_notes.first %>
 
             <div class="notes-list clearfix">
-              <h2><span class="glyphicon glyphicon-comment"></span><% t('notes.header') %></h2>
-              <% if n.nil? %>
-                  <%= link_to  milestone_path(e), method: :get do%>
-                      <span class="toggle-documents glyphicon glyphicon-plus"></span>
-                  <% end %>
-              <% else %>
+              <h2><span class="glyphicon glyphicon-comment"></span><% t('notes_header') %></h2>
+              <%= link_to  milestone_path(e), method: :get do%>
+                  <span class="toggle-documents glyphicon glyphicon-plus"></span>
+              <% end %>
+              <% unless n.nil? %>
                   <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
                   <div class="slider">
                     <ul>
@@ -83,9 +116,9 @@
 
                       </li>
                     </ul>
-                    <% if e.notes.count > 1 %>
+                    <% if visible_notes.count > 1 %>
                         <div class="link">
-                          <%= link_to "Ver #{e.notes.count - 1} notas restantes", e %></div>
+                          <%= link_to t('people.new.other_notes', :count => "#{visible_notes.count - 1}"), e %></div>
                     <% end %>
                   </div>
 

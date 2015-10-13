@@ -21,4 +21,8 @@ module MilestoneHelper
 
     %{<div class="visibility glyphicon #{glyph[note.visibility.to_sym]}"></div>}.html_safe
   end
+
+  def milestone_icon(m)
+    %{<span class="glyphicon #{m.icon}"></span>}
+  end
 end

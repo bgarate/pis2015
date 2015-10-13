@@ -117,6 +117,7 @@ Rails.application.routes.draw do
     post :next_status_rej
     get :set_as_done
   end
+  post 'milestones/new' => 'milestones#create'
 
   resources :categories do
     resources :milestones

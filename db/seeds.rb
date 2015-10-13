@@ -32,6 +32,7 @@ m.due_date= Time.now + (3*2*7*24*60*60)
 m.status=0
 m.icon = "test/silueta.gif"
 m.category = e
+m.icon = "glyphicon-flag"
 
 m1 = Milestone.new
 m1.title = 'Entrega del prototipo de alfred'
@@ -39,6 +40,7 @@ m1.description= 'Hay que entregar el protipo de alfred a la gente de pis. Ademas
 m1.due_date= Time.now - (3*2*7*24*60*60)
 m1.status=0
 m1.category = c
+m1.icon = "glyphicon-flag"
 
 m2 = Milestone.new
 m2.title = 'Otra entrega de alfred'
@@ -47,7 +49,7 @@ m2.due_date = Time.now
 m2.status = 0
 m2.category = f
 m2.save!
-
+m2.icon = "glyphicon-flag"
 
 ################# Skills #################
 

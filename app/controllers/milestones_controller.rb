@@ -20,6 +20,9 @@ class MilestonesController < ApplicationController
 
   def get_milestone_by_id
     @milestone=Milestone.find_by(id: params[:id])
+    if @milestone.nil?
+      redirect_to '/milestones'
+    end
   end
 
   def get_category
@@ -36,13 +39,43 @@ class MilestonesController < ApplicationController
   end
 
   def new
-    redirect_to '/people'
+    u = User.find_by(id: session[:user_id])
+    p = Person.find_by(id: u.person_id)
+    @identifier =  u.person_id
+    @person = Person.find_by(id: @identifier)
+
+    #redirect_to '/people'
+    @cats=Category.all.collect {|t| [t.name, t.id]}
+    @authors=Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
+    @tags=Tag.all
+
+    if current_user_admin?
+      #@people= Person.all.where('id NOT in (?)', @identifier)
+      @people= Person.all
+    else
+      @people= p.mentees.where('mentee_id NOT in (?) ', @identifier)
+      unless p.id==@identifier
+        @people<<p
+      end
+    end
+
+    @redirect_url = request.headers["Referer"]
   end
 
 
   def create
-    @person=Person.find(params[:person_id])
-    @milestone= @person.milestones.create(milestone_params)
+    @person = nil
+    if params[:person_id]
+      @person=Person.find(params[:person_id])
+      @milestone= @person.milestones.create(milestone_params)
+    else
+      @milestone = Milestone.create(milestone_params)
+      if params[:people] == nil
+        redirect_to root_path
+        return
+      end
+    end
+
     @milestone.tag_ids = params[:tags]
     #CATEGORIES
     category=Category.find(params[:milestone][:category_id])
@@ -60,12 +93,19 @@ class MilestonesController < ApplicationController
     @milestone.save
     if @milestone.valid?
       flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')
-      redirect_to @person
     else
       flash.alert = "'#{milestone_params[:title]}' " + t('messages.create.error')
-      redirect_to @person
     end
 
+    if @person
+      redirect_to @person
+    else
+      if params[:redirect_url]
+        redirect_to params[:redirect_url]
+      else
+        redirect_to root_path
+      end
+    end
   end
 
 
@@ -77,7 +117,7 @@ class MilestonesController < ApplicationController
 
   def show
     if @milestone
-      @notes = @milestone.notes.includes(:author).order(created_at: :desc).select {|n| filter_note_by_visibility(n)}
+      @notes = @milestone.get_visible_notes(current_person)
     else
       redirect_to root_path
     end
@@ -88,6 +128,7 @@ class MilestonesController < ApplicationController
       n.destroy
     end
     @milestone.destroy
+    #redirect_to milestones_path
     redirect_to milestones_path
   end
 
@@ -157,12 +198,13 @@ class MilestonesController < ApplicationController
     redirect_to :back
   end
 
-  def filter_note_by_visibility(note)
-      (note.visibility=='every_body') ||
-      (note.author_id==current_person.id) || #la hice yo?
-      (note.visibility=='mentors' && Person.find(note.author_id).mentors.exists?(current_person.id)) || #si es para mentores, soy su mentor
-      (current_person.admin?)
-  end
+  ## SE PASO AL MODELO Milestone
+  # def filter_note_by_visibility(note)
+  #     (note.visibility=='every_body') ||
+  #     (note.author_id==current_person.id) || #la hice yo?
+  #     (note.visibility=='mentors' && Person.find(note.author_id).mentors.exists?(current_person.id)) || #si es para mentores, soy su mentor
+  #     (current_person.admin?)
+  # end
 
   private
 

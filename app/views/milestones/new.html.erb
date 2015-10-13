@@ -142,7 +142,7 @@ if ($('.category').find('option:selected').text()!='Feedback') {
             var start_day= parts[0];
             var start_date=new Date(start_year, start_month, start_day,23,59,59);
             var date=new Date();
-            return due_date>=date && (start=='' || start_date<due_date);
+            return due_date>=date && (start=='' || start_date<=due_date);
         },
         errorMessage : '',
         errorMessageKey: 'badDueDate'

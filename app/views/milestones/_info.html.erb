@@ -39,6 +39,7 @@
         </div>
     <% end %>
 
+    <%= @milestone.tags.count %>
     <% unless @milestone.tags.empty? %>
         <ul class="tags clearfix">
           <% @milestone.tags.each do |t| %>

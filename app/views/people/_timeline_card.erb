@@ -9,7 +9,7 @@
   <div id="timeline-card" class="card timeline">
     <ul id="milestone-list">
       <% @milestones.each do |e| %>
-          <li>
+          <li class="clearfix">
             <div class="icon"><%= milestone_icon(e).html_safe %></div>
             <% if can_modify_milestone?e.id %>
               <%= if e.status != 'rejected'
@@ -31,69 +31,52 @@
             <div class="clearfix"></div>
 
             <% @milestone = e %>
-            <%= form_for @milestone do |f| %>
-                <%= f.hidden_field :category_id %>
-                
+
+
+                <div class="date-row editable">
+                    <% if @milestone.start_date %>
+                        <div class="calendar"><%= l(@milestone.start_date, format: :long) %></div>
+                    <% end %>
+
+                    <% if @milestone.due_date %>
+                        <div class="calendar right"><%= l(@milestone.due_date, format: :long) %></div>
+                    <% end %>
+                </div>
                 <% if can_modify_milestone?e.id %>
 
-                <div class="row">
-                  <div class="form-group col-xs-6">
-                    <%= f.label t('milestones.start_date'), class: "control-label" %>
-                    <div class="input-group">
-                      <%if @milestone.start_date==nil %>
-                          <%= f.text_field :start_date, class: "form-control", id:'start_date' ,"data-provide":"datepicker", 'data-validation':'check_start_date','data-validation-format': "dd/mm/yyyy" %>
-                      <%else%>
-                          <%= f.text_field :start_date, class: "form-control", id:'start_date' ,'value':l(@milestone.start_date), "data-provide":"datepicker", 'data-validation':'check_start_date', 'data-validation-format': "dd/mm/yyyy" %>
-                      <%end%>
-                      <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
-                    </div>
-                  </div>
 
-                  <div class="form-group col-xs-6">
-                    <%= f.label t('milestones.due_date'), class: "control-label" %>
-                    <div class="input-group">
-                      <%if @milestone.due_date==nil %>
-                          <%= f.text_field :due_date, class: "form-control" , id:'due_date' ,"data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy" %>
-                      <%else%>
-                          <%= f.text_field :due_date, class: "form-control", id:'due_date' ,'value':l(@milestone.due_date), "data-provide":"datepicker", 'data-validation':'check_due_date','data-validation-format': "dd/mm/yyyy" %>
-                      <%end%>
-                      <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
-                    </div>
-                  </div>
-                </div>
+                    <div class="edit-form row">
+                      <%= form_for @milestone do |f| %>
+                          <%= f.hidden_field :category_id %>
 
-                <% if can_modify_milestone?e.id %>
-                  <div class="btn">
-                    <%= f.button t('milestones.edit.submit'),:type => 'submit', class: "btn btn-default" %>
-                  </div>
-                <% end %>
-          
-            <%else%>
-            <div class="row">
-                <div class="form-group col-xs-6">
-                    <%= f.label t('milestones.start_date'), class: "control-label" %>
-                    <div class="input-group">
-                      <%if @milestone.start_date==nil %>
-                          <%= f.text_field :start_date, class: "form-control", disabled: true %>
-                      <%else%>
-                          <%= f.text_field :start_date, class: "form-control",'value':l(@milestone.start_date), disabled: true %>
-                      <%end%>
-                    </div>
-                  </div>
+                      <div class="form-group col-xs-6">
+                        <%= f.label t('milestones.start_date'), class: "control-label" %>
+                        <div class="input-group">
+                              <%= f.text_field :start_date, class: "form-control", id:'start_date' ,value:(@milestone.start_date ? l(@milestone.start_date) : nil), "data-provide":"datepicker", 'data-validation':'date', 'data-validation-format': "dd/mm/yyyy" %>
+                          <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+                        </div>
+                      </div>
 
-                  <div class="form-group col-xs-6">
-                    <%= f.label t('milestones.due_date'), class: "control-label" %>
-                    <div class="input-group">
-                      <%if @milestone.due_date==nil %>
-                          <%= f.text_field :due_date, class: "form-control", disabled: true %>
-                      <%else%>
-                          <%= f.text_field :due_date, class: "form-control" ,'value':l(@milestone.due_date), disabled: true %>
-                      <%end%>
+                      <div class="form-group col-xs-6">
+                        <%= f.label t('milestones.due_date'), class: "control-label" %>
+                        <div class="input-group">
+                              <%= f.text_field :due_date, class: "form-control" , id:'due_date',value:(@milestone.due_date ? l(@milestone.due_date) : nil) ,"data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy" %>
+                          <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+                        </div>
+                      </div>
+
+                      <div class="btn pull-right">
+                        <%= f.button t('milestones.edit.submit'),:type => 'submit', class: "btn btn-default" %>
+                      </div>
+
+
                     </div>
-                  </div>
-                </div>
+
+
+                <% end %> <!-- Form -->
+
             <% end %>
-            <% end %>
+
 
             <div class="clearfix"></div>
 
@@ -159,9 +142,14 @@
               <% end %>
 
             </div>
-            <ul class="tags">
-              <!--<li>Speaker</li>-->
-            </ul>
+            <% unless @milestone.tags.empty? %>
+                <ul class="tags clearfix">
+                  <% @milestone.tags.each do |t| %>
+                      <li><%= t.name %></li>
+                  <%end%>
+                </ul>
+            <%end%>
+
             <div class="milestone-last-update">
               <%= t('milestones.last_update') + " " + t('ago_i') +  time_ago_in_words(e.updated_at) + t('ago_f') %>
             </div>

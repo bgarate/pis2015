@@ -98,6 +98,13 @@
             search: false
         });
 
+
+        $("#timeline-card .editable, #milestone-info .editable").click(function(){
+            var obj = $(this);
+            obj.parent().find(".edit-form").show();
+            obj.hide();
+        });
+
     };
 
     $(document).ready(ready);

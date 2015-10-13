@@ -12,11 +12,20 @@ describe CategoriesController, "Categories Controller" do
       expect(response.status).to eq(200)
     end
 
-    it 'creates a milestone' do
+    it 'creates a category' do
       post :new
       post :create, {:category=>{:name=>'otrofeedback', :icon=>'algun icono de feedback'}}
       expect(response.status).to eq(302)
+    end
 
+    it 'does not create a category' do
+      c1=Category.new
+      c1.name='otrofeedback'
+      c1.icon='algunootroIcono'
+      c1.save!
+      post :new
+      post :create, {:category=>{:name=>'otrofeedback', :icon=>'algun icono de feedback'}}
+      expect(response).to redirect_to('/categories/new')
     end
 
     it 'shows a category' do

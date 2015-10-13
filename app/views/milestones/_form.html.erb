@@ -105,6 +105,7 @@
       var start_day= parts[0];
       var start_date=new Date(start_year, start_month, start_day,23,59,59);
       return (start=='' || start_date<=due_date);
+
     },
     errorMessage : '',
     errorMessageKey: 'badDueDate'

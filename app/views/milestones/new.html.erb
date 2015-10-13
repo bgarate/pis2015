@@ -43,7 +43,7 @@
                 <div class="form-group col-xs-6">
                   <%= m.label t('milestones.start_date'), class: "control-label" %>
                   <div class="input-group">
-                    <%= m.text_field :start_date, id: 'start_date', class: "form-control", "data-provide":"datepicker", 'data-validation':'check_start_date' ,'data-validation-format': "dd/mm/yyyy"%>
+                    <%= m.text_field :start_date, id: 'start_date', class: "form-control", "data-provide":"datepicker",'data-validation-format': "dd/mm/yyyy"%>
                     <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
                   </div>
                 </div>
@@ -94,33 +94,6 @@ if ($('.category').find('option:selected').text()!='Feedback') {
 }
 </script>
 
-<script>
-    // Add custom validation rule
-    $.formUtils.addValidator({
-        name : 'check_start_date',
-        validatorFunction : function() {
-            var start=document.getElementById('start_date').value;
-            if (start=='') return true;
-            var parts= start.split('/');
-            var start_year= parts[2];
-            var start_month= parts[1]-1;
-            var start_day= parts[0];
-            var date=new Date();
-            var start_date=new Date(start_year, start_month, start_day,23,59,59);
-            return start_date>=date;
-
-        },
-        errorMessage : '',
-        errorMessageKey: 'badStartDate'
-    });
-
-    // Setup form validation
-    $.validate({
-        modules: 'html5, date',
-        lang: '<%= I18n.locale %>',
-       /* ignore: ":hidden:not(select)"*/
-    });
-</script>
 
 <script>
     // Add custom validation rule
@@ -140,8 +113,8 @@ if ($('.category').find('option:selected').text()!='Feedback') {
             var start_month= parts[1]-1;
             var start_day= parts[0];
             var start_date=new Date(start_year, start_month, start_day,23,59,59);
-            var date=new Date();
-            return due_date>=date && (start=='' || start_date<=due_date);
+            return (start=='' || start_date<=due_date);
+
         },
         errorMessage : '',
         errorMessageKey: 'badDueDate'

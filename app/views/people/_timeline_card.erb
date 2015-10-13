@@ -24,15 +24,18 @@
             <%end%>
             <p><%=t(e.description) %></p>
 
-            <% if e.due_date %>
+            <!--<% if e.due_date %>
                 <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
-            <% end %>
+            <% end %>-->
 
             <div class="clearfix"></div>
 
             <% @milestone = e %>
             <%= form_for @milestone do |f| %>
                 <%= f.hidden_field :category_id %>
+                
+                <% if can_modify_milestone?e.id %>
+
                 <div class="row">
                   <div class="form-group col-xs-6">
                     <%= f.label t('milestones.start_date'), class: "control-label" %>
@@ -50,7 +53,7 @@
                     <%= f.label t('milestones.due_date'), class: "control-label" %>
                     <div class="input-group">
                       <%if @milestone.due_date==nil %>
-                          <%= f.text_field :due_date, class: "form-control", id:'due_date' ,"data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy" %>
+                          <%= f.text_field :due_date, class: "form-control" , id:'due_date' ,"data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy" %>
                       <%else%>
                           <%= f.text_field :due_date, class: "form-control", id:'due_date' ,'value':l(@milestone.due_date), "data-provide":"datepicker", 'data-validation':'check_due_date','data-validation-format': "dd/mm/yyyy" %>
                       <%end%>
@@ -59,10 +62,37 @@
                   </div>
                 </div>
 
-                <div class="btn">
-                  <%= f.button t('milestones.edit.submit'),:type => 'submit', class: "btn btn-default" %>
-                </div>
+                <% if can_modify_milestone?e.id %>
+                  <div class="btn">
+                    <%= f.button t('milestones.edit.submit'),:type => 'submit', class: "btn btn-default" %>
+                  </div>
+                <% end %>
+          
+            <%else%>
+            <div class="row">
+                <div class="form-group col-xs-6">
+                    <%= f.label t('milestones.start_date'), class: "control-label" %>
+                    <div class="input-group">
+                      <%if @milestone.start_date==nil %>
+                          <%= f.text_field :start_date, class: "form-control", disabled: true %>
+                      <%else%>
+                          <%= f.text_field :start_date, class: "form-control",'value':l(@milestone.start_date), disabled: true %>
+                      <%end%>
+                    </div>
+                  </div>
 
+                  <div class="form-group col-xs-6">
+                    <%= f.label t('milestones.due_date'), class: "control-label" %>
+                    <div class="input-group">
+                      <%if @milestone.due_date==nil %>
+                          <%= f.text_field :due_date, class: "form-control", disabled: true %>
+                      <%else%>
+                          <%= f.text_field :due_date, class: "form-control" ,'value':l(@milestone.due_date), disabled: true %>
+                      <%end%>
+                    </div>
+                  </div>
+                </div>
+            <% end %>
             <% end %>
 
             <div class="clearfix"></div>

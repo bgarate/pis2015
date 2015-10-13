@@ -160,6 +160,7 @@ class MilestonesController < ApplicationController
         params[:people].each do |p|
           @person2=Person.find(p)
           @milestone.people<<@person2
+          @milestone.updated_at= Time.now
           @milestone.save
         end
       end

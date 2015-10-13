@@ -239,7 +239,6 @@ es:
 
   #notas
   notes:
-
     header: "Notas"
     visibility: "Visibilidad"
     author: "Autor"

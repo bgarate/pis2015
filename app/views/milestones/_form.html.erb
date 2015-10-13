@@ -13,12 +13,10 @@
           <%= m.text_field :description, class: "form-control", 'data-validation':"required" %>
         </div>
 
-
         <div class="row">
           <div class="form-group col-xs-6">
-
             <%=  m.label t('milestones.icon'), class: "control-label" %>
-            <%=  m.text_area :icon, class: "form-control" %>
+            <button name="milestone[icon]" class="btn btn-default" role="iconpicker"></button>
           </div>
         </div>
 

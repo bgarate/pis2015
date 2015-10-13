@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :admin?, only:[:show, :index, :me]
+  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline]
   #skip_before_action :admin?, only:[:assign_project]
   before_action :get_person, only:[:show, :show_pending_timeline, :show_not_pending_timeline]
 

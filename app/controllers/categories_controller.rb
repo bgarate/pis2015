@@ -10,12 +10,13 @@ class CategoriesController < ApplicationController
 
   def create
     @category=Category.new(category_params)
-    if Category.exists? Category.find_by_name(@category.name)
-      flash.alert= t('categories.new.exists')
-      redirect_to '/categories/new'
-    else
+    cat_name=Category.find_by_name @category.name
+    if cat_name.nil?
       @category.save
       redirect_to @category
+    else
+      flash.alert= t('categories.new.exists')
+      redirect_to '/categories/new'
     end
   end
 

@@ -54,9 +54,7 @@ class MilestonesController < ApplicationController
       @people= Person.all
     else
       @people= p.mentees.where('mentee_id NOT in (?) ', @identifier)
-      unless p.id==@identifier
-        @people<<p
-      end
+      @people<<p
     end
 
     @redirect_url = request.headers["Referer"]

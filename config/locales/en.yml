@@ -28,6 +28,10 @@ en:
   none:  'None'
   view: 'View'
 
+  common:
+    y: 'Yes'
+    n: 'No'
+
   not_authorized: "You are not authorized to perform that action"
   unregistered: "You are not registered in the system. Contact an administrator for this create your account."
   unregistered_title: 'User unregistered'
@@ -46,6 +50,15 @@ en:
 
   #people
   people:
+
+    list:
+      header: "Users"
+      name: "Name"
+      email: "Email"
+      tech_role: "Tech Role"
+      admin: "Admin"
+      start_date: "Signup Date"
+      zero: "There are no registered users"
 
     new:
       header: "Create user"

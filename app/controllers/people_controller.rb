@@ -19,10 +19,17 @@ class PeopleController < ApplicationController
   end
 
   def index
-    # @people = Person.all
+
+    @people = Person.all
 
     respond_to do |f|
-      f.html { me }
+
+      f.html {
+        if !current_user_admin?
+          me
+        end
+      }
+
       f.json { render json: name_and_path(Person.all)}
     end
 

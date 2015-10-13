@@ -28,7 +28,7 @@ describe PeopleController do
       #get :index, :session => session
       get :index
       # Espero que me muestre el formulario
-      expect(response).to redirect_to(@admin)
+      expect(response).to render_template("index")
     end
   end
 

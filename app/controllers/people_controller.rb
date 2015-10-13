@@ -2,11 +2,11 @@ class PeopleController < ApplicationController
 
   skip_before_action :admin?, only:[:show, :index, :me]
   #skip_before_action :admin?, only:[:assign_project]
-  before_action :get_person, only:[:show, :show_not_pending_timeline, :show_pending_timeline]
+  before_action :get_person, only:[:show, :show_pending_timeline, :show_not_pending_timeline]
 
   def get_person
     identifier = params[:id]
-    @person = Person.find_by(id: identifier)
+    @person = Person.find_by(id: params[:id] || params[:person_id])
     unless @person
       # El identificador lo comparo en minuscula con la base de datos
       identifier = identifier.downcase

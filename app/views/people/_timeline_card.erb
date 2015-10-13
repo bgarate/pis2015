@@ -17,7 +17,11 @@
                   end %>
               <%= milestone_status_rej(e, :right) %>
             <%end%>
-            <h2><%=link_to e.title, e, method: :get%></h2>
+            <%if e.pending?%>
+              <h2><%=link_to e.title, e, method: :get%></h2>
+            <%else%>
+              <strike><h2><%=link_to e.title, e, method: :get%></h2></strike>
+            <%end%>
             <p><%=t(e.description) %></p>
 
             <% if e.due_date %>

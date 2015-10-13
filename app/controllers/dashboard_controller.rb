@@ -33,7 +33,8 @@ class DashboardController < ApplicationController
       #@mentees << p
     #end
 
-    @my_milestones = person.milestones.where('due_date > ?',Date.today)
+    @my_milestones = person.milestones.where('due_date > ? AND status = ?',Date.today,Milestone.statuses[:pending])
+
 
 
     respond_to do |f|

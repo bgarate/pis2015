@@ -29,7 +29,7 @@
                 <td>
                   <ul>
                   <%
-                     miles = m.milestones.where("status <> ?", Milestone.statuses[:pending]).order("due_date ASC, created_at DESC").limit(2)
+                     miles = m.milestones.where("status = ?", Milestone.statuses[:done]).order("due_date ASC, created_at DESC").limit(2)
 
                      miles.each do |mil| %>
 

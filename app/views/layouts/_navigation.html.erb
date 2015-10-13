@@ -22,10 +22,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav left-menu">
                 <li class="active">
-                    <a href=<%=root_path%>>
-                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                        <span class="sr-only">(current)</span>
-                    </a>
+                  <%= link_to root_path  do %>
+                      <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                      <span class="sr-only">(current)</span>
+                  <% end %>
                 </li>
             </ul>
 

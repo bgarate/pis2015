@@ -21,11 +21,11 @@
                 <td>
                   <div id="profile-picture-<%= m.id %>" class="profile_picture">
                     <div class="img-container">
-                      <%= image_tag "test/silueta.gif" %>
+                      <%= person_picture m.image_id %>
                       </div>
                     </div>
                 </td>
-                <td><%= m.name %></td>
+                <td><%= link_to m.name, person_path(m.id), method: :get%></td>
                 <td>
                   <ul>
                   <%

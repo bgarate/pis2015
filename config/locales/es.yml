@@ -49,6 +49,10 @@ es:
   none:  'Ninguna'
   view: 'Ver'
 
+  common:
+    y: 'Sí'
+    n: 'No'
+
   not_authorized: "No esta autorizado para realizar esa acción"
   unregistered: "Usted no estra registrado en el sistema. Contacte con un administrador para que este cree su cuenta."
   unregistered_title: 'Usuario no registrado'
@@ -67,6 +71,15 @@ es:
 
   #people
   people:
+
+    list:
+      header: "Lista de Personas"
+      name: "Nombre"
+      email: "Correo electrónico"
+      tech_role: "Rol Técnico"
+      admin: "Admin"
+      start_date: "Fecha de Registro"
+      zero: "No hay usuarios registrados"
 
     new:
       header: "Crear usuario"

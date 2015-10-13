@@ -46,7 +46,14 @@
           <%end%>
         </ul>
     <%end%>
+
+    <div class="last-update">
+      <%= t('milestones.last_update') + " " + t('ago_i') +  time_ago_in_words(@milestone.updated_at) + t('ago_f') %>
+    </div>
+
   </div>
+
+
 </div>
 <div >
   <br>

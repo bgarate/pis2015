@@ -1,17 +1,6 @@
 class DashboardController < ApplicationController
 
-  before_action :is_authorized?
   skip_before_action :admin?
-
-
-  def is_authorized?
-    @person=Person.find(current_user.person_id)
-    if @person.mentees.any?
-    else
-      flash.alert = t('not_authorized')
-      redirect_to '/people'
-    end
-  end
 
 
   def index

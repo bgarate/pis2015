@@ -1,7 +1,6 @@
 <% if @redirect_url%>
     <input name='redirect_url' type='hidden' value=<%=@redirect_url%> readonly class='form-control'>
 <% end%>
-<%= form_for [@person, @person.milestones.build], html: { class:'timeline-form main-form slide-on-click clearfix','data-toggle': 'validator'}  do |m| %>
 
     <div class="form-slide">
       <div class="form-group">
@@ -74,4 +73,3 @@
       <%= m.hidden_field(:updated_at, :value=>Time.now) %>
       <%= m.button t('milestones.new.submit'), :type => 'submit', class: "btn btn-default" %>
 </div>
-<% end %>

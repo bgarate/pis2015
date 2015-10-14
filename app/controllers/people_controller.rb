@@ -1,13 +1,35 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :admin?, only:[:show, :index, :me]
+  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline]
   #skip_before_action :admin?, only:[:assign_project]
+  before_action :get_person, only:[:show, :show_pending_timeline, :show_not_pending_timeline]
+
+  def get_person
+    identifier = params[:id]
+    @person = Person.find_by(id: params[:id] || params[:person_id])
+    unless @person
+      # El identificador lo comparo en minuscula con la base de datos
+      identifier = identifier.downcase
+      # En el caso que sea un nombre, se sustituyen las _ por espacios
+      @person = Person.where("lower(name)= :name", name:"#{identifier.gsub(/_/, "\s")}").first
+      unless @person
+        @person = Person.where("lower(email) LIKE :prefix", prefix:"#{identifier}@%").first
+      end
+    end
+  end
 
   def index
-    # @people = Person.all
+
+    @people = Person.all
 
     respond_to do |f|
-      f.html { me }
+
+      f.html {
+        if !current_user_admin?
+          me
+        end
+      }
+
       f.json { render json: name_and_path(Person.all)}
     end
 
@@ -19,62 +41,78 @@ class PeopleController < ApplicationController
   end
 
   def show
-    person = Person.find_by(id: params[:id])
-    unless person
-      person = Person.where("lower(name)= :name", name:"#{params[:id].downcase}").first
-      unless person
-        person = Person.where("lower(email) LIKE :prefix", prefix:"#{params[:id].downcase}@%").first
-      end
-    end
-
-    if person
+    if @person
       #nombre
-      @name = person.name
-      @identifier = person.id
-      @people= Person.all.where('id NOT in (?)', @identifier)
-      @person = person
+      @name = @person.name
+      @identifier = @person.id
+      user = Person.find(current_user.person_id)
+      #ASSIGN PEOPLE
+      if current_user_admin?
+        @people= Person.all.where('id NOT in (?)', @identifier)
+      else
+        @people= user.mentees.where('mentee_id NOT in (?) ', @identifier)
+        unless user.id==@identifier
+          @people<<user
+        end
+      end
+      #CATEGORIES PEOPLE
+      @cats=Category.all.collect {|t| [t.name, t.id]}
+      @authors=Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
       @tags=Tag.all
 
       #rol tecnico
       @trole = ''
-      @trole = person.tech_role.name if person.tech_role
+      @trole = @person.tech_role.name if @person.tech_role
 
       #habilidades
-      @skills = person.skills
+      @skills = @person.skills
 
       #proyectos
-      @proysin = person.projects.where("Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE").length
-      @proysend = person.projects.where("Projects.end_date < CURRENT_DATE").length
+      @proysin = @person.projects.where("Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE").length
+      @proysend = @person.projects.where("Projects.end_date < CURRENT_DATE").length
+
+      @image_id = @person.image_id
 
       #tiempo en moove-it
-      @start_date = person.start_date
+      @start_date = @person.start_date
       #Eventos (Hitos)
-      @events = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.milestone_type = 1")
+      @events = @person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0 AND milestones.category_id = 1").order(due_date: :desc, created_at: :desc)
+
       #Hitos pendientes
-      @overcomes = person.milestones.where("milestones.due_date >= CURRENT_DATE AND milestones.status = 0")
-      #Todos los hitos
-      @milestones = person.milestones.order(created_at: :desc)
-      #Todos los hitos
-      @mentorships = person.mentors
-      @yet_pending = Milestone.pending.where('id NOT in (?)', person.milestones.pluck(:id))
+      @overcomes = @person.milestones.where("milestones.due_date < CURRENT_DATE AND milestones.status = 0").order(due_date: :desc, created_at: :desc)
 
-     # @person_vew = person
-      # person_log = Person.find(current_user.person_id)
-      #if (person_log.admin) || !(person_log.mentees.exists?(@person_vew.id)) || (person_log.id = person.id)
-      #  projects = Project.all
-      #else
-      #  projects = []
-      #end
-      #@project_to_show=[]
-      #projects.each do |p|
-      #  if !person.projects.exists?(p.id)
-      #    @project_to_show = @project_to_show + [p]
-      #  end
-      #end
+      #Mentores
+      @mentorships = @person.mentors
+      @yet_pending = Milestone.pending.where('id NOT in (?)', @person.milestones.pluck(:id))
 
+      show_pending_timeline
 
     else
       redirect_to root_path
+    end
+  end
+
+  def show_not_pending_timeline
+    @milestones = @person.milestones.where('milestones.status <> 0').order(due_date: :desc, created_at: :desc)
+    @filtered_count = @person.milestones.size - @milestones.size
+
+    @filter = :not_pending
+
+    respond_to do |f|
+      f.js {render 'people/show_timeline'}
+      f.html {}
+    end
+  end
+
+  def show_pending_timeline
+    @milestones = @person.milestones.where('milestones.status = 0').order(due_date: :desc, created_at: :desc)
+    @filtered_count = @person.milestones.size - @milestones.size
+
+    @filter = :pending
+
+    respond_to do |f|
+      f.js {render 'people/show_timeline'}
+      f.html {}
     end
   end
 
@@ -83,13 +121,22 @@ class PeopleController < ApplicationController
   end
 
   def create
-    @person = Person.new(person_params)
+
+    @person = Person.new(person_params.except(:image_id))
+
+    if person_params[:image_id].present?
+      preloaded = Cloudinary::PreloadedFile.new(params[:image_id])
+      raise "Invalid upload signature" if !preloaded.valid?
+      @person.image_id = preloaded.identifier
+    end
+
     @person.save
+
     if @person.valid?
-      flash.notice = "'#{person_params[:name]}' creado con éxito!"
+      flash.notice = "'#{person_params[:name]}' " + t('messages.create.success')
       redirect_to @person
     else
-      flash.alert = "'#{person_params[:name]}' no se ha podido crear"
+      flash.alert = "'#{person_params[:name]}' " + t('messages.create.error')
       redirect_to '/people/new'
     end
   end
@@ -142,7 +189,7 @@ class PeopleController < ApplicationController
 
   private
   def person_params
-    params.require(:person).permit(:name, :email, :cellphone, :phone, :birth_date, :start_date)
+    params.require(:person).permit(:name, :email, :cellphone, :phone, :birth_date, :start_date, :image)
   end
 
 

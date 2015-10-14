@@ -3,33 +3,33 @@
     <div class="card-col col-xs-4 col-xs-offset-4">
 
         <%= form_for :project, url:projects_path, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
-          <h1><%= t('project_create_head') %></h1>
+          <h1><%= t('project.new.header') %></h1>
 
           <div class="form-group">
-              <%= f.label t('project_name'), class: "control-label" %>
+              <%= f.label t('project.name'), class: "control-label" %>
               <%= f.text_field :name, class: "form-control", 'data-validation': "required" %>
           </div>
 
           <div class="form-group">
-              <%= f.label t('project_client'), class: "control-label" %>
+              <%= f.label t('project.client'), class: "control-label" %>
               <%= f.text_field :client, class: "form-control", 'data-validation': "required" %>
           </div>
 
           <div class="form-group">
-              <%= f.label t('project_status') %>
+              <%= f.label t('project.status') %>
               <%= f.select :status, options_for_select(Project.status_names_for_select) %>
           </div>
 
           <div class="form-group col-xs-12">
-              <%= f.label t('project_technologies'), class: "control-label" %>
+              <%= f.label t('project.technologies.title'), class: "control-label" %>
 
               <%= select_tag(:technologies, options_from_collection_for_select(@technologies, :id, :name), :multiple => true,
-                             class: "chzn-select", 'data-placeholder'=> t('select_technologies'), 'style'=> 'width:100%') %>
+                             class: "chzn-select", 'data-placeholder'=> t('project.technologies.select'), 'style'=> 'width:100%') %>
           </div>
 
           <div class="row">
             <div class="form-group col-xs-6">
-              <%= f.label t('project_start_date'), class: "control-label" %>
+              <%= f.label t('project.start_date'), class: "control-label" %>
               <div class="input-group">
                 <%= f.text_field :start_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
                 <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
@@ -37,7 +37,7 @@
             </div>
 
             <div class="form-group col-xs-6">
-              <%= f.label t('project_end_date'), class: "control-label" %>
+              <%= f.label t('project.end_date'), class: "control-label" %>
               <div class="input-group">
                 <%= f.text_field :end_date, class: "form-control", "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
                 <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
@@ -45,7 +45,7 @@
             </div>
           </div>
 
-          <%= f.button t('project_new_submit'), options= :type => 'submit', class: "btn btn-default" %>
+          <%= f.button t('project.new.submit'), options= :type => 'submit', class: "btn btn-default" %>
         <% end %>
 
     </div>

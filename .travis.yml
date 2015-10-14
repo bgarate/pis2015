@@ -1,0 +1,16 @@
+language: ruby
+
+rvm:
+  - 2.2.2
+
+before_script:
+  - mv config/database.travis.yml config/database.yml
+  - rake db:create
+  - rake db:migrate
+
+install: bundle install
+
+script: 'COVERAGE=TRUE rspec spec'
+
+addons:
+  postgresql: "9.4"

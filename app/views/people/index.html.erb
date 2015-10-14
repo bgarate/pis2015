@@ -1,0 +1,53 @@
+<div class="container">
+  <div class="row">
+
+    <div class="table-container" id="people_table">
+
+      <h1><%= t('people.list.header')  %></h1>
+      <% if @people.any? %>
+          <table class="table datatable" data-info="false">
+            <thead>
+            <tr>
+              <td></td>
+              <td><%= t('people.list.name') %></td>
+              <td><%= t('people.list.email') %></td>
+              <td><%= t('people.list.start_date') %></td>
+              <td><%= t('people.list.admin') %></td>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <% @people.each do |p| %>
+                <tr>
+                  <td>
+                    <div id="profile-picture-<%= p.id %>" class="profile_picture">
+                      <div class="img-container">
+
+                        <%= person_picture p.image_id %>
+                      </div>
+                    </div>
+                  </td>
+                  <td><%= link_to p.name, person_path(p.id), method: :get %></td>
+                  <td><%= p.email %></td>
+                  <td><div class="calendar left"><%= p.start_date %></div></td>
+                  <td>
+                    <% if p.admin %>
+                        <%= t('common.y') %>
+                    <% else %>
+                        <%= t('common.n') %>
+                    <% end %>
+                  </td>
+                </tr>
+            <% end %>
+
+            </tbody>
+          </table>
+      <% else %>
+          <div class="zero"><%= t('people.list.zero') %></div>
+      <% end %>
+    </div>
+
+
+  </div>
+</div>

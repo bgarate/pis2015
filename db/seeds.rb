@@ -15,26 +15,24 @@ tr2 = TechRole.new
 tr2.name= "iOS Developer"
 tr2.save!
 
+################# Categories #################
+
+e = Category.create(name: "Evento")
+e.save!
 c = Category.create(name: "Conferencia")
 f = Category.create(name: 'Feedback')
 
-per = Person.new
-per.name = 'Alfred'
-per.email = 'alfred.pis.2015@gmail.com'
-per.birth_date= Time.new(2012, 8, 29, 22, 35, 0)
-per.start_date= Time.new(2012, 8, 29, 22, 35, 0)
-per.tech_role = tr
-per.admin=true
+
+################# Milestones #################
 
 m = Milestone.new
 m.title = 'Conferencia Tecnológica'
 m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
 m.due_date= Time.now + (3*2*7*24*60*60)
-m.milestone_type= 1
 m.status=0
 m.icon = "test/silueta.gif"
-m.category = c
-per.milestones<<(m)
+m.category = e
+m.icon = "glyphicon-flag"
 
 m1 = Milestone.new
 m1.title = 'Entrega del prototipo de alfred'
@@ -42,7 +40,7 @@ m1.description= 'Hay que entregar el protipo de alfred a la gente de pis. Ademas
 m1.due_date= Time.now - (3*2*7*24*60*60)
 m1.status=0
 m1.category = c
-per.milestones<<(m1)
+m1.icon = "glyphicon-flag"
 
 m2 = Milestone.new
 m2.title = 'Otra entrega de alfred'
@@ -50,8 +48,10 @@ m2.description = 'Esperemos meter mas puntos que 10'
 m2.due_date = Time.now
 m2.status = 0
 m2.category = f
-m2.milestone_type = :feedback
 m2.save!
+m2.icon = "glyphicon-flag"
+
+################# Skills #################
 
 sk1 = Skill.new
 sk1.name='angular'
@@ -59,8 +59,9 @@ sk1.icon='skills/angular.png'
 sk2 = Skill.new
 sk2.name='java'
 sk2.icon='skills/java.png'
-per.skills<<(sk1)
-per.skills<<(sk2)
+
+
+################# Projects #################
 
 pro = Project.new
 pro.name= 'Super Tortas 0.1'
@@ -68,31 +69,9 @@ pro.client= 'ATU'
 pro.status= 0
 pro.start_date= Time.now - (2*7*24*60*60)
 pro.end_date= Time.now - (2*7*24*60*60)
-per.projects<<(pro)
 
-per.save!
 
-p1 = Person.create!(name: "Bruno Garate", email: "bruno.garate@gmail.com", admin: true, start_date: 3.years.ago)
-
-p1.milestones.create(title: "Un hito de prueba",
-  description: "Esta es la descripción del hito",
-  due_date: Time.now + 5*24*60*60)
-
-p1.milestones.create(title: "Otro hito de prueba",
-                     description: "Una descripción un poquito mas larga que no entra en una sola linea",
-                     due_date: Time.now - 5*24*60*60)
-
-p1.projects << pro
-p1.skills << sk1
-p1.skills << sk2
-p1.tech_role = tr2
-
-p2 = Person.create!(name: "Diego Bortot", email: "bortotdiegogm@gmail.com", admin: true, start_date: 23.years.ago)
-p3 = Person.create!(name: "Oscar Montañés", email: "omontanes@gmail.com", admin: true, start_date: 23.years.ago)
-p3 = Person.create!(name: "Sebastían Soleri", email: "omontanes.guri@gmail.com", admin: false, start_date: 23.years.ago)
-p4 = Person.create!(name: "Gonzalo Herrera", email: "gonzalo.herrera.1993@gmail.com", admin: true, start_date: 2.years.ago)
-p5 = Person.create!(name: "Maxi", email: "maxikotvi@gmail.com", admin: false, start_date: 23.years.ago)
-
+################# Technologies #################
 
 tech1 = Technology.new
 tech1.name = 'Java'
@@ -105,6 +84,8 @@ tech3.name = 'Android'
 tech3.save!
 
 
+################# Tags #################
+
 Tag.create!(name:'Dar Feedback')
 Tag.create!(name:'Recibir Feedback')
 Tag.create!(name:'Inicio proyecto')
@@ -113,64 +94,63 @@ Tag.create!(name:'Speacker')
 Tag.create!(name:'Participación')
 
 
-# Datos de Prueba para Bill Hicks
-p6 = Person.create!(name: "Andy", email: "andresvasilev@gmail.com", admin: false, start_date: 2.years.ago)
+################# People #################
 
-p6.milestones.create(title: "Aprendio a programar",
-                     description: "Esta es la descripción del hito",
-                     due_date: Time.now + 5*24*60*60)
+p0 = Person.create!(name: "Alfred", email: "alfred.pis.2015@gmail.com", admin: true,birth_date: 4.years.ago, start_date: 3.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
+p1 = Person.create!(name: "Bruno Garate", email: "bruno.garate@gmail.com", admin: true, start_date: 3.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
+p2 = Person.create!(name: "Diego Bortot", email: "bortotdiegogm@gmail.com", admin: true, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg")
+p3 = Person.create!(name: "Oscar Montañés", email: "omontanes@gmail.com", admin: true, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg")
+p3 = Person.create!(name: "Sebastían Soleri", email: "omontanes.guri@gmail.com", admin: false, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg")
+p4 = Person.create!(name: "Gonzalo Herrera", email: "gonzalo.herrera.1993@gmail.com", admin: true, start_date: 2.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
+p5 = Person.create!(name: "Maxi", email: "maxikotvi@gmail.com", admin: false, start_date: 23.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
+p6 = Person.create!(name: "Andy", email: "andresvasilev@gmail.com", admin: false, start_date: 2.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
+p7 = Person.create!(name: "Rodrigo", email: "rodrigoberon2014@gmail.com", admin: false, start_date: 2.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
+Person.create!(name: "Martin Cabrera", email: "martin.cabrera@moove-it.com", admin: true, start_date: '2007-01-15', birth_date: '1980-04-16', cellphone: '099143405', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg")
+Person.create!(name: "Andreas Fast", email: "andreas.fast@moove-it.com", admin: false, start_date: '2014-08-15', birth_date: '1990-04-16', cellphone: '099143406', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg")
+Person.create!(name: "Miguel Renom", email: "miguel.renom@moove-it.com", admin: false, start_date: '2014-08-15', birth_date: '1990-04-16', cellphone: '099143406', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg")
 
-p6.milestones.create(title: "Otro hito de prueba",
-                     description: "Una descripción un poquito mas larga que no entra en una sola linea",
-                     due_date: Time.now - 5*24*60*60)
+
+p0.projects << pro
+p0.skills << sk1
+p0.skills << sk2
+p0.tech_role = tr
+p0.milestones << m
+p0.milestones << m1
+
+
+p1.projects << pro
+p1.skills << sk1
+p1.skills << sk2
+p1.tech_role = tr2
+
+
+p4.projects << pro
+p4.skills << sk1
+p4.skills << sk2
+p4.tech_role = tr2
+p4.milestones << m
+p4.milestones << m1
+p4.milestones << m2
+
+
+p5.projects << pro
+p5.skills << sk1
+p5.skills << sk2
+p5.tech_role = tr2
+p5.milestones << m
+p5.milestones << m1
+p5.milestones << m2
+
 
 p6.projects << pro
 p6.skills << sk1
 p6.skills << sk2
 p6.tech_role = tr2
+p6.mentees << p4
+p6.mentees << p5
+p6.milestones << m
+p6.milestones << m1
+p6.milestones << m2
 
 
-# Datos de Prueba para John Doe
-p7 = Person.create!(name: "John Doe", email: "johndoe@gmail.com", admin: false, start_date: 1.years.ago)
 
-p7.milestones.create(title: "Hito 1",
-                     description: "Esta es la descripción del hito",
-                     due_date: Time.now + 5*24*60*60,status: :done)
-
-p7.milestones.create(title: "Hito 2",
-                     description: "Una descripción un poquito mas larga que no entra en una sola linea",
-                     due_date: Time.now - 5*24*60*60,status: :pending)
-
-p7.milestones.create(title: "Hito 3",
-                     description: "Esta es la descripción del hito",
-                     due_date: Time.now + 5*24*60*60,status: :rejected)
-
-
-p7.projects << pro
-p7.skills << sk1
-p7.skills << sk2
-p7.tech_role = tr2
-
-# Datos de Prueba para John Doe
-p8 = Person.create!(name: "Bill Cooper", email: "billcooper@gmail.com", admin: false, start_date: 1.years.ago)
-
-p8.milestones.create(title: "Hito 1",
-                     description: "Hito 1",
-                     due_date: Time.now + 5*24*60*60,status: :done)
-
-p8.milestones.create(title: "Hito 2",
-                     description: "Una descripción un poquito mas larga que no entra en una sola linea",
-                     due_date: Time.now - 5*24*60*60,status: :done)
-
-p8.milestones.create(title: "Hito 3",
-                     description: "Esta es la descripción del hito",
-                     due_date: Time.now + 5*24*60*60,status: :done)
-
-
-p8.projects << pro
-p8.skills << sk1
-p8.skills << sk2
-p8.tech_role = tr2
-
-p6.mentees<<p7
-p6.mentees<<p8

@@ -1,5 +1,5 @@
 <div id="events-card" class="card events">
-  <h1>Eventos</h1>
+  <h1><%= t('events') %></h1>
   <!--<div class="separator"><div>Esta semana</div></div>
   <ul>
     <li class="clearfix">
@@ -47,7 +47,7 @@
               <% end %>
               <div class="content">
                 <% if e.due_date %>
-                    <div class="month-and-year"><%=l(e.due_date, format: "%^B %Y")%></div>
+                    <div class="month-and-year"><%=l(e.due_date, format: "%B %Y")%></div>
                 <% end %>
                 <h2><%=e.title%></h2>
                 <p><%=e.description%></p>
@@ -59,6 +59,6 @@
           </ul>
       <% end %>
   <% else %>
-    <p>No hay hitos que mostar</p>
+    <p><%= t('milestones.zero') %></p>
   <% end %>
 </div>

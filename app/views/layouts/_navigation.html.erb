@@ -22,10 +22,14 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav left-menu">
                 <li class="active">
-                    <a href=<%=root_path%>>
-                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                        <span class="sr-only">(current)</span>
-                    </a>
+                  <%= link_to root_path  do %>
+                      <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+                      <span class="sr-only">(current)</span>
+                  <% end %>
+                  <%= link_to dashboard_index_path  do %>
+                      <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
+                      <span class="sr-only">(current)</span>
+                  <% end %>
                 </li>
             </ul>
 
@@ -43,7 +47,7 @@
             <form id="nav-search-form" class="navbar-form navbar-right search" role="search">
                 <button type="submit" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-search"></span></button>
                 <div class="form-group">
-                    <input type="text" id="nav-search"  class="form-control" placeholder="Search" autocomplete="off">
+                    <input type="text" id="nav-search"  class="form-control" placeholder="<%= t('search') %>" autocomplete="off">
                 </div>
             </form>
 

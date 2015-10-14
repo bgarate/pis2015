@@ -2,9 +2,16 @@
 .table-container {
     margin-top: 30px;
     border-bottom: 3px solid $alizarin;
-    //padding: 0px 30px 30px 30px;
     background-color: white;
     position: relative;
+
+    a {
+        color: $alizarin;
+        text-decoration: none;
+    }
+    a:hover {
+        color: $alizarin-dark;
+    }
 
     h1 {
         color:white;
@@ -16,24 +23,18 @@
         font-size: 16px;
         font-weight: bold;
     }
-
+    .table-add-button{
+        color: whitesmoke;
+    }
     .datatable {
         thead td {
 
             cursor: pointer;
 
-            &:hover {
-                background-color: rgba(255, 233, 227, 1);
-            }
-
-            .sorting_desc {
-
-            }
-
-            .sorting_asc {
-
-            }
         }
+    }
+    .calendar{
+        margin-left: 0px;
     }
 
     .dataTables_filter {

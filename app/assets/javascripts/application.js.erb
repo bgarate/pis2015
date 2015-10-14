@@ -21,42 +21,110 @@
 //= require typeahead.bundle
 //= require chosen/chosen.jquery.min
 //= require datatables
+//= require cloudinary
+//= require bootstrap-iconpicker/js/iconset-glyphicon.min
+//= require bootstrap-iconpicker/js/bootstrap-iconpicker.min
 //= require_tree .
 
+//= require i18n/translations
 
-$(function() {
-  $(".knob-stats input").knob({
-    'width':'90%',
-    'readOnly':true
-  });
-  $.validate({
-      modules: 'html5, date',
-      lang: '<%= I18n.locale %>'
-  });
-  $.fn.datepicker.defaults.format = "dd/mm/yyyy";
-  $(".datatable").DataTable({
-      paging: false,
+(function(){
 
-      "language": {
-          "search" : ""
-      }
-  });
-    $("select.chosen").chosen();
-    $("select.submit-on-select").change(
-            function(){$(this).parents("form").submit();}
-    )
-    $("select.submit-on-select").val("").trigger('chosen:updated');
-    $("input.submit-on-enter").keypress(function(event) {
-        if (event.which == 13) {
-            event.preventDefault();
-            $(this).parents("form").submit()
-        }
-    });
+    var ready = function() {
 
-    $("form.slide-on-click > .form-slide").hide();
 
-    $("form.slide-on-click h1").on('click', function (e){
-        $(this).parent().toggleClass("active-slide");
-        $(this).siblings(".form-slide").slideToggle();
-    });
-});
+        $(".knob-stats input").knob({
+            'width': '90%',
+            'readOnly': true
+        });
+
+        $.validate({
+            modules: 'html5, date',
+            lang: '<%= I18n.locale %>'
+        });
+
+        $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+        $(".datatable").DataTable({
+            paging: false,
+
+            "language": {
+                "search": ""
+            }
+        });
+        $("select.chosen").chosen();
+        $("select.submit-on-select").change(
+                function () {
+                    $(this).parents("form").submit();
+                }
+        )
+        $("select.submit-on-select").val("").trigger('chosen:updated');
+        $("input.submit-on-enter").keypress(function (event) {
+            if (event.which == 13) {
+                event.preventDefault();
+                $(this).parents("form").submit()
+            }
+        });
+
+        $("form.slide-on-click > .form-slide").hide();
+
+        $("form.slide-on-click h1").on('click', function (e) {
+            $(this).parent().toggleClass("active-slide");
+            $(this).siblings(".form-slide").slideToggle();
+        });
+
+
+        // jQuery plugin to prevent double submission of forms
+        jQuery.fn.preventDoubleSubmission = function() {
+            $(this).on('submit',function(e){
+                var $form = $(this);
+
+                if ($form.data('submitted') === true) {
+                    // Previously submitted - don't submit again
+                    e.preventDefault();
+                } else {
+                    // Mark it so that the next submit can be ignored
+                    $form.data('submitted', true);
+                }
+            });
+
+            // Keep chainability
+            return this;
+        };
+
+        $('form').preventDoubleSubmission();
+
+        $('[role=iconpicker]').iconpicker({
+            iconset:"glyphicon",
+            search: false
+        });
+
+
+        $("#timeline-card .editable, #milestone-info .editable").click(function(){
+            var obj = $(this);
+            obj.parent().find(".edit-form").show();
+            obj.hide();
+        });
+
+        var ctrlDown = false;
+        const ctrlKey = 17;
+        const qKey = 81;
+
+        $(document).keydown(function(e)
+        {
+            if (e.keyCode == ctrlKey) ctrlDown = true;
+        }).keyup(function(e)
+        {
+            if (e.keyCode == ctrlKey) ctrlDown = false;
+        });
+
+        $(document).keydown(function(e)
+        {
+            if (ctrlDown && (e.keyCode == qKey))
+                $("#nav-search").focus();
+        });
+
+    };
+
+    $(document).ready(ready);
+    $(document).on('page:load', ready);
+})();

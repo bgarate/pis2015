@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
     if @person.mentees.any?
     else
       flash.alert = t('not_authorized')
-      redirect_to '/people/index'
+      redirect_to '/people'
     end
   end
 
@@ -33,7 +33,8 @@ class DashboardController < ApplicationController
       #@mentees << p
     #end
 
-    @my_milestones = person.milestones.where('due_date > ?',Date.today)
+    @my_milestones = person.milestones.where('due_date > ? AND status = ?',Date.today,Milestone.statuses[:pending])
+
 
 
     respond_to do |f|
@@ -43,10 +44,6 @@ class DashboardController < ApplicationController
 
   end
 
-  def show
-
-
-  end
 
   def name_and_path ()
 

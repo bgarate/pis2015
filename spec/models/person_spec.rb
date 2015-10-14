@@ -14,6 +14,7 @@
 #  updated_at   :datetime         not null
 #  tech_role_id :integer
 #  admin        :boolean
+#  image_id     :string
 #
 
 require 'rails_helper'

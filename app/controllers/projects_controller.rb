@@ -1,14 +1,16 @@
 class ProjectsController < ApplicationController
 
   before_action :get_project, only: [:show, :edit, :update, :destroy]
-  skip_before_action :admin?, only: [:show, :assign_person]
+  skip_before_action :admin?, only: [:show, :index, :assign_person]
 
   def get_project
-    @project = Project.find_by(id: params[:id])
+    identifier = params[:id]
+    @project = Project.find_by(id: identifier)
     unless @project
-      @project = Project.where("lower(name)= :name", name:"#{params[:id].downcase}").first
+      identifier = identifier.downcase.gsub(/_/, "\s")
+      @project = Project.where("lower(name)= :name", name:"#{identifier}").first
       unless @project
-          @project = Project.where("lower(client)= :client", client:"#{params[:id].downcase}").first
+          @project = Project.where("lower(client)= :client", client:"#{identifier}").first
       end
     end
     unless @project  && @project.validity?

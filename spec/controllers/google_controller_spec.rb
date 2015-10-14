@@ -28,7 +28,6 @@ describe GoogleController, "Login a traves de google oatuh" do
     m.title = 'Conferencia Tecnológica'
     m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
     m.due_date= Time.now + (3*2*7*24*60*60)
-    m.milestone_type= 1
     m.status=0
     per.milestones<<(m)
 
@@ -86,7 +85,6 @@ describe GoogleController, "Login a traves de google oatuh" do
   it 'Deberia renderizar unregistered con msj como parametro' do
 
     get :unregistered
-    expect(assigns(:msj)).to eq('Usuario no registrado, contacte a un administrador.')
     expect(response).to render_template('unregistered')
   end
 
@@ -112,7 +110,6 @@ describe GoogleController, "Login a traves de google oatuh" do
     m.title = 'Conferencia Tecnológica'
     m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
     m.due_date= Time.now + (3*2*7*24*60*60)
-    m.milestone_type= 1
     m.status=0
     per.milestones<<(m)
     per.save!
@@ -159,7 +156,6 @@ describe GoogleController, "Login a traves de google oatuh" do
     m.title = 'Conferencia Tecnológica'
     m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
     m.due_date= Time.now + (3*2*7*24*60*60)
-    m.milestone_type= 1
     m.status=0
     per.milestones<<(m)
 
@@ -197,7 +193,6 @@ describe GoogleController, "Login a traves de google oatuh" do
     m.title = 'Conferencia Tecnológica'
     m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
     m.due_date= Time.now + (3*2*7*24*60*60)
-    m.milestone_type= 1
     m.status=0
     per.milestones<<(m)
 
@@ -213,6 +208,41 @@ describe GoogleController, "Login a traves de google oatuh" do
     mr = Milestone.find_by(id: m.id)
     expect(mr.resources[0].url).to eq('/una/url')
     expect(mr.resources[0].title).to eq('/una/url')
+  end
+
+  it 'Deveria redirigir a adddriveview con error true' do
+
+    s = double()
+    allow(s).to receive(:file_by_url).with(anything()) { raise GoogleDrive::Error }
+
+    GoogleDrive.stub(:login_with_oauth).with(anything()) { s }
+
+    tr = TechRole.new
+    tr.name= 'Vendedor de Tortas Fritas'
+    tr.save!
+
+    per = Person.new :name=>'Alfred', :email=>'alfred.pis.2015@gmail.com', :start_date=>Time.current()
+    per.birth_date= Time.new(2012, 8, 29, 22, 35, 0)
+    per.start_date= Time.new(2012, 8, 29, 22, 35, 0)
+    per.tech_role = tr
+
+    m = Milestone.new
+    m.title = 'Conferencia Tecnológica'
+    m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
+    m.due_date= Time.now + (3*2*7*24*60*60)
+    m.status=0
+    per.milestones<<(m)
+
+    per.user = User.new
+    per.user.oauth_token = 'UnToken'
+    per.user.oauth_expires_at = Time.current().advance(days:1)
+
+    per.save!
+    session[:user_id] = per.user.id
+
+    get :adddrive, :milestone_id => m.id, :URL => 'una url invalida'
+    expect(response).to redirect_to(google_adddriveview_path(:milestone_id => m.id, :error => true))
+
   end
 
 end

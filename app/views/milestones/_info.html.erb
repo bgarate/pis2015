@@ -31,12 +31,12 @@
 
     <div class="date-row editable">
         <% if @milestone.start_date %>
-            <div class="calendar right">
+            <div class="calendar">
               <%= l(@milestone.start_date, format: "%A, %B %d %Y").capitalize %>
             </div>
         <% end %>
         <% if @milestone.due_date %>
-            <div class="calendar">
+            <div class="calendar right">
               <%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %>
             </div>
         <% end %>

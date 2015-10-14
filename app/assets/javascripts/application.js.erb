@@ -28,9 +28,9 @@
 
 //= require i18n/translations
 
-(function(){
+/* (function(){ */
 
-    var ready = function() {
+    var app_ready = function() {
 
 
         $(".knob-stats input").knob({
@@ -123,8 +123,23 @@
                 $("#nav-search").focus();
         });
 
+        $('.cloudinary-fileupload').bind('cloudinarydone', function(e, data) {
+            $('.image-preview').html(
+                    $.cloudinary.image(data.result.public_id,
+                            { format: data.result.format, version: data.result.version,
+                                crop: 'fill', width: 150, height: 100 })
+            );
+            return true;
+        });
+
+        $('.cloudinary-fileupload').bind('fileuploadprogress', function(e, data) {
+            $('.progress').removeClass("hidden");
+            $('.progress-bar').css('width', Math.round((data.loaded * 100.0) / data.total) + '%');
+        });
+
     };
 
-    $(document).ready(ready);
-    $(document).on('page:load', ready);
-})();
+    $(document).ready(app_ready);
+    //$(document).on('page:load', app_ready);
+
+ /* })();*/

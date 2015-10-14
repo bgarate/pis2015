@@ -165,7 +165,13 @@ class MilestonesController < ApplicationController
       @milestone.category = category
       if @milestone.update_attributes(milestone_params)
         @milestone.tag_ids = params[:tags]
-        redirect_to @milestone
+
+        if request.referer.include? "/people/" # TODO: Solucion desprolija
+          redirect_to :back
+        else
+          redirect_to @milestone
+        end
+
       else
         render :edit
       end

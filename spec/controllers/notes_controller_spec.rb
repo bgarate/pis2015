@@ -28,7 +28,7 @@ describe 'Note' do
 
   it "creates a note" do
     session[:user_id] = @ad_user.id
-
+    request.env['HTTP_REFERER']= '/milestones'
     post :create, :milestone_id =>@m1.id, :note=>{:text=>'un texto pa la nota', :milestone_id=>@m1.id}
     expect(response.status).to eq(302)
   end

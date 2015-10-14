@@ -1,8 +1,8 @@
-<div id="npmillink-card" class="card nonpending">
+<div id="npmillink-card" class="timeline-filter">
   <% if @filter == :pending %>
-      <%=link_to "#{t('milestones.state.done_or_rejected')} (#{@filtered_count})", person_show_not_pending_timeline_path(:person_id => @person.id),remote:true, class: "card nonpending" %>
+      <%=link_to "#{t('milestones.state.done_or_rejected')} (#{@filtered_count})", person_show_not_pending_timeline_path(:person_id => @person.id),remote:true %>
   <% else %>
-      <%=link_to "#{t('milestones.state.pending')} (#{@filtered_count})", person_show_pending_timeline_path(:person_id => @person.id),remote:true, class: "card nonpending" %>
+      <%=link_to "#{t('milestones.state.pending')} (#{@filtered_count})", person_show_pending_timeline_path(:person_id => @person.id),remote:true %>
   <% end %>
 </div>
 <% if @milestones and not @milestones.empty? %>
@@ -22,7 +22,7 @@
             <%else%>
               <strike><h2><%=link_to e.title, e, method: :get%></h2></strike>
             <%end%>
-            <p><%=t(e.description) %></p>
+            <p title="<%=e.description%>"><%=e.description.to_s.truncate(100, separator: ' ') %></p>
 
             <!--<% if e.due_date %>
                 <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
@@ -52,7 +52,7 @@
                       <div class="form-group col-xs-6">
                         <%= f.label t('milestones.start_date'), class: "control-label" %>
                         <div class="input-group">
-                              <%= f.text_field :start_date, class: "form-control", id:'start_date' ,value:(@milestone.start_date ? l(@milestone.start_date) : nil), "data-provide":"datepicker", 'data-validation':'date', 'data-validation-format': "dd/mm/yyyy" %>
+                              <%= f.text_field :start_date, class: "form-control", id:'start_date' ,value:(@milestone.start_date ? l(@milestone.start_date) : nil), "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
                           <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
                         </div>
                       </div>
@@ -108,10 +108,10 @@
                n = visible_notes.first %>
 
             <div class="notes-list clearfix">
-              <h2><span class="glyphicon glyphicon-comment"></span><% t('notes_header') %></h2>
-              <%= link_to  milestone_path(e), method: :get do%>
-                  <span class="toggle-documents glyphicon glyphicon-plus"></span>
-              <% end %>
+              <h2><span class="glyphicon glyphicon-comment"></span></h2>
+
+              <%= render "notes/form" %>
+
               <% unless n.nil? %>
                   <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
                   <div class="slider">

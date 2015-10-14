@@ -3,83 +3,8 @@
     <div class="card-col col-xs-4 col-xs-offset-4">
 
         <%= form_for :milestone, html: { class:'timeline-form main-form ','data-toggle': 'validator'}  do |m| %>
-            <h1 class=""><span class="glyphicon glyphicon-check"></span> <%= t('milestones.new.header') %></h1>
-
-              <div class="form-group">
-                <%= m.label t('milestones.title'), class: "control-label" %>
-                <%= m.text_field :title, class: "form-control", 'data-validation':"required" %>
-              </div>
-
-              <div class="form-group">
-                <%= m.label t('milestones.description'), class: "control-label" %>
-                <%= m.text_field :description, class: "form-control", 'data-validation':"required" %>
-              </div>
-
-              <% if @redirect_url%>
-                  <input name='redirect_url' type='hidden' value=<%=@redirect_url%> readonly class='form-control'>
-              <% end%>
-
-              <div class="row">
-                <div class="form-group col-xs-6">
-                  <%=  m.label t('milestones.icon'), class: "control-label" %>
-                  <button name="milestone[icon]" class="btn btn-default" role="iconpicker"></button>
-                </div>
-              </div>
-
-              <div class="form-group">
-                <%= m.label t('category')%>
-                <br>
-                <%= m.select :category_id, @cats, {}, {:multiple => false, :class => "chzn-select category", 'style'=> 'width:100%'} %>
-
-              </div>
-              <div class="form-group feedback_autor">
-                <%=  m.label t('milestones.reviewer')%>
-                <br>
-                <%= m.select :feedback_author_id, @authors, {:include_blank => true}, {:multiple => false, :class => "chzn-select select_author", 'data-placeholder'=> t('milestones.add_feedback_author'), 'style'=> 'width:100%'} %>
-              </div>
-
-              <div class="row">
-
-                <div class="form-group col-xs-6">
-                  <%= m.label t('milestones.start_date'), class: "control-label" %>
-                  <div class="input-group">
-                    <%= m.text_field :start_date, id: 'start_date', class: "form-control", "data-provide":"datepicker",'data-validation-format': "dd/mm/yyyy"%>
-                    <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
-                  </div>
-                </div>
-
-                <div class="form-group col-xs-6">
-                  <%= m.label t('milestones.due_date'), class: "control-label" %>
-                  <div class="input-group">
-                    <%= m.text_field :due_date, id: 'due_date', class: "form-control", "data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy"%>
-                    <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
-                  </div>
-                </div>
-
-              </div>
-              <div class="row">
-
-                <div class="form-group col-xs-12">
-                  <%= m.label 'Tags', class: "control-label" %>
-
-                  <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name), :multiple => true, class: "chzn-select", 'data-placeholder'=> t('milestones.select_tags'), 'style'=> 'width:100%') %>
-
-                </div>
-                <div class="form-group col-xs-12">
-                  <% if @people.empty? %>
-                      <%= m.label t('milestones.cannot_assign')%>
-                  <%else%>
-                      <%= m.label t('milestones.assign_to'), class: "control-label" %>:<br>
-                      <%= select_tag(:people, options_from_collection_for_select(@people, :id, :name), :required=>true, :multiple => true, class: "chzn-select", 'data-placeholder'=> t('milestones.select_people'), 'style'=> 'width:100%;') %>
-                  <%end%>
-                </div>
-              </div>
-              <%= m.hidden_field(:created_at, :value=>Time.now) %>
-              <%= m.hidden_field(:updated_at, :value=>Time.now) %>
-              <%= m.button t('milestones.new.submit'), :type => 'submit', class: "btn btn-default" %>
-
-
-
+          <h1 class=""><span class="glyphicon glyphicon-check"></span> <%= t('milestones.new.header') %></h1>
+          <%= render partial: 'milestones/innerform', locals: {m: m, in_profile: false} %>
         <% end %>
     </div>
   </div>

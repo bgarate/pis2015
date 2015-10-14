@@ -12,7 +12,7 @@
               <% @overcomes.each do |e| %>
                   <li>
                     <h2><%=e.title%></h2>
-                    <p><%=e.description%></p>
+                    <p title="<%=e.description%>"><%=e.description.to_s.truncate(100, separator: ' ') %></p>
 
                     <% if e.due_date %>
                         <div class="calendar right"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>

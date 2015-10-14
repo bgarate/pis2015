@@ -22,7 +22,7 @@
             <%else%>
               <strike><h2><%=link_to e.title, e, method: :get%></h2></strike>
             <%end%>
-            <p><%=t(e.description) %></p>
+            <p title="<%=e.description%>"><%=e.description.to_s.truncate(100, separator: ' ') %></p>
 
             <!--<% if e.due_date %>
                 <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>

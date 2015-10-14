@@ -50,7 +50,7 @@
                     <div class="month-and-year"><%=l(e.due_date, format: "%B %Y")%></div>
                 <% end %>
                 <h2><%=e.title%></h2>
-                <p><%=e.description%></p>
+                <p title="<%=e.description%>"><%=e.description.to_s.truncate(100, separator: ' ') %></p>
 
                 <div class="pull-right"><%= milestone_short_info(e) %></div>
               </div>

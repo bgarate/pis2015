@@ -98,6 +98,31 @@
             search: false
         });
 
+
+        $("#timeline-card .editable, #milestone-info .editable").click(function(){
+            var obj = $(this);
+            obj.parent().find(".edit-form").show();
+            obj.hide();
+        });
+
+        var ctrlDown = false;
+        const ctrlKey = 17;
+        const qKey = 81;
+
+        $(document).keydown(function(e)
+        {
+            if (e.keyCode == ctrlKey) ctrlDown = true;
+        }).keyup(function(e)
+        {
+            if (e.keyCode == ctrlKey) ctrlDown = false;
+        });
+
+        $(document).keydown(function(e)
+        {
+            if (ctrlDown && (e.keyCode == qKey))
+                $("#nav-search").focus();
+        });
+
     };
 
     $(document).ready(ready);

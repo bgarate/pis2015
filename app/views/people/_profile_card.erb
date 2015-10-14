@@ -20,9 +20,13 @@
             <% @mentorships.each do |s| %>
                 <li><%= link_to person_picture(s.image_id), s %></li>
             <%end%>
+          <%if current_user_admin? %>
+              <li class="plus" >
+                <a href="add_mentor_form?mentee_id=<%=@identifier%>" role="button">
+                  <span class="glyphicon glyphicon-plus"></span>
+                </a>
+              </li>
+          <%end%>
         </ul>
-    <%end%>
-    <%if current_user_admin? %>
-        <a href="add_mentor_form?mentee_id=<%=@identifier%>" class="btn btn-info" role="button"><span class="glyphicon glyphicon-add"></span><%= t('mentor.add.header') %></a>
     <%end%>
 </div>

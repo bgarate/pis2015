@@ -3,6 +3,43 @@
     font-size: 2rem;
 }
 
+.date-row {
+    padding: 10px 0;
+    overflow: auto;
+}
+
+.editable {
+
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba($turqoise, 0.5);
+        }
+
+        &:after {
+            content: "\e065";
+            font-family: "Glyphicons Halflings";
+            display: inline;
+            text-align: center;
+            color: white;
+            font-size: 30px;
+        }
+    }
+}
+
+.edit-form {
+    display: none;
+}
+
 .calendar {
     background-image: image-url('layouts/calendar-red.png');
     background-repeat: no-repeat;

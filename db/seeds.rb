@@ -97,7 +97,7 @@ Tag.create!(name:'Participación')
 ################# People #################
 
 p0 = Person.create!(name: "Alfred", email: "alfred.pis.2015@gmail.com", admin: true,birth_date: 4.years.ago, start_date: 3.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
-p1 = Person.create!(name: "Bruno Garate", email: "bruno.garate@gmail.com", admin: true, start_date: 3.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
+p1 = Person.create!(name: "Bruno Garate", email: "bruno.garate@gmail.com", admin: true, start_date: 3.years.ago, image_id: "y5cgoifotmmbkh1l1mn4.jpg")
 p2 = Person.create!(name: "Diego Bortot", email: "bortotdiegogm@gmail.com", admin: true, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg")
 p3 = Person.create!(name: "Oscar Montañés", email: "omontanes@gmail.com", admin: true, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg")
 p3 = Person.create!(name: "Sebastían Soleri", email: "omontanes.guri@gmail.com", admin: false, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg")

@@ -50,15 +50,24 @@
     //border-color: $alizarin-dark;
     min-height: 40em;
   }
+}
 
-    &.card.nonpending{
-        background-color: $turqoise-dark;
+.timeline-filter{
+    a {
+        line-height: 25px;
+
+        background-color: $peterriver-focus;
         text-decoration: none;
-        height: auto;
         padding: 6px;
         border-bottom: solid 0px transparent;
-        a:hover {
-            color: $body-background;
+        text-align: left;
+        display: block;
+        margin-bottom: 30px;
+
+            color: white;
+
+        &:hover {
+            background-color: $peterriver;
         }
     }
 }
@@ -293,8 +302,9 @@ ul#mentors {
 
 }
 
-form.timeline-form {
+form.timeline-form.slide-on-click {
     margin-top: 0;
+    margin-bottom: 0;
 }
 
 ul#milestone-list {
@@ -354,6 +364,32 @@ ul#milestone-list {
 
           a {
               text-decoration: none;
+          }
+      }
+
+      .notes-list form{
+
+          color: black;
+
+          input, select {
+              float: left;
+              height: 20px;
+              background-color: rgba(white,0.2);
+              border:none;
+              @include input-placeholder {
+                  color: #555555;
+              }
+              &:focus {
+                  outline-color: transparent;
+                  border: 1px goldenrod solid;
+              }
+          }
+
+          input {
+              width: calc(100% - 100px);
+          }
+          select {
+              width: 45px;
           }
       }
 

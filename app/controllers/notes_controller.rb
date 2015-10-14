@@ -12,7 +12,14 @@ class NotesController < ApplicationController
     @note= @milestone.notes.create(notes_params.merge({author_id: current_person.id}))
     @milestone.updated_at = Time.now
     @milestone.save!
-    redirect_to @milestone
+
+
+    if request.referer.include? "/people/" # TODO: Solucion desprolija
+      redirect_to :back
+    else
+      redirect_to @milestone
+    end
+
   end
 
   def destroy

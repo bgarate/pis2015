@@ -1,8 +1,8 @@
-<div id="npmillink-card" class="card nonpending">
+<div id="npmillink-card" class="timeline-filter">
   <% if @filter == :pending %>
-      <%=link_to "#{t('milestones.state.done_or_rejected')} (#{@filtered_count})", person_show_not_pending_timeline_path(:person_id => @person.id),remote:true, class: "card nonpending" %>
+      <%=link_to "#{t('milestones.state.done_or_rejected')} (#{@filtered_count})", person_show_not_pending_timeline_path(:person_id => @person.id),remote:true %>
   <% else %>
-      <%=link_to "#{t('milestones.state.pending')} (#{@filtered_count})", person_show_pending_timeline_path(:person_id => @person.id),remote:true, class: "card nonpending" %>
+      <%=link_to "#{t('milestones.state.pending')} (#{@filtered_count})", person_show_pending_timeline_path(:person_id => @person.id),remote:true %>
   <% end %>
 </div>
 <% if @milestones and not @milestones.empty? %>
@@ -108,10 +108,10 @@
                n = visible_notes.first %>
 
             <div class="notes-list clearfix">
-              <h2><span class="glyphicon glyphicon-comment"></span><% t('notes_header') %></h2>
-              <%= link_to  milestone_path(e), method: :get do%>
-                  <span class="toggle-documents glyphicon glyphicon-plus"></span>
-              <% end %>
+              <h2><span class="glyphicon glyphicon-comment"></span></h2>
+
+              <%= render "notes/form" %>
+
               <% unless n.nil? %>
                   <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
                   <div class="slider">

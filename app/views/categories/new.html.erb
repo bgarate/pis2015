@@ -9,11 +9,13 @@
           <%= c.text_field :name, class: "form-control", 'data-validation':"required" %>
         </div>
 
-        <div class="form-group">
-          <%= c.label t('categories.icon'), class: "control-label" %>
-          <%= c.text_field :icon, class: "form-control" %>
-        </div>
 
+          <div class="row">
+            <div class="form-group col-xs-6">
+              <%=  c.label t('categories.icon'), class: "control-label" %>
+              <button name="category[icon]" class="btn btn-default" role="iconpicker"></button>
+            </div>
+          </div>
 
         <%= c.hidden_field(:created_at, :value =>Time.now) %>
         <%= c.hidden_field(:updated_at, :value =>Time.now) %>

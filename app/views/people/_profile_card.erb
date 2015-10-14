@@ -13,20 +13,21 @@
   </ul>
   <hr>
   <h4><%= t('mentor.header') %></h4>
-    <% if @mentorships.empty? %>
-        <p><%= t('mentor.zero') %></p>
-    <%else%>
-        <ul id="mentors">
-            <% @mentorships.each do |s| %>
-                <li><%= link_to person_picture(s.image_id), s %></li>
-            <%end%>
-          <%if current_user_admin? %>
-              <li class="plus" >
-                <a href="add_mentor_form?mentee_id=<%=@identifier%>" role="button">
-                  <span class="glyphicon glyphicon-plus"></span>
-                </a>
-              </li>
+
+    <ul id="mentors">
+      <% if @mentorships.empty? %>
+          <li><%= t('mentor.zero') %></li>
+      <%else%><% @mentorships.each do |s| %>
+            <li title="<%= s.name %>"><%= link_to person_picture(s.image_id), s %></li>
           <%end%>
-        </ul>
-    <%end%>
+      <%end%>
+      <%if current_user_admin? %>
+          <li class="plus" >
+            <a href="add_mentor_form?mentee_id=<%=@identifier%>" role="button">
+              <span class="glyphicon glyphicon-plus"></span>
+            </a>
+          </li>
+      <%end%>
+    </ul>
+
 </div>

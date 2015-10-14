@@ -127,8 +127,8 @@
       var start_month= parts[1]-1;
       var start_day= parts[0];
       var start_date=new Date(start_year, start_month, start_day,23,59,59);
-      var date=new Date();
       return (start=='' || start_date<=due_date);
+
     },
     errorMessage : '',
     errorMessageKey: 'badDueDate'

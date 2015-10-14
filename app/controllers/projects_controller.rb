@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
   before_action :get_project, only: [:show, :edit, :update, :destroy]
-  skip_before_action :admin?, only: [:show, :assign_person]
+  skip_before_action :admin?, only: [:show, :index, :assign_person]
 
   def get_project
     identifier = params[:id]

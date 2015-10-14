@@ -17,9 +17,9 @@
 //= require turbolinks
 //= require jquery.knob
 //= require bootstrap-datepicker
-//= require form-validator/jquery.form-validator.min
 //= require typeahead.bundle
 //= require chosen/chosen.jquery.min
+//= require form-validator/jquery.form-validator.min
 //= require datatables
 //= require cloudinary
 //= require bootstrap-iconpicker/js/iconset-glyphicon.min
@@ -33,6 +33,43 @@
     var app_ready = function() {
 
 
+
+        I18n.defaultLocale = "<%= I18n.default_locale %>";
+        I18n.locale = "<%= I18n.locale %>";
+
+
+        var myLanguage = {
+            errorTitle : I18n.t("form.error.errorTitle"),
+            requiredFields : I18n.t("form.error.requiredFields"),
+            badTime : I18n.t("form.error.badTime"),
+            badEmail : I18n.t("form.error.badEmail"),
+            badTelephone : I18n.t("form.error.badTelephone"),
+            badSecurityAnswer : I18n.t("form.error.badSecurityAnswer"),
+            badDate : I18n.t("form.error.badDate"),
+            lengthBadStart : I18n.t("form.error.lengthBadStart"),
+            lengthBadEnd : I18n.t("form.error.lengthBadEnd"),
+            lengthTooLongStart : I18n.t("form.error.lengthTooLongStart"),
+            lengthTooShortStart : I18n.t("form.error.lengthTooShortStart"),
+            notConfirmed : I18n.t("form.error.notConfirmed"),
+            badDomain : I18n.t("form.error. badDomain"),
+            badUrl : I18n.t("form.error.badUrl"),
+            badCustomVal : I18n.t("form.error.badCustomVal"),
+            badInt : I18n.t("form.error.badInt"),
+            badSecurityNumber : I18n.t("form.error.badSecurityNumber"),
+            badUKVatAnswer : I18n.t("form.error.badUKVatAnswer"),
+            badStrength : I18n.t("form.error.badStrength"),
+            badNumberOfSelectedOptionsStart : I18n.t("form.error.badNumberOfSelectedOptionsStart"),
+            badNumberOfSelectedOptionsEnd : I18n.t("form.error.adNumberOfSelectedOptionsEnd"),
+            badAlphaNumeric : I18n.t("form.error.badAlphaNumeric"),
+            badAlphaNumericExtra: I18n.t("form.error.badAlphaNumericExtra"),
+            wrongFileSize : I18n.t("form.error.wrongFileSize"),
+            wrongFileType : I18n.t("form.error.wrongFileType"),
+            groupCheckedRangeStart : I18n.t("form.error.groupCheckedRangeStart"),
+            groupCheckedTooFewStart : I18n.t("form.error.groupCheckedTooFewStart"),
+            groupCheckedTooManyStart : I18n.t("form.error.groupCheckedTooManyStart"),
+            groupCheckedEnd : I18n.t("form.error.groupCheckedEnd"),
+        };
+
         $(".knob-stats input").knob({
             'width': '90%',
             'readOnly': true
@@ -40,7 +77,7 @@
 
         $.validate({
             modules: 'html5, date',
-            lang: '<%= I18n.locale %>'
+            language: myLanguage
         });
 
         $.fn.datepicker.defaults.format = "dd/mm/yyyy";

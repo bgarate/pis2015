@@ -300,6 +300,39 @@ es:
   ago_i: "hace "
   ago_f: " "
 
+  #form errors
+  form:
+    error:
+      errorTitle : 'El formulario no se ha podido enviar!'
+      requiredFields: "Este campo es obligatorio"
+      badTime : 'No ha introducido la hora correcta'
+      badEmail : 'No ha ingresado una dirección de e-mail válida'
+      badTelephone : 'No ha ingresado un número de teléfono válido'
+      badSecurityAnswer : 'Ha ingresado una respuesta incorrecta a la pregunta de seguridad'
+      badDate : 'No ha introducido una fecha correcta'
+      lengthBadStart : 'Su respuesta debe incluir entre '
+      lengthBadEnd : ' caracteres'
+      lengthTooLongStart : 'Ha ingresado una respuesta más larga que '
+      lengthTooShortStart : 'Ha ingresado una respuesta más corta que '
+      notConfirmed : 'Los valores no han podido ser confirmados'
+      badDomain : 'Ha ingresado un dominio incorrecto'
+      badUrl : 'No ha ingresado una URL correcta'
+      badCustomVal : 'Ha dado una respuesta incorrecta'
+      badInt : 'No ha ingresado un número'
+      badSecurityNumber : 'Su número de seguridad social es incorrecto'
+      badUKVatAnswer : 'No ha ingresado un número de IVA del Reino Unido'
+      badStrength : 'Ha ingresado una contraseña que no es lo suficientemente segura'
+      badNumberOfSelectedOptionsStart : 'Debe elegir al menos '
+      badNumberOfSelectedOptionsEnd : ' respuestas'
+      badAlphaNumeric : 'La respuesta solo debe contener caracteres alfanumericos '
+      badAlphaNumericExtra: ' y '
+      wrongFileSize : 'El archivo que está tratando de subir es demasiado grande'
+      wrongFileType : 'El archivo que está tratando de subir no es de un tipo permitido'
+      groupCheckedRangeStart : 'Elegir entre '
+      groupCheckedTooFewStart : 'Elegir al menos '
+      groupCheckedTooManyStart : 'Por favor elija un máximo de '
+      groupCheckedEnd : ' elemento(s)'
+
   #fechas
   date:
     abbr_day_names:

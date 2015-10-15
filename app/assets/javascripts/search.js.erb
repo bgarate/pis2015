@@ -24,7 +24,18 @@ var projects = new Bloodhound({
 
 $().ready(function() {
 
-    people.initialize();
+    projects.clear();
+    projects.clearPrefetchCache();
+    projects.initialize(true);
+
+    people.clear();
+    people.clearPrefetchCache();
+    people.initialize(true);
+
+    milestones.clear();
+    milestones.clearPrefetchCache();
+    milestones.initialize(true);
+
 
     $("#nav-search").typeahead({
         minLength: 1,

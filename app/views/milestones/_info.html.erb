@@ -21,6 +21,7 @@
     <%end%>
   </div>
   <div class="right-pane">
+    <p><%= t('milestones.author') + ": " + @milestone.author.name %></p>
     <p><%= @milestone.description %></p>
     <p><%=
         if feedback? and @milestone.feedback_author

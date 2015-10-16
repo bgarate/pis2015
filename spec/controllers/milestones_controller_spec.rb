@@ -273,16 +273,19 @@ describe MilestonesController, "Milestone Controller" do
     end
 
     it 'is valid with a title and description' do
+      session[:user_id] = @ad_user.id
       post :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :due_date=>Time.now, :category_id=>@c1.id}
       expect(response.status).to eq(302)
     end
 
     it 'is invalid without a title' do
+      session[:user_id] = @ad_user.id
       post :create, :person_id=>@admin.id, :milestone=>{ :description=>'unadescripciondemilestone', :category_id=>@c1.id}
       expect(response).to redirect_to(@admin)
     end
 
     it 'is invalid without a description' do
+      session[:user_id] = @ad_user.id
       get :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1', :category_id=>@c1.id}
       expect(response.status).to redirect_to(@admin)
     end

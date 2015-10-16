@@ -181,6 +181,7 @@ es:
     feedback: "feedback"
     event: "evento"
     last_update: "Modificado"
+    author: "Autor"
 
     state:
       done_or_rejected: 'Hitos en estado hecho o rechazado'

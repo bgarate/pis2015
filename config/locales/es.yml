@@ -152,7 +152,7 @@ es:
       submit: "Actualizar Proyecto"
 
     index:
-      header: "Listando proyectos"
+      header: "Listando de proyectos"
 
     delete:
       sure: "¿Está seguro que desea eliminar este proyecto?"

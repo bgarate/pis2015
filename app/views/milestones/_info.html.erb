@@ -12,6 +12,12 @@
   <% end %>
 
   <div class="left-pane">
+    <% if @milestone.status == 'rejected' %>
+        <p><%= @milestone.deleted_date %></p>
+    <% end %>
+    <% if @milestone.status == 'done' %>
+        <p><%= @milestone.completed_date %></p>
+    <% end %>
     <div class="milestone-icon"><%= milestone_icon(@milestone).html_safe %></div>
     <h2><%= @milestone.title %></h2>
     <% if @milestone.category %>

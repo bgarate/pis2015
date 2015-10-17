@@ -12,6 +12,12 @@
   <% end %>
 
   <div class="left-pane">
+    <% if @milestone.status == 'rejected' %>
+        <p><%= t('milestones.rejected_date') + l(@milestone.deleted_date, format: :long) %></p>
+    <% end %>
+    <% if @milestone.status == 'done' %>
+        <p><%= t('milestones.done_date') + l(@milestone.completed_date, format: :long) %></p>
+    <% end %>
     <div class="milestone-icon"><%= milestone_icon(@milestone).html_safe %></div>
     <h2><%= @milestone.title %></h2>
     <% if @milestone.category %>
@@ -21,6 +27,7 @@
     <%end%>
   </div>
   <div class="right-pane">
+    <p><%= t('milestones.author') + ": " + @milestone.author.name %></p>
     <p><%= @milestone.description %></p>
     <p><%=
         if feedback? and @milestone.feedback_author
@@ -29,49 +36,59 @@
     %></p>
 
 
-    <div class="date-row editable">
-        <% if @milestone.start_date %>
-            <div class="calendar">
-              <%= l(@milestone.start_date, format: "%A, %B %d %Y").capitalize %>
-            </div>
-        <% end %>
-        <% if @milestone.due_date %>
-            <div class="calendar right">
-              <%= l(@milestone.due_date, format: "%A, %B %d %Y").capitalize %>
-            </div>
-        <% end %>
-    </div>
+    <% if (@milestone.pending?) && (can_modify_milestone?@milestone.id) %>
+        <div class="date-row editable">
+    <%else%>
+        <div class="date-row">
+    <% end %>
+    <% if @milestone.start_date %>
+        <div class="calendar"><%= l(@milestone.start_date, format: :long) %></div>
+    <% end %>
+
+    <% if @milestone.due_date %>
+        <div class="calendar right"><%= l(@milestone.due_date, format: :long) %></div>
+    <% end %>
+
+    <% if (@milestone.pending?) && (can_modify_milestone?@milestone.id) %>
+        </div>
+    <%else%>
+        </div>
+    <% end %>
+
+    <% if can_modify_milestone?@milestone.id %>
 
 
-        <div class="row edit-form">
-
+        <div class="edit-form row">
           <%= form_for @milestone do |f| %>
               <%= f.hidden_field :category_id %>
 
-          <div class="form-group col-xs-6">
-            <%= f.label t('milestones.start_date'), class: "control-label" %>
-            <div class="input-group">
-              <%= f.text_field :start_date, class: "form-control", id:'start_date' ,value:(@milestone.start_date ? l(@milestone.start_date) : nil), "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
-              <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
-            </div>
-          </div>
+              <div class="form-group col-xs-6">
+                <%= f.label t('milestones.start_date'), class: "control-label" %>
+                <div class="input-group">
+                  <%= f.text_field :start_date, class: "form-control", id:'start_date' ,value:(@milestone.start_date ? l(@milestone.start_date) : nil), "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
+                  <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+                </div>
+              </div>
 
-          <div class="form-group col-xs-6">
-            <%= f.label t('milestones.due_date'), class: "control-label" %>
-            <div class="input-group">
-              <%= f.text_field :due_date, class: "form-control" , id:'due_date',value:(@milestone.due_date ? l(@milestone.due_date) : nil) ,"data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy" %>
-              <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
-            </div>
-          </div>
+              <div class="form-group col-xs-6">
+                <%= f.label t('milestones.due_date'), class: "control-label" %>
+                <div class="input-group">
+                  <%= f.text_field :due_date, class: "form-control" , id:'due_date',value:(@milestone.due_date ? l(@milestone.due_date) : nil) ,"data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy" %>
+                  <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+                </div>
+              </div>
+
+              <div class="btn pull-right">
+                <%= f.button t('milestones.edit.submit'),:type => 'submit', class: "btn btn-default" %>
+              </div>
 
 
-          <div class="btn pull-right">
-            <%= f.button t('milestones.edit.submit'),:type => 'submit', class: "btn btn-default" %>
-          </div>
+              </div>
 
-          <% end %>
 
-        </div>
+          <% end %> <!-- Form -->
+
+    <% end %>
 
 
     <% unless @milestone.tags.empty? %>

@@ -86,6 +86,9 @@ class GoogleController < ApplicationController
       rescue GoogleDrive::Error
         redirect_to google_adddriveview_path(:milestone_id => @milestone_id, :error => true)
         return
+      rescue URI::InvalidURIError
+        redirect_to google_adddriveview_path(:milestone_id => @milestone_id, :error => true)
+        return
       end
     end
       if params[:redirect_url]

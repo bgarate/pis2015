@@ -55,7 +55,7 @@ class ProjectsController < ApplicationController
     @project.technology_ids = params[:technologies]
     @project.save
     if @project.valid?
-      redirect_to @project
+      redirect_to '/projects/'
     else
       redirect_to '/projects/new'
     end

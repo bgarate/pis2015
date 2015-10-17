@@ -20,7 +20,17 @@
 
   <h1><%= t('stats') %></h1>
   <div class="badge-stats">
-    <span><%= t('project.ongoing') %></span><span class="badge"><%=@proysin%></span><br>
+    <span><%= t('project.ongoing') %></span>
+    <% if @proysin.length > 0 %>
+
+        <% @proysin.each do |p| %>
+            <span class="badge"><%= link_to p.name, project_path(p.id), method: :get %></span>
+        <% end %>
+
+    <% else %>
+        <%= t('project.zero') %>
+    <% end %>
+
     <span><%= t('project.fulfilled') %></span><span class="badge"><%=@proysend%></span><br>
     <span><%= t('moove-it-time') %></span><span class="badge"><%= time_ago_in_words(@start_date) %></span>
   </div>

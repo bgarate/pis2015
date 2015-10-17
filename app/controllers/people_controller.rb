@@ -68,7 +68,7 @@ class PeopleController < ApplicationController
       @skills = @person.skills
 
       #proyectos
-      @proysin = @person.projects.where("Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE").length
+      @proysin = @person.projects.where('Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE')
       @proysend = @person.projects.where("Projects.end_date < CURRENT_DATE").length
 
       @image_id = @person.image_id

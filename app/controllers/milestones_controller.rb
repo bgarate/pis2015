@@ -186,6 +186,7 @@ class MilestonesController < ApplicationController
   def next_status
     if @milestone.status == 'pending'
       @milestone.status= 'done'
+      @milestone.completed_date = Date.today
     else
       @milestone.status= 'pending'
     end
@@ -199,6 +200,7 @@ class MilestonesController < ApplicationController
       @milestone.status= 'pending'
     else
       @milestone.status= 'rejected'
+      @milestone.deleted_date = Date.today
     end
     @milestone.save!
     redirect_to :back

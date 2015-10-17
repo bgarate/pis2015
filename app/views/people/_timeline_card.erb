@@ -24,6 +24,13 @@
             <%end%>
             <p title="<%=e.description%>"><%=e.description.to_s.truncate(100, separator: ' ') %></p>
 
+            <% if e.status == 'rejected' %>
+                <p><%= t('milestones.rejected_date') + l(e.deleted_date, format: :long) %></p>
+            <% end %>
+            <% if e.status == 'done' %>
+                <p><%= t('milestones.done_date') + l(e.completed_date, format: :long) %></p>
+            <% end %>
+
             <!--<% if e.due_date %>
                 <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
             <% end %>-->

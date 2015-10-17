@@ -158,6 +158,9 @@ en:
     feedback: "feedback"
     event: "event"
     last_update: "Edited"
+    author: "Author"
+    done_date: "Done on: "
+    rejected_date: "Rejected on: "
 
     state:
       done_or_rejected: 'milestones in state done or rejected'

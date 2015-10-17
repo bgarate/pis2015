@@ -119,8 +119,10 @@ es:
     start_date: "Fecha de inicio"
     end_date: "Fecha de fin"
 
-    ongoing: "Proyectos en curso"
-    fulfilled: "Proyectos realizados"
+    ongoing: "Proyectos asignados:"
+    fulfilled: "Proyectos realizados:"
+
+    zero: "No hay proyectos asignados"
 
     people:
       title: "Personas asociadas al proyecto"
@@ -156,6 +158,7 @@ es:
 
     delete:
       sure: "¿Está seguro que desea eliminar este proyecto?"
+
 
 
   #hitos

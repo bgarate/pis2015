@@ -21,8 +21,13 @@ e = Category.create(name: "Evento")
 e.save!
 c = Category.create(name: "Conferencia")
 f = Category.create(name: 'Feedback')
+f.is_feedback= true
 f.doc_url='https://docs.google.com/document/d/1bpQ3HB__V1YbQ4YH6CBeDjcKp-YGjH5_WtsxFdNuMk0/edit'
 f.save!
+f2 = Category.create(name: 'Feedback diseño')
+f2.is_feedback= true
+f2.doc_url='https://docs.google.com/document/d/1VuyDDm-iDK6LF2uG9Sx8WhTJe2kON-bVW7As3BmIIhI/edit'
+f2.save!
 
 
 ################# Milestones #################

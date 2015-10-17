@@ -220,7 +220,7 @@ class MilestonesController < ApplicationController
 
   helper_method :feedback?
   def feedback?
-    return @milestone.category.name == 'Feedback'
+    return @milestone.category.is_feedback?
   end
 
   def next_status

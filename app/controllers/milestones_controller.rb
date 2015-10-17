@@ -68,10 +68,6 @@ class MilestonesController < ApplicationController
       @milestone= @person.milestones.create(milestone_params)
     else
       @milestone = Milestone.create(milestone_params)
-      if params[:people] == nil
-        redirect_to root_path
-        return
-      end
     end
 
     @milestone.tag_ids = params[:tags]
@@ -81,6 +77,10 @@ class MilestonesController < ApplicationController
     if category.name=='Feedback'
       @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
     end
+
+    #AUTHOR
+    @milestone.author_id = current_user.person_id
+
     #ASSIGNED
     if params[:people]!=nil
       params[:people].each do |p|
@@ -226,6 +226,7 @@ class MilestonesController < ApplicationController
   def next_status
     if @milestone.status == 'pending'
       @milestone.status= 'done'
+      @milestone.completed_date = Date.today
     else
       @milestone.status= 'pending'
     end
@@ -239,6 +240,7 @@ class MilestonesController < ApplicationController
       @milestone.status= 'pending'
     else
       @milestone.status= 'rejected'
+      @milestone.deleted_date = Date.today
     end
     @milestone.save!
     redirect_to :back

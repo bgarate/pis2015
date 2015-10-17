@@ -13,6 +13,7 @@
 #  updated_at         :datetime         not null
 #  category_id        :integer
 #  start_date         :date
+#  author_id          :integer
 #
 
 class Milestone < ActiveRecord::Base
@@ -29,6 +30,9 @@ class Milestone < ActiveRecord::Base
 
   # autor del feedback
   belongs_to :feedback_author, class_name: 'Person'
+
+  # autor del hito
+  belongs_to :author, class_name: 'Person'
 
   def get_next_status
     status_order = [:pending, :done, :rejected]

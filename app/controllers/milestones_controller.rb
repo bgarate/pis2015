@@ -98,6 +98,11 @@ class MilestonesController < ApplicationController
         f = session.file_by_url(@milestone.category.doc_url)
         #lo copio
         fuploaded = f.copy("#{@milestone.title}")
+        #agregar permisos a la gente asociada al hito
+        @milestone.people.each do |p|
+          fuploaded.acl.push(
+              {:type => 'user', :value => p.email, :role => 'writer'})
+        end
 
         #se logro encontrar el resorce
         r = Resource.new

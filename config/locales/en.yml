@@ -99,8 +99,10 @@ en:
     start_date: "Start date"
     end_date: "End date"
 
-    ongoing: "Ongoing Projects"
-    fulfilled: "Fulfilled Projects"
+    ongoing: "Assigned projects:"
+    fulfilled: "Fulfilled Projects:"
+
+    zero: "No assigned projects"
 
     people:
       title: "People associated to the project"
@@ -136,6 +138,7 @@ en:
 
     delete:
       sure: "Are you sure you want to delete this project?"
+
 
   #milestones
   milestones:

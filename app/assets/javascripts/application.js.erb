@@ -70,14 +70,16 @@
             groupCheckedEnd : I18n.t("form.error.groupCheckedEnd"),
         };
 
+        $.validate({
+            modules: 'html5, date , toggleDisabled',
+
+            language: myLanguage
+
+        });
+
         $(".knob-stats input").knob({
             'width': '90%',
             'readOnly': true
-        });
-
-        $.validate({
-            modules: 'html5, date',
-            language: myLanguage
         });
 
         $.fn.datepicker.defaults.format = "dd/mm/yyyy";
@@ -121,6 +123,7 @@
                 } else {
                     // Mark it so that the next submit can be ignored
                     $form.data('submitted', true);
+                    alert('Hello')
                 }
             });
 
@@ -129,6 +132,8 @@
         };
 
         $('form').preventDoubleSubmission();
+
+
 
         $('[role=iconpicker]').iconpicker({
             iconset:"glyphicon",

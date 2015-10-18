@@ -187,6 +187,9 @@ es:
     done_date: "Completado el día: "
     rejected_date: "Rechazado el día: "
 
+    state_title: "Estado"
+    actions: "Acciones"
+
     state:
       done_or_rejected: 'Hitos en estado hecho o rechazado'
       pending: 'Hitos pendientes'

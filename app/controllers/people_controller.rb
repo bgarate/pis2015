@@ -68,7 +68,7 @@ class PeopleController < ApplicationController
       @skills = @person.skills
 
       #proyectos
-      @proysin = @person.projects.where("Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE").length
+      @proysin = @person.projects.where('Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE')
       @proysend = @person.projects.where("Projects.end_date < CURRENT_DATE").length
 
       @image_id = @person.image_id
@@ -93,7 +93,7 @@ class PeopleController < ApplicationController
   end
 
   def show_not_pending_timeline
-    @milestones = @person.milestones.where('milestones.status <> 0').order(due_date: :desc, created_at: :desc)
+    @milestones = @person.milestones.where('milestones.status <> 0').order(due_date: :asc, updated_at: :desc)
     @filtered_count = @person.milestones.size - @milestones.size
 
     @filter = :not_pending
@@ -105,7 +105,7 @@ class PeopleController < ApplicationController
   end
 
   def show_pending_timeline
-    @milestones = @person.milestones.where('milestones.status = 0').order(due_date: :desc, created_at: :desc)
+    @milestones = @person.milestones.where('milestones.status = 0').order(due_date: :asc, updated_at: :desc)
     @filtered_count = @person.milestones.size - @milestones.size
 
     @filter = :pending

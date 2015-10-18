@@ -70,6 +70,20 @@ pro.status= 0
 pro.start_date= Time.now - (2*7*24*60*60)
 pro.end_date= Time.now - (2*7*24*60*60)
 
+pro2 = Project.new
+pro2.name= 'Super Candies 1.0'
+pro2.client= 'Candy World'
+pro2.status= 0
+pro2.start_date= Time.now - (2*7*24*60*60)
+pro2.end_date= Time.now + (2*7*24*60*60)
+
+pro3 = Project.new
+pro3.name= 'Super Games 1.0'
+pro3.client= 'Game World'
+pro3.status= 0
+pro3.start_date= Time.now - (2*7*24*60*60)
+pro3.end_date= Time.now + (2*7*24*60*60)
+
 
 ################# Technologies #################
 
@@ -111,11 +125,20 @@ Person.create!(name: "Miguel Renom", email: "miguel.renom@moove-it.com", admin: 
 
 
 p0.projects << pro
+p0.projects << pro2
+p0.projects << pro3
 p0.skills << sk1
 p0.skills << sk2
 p0.tech_role = tr
 p0.milestones << m
 p0.milestones << m1
+p0.save!
+m.author_id = p0.id
+m.save!
+m1.author_id = p0.id
+m1.save!
+m2.author_id = p0.id
+m2.save!
 
 
 p1.projects << pro
@@ -151,6 +174,8 @@ p6.mentees << p5
 p6.milestones << m
 p6.milestones << m1
 p6.milestones << m2
-
+p6.projects << pro
+p6.projects << pro2
+p6.projects << pro3
 
 

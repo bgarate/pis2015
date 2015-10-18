@@ -3,40 +3,13 @@
     <div class="card-col col-xs-2">
       <%= render 'people/profile_card' %>
       <%= render 'people/stats_card' %>
-    </div>
-    <div class="card-col col-lg-5">
-      <div class="card pending">
-        <h1><%= t('milestones.overcomes') %></h1>
-        <% if @overcomes and not @overcomes.empty? %>
-            <ul id="pending-list">
-              <% @overcomes.each do |e| %>
-                  <li>
-                    <h2><%=e.title%></h2>
-                    <p title="<%=e.description%>"><%=e.description.to_s.truncate(100, separator: ' ') %></p>
-
-                    <% if e.due_date %>
-                        <div class="calendar right"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
-                    <% end %>
-                    <%= milestone_short_info(e) %>
-                    <ul class="tags">
-                      <!--<li>Speaker</li>-->
-                    </ul>
-                    <div class="clearfix"></div>
-                  </li>
-              <% end %>
-            </ul>
-        <% else %>
-            <p><% t('milestones.zero') %></p>
-        <% end %>
-      </div>
       <%= render 'people/events_card' %>
     </div>
-
-
-    <div class="card-col col-xs-5">
-        <%if can_view_person?(@identifier) %>
+    <div class="card-col col-xs-10">
+      <p><% t('milestones.zero') %></p>
+      <%if can_view_person?(@identifier) %>
           <%= render 'milestones/form' %>
-        <%end%>
+      <%end%>
       <div id="timeline-container">
         <%= render 'people/timeline_card' %>
       </div>

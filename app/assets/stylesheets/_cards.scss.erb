@@ -1,55 +1,59 @@
 
 .card-col {
-  padding-left: 8px;
-  padding-right: 8px;
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .card {
-  width: 100%;
-  padding: 14px;
-  margin: 0 0 15px 0em;
-  border-bottom: solid 5px transparent;
+    width: 100%;
+    padding: 14px;
+    margin: 0 0 15px 0em;
+    border-bottom: solid 5px transparent;
 
-  color: white;
-  text-align: center;
+    color: white;
+    text-align: center;
 
-  > h1 {
-    font-size: 18px;
-    text-transform: uppercase;
-    margin-top: 5px;
-  }
+    > h1 {
+        font-size: 18px;
+        text-transform: uppercase;
+        margin-top: 5px;
+    }
 
-  &.card.profile {
-    background-color: $turqoise;
-    border-color: $turqoise-dark;
-    min-height: 15em;
-  }
-
-
-  &.card.events {
-      background-color: $sunflower;
-      border-color: $sunflower-dark;
-    min-height: 15em;
-  }
+    &.card.profile {
+        background-color: $turqoise;
+        border-color: $turqoise-dark;
+        min-height: 15em;
+    }
 
 
-  &.card.stats {
-    background-color: $peterriver;
-    border-color: $peterriver-dark;
-    min-height: 20em;
-  }
+    &.card.events {
+        background-color: $sunflower;
+        border-color: $sunflower-dark;
 
-  &.card.pending {
-      background-color: $alizarin;
-      border-color: $alizarin-dark;
-    min-height: 20em;
-  }
+        .toggle-events {
+            float: right;
+            cursor: pointer;
+        }
+    }
 
-  &.card.timeline {
-    //background-color: $alizarin;
-    //border-color: $alizarin-dark;
-    min-height: 40em;
-  }
+
+    &.card.stats {
+        background-color: $peterriver;
+        border-color: $peterriver-dark;
+        min-height: 20em;
+    }
+
+    &.card.pending {
+        background-color: $alizarin;
+        border-color: $alizarin-dark;
+        min-height: 20em;
+    }
+
+    &.card.timeline {
+        //background-color: $alizarin;
+        //border-color: $alizarin-dark;
+        min-height: 40em;
+    }
 }
 
 .timeline-filter{
@@ -64,7 +68,7 @@
         display: block;
         margin-bottom: 30px;
 
-            color: white;
+        color: white;
 
         &:hover {
             background-color: $peterriver;
@@ -74,35 +78,35 @@
 
 #profile-card {
 
-  h1 {
-    margin-top: 0;
-    font-size: 20px;
-  }
-  h2 {
-    margin-top: 0px;
-    font-size: 13px;
-  }
+    h1 {
+        margin-top: 0;
+        font-size: 20px;
+    }
+    h2 {
+        margin-top: 0px;
+        font-size: 13px;
+    }
 
-  h4 {
-    text-transform: uppercase;
-  }
+    h4 {
+        text-transform: uppercase;
+    }
 
 }
 
 ul#skills {
 
-  padding-left: 0;
-  margin-top: 20px;
+    padding-left: 0;
+    margin-top: 20px;
 
-  li {
-    list-style: none;
-    display: inline-block;
-    width: 14%;
+    li {
+        list-style: none;
+        display: inline-block;
+        width: 14%;
 
-    img {
-      width: 100%;
+        img {
+            width: 100%;
+        }
     }
-  }
 }
 
 ul#mentors {
@@ -130,45 +134,46 @@ ul#mentors {
 
 #profile-picture {
 
-  width: 100%;
-  padding: 20px;
-
-  .img-container {
-    border-radius: 50%;
-    border: solid 2px white;
     width: 100%;
-    margin: auto;
-    padding: 15px;
+    padding: 20px;
 
-    img {
-      border-radius: 50%;
-      width: 100%;
+    .img-container {
+        border-radius: 50%;
+        border: solid 2px white;
+        width: 100%;
+        margin: auto;
+        padding: 15px;
+
+        img {
+            border-radius: 50%;
+            width: 100%;
 
 
-      @include transition(0.3s ease-in-out);
+            @include transition(0.3s ease-in-out);
 
-      &:hover {
-        @include scale(1.1);
-        @include transition(0.3s ease-in-out);
-      }
+            &:hover {
+                @include scale(1.1);
+                @include transition(0.3s ease-in-out);
+            }
 
+        }
     }
-  }
 
 }
 
 #stats-card {
 
-  vertical-align: middle;
-  line-height: 22px;
+    vertical-align: middle;
+    line-height: 22px;
 
-  font-size: 13px;
+    font-size: 13px;
 
-  .badge-stats {
+    .badge-stats {
 
 
-    border-bottom: 2px solid $peterriver-dark;
-    padding-bottom: 20px;
+        border-bottom: 2px solid $peterriver-dark;
+        padding-bottom: 20px;
+
 
     .badge {
       margin-left: 5px;
@@ -179,131 +184,132 @@ ul#mentors {
          text-decoration: none;
       }
     }
-  }
 
-  .knob-stats {
+    .knob-stats {
 
-    margin: 30px 0 10px 0;
+        margin: 30px 0 10px 0;
 
-    .knob {
-      display: table;
-      margin-bottom: 10px;
+        .knob {
+            display: table;
+            margin-bottom: 10px;
+        }
+        .graph,.text {
+            display: inline-block;
+            vertical-align: middle;
+            width: 50%;
+        }
+
     }
-    .graph,.text {
-      display: inline-block;
-      vertical-align: middle;
-      width: 50%;
-    }
-
   }
-
 }
 
 #events-card {
-  .separator {
-    div {
-      text-align: left;
-      display: inline-block;
-      float: left;
-      padding-right: 20px;
+    .documents{
+        margin-top: 100px;
     }
-    &:after {
-      content: '';
-      display: block;
-      overflow: hidden;
-      border-bottom: 2px solid white;
-      padding: 0.5rem;
+    .separator {
+        div {
+            text-align: left;
+            display: inline-block;
+            float: left;
+            padding-right: 20px;
+        }
+        &:after {
+            content: '';
+            display: block;
+            overflow: hidden;
+            border-bottom: 2px solid white;
+            padding: 0.5rem;
+        }
     }
-  }
-  ul {
-    clear: both;
-    position: relative;
-    z-index: 5;
-    margin: 10px 0;
-    padding-left: 0;
-
-    li {
-      display: block;
-      margin-left: 40px;
-      background-color: $sunflower-dark;
-      border-radius: 5px;
-      position: relative;
-      padding: 10px 10px 10px 0;
-      margin-bottom: 10px;
-
-      .day-of-the-week {
-        position: absolute;
-        left: -40px;
-        top: 10px;
-        text-transform: uppercase;
-        color:  $sunflower;
-        padding: 2.5px 20px 2.5px 5px;
-        border-radius: 5px;
-        z-index: -1;
-        background-color: white;
-        font-weight: bold;
-      }
-
-      .day {
-        float: left;
-        width: 40px;
-        font-weight: bold;
-        font-size: 18px;
-        text-align: left;
-        padding-left: 10px;
-      }
-
-      .content {
-        position: relative;
-        border-left:  $sunflower solid 2px;
-        float: left;
-        width: calc(100% - 40px);
-        padding: 0 15px 0 20px;
-        font-size: 14px;
-      }
-
-      h2 {
-        display: inline-block;
-        float: left;
-        font-size: 16px;
-        margin: 0 5px 0 0;
-        font-weight: bold;
-      }
-
-      .month-and-year {
-        display: inline-block;
-        float: right;
-        font-size: 12px;
-        line-height: 1.8;
-        text-transform: uppercase;
-      }
-
-      p {
+    ul {
         clear: both;
-        text-align: left;
-      }
+        position: relative;
+        z-index: 5;
+        margin: 10px 0;
+        padding-left: 0;
+
+        li {
+            display: block;
+            background-color: $sunflower-dark;
+            border-radius: 5px;
+            position: relative;
+            padding: 10px 10px 10px 0;
+            margin-bottom: 10px;
+
+            .day-of-the-week {
+                position: absolute;
+                left: -40px;
+                top: 10px;
+                text-transform: uppercase;
+                color:  $sunflower;
+                padding: 2.5px 20px 2.5px 5px;
+                border-radius: 5px;
+                z-index: -1;
+                background-color: white;
+                font-weight: bold;
+            }
+
+            .day {
+                float: left;
+                width: 40px;
+                font-weight: bold;
+                font-size: 18px;
+                text-align: left;
+                padding-left: 10px;
+            }
+
+            .content {
+                position: relative;
+                border-left:  $sunflower solid 2px;
+                float: left;
+                width: calc(100% - 40px);
+                padding: 0 15px 0 20px;
+                font-size: 14px;
+            }
+
+            h2 {
+                display: inline-block;
+                float: left;
+                font-size: 16px;
+                margin: 0 5px 0 0;
+                font-weight: bold;
+            }
+
+            .month-and-year {
+                display: inline-block;
+                float: right;
+                font-size: 12px;
+                line-height: 1.8;
+                text-transform: uppercase;
+            }
+
+            p {
+                clear: both;
+                text-align: left;
+            }
 
 
 
 
+        }
     }
-  }
 }
 
 #timeline-card {
 
     position: relative;
 
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 22px;
-    width: 4px;
-    background-color: $alizarin;
-    border-radius: 2px;
-  }
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 22px;
+        width: 4px;
+        background-color: $alizarin;
+        border-radius: 2px;
+    }
 
 }
 
@@ -314,243 +320,243 @@ form.timeline-form.slide-on-click {
 
 ul#milestone-list {
 
-  padding-left: 40px;
+    padding-left: 40px;
 
-  > li {
+    > li {
 
-      position: relative;
-      border-radius: 10px;
-      text-align: left;
-      background-color: white;
-      list-style-type: none;
-      padding: 20px 10px 20px 15px;
-      color: black;
+        position: relative;
+        border-radius: 10px;
+        text-align: left;
+        background-color: white;
+        list-style-type: none;
+        padding: 20px 10px 20px 15px;
+        color: black;
 
-      margin: 10px;
+        margin: 10px;
 
-      @include transition(0.3s ease-in-out);
+        @include transition(0.3s ease-in-out);
 
-      &:hover {
-          margin-top: 20px;
-          margin-bottom: 20px;
-          padding-top: 30px;
-          padding-bottom: 30px;
-          @include box-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
+        &:hover {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            @include box-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
 
-      }
+        }
 
-      &:before {
-          content: '';
-          position: absolute;
-          top: 20px;
-          left: -30px;
-          @include triangle(left, white);
-          clear: both;
-      }
+        &:before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -30px;
+            @include triangle(left, white);
+            clear: both;
+        }
 
-      .icon {
-          position: absolute;
-          top: 16px;
-          left: -60px;
-          width: 42px;
-          height: 42px;
-          border-radius: 50%;
-          border: 6px $body-background solid;
-          background-color: $alizarin;
-          color: white;
-          text-align: center;
-          line-height: 32px;
-          font-size: 16px;
-      }
+        .icon {
+            position: absolute;
+            top: 16px;
+            left: -60px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 6px $body-background solid;
+            background-color: $alizarin;
+            color: white;
+            text-align: center;
+            line-height: 32px;
+            font-size: 16px;
+        }
 
-      h2{
-          margin: 0 0px 10px 0px;
-          font-size: 18px;
+        h2{
+            margin: 0 0px 10px 0px;
+            font-size: 18px;
 
-          a {
-              text-decoration: none;
-          }
-      }
+            a {
+                text-decoration: none;
+            }
+        }
 
-      .notes-list form{
+        .notes-list form{
 
-          color: black;
+            color: black;
 
-          input, select {
-              float: left;
-              height: 20px;
-              background-color: rgba(white,0.2);
-              border:none;
-              @include input-placeholder {
-                  color: #555555;
-              }
-              &:focus {
-                  outline-color: transparent;
-                  border: 1px goldenrod solid;
-              }
-          }
+            input, select {
+                float: left;
+                height: 20px;
+                background-color: rgba(white,0.2);
+                border:none;
+                @include input-placeholder {
+                    color: #555555;
+                }
+                &:focus {
+                    outline-color: transparent;
+                    border: 1px goldenrod solid;
+                }
+            }
 
-          input {
-              width: calc(100% - 100px);
-          }
-          select {
-              width: 45px;
-          }
-      }
+            input {
+                width: calc(100% - 100px);
+            }
+            select {
+                width: 45px;
+            }
+        }
 
-      p {
-          padding-left: 15px;
-      }
+        p {
+            padding-left: 15px;
+        }
 
-      .resources-list, .notes-list {
+        .resources-list, .notes-list {
 
-          color: white;
-          margin: 0 -10px 10px -15px;
+            color: white;
+            margin: 0 -10px 10px -15px;
 
-          padding: 10px 15px;
+            padding: 10px 15px;
 
-          .slider {
-              clear: both;
-          }
+            .slider {
+                clear: both;
+            }
 
-          h2 {
-              font-size: 14px;
-              margin: 0;
-              font-weight: bold;
-              float: left;
-              .glyphicon {
-                  padding-right: 10px;
-              }
-          }
+            h2 {
+                font-size: 14px;
+                margin: 0;
+                font-weight: bold;
+                float: left;
+                .glyphicon {
+                    padding-right: 10px;
+                }
+            }
 
-          a {
-              color: white;
-              text-decoration: none;
-          }
+            a {
+                color: white;
+                text-decoration: none;
+            }
 
-          .toggle-documents {
-              float: right;
-              cursor: pointer;
-          }
+            .toggle-documents {
+                float: right;
+                cursor: pointer;
+            }
 
-          ul {
-              padding: 10px 5px;
-              list-style-type: none;
-              clear: both;
+            ul {
+                padding: 10px 5px;
+                list-style-type: none;
+                clear: both;
 
-          }
+            }
 
-          h3{
-              font-weight: bold;
-              font-size: 15px;
-              float: left;
-              margin: 0;
-          }
+            h3{
+                font-weight: bold;
+                font-size: 15px;
+                float: left;
+                margin: 0;
+            }
 
-          .time {
-              float: right;
-          }
+            .time {
+                float: right;
+            }
 
-          p {
-              clear: both;
-          }
+            p {
+                clear: both;
+            }
 
-          .link {
-              text-align: center;
-          }
-      }
+            .link {
+                text-align: center;
+            }
+        }
 
-      .resources-list {
-          background-color: $peterriver;
-          margin-top: 10px;
-      }
+        .resources-list {
+            background-color: $peterriver;
+            margin-top: 10px;
+        }
 
-      .notes-list {
-          background-color: $sunflower;
+        .notes-list {
+            background-color: $sunflower;
 
-          li {
-              background-color: $sunflower-dark;
-              margin: 0 -20px;
-              padding: 20px;
-          }
+            li {
+                background-color: $sunflower-dark;
+                margin: 0 -20px;
+                padding: 20px;
+            }
 
-      }
+        }
 
-      .tags {
-          margin-bottom: 15px;
-      }
+        .tags {
+            margin-bottom: 15px;
+        }
 
-  }
+    }
 
 }
 
 
 ul#pending-list {
 
-  padding-left: 0;
+    padding-left: 0;
 
 
-  > li {
+    > li {
 
-    position: relative;
-    border-radius: 10px;
-    text-align: left;
-    background-color: white;
-    list-style-type: none;
-    padding: 20px 10px 20px 15px;
-    background-color: $alizarin-dark;
-    margin: 10px;
-
-    h2 {
-      margin: 0 0 10px 0;
-      font-size: 18px;
-    }
-
-    p {
-      padding-left: 15px;
-    }
-
-    .calendar {
-      background-image: image-url('layouts/calendar-white.png');
-    }
-
-    li {
-      position: relative;
-      float: right;
-      background-color: #E862E5;
-      font-size: 10px;
-      list-style: none;
-      line-height: $tag-height;
-      height: $tag-height;
-      padding: 0 10px;
-      color: white;
-      font-weight: bold;
-      margin-top: 4px;
-
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-
-      &:before {
-        content: '';
-        position: absolute;
-        left: -$tag-height;
-        @include triangle(left, #E862E5, $tag-height);
-      }
-
-      &:after {
-        content: '';
-        position: absolute;
-        left: -1px;
-        top: calc(50% - 2px);
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
+        position: relative;
+        border-radius: 10px;
+        text-align: left;
         background-color: white;
-      }
+        list-style-type: none;
+        padding: 20px 10px 20px 15px;
+        background-color: $alizarin-dark;
+        margin: 10px;
 
+        h2 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+
+        p {
+            padding-left: 15px;
+        }
+
+        .calendar {
+            background-image: image-url('layouts/calendar-white.png');
+        }
+
+        li {
+            position: relative;
+            float: right;
+            background-color: #E862E5;
+            font-size: 10px;
+            list-style: none;
+            line-height: $tag-height;
+            height: $tag-height;
+            padding: 0 10px;
+            color: white;
+            font-weight: bold;
+            margin-top: 4px;
+
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+
+            &:before {
+                content: '';
+                position: absolute;
+                left: -$tag-height;
+                @include triangle(left, #E862E5, $tag-height);
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                left: -1px;
+                top: calc(50% - 2px);
+                width: 4px;
+                height: 4px;
+                border-radius: 50%;
+                background-color: white;
+            }
+
+
+        }
 
     }
-
-  }
 }
 

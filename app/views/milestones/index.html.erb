@@ -13,6 +13,7 @@
             <td><%= t('milestones.state_title') %></td>
             <td><%= t('milestones.title') %></td>
             <td><%= t('milestones.description') %></td>
+            <td><%= t('milestones.category') %></td>
             <td><%= t('milestones.due_date') %></td>
             <td><%= t('milestones.actions') %></td>
           </tr>
@@ -38,6 +39,9 @@
                 <% end %>
                 <td>
                   <%= m.description.truncate(50) %>
+                </td>
+                <td>
+                  <%= m.category.name %>
                 </td>
                 <td>
                   <div class="calendar left"><%= m.due_date %></div>

@@ -145,6 +145,7 @@ en:
 
     header: "Milestones"
     title: "Title"
+    category: "Category"
     due_date: "Due date"
     reviewer: "Feedback's reviewer"
     assign_to: 'Assign to'

@@ -70,6 +70,9 @@ es:
     save:
       success: "guardado con éxito!"
       error: "no se ha podido guardar"
+    delete:
+      success: "eliminado con éxito!"
+      error: "no se ha podido eliminar"
 
 
 

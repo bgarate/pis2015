@@ -1,5 +1,7 @@
 class TechRolesController < ApplicationController
 
+  skip_before_action :admin?, only:[:show, :index]
+
   def index
     @techRoles=TechRole.all
   end
@@ -41,7 +43,9 @@ class TechRolesController < ApplicationController
   def destroy
     @techRole = TechRole.find_by(id: params[:id])
     if @techRole
+      name = @techRole.name
       @techRole.destroy
+      flash.notice = "#{name} " + t('messages.delete.success')
     end
     redirect_to tech_roles_path
   end

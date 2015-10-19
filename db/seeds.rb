@@ -104,7 +104,7 @@ Tag.create!(name:'Dar Feedback')
 Tag.create!(name:'Recibir Feedback')
 Tag.create!(name:'Inicio proyecto')
 Tag.create!(name:'Fin proyecto')
-Tag.create!(name:'Speacker')
+Tag.create!(name:'Speaker')
 Tag.create!(name:'Participación')
 
 

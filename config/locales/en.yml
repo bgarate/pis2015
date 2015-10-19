@@ -145,6 +145,7 @@ en:
 
     header: "Milestones"
     title: "Title"
+    category: "Category"
     due_date: "Due date"
     reviewer: "Feedback's reviewer"
     assign_to: 'Assign to'
@@ -164,6 +165,9 @@ en:
     author: "Author"
     done_date: "Done on: "
     rejected_date: "Rejected on: "
+
+    state_title: "State"
+    actions: "Actions"
 
     state:
       done_or_rejected: 'milestones in state done or rejected'

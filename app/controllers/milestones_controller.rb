@@ -45,7 +45,7 @@ class MilestonesController < ApplicationController
     @person = Person.find_by(id: @identifier)
 
     #redirect_to '/people'
-    @cats=Category.all.collect {|t| [t.name, t.id]}
+    @cats=Category.all.collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
     @authors=Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
     @tags=Tag.all
 
@@ -172,7 +172,7 @@ class MilestonesController < ApplicationController
   end
 
   def edit
-    @cats=Category.all.collect {|t| [t.name, t.id]}
+    @cats=Category.all.collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
     @authors=Person.all.collect {|t| [t.name, t.id]}
     @tags = Tag.all
     user= Person.find(current_user.person_id)

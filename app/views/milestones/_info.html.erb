@@ -27,11 +27,10 @@
     <%end%>
   </div>
   <div class="right-pane">
-    <p><%= t('milestones.author') + ": " + @milestone.author.name %></p>
     <p><%= @milestone.description %></p>
     <p><%=
-        if feedback? and @milestone.feedback_author
-          @milestone.feedback_author.name
+        if feedback? && @milestone.feedback_author
+           t('milestones.author') + ": " + @milestone.feedback_author.name
         end
     %></p>
 

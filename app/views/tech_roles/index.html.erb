@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div class="table-container">
+
+        <h1>
+            <%= link_to new_tech_role_path do%>
+                <span class='large-text glyphicon glyphicon-plus table-add-button pull-left'>  </span>
+            <% end %>
+          <%= t('tech_roles.index.header') %>
+        </h1>
+        <table class="table datatable" data-info="false">
+
+          <thead>
+          <tr>
+            <td><%= t('id') %></td>
+            <td><%= t('name') %></td>
+            <td></td>
+            <td></td>
+          </tr>
+          </thead>
+          <tbody>
+          <% @techRoles.each do |t| %>
+              <tr>
+                <td><%= t.id %></td>
+                <td><%= t.name %></td>
+                <td><%= link_to edit_tech_role_path(t) do%>
+                      <span class='large-text glyphicon glyphicon-pencil'></span>
+                  <% end %>
+                </td>
+                <td><%= link_to tech_role_path(t),
+                                method: :delete,
+                                data: { confirm: t('tech_roles.delete.sure') } do %>
+                      <span class='large-text glyphicon glyphicon-remove'></span>
+                  <% end %>
+                </td>
+
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+

@@ -19,8 +19,10 @@ ActiveRecord::Schema.define(version: 20151019131723) do
   create_table "categories", force: :cascade do |t|
     t.string   "name"
     t.string   "icon"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "doc_url"
+    t.boolean  "is_feedback"
   end
 
   create_table "mentorships", force: :cascade do |t|

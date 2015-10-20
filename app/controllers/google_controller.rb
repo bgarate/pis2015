@@ -84,6 +84,7 @@ class GoogleController < ApplicationController
         m.updated_at= Time.now
         m.save!
       rescue GoogleDrive::Error
+        #url no es valida
         redirect_to google_adddriveview_path(:milestone_id => @milestone_id, :error => true)
         return
       rescue URI::InvalidURIError

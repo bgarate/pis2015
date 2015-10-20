@@ -178,6 +178,7 @@ es:
     reviewer: "Revisor del feedback"
     assign_to: 'Asignar a'
     cannot_assign: "No puede asignar más personas"
+    people: "Personas asociadas"
     assigned_people: "Personas asociadas al hito"
     mark_done: 'Marcar como hecho'
     add_feedback_author: 'Añadir revisor del feedback'
@@ -319,9 +320,8 @@ es:
 
   attachmentsdocs: 'Documentos adjuntos'
   adddoc: 'Agregar documento'
-  driveerrormsj: 'Ha ocurrido un error. Asegúrese de cumplir con los siguientes puntos:
-                      - Ha ingresado un URL correcta
-                      - Tiene permisos de acceso al archivo en Google Drive'
+  driveerrormsj: 'Ha ocurrido un error al adjuntar el documento de drive'
+  notpermissionsdrive: 'Asegúrese de que tiene permisos de acceso al archivo en Google Drive'
   attachgoogledrivedoc: 'Adjuntar documento de Google Drive'
   documenturl: 'URL del documento'
   attach: 'Adjuntar'

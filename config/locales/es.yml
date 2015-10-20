@@ -214,6 +214,8 @@ es:
     zero: "No hay hitos que mostrar"
 
     no_tech_role: "Sin rol técnico"
+    completed:
+      zero: "Sin hitos completados"
 
     new:
       header: "Crear Hito"

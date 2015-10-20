@@ -30,12 +30,16 @@
                   <ul>
                   <%
                      miles = m.milestones.where("status = ?", Milestone.statuses[:done]).order("due_date ASC, created_at DESC").limit(3)
+                     if miles.length > 0
+                         miles.each do |mil| %>
 
-                     miles.each do |mil| %>
+                            <li><%= link_to mil.title, milestone_path(mil), method: :get%></li>
 
-                    <li><%= link_to mil.title, milestone_path(mil), method: :get%></li>
+                        <% end
+                     else %>
 
-                  <% end %>
+                       <%= t('milestones.completed.zero') %>
+                    <% end %>
                   </ul>
                 </td>
               </tr>
@@ -68,7 +72,15 @@
                 <tr>
                   <td><%= link_to mil.title, milestone_path(mil), method: :get%></td>
                   <td><%= mil.description.truncate(50) %></td>
-                  <td><div class="calendar left"><%= l(mil.due_date, format: "%A, %B %d %Y") %></div></td>
+                  <td>
+
+                  <% if mil.due_date != nil %>
+                    <div class="calendar left">
+                  <%= l(mil.due_date, format: "%A, %B %d %Y") %>
+                    </div>
+                  <% end %>
+
+                  </td>
                 </tr>
             <% end %>
 

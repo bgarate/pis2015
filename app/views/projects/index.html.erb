@@ -25,7 +25,7 @@
           <tbody>
           <% @projects.each do |m| %>
               <tr>
-                <td><%= m.status %></td>
+                <td><%=  I18n.t("project.display_status.#{m.status}") %> </td>
                 <td><%= link_to m.name, project_path(m)%></td>
                 <td><%= m.client %></td>
                 <td><div class="calendar left"><%= m.start_date %></div></td>

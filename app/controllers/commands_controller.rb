@@ -15,6 +15,7 @@ class CommandsController < ApplicationController
       { "name" => "Ver categorias"  , "url" => "/categories/"       },
       { "name" => "Ver proyectos"   , "url" => "/projects/"         },
       { "name" => "Ver tags"        , "url" => "/tags/"             },
+      { "name" => "Ver roles técnicos", "url" => "/tech_roles/"             },
       { "name" => "Crear categoria" , "url" => "/categories/new"    },
       { "name" => "Crear proyecto"  , "url" => "/projects/new"      },
       { "name" => "Crear hito"      , "url" => "/milestones/new"    },

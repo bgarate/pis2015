@@ -67,6 +67,13 @@ es:
     create:
       success: "creado con éxito!"
       error: "no se ha podido crear"
+    save:
+      success: "guardado con éxito!"
+      error: "no se ha podido guardar"
+    delete:
+      success: "eliminado con éxito!"
+      error: "no se ha podido eliminar"
+
 
 
   #people
@@ -296,11 +303,25 @@ es:
 
     zero: "No se han encontrado tags"
 
+  tech_roles:
+    index:
+      header: "Listando roles técnicos"
+    new:
+      header: "Crear rol técnico"
+      submit: "Crear"
+    edit:
+      header: "Editar rol técnico"
+      submit: "Editar"
+
+    delete:
+      sure: "¿Está seguro que desea eliminar el rol?"
+
+    zero: "No se han encontrado roles"
 
   attachmentsdocs: 'Documentos adjuntos'
   adddoc: 'Agregar documento'
-  driveerrormsj: 'A ocurrido un erro al adjuntar el documento de drive'
-  notpermissionsdrive: 'Asegúrese de que  tiene permisos de acceso al archivo en Google Drive'
+  driveerrormsj: 'Ha ocurrido un error al adjuntar el documento de drive'
+  notpermissionsdrive: 'Asegúrese de que tiene permisos de acceso al archivo en Google Drive'
   attachgoogledrivedoc: 'Adjuntar documento de Google Drive'
   documenturl: 'URL del documento'
   attach: 'Adjuntar'

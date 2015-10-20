@@ -53,7 +53,7 @@
                 <% if current_user_admin? %>
                     <td>
                       <ul>
-                        <% m.people.each do |p| %>
+                        <% m.people.take(3).each do |p| %>
                             <li><%= link_to p.name, person_path(p.id), method: :get %></li>
                         <% end %>
                       </ul>
@@ -61,7 +61,7 @@
                 <% end %>
                 <td class="tags_row">
                   <ul class="">
-                  <% m.tags.each do |t| %>
+                  <% m.tags.take(3).each do |t| %>
                       <li><%= t.name %></li>
                   <% end %>
                   </ul>

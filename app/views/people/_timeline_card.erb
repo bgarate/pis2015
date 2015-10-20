@@ -10,6 +10,9 @@
     <ul id="milestone-list">
       <% @milestones.each do |e| %>
           <li class="clearfix">
+          <% if e.due_date && e.due_date < Date.today %>
+            <div class="expired">
+          <% end %>
             <div class="icon"><%= milestone_icon(e).html_safe %></div>
             <% if can_modify_milestone?e.id %>
               <%= if e.status != 'rejected'
@@ -170,7 +173,9 @@
             <div class="milestone-last-update">
               <%= t('milestones.last_update') + " " + t('ago_i') +  time_ago_in_words(e.updated_at) + t('ago_f') %>
             </div>
-
+            <% if e.due_date && e.due_date < Date.today %>
+                </div>
+            <% end %>
           </li>
       <% end %>
     </ul>

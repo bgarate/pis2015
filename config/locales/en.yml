@@ -150,6 +150,7 @@ en:
     reviewer: "Feedback's reviewer"
     assign_to: 'Assign to'
     cannot_assign: "You cannot assign more people"
+    people: "Associated People"
     assigned_people: "People associated with the milestone"
     mark_done: 'Mark as done'
     add_feedback_author: 'Add feedback reviewer'

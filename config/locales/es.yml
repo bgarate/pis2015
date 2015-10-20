@@ -171,6 +171,7 @@ es:
     reviewer: "Revisor del feedback"
     assign_to: 'Asignar a'
     cannot_assign: "No puede asignar más personas"
+    people: "Personas asociadas"
     assigned_people: "Personas asociadas al hito"
     mark_done: 'Marcar como hecho'
     add_feedback_author: 'Añadir revisor del feedback'

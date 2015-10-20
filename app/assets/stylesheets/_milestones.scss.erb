@@ -262,10 +262,61 @@
 }
 
 .datatable{
+
     .description_row, .title_row{
 
         max-width: 160px;
         word-wrap:break-word;
+    }
+
+    .category_row{
+        max-width: 60px;
+    }
+
+    .tags_row{
+
+        max-width: 191px;
+
+        ul {
+            float: left;
+            margin: 0px;
+
+            li {
+                position: relative;
+                float: left;
+                background-color: #4183C4;
+                font-size: 10px;
+                list-style: none;
+                line-height: $tag-height;
+                height: $tag-height;
+                padding: 0 10px;
+                color: white;
+                font-weight: bold;
+                margin-top: 4px;
+                margin-left: 20px;
+
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    left: -$tag-height;
+                    @include triangle(left, #4183C4, $tag-height);
+                }
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    left: -1px;
+                    top: calc(50% - 2px);
+                    width: 4px;
+                    height: 4px;
+                    border-radius: 50%;
+                    background-color: white;
+                }
+            }
+        }
     }
 
     li{

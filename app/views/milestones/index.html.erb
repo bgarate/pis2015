@@ -47,7 +47,7 @@
                 <td class="description_row">
                   <%= m.description.truncate(50) %>
                 </td>
-                <td>
+                <td  class="category_row" >
                   <%= m.category.name %>
                 </td>
                 <% if current_user_admin? %>
@@ -59,20 +59,24 @@
                       </ul>
                     </td>
                 <% end %>
-                <td>
-                  <ul class="chosen-choices">
+                <td class="tags_row">
+                  <ul class="">
                   <% m.tags.each do |t| %>
-                      <li class="search-choice"><%= t.name %></li>
+                      <li><%= t.name %></li>
                   <% end %>
                   </ul>
                 </td>
                 <% if current_user_admin? %>
                     <td>
-                      <div class="calendar left"><%= m.start_date %></div>
+                      <% if m.start_date != nil %>
+                           <div class="calendar left"><%= m.start_date %></div>
+                      <% end %>
                     </td>
                 <% end %>
                 <td>
-                  <div class="calendar left"><%= m.due_date %></div>
+                  <% if m.due_date != nil %>
+                    <div class="calendar left"><%= m.due_date %></div>
+                  <% end %>
                 </td>
 
 

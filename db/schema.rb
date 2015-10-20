@@ -53,13 +53,14 @@ ActiveRecord::Schema.define(version: 20151017170200) do
     t.string   "title"
     t.date     "due_date"
     t.text     "description"
-    t.integer  "status",             default: 0
+    t.integer  "status",                       default: 0
     t.string   "icon"
     t.integer  "feedback_author_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.integer  "category_id"
     t.date     "start_date"
+    t.integer  "milestone_type",     limit: 8
     t.integer  "author_id"
     t.date     "completed_date"
     t.date     "deleted_date"

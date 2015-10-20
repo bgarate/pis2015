@@ -214,6 +214,9 @@ en:
 
     no_tech_role: "No tech role"
 
+    completed:
+          zero: "No done milestones"
+
     new:
       header: "Create Milestone"
       submit: "Create"

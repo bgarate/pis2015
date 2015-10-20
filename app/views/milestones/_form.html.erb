@@ -1,5 +1,5 @@
 
-<%= form_for [@person, @person.milestones.build], html: { class:'timeline-form main-form slide-on-click clearfix','data-toggle': 'validator'}  do |m| %>
+<%= form_for [@person, @person.milestones.build], html: { class:'timeline-form main-form slide-on-click clearfix toggle-disabled','data-toggle': 'validator'}  do |m| %>
     <h1 class=""><span class="glyphicon glyphicon-check"></span> <%= t('milestones.new.header') %></h1>
     <div class="form-slide">
         <%= render partial: 'milestones/innerform', locals: { m: m, in_profile: true} %>
@@ -7,8 +7,9 @@
 
 <% end %>
 
-<script> $(".chzn-select").chosen();
-    if ($('.category').find('option:selected').text()!='Feedback') {
+<script>
+    $(".chzn-select").chosen();
+    if ($('.category').find('option:selected').attr('isfeedback')!='true') {
         $('.feedback_autor').hide();
     }else {
         $('.feedback_autor').show();
@@ -45,15 +46,14 @@
 </script>
 
 <script>
-  $('.category').change( function() {
-    var selectedValue = $(this).find('option:selected').text();
-    if (selectedValue=='Feedback'){
-      $('.feedback_autor').show('slow');
-    }else{
+    $('.category').change( function() {
+        var selectedValue = $(this).find('option:selected').attr('isfeedback');
+        if (selectedValue=='true'){
+            $('.feedback_autor').show('slow');
+        }else{
 
-      $('.feedback_autor').hide('slow');
-      $('.select_author').val('').trigger("select_author:updated");
-    }
-  });
-
+            $('.feedback_autor').hide('slow');
+            $('.select_author').val('').trigger("select_author:updated");
+        }
+    });
 </script>

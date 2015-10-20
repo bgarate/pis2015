@@ -56,7 +56,7 @@ class PeopleController < ApplicationController
         end
       end
       #CATEGORIES PEOPLE
-      @cats=Category.all.collect {|t| [t.name, t.id]}
+      @cats=Category.all.collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
       @authors=Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
       @tags=Tag.all
 
@@ -93,7 +93,7 @@ class PeopleController < ApplicationController
   end
 
   def show_not_pending_timeline
-    @milestones = @person.milestones.where('milestones.status <> 0').order(due_date: :desc, created_at: :desc)
+    @milestones = @person.milestones.where('milestones.status <> 0').order(due_date: :asc, updated_at: :desc)
     @filtered_count = @person.milestones.size - @milestones.size
 
     @filter = :not_pending
@@ -105,7 +105,7 @@ class PeopleController < ApplicationController
   end
 
   def show_pending_timeline
-    @milestones = @person.milestones.where('milestones.status = 0').order(due_date: :desc, created_at: :desc)
+    @milestones = @person.milestones.where('milestones.status = 0').order(due_date: :asc, updated_at: :desc)
     @filtered_count = @person.milestones.size - @milestones.size
 
     @filter = :pending

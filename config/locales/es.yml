@@ -165,9 +165,8 @@ es:
   milestones:
 
     header: "Hitos"
-    state_title: "Estado"
-    actions: "Acciones"
     title: "Título"
+    category: "Categoría"
     due_date: "Fecha límite"
     reviewer: "Revisor del feedback"
     assign_to: 'Asignar a'
@@ -187,6 +186,9 @@ es:
     author: "Autor"
     done_date: "Completado el día: "
     rejected_date: "Rechazado el día: "
+
+    state_title: "Estado"
+    actions: "Acciones"
 
     state:
       done_or_rejected: 'Hitos en estado hecho o rechazado'
@@ -296,9 +298,8 @@ es:
 
   attachmentsdocs: 'Documentos adjuntos'
   adddoc: 'Agregar documento'
-  driveerrormsj: 'Ha ocurrido un error. Asegúrese de cumplir con los siguientes puntos:
-                      - Ha ingresado un URL correcta
-                      - Tiene permisos de acceso al archivo en Google Drive'
+  driveerrormsj: 'A ocurrido un erro al adjuntar el documento de drive'
+  notpermissionsdrive: 'Asegúrese de que  tiene permisos de acceso al archivo en Google Drive'
   attachgoogledrivedoc: 'Adjuntar documento de Google Drive'
   documenturl: 'URL del documento'
   attach: 'Adjuntar'

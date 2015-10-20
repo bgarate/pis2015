@@ -95,8 +95,9 @@
 
           </tbody>
         </table>
-        <b><%= link_to t("project.index.header"), '/projects/' %></b>
-        <!--#TEMPORAL: definir a donde tiene que volver, o a donde hay que redirigir.-->
+        <%= link_to '/projects' do%>
+            <button type="button"  class="btn btn-default btn-xs"><span class="glyphicon glyphicon-th-list"></span>  <%=t("project.index.header")%></button>
+        <%end%>
       </div>
     </div>
   </div>

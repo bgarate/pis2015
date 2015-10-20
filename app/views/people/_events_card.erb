@@ -1,64 +1,28 @@
 <div id="events-card" class="card events">
+
+  <span class="toggle-events glyphicon glyphicon-chevron-down"></span>
   <h1><%= t('events') %></h1>
-  <!--<div class="separator"><div>Esta semana</div></div>
-  <ul>
-    <li class="clearfix">
-      <div class="day">16</div>
-      <div class="day-of-the-week">Mie</div>
-      <div class="content">
-        <div class="month-and-year">Septiembre 2015</div>
-        <h2>Feedback semestral</h2>
-        <p>Reunión de relevamiento de requisitos
-          para nuevo proyecto con el cliente XYZ S.A.</p>
-      </div>
-    </li>
-  </ul>
-  <div class="separator"><div>Semana próxima</div></div>
-  <ul>
-    <li class="clearfix">
-      <div class="day">16</div>
-      <div class="day-of-the-week">Mie</div>
-      <div class="content">
-        <div class="month-and-year">Septiembre 2015</div>
-        <h2>Feedback semestral</h2>
-        <p>Reunión de relevamiento de requisitos
-          para nuevo proyecto con el cliente XYZ S.A.</p>
-      </div>
-    </li>
-    <li class="clearfix">
-      <div class="day">16</div>
-      <div class="day-of-the-week">Mie</div>
-      <div class="content">
-        <div class="month-and-year">Septiembre 2015</div>
-        <h2>Feedback semestral</h2>
-        <p>Reunión de relevamiento de requisitos
-          para nuevo proyecto con el cliente XYZ S.A.</p>
-      </div>
-    </li>
-  </ul>-->
-
-  <% if @events %>
-      <% @events.each do |e| %>
-          <ul>
-            <li class="clearfix">
-              <% if e.due_date %>
-                  <div class="day"><%=l(e.due_date, format: "%d")%></div>
-                  <div class="day-of-the-week"><%=l(e.due_date, format: "%a")%></div>
-              <% end %>
-              <div class="content">
+  <div class="slider">
+    <% if @events %>
+        <% @events.each do |e| %>
+            <ul>
+              <li class="clearfix">
                 <% if e.due_date %>
-                    <div class="month-and-year"><%=l(e.due_date, format: "%B %Y")%></div>
+                    <div class="day"><%=l(e.due_date, format: "%d")%></div>
+                    <div class="content">
+                        <div>
+                        <div class="month-and-year"><%=l(e.due_date, format: "%B %Y")%></div>
+                        <h2><%=e.title%></h2>
+                        </div>
+                        <div class="documents"><%= milestone_short_info(e) %></div>
+                </div>
                 <% end %>
-                <h2><%=e.title%></h2>
-                <p title="<%=e.description%>"><%=e.description.to_s.truncate(100, separator: ' ') %></p>
 
-                <div class="pull-right"><%= milestone_short_info(e) %></div>
-              </div>
-
-            </li>
-          </ul>
-      <% end %>
-  <% else %>
-    <p><%= t('milestones.zero') %></p>
-  <% end %>
+              </li>
+            </ul>
+        <% end %>
+    <% else %>
+        <p><%= t('milestones.zero') %></p>
+    <% end %>
+  </div>
 </div>

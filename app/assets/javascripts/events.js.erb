@@ -1,0 +1,26 @@
+var event_ready = function () {
+    $("#events-card .toggle-events, #events-card h2").click(function(e) {
+        var obj = $(this).parent().children(".toggle-events");
+
+        if($(this).parent().children(".slider").length == 0)
+            return;
+
+        var list = obj.siblings(".slider");
+
+        if(list.is(":hidden")) {
+            obj.removeClass("glyphicon-chevron-down");
+            obj.addClass("glyphicon-chevron-up");
+        } else {
+            obj.removeClass("glyphicon-chevron-up");
+            obj.addClass("glyphicon-chevron-down");
+        }
+
+        list.slideToggle();
+
+    });
+    $("#events-card .slider").hide();
+    $(".toggle-events").parent().children("h2").addClass("pointer");
+};
+
+$(document).ready(event_ready);
+$(document).on('page:load', event_ready);

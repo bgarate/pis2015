@@ -91,6 +91,8 @@ Rails.application.routes.draw do
       get 'me'
       post 'add_mentor'
       get 'add_mentor_form'
+      post 'edit_profile_pic'
+      get 'edit_profile_pic_form'
       get 'new' => 'people#new'
       post 'new' => 'people#create'
       get ':id' => 'people#show', :constraints  => { :id => /[-\w\.]+/ }

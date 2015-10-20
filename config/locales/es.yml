@@ -101,6 +101,10 @@ es:
       other_notes: "Ver %{count} notas restantes"
       submit: "Crear"
 
+    edit_picture:
+      header: "Editar imagen de perfil"
+      submit: "Actualizar imagen"
+
   #mentor
   mentor:
     header: "Mentores"

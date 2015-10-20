@@ -3,7 +3,14 @@
 
     <div class="table-container" id="people_table">
 
-      <h1><%= t('people.list.header')  %></h1>
+      <h1>
+        <% if current_user_admin? %>
+            <%= link_to new_person_path, method: :get do%>
+                <span class='large-text glyphicon glyphicon-plus table-add-button pull-left'></span>
+            <% end %>
+        <% end %>
+        <%= t('people.list.header')  %>
+      </h1>
       <% if @people.any? %>
           <table class="table datatable" data-info="false">
             <thead>

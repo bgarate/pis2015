@@ -205,7 +205,7 @@ es:
     pendings: "Hitos pendientes"
     overcomes: 'Hitos vencidos'
 
-    start_date: "Fecha de inicio"
+    start_date: "Fecha inicio"
     description: "Descripción"
     icon: "Icono"
     status: "Estado"

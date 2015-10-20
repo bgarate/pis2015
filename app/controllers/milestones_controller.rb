@@ -74,7 +74,7 @@ class MilestonesController < ApplicationController
     #CATEGORIES
     category=Category.find(params[:milestone][:category_id])
     @milestone.category=category
-    if category.name=='Feedback'
+    if category.name.include? "Feedback"
       @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
     end
 
@@ -189,7 +189,8 @@ class MilestonesController < ApplicationController
 
   def update
     category=Category.find(params[:milestone][:category_id])
-      if category.name == 'Feedback'
+
+      if category.name.include? "Feedback"
         @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
       else
         @milestone.feedback_author_id=nil

@@ -314,3 +314,10 @@ en:
       groupCheckedTooManyStart : 'Please choose a maximum of '
       groupCheckedEnd : ' item(s)'
 
+  events-strings:
+    project:
+      creation:
+        title: '%{project} started'
+        description: 'The project %{project} has begun for the client %{client}'
+
+

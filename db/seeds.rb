@@ -140,11 +140,11 @@ p0.tech_role = tr
 p0.milestones << m
 p0.milestones << m1
 p0.save!
-m.author_id = p0.id
+m.feedback_author_id = p0.id
 m.save!
-m1.author_id = p0.id
+m1.feedback_author_id = p0.id
 m1.save!
-m2.author_id = p0.id
+m2.feedback_author_id = p0.id
 m2.save!
 
 

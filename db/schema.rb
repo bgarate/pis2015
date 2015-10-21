@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019131723) do
+ActiveRecord::Schema.define(version: 20151021173324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,30 +38,17 @@ ActiveRecord::Schema.define(version: 20151019131723) do
   add_index "mentorships", ["mentee_id"], name: "index_mentorships_on_mentee_id", using: :btree
   add_index "mentorships", ["mentor_id"], name: "index_mentorships_on_mentor_id", using: :btree
 
-  create_table "milestone_templates", force: :cascade do |t|
-    t.string   "title"
-    t.integer  "due_term"
-    t.text     "description"
-    t.integer  "type"
-    t.string   "icon"
-    t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "milestones", force: :cascade do |t|
     t.string   "title"
     t.date     "due_date"
     t.text     "description"
-    t.integer  "status",                       default: 0
+    t.integer  "status",             default: 0
     t.string   "icon"
     t.integer  "feedback_author_id"
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.integer  "category_id"
     t.date     "start_date"
-    t.integer  "milestone_type",     limit: 8
-    t.integer  "author_id"
     t.date     "completed_date"
     t.date     "deleted_date"
   end
@@ -194,6 +181,24 @@ ActiveRecord::Schema.define(version: 20151019131723) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "templates", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "icon"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "templates_tags", id: false, force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "template_id"
+  end
+
+  add_index "templates_tags", ["tag_id", "template_id"], name: "index_templates_tags_on_tag_id_and_template_id", unique: true, using: :btree
+  add_index "templates_tags", ["tag_id"], name: "index_templates_tags_on_tag_id", using: :btree
+  add_index "templates_tags", ["template_id"], name: "index_templates_tags_on_template_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.integer  "person_id"
     t.string   "oauth_token"
@@ -216,4 +221,7 @@ ActiveRecord::Schema.define(version: 20151019131723) do
   add_foreign_key "people", "tech_roles"
   add_foreign_key "person_skills", "people"
   add_foreign_key "person_skills", "skills"
+  add_foreign_key "templates", "categories"
+  add_foreign_key "templates_tags", "tags"
+  add_foreign_key "templates_tags", "templates"
 end

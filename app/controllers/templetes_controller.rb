@@ -1,0 +1,2 @@
+class TempletesController
+end

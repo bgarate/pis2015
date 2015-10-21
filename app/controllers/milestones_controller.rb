@@ -78,9 +78,6 @@ class MilestonesController < ApplicationController
       @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
     end
 
-    #AUTHOR
-    @milestone.author_id = current_user.person_id
-
     #ASSIGNED
     if params[:people]!=nil
       params[:people].each do |p|

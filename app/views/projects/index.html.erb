@@ -18,8 +18,10 @@
             <td><%= t('project.client') %></td>
             <td><%= t('project.start_date') %></td>
             <td><%= t('project.end_date') %></td>
-            <td></td>
-            <td></td>
+            <% if current_user_admin? %>
+                <td></td>
+                <td></td>
+            <% end %>
           </tr>
           </thead>
           <tbody>
@@ -30,18 +32,20 @@
                 <td><%= m.client %></td>
                 <td><div class="calendar left"><%= m.start_date %></div></td>
                 <td><div class="calendar left"><%= m.end_date %></div></td>
-                <td><%= link_to edit_project_path(m) do%>
-                    <span class='large-text glyphicon glyphicon-pencil'></span>
-                  <% end %>
-                </td>
-                <td><%= link_to project_path(m),
-                                method: :delete,
-                                data: { confirm: t('project.delete.sure') } do %>
+                <% if current_user_admin? %>
+                    <td><%= link_to edit_project_path(m) do%>
+                        <span class='large-text glyphicon glyphicon-pencil'></span>
+                      <% end %>
+                    </td>
 
-                      <span class='large-text glyphicon glyphicon-remove'></span>
-                  <% end %>
-                </td>
+                    <td><%= link_to project_path(m),
+                                    method: :delete,
+                                    data: { confirm: t('project.delete.sure') } do %>
 
+                          <span class='large-text glyphicon glyphicon-remove'></span>
+                      <% end %>
+                    </td>
+                <% end %>
               </tr>
           <% end %>
           </tbody>

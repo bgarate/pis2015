@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
+      <%= form_for @person, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
+        <h1><span class="glyphicon glyphicon-user"></span><%= t('people.edit.header') %></h1>
+        <div class="form-group">
+          <%= f.label t('people.new.name'), class: "control-label" %>
+          <%= f.text_field :name, class: "form-control", 'data-validation': "required" %>
+        </div>
+        <div class="form-group">
+          <%= f.label t('people.new.email'), class: "control-label" %>
+          <%= f.text_field :email, class: "form-control", 'data-validation': "required email"%>
+
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-6">
+            <%= f.label t('people.new.cellphone'), class: "control-label" %>
+            <%= f.text_field :cellphone, class: "form-control"%>
+
+          </div>
+          <div class="form-group col-xs-6">
+            <%= f.label t('people.new.telephone'), class: "control-label" %>
+            <%= f.text_field :phone, class: "form-control" %>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-xs-6">
+            <%= f.label t('people.new.birth_date'), class: "control-label" %>
+            <div class="input-group">
+              <%if @person.birth_date==nil %>
+                <%= f.text_field :birth_date, class: "form-control", "data-provide":"datepicker", 'data-validation': "required birthdate", 'data-validation-format': "dd/mm/yyyy"%>
+              <% else %>
+                <%= f.text_field :birth_date, class: "form-control",'value':l(@person.birth_date), "data-provide":"datepicker", 'data-validation': "required birthdate", 'data-validation-format': "dd/mm/yyyy"%>
+              <% end %>
+                <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+            </div>
+
+          </div>
+          <div class="form-group col-xs-6">
+            <%= f.label t('people.new.init_date'), class: "control-label" %>
+            <div class="input-group">
+              <%if @person.start_date==nil %>
+                <%= f.text_field :start_date, class: "form-control", "data-provide":"datepicker", 'data-validation': "required birthdate", 'data-validation-format': "dd/mm/yyyy"%>
+              <% else %>
+                <%= f.text_field :start_date, class: "form-control",'value':l(@person.start_date), "data-provide":"datepicker", 'data-validation': "required birthdate", 'data-validation-format': "dd/mm/yyyy"%>
+              <% end %>
+              <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="progress hidden">
+                <div class="progress-bar" role="progressbar">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-xs-6">
+              <%= f.label "Imagen", class: "control-label" %>
+              <%= f.cl_image_upload(:image_id, :crop => :fill, :width => 300, :height => 300) %>
+            </div>
+            <div class="form-group col-xs-6">
+              <div class="image-preview"></div>
+            </div>
+          </div>
+
+          <div class="btn">
+            <%= f.button t('person.edit.submit'),:type => 'submit', class: "btn btn-default" %>
+          </div>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</div>

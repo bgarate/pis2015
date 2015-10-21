@@ -25,6 +25,16 @@ class CategoriesController < ApplicationController
     #@category=Category.find(params[:id])
   end
 
+  def destroy
+    @category = Category.find_by(id: params[:id])
+    if @category
+      name = @category.name
+      @category.destroy
+      flash.notice = "#{name} " + t('messages.delete.success')
+    end
+    redirect_to categories_path
+  end
+
   private
   def category_params
     params.require(:category).permit(:name, :icon, :created_at, :updated_at)

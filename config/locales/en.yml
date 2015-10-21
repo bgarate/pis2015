@@ -257,6 +257,7 @@ en:
     updated: "Updated at"
     delete:
       title: "Delete Category"
+      sure: "¿Are you sure you want to delete this category?"
 
     new:
       header: "Create Category"

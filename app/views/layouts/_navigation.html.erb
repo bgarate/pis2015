@@ -30,11 +30,18 @@
                       <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
                       <span class="sr-only">(current)</span>
                   <% end %>
+
                   <% if current_user_admin? %>
+
                     <%= link_to '/people'  do %>
                       <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                       <span class="sr-only">(current)</span>
                     <% end %>
+                    <%= link_to categories_path  do %>
+                      <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                      <span class="sr-only">(current)</span>
+                    <% end %>
+
                   <% end %>
 
                   <%= link_to  '/projects' do %>

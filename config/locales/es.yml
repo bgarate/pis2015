@@ -43,11 +43,13 @@ es:
   delete: "Borrar"
   back: "Volver"
   title: "Título"
+  description: "Descripción"
   name: 'Nombre'
   id: 'ID'
   search: 'Buscar'
   none:  'Ninguna'
   view: 'Ver'
+  icon: "Icono"
 
   common:
     y: 'Sí'
@@ -166,7 +168,11 @@ es:
     delete:
       sure: "¿Está seguro que desea eliminar este proyecto?"
 
-
+  #plantillas
+  templates:
+    new:
+      header: 'Crear Plantilla de Hito'
+      submit: 'Crear'
 
   #hitos
   milestones:

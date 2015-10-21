@@ -43,11 +43,13 @@ en:
   delete: "Delete"
   back: "Back"
   title: 'Title'
+  description: "Description"
   name: 'Name'
   id: 'ID'
   search: 'Search'
   none:  'None'
   view: 'View'
+  icon: "Icon"
 
   common:
     y: 'Yes'
@@ -166,6 +168,11 @@ en:
     delete:
       sure: "Are you sure you want to delete this project?"
 
+  #templates
+  templates:
+    new:
+      header: 'Create Milestone Template'
+      submit: 'Create'
 
   #milestones
   milestones:

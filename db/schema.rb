@@ -165,6 +165,15 @@ ActiveRecord::Schema.define(version: 20151021173324) do
     t.string "name"
   end
 
+  create_table "tags_templates", id: false, force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "template_id"
+  end
+
+  add_index "tags_templates", ["tag_id", "template_id"], name: "index_tags_templates_on_tag_id_and_template_id", unique: true, using: :btree
+  add_index "tags_templates", ["tag_id"], name: "index_tags_templates_on_tag_id", using: :btree
+  add_index "tags_templates", ["template_id"], name: "index_tags_templates_on_template_id", using: :btree
+
   create_table "tech_roles", force: :cascade do |t|
     t.string   "name"
     t.string   "icon"
@@ -190,15 +199,6 @@ ActiveRecord::Schema.define(version: 20151021173324) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "templates_tags", id: false, force: :cascade do |t|
-    t.integer "tag_id"
-    t.integer "template_id"
-  end
-
-  add_index "templates_tags", ["tag_id", "template_id"], name: "index_templates_tags_on_tag_id_and_template_id", unique: true, using: :btree
-  add_index "templates_tags", ["tag_id"], name: "index_templates_tags_on_tag_id", using: :btree
-  add_index "templates_tags", ["template_id"], name: "index_templates_tags_on_template_id", using: :btree
-
   create_table "users", force: :cascade do |t|
     t.integer  "person_id"
     t.string   "oauth_token"
@@ -221,7 +221,7 @@ ActiveRecord::Schema.define(version: 20151021173324) do
   add_foreign_key "people", "tech_roles"
   add_foreign_key "person_skills", "people"
   add_foreign_key "person_skills", "skills"
+  add_foreign_key "tags_templates", "tags"
+  add_foreign_key "tags_templates", "templates"
   add_foreign_key "templates", "categories"
-  add_foreign_key "templates_tags", "tags"
-  add_foreign_key "templates_tags", "templates"
 end

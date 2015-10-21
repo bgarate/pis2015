@@ -11,14 +11,14 @@ class CreateTemplates < ActiveRecord::Migration
 
     add_foreign_key :templates, :categories
 
-    create_table :templates_tags, id: false, force: :cascade do |t|
+    create_table :tags_templates, id: false, force: :cascade do |t|
       t.belongs_to :tag, index: true
       t.belongs_to :template, index: true
 
     end
 
-    add_index :templates_tags, [:tag_id, :template_id], :unique => true
-    add_foreign_key :templates_tags, :tags
-    add_foreign_key :templates_tags, :templates
+    add_index :tags_templates, [:tag_id, :template_id], :unique => true
+    add_foreign_key :tags_templates, :tags
+    add_foreign_key :tags_templates, :templates
   end
 end

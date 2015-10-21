@@ -39,6 +39,10 @@ describe MilestonesController, "Milestone Controller" do
     @c1.updated_at=Time.now
     @c1.save!
 
+    @cFeed = Category.new :name=>'Feedback cualquiera', :icon=>'unicono'
+    @cFeed.is_feedback=true
+    @cFeed.save!
+
     @m1 = Milestone.new :title=>'Entrega del prototipo de alfred', :description=>'Hay que entregar el protipo de alfred
                                   a la gente de pis. Ademas de cafe y galletitas maria gratis'
     @m1.due_date= Time.now - (3*2*7*24*60*60)
@@ -145,9 +149,10 @@ describe MilestonesController, "Milestone Controller" do
 
   it "añade un revisor a un hito de tipo feedback" do
     session[:user_id] = @ad_user.id
-    put :update, :id => @m1.id, :category_id=>@c1.id, :milestone => {:category_id=>@c1.id, :feedback_author_id => @person.id }
+    put :update, :id => @m1.id, :category_id=>@cFeed.id, :milestone => {:category_id=>@cFeed.id, :feedback_author_id => @person.id }
     @m1.reload
     expect(@m1.feedback_author).to eq @person
+    expect(@m1.people).to include(@person)
   end
 
   it "no añade un revisor a un hito que no es tipo feedback" do

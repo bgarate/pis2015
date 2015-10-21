@@ -88,7 +88,7 @@ en:
       zero: "There are no registered users"
 
     new:
-      header: "Create user"
+      header: "Create User"
       name: "Name"
       email: "Email"
       cellphone: "Cellphone"
@@ -99,6 +99,10 @@ en:
       asign_to_project: "Assign to project"
       other_notes: "View %{count} other notes"
       submit: "Create"
+
+    edit:
+          header: "Edit User"
+          submit: "Edit"
 
 
   #mentor

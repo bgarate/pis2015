@@ -16,7 +16,7 @@
           <tbody>
           <% @category.each do |c| %>
               <tr>
-                <td><%= c.icon %></td>
+                <td><span class="large-text glyphicon <%= c.icon %>"></span></td>
                 <td><%= c.name %></td>
                 <td><%= c.created_at%></td>
                 <td><%= c.updated_at%></td>

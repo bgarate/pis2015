@@ -1,7 +1,7 @@
 <div id="events-card" class="card events">
 
   <span class="toggle-events glyphicon glyphicon-chevron-down"></span>
-  <h1><%= t('events') %></h1>
+  <h1><%= t('events') %> (<%= @events.length %>)</h1>
   <div class="slider">
     <% if @events %>
         <% @events.each do |e| %>

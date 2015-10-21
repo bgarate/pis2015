@@ -27,13 +27,13 @@
     <%end%>
   </div>
   <div class="right-pane">
-    <p><%= t('milestones.author') + ": " + @milestone.author.name %></p>
     <p><%= @milestone.description %></p>
-    <p><%=
-        if feedback? and @milestone.feedback_author
-          @milestone.feedback_author.name
-        end
-    %></p>
+    <p><%
+        if feedback? && @milestone.feedback_author %>
+            <%=  t('milestones.author') + ": " %>
+           <%= link_to @milestone.feedback_author.name, person_path(@milestone.feedback_author.id), method: :get %>
+        <% end %>
+    </p>
 
 
     <% if (@milestone.pending?) && (can_modify_milestone?@milestone.id) %>

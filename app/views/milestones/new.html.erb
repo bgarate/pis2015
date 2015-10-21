@@ -11,12 +11,13 @@
 </div>
 <br><br><br><br>
 
-<script> $(".chzn-select").chosen();
-if ($('.category').find('option:selected').text()!='Feedback') {
-    $('.feedback_autor').hide();
-}else {
-    $('.feedback_autor').show();
-}
+<script>
+    $(".chzn-select").chosen();
+    if ($('.category').find('option:selected').attr('isfeedback')!='true') {
+        $('.feedback_autor').hide();
+    }else {
+        $('.feedback_autor').show();
+    }
 </script>
 
 <script>
@@ -49,8 +50,8 @@ if ($('.category').find('option:selected').text()!='Feedback') {
 
 <script>
     $('.category').change( function() {
-        var selectedValue = $(this).find('option:selected').text();
-        if (selectedValue=='Feedback'){
+        var selectedValue = $(this).find('option:selected').attr('isfeedback');
+        if (selectedValue=='true'){
             $('.feedback_autor').show('slow');
         }else{
 
@@ -58,6 +59,5 @@ if ($('.category').find('option:selected').text()!='Feedback') {
             $('.select_author').val('').trigger("select_author:updated");
         }
     });
-
 </script>
 

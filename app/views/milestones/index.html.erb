@@ -11,10 +11,16 @@
           <thead>
           <tr>
             <td><%= t('milestones.state_title') %></td>
-            <td><%= t('milestones.title') %></td>
-            <td><%= t('milestones.description') %></td>
+            <td class="title_row" ><%= t('milestones.title') %></td>
+            <td class="description_row"><%= t('milestones.description') %></td>
             <td><%= t('milestones.category') %></td>
+            <% if current_user_admin? %>
+                <td><%= t('milestones.people') %></td>
+            <% end %>
             <td><%= t('milestones.tags') %></td>
+            <% if current_user_admin? %>
+                <td><%= t('milestones.start_date') %></td>
+            <% end %>
             <td><%= t('milestones.due_date') %></td>
             <td><%= t('milestones.actions') %></td>
           </tr>
@@ -30,29 +36,47 @@
                   <% end %>
                 </td>
                 <% if (m.status == 'rejected') || (m.status == 'done')  %>
-                    <td style="text-decoration: line-through;">
+                    <td class="description_row" style="text-decoration: line-through;">
                       <%= link_to m.title, milestone_path(m), method: :get%>
                     </td>
                 <% else %>
-                    <td>
+                    <td class="description_row">
                       <%= link_to m.title, milestone_path(m), method: :get%>
                     </td>
                 <% end %>
-                <td>
+                <td class="description_row">
                   <%= m.description.truncate(50) %>
                 </td>
-                <td>
+                <td  class="category_row" >
                   <%= m.category.name %>
                 </td>
-                <td>
-                  <ul class="chosen-choices">
-                  <% m.tags.each do |t| %>
-                      <li class="search-choice"><%= t.name %></li>
+                <% if current_user_admin? %>
+                    <td>
+                      <ul>
+                        <% m.people.take(3).each do |p| %>
+                            <li><%= link_to p.name, person_path(p.id), method: :get %></li>
+                        <% end %>
+                      </ul>
+                    </td>
+                <% end %>
+                <td class="tags_row">
+                  <ul class="">
+                  <% m.tags.take(3).each do |t| %>
+                      <li><%= t.name %></li>
                   <% end %>
                   </ul>
                 </td>
+                <% if current_user_admin? %>
+                    <td>
+                      <% if m.start_date != nil %>
+                           <div class="calendar left"><%= m.start_date %></div>
+                      <% end %>
+                    </td>
+                <% end %>
                 <td>
-                  <div class="calendar left"><%= m.due_date %></div>
+                  <% if m.due_date != nil %>
+                    <div class="calendar left"><%= m.due_date %></div>
+                  <% end %>
                 </td>
 
 

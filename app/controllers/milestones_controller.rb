@@ -45,7 +45,7 @@ class MilestonesController < ApplicationController
     @person = Person.find_by(id: @identifier)
 
     #redirect_to '/people'
-    @cats=Category.all.collect {|t| [t.name, t.id]}
+    @cats=Category.all.collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
     @authors=Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
     @tags=Tag.all
 
@@ -74,7 +74,7 @@ class MilestonesController < ApplicationController
     #CATEGORIES
     category=Category.find(params[:milestone][:category_id])
     @milestone.category=category
-    if category.name=='Feedback'
+    if category.name.include? "Feedback"
       @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
     end
 
@@ -89,9 +89,49 @@ class MilestonesController < ApplicationController
       end
     end
 
+    #Crear documento adjunto
+    if @milestone.category && @milestone.category.doc_url
+      u = current_user
+      session = GoogleDrive.login_with_oauth(u.oauth_token)
+      begin
+        #traigo el archivo
+        f = session.file_by_url(@milestone.category.doc_url)
+        #lo copio
+        fuploaded = f.copy("#{@milestone.title}")
+        #agregar permisos a la gente asociada al hito
+        @milestone.people.each do |p|
+          fuploaded.acl.push(
+              {:type => 'user', :value => p.email, :role => 'writer'})
+        end
+
+        #se logro encontrar el resorce
+        r = Resource.new
+        r.doc_id= fuploaded.resource_id
+        r.title= fuploaded.title
+        r.url= fuploaded.human_url
+        @milestone.resources<<(r)
+        @milestone.updated_at= Time.now
+        @milestone.save!
+      rescue Google::APIClient::ClientError
+        #no se logro encontrar el resorce
+        driveerr = t(:driveerrormsj)
+      rescue GoogleDrive::Error
+        #url no es valida
+        driveerr = t(:invalidurl)
+      rescue URI::InvalidURIError
+        #url no es valida
+        driveerr = t(:invalidurl)
+      end
+    end
+
     @milestone.save
+
     if @milestone.valid?
-      flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')
+      if driveerr.nil?
+        flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')
+      else
+        flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success') + " \n(#{t(:driveerrormsj)}: #{driveerr})"
+      end
     else
       flash.alert = "'#{milestone_params[:title]}' " + t('messages.create.error')
     end
@@ -132,7 +172,7 @@ class MilestonesController < ApplicationController
   end
 
   def edit
-    @cats=Category.all.collect {|t| [t.name, t.id]}
+    @cats=Category.all.collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
     @authors=Person.all.collect {|t| [t.name, t.id]}
     @tags = Tag.all
     user= Person.find(current_user.person_id)
@@ -149,7 +189,8 @@ class MilestonesController < ApplicationController
 
   def update
     category=Category.find(params[:milestone][:category_id])
-      if category.name == 'Feedback'
+
+      if category.name.include? "Feedback"
         @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
       else
         @milestone.feedback_author_id=nil
@@ -180,7 +221,7 @@ class MilestonesController < ApplicationController
 
   helper_method :feedback?
   def feedback?
-    return @milestone.category.name == 'Feedback'
+    return @milestone.category.is_feedback?
   end
 
   def next_status

@@ -7,8 +7,9 @@
 
 <% end %>
 
-<script> $(".chzn-select").chosen();
-    if ($('.category').find('option:selected').text()!='Feedback') {
+<script>
+    $(".chzn-select").chosen();
+    if ($('.category').find('option:selected').attr('isfeedback')!='true') {
         $('.feedback_autor').hide();
     }else {
         $('.feedback_autor').show();
@@ -45,15 +46,14 @@
 </script>
 
 <script>
-  $('.category').change( function() {
-    var selectedValue = $(this).find('option:selected').text();
-    if (selectedValue=='Feedback'){
-      $('.feedback_autor').show('slow');
-    }else{
+    $('.category').change( function() {
+        var selectedValue = $(this).find('option:selected').attr('isfeedback');
+        if (selectedValue=='true'){
+            $('.feedback_autor').show('slow');
+        }else{
 
-      $('.feedback_autor').hide('slow');
-      $('.select_author').val('').trigger("select_author:updated");
-    }
-  });
-
+            $('.feedback_autor').hide('slow');
+            $('.select_author').val('').trigger("select_author:updated");
+        }
+    });
 </script>

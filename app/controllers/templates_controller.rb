@@ -45,6 +45,10 @@ class TemplatesController < ApplicationController
     end
   end
 
+  def generate
+    
+  end
+
   def destroy
     temp = Template.find_by(id: params[:template_id])
     if temp

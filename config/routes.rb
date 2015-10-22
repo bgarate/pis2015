@@ -85,6 +85,7 @@ Rails.application.routes.draw do
     resources :milestones
     post :assign_milestone
     post :assign_project
+    post :switch_admin
     get :show_pending_timeline
     get :show_not_pending_timeline
     collection do

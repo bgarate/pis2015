@@ -108,6 +108,11 @@ es:
       header: "Editar imagen de perfil"
       submit: "Actualizar imagen"
 
+    admin:
+      mark_as_sure: "¿Estás seguro de que deseas hacer del usuario un "
+      admin: " admin?"
+      no_admin: " NO admin?"
+
   #mentor
   mentor:
     header: "Mentores"

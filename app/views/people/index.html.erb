@@ -45,6 +45,7 @@
                         <%= t('common.n') %>
                     <% end %>
                   </td>
+                  <td><%= user_admin(p,:right) %></td>
                   <td>
                     <% if current_user_admin? %>
                       <%= link_to edit_person_path(p) do %>

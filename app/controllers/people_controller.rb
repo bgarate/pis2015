@@ -2,7 +2,7 @@ class PeopleController < ApplicationController
 
   skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline]
   #skip_before_action :admin?, only:[:assign_project]
-  before_action :get_person, only:[:show, :show_pending_timeline, :show_not_pending_timeline]
+  before_action :get_person, only:[:show, :edit, :update, :show_pending_timeline, :show_not_pending_timeline]
 
   def get_person
     identifier = params[:id]
@@ -162,6 +162,17 @@ class PeopleController < ApplicationController
   #  redirect_to person
   #end
 
+  def edit
+
+  end
+
+  def update
+    if @person.update_attributes(person_params)
+      redirect_to @person
+    else
+      redirect_to edit_person_path
+    end
+  end
 
   def add_mentor
     if (params[:mentor_id] != params[:mentee_id])

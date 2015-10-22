@@ -103,6 +103,9 @@ es:
       asign_to_project: "Asignar a proyecto"
       other_notes: "Ver %{count} notas restantes"
       submit: "Crear"
+    edit:
+      header: "Editar Usuario"
+      submit: "Editar"
 
   #mentor
   mentor:
@@ -220,7 +223,7 @@ es:
     pendings: "Hitos pendientes"
     overcomes: 'Hitos vencidos'
 
-    start_date: "Fecha de inicio"
+    start_date: "Fecha inicio"
     description: "Descripción"
     icon: "Icono"
     status: "Estado"
@@ -577,3 +580,13 @@ es:
       long: "%d de %B de %Y %H:%M"
       short: "%d de %b %H:%M"
     pm: pm
+
+  events-strings:
+    project:
+      assign_to_project_event:
+        title: "%{person} se unió al proyecto %{project}"
+        description: "%{person} se unió al proyecto %{project} para %{client}"
+    person:
+          change_role_event:
+            title: "%{person} es ahora %{new_role}"
+            description: "%{person} pasó de %{old_role} a %{new_role}"

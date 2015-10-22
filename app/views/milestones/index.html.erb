@@ -47,32 +47,36 @@
                 <td class="description_row">
                   <%= m.description.truncate(50) %>
                 </td>
-                <td>
+                <td  class="category_row" >
                   <%= m.category.name %>
                 </td>
                 <% if current_user_admin? %>
                     <td>
                       <ul>
-                        <% m.people.each do |p| %>
+                        <% m.people.take(3).each do |p| %>
                             <li><%= link_to p.name, person_path(p.id), method: :get %></li>
                         <% end %>
                       </ul>
                     </td>
                 <% end %>
-                <td>
-                  <ul class="chosen-choices">
-                  <% m.tags.each do |t| %>
-                      <li class="search-choice"><%= t.name %></li>
+                <td class="tags_row">
+                  <ul class="">
+                  <% m.tags.take(3).each do |t| %>
+                      <li><%= t.name %></li>
                   <% end %>
                   </ul>
                 </td>
                 <% if current_user_admin? %>
                     <td>
-                      <div class="calendar left"><%= m.start_date %></div>
+                      <% if m.start_date != nil %>
+                           <div class="calendar left"><%= m.start_date %></div>
+                      <% end %>
                     </td>
                 <% end %>
                 <td>
-                  <div class="calendar left"><%= m.due_date %></div>
+                  <% if m.due_date != nil %>
+                    <div class="calendar left"><%= m.due_date %></div>
+                  <% end %>
                 </td>
 
 

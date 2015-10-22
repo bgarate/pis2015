@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20151021173324) do
+=======
+ActiveRecord::Schema.define(version: 20151021133901) do
+>>>>>>> origin
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +116,7 @@ ActiveRecord::Schema.define(version: 20151021173324) do
   end
 
   add_index "person_milestones", ["milestone_id"], name: "index_person_milestones_on_milestone_id", using: :btree
+  add_index "person_milestones", ["person_id", "milestone_id"], name: "index_person_milestones_on_person_id_and_milestone_id", unique: true, using: :btree
   add_index "person_milestones", ["person_id"], name: "index_person_milestones_on_person_id", using: :btree
 
   create_table "person_skills", force: :cascade do |t|

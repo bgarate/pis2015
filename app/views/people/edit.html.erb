@@ -17,8 +17,9 @@
         </div>
 
         <div class="form-group tech_role">
-          <%= f.label 'dasdsa' %>
-          <%= f.select :tech_role_id, @roles, {include_blank: true}, {:multiple => false , 'data-placeholder'=> t('person.add_tech_role'), 'style'=> 'width:100%'} %>
+          <%= f.label t('people.new.role'), class: "small_label" %>
+          <br>
+          <%= select_tag(:tech_role_id, options_from_collection_for_select(@roles, :id, :name), :include_blank=>true, :multiple => false, class: "chosen", 'data-placeholder'=> t('people.add_tech_role'), 'style'=> 'width:100%') %>
         </div>
 
         <div class="row">
@@ -78,7 +79,7 @@
           </div>
 
           <div class="btn">
-            <%= f.button t('person.edit.submit'),:type => 'submit', class: "btn btn-default" %>
+            <%= f.button t('people.edit.submit'),:type => 'submit', class: "btn btn-default" %>
           </div>
       <% end %>
       </div>

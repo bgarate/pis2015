@@ -118,12 +118,12 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
-    @roles=TechRole.all.collect {|t| [t.name, t.id]}
+    @roles=TechRole.all
   end
 
   def create
     @person = Person.new(person_params.except(:image_id))
-    @person.tech_role = params[:person][:tech_role_id]
+    @person.tech_role_id = params[:tech_role_id]
     if person_params[:image_id].present?
       preloaded = Cloudinary::PreloadedFile.new(person_params[:image_id])
       raise "Invalid upload signature" if !preloaded.valid?
@@ -165,14 +165,12 @@ class PeopleController < ApplicationController
       flash.alert= t('not_authorized')
       redirect_to people_path
     end
-    @roles=TechRole.all.collect {|t| [t.name, t.id]}
+    @roles=TechRole.all
   end
 
   def update
-    unless params[:person][:tech_role_id].nil?
-      rol= params[:person][:tech_role_id]
-      @person.tech_role_id=rol
-    end
+
+    @person.tech_role_id=params[:tech_role_id]
     if @person.update_attributes(person_params.except(:image_id))
       if person_params[:image_id].present?
         preloaded = Cloudinary::PreloadedFile.new(person_params[:image_id])

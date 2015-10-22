@@ -124,6 +124,8 @@ Rails.application.routes.draw do
   #templates
   get 'templates/new'
   post 'templates/new' => 'templates#create'
+  get 'templates' => 'templates#index'
+  get '/templates/destroy'
 
   resources :categories do
     resources :milestones

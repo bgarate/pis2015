@@ -49,7 +49,8 @@ es:
   search: 'Buscar'
   none:  'Ninguna'
   view: 'Ver'
-  icon: "Icono"
+  icon: 'Icono'
+  actions: 'Acciones'
 
   common:
     y: 'Sí'
@@ -170,9 +171,17 @@ es:
 
   #plantillas
   templates:
+    generate:
+      header: 'Generar Hito a partir de Plantilla'
+      submit: 'Generar'
+    select: 'Seleccionar template'
+    header: 'Plantillas de Hito'
     new:
       header: 'Crear Plantilla de Hito'
       submit: 'Crear'
+    delete:
+      title: "Borrar Plantilla"
+      sure: "¿Esta seguro que desea eliminar esta plantilla permanentemente?"
 
   #hitos
   milestones:
@@ -188,8 +197,8 @@ es:
     assigned_people: "Personas asociadas al hito"
     mark_done: 'Marcar como hecho'
     add_feedback_author: 'Añadir revisor del feedback'
-    tags: "Tags"
-    select_tags: 'Seleccione tags...'
+    tags: 'Etiquetas'
+    select_tags: 'Seleccione etiquetas...'
     select_people: "Seleccione personas..."
     pending: "pendiente"
     done: "hecho"
@@ -297,8 +306,9 @@ es:
   #tags
   tags:
 
+    name: 'Etiquetas'
     index:
-      header: "Listando tags"
+      header: "Listando etiquetas"
     new:
       header: "Crear tag"
       submit: "Crear"
@@ -309,7 +319,7 @@ es:
     delete:
       sure: "¿Está seguro que desea eliminar el tag?"
 
-    zero: "No se han encontrado tags"
+    zero: "No se han encontrado etiquetas"
 
   tech_roles:
     index:

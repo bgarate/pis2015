@@ -49,7 +49,9 @@ en:
   search: 'Search'
   none:  'None'
   view: 'View'
-  icon: "Icon"
+  icon: 'Icon'
+  tags: 'Tags'
+  actions: 'Actions'
 
   common:
     y: 'Yes'
@@ -170,9 +172,17 @@ en:
 
   #templates
   templates:
+    generate:
+      header: 'Generate Milestone from Template'
+      submit: 'Generate'
+    select: 'Select template'
+    header: 'Milestone templates'
     new:
       header: 'Create Milestone Template'
       submit: 'Create'
+    delete:
+      title: "Delete Milestone Template"
+      sure: "Are you sure you want to permanently delete this milestone template?"
 
   #milestones
   milestones:
@@ -292,6 +302,7 @@ en:
   #tags
   tags:
 
+    name: 'Tags'
     index:
       header: "Listing tags"
     new:

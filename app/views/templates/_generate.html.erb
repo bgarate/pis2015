@@ -1,0 +1,23 @@
+<div class="generate-milestones">
+    <b><span class="glyphicon glyphicon-check"></span> <%= t('templates.generate.header') %></b>
+</div>
+
+<form action='<%=root_path%>' class='timeline-form main-form' data-toggle='validator'>
+  <div class="form-group">
+    <br>
+    <label><%=t('templates.select')%></label>
+    <br>
+    <select class="chzn-select" style="width:100%" >
+      <%@temps.each do |t|%>
+          <option value=<%=t.id%> ><%=t.title%></option>
+      <%end%>
+    </select>
+  </div>
+
+
+  <input type="submit" value="<%=t('templates.generate.submit')%>" class="btn ">
+</form>
+
+<script>
+    $(".chzn-select").chosen();
+</script>

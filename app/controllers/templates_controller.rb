@@ -37,6 +37,23 @@ class TemplatesController < ApplicationController
     end
   end
 
+  def index
+    @template= Template.all
+    respond_to do |f|
+      f.json { render json: name_and_path(@template)}
+      f.html { render }
+    end
+  end
+
+  def destroy
+    temp = Template.find_by(id: params[:template_id])
+    if temp
+      temp.destroy
+    end
+    #redirect_to milestones_path
+    redirect_to templates_path
+  end
+
   def templates_params
     params.require(:template).permit(:title,:description, :icon, :category_id, :created_at, :updated_at)
   end

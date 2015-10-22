@@ -55,8 +55,6 @@ class ProjectsController < ApplicationController
     @project.technology_ids = params[:technologies]
     @project.save
     if @project.valid?
-      event = ProjectEvent.new(author: current_person, project: @project, type: :create)
-      event.fire
       redirect_to '/projects/'
     else
       redirect_to '/projects/new'
@@ -89,6 +87,11 @@ class ProjectsController < ApplicationController
     if ! project.people.exists?(person.id)
       project.people<< person
       project.save
+
+
+      event = ProjectEvent.new(author: current_person, person: person, project: project, type: :assign_person)
+      event.fire
+
     end
     redirect_to project
   end

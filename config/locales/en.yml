@@ -364,8 +364,8 @@ en:
 
   events-strings:
     project:
-      creation:
-        title: '%{project} started'
-        description: 'The project %{project} has begun for the client %{client}'
+      assign_person:
+        title: '%{name} joined project %{project}'
+        description: '%{name} joined project %{project} for %{client}'
 
 

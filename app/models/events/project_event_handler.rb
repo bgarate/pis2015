@@ -1,21 +1,23 @@
 
 class ProcessEventHandler
 
-  def process event
+  def process(event)
 
     project = event.project
-    type = event.type
-    author = event.author
+    person = event.person
 
     milestone = Milestone.new
-    milestone.author = author
+    milestone.author = event.author
     milestone.completed_date = Time.now
     milestone.status = :done
-    milestone.people << project.people
-    milestone.title = I18n.translate('events-strings.project.creation.title', project: project.name)
-    milestone.description = I18n.translate('events-strings.project.creation.description', project: project.name, client: project.client)
-    milestone.category = Category.find(1)
-    milestone.tags << Tag.find(1)
+    milestone.people << person
+    milestone.category = Category.get_or_create_history_category
+    milestone.icon = milestone.category.icon
+
+    milestone.title = I18n.translate("events-strings.project.#{event.type.to_s}.title", name: person.name.titleize, project: project.name)
+    milestone.description = I18n.translate("events-strings.project.#{event.type.to_s}.description", name: person.name.titleize,
+                                           project: project.name, client: project.client)
+
     milestone.save!
 
   end

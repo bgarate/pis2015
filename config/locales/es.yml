@@ -567,6 +567,6 @@ es:
 
   events-strings:
     project:
-      creation:
-        title: 'Se inició el proyecto %{project}'
-        description: 'Se inició el proyecto %{project} para el cliente %{client}'
+      assign_person:
+        title: '%{name} se unió al proyecto %{project}'
+        description: '%{name} se unió al proyecto %{project} para %{client}'

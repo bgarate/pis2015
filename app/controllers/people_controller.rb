@@ -165,7 +165,13 @@ class PeopleController < ApplicationController
   end
 
   def update
-    if @person.update_attributes(person_params)
+    if @person.update_attributes(person_params.except(:image_id))
+      if person_params[:image_id].present?
+        preloaded = Cloudinary::PreloadedFile.new(person_params[:image_id])
+        raise "Invalid upload signature" if !preloaded.valid?
+        @person.image_id = preloaded.identifier
+        @person.save
+      end
       redirect_to @person
     else
       redirect_to edit_person_path
@@ -197,22 +203,6 @@ class PeopleController < ApplicationController
     render :file => "app/views/people/add_mentor_form"
   end
 
-  def edit_profile_pic_form
-    @person = Person.find(params[:person_id])
-    render :file => "app/views/people/_picture_edit"
-  end
-
-  def edit_profile_pic
-    @person = Person.find(params[:person_id])
-
-    if params[:image_id].present?
-      preloaded = Cloudinary::PreloadedFile.new(params[:image_id])
-      raise "Invalid upload signature" if !preloaded.valid?
-      @person.image_id = preloaded.identifier
-    end
-
-    @person.save
-  end
 
   private
   def person_params

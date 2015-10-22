@@ -1,7 +1,7 @@
 <div id="profile-card" class="card profile">
   <div id="profile-picture">
     <div class="img-container">
-      <%= link_to person_picture(@image_id), @person, :href => "edit_profile_pic_form?person_id=#{@person.id}", method: :get %>
+      <%= person_picture(@image_id) %>
     </div>
   </div>
   <h1><%= @name %>

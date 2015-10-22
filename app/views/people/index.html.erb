@@ -46,7 +46,7 @@
                     <% end %>
                   </td>
                   <td>
-                    <% if current_user_admin? %>
+                    <% if can_view_person? p.id %>
                       <%= link_to edit_person_path(p) do %>
                         <span class='large-text glyphicon glyphicon-pencil'></span>
                       <% end %>

@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline]
+  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline, :edit, :update]
   #skip_before_action :admin?, only:[:assign_project]
   before_action :get_person, only:[:show, :edit, :update, :show_pending_timeline, :show_not_pending_timeline]
 
@@ -161,7 +161,10 @@ class PeopleController < ApplicationController
   #end
 
   def edit
-
+    unless can_view_person? @person.id
+      flash.alert= t('not_authorized')
+      redirect_to people_path
+    end
   end
 
   def update

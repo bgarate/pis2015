@@ -564,3 +564,13 @@ es:
       long: "%d de %B de %Y %H:%M"
       short: "%d de %b %H:%M"
     pm: pm
+
+  events-strings:
+    project:
+      assign_to_project_event:
+        title: "%{person} se unió al proyecto %{project}"
+        description: "%{person} se unió al proyecto %{project} para %{client}"
+    person:
+          change_role_event:
+            title: "%{person} es ahora %{new_role}"
+            description: "%{person} pasó de %{old_role} a %{new_role}"

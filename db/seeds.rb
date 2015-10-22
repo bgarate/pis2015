@@ -16,9 +16,9 @@ tr2.name= "iOS Developer"
 tr2.save!
 
 ################# Categories #################
-
-e = Category.create(name: 'Historial')
-e.save!
+#No usar este create, para obtener esta categoria emplear Category.get_or_create_history_category
+#e = Category.create(name: Category::HIST0RY_NAME)
+#e.save!
 c = Category.create(name: 'Conferencia')
 f = Category.create(name: 'Feedback')
 f.is_feedback= true
@@ -38,7 +38,7 @@ m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nu
 m.due_date= Time.now + (3*2*7*24*60*60)
 m.status=0
 m.icon = "test/silueta.gif"
-m.category = e
+m.category = c
 m.icon = "glyphicon-flag"
 
 m1 = Milestone.new

@@ -87,6 +87,10 @@ class ProjectsController < ApplicationController
     if ! project.people.exists?(person.id)
       project.people<< person
       project.save
+
+      event = AssignToProjectEvent.new(author: current_person, person: person, project: project)
+      event.fire
+
     end
     redirect_to project
   end

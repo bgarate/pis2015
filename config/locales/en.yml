@@ -103,6 +103,9 @@ en:
       submit: "Create"
       role: "Role"
 
+    edit_picture:
+      header: "Edit profile image"
+      submit: "Update image"
     edit:
           header: "Edit User"
           submit: "Edit"
@@ -364,4 +367,15 @@ en:
       groupCheckedTooFewStart : 'Please choose at least '
       groupCheckedTooManyStart : 'Please choose a maximum of '
       groupCheckedEnd : ' item(s)'
+
+  events-strings:
+    project:
+      assign_to_project_event:
+        title: '%{person} joined project %{project}'
+        description: '%{person} joined project %{project} for %{client}'
+    person:
+      change_role_event:
+        title: '%{person} is now %{new_role}'
+        description: '%{person} went from %{old-role} to %{new-role}'
+
 

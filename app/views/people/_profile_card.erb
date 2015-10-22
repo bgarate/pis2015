@@ -1,13 +1,13 @@
 <div id="profile-card" class="card profile">
   <div id="profile-picture">
     <div class="img-container">
-      <%= person_picture @image_id %>
+      <%= person_picture(@image_id) %>
     </div>
   </div>
   <h1><%= @name %>
   <% if can_view_person? @identifier %>
     <%= link_to edit_person_path(@identifier) do %>
-      <span class="large-text edit glyphicon glyphicon-edit" style="color:yellowgreen"></span>
+      <span class="large-text edit glyphicon glyphicon-edit"></span>
     <% end %>
   <% end %>
   </h1>

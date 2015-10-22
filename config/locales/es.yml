@@ -104,6 +104,10 @@ es:
       header: "Editar Usuario"
       submit: "Editar"
 
+    edit_picture:
+      header: "Editar imagen de perfil"
+      submit: "Actualizar imagen"
+
   #mentor
   mentor:
     header: "Mentores"

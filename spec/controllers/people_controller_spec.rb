@@ -140,6 +140,17 @@ describe PeopleController do
       expect(response).to redirect_to(p1)
     end
 
+    it "NO deberia editar una persona" do
+      session[:user_id] = @ad_user.id
+      p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+      get :edit, :id=>p1.id
+      put :update, :id => p1.id, :person =>{:email=>"mailInvalido"}, :session=>session
+      p1.reload
+      expect(response).to redirect_to(edit_person_path)
+    end
+
 
   end
 

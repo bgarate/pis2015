@@ -79,6 +79,9 @@ es:
   #people
   people:
 
+    add_tech_role: "Agregar Rol Técnico"
+
+
     list:
       header: "Lista de Personas"
       name: "Nombre"
@@ -100,6 +103,7 @@ es:
       asign_to_project: "Asignar a proyecto"
       other_notes: "Ver %{count} notas restantes"
       submit: "Crear"
+      role: "Rol"
     edit:
       header: "Editar Usuario"
       submit: "Editar"

@@ -194,7 +194,6 @@ class MilestonesController < ApplicationController
 
   def update
     category=Category.find(params[:milestone][:category_id])
-
     @milestone.category = category
 
     if params[:people]!=nil

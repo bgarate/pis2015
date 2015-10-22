@@ -46,7 +46,68 @@ class TemplatesController < ApplicationController
   end
 
   def generate
-    
+    t = Template.find_by(id: params[:template_id])
+    p = Person.find_by(id: params[:person_id])
+    if t && p
+      m = Milestone.new
+      m.title= t.title
+      m.description= t.description
+      m.category = t.category
+      m.icon= t.icon
+      m.tags = t.tags
+      m.people<<(p)
+
+      #Crear documento adjunto
+      if m.category && m.category.doc_url
+        u = current_user
+        session = GoogleDrive.login_with_oauth(u.oauth_token)
+        begin
+          #traigo el archivo
+          f = session.file_by_url(m.category.doc_url)
+          #lo copio
+          fuploaded = f.copy("#{m.title}")
+          #agregar permisos a la gente asociada al hito
+          m.people.each do |p|
+            fuploaded.acl.push(
+                {:type => 'user', :value => p.email, :role => 'writer'})
+          end
+
+          #se logro encontrar el resorce
+          r = Resource.new
+          r.doc_id= fuploaded.resource_id
+          r.title= fuploaded.title
+          r.url= fuploaded.human_url
+          m.resources<<(r)
+          m.updated_at= Time.now
+          m.save!
+        rescue Google::APIClient::ClientError
+          #no se logro encontrar el resorce
+          driveerr = t(:driveerrormsj)
+        rescue GoogleDrive::Error
+          #url no es valida
+          driveerr = t(:invalidurl)
+        rescue URI::InvalidURIError
+          #url no es valida
+          driveerr = t(:invalidurl)
+        end
+      end
+
+      m.save!
+
+      if m.valid?
+        if driveerr.nil?
+          flash.notice = "'#{t.title}' " + t('messages.create.success')
+        else
+          flash.notice = "'#{t.title}' " + t('messages.create.success') + " \n(#{t(:driveerrormsj)}: #{driveerr})"
+        end
+      else
+        flash.alert = "'#{t.title}' " + t('messages.create.error')
+      end
+
+      redirect_to :back
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy

@@ -1,5 +1,5 @@
 
-  <form action='<%=root_path%>' class='timeline-form main-form slide-on-click clearfix toggle-disabled' data-toggle='validator'>
+  <form action='<%=templates_generate_path%>' class='timeline-form main-form slide-on-click clearfix toggle-disabled' data-toggle='validator'>
 
     <h1 class=""><span class="glyphicon glyphicon-check"></span> <%= t('templates.generate.header') %></h1>
 
@@ -9,7 +9,7 @@
 
               <label><%=t('templates.select')%></label>
               <br>
-              <select class="chzn-select category" style="width:100%" >
+              <select name="template_id" class="chzn-select category" style="width:100%" >
                 <%@temps.each do |t|%>
                     <option value=<%=t.id%> ><%=t.title%></option>
                 <%end%>
@@ -18,6 +18,7 @@
           </div>
         </div>
 
+        <input type="hidden" name="person_id" value="<%= @person.id %>">
         <button type="submit" class="btn btn-default" id="submitg"><%=t('templates.generate.submit')%></button>
     </div>
   </form>

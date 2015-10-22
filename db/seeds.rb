@@ -28,6 +28,7 @@ f2 = Category.create(name: 'Feedback diseño')
 f2.is_feedback= true
 f2.doc_url='https://docs.google.com/document/d/1VuyDDm-iDK6LF2uG9Sx8WhTJe2kON-bVW7As3BmIIhI/edit'
 f2.save!
+indu = Category.create(name: 'Inducción')
 
 
 ################# Milestones #################
@@ -113,6 +114,8 @@ Tag.create!(name:'Inicio proyecto')
 Tag.create!(name:'Fin proyecto')
 Tag.create!(name:'Speaker')
 Tag.create!(name:'Participación')
+tagt = Tag.new
+tagt.name= 'Destacado'
 
 
 ################# People #################
@@ -186,3 +189,11 @@ p6.projects << pro2
 p6.projects << pro3
 
 
+################# Templates #################
+t = Template.new
+t.title= 'Inducción ruby'
+t.description= 'Periodo en el cual son adquiridos los conocimientos subyacentes que implican el confort en el manejo de ruby como lenguaje de programación'
+t.icon= 'glyphicon-flag'
+t.category_id=indu.id
+t.tags<<(tagt)
+t.save!

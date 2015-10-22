@@ -16,10 +16,10 @@ tr2.name= "iOS Developer"
 tr2.save!
 
 ################# Categories #################
-
-e = Category.create(name: "Evento")
-e.save!
-c = Category.create(name: "Conferencia")
+#No usar este create, para obtener esta categoria emplear Category.get_or_create_history_category
+#e = Category.create(name: Category::HIST0RY_NAME)
+#e.save!
+c = Category.create(name: 'Conferencia')
 f = Category.create(name: 'Feedback')
 f.is_feedback= true
 f.doc_url='https://docs.google.com/document/d/1bpQ3HB__V1YbQ4YH6CBeDjcKp-YGjH5_WtsxFdNuMk0/edit'
@@ -38,7 +38,7 @@ m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nu
 m.due_date= Time.now + (3*2*7*24*60*60)
 m.status=0
 m.icon = "test/silueta.gif"
-m.category = e
+m.category = c
 m.icon = "glyphicon-flag"
 
 m1 = Milestone.new
@@ -127,9 +127,9 @@ p5 = Person.create!(name: "Maxi", email: "maxikotvi@gmail.com", admin: false, st
 p6 = Person.create!(name: "Andy", email: "andresvasilev@gmail.com", admin: false, start_date: 2.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
 p7 = Person.create!(name: "Rodrigo", email: "rodrigoberon2014@gmail.com", admin: false, start_date: 2.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
 Person.create!(name: "Martin Cabrera", email: "martin.cabrera@moove-it.com", admin: true, start_date: '2007-01-15', birth_date: '1980-04-16', cellphone: '099143405', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg")
-Person.create!(name: "Andreas Fast", email: "andreas.fast@moove-it.com", admin: false, start_date: '2014-08-15', birth_date: '1990-04-16', cellphone: '099143406', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg")
+Person.create!(name: "Andreas Fast", email: "andreas.fast@moove-it.com", admin: true, start_date: '2014-08-15', birth_date: '1990-04-16', cellphone: '099143406', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg")
 Person.create!(name: "Miguel Renom", email: "miguel.renom@moove-it.com", admin: false, start_date: '2014-08-15', birth_date: '1990-04-16', cellphone: '099143406', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg")
-
+Person.create!(name: "Cecilia Marcora", email: "cecilia.marcora@moove-it.com", admin: true, start_date: '2014-08-15', birth_date: '1990-04-16', cellphone: '099143406', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg")
 
 p0.projects << pro
 p0.projects << pro2

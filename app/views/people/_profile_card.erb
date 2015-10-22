@@ -4,7 +4,13 @@
       <%= link_to person_picture(@image_id), @person, :href => "edit_profile_pic_form?person_id=#{@person.id}", method: :get %>
     </div>
   </div>
-  <h1><%= @name %></h1>
+  <h1><%= @name %>
+  <% if current_user_admin? %>
+    <%= link_to edit_person_path(@identifier) do %>
+      <span class="large-text edit glyphicon glyphicon-edit"></span>
+    <% end %>
+  <% end %>
+  </h1>
   <h2><%= @trole %></h2>
   <ul id="skills">
     <% @skills.each do |s| %>

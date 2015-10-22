@@ -83,6 +83,12 @@
         });
 
         $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+
+        $('#hitos tfoot th.filter').each( function () {
+            var title = $('#hitos thead th').eq( $(this).index() ).text();
+            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        } );
+
         $(".datatable").DataTable({
             paging: false,
 
@@ -90,6 +96,20 @@
                 "search": ""
             }
         });
+
+        var tabla = $('#hitos').DataTable();
+        tabla.columns().every( function () {
+            var that = this;
+
+            $( 'input', this.footer() ).on( 'keyup change', function () {
+                if ( that.search() !== this.value ) {
+                    that
+                            .search( this.value )
+                            .draw();
+                }
+            } );
+        } );
+
         $("select.chosen").chosen();
         $("select.submit-on-select").change(
                 function () {

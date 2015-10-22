@@ -10,21 +10,38 @@
         <table class="table datatable table-striped" id="hitos" data-info="false">
           <thead>
           <tr>
-            <td><%= t('milestones.state_title') %></td>
-            <td class="title_row" ><%= t('milestones.title') %></td>
-            <td class="description_row"><%= t('milestones.description') %></td>
-            <td><%= t('milestones.category') %></td>
+            <th><%= t('milestones.state_title') %></th>
+            <th class="title_row" ><%= t('milestones.title') %></th>
+            <th class="description_row"><%= t('milestones.description') %></th>
+            <th><%= t('milestones.category') %></th>
             <% if current_user_admin? %>
-                <td><%= t('milestones.people') %></td>
+                <th><%= t('milestones.people') %></th>
             <% end %>
-            <td><%= t('milestones.tags') %></td>
+            <th><%= t('milestones.tags') %></th>
             <% if current_user_admin? %>
-                <td><%= t('milestones.start_date') %></td>
+                <th><%= t('milestones.start_date') %></th>
             <% end %>
-            <td><%= t('milestones.due_date') %></td>
-            <td><%= t('milestones.actions') %></td>
+            <th><%= t('milestones.due_date') %></th>
+            <th><%= t('milestones.actions') %></th>
           </tr>
           </thead>
+          <tfoot>
+          <tr>
+            <th ></th>
+            <th class="title_row filter" ><%= t('milestones.title') %></th>
+            <th class="description_row filter"><%= t('milestones.description') %></th>
+            <th class="filter"><%= t('milestones.category') %></th>
+            <% if current_user_admin? %>
+                <th class="filter"><%= t('milestones.people') %></th>
+            <% end %>
+            <th class="filter"><%= t('milestones.tags') %></th>
+            <% if current_user_admin? %>
+                <th class="filter"><%= t('milestones.start_date') %></th>
+            <% end %>
+            <th class="filter"><%= t('milestones.due_date') %></th>
+            <th></th>
+          </tr>
+          </tfoot>
           <tbody>
           <% @milestone.each do |m| %>
               <tr>

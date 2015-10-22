@@ -88,8 +88,7 @@ class ProjectsController < ApplicationController
       project.people<< person
       project.save
 
-
-      event = ProjectEvent.new(author: current_person, person: person, project: project, type: :assign_person)
+      event = AssignToProjectEvent.new(author: current_person, person: person, project: project)
       event.fire
 
     end

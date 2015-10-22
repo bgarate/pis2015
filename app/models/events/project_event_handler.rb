@@ -1,5 +1,5 @@
 
-class ProcessEventHandler
+class ProjectEventHandler
 
   def process(event)
 
@@ -14,9 +14,10 @@ class ProcessEventHandler
     milestone.category = Category.get_or_create_history_category
     milestone.icon = milestone.category.icon
 
-    milestone.title = I18n.translate("events-strings.project.#{event.type.to_s}.title", name: person.name.titleize, project: project.name)
-    milestone.description = I18n.translate("events-strings.project.#{event.type.to_s}.description", name: person.name.titleize,
-                                           project: project.name, client: project.client)
+    milestone.title = I18n.translate("events-strings.project.#{event.type}.title",
+                                     person: person.name, project: project.name)
+    milestone.description = I18n.translate("events-strings.project.#{event.type}.description",
+                                           person: person.name, project: project.name, client: project.client)
 
     milestone.save!
 

@@ -364,8 +364,12 @@ en:
 
   events-strings:
     project:
-      assign_person:
-        title: '%{name} joined project %{project}'
-        description: '%{name} joined project %{project} for %{client}'
+      assign_to_project_event:
+        title: '%{person} joined project %{project}'
+        description: '%{person} joined project %{project} for %{client}'
+    person:
+      change_role_event:
+        title: '%{person} is now %{new_role}'
+        description: '%{person} went from %{old-role} to %{new-role}'
 
 

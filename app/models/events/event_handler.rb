@@ -1,5 +1,4 @@
 
-
 class EventHandler
 
   def process event

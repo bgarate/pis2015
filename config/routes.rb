@@ -91,6 +91,8 @@ Rails.application.routes.draw do
       get 'me'
       post 'add_mentor'
       get 'add_mentor_form'
+      post 'edit_profile_pic'
+      get 'edit_profile_pic_form'
       get 'new' => 'people#new'
       post 'new' => 'people#create'
       get ':id' => 'people#show', :constraints  => { :id => /[-\w\.]+/ }
@@ -120,6 +122,13 @@ Rails.application.routes.draw do
     get :set_as_done
   end
   post 'milestones/new' => 'milestones#create'
+
+  #templates
+  get 'templates/new'
+  post 'templates/new' => 'templates#create'
+  get 'templates' => 'templates#index'
+  get '/templates/destroy'
+  get '/templates/generate'
 
   resources :categories do
     resources :milestones

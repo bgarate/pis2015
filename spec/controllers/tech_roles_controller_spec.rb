@@ -28,13 +28,34 @@ describe TechRolesController, "tech Roles Controller" do
       expect(flash[:alert]).to eq "otrotechrole " + I18n.t('messages.create.error')
     end
 
+    it 'shows a techRole' do
+      c1=TechRole.new
+      c1.name='otrotechrole'
+      c1.save!
+      get :show, :id=>c1.id
+      expect(response.status).to eq(302)
+    end
+
     #update
     it 'updates a tech role' do
       c1=TechRole.new
       c1.name='otrotechrole'
       c1.save!
+      get :edit, :id=>c1.id
       post :update, {:id=>c1.id, :tech_role=>{:name=>'otrotechroleupdateado'}}
       expect(flash[:notice]).to eq "otrotechroleupdateado " + I18n.t('messages.save.success')
+    end
+
+    #update
+    it 'does not update a tech role' do
+      c1=TechRole.new
+      c1.name='otrotechrole'
+      c1.save!
+      c2=TechRole.new
+      c2.name='otromsatechrole'
+      c2.save!
+      post :update, {:id=>c2.id, :tech_role=>{:name=>'otrotechrole'}}
+      expect(response.status).to eq(200)
     end
 
     #delete

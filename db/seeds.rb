@@ -16,9 +16,9 @@ tr2.name= "iOS Developer"
 tr2.save!
 
 ################# Categories #################
-
-e = Category.create(name: 'Historial')
-e.save!
+#No usar este create, para obtener esta categoria emplear Category.get_or_create_history_category
+#e = Category.create(name: Category::HIST0RY_NAME)
+#e.save!
 c = Category.create(name: 'Conferencia')
 f = Category.create(name: 'Feedback')
 f.is_feedback= true
@@ -28,6 +28,7 @@ f2 = Category.create(name: 'Feedback diseño')
 f2.is_feedback= true
 f2.doc_url='https://docs.google.com/document/d/1VuyDDm-iDK6LF2uG9Sx8WhTJe2kON-bVW7As3BmIIhI/edit'
 f2.save!
+indu = Category.create(name: 'Inducción')
 
 
 ################# Milestones #################
@@ -38,7 +39,7 @@ m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nu
 m.due_date= Time.now + (3*2*7*24*60*60)
 m.status=0
 m.icon = "test/silueta.gif"
-m.category = e
+m.category = c
 m.icon = "glyphicon-flag"
 
 m1 = Milestone.new
@@ -113,6 +114,8 @@ Tag.create!(name:'Inicio proyecto')
 Tag.create!(name:'Fin proyecto')
 Tag.create!(name:'Speaker')
 Tag.create!(name:'Participación')
+tagt = Tag.new
+tagt.name= 'Destacado'
 
 
 ################# People #################
@@ -186,3 +189,11 @@ p6.projects << pro2
 p6.projects << pro3
 
 
+################# Templates #################
+t = Template.new
+t.title= 'Inducción ruby'
+t.description= 'Periodo en el cual son adquiridos los conocimientos subyacentes que implican el confort en el manejo de ruby como lenguaje de programación'
+t.icon= 'glyphicon-flag'
+t.category_id=indu.id
+t.tags<<(tagt)
+t.save!

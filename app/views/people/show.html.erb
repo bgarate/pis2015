@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="card-col col-xs-2">
       <%= render 'people/profile_card' %>
@@ -9,6 +9,9 @@
       <p><% t('milestones.zero') %></p>
       <%if can_view_person?(@identifier) %>
           <%= render 'milestones/form' %>
+      <%end%>
+      <% if current_user_admin? %>
+          <%= render 'templates/generate' %>
       <%end%>
       <div id="timeline-container">
         <%= render 'people/timeline_card' %>

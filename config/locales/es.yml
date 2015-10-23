@@ -43,6 +43,7 @@ es:
   delete: "Borrar"
   back: "Volver"
   title: "Título"
+  description: "Descripción"
   name: 'Nombre'
   id: 'ID'
   search: 'Buscar'
@@ -53,6 +54,8 @@ es:
   filters: 'Filtros'
   all: 'Todos...'
   reset: 'Limpiar'
+  icon: 'Icono'
+  actions: 'Acciones'
 
   common:
     y: 'Sí'
@@ -84,6 +87,9 @@ es:
   #people
   people:
 
+    add_tech_role: "Agregar Rol Técnico"
+
+
     list:
       header: "Lista de Personas"
       name: "Nombre"
@@ -105,9 +111,14 @@ es:
       asign_to_project: "Asignar a proyecto"
       other_notes: "Ver %{count} notas restantes"
       submit: "Crear"
+      role: "Rol"
     edit:
       header: "Editar Usuario"
       submit: "Editar"
+
+    edit_picture:
+      header: "Editar imagen de perfil"
+      submit: "Actualizar imagen"
 
   #mentor
   mentor:
@@ -174,7 +185,19 @@ es:
     delete:
       sure: "¿Está seguro que desea eliminar este proyecto?"
 
-
+  #plantillas
+  templates:
+    generate:
+      header: 'Generar Hito a partir de Plantilla'
+      submit: 'Generar'
+    select: 'Seleccionar template'
+    header: 'Plantillas de Hito'
+    new:
+      header: 'Crear Plantilla de Hito'
+      submit: 'Crear'
+    delete:
+      title: "Borrar Plantilla"
+      sure: "¿Esta seguro que desea eliminar esta plantilla permanentemente?"
 
   #hitos
   milestones:
@@ -190,8 +213,8 @@ es:
     assigned_people: "Personas asociadas al hito"
     mark_done: 'Marcar como hecho'
     add_feedback_author: 'Añadir revisor del feedback'
-    tags: "Tags"
-    select_tags: 'Seleccione tags...'
+    tags: 'Etiquetas'
+    select_tags: 'Seleccione etiquetas...'
     select_people: "Seleccione personas..."
     pending: "pendiente"
     done: "hecho"
@@ -299,8 +322,9 @@ es:
   #tags
   tags:
 
+    name: 'Etiquetas'
     index:
-      header: "Listando tags"
+      header: "Listando etiquetas"
     new:
       header: "Crear tag"
       submit: "Crear"
@@ -311,7 +335,7 @@ es:
     delete:
       sure: "¿Está seguro que desea eliminar el tag?"
 
-    zero: "No se han encontrado tags"
+    zero: "No se han encontrado etiquetas"
 
   tech_roles:
     index:
@@ -569,3 +593,13 @@ es:
       long: "%d de %B de %Y %H:%M"
       short: "%d de %b %H:%M"
     pm: pm
+
+  events-strings:
+    project:
+      assign_to_project_event:
+        title: "%{person} se unió al proyecto %{project}"
+        description: "%{person} se unió al proyecto %{project} para %{client}"
+    person:
+          change_role_event:
+            title: "%{person} es ahora %{new_role}"
+            description: "%{person} pasó de %{old_role} a %{new_role}"

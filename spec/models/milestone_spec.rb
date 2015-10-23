@@ -13,6 +13,8 @@
 #  updated_at         :datetime         not null
 #  category_id        :integer
 #  start_date         :date
+#  completed_date     :date
+#  deleted_date       :date
 #
 
 require 'rails_helper'

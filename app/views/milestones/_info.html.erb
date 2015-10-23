@@ -118,7 +118,11 @@
             </div>
             <div class="info">
               <h2><%= p.name %></h2>
-              <h3><%=  t('milestones.no_tech_role') || p.tech_role.name %></h3>
+	              <% if p.tech_role.nil? %>
+		              <h3><%= t('milestones.no_tech_role')  %></h3>
+	              <% else %>	 
+                  <h3><%= p.tech_role.name %></h3>
+	              <% end %>	
             </div>
           </a>
         </div>

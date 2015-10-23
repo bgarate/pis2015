@@ -78,6 +78,8 @@ en:
   #people
   people:
 
+    add_tech_role: "Add Tech Role"
+
     list:
       header: "Users"
       name: "Name"
@@ -99,6 +101,8 @@ en:
       asign_to_project: "Assign to project"
       other_notes: "View %{count} other notes"
       submit: "Create"
+      role: "Role"
+
     edit_picture:
       header: "Edit profile image"
       submit: "Update image"

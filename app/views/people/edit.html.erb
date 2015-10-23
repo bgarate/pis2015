@@ -2,30 +2,39 @@
 
 <div class="container">
   <div class="row">
-    <div class="card-col col-xs-4 col-xs-offset-4">
+    <div class="card-col col-xs-5 col-xs-offset-3">
+      
       <%= form_for @person, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
         <h1><span class="glyphicon glyphicon-user"></span><%= t('people.edit.header') %></h1>
+
         <div class="form-group">
           <%= f.label t('people.new.name'), class: "control-label" %>
           <%= f.text_field :name, class: "form-control", 'data-validation': "required" %>
         </div>
+
         <div class="form-group">
           <%= f.label t('people.new.email'), class: "control-label" %>
           <%= f.text_field :email, class: "form-control", 'data-validation': "required email"%>
-
         </div>
+
+        <div class="form-group tech_role">
+          <%= f.label t('people.new.role'), class: "small_label" %>
+          <br>
+          <%= select_tag(:tech_role_id, options_from_collection_for_select(@roles, :id, :name), :include_blank=>true, :multiple => false, class: "chosen", 'data-placeholder'=> t('people.add_tech_role'), 'style'=> 'width:100%') %>
+        </div>
+
         <div class="row">
           <div class="form-group col-xs-6">
             <%= f.label t('people.new.cellphone'), class: "control-label" %>
             <%= f.text_field :cellphone, class: "form-control"%>
-
           </div>
+
           <div class="form-group col-xs-6">
             <%= f.label t('people.new.telephone'), class: "control-label" %>
             <%= f.text_field :phone, class: "form-control" %>
-
           </div>
         </div>
+
         <div class="row">
           <div class="form-group col-xs-6">
             <%= f.label t('people.new.birth_date'), class: "control-label" %>
@@ -71,7 +80,7 @@
           </div>
 
           <div class="btn">
-            <%= f.button t('person.edit.submit'),:type => 'submit', class: "btn btn-default" %>
+            <%= f.button t('people.edit.submit'),:type => 'submit', class: "btn btn-default" %>
           </div>
       <% end %>
       </div>

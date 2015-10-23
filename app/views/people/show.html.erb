@@ -10,6 +10,9 @@
       <%if can_view_person?(@identifier) %>
           <%= render 'milestones/form' %>
       <%end%>
+      <% if current_user_admin? %>
+          <%= render 'templates/generate' %>
+      <%end%>
       <div id="timeline-container">
         <%= render 'people/timeline_card' %>
       </div>

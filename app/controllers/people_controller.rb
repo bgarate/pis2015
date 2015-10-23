@@ -85,6 +85,8 @@ class PeopleController < ApplicationController
       @mentorships = @person.mentors
       @yet_pending = Milestone.pending.where('id NOT in (?)', @person.milestones.pluck(:id))
 
+      #
+      @temps = Template.all.order(title: :desc)
       show_pending_timeline
 
     else

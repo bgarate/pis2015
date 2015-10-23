@@ -90,6 +90,7 @@ Rails.application.routes.draw do
     get :show_not_pending_timeline
     collection do
       get 'me'
+      post 'switch_admin'
       post 'add_mentor'
       get 'add_mentor_form'
       post 'edit_profile_pic'

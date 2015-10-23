@@ -19,6 +19,8 @@ describe PeopleController do
     # Seteo la expiracion de la sesion a un dia a partir del momento actual
     @no_ad_user.oauth_expires_at = Time.current().advance(days:1)
     @no_ad_user.save!
+
+    request.env["HTTP_REFERER"] = root_path
   end
 
 
@@ -242,6 +244,25 @@ describe PeopleController do
       session[:user_id] = @no_ad_user.id
       get :show, :id => p1.id
       expect(response.status).to eq(200)
+    end
+  end
+
+  describe "switch_admin" do
+    it 'deberia cambiar de admin a no_admin' do
+      session[:user_id] = @ad_user.id
+      get :index
+      get :switch_admin, :id => @ad_user.person_id, :session=>session
+
+      resultado = Person.find(@ad_user.person_id)
+      expect(resultado.admin).to eq(false)
+    end
+
+    it 'deberia cambiar de no_admin a admin' do
+      session[:user_id] = @ad_user.id
+      post :switch_admin, {:id => @no_ad_user.person_id}, :session=>session
+
+      resultado = Person.find(@no_ad_user.person_id)
+      expect(resultado.admin).to eq(true)
     end
   end
 end

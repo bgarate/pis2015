@@ -1,6 +1,6 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline]
+  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline, :edit, :update]
   #skip_before_action :admin?, only:[:assign_project]
   before_action :get_person, only:[:show, :edit, :update, :show_pending_timeline, :show_not_pending_timeline, :switch_admin]
 
@@ -85,6 +85,8 @@ class PeopleController < ApplicationController
       @mentorships = @person.mentors
       @yet_pending = Milestone.pending.where('id NOT in (?)', @person.milestones.pluck(:id))
 
+      #
+      @temps = Template.all.order(title: :desc)
       show_pending_timeline
 
     else
@@ -118,12 +120,12 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
+    @roles=TechRole.all
   end
 
   def create
-
     @person = Person.new(person_params.except(:image_id))
-
+    @person.tech_role_id = params[:tech_role_id]
     if person_params[:image_id].present?
       preloaded = Cloudinary::PreloadedFile.new(person_params[:image_id])
       raise "Invalid upload signature" if !preloaded.valid?
@@ -161,10 +163,16 @@ class PeopleController < ApplicationController
   #end
 
   def edit
-
+    unless can_view_person? @person.id
+      flash.alert= t('not_authorized')
+      redirect_to people_path
+    end
+    @roles=TechRole.all
   end
 
   def update
+
+    @person.tech_role_id=params[:tech_role_id]
     if @person.update_attributes(person_params.except(:image_id))
       if person_params[:image_id].present?
         preloaded = Cloudinary::PreloadedFile.new(person_params[:image_id])
@@ -211,7 +219,7 @@ class PeopleController < ApplicationController
 
   private
   def person_params
-    params.require(:person).permit(:name, :email, :cellphone, :phone, :birth_date, :start_date, :image_id)
+    params.require(:person).permit(:name, :email, :cellphone, :phone, :birth_date, :start_date, :image_id, :tech_role_id)
   end
 
 

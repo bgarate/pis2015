@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021133901) do
+ActiveRecord::Schema.define(version: 20151021173324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,17 +37,6 @@ ActiveRecord::Schema.define(version: 20151021133901) do
   add_index "mentorships", ["mentee_id", "mentor_id"], name: "index_mentorships_on_mentee_id_and_mentor_id", unique: true, using: :btree
   add_index "mentorships", ["mentee_id"], name: "index_mentorships_on_mentee_id", using: :btree
   add_index "mentorships", ["mentor_id"], name: "index_mentorships_on_mentor_id", using: :btree
-
-  create_table "milestone_templates", force: :cascade do |t|
-    t.string   "title"
-    t.integer  "due_term"
-    t.text     "description"
-    t.integer  "type"
-    t.string   "icon"
-    t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
 
   create_table "milestones", force: :cascade do |t|
     t.string   "title"
@@ -178,6 +167,15 @@ ActiveRecord::Schema.define(version: 20151021133901) do
     t.string "name"
   end
 
+  create_table "tags_templates", id: false, force: :cascade do |t|
+    t.integer "tag_id"
+    t.integer "template_id"
+  end
+
+  add_index "tags_templates", ["tag_id", "template_id"], name: "index_tags_templates_on_tag_id_and_template_id", unique: true, using: :btree
+  add_index "tags_templates", ["tag_id"], name: "index_tags_templates_on_tag_id", using: :btree
+  add_index "tags_templates", ["template_id"], name: "index_tags_templates_on_template_id", using: :btree
+
   create_table "tech_roles", force: :cascade do |t|
     t.string   "name"
     t.string   "icon"
@@ -192,6 +190,15 @@ ActiveRecord::Schema.define(version: 20151021133901) do
     t.string   "icon"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "templates", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "icon"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -216,4 +223,7 @@ ActiveRecord::Schema.define(version: 20151021133901) do
   add_foreign_key "people", "tech_roles"
   add_foreign_key "person_skills", "people"
   add_foreign_key "person_skills", "skills"
+  add_foreign_key "tags_templates", "tags"
+  add_foreign_key "tags_templates", "templates"
+  add_foreign_key "templates", "categories"
 end

@@ -43,11 +43,15 @@ en:
   delete: "Delete"
   back: "Back"
   title: 'Title'
+  description: "Description"
   name: 'Name'
   id: 'ID'
   search: 'Search'
   none:  'None'
   view: 'View'
+  icon: 'Icon'
+  tags: 'Tags'
+  actions: 'Actions'
 
   common:
     y: 'Yes'
@@ -78,6 +82,8 @@ en:
   #people
   people:
 
+    add_tech_role: "Add Tech Role"
+
     list:
       header: "Users"
       name: "Name"
@@ -99,6 +105,8 @@ en:
       asign_to_project: "Assign to project"
       other_notes: "View %{count} other notes"
       submit: "Create"
+      role: "Role"
+
     edit_picture:
       header: "Edit profile image"
       submit: "Update image"
@@ -177,6 +185,19 @@ en:
     delete:
       sure: "Are you sure you want to delete this project?"
 
+  #templates
+  templates:
+    generate:
+      header: 'Generate Milestone from Template'
+      submit: 'Generate'
+    select: 'Select template'
+    header: 'Milestone templates'
+    new:
+      header: 'Create Milestone Template'
+      submit: 'Create'
+    delete:
+      title: "Delete Milestone Template"
+      sure: "Are you sure you want to permanently delete this milestone template?"
 
   #milestones
   milestones:
@@ -296,6 +317,7 @@ en:
   #tags
   tags:
 
+    name: 'Tags'
     index:
       header: "Listing tags"
     new:

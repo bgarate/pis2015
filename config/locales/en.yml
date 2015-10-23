@@ -48,6 +48,11 @@ en:
   search: 'Search'
   none:  'None'
   view: 'View'
+  from: 'from'
+  to: 'to'
+  filters: 'Filters'
+  all: 'All...'
+  reset: 'Reset'
 
   common:
     y: 'Yes'
@@ -232,6 +237,10 @@ en:
     delete:
       title: "Delete Milestone"
       sure: "Are you sure you want to permanently delete this milestone?"
+
+    see_all: "See all milestones"
+
+
 
   #dashboard
   dashboard:

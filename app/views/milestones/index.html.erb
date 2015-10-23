@@ -1,7 +1,51 @@
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="table-container">
+  <form class="row milestone-filters slide-on-click clearfix toggle-disabled">
+
+      <h1 class=""><span class="glyphicon glyphicon-filter"></span> <%= t('filters')%> </h1>
+      <div class="form-slide">
+
+
+          <div class="row">
+
+            <div class="form-group col-xs-2">
+              <%= label_tag :due_date_from, t('milestones.due_date') + ' ' + t('from'), class: "control-label" %>
+
+              <%= text_field_tag :due_date_from,nil, {class: "form-control", id:'due_date_from' ,"data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy"} %>
+            </div>
+
+            <div class="form-group col-xs-2">
+              <%= label_tag :due_date_to, t('to'), class: "control-label" %>
+
+              <%= text_field_tag :due_date_to,nil, {class: "form-control", id:'due_date_to' ,"data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy"} %>
+            </div>
+          <!--</div>-->
+          <!--<div class="row">-->
+            <div class="form-group col-xs-3">
+              <%= label_tag :people, t('milestones.people'), class: "small_label" %>
+              <br>
+              <%= select_tag(:people, options_from_collection_for_select(@people, :name, :name), :id => 'peoplefilter', :multiple => true, class: "chosen", 'data-placeholder'=> t('milestones.select_tags'), 'style'=> 'width:100%') %>
+            </div>
+            <div class="form-group col-xs-3">
+              <%= label_tag :tags, t('milestones.tags'), class: "small_label" %>
+              <br>
+              <%= select_tag(:tags, options_from_collection_for_select(@tags, :name, :name), :id => 'tagsfilter', :multiple => true, class: "chosen", 'data-placeholder'=> t('milestones.select_tags'), 'style'=> 'width:100%') %>
+            </div>
+            <div class="form-group col-xs-2">
+              <%= label_tag :categories, t('milestones.category'), class: "small_label" %>
+              <br>
+              <%= select_tag(:categories, options_from_collection_for_select(@categories, :name, :name), include_blank: t('all'), :id => 'categoriesfilter', :multiple => false, class: "chosen", 'data-placeholder'=> t('milestones.select_tags'), 'style'=> 'width:100%') %>
+            </div>
+          </div>
+          <div class="row ">
+            <div class="form-group col-xs-12">
+                <%= button_tag t('reset'), :id => 'reset_filters',:type => 'button', class: "btn btn-default pull-right" %>
+            </div>
+          </div>
+      </div>
+
+  </form>
+    <div class="row">
+       <div id="container-hitos" class="table-container">
         <h1>
           <%= link_to new_milestone_path do%>
               <span class='large-text glyphicon glyphicon-plus table-add-button pull-left'>  </span>
@@ -10,38 +54,18 @@
         <table class="table datatable table-striped" id="hitos" data-info="false">
           <thead>
           <tr>
-            <th><%= t('milestones.state_title') %></th>
+            <th class="status_col"><%= t('milestones.state_title') %></th>
             <th class="title_row" ><%= t('milestones.title') %></th>
             <th class="description_row"><%= t('milestones.description') %></th>
-            <th><%= t('milestones.category') %></th>
-            <% if current_user_admin? %>
-                <th><%= t('milestones.people') %></th>
-            <% end %>
-            <th><%= t('milestones.tags') %></th>
-            <% if current_user_admin? %>
-                <th><%= t('milestones.start_date') %></th>
-            <% end %>
-            <th><%= t('milestones.due_date') %></th>
+            <th id="categories"><%= t('milestones.category') %></th>
+            <th id="people"><%= t('milestones.people') %></th>
+            <th id="tags"><%= t('milestones.tags') %></th>
+            <th id="start_date"><%= t('milestones.start_date') %></th>
+            <th id="due_date"><%= t('milestones.due_date') %></th>
             <th><%= t('milestones.actions') %></th>
           </tr>
           </thead>
-          <tfoot>
-          <tr>
-            <th ></th>
-            <th class="title_row filter" ><%= t('milestones.title') %></th>
-            <th class="description_row filter"><%= t('milestones.description') %></th>
-            <th class="filter"><%= t('milestones.category') %></th>
-            <% if current_user_admin? %>
-                <th class="filter"><%= t('milestones.people') %></th>
-            <% end %>
-            <th class="filter"><%= t('milestones.tags') %></th>
-            <% if current_user_admin? %>
-                <th class="filter"><%= t('milestones.start_date') %></th>
-            <% end %>
-            <th class="filter"><%= t('milestones.due_date') %></th>
-            <th></th>
-          </tr>
-          </tfoot>
+
           <tbody>
           <% @milestone.each do |m| %>
               <tr>
@@ -67,29 +91,25 @@
                 <td  class="category_row" >
                   <%= m.category.name %>
                 </td>
-                <% if current_user_admin? %>
-                    <td>
-                      <ul>
-                        <% m.people.take(3).each do |p| %>
-                            <li><%= link_to p.name, person_path(p.id), method: :get %></li>
-                        <% end %>
-                      </ul>
-                    </td>
-                <% end %>
+                <td>
+                  <ul>
+                    <% m.people.each do |p| %>
+                        <li><%= link_to p.name, person_path(p.id), method: :get %></li>
+                    <% end %>
+                  </ul>
+                </td>
                 <td class="tags_row">
                   <ul class="">
-                  <% m.tags.take(3).each do |t| %>
+                  <% m.tags.each do |t| %>
                       <li><%= t.name %></li>
                   <% end %>
                   </ul>
                 </td>
-                <% if current_user_admin? %>
-                    <td>
-                      <% if m.start_date != nil %>
-                           <div class="calendar left"><%= m.start_date %></div>
-                      <% end %>
-                    </td>
-                <% end %>
+                <td>
+                  <% if m.start_date != nil %>
+                       <div class="calendar left"><%= m.start_date %></div>
+                  <% end %>
+                </td>
                 <td>
                   <% if m.due_date != nil %>
                     <div class="calendar left"><%= m.due_date %></div>
@@ -116,14 +136,10 @@
           <% end %>
           </tbody>
         </table>
+
       </div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
+    </div>
     </div>
   </div>
 </div>
-
+<script>$(document).ready(milestonefilters_ready);</script>

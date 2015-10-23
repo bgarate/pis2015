@@ -31,6 +31,10 @@ class MilestonesController < ApplicationController
 
   def index
     @milestone= Milestone.all
+    @tags = Tag.all.order(:name)
+    @people = Person.all.order(:name)
+    @categories = Category.all.order(:name)
+
     respond_to do |f|
       f.json { render json: name_and_path(@milestone)}
       f.html { render }

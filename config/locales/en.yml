@@ -103,7 +103,9 @@ en:
       asign_to_project: "Assign to project"
       other_notes: "View %{count} other notes"
       submit: "Create"
-
+    edit_picture:
+      header: "Edit profile image"
+      submit: "Update image"
     edit:
           header: "Edit User"
           submit: "Edit"

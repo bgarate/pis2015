@@ -167,7 +167,13 @@ class PeopleController < ApplicationController
   end
 
   def update
-    if @person.update_attributes(person_params)
+    if @person.update_attributes(person_params.except(:image_id))
+      if person_params[:image_id].present?
+        preloaded = Cloudinary::PreloadedFile.new(person_params[:image_id])
+        raise "Invalid upload signature" if !preloaded.valid?
+        @person.image_id = preloaded.identifier
+        @person.save
+      end
       redirect_to @person
     else
       redirect_to edit_person_path

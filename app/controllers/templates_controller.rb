@@ -57,6 +57,9 @@ class TemplatesController < ApplicationController
       m.tags = t.tags
       m.people<<(p)
 
+      #AUTHOR
+      m.author_id = current_user.person_id
+
       #Crear documento adjunto
       if m.category && m.category.doc_url
         u = current_user

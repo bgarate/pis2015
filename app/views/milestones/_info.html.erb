@@ -61,6 +61,9 @@
         <div class="edit-form row">
           <%= form_for @milestone do |f| %>
               <%= f.hidden_field :category_id %>
+              <% if feedback? %>
+                  <%= f.hidden_field :feedback_author_id %>
+              <% end %>
 
               <div class="form-group col-xs-6">
                 <%= f.label t('milestones.start_date'), class: "control-label" %>

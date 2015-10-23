@@ -65,7 +65,7 @@
                 <div class="edit-form row">
                   <%= form_for @milestone do |f| %>
                       <%= f.hidden_field :category_id %>
-                      <% if @milestone.category.is_feedback? %>
+                      <% if @milestone.category && @milestone.category.is_feedback? %>
                           <%= f.hidden_field :feedback_author_id %>
                       <% end %>
 

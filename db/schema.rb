@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20151021173324) do
     t.datetime "updated_at",                     null: false
     t.integer  "category_id"
     t.date     "start_date"
+    t.integer  "author_id"
     t.date     "completed_date"
     t.date     "deleted_date"
   end

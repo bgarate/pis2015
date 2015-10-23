@@ -75,6 +75,8 @@ class MilestonesController < ApplicationController
     category=Category.find(params[:milestone][:category_id])
     @milestone.category=category
 
+    #AUTHOR
+    @milestone.author_id = current_user.person_id
 
     #ASSIGNED
     if params[:people]!=nil

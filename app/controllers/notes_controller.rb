@@ -15,6 +15,7 @@ class NotesController < ApplicationController
 
 
     if request.referer.include? "/people/" # TODO: Solucion desprolija
+      flash.notice = t('note') + ' ' + t('messages.create.successf')
       redirect_to :back
     else
       redirect_to @milestone

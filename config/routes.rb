@@ -101,11 +101,13 @@ Rails.application.routes.draw do
 
   resources :projects do
     post :assign_person
+
     collection do
       get 'new' => 'projects#new'
       post 'new' => 'projects#create'
       get ':id' => 'projects#show', :constraints  => { :id => /[-\w\.]+/ }
       get 'index' => 'projects#index', as: 'index'
+      post 'unassign_person' =>  'projects#unassign_person'
     end
   end
 

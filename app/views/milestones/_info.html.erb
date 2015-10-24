@@ -30,7 +30,7 @@
     <p><%= @milestone.description %></p>
     <p><%
         if feedback? && @milestone.feedback_author %>
-            <%=  t('milestones.author') + ": " %>
+           <%=  t('milestones.author') + ": " %>
            <%= link_to @milestone.feedback_author.name, person_path(@milestone.feedback_author.id), method: :get %>
         <% end %>
     </p>
@@ -104,6 +104,9 @@
 
     <div class="last-update">
       <%= t('milestones.last_update') + " " + t('ago_i') +  time_ago_in_words(@milestone.updated_at) + t('ago_f') %>
+      <br>
+      <%=  t('milestones.author_milestone') + ": " +  Person.find(@milestone.author_id).name %>
+
     </div>
 
   </div>

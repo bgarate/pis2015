@@ -205,6 +205,7 @@ es:
     header: "Hitos"
     title: "Título"
     category: "Categoría"
+    author_milestone: "Autor del hito"
     due_date: "Fecha límite"
     reviewer: "Revisor del feedback"
     assign_to: 'Asignar a'
@@ -225,6 +226,7 @@ es:
     author: "Autor"
     done_date: "Completado el día: "
     rejected_date: "Rechazado el día: "
+    mod_date: "Fecha Completado/ Rechazado"
 
     state_title: "Estado"
     actions: "Acciones"

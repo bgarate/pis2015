@@ -22,29 +22,24 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav left-menu">
                 <li class="active">
-                  <%= link_to root_path  do %>
-                      <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-                      <span class="sr-only">(current)</span>
+                  <%= link_to root_path, "data-toggle": "tooltip", "data-placement": "bottom",title: "Inicio" do %>
+                      <span class="glyphicon glyphicon-home"></span>
                   <% end %>
-                  <%= link_to dashboard_index_path  do %>
-                      <span class="glyphicon glyphicon-th" aria-hidden="true"></span>
-                      <span class="sr-only">(current)</span>
+                  <%= link_to dashboard_index_path, "data-toggle": "tooltip", "data-placement": "bottom",title: "Dashboard" do %>
+                      <span class="glyphicon glyphicon-th"></span>
                   <% end %>
                   <% if current_user_admin? %>
-                    <%= link_to '/people'  do %>
-                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                      <span class="sr-only">(current)</span>
+                    <%= link_to '/people', "data-toggle": "tooltip", "data-placement": "bottom",title: "Personas" do %>
+                      <span class="glyphicon glyphicon-user"></span>
                     <% end %>
                   <% end %>
 
-                  <%= link_to  '/projects' do %>
-                      <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                      <span class="sr-only">(current)</span>
+                  <%= link_to  '/projects', "data-toggle": "tooltip", "data-placement": "bottom",title: "Proyectos" do %>
+                      <span class="glyphicon glyphicon-file"></span>
                   <% end %>
 
-                  <%= link_to milestones_path  do %>
-                      <span class="glyphicon glyphicon-flag" aria-hidden="true"></span>
-                      <span class="sr-only">(current)</span>
+                  <%= link_to milestones_path, "data-toggle": "tooltip", "data-placement": "bottom",title: "Hitos" do %>
+                      <span class="glyphicon glyphicon-flag"></span>
                   <% end %>
 
                 </li>

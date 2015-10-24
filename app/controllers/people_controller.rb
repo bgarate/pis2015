@@ -171,6 +171,9 @@ class PeopleController < ApplicationController
 
   def update
 
+    old_person = Person.find(@person.id)
+    old_role = old_person.tech_role
+
     @person.tech_role_id=params[:tech_role_id]
     if @person.update_attributes(person_params.except(:image_id))
       if person_params[:image_id].present?
@@ -179,6 +182,13 @@ class PeopleController < ApplicationController
         @person.image_id = preloaded.identifier
         @person.save
       end
+
+      if old_role != @person.tech_role
+        ev = ChangeRoleEvent.new(new_role: @person.tech_role, old_role: old_role,
+                                 author: current_person, person: @person)
+        ev.fire
+      end
+
       redirect_to @person
     else
       redirect_to edit_person_path

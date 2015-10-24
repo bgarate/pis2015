@@ -132,9 +132,8 @@ class PeopleController < ApplicationController
       @person.image_id = preloaded.identifier
     end
 
-    @person.save
-
     if @person.valid?
+      @person.save
       flash.notice = "'#{person_params[:name]}' " + t('messages.create.success')
       redirect_to @person
     else

@@ -25,7 +25,7 @@ class MilestonesController < ApplicationController
     end
   end
 
-  def get_category
+  def get_categorys
     @category=Category.find(params[:category_id])
   end
 

@@ -6,181 +6,180 @@
   <% end %>
 </div>
 <% if @milestones and not @milestones.empty? %>
-  <div id="timeline-card" class="card timeline">
-    <ul id="milestone-list">
-      <% @milestones.each do |e| %>
-          <li class="clearfix">
-          <% if e.due_date && e.due_date < Date.today %>
-            <div class="expired">
-          <% end %>
-            <div class="icon"><%= milestone_icon(e).html_safe %></div>
-            <% if can_modify_milestone?e.id %>
-              <%= if e.status != 'rejected'
-                    milestone_status(e,:right)
-                  end %>
-              <%= milestone_status_rej(e, :right) %>
-            <%end%>
-            <%if e.pending?%>
-              <h2><%=link_to e.title, e, method: :get%></h2>
-            <%else%>
-              <strike><h2><%=link_to e.title, e, method: :get%></h2></strike>
-            <%end%>
-            <p title="<%=e.description%>"><%=e.description.to_s.truncate(100, separator: ' ') %></p>
+    <div id="timeline-card" class="card timeline">
+      <ul id="milestone-list">
+        <% @milestones.each do |e| %>
 
-            <% if e.status == 'rejected' %>
-                <p><%= t('milestones.rejected_date') + l(e.deleted_date, format: :long) %></p>
+            <% if e.due_date && e.due_date < Date.today %>
+                <li class="clearfix expired">
+            <% else %>
+                <li class="clearfix">
             <% end %>
-            <% if e.status == 'done' %>
-                <p><%= t('milestones.done_date') + l(e.completed_date, format: :long) %></p>
-            <% end %>
+        <div class="icon"><%= milestone_icon(e).html_safe %></div>
+        <% if can_modify_milestone?e.id %>
+            <%= if e.status != 'rejected'
+                  milestone_status(e,:right)
+                end %>
+            <%= milestone_status_rej(e, :right) %>
+        <%end%>
+        <%if e.pending?%>
+            <h2><%=link_to e.title, e, method: :get%></h2>
+        <%else%>
+            <strike><h2><%=link_to e.title, e, method: :get%></h2></strike>
+        <%end%>
+        <p title="<%=e.description%>"><%=e.description.to_s.truncate(100, separator: ' ') %></p>
 
-            <!--<% if e.due_date %>
+        <% if e.status == 'rejected' %>
+            <p><%= t('milestones.rejected_date') + l(e.deleted_date, format: :long) %></p>
+        <% end %>
+        <% if e.status == 'done' %>
+            <p><%= t('milestones.done_date') + l(e.completed_date, format: :long) %></p>
+        <% end %>
+
+        <!--<% if e.due_date %>
                 <div class="calendar"><%=l(e.due_date, format: "%A, %B %d %Y")%></div>
             <% end %>-->
 
-            <div class="clearfix"></div>
+        <div class="clearfix"></div>
 
-            <% @milestone = e %>
-
-
-            <% if (@milestone.pending?) && (can_modify_milestone?@milestone.id) %>
-                <div class="date-row editable">
-            <%else%>
-                <div class="date-row">
-            <% end %>
-            <% if @milestone.start_date %>
-                <div class="calendar"><%= l(@milestone.start_date, format: :long) %></div>
-            <% end %>
-
-            <% if @milestone.due_date %>
-                <div class="calendar right"><%= l(@milestone.due_date, format: :long) %></div>
-            <% end %>
-
-            <% if (@milestone.pending?) && (can_modify_milestone?@milestone.id) %>
-                </div>
-            <%else%>
-                </div>
-            <% end %>
-
-            <% if can_modify_milestone?@milestone.id %>
+        <% @milestone = e %>
 
 
-                <div class="edit-form row">
-                  <%= form_for @milestone do |f| %>
-                      <%= f.hidden_field :category_id %>
+        <% if (@milestone.pending?) && (can_modify_milestone?@milestone.id) %>
+            <div class="date-row editable">
+        <%else%>
+            <div class="date-row">
+        <% end %>
+        <% if @milestone.start_date %>
+            <div class="calendar"><%= l(@milestone.start_date, format: :long) %></div>
+        <% end %>
 
-                      <div class="form-group col-xs-6">
-                        <%= f.label t('milestones.start_date'), class: "control-label" %>
-                        <div class="input-group">
-                          <%= f.text_field :start_date, class: "form-control", id:'start_date' ,value:(@milestone.start_date ? l(@milestone.start_date) : nil), "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
-                          <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
-                        </div>
-                      </div>
+        <% if @milestone.due_date %>
+            <div class="calendar right"><%= l(@milestone.due_date, format: :long) %></div>
+        <% end %>
 
-                      <div class="form-group col-xs-6">
-                        <%= f.label t('milestones.due_date'), class: "control-label" %>
-                        <div class="input-group">
-                          <%= f.text_field :due_date, class: "form-control" , id:'due_date',value:(@milestone.due_date ? l(@milestone.due_date) : nil) ,"data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy" %>
-                          <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
-                        </div>
-                      </div>
-
-                      <div class="btn pull-right">
-                        <%= f.button t('milestones.edit.submit'),:type => 'submit', class: "btn btn-default" %>
-                      </div>
-
-
-                      </div>
-
-
-                  <% end %> <!-- Form -->
-
-            <% end %>
-
-
-            <div class="clearfix"></div>
-
-            <div class="resources-list clearfix">
-                <h2><span class="glyphicon glyphicon glyphicon-paperclip"></span>  <%=t(:attachmentsdocs)%></h2>
-                  <% if can_modify_milestone?(e.id) %>
-                      <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                          <span class="toggle-documents glyphicon glyphicon-plus"></span>
-                      <% end %>
-                  <% end %>
-              <% unless e.resources.empty? %>
-                  <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
-                  <div class="slider">
-                    <ul>
-                      <%e.resources.each do |r|%>
-                          <li><%=link_to r.title, r.url, :target => "_blank"%></li>
-                      <%end%>
-                    </ul>
-                  </div>
-              <% end %>
-
+        <% if (@milestone.pending?) && (can_modify_milestone?@milestone.id) %>
             </div>
+        <%else%>
+            </div>
+        <% end %>
+
+        <% if can_modify_milestone?@milestone.id %>
 
 
+            <div class="edit-form row">
+              <%= form_for @milestone do |f| %>
+                  <%= f.hidden_field :category_id %>
 
-
-            <!-- Muestro ultima nota -->
-            <% visible_notes = e.get_visible_notes(current_person)
-               n = visible_notes.first %>
-
-            <div class="notes-list clearfix">
-              <h2><span class="glyphicon glyphicon-comment"></span></h2>
-
-              <%= render "notes/form" %>
-
-              <% unless n.nil? %>
-                  <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
-                  <div class="slider">
-                    <ul>
-
-                      <li>
-                        <h3><%= n.author.name %></h3>
-                        <div class="time"><%=  t('ago_i') + time_ago_in_words(n.created_at) + t('ago_f')  %></div>
-                        <p><%= truncate(n.text, length: 350) %></p>
-
-                        <% if current_user_admin?
-                             link_to [n.milestone, n],
-                                     method: :delete,
-                                     data: { confirm: t('notes.delete.sure')},
-                                     class: 'delete' do %>
-                                <span class="glyphicon glyphicon-remove"></span>
-                            <% end
-                               end %>
-
-                      </li>
-                    </ul>
-                    <% if visible_notes.count > 1 %>
-                        <div class="link">
-                          <%= link_to t('people.new.other_notes', :count => "#{visible_notes.count - 1}"), e %></div>
-                    <% end %>
+                  <div class="form-group col-xs-6">
+                    <%= f.label t('milestones.start_date'), class: "control-label" %>
+                    <div class="input-group">
+                      <%= f.text_field :start_date, class: "form-control", id:'start_date' ,value:(@milestone.start_date ? l(@milestone.start_date) : nil), "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
+                      <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+                    </div>
                   </div>
 
-              <% end %>
+                  <div class="form-group col-xs-6">
+                    <%= f.label t('milestones.due_date'), class: "control-label" %>
+                    <div class="input-group">
+                      <%= f.text_field :due_date, class: "form-control" , id:'due_date',value:(@milestone.due_date ? l(@milestone.due_date) : nil) ,"data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy" %>
+                      <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
+                    </div>
+                  </div>
 
-            </div>
-            <% unless @milestone.tags.empty? %>
-                <ul class="tags clearfix">
-                  <% @milestone.tags.each do |t| %>
-                      <li><%= t.name %></li>
+                  <div class="btn pull-right">
+                    <%= f.button t('milestones.edit.submit'),:type => 'submit', class: "btn btn-default" %>
+                  </div>
+
+
+                  </div>
+
+
+              <% end %> <!-- Form -->
+
+        <% end %>
+
+
+        <div class="clearfix"></div>
+
+        <div class="resources-list clearfix">
+          <h2><span class="glyphicon glyphicon glyphicon-paperclip"></span>  <%=t(:attachmentsdocs)%></h2>
+          <% if can_modify_milestone?(e.id) %>
+              <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                  <span class="toggle-documents glyphicon glyphicon-plus"></span>
+              <% end %>
+          <% end %>
+          <% unless e.resources.empty? %>
+              <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
+              <div class="slider">
+                <ul>
+                  <%e.resources.each do |r|%>
+                      <li><%=link_to r.title, r.url, :target => "_blank"%></li>
                   <%end%>
                 </ul>
-            <%end%>
+              </div>
+          <% end %>
 
-            <div class="milestone-last-update">
-              <%= t('milestones.last_update') + " " + t('ago_i') +  time_ago_in_words(e.updated_at) + t('ago_f') %>
-            </div>
-            <% if e.due_date && e.due_date < Date.today %>
-                </div>
-            <% end %>
-          </li>
-      <% end %>
-    </ul>
-  </div>
+        </div>
+
+
+
+
+        <!-- Muestro ultima nota -->
+        <% visible_notes = e.get_visible_notes(current_person)
+           n = visible_notes.first %>
+
+        <div class="notes-list clearfix">
+          <h2><span class="glyphicon glyphicon-comment"></span></h2>
+
+          <%= render "notes/form" %>
+
+          <% unless n.nil? %>
+              <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
+              <div class="slider">
+                <ul>
+
+                  <li>
+                    <h3><%= n.author.name %></h3>
+                    <div class="time"><%=  t('ago_i') + time_ago_in_words(n.created_at) + t('ago_f')  %></div>
+                    <p><%= truncate(n.text, length: 350) %></p>
+
+                    <% if current_user_admin?
+                         link_to [n.milestone, n],
+                                 method: :delete,
+                                 data: { confirm: t('notes.delete.sure')},
+                                 class: 'delete' do %>
+                            <span class="glyphicon glyphicon-remove"></span>
+                        <% end
+                           end %>
+
+                  </li>
+                </ul>
+                <% if visible_notes.count > 1 %>
+                    <div class="link">
+                      <%= link_to t('people.new.other_notes', :count => "#{visible_notes.count - 1}"), e %></div>
+                <% end %>
+              </div>
+
+          <% end %>
+
+        </div>
+        <% unless @milestone.tags.empty? %>
+            <ul class="tags clearfix">
+              <% @milestone.tags.each do |t| %>
+                  <li><%= t.name %></li>
+              <%end%>
+            </ul>
+        <%end%>
+
+        <div class="milestone-last-update">
+          <%= t('milestones.last_update') + " " + t('ago_i') +  time_ago_in_words(e.updated_at) + t('ago_f') %>
+        </div>
+        </li>
+<% end %>
+</ul>
+</div>
 
 <% else %>
-  <div class="alert alert-info" role="alert"><p><%= t('milestones.zero') %></p></div>
+<div class="alert alert-info" role="alert"><p><%= t('milestones.zero') %></p></div>
 <% end %>

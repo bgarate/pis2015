@@ -325,6 +325,18 @@ ul#milestone-list {
 
     padding-left: 40px;
 
+    .expired {
+        background-color: #D9534F;
+        &:before {
+
+            border-right-color:  #D9534F;
+        }
+        a  {
+            color: white !important;
+        }
+
+    }
+
     > li {
 
         position: relative;
@@ -357,9 +369,7 @@ ul#milestone-list {
             clear: both;
         }
 
-        .expired {
-            background-color: red;
-        }
+
 
         .icon {
             position: absolute;

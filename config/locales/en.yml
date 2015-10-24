@@ -75,6 +75,7 @@ en:
   messages:
     create:
       success: "created successfully!"
+      successf: "created successfully!"
       error: "couldn't be created"
     save:
       success: "successfully saved!"

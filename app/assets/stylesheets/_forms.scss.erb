@@ -58,7 +58,6 @@ form.main-form {
         position: relative;
 
         h1 {
-            cursor: pointer;
             margin-bottom: 0;
             width: calc(100% + 60px);
             float: right;
@@ -184,4 +183,20 @@ form.milestone-filters {
     .btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled.focus, .btn-default.disabled:active, .btn-default.disabled.active, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled].focus, .btn-default[disabled]:active, .btn-default[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default.focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default.active {
         background-color:#2980B8;
     }
+}
+
+
+.slide-form-button {
+    float: right;
+    background-color: $peterriver-focus;
+    border-radius: 15px;
+    height: 30px;
+    color: white;
+    border: 0;
+    margin: 4px;
+
+    &:hover {
+        background-color: $peterriver;
+    }
+
 }

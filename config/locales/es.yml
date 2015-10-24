@@ -49,6 +49,11 @@ es:
   search: 'Buscar'
   none:  'Ninguna'
   view: 'Ver'
+  from: 'desde'
+  to: 'hasta'
+  filters: 'Filtros'
+  all: 'Todos...'
+  reset: 'Limpiar'
   icon: 'Icono'
   actions: 'Acciones'
 

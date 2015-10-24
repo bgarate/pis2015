@@ -88,4 +88,100 @@ form.main-form {
     .btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled.focus, .btn-default.disabled:active, .btn-default.disabled.active, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled].focus, .btn-default[disabled]:active, .btn-default[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default.focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default.active {
         background-color:#2980B8;
     }
+};
+
+form.milestone-filters {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-bottom: 3px solid $alizarin;
+    padding: 0px 30px 0px 30px;
+    background-color: white;
+
+    h1 {
+        color:white;
+        text-align: center;
+        background-color: $alizarin;
+        margin: 0px -30px 20px -30px;
+        padding: 15px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .form-group {
+        padding-right: 3px;
+        padding-left: 3px;
+    }
+    button[type=submit] {
+        position: absolute;
+        right: 8px;
+        bottom: 0;
+        border-radius: 0;
+        background-color: $alizarin;
+        border: none;
+        color: white;
+
+        &:active, &:focus {
+            background-color: $alizarin-dark;
+            color: white;
+            box-shadow: none;
+        }
+
+    }
+
+    input, textarea {
+        border-radius: 0;
+        box-shadow: none;
+
+        border-width: 1px 1px 3px 1px;
+
+        &:focus {
+
+            box-shadow: none;
+        }
+    }
+    textarea{
+        resize: vertical;
+    }
+
+    .has-success, .has-error {
+        .form-control {
+            box-shadow: none;
+        }
+    }
+
+    &.slide-on-click {
+        padding-bottom: 0;
+        margin-bottom: 0px;
+        position: relative;
+
+        h1 {
+            cursor: pointer;
+            margin-bottom: 0;
+            width: calc(100% + 60px);
+            float: right;
+            @include transition(0.5s ease-in-out all);
+        }
+        .form-slide {
+            padding-top: 20px;
+            margin-bottom: 0px;
+            clear: both;
+        }
+
+        button[type=submit] {
+            right: 0;
+        }
+
+        &:not(.active-slide) {
+            background-color: transparent;
+            h1 {
+                width: 150px;
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+    }
+
+    .btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled.focus, .btn-default.disabled:active, .btn-default.disabled.active, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled].focus, .btn-default[disabled]:active, .btn-default[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default.focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default.active {
+        background-color:#2980B8;
+    }
 }

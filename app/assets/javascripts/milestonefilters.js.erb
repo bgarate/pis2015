@@ -1,0 +1,112 @@
+var milestonefilters_ready = function() {
+    //Plugin filtro por rango de fechas en Datatable
+    $.fn.dataTableExt.afnFiltering.push(
+            function( oSettings, aData, iDataIndex ) {
+                var iDueFrom= document.getElementById('due_date_from').value;
+                var iDueTo = document.getElementById('due_date_to').value;
+                var iDueDateCol = 7; //7 es la de due_date
+                var iEndDateCol = 7;
+
+                // toma dd*mm*yyyy y convierte a yyyymmdd
+                iDueFrom=iDueFrom.substring(6,10) + iDueFrom.substring(3,5)+ iDueFrom.substring(0,2);
+                iDueTo=iDueTo.substring(6,10) + iDueTo.substring(3,5)+ iDueTo.substring(0,2);
+//                    console.log ('Datos: ' +aData[iStartDateCol] + ' ' + aData[iEndDateCol]);
+
+                // toma yyyy*mm*dd y convierte a yyyymmdd
+                var datofdue=aData[iDueDateCol].substring(0,4) + aData[iDueDateCol].substring(5,7)+ aData[iDueDateCol].substring(8,10);
+//                    var datoffin=aData[iEndDateCol].substring(0,4) + aData[iEndDateCol].substring(5,7)+ aData[iEndDateCol].substring(8,10);
+
+                //si es en una sola columna se puede eliminar uno de los datofXXX
+                console.log (datofdue);
+                if ( iDueFrom === "" && iDueTo === "" )
+                {
+                    return true;
+                }
+                else if ( datofdue==0) //hay algun filtro, pero no hay dato
+                {
+                    return false;
+                }
+                else if ( iDueFrom <= datofdue && iDueTo === "")
+                {
+                    return true;
+                }
+                else if ( iDueTo >= datofdue && iDueFrom === "")
+                {
+                    return true;
+                }
+                else if (iDueFrom <= datofdue && iDueTo >= datofdue)
+                {
+                    return true;
+                }
+                return false;
+            }
+    );
+    var tabla = $('#hitos').DataTable({
+        paging: false,
+        "columnDefs": [
+            { "width": "30px", "targets": 'status_col' }
+        ],
+        "language": {
+            "search": ""
+        }
+    });
+
+
+    //filtro de fechas
+    $( '.milestone-filters #due_date_from,.milestone-filters #due_date_to' ).on( 'change', function (ev) {
+//            if (ev.keyCode == 13) {
+        tabla.draw();
+
+//            }
+    } );
+
+    //filtros select
+    $( '.milestone-filters #tagsfilter' ).on( 'keydown change', function (ev) {
+        var that = tabla.column('#tags');
+
+        var str = "";
+        //$( "#tagsfilter option:selected" ).each(function() {
+        $(this).find('option').filter(":selected" ).each(function() {
+            str += $( this ).text() + " ";
+        });
+//            console.log ('Parseado:' + str);
+        if ( that.search() !== str ) {
+
+            that
+                    .search( str )
+                    .draw();
+        }
+    });
+    $( '.milestone-filters #peoplefilter' ).on( 'keydown change', function (ev) {
+        var that = tabla.column('#people');
+        var str = "";
+        $(this).find('option').filter(":selected" ).each(function() {
+            str += $( this ).text() + " ";
+        });
+
+        if ( that.search() !== str ) {
+
+            that
+                    .search( str )
+                    .draw();
+        }
+
+    });
+    $( '.milestone-filters #categoriesfilter' ).on( 'keydown change', function (ev) {
+        var that = tabla.column('#categories');
+        if ( that.search() !== this.value ) {
+
+            that
+                    .search( this.value )
+                    .draw();
+        }
+
+    });
+    $('#reset_filters').click(function(){
+        $(".chosen").val('').trigger("chosen:updated");
+        $( '.milestone-filters #due_date_from,.milestone-filters #due_date_to').val('');
+        tabla.search('').columns().search('');
+        tabla.draw();
+    });
+
+};

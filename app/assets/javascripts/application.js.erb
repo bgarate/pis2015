@@ -83,13 +83,14 @@
         });
 
         $.fn.datepicker.defaults.format = "dd/mm/yyyy";
-        $(".datatable").DataTable({
-            paging: false,
 
+        $(".datatable:not(#hitos)").DataTable({
+            paging: false,
             "language": {
                 "search": ""
             }
         });
+
         $("select.chosen").chosen();
         $("select.submit-on-select").change(
                 function () {

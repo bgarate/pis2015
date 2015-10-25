@@ -199,6 +199,7 @@ es:
     delete:
       title: "Borrar Plantilla"
       sure: "¿Esta seguro que desea eliminar esta plantilla permanentemente?"
+    see_all: "Ver todas las plantillas"
 
   #hitos
   milestones:

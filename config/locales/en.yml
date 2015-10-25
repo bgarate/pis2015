@@ -199,6 +199,7 @@ en:
     delete:
       title: "Delete Milestone Template"
       sure: "Are you sure you want to permanently delete this milestone template?"
+    see_all: "See all templates"
 
   #milestones
   milestones:

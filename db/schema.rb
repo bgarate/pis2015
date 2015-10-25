@@ -38,17 +38,6 @@ ActiveRecord::Schema.define(version: 20151021173324) do
   add_index "mentorships", ["mentee_id"], name: "index_mentorships_on_mentee_id", using: :btree
   add_index "mentorships", ["mentor_id"], name: "index_mentorships_on_mentor_id", using: :btree
 
-  create_table "milestone_templates", force: :cascade do |t|
-    t.string   "title"
-    t.integer  "due_term"
-    t.text     "description"
-    t.integer  "type"
-    t.string   "icon"
-    t.integer  "category_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "milestones", force: :cascade do |t|
     t.string   "title"
     t.date     "due_date"

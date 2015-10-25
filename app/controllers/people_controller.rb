@@ -230,16 +230,13 @@ class PeopleController < ApplicationController
     if (params[:mentor_id] != params[:mentee_id])
       @mentor=Person.find(params[:mentor_id])
       @mentee=Person.find(params[:mentee_id])
-      begin
-        #SIN TEMINAR
-        ma = Mentorship.find_by(mentor_id: params[:mentor_id], mentee_id: params[:mentee_id])
-        if ma
-          ma.destroy!
-        end
-        redirect_to @mentee
-      rescue Exception
-        render :status => 500, :file => "public/500"
+
+      #Eliminar mentor
+      ma = Mentorship.find_by(mentor_id: params[:mentor_id], mentee_id: params[:mentee_id])
+      if ma
+        ma.destroy!
       end
+      redirect_to @mentee
 
     else
       render :status => 422, :file => "public/422"

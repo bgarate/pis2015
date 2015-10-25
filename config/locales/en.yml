@@ -227,6 +227,7 @@ en:
     author: "Author"
     done_date: "Done on: "
     rejected_date: "Rejected on: "
+    mod_date: "Done/ rejected on"
 
     state_title: "State"
     actions: "Actions"

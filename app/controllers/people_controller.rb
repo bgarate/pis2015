@@ -1,8 +1,8 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline]
+  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline, :edit, :update]
   #skip_before_action :admin?, only:[:assign_project]
-  before_action :get_person, only:[:show, :show_pending_timeline, :show_not_pending_timeline]
+  before_action :get_person, only:[:show, :edit, :update, :show_pending_timeline, :show_not_pending_timeline]
 
   def get_person
     identifier = params[:id]
@@ -85,6 +85,8 @@ class PeopleController < ApplicationController
       @mentorships = @person.mentors
       @yet_pending = Milestone.pending.where('id NOT in (?)', @person.milestones.pluck(:id))
 
+      #
+      @temps = Template.all.order(title: :desc)
       show_pending_timeline
 
     else
@@ -94,7 +96,8 @@ class PeopleController < ApplicationController
 
   def show_not_pending_timeline
     @milestones = @person.milestones.where('milestones.status <> 0').order(due_date: :asc, updated_at: :desc)
-    @filtered_count = @person.milestones.size - @milestones.size
+    @filtered_not_pending_count = @milestones.size
+    @filtered_pending_count = @person.milestones.size - @milestones.size
 
     @filter = :not_pending
 
@@ -106,7 +109,8 @@ class PeopleController < ApplicationController
 
   def show_pending_timeline
     @milestones = @person.milestones.where('milestones.status = 0').order(due_date: :asc, updated_at: :desc)
-    @filtered_count = @person.milestones.size - @milestones.size
+    @filtered_pending_count = @milestones.size
+    @filtered_not_pending_count = @person.milestones.size - @milestones.size
 
     @filter = :pending
 
@@ -118,21 +122,20 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
+    @roles=TechRole.all
   end
 
   def create
-
     @person = Person.new(person_params.except(:image_id))
-
+    @person.tech_role_id = params[:tech_role_id]
     if person_params[:image_id].present?
       preloaded = Cloudinary::PreloadedFile.new(person_params[:image_id])
       raise "Invalid upload signature" if !preloaded.valid?
       @person.image_id = preloaded.identifier
     end
 
-    @person.save
-
     if @person.valid?
+      @person.save
       flash.notice = "'#{person_params[:name]}' " + t('messages.create.success')
       redirect_to @person
     else
@@ -160,6 +163,39 @@ class PeopleController < ApplicationController
   #  redirect_to person
   #end
 
+  def edit
+    unless can_view_person? @person.id
+      flash.alert= t('not_authorized')
+      redirect_to people_path
+    end
+    @roles=TechRole.all
+  end
+
+  def update
+
+    old_person = Person.find(@person.id)
+    old_role = old_person.tech_role
+
+    @person.tech_role_id=params[:tech_role_id]
+    if @person.update_attributes(person_params.except(:image_id))
+      if person_params[:image_id].present?
+        preloaded = Cloudinary::PreloadedFile.new(person_params[:image_id])
+        raise "Invalid upload signature" if !preloaded.valid?
+        @person.image_id = preloaded.identifier
+        @person.save
+      end
+
+      if old_role != @person.tech_role
+        ev = ChangeRoleEvent.new(new_role: @person.tech_role, old_role: old_role,
+                                 author: current_person, person: @person)
+        ev.fire
+      end
+
+      redirect_to @person
+    else
+      redirect_to edit_person_path
+    end
+  end
 
   def add_mentor
     if (params[:mentor_id] != params[:mentee_id])
@@ -189,7 +225,7 @@ class PeopleController < ApplicationController
 
   private
   def person_params
-    params.require(:person).permit(:name, :email, :cellphone, :phone, :birth_date, :start_date, :image_id)
+    params.require(:person).permit(:name, :email, :cellphone, :phone, :birth_date, :start_date, :image_id, :tech_role_id)
   end
 
 

@@ -1,10 +1,3 @@
-<div id="npmillink-card" class="timeline-filter">
-  <% if @filter == :pending %>
-      <%=link_to "#{t('milestones.state.done_or_rejected')} (#{@filtered_count})", person_show_not_pending_timeline_path(:person_id => @person.id),remote:true %>
-  <% else %>
-      <%=link_to "#{t('milestones.state.pending')} (#{@filtered_count})", person_show_pending_timeline_path(:person_id => @person.id),remote:true %>
-  <% end %>
-</div>
 <% if @milestones and not @milestones.empty? %>
     <div id="timeline-card" class="card timeline">
       <ul id="milestone-list">
@@ -67,9 +60,12 @@
         <% if can_modify_milestone?@milestone.id %>
 
 
-            <div class="edit-form row">
-              <%= form_for @milestone do |f| %>
-                  <%= f.hidden_field :category_id %>
+                <div class="edit-form row">
+                  <%= form_for @milestone do |f| %>
+                      <%= f.hidden_field :category_id %>
+                      <% if @milestone.category && @milestone.category.is_feedback? %>
+                          <%= f.hidden_field :feedback_author_id %>
+                      <% end %>
 
                   <div class="form-group col-xs-6">
                     <%= f.label t('milestones.start_date'), class: "control-label" %>

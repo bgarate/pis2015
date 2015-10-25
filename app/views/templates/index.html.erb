@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-container">
+        <h1>
+          <%= link_to templates_new_path do%>
+              <span class='large-text glyphicon glyphicon-plus table-add-button pull-left'>  </span>
+          <% end %>
+          <%= t('templates.header') %></h1>
+        <table class="table datatable table-striped" id="plantillas" data-info="false">
+          <thead>
+          <tr>
+            <td class="title_row" ><%= t('title') %></td>
+            <td class="description_row"><%= t('description') %></td>
+            <td><%= t('category') %></td>
+            <td><%= t('tags.name') %></td>
+            <td><%= t('actions') %></td>
+          </tr>
+          </thead>
+          <tbody>
+          <% @template.each do |m| %>
+              <tr>
+                <td class="description_row">
+                  <%= m.title %>
+                </td>
+                <td class="description_row">
+                  <%= m.description %>
+                </td>
+                <td>
+                  <%= m.category.name %>
+                </td>
+                <td>
+                  <ul class="chosen-choices">
+                    <% m.tags.each do |t| %>
+                        <li class="search-choice"><%= t.name %></li>
+                    <% end %>
+                  </ul>
+                </td>
+
+                <td>
+                      <%= link_to templates_destroy_path(template_id: m.id),
+                                  data: { confirm: t('templates.delete.sure') } do %>
+                          <span class='large-text glyphicon glyphicon-trash'></span>
+                      <% end %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>
+

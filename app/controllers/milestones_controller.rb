@@ -31,6 +31,10 @@ class MilestonesController < ApplicationController
 
   def index
     @milestone= Milestone.all
+    @tags = Tag.all.order(:name)
+    @people = Person.all.order(:name)
+    @categories = Category.all.order(:name)
+
     respond_to do |f|
       f.json { render json: name_and_path(@milestone)}
       f.html { render }
@@ -74,9 +78,6 @@ class MilestonesController < ApplicationController
     #CATEGORIES
     category=Category.find(params[:milestone][:category_id])
     @milestone.category=category
-    if category.name.include? "Feedback"
-      @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
-    end
 
     #AUTHOR
     @milestone.author_id = current_user.person_id
@@ -86,6 +87,13 @@ class MilestonesController < ApplicationController
       params[:people].each do |p|
       @person2=Person.find(p)
       @milestone.people<<@person2
+      end
+    end
+
+    if category.is_feedback?
+      @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
+      unless @milestone.people.exists?(@milestone.feedback_author_id)
+        @milestone.people<<@milestone.feedback_author
       end
     end
 
@@ -189,34 +197,37 @@ class MilestonesController < ApplicationController
 
   def update
     category=Category.find(params[:milestone][:category_id])
+    @milestone.category = category
 
-      if category.name.include? "Feedback"
-        @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
+    if params[:people]!=nil
+      params[:people].each do |p|
+        @person2=Person.find(p)
+        @milestone.people<<@person2
+        # @milestone.updated_at= Time.now #esto lo asigna activerecord automaticamente.
+        @milestone.save
+      end
+    end
+    if category.is_feedback?
+      @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
+      unless @milestone.people.exists?(@milestone.feedback_author_id)
+        @milestone.people<<@milestone.feedback_author
+      end
+    else
+      @milestone.feedback_author_id=nil
+    end
+
+    if @milestone.update_attributes(milestone_params)
+      @milestone.tag_ids = params[:tags]
+
+      if request.referer.include? "/people/" # TODO: Solucion desprolija
+        redirect_to :back
       else
-        @milestone.feedback_author_id=nil
+        redirect_to @milestone
       end
-      @milestone.category = category
-      if params[:people]!=nil
-        params[:people].each do |p|
-          @person2=Person.find(p)
-          @milestone.people<<@person2
-          @milestone.updated_at= Time.now
-          @milestone.save
-        end
-      end
-      @milestone.category = category
-      if @milestone.update_attributes(milestone_params)
-        @milestone.tag_ids = params[:tags]
 
-        if request.referer.include? "/people/" # TODO: Solucion desprolija
-          redirect_to :back
-        else
-          redirect_to @milestone
-        end
-
-      else
-        render :edit
-      end
+    else
+      render :edit
+    end
   end
 
   helper_method :feedback?
@@ -258,7 +269,7 @@ class MilestonesController < ApplicationController
   private
 
   def milestone_params
-    params.require(:milestone).permit(:title, :start_date, :due_date,:description,:status, :icon, :category_id, :created_at, :updated_at)
+    params.require(:milestone).permit(:title, :start_date, :due_date,:description,:status, :icon, :category_id)
   end
 
 

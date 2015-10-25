@@ -134,6 +134,8 @@ es:
     add:
       header: "Agregar Mentores"
       submit: "Agregar Mentor"
+    remove:
+      submit: "Quitar Mentor"
 
 
   #projects

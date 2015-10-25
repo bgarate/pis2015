@@ -149,6 +149,12 @@
 
         $("form.slide-on-click > .form-slide").hide();
 
+        $("form.slide-on-click.milestone-filters h1").on('click', function (e) {
+            $(this).parent().toggleClass("active-slide");
+            $(this).siblings(".form-slide").slideToggle();
+        });
+
+
         // jQuery plugin to prevent double submission of forms
         jQuery.fn.preventDoubleSubmission = function() {
             $(this).on('submit',function(e){

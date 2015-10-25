@@ -228,7 +228,7 @@ es:
     author: "Autor"
     done_date: "Completado el día: "
     rejected_date: "Rechazado el día: "
-    mod_date: "Fecha Completado/ Rechazado"
+    mod_date: "Fecha hecho/ rechazado"
 
     state_title: "Estado"
     actions: "Acciones"

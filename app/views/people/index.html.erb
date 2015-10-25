@@ -15,12 +15,12 @@
           <table class="table datatable" data-info="false">
             <thead>
             <tr>
-              <td></td>
-              <td><%= t('people.list.name') %></td>
-              <td><%= t('people.list.email') %></td>
-              <td><%= t('people.list.start_date') %></td>
-              <td><%= t('people.list.admin') %></td>
-
+              <th style="width: 60px"></th>
+              <th><%= t('people.list.name') %></th>
+              <th><%= t('people.list.email') %></th>
+              <th><%= t('people.list.start_date') %></th>
+              <th><%= t('people.list.admin') %></th>
+              <th></th>
             </tr>
             </thead>
             <tbody>
@@ -52,6 +52,7 @@
                       <% end %>
                     <%end%>
                   </td>
+
                 </tr>
             <% end %>
 

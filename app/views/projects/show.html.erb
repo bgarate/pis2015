@@ -66,7 +66,7 @@
               <% @project.people.each do |t| %>
                   <li>
                     <%= link_to t.name, t %>
-                    <%= link_to  controller: 'projects', action: 'unassign_person' , project_id: @project.id, person_id: t.id  do %>
+                    <%= link_to  controller: 'projects', action: 'unassign_person' ,project_id: @project.id, person_id: t.id do %>
                         <span class='large-text glyphicon glyphicon-remove'></span>
                     <% end%>
                   </li>

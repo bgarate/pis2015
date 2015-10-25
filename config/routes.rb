@@ -105,9 +105,10 @@ Rails.application.routes.draw do
     collection do
       get 'new' => 'projects#new'
       post 'new' => 'projects#create'
+      get 'unassign_person' =>  'projects#unassign_person'
       get ':id' => 'projects#show', :constraints  => { :id => /[-\w\.]+/ }
       get 'index' => 'projects#index', as: 'index'
-      post 'unassign_person' =>  'projects#unassign_person'
+
     end
   end
 

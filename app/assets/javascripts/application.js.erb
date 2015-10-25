@@ -74,9 +74,8 @@
 
         $.validate({
             modules: 'html5, date',
-
-            language: myLanguage
-
+            language: myLanguage,
+            ignore: 'iconpicker-popover button'
         });
 
         $(".knob-stats input").knob({

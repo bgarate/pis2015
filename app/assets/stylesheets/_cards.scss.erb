@@ -65,20 +65,34 @@
     background-color: #dddddd;
     margin: 4px;
 
-    &:hover {
-        background-color: #e4e4e4;
-    }
-
     a {
 
         text-decoration: none;
         padding: 6px;
-        border-bottom: solid 0px transparent;
+        border-bottom: solid 0 transparent;
         text-align: left;
         display: block;
         margin-bottom: 30px;
 
         color: #2a2a2a;
+
+        &:after {
+            content: "\e080";
+            display: inline-block;
+            font-family: "Glyphicons Halflings";
+            transform: rotate(0deg);
+            margin-left: 5px;
+            @include transition(0.5s ease-in-out);
+        }
+
+
+    }
+
+    &.active, &:hover,{
+        background-color: #b7c9d3;
+        a:after {
+            transform: rotate(90deg);
+        }
     }
 }
 
@@ -351,13 +365,16 @@ ul#milestone-list {
     padding-left: 40px;
 
     .expired {
-        background-color: #D9534F;
+        border: #D9534F 3px solid;
         &:before {
 
             border-right-color:  #D9534F;
         }
         a  {
             color: white !important;
+        }
+        .calendar.right {
+            color: #D9534F;
         }
 
     }

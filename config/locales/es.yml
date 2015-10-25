@@ -234,8 +234,8 @@ es:
     actions: "Acciones"
 
     state:
-      done_or_rejected: 'Hitos en estado hecho o rechazado'
-      pending: 'Hitos pendientes'
+      done_or_rejected: 'Finalizados'
+      pending: 'Pendientes'
     mark_as_sure: '¿Está seguro que desea marcar el hito como '
     pendings: "Hitos pendientes"
     overcomes: 'Hitos vencidos'

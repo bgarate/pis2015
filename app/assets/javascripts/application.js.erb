@@ -189,6 +189,12 @@
             obj.hide();
         });
 
+
+        $(".timeline-filter").unbind().click(function() {
+            $(".timeline-filter").removeClass("active");
+            $(this).addClass("active");
+        });
+
         var ctrlDown = false;
         const ctrlKey = 17;
         const qKey = 81;

@@ -260,6 +260,7 @@ ul#mentors {
             padding: 10px 10px 10px 0;
             margin-bottom: 10px;
 
+
             .day-of-the-week {
                 position: absolute;
                 left: -40px;
@@ -349,6 +350,18 @@ ul#milestone-list {
 
     padding-left: 40px;
 
+    .expired {
+        background-color: #D9534F;
+        &:before {
+
+            border-right-color:  #D9534F;
+        }
+        a  {
+            color: white !important;
+        }
+
+    }
+
     > li {
 
         position: relative;
@@ -380,6 +393,8 @@ ul#milestone-list {
             @include triangle(left, white);
             clear: both;
         }
+
+
 
         .icon {
             position: absolute;

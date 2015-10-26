@@ -33,6 +33,13 @@
               <span class="glyphicon glyphicon-plus"></span>
             </a>
           </li>
+          <% if !@mentorships.empty? %>
+              <li class="minus" >
+                <a href="remove_mentor_form?mentee_id=<%=@identifier%>" role="button">
+                  <span class="glyphicon glyphicon-minus"></span>
+                </a>
+              </li>
+          <%end%>
       <%end%>
     </ul>
 

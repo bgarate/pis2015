@@ -64,7 +64,12 @@
                 <%= t('project.people.title') %>
               </label>
               <% @project.people.each do |t| %>
-                  <li><%= link_to t.name, t %></li>
+                  <li>
+                    <%= link_to t.name, t %>
+                    <%= link_to  controller: 'projects', action: 'unassign_person' ,project_id: @project.id, person_id: t.id do %>
+                        <span class='large-text glyphicon glyphicon-remove'></span>
+                    <% end%>
+                  </li>
               <% end %>
               <% if @project.people.size == 0 %>
                   <em><%= t('project.people.zero') %></em>
@@ -74,20 +79,18 @@
           <tr>
             <td>
               <%= form_tag ({:action => 'assign_person', :controller => 'projects', :project_id => @project.id}) do   %>
-                <% if !@usr.empty?%>
-                  <label>
-                    <%= t('project.assign.title') %>
-                  </label>
-                  <br>
-                  <select name="person_id">
-                    <% @usr.each do |p|%>
-                        <option value= <%=p.id%> > <%=p.name%></option>
-
-                    <% end %>
-                  </select>
-
-                  <%= button_tag t('project.assign.submit'), :type => 'submit', id: "buttonTwo" %>
-               <% end %>
+                  <% if !@usr.empty?%>
+                      <label>
+                        <%= t('project.assign.title') %>
+                      </label>
+                      <br>
+                      <select name="person_id">
+                        <% @usr.each do |p|%>
+                            <option value= <%=p.id%> > <%=p.name%></option>
+                        <% end %>
+                      </select>
+                      <%= button_tag t('project.assign.submit'), :type => 'submit', id: "buttonTwo" %>
+                  <% end %>
               <% end%>
             </td>
           </tr>

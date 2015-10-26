@@ -1,11 +1,11 @@
 <div class="container">
   <div class="row">
-    <div class="card-col col-xs-2">
+    <div class="card-col col-xs-2 col-xs-offset-2">
       <%= render 'people/profile_card' %>
       <%= render 'people/stats_card' %>
-      <%= render 'people/events_card' %>
+      <% #render 'people/events_card' %>
     </div>
-    <div class="card-col col-xs-10">
+    <div class="card-col col-xs-6">
 
       <div class="clearfix">
 
@@ -22,7 +22,7 @@
             </button>
         <%end%>
 
-        <div id="npmillink-card" class="timeline-filter">
+        <div id="npmillink-card" class="timeline-filter active">
           <%=link_to "#{t('milestones.state.pending')} (#{@filtered_pending_count})", person_show_pending_timeline_path(:person_id => @person.id),remote:true %>
         </div>
 

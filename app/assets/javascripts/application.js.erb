@@ -74,9 +74,8 @@
 
         $.validate({
             modules: 'html5, date',
-
-            language: myLanguage
-
+            language: myLanguage,
+            ignore: 'iconpicker-popover button'
         });
 
         $(".knob-stats input").knob({
@@ -187,6 +186,12 @@
             var obj = $(this);
             obj.parent().find(".edit-form").show();
             obj.hide();
+        });
+
+
+        $(".timeline-filter").unbind().click(function() {
+            $(".timeline-filter").removeClass("active");
+            $(this).addClass("active");
         });
 
         var ctrlDown = false;

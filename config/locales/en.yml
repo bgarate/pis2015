@@ -405,6 +405,9 @@ en:
       assign_to_project_event:
         title: '%{person} joined project %{project}'
         description: '%{person} joined project %{project} for %{client}'
+      unassign_from_project_event:
+        title: '%{person} left project %{project}'
+        description: '%{person} left project %{project} for %{client}'
     person:
       change_role_event:
         title: '%{person} is now %{new_role}'

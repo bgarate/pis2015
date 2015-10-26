@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
   before_action :get_project, only: [:show, :edit, :update, :destroy]
-  skip_before_action :admin?, only: [:show, :index, :assign_person]
+  skip_before_action :admin?, only: [:show, :index, :assign_person,:unassign_person]
 
   def get_project
     identifier = params[:id]
@@ -87,8 +87,25 @@ class ProjectsController < ApplicationController
     if ! project.people.exists?(person.id)
       project.people<< person
       project.save
+
+      event = AssignToProjectEvent.new(author: current_person, person: person, project: project)
+      event.fire
+
     end
     redirect_to project
+  end
+
+  def unassign_person
+    pj_id= params[:project_id]
+    person_id= params[:person_id]
+
+    project= Project.find(pj_id)
+    person= Person.find(person_id)
+    project.people.delete(person.id)
+    project.save!
+
+
+    redirect_to :back
   end
 
   private

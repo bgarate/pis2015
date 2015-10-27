@@ -2,7 +2,7 @@ class PeopleController < ApplicationController
 
   skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline, :edit, :update]
   #skip_before_action :admin?, only:[:assign_project]
-  before_action :get_person, only:[:show, :edit, :update, :show_pending_timeline, :show_not_pending_timeline]
+  before_action :get_person, only:[:show, :edit, :update, :show_pending_timeline, :show_not_pending_timeline, :switch_admin]
 
   def get_person
     identifier = params[:id]
@@ -220,6 +220,14 @@ class PeopleController < ApplicationController
     @posible_mentors=Person.all.where("id NOT IN (SELECT mentor_id FROM mentorships WHERE mentee_id=?) AND id<>?",params[:mentee_id], params[:mentee_id])
     render :file => "app/views/people/add_mentor_form"
   end
+
+
+  def switch_admin
+    @person.admin = !@person.admin
+    @person.save!
+    redirect_to :back
+  end
+
 
   def remove_mentor_form
     @mentee=Person.find(params[:mentee_id])

@@ -47,6 +47,15 @@ class Person < ActiveRecord::Base
 
   has_many :person_skills
   has_many :skills, through: :person_skills
+
+  def get_next_admin_value
+    if self.admin
+      :no_admin
+    else
+      :admin
+    end
+  end
+
 end
 
 

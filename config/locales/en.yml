@@ -119,6 +119,11 @@ en:
     edit:
           header: "Edit User"
           submit: "Edit"
+    admin:
+      mark_as_sure: "Are you sure you want to make the user a"
+      admin: "n admin?"
+      no_admin: " NO admin?"
+
 
 
   #mentor

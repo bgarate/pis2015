@@ -45,7 +45,11 @@
                         <%= t('common.n') %>
                     <% end %>
                   </td>
-                  <td><%= user_admin(p,:right) %></td>
+                  <td>
+                    <%= link_to  person_switch_admin_path(p.id), method: :post,  data: { confirm: "#{t('people.admin.mark_as_sure')}#{t("people.admin.#{p.get_next_admin_value}")}" } do %>
+                        <span class='large-text glyphicon glyphicon-retweet'></span>
+                     <% end %>
+                  </td>
                   <td>
                     <% if can_view_person? p.id %>
                       <%= link_to edit_person_path(p) do %>

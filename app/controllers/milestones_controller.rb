@@ -90,7 +90,7 @@ class MilestonesController < ApplicationController
       end
     end
 
-    if category.is_feedback?
+    if category.is_feedback? && params[:milestone][:feedback_author_id]!=''
       @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
       unless @milestone.people.exists?(@milestone.feedback_author_id)
         @milestone.people<<@milestone.feedback_author
@@ -207,7 +207,7 @@ class MilestonesController < ApplicationController
         @milestone.save
       end
     end
-    if category.is_feedback?
+    if category.is_feedback? && params[:milestone][:feedback_author_id]!=''
       @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
       unless @milestone.people.exists?(@milestone.feedback_author_id)
         @milestone.people<<@milestone.feedback_author

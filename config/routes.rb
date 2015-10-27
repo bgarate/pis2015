@@ -93,6 +93,8 @@ Rails.application.routes.draw do
       post 'switch_admin'
       post 'add_mentor'
       get 'add_mentor_form'
+      post 'remove_mentor'
+      get 'remove_mentor_form'
       post 'edit_profile_pic'
       get 'edit_profile_pic_form'
       get 'new' => 'people#new'
@@ -103,11 +105,14 @@ Rails.application.routes.draw do
 
   resources :projects do
     post :assign_person
+
     collection do
       get 'new' => 'projects#new'
       post 'new' => 'projects#create'
+      get 'unassign_person' =>  'projects#unassign_person'
       get ':id' => 'projects#show', :constraints  => { :id => /[-\w\.]+/ }
       get 'index' => 'projects#index', as: 'index'
+
     end
   end
 

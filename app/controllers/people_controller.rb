@@ -96,7 +96,8 @@ class PeopleController < ApplicationController
 
   def show_not_pending_timeline
     @milestones = @person.milestones.where('milestones.status <> 0').order(due_date: :asc, updated_at: :desc)
-    @filtered_count = @person.milestones.size - @milestones.size
+    @filtered_not_pending_count = @milestones.size
+    @filtered_pending_count = @person.milestones.size - @milestones.size
 
     @filter = :not_pending
 
@@ -108,7 +109,8 @@ class PeopleController < ApplicationController
 
   def show_pending_timeline
     @milestones = @person.milestones.where('milestones.status = 0').order(due_date: :asc, updated_at: :desc)
-    @filtered_count = @person.milestones.size - @milestones.size
+    @filtered_pending_count = @milestones.size
+    @filtered_not_pending_count = @person.milestones.size - @milestones.size
 
     @filter = :pending
 
@@ -132,9 +134,8 @@ class PeopleController < ApplicationController
       @person.image_id = preloaded.identifier
     end
 
-    @person.save
-
     if @person.valid?
+      @person.save
       flash.notice = "'#{person_params[:name]}' " + t('messages.create.success')
       redirect_to @person
     else
@@ -172,6 +173,9 @@ class PeopleController < ApplicationController
 
   def update
 
+    old_person = Person.find(@person.id)
+    old_role = old_person.tech_role
+
     @person.tech_role_id=params[:tech_role_id]
     if @person.update_attributes(person_params.except(:image_id))
       if person_params[:image_id].present?
@@ -180,6 +184,13 @@ class PeopleController < ApplicationController
         @person.image_id = preloaded.identifier
         @person.save
       end
+
+      if old_role != @person.tech_role
+        ev = ChangeRoleEvent.new(new_role: @person.tech_role, old_role: old_role,
+                                 author: current_person, person: @person)
+        ev.fire
+      end
+
       redirect_to @person
     else
       redirect_to edit_person_path
@@ -204,18 +215,42 @@ class PeopleController < ApplicationController
     end
   end
 
-
   def add_mentor_form
     @mentee=Person.find(params[:mentee_id])
     @posible_mentors=Person.all.where("id NOT IN (SELECT mentor_id FROM mentorships WHERE mentee_id=?) AND id<>?",params[:mentee_id], params[:mentee_id])
     render :file => "app/views/people/add_mentor_form"
   end
 
+
   def switch_admin
     @person.admin = !@person.admin
     @person.save!
     redirect_to :back
   end
+
+
+  def remove_mentor_form
+    @mentee=Person.find(params[:mentee_id])
+    @mentors = @mentee.mentors
+  end
+
+  def remove_mentor
+    if (params[:mentor_id] != params[:mentee_id])
+      @mentor=Person.find(params[:mentor_id])
+      @mentee=Person.find(params[:mentee_id])
+
+      #Eliminar mentor
+      ma = Mentorship.find_by(mentor_id: params[:mentor_id], mentee_id: params[:mentee_id])
+      if ma
+        ma.destroy!
+      end
+      redirect_to @mentee
+
+    else
+      render :status => 422, :file => "public/422"
+    end
+  end
+
 
   private
   def person_params

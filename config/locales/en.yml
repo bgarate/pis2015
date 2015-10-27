@@ -49,6 +49,11 @@ en:
   search: 'Search'
   none:  'None'
   view: 'View'
+  from: 'from'
+  to: 'to'
+  filters: 'Filters'
+  all: 'All...'
+  reset: 'Reset'
   icon: 'Icon'
   tags: 'Tags'
   actions: 'Actions'
@@ -70,6 +75,7 @@ en:
   messages:
     create:
       success: "created successfully!"
+      successf: "created successfully!"
       error: "couldn't be created"
     save:
       success: "successfully saved!"
@@ -133,6 +139,8 @@ en:
     add:
       header: "Add Mentors"
       submit: "Add Mentor"
+    remove:
+      submit: "Remove Mentor"
 
 
   #projects
@@ -198,6 +206,7 @@ en:
     delete:
       title: "Delete Milestone Template"
       sure: "Are you sure you want to permanently delete this milestone template?"
+    see_all: "See all templates"
 
   #milestones
   milestones:
@@ -225,13 +234,14 @@ en:
     author: "Author"
     done_date: "Done on: "
     rejected_date: "Rejected on: "
+    mod_date: "Done/ rejected on"
 
     state_title: "State"
     actions: "Actions"
 
     state:
-      done_or_rejected: 'milestones in state done or rejected'
-      pending: 'milestones in state pending'
+      done_or_rejected: 'Finalized'
+      pending: 'Pending'
     mark_as_sure: 'Are you sure you want to mark the milestone as '
     pendings: "Pending Milestones"
     overcomes: 'Expired milestones'
@@ -260,6 +270,10 @@ en:
     delete:
       title: "Delete Milestone"
       sure: "Are you sure you want to permanently delete this milestone?"
+
+    see_all: "See all milestones"
+
+
 
   #dashboard
   dashboard:
@@ -396,6 +410,9 @@ en:
       assign_to_project_event:
         title: '%{person} joined project %{project}'
         description: '%{person} joined project %{project} for %{client}'
+      unassign_from_project_event:
+        title: '%{person} left project %{project}'
+        description: '%{person} left project %{project} for %{client}'
     person:
       change_role_event:
         title: '%{person} is now %{new_role}'

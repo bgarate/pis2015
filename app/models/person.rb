@@ -21,6 +21,7 @@ class Person < ActiveRecord::Base
 
   validates :name, :email, :start_date, presence: true
   validates :email, format: { with: /\A([-a-z0-9\.]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
+  validates_uniqueness_of :email
 
   has_one :user
   has_many :person_milestones

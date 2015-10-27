@@ -30,6 +30,8 @@
 
 /* (function(){ */
 
+
+
     var app_ready = function() {
 
 
@@ -72,9 +74,8 @@
 
         $.validate({
             modules: 'html5, date',
-
-            language: myLanguage
-
+            language: myLanguage,
+            ignore: 'iconpicker-popover button'
         });
 
         $(".knob-stats input").knob({
@@ -83,15 +84,56 @@
         });
 
         $.fn.datepicker.defaults.format = "dd/mm/yyyy";
-        $(".datatable").DataTable({
-            paging: false,
 
+        $(".datatable:not(#hitos)").DataTable({
+            paging: false,
             "language": {
                 "search": ""
             }
         });
+
+        $(".slide-form-button").each(function() {
+            var ref = $(this).attr("data-rel");
+            var target = $("#" + ref);
+            target.hide();
+            target.removeClass("active-slide");
+        });
+
+        // TODO: Emrpolijar
+        $(".slide-form-button").unbind().click(function() {
+            var ref = $(this).attr("data-rel");
+            var target = $("#" + ref);
+
+            if (target.is(":visible")) {
+
+                target.toggleClass("active-slide");
+                target.children(".form-slide").slideToggle(function(){
+                    target.slideToggle(100);
+                });
+
+            } else {
+                target.slideToggle(100, function() {
+                    target.toggleClass("active-slide");
+                });
+                target.children(".form-slide").slideToggle();
+
+                //TODO: Esto corre mientras sean dos botones
+                $(".slide-form-button").not(this).each(function() {
+                    var ref = $(this).attr("data-rel");
+                    var target = $("#" + ref);
+                    if(target.is(":visible")) {
+                        target.toggleClass("active-slide");
+                        target.children(".form-slide").slideToggle(function () {
+                            target.slideToggle(100);
+                        });
+                    }
+                });
+            }
+
+        });
+
         $("select.chosen").chosen();
-        $("select.submit-on-select").change(
+        $("select.submit-on-select").unbind().change(
                 function () {
                     $(this).parents("form").submit();
                 }
@@ -106,7 +148,7 @@
 
         $("form.slide-on-click > .form-slide").hide();
 
-        $("form.slide-on-click h1").on('click', function (e) {
+        $("form.slide-on-click.milestone-filters h1").on('click', function (e) {
             $(this).parent().toggleClass("active-slide");
             $(this).siblings(".form-slide").slideToggle();
         });
@@ -140,10 +182,16 @@
         });
 
 
-        $("#timeline-card .editable, #milestone-info .editable").click(function(){
+        $("#timeline-card .editable, #milestone-info .editable").unbind().click(function(){
             var obj = $(this);
             obj.parent().find(".edit-form").show();
             obj.hide();
+        });
+
+
+        $(".timeline-filter").unbind().click(function() {
+            $(".timeline-filter").removeClass("active");
+            $(this).addClass("active");
         });
 
         var ctrlDown = false;
@@ -164,7 +212,7 @@
                 $("#nav-search").focus();
         });
 
-        $('.cloudinary-fileupload').bind('cloudinarydone', function(e, data) {
+        $('.cloudinary-fileupload').unbind().bind('cloudinarydone', function(e, data) {
             $('.image-preview').html(
                     $.cloudinary.image(data.result.public_id,
                             { format: data.result.format, version: data.result.version,
@@ -177,6 +225,8 @@
             $('.progress').removeClass("hidden");
             $('.progress-bar').css('width', Math.round((data.loaded * 100.0) / data.total) + '%');
         });
+
+        $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
     };
 

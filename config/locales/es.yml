@@ -605,7 +605,10 @@ es:
       assign_to_project_event:
         title: "%{person} se unió al proyecto %{project}"
         description: "%{person} se unió al proyecto %{project} para %{client}"
+      unassign_from_project_event:
+        title: "%{person} dejó el proyecto %{project}"
+        description: "%{person} dejó el proyecto %{project} para %{client}"
     person:
-          change_role_event:
-            title: "%{person} es ahora %{new_role}"
-            description: "%{person} pasó de %{old_role} a %{new_role}"
+      change_role_event:
+        title: "%{person} es ahora %{new_role}"
+        description: "%{person} pasó de %{old_role} a %{new_role}"

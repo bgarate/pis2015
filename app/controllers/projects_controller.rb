@@ -104,6 +104,8 @@ class ProjectsController < ApplicationController
     project.people.delete(person.id)
     project.save!
 
+    event = UnassignFromProjectEvent.new(author: current_person, person: person, project: project)
+    event.fire
 
     redirect_to :back
   end

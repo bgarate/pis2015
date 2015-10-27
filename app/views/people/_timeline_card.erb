@@ -3,7 +3,7 @@
       <ul id="milestone-list">
         <% @milestones.each do |e| %>
 
-            <% if e.due_date && e.due_date < Date.today %>
+            <% if e.status == 'pending' && e.due_date && e.due_date < Date.today %>
                 <li class="clearfix expired">
             <% else %>
                 <li class="clearfix">

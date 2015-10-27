@@ -110,7 +110,7 @@
               <div class="slider">
                 <ul>
                   <%e.resources.each do |r|%>
-                      <li><%=link_to r.title, r.url, :target => "_blank"%></li>
+                        <li><%=link_to r.title.truncate(60), r.url, :target => "_blank"%></li>
                   <%end%>
                 </ul>
               </div>

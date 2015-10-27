@@ -11,7 +11,7 @@
   <% end %>
   <% end %>
 
-  <div class="left-pane">
+  <div class="left-pane" style="margin-left: 40px;">
     <% if @milestone.status == 'rejected' %>
         <p><%= t('milestones.rejected_date') + l(@milestone.deleted_date, format: :long) %></p>
     <% end %>

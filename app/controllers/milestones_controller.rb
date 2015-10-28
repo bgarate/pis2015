@@ -112,7 +112,7 @@ class MilestonesController < ApplicationController
               {:type => 'user', :value => p.email, :role => 'writer'})
         end
 
-        #se logro encontrar el resorce
+        #se logro encontrar el resource
         r = Resource.new
         r.doc_id= fuploaded.resource_id
         r.title= fuploaded.title

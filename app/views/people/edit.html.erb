@@ -20,7 +20,7 @@
         <div class="form-group tech_role">
           <%= f.label t('people.new.role'), class: "small_label" %>
           <br>
-          <%= select_tag(:tech_role_id, options_from_collection_for_select(@roles, :id, :name), :include_blank=>true, :multiple => false, class: "chosen", 'data-placeholder'=> t('people.add_tech_role'), 'style'=> 'width:100%') %>
+          <%= f.select :tech_role_id, options_from_collection_for_select(@roles, :id, :name, @person.tech_role_id), {}, {class: "chosen", 'data-placeholder'=> t('people.add_tech_role') }%>
         </div>
 
         <div class="row">

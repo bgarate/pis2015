@@ -75,7 +75,17 @@
         $.validate({
             modules: 'html5, date',
             language: myLanguage,
-            ignore: 'iconpicker-popover button'
+            ignore: 'iconpicker-popover button',
+            onValidate : function($form) {
+                var chosen = $('select.chosen[data-validation=required]');
+                var emptyChosen = chosen.filter(function() {return $(this).val() == ''});
+
+                if(emptyChosen.length > 0)
+                    return {
+                        element: chosen.first(),
+                        message: myLanguage.requiredFields
+                    }
+            }
         });
 
         $(".knob-stats input").knob({
@@ -212,7 +222,7 @@
                 $("#nav-search").focus();
         });
 
-        $('.cloudinary-fileupload').unbind().bind('cloudinarydone', function(e, data) {
+        $('.cloudinary-fileupload').bind('cloudinarydone', function(e, data) {
             $('.image-preview').html(
                     $.cloudinary.image(data.result.public_id,
                             { format: data.result.format, version: data.result.version,

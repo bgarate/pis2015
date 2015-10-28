@@ -375,8 +375,9 @@ en:
   #form errors
   form:
     error:
+      required: 'This field is required'
       errorTitle : 'Please try again...'
-      requiredFields: "You have not answered all required fields foo"
+      requiredFields: "This field is required"
       badTime : 'You have not given a correct time'
       badEmail : 'You have not given a correct e-mail address'
       badTelephone : 'You have not given a correct phone number'

@@ -299,11 +299,16 @@ en:
     updated: "Updated at"
     delete:
       title: "Delete Category"
+      sure: "¿Are you sure you want to delete this category?"
 
     new:
       header: "Create Category"
-      sumbit: "Add Category"
+      submit: "Add Category"
       exists: "A category with that name already exists"
+
+    edit:
+      header: "Edit Category"
+      submit: "Edit"
 
     zero: "There are no available Categories"
 

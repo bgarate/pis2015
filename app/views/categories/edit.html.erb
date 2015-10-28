@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
+      <h1><span class="glyphicon glyphicon-list"></span> <%= t('categories.edit.header') %></h1>
+
+      <%= form_for @category, html: { class:'main-form','data-toggle': 'validator'} do |c| %>
+          <div class="form-group">
+            <%= c.label t('categories.name'), class: "control-label" %>
+            <%= c.text_field :name, class: "form-control", 'data-validation':"required" %>
+          </div>
+
+
+          <div class="row">
+            <div class="form-group col-xs-6">
+              <%=  c.label t('categories.icon'), class: "control-label" %>
+              <button name="category[icon]" class="btn btn-default" role="iconpicker" data-icon="<%= @category.icon %>"></button>
+            </div>
+          </div>
+
+          <%= c.hidden_field(:updated_at, :value =>Time.now) %>
+
+          <%= c.button t('categories.edit.submit'), :type => 'submit', class: "btn btn-default" %>
+          </div>
+      <% end %>
+      </div>
+</div>

@@ -300,12 +300,16 @@ es:
     updated: "Actualizado"
     delete:
       title: "Borrar Categoria"
+      sure: "¿Está seguro que desea eliminar esta categoría?"
 
     new:
       header: "Agregar Categoría"
-      sumbit: "Agregar Categoría"
+      submit: "Agregar Categoría"
       exists: "Ya existe una categoria con ese nombre"
 
+    edit:
+      header: "Editar Categoría"
+      submit: "Editar"
 
     zero: "No hay categorías disponibles"
 

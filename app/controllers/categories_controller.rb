@@ -1,11 +1,17 @@
 class CategoriesController < ApplicationController
 
+  before_action :get_category, only: [:edit,:update]
+
   def index
     @category=Category.all
   end
 
   def new
     @category=Category.new
+  end
+
+  def get_category
+    @category=Category.find(params[:id])
   end
 
   def create
@@ -23,6 +29,30 @@ class CategoriesController < ApplicationController
   def show
     redirect_to categories_path
     #@category=Category.find(params[:id])
+  end
+
+
+  def edit
+  end
+
+
+  def update
+    if @category.update_attributes(category_params)
+      redirect_to '/categories'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+
+   cat = Category.find_by(id: params[:category_id])
+   unless cat.nil?
+      name = cat.name
+      cat.destroy
+      flash.notice = "#{name} " + t('messages.delete.success')
+    end
+    redirect_to categories_path
   end
 
   private

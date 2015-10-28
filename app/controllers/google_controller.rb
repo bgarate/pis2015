@@ -50,7 +50,11 @@ class GoogleController < ApplicationController
     if params[:milestone_id] && can_modify_milestone?(params[:milestone_id])
       @milestone_id = params[:milestone_id]
       #@redirect_url = request.env['HTTP_REFERER']
-      @redirect_url = request.headers["Referer"]
+      if (params[:redirect_url])
+        @redirect_url = params[:redirect_url]
+      else
+        @redirect_url = request.headers["Referer"]
+      end
     else
       redirect_to root_path
     end
@@ -85,10 +89,18 @@ class GoogleController < ApplicationController
         m.save!
       rescue GoogleDrive::Error
         #url no es valida
-        redirect_to google_adddriveview_path(:milestone_id => @milestone_id, :error => true)
+        if params[:redirect_url]
+          redirect_to google_adddriveview_path(:milestone_id => @milestone_id, :error => true, :redirect_url => params[:redirect_url])
+        else
+          redirect_to google_adddriveview_path(:milestone_id => @milestone_id, :error => true)
+        end
         return
       rescue URI::InvalidURIError
-        redirect_to google_adddriveview_path(:milestone_id => @milestone_id, :error => true)
+        if params[:redirect_url]
+          redirect_to google_adddriveview_path(:milestone_id => @milestone_id, :error => true, :redirect_url => params[:redirect_url])
+        else
+          redirect_to google_adddriveview_path(:milestone_id => @milestone_id, :error => true)
+        end
         return
       end
     end

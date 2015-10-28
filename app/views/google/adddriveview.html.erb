@@ -15,7 +15,7 @@
         <% if params[:error] %>
             <div id="div" class="form-group has-error">
         <% else %>
-            <div class="form-group">
+            <div id="div" class="form-group">
         <% end %>
             <input id='url' type='input' name='URL' class='form-control' data-validation="required">
             <% if params[:error] %>
@@ -37,7 +37,8 @@
             var msj =document.getElementById("msj");
 
             div.setAttribute("class", "form-group");
-            msj.innerHTML="";
+            if (msj!=null)
+                msj.innerHTML="";
         });
     });
 </script>

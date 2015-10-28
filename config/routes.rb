@@ -137,6 +137,9 @@ Rails.application.routes.draw do
   get '/templates/destroy'
   get '/templates/generate'
 
+
+  get '/categories/destroy'
+
   resources :categories do
     resources :milestones
   end

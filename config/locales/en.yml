@@ -303,8 +303,11 @@ en:
 
     new:
       header: "Create Category"
-      sumbit: "Add Category"
+      submit: "Add Category"
       exists: "A category with that name already exists"
+
+    edit:
+      header: "Edit Category"
 
     zero: "There are no available Categories"
 

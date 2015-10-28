@@ -304,9 +304,11 @@ es:
 
     new:
       header: "Agregar Categoría"
-      sumbit: "Agregar Categoría"
+      submit: "Agregar Categoría"
       exists: "Ya existe una categoria con ese nombre"
 
+    edit:
+      header: "Editar Categoría"
 
     zero: "No hay categorías disponibles"
 

@@ -35,9 +35,9 @@
                       <span class="glyphicon glyphicon-user"></span>
 
                     <% end %>
-                    <%= link_to categories_path  do %>
-                      <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-                      <span class="sr-only">(current)</span>
+
+                    <%= link_to categories_path, "data-toggle": "tooltip", "data-placement": "bottom",title: "Categorías"  do %>
+                      <span class="glyphicon glyphicon-list"></span>
                     <% end %>
 
                   <% end %>

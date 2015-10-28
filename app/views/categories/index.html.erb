@@ -37,8 +37,7 @@
                       <% end %>
                     </td>
 
-                    <td><%= link_to categories_path(c),
-                                    method: :delete,
+                    <td><%= link_to categories_destroy_path(category_id: c.id),
                                     data: { confirm: t('categories.delete.sure') } do %>
 
                           <span class='large-text glyphicon glyphicon-remove'></span>

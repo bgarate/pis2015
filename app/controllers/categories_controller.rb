@@ -26,12 +26,13 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category = Category.find_by(id: params[:id])
-    if @category
-      name = @category.name
-      @category.destroy
-      flash.notice = "#{name} " + t('messages.delete.success')
-    end
+
+    ######@category = Category.find_by(id: params[:id])
+    #####unless @category.nil?
+      ####name = @category.name
+      ###@category.destroy
+      ##flash.notice = "#{name} " + t('messages.delete.success')
+    #end
     redirect_to categories_path
   end
 

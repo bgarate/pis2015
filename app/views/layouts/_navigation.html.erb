@@ -28,10 +28,18 @@
                   <%= link_to dashboard_index_path, "data-toggle": "tooltip", "data-placement": "bottom",title: "Dashboard" do %>
                       <span class="glyphicon glyphicon-th"></span>
                   <% end %>
+
                   <% if current_user_admin? %>
+
                     <%= link_to '/people', "data-toggle": "tooltip", "data-placement": "bottom",title: "Personas" do %>
                       <span class="glyphicon glyphicon-user"></span>
+
                     <% end %>
+
+                    <%= link_to categories_path, "data-toggle": "tooltip", "data-placement": "bottom",title: "Categorías"  do %>
+                      <span class="glyphicon glyphicon-list"></span>
+                    <% end %>
+
                   <% end %>
 
                   <%= link_to  '/projects', "data-toggle": "tooltip", "data-placement": "bottom",title: "Proyectos" do %>

@@ -13,13 +13,13 @@
 
 
         <% if params[:error] %>
-            <div class="form-group has-error">
+            <div id="div" class="form-group has-error">
         <% else %>
-            <div class="form-group">
+            <div id="div" class="form-group">
         <% end %>
-            <input type='input' name='URL' class='form-control' data-validation="required">
+            <input id='url' type='input' name='URL' class='form-control' data-validation="required">
             <% if params[:error] %>
-              <span class="help-block form-error"><%= t(:invalidurl) %></span>
+              <span id="msj" class="help-block form-error"><%= t(:invalidurl) %></span>
             <% end %>
         </div>
 
@@ -29,3 +29,16 @@
     </div>
   </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#url').click(function () {
+            var div =document.getElementById("div");
+            var msj =document.getElementById("msj");
+
+            div.setAttribute("class", "form-group");
+            if (msj!=null)
+                msj.innerHTML="";
+        });
+    });
+</script>

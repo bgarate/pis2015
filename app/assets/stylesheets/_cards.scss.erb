@@ -77,7 +77,7 @@
         color: #2a2a2a;
 
         &:after {
-            content: "\e080";
+            //content: "\e080";
             display: inline-block;
             font-family: "Glyphicons Halflings";
             transform: rotate(0deg);
@@ -98,7 +98,7 @@
 
 #profile-card {
 
-    h1, h2 {
+    h1 {
         text-transform: capitalize;
     }
 
@@ -533,9 +533,18 @@ ul#milestone-list {
             }
         }
 
+        /*.resources-list {
+            background-color: $peterriver;
+            margin-top: 10px;
+        }*/
         .resources-list {
             background-color: $peterriver;
             margin-top: 10px;
+            ul {
+                list-style:disc;
+                margin-left: 20px;
+            }
+
         }
 
         .notes-list {

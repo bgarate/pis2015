@@ -1,11 +1,17 @@
 class CategoriesController < ApplicationController
 
+  before_action :get_category, only: [:edit,:update]
+
   def index
     @category=Category.all
   end
 
   def new
     @category=Category.new
+  end
+
+  def get_category
+    @category=Category.find(params[:id])
   end
 
   def create
@@ -25,6 +31,18 @@ class CategoriesController < ApplicationController
     #@category=Category.find(params[:id])
   end
 
+
+  def edit
+  end
+
+
+  def update
+    if @category.update_attributes(category_params)
+      redirect_to '/categories'
+    else
+      render :edit
+    end
+  end
 
   def destroy
 

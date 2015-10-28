@@ -309,6 +309,7 @@ es:
 
     edit:
       header: "Editar Categoría"
+      submit: "Editar"
 
     zero: "No hay categorías disponibles"
 

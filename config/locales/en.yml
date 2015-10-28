@@ -308,6 +308,7 @@ en:
 
     edit:
       header: "Edit Category"
+      submit: "Edit"
 
     zero: "There are no available Categories"
 

@@ -1,41 +1,37 @@
-var commands = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: "/commands"
-});
+function search_ready(){
+    var commands = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: "/commands"
+    });
 
-var people = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: "/people.json"
-});
+    var people = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: "/people.json"
+    });
 
-var milestones = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: "/milestones.json"
-});
+    var milestones = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: "/milestones.json"
+    });
 
-var projects = new Bloodhound({
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace,
-    prefetch: "/projects.json"
-});
+    var projects = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        prefetch: "/projects.json"
+    });
 
-$().ready(function() {
+    function clearCaches(bloodhound) {
+        bloodhound.clear();
+        bloodhound.clearPrefetchCache();
+        bloodhound.initialize(true);
+    }
 
-    projects.clear();
-    projects.clearPrefetchCache();
-    projects.initialize(true);
-
-    people.clear();
-    people.clearPrefetchCache();
-    people.initialize(true);
-
-    milestones.clear();
-    milestones.clearPrefetchCache();
-    milestones.initialize(true);
-
+    clearCaches(projects);
+    clearCaches(people);
+    clearCaches(milestones);
 
     $("#nav-search").typeahead({
         minLength: 1,
@@ -78,4 +74,6 @@ $().ready(function() {
         form.submit();
     });
 
-});
+}
+
+$().ready(search_ready);

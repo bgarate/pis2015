@@ -11,7 +11,7 @@
   <% end %>
   <% end %>
 
-  <div class="left-pane">
+  <div class="left-pane" style="margin-left: 40px;">
     <% if @milestone.status == 'rejected' %>
         <p><%= t('milestones.rejected_date') + l(@milestone.deleted_date, format: :long) %></p>
     <% end %>
@@ -30,7 +30,7 @@
     <p><%= @milestone.description %></p>
     <p><%
         if feedback? && @milestone.feedback_author %>
-            <%=  t('milestones.author') + ": " %>
+           <%=  t('milestones.author') + ": " %>
            <%= link_to @milestone.feedback_author.name, person_path(@milestone.feedback_author.id), method: :get %>
         <% end %>
     </p>
@@ -61,6 +61,9 @@
         <div class="edit-form row">
           <%= form_for @milestone do |f| %>
               <%= f.hidden_field :category_id %>
+              <% if feedback? %>
+                  <%= f.hidden_field :feedback_author_id %>
+              <% end %>
 
               <div class="form-group col-xs-6">
                 <%= f.label t('milestones.start_date'), class: "control-label" %>
@@ -101,6 +104,9 @@
 
     <div class="last-update">
       <%= t('milestones.last_update') + " " + t('ago_i') +  time_ago_in_words(@milestone.updated_at) + t('ago_f') %>
+      <br>
+      <%=  t('milestones.author_milestone') + ": " +  Person.find(@milestone.author_id).name %>
+
     </div>
 
   </div>
@@ -118,7 +124,11 @@
             </div>
             <div class="info">
               <h2><%= p.name %></h2>
-              <h3><%=  t('milestones.no_tech_role') || p.tech_role.name %></h3>
+	              <% if p.tech_role.nil? %>
+		              <h3><%= t('milestones.no_tech_role')  %></h3>
+	              <% else %>	 
+                  <h3><%= p.tech_role.name %></h3>
+	              <% end %>	
             </div>
           </a>
         </div>

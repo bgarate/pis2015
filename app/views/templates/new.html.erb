@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
+
+      <%= form_for :template, html: { class:'timeline-form main-form ','data-toggle': 'validator'}  do |m| %>
+          <h1 class=""><span class="glyphicon glyphicon-check"></span> <%= t('templates.new.header') %></h1>
+          <%= render partial: 'templates/innerform', locals: {m: m, in_profile: false} %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<br><br><br><br>
+
+<script>
+    $(".chzn-select").chosen();
+
+</script>

@@ -104,4 +104,12 @@ describe 'Person' do
     expect(@aux.admin).to eq(true)
   end
 
+  it 'si es administrador, el siguiente valor es no_admin' do
+    expect(@admin.get_next_admin_value).to eq(:no_admin)
+  end
+
+  it 'si es no administrador, el siguiente valor es admin' do
+    expect(@master.get_next_admin_value).to eq(:admin)
+  end
+
 end

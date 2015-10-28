@@ -21,6 +21,7 @@ class Person < ActiveRecord::Base
 
   validates :name, :email, :start_date, presence: true
   validates :email, format: { with: /\A([-a-z0-9\.]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
+  validates_uniqueness_of :email
 
   has_one :user
   has_many :person_milestones
@@ -46,6 +47,15 @@ class Person < ActiveRecord::Base
 
   has_many :person_skills
   has_many :skills, through: :person_skills
+
+  def get_next_admin_value
+    if self.admin
+      :no_admin
+    else
+      :admin
+    end
+  end
+
 end
 
 

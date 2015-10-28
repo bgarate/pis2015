@@ -15,11 +15,12 @@ class CommandsController < ApplicationController
       { "name" => "Ver categorias"  , "url" => "/categories/"       },
       { "name" => "Ver proyectos"   , "url" => "/projects/"         },
       { "name" => "Ver tags"        , "url" => "/tags/"             },
-      { "name" => "Ver roles técnicos", "url" => "/tech_roles/"             },
+      { "name" => "Ver roles técnicos", "url" => "/tech_roles/"     },
       { "name" => "Crear categoria" , "url" => "/categories/new"    },
       { "name" => "Crear proyecto"  , "url" => "/projects/new"      },
       { "name" => "Crear hito"      , "url" => "/milestones/new"    },
-      { "name" => "Ver Dashboard"      , "url" => "/dashboard/"    },
+      { "name" => "Ver dashboard"      , "url" => "/dashboard/"     },
+      { "name" => "Ver plantillas"      , "url" => "/templates/"    },
     ]
 
     respond_with commands

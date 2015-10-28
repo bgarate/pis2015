@@ -57,21 +57,41 @@
 }
 
 .timeline-filter{
-    a {
-        line-height: 25px;
 
-        background-color: $peterriver-focus;
+    height: 30px;
+    border-radius: 15px;
+    padding: 0 10px;
+    float: left;
+    background-color: #dddddd;
+    margin: 4px;
+
+    a {
+
         text-decoration: none;
         padding: 6px;
-        border-bottom: solid 0px transparent;
+        border-bottom: solid 0 transparent;
         text-align: left;
         display: block;
         margin-bottom: 30px;
 
-        color: white;
+        color: #2a2a2a;
 
-        &:hover {
-            background-color: $peterriver;
+        &:after {
+            content: "\e080";
+            display: inline-block;
+            font-family: "Glyphicons Halflings";
+            transform: rotate(0deg);
+            margin-left: 5px;
+            @include transition(0.5s ease-in-out);
+        }
+
+
+    }
+
+    &.active, &:hover,{
+        background-color: #b7c9d3;
+        a:after {
+            transform: rotate(90deg);
         }
     }
 }
@@ -134,6 +154,20 @@ ul#mentors {
         }
 
         &.plus {
+            padding-top: 5px;
+            padding-left: 4px;
+            text: center;
+            background-color: white;
+            width: 30px;
+            height: 30px;
+            a {
+                color: $turqoise;
+            }
+        }
+        &.minus {
+            padding-top: 6px;
+            padding-left: 2px;
+            text: center;
             background-color: white;
             width: 30px;
             height: 30px;
@@ -251,6 +285,7 @@ ul#mentors {
             padding: 10px 10px 10px 0;
             margin-bottom: 10px;
 
+
             .day-of-the-week {
                 position: absolute;
                 left: -40px;
@@ -333,12 +368,24 @@ ul#mentors {
 
 form.timeline-form.slide-on-click {
     margin-top: 0;
-    margin-bottom: 0;
 }
 
 ul#milestone-list {
 
     padding-left: 40px;
+
+    .expired {
+        border: #D9534F 3px solid;
+        &:before {
+
+            border-right-color:  #D9534F;
+        }
+
+        .calendar.right {
+            color: #D9534F;
+        }
+
+    }
 
     > li {
 
@@ -355,11 +402,11 @@ ul#milestone-list {
         @include transition(0.3s ease-in-out);
 
         &:hover {
-            margin-top: 20px;
+            /*margin-top: 20px;
             margin-bottom: 20px;
             padding-top: 30px;
-            padding-bottom: 30px;
-            @include box-shadow(1px 1px 3px rgba(0, 0, 0, 0.3));
+            padding-bottom: 30px;*/
+            @include box-shadow(4px 4px 12px rgba(0, 0, 0, 0.6));
 
         }
 
@@ -371,6 +418,8 @@ ul#milestone-list {
             @include triangle(left, white);
             clear: both;
         }
+
+
 
         .icon {
             position: absolute;
@@ -484,9 +533,17 @@ ul#milestone-list {
             }
         }
 
+        /*.resources-list {
+            background-color: $peterriver;
+            margin-top: 10px;
+        }*/
         .resources-list {
             background-color: $peterriver;
             margin-top: 10px;
+            ul {
+                list-style:disc;
+            }
+
         }
 
         .notes-list {
@@ -577,4 +634,3 @@ ul#pending-list {
 
     }
 }
-

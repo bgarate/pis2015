@@ -15,12 +15,12 @@
           <table class="table datatable" data-info="false">
             <thead>
             <tr>
-              <td></td>
-              <td><%= t('people.list.name') %></td>
-              <td><%= t('people.list.email') %></td>
-              <td><%= t('people.list.start_date') %></td>
-              <td><%= t('people.list.admin') %></td>
-
+              <th style="width: 60px"></th>
+              <th><%= t('people.list.name') %></th>
+              <th><%= t('people.list.email') %></th>
+              <th><%= t('people.list.start_date') %></th>
+              <th><%= t('people.list.admin') %></th>
+              <th></th>
             </tr>
             </thead>
             <tbody>
@@ -46,12 +46,18 @@
                     <% end %>
                   </td>
                   <td>
-                    <% if current_user_admin? %>
+                    <%= link_to  person_switch_admin_path(p.id), method: :post,  data: { confirm: "#{t('people.admin.mark_as_sure')}#{t("people.admin.#{p.get_next_admin_value}")}" } do %>
+                        <span class='large-text glyphicon glyphicon-retweet'></span>
+                     <% end %>
+                  </td>
+                  <td>
+                    <% if can_view_person? p.id %>
                       <%= link_to edit_person_path(p) do %>
                         <span class='large-text glyphicon glyphicon-pencil'></span>
                       <% end %>
                     <%end%>
                   </td>
+
                 </tr>
             <% end %>
 

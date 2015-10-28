@@ -4,17 +4,16 @@
 #
 #  id          :integer          not null, primary key
 #  title       :string
-#  due_term    :integer
 #  description :text
-#  type        :integer
 #  icon        :string
 #  category_id :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
 
-class MilestoneTemplate < ActiveRecord::Base
+class Template < ActiveRecord::Base
 
-  has_many :resources
+  #has_many :resources
   belongs_to :category
+  has_and_belongs_to_many :tags
 end

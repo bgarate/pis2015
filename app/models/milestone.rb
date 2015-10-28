@@ -13,12 +13,13 @@
 #  updated_at         :datetime         not null
 #  category_id        :integer
 #  start_date         :date
-#  author_id          :integer
+#  completed_date     :date
+#  deleted_date       :date
 #
 
 class Milestone < ActiveRecord::Base
 
-  validates :title, :description, presence: true
+  validates :title, presence: true
 
   has_many :person_milestones
   has_many :people, through: :person_milestones

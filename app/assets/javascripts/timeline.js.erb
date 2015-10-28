@@ -1,7 +1,7 @@
 var timeline_ready = function () {
 
     $(".resources-list .toggle-documents, .resources-list h2, " +
-            ".notes-list .toggle-documents, .notes-list h2").click(function(e) {
+            ".notes-list .toggle-documents, .notes-list h2").unbind().click(function(e) {
         var obj = $(this).parent().children(".toggle-documents");
 
         if($(this).parent().children(".slider").length == 0)
@@ -25,4 +25,4 @@ var timeline_ready = function () {
 };
 
 $(document).ready(timeline_ready);
-$(document).on('page:load', timeline_ready);
+//$(document).on('page:load', timeline_ready);

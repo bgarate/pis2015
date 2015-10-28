@@ -1,0 +1,37 @@
+
+
+<form action='<%=templates_generate_path%>' id='from-template-form' class='timeline-form main-form slide-on-click clearfix toggle-disabled' data-toggle='validator'>
+
+<h1 class=""><span class="glyphicon glyphicon-check"></span> <%= t('templates.generate.header') %></h1>
+
+<div class="form-slide">
+  <div class="row text-right">
+    <div class="card-col col-xs-12">
+      <%= link_to '/templates' do %>
+          <button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-th-list"></span>  <%=t('templates.see_all')%></button>
+      <%end%>
+    </div>
+  </div>
+
+    <div class="row">
+      <div class="form-group">
+
+          <label><%=t('templates.select')%></label>
+          <br>
+          <select name="template_id" class="chzn-select category" style="width:100%" >
+            <%@temps.each do |t|%>
+                <option value=<%=t.id%> ><%=t.title%></option>
+            <%end%>
+          </select>
+
+      </div>
+    </div>
+
+    <input type="hidden" name="person_id" value="<%= @person.id %>">
+    <button type="submit" class="btn btn-default" id="submitg"><%=t('templates.generate.submit')%></button>
+</div>
+</form>
+
+<script>
+    $(".chzn-select").chosen();
+</script>

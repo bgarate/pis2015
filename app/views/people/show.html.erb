@@ -1,15 +1,45 @@
 <div class="container">
   <div class="row">
-    <div class="card-col col-xs-2">
+    <div class="card-col col-xs-2 col-xs-offset-2">
       <%= render 'people/profile_card' %>
       <%= render 'people/stats_card' %>
-      <%= render 'people/events_card' %>
+      <% #render 'people/events_card' %>
     </div>
-    <div class="card-col col-xs-10">
+    <div class="card-col col-xs-6">
+
+      <div class="clearfix">
+
+
+        <% if current_user_admin? %>
+            <button class="slide-form-button" data-rel="from-template-form" data-toggle="tooltip" title="Crear hito desde template">
+              <span class="glyphicon glyphicon-star"></span>
+            </button>
+        <%end%>
+
+        <%if can_view_person?(@identifier) %>
+            <button class="slide-form-button" data-rel="new-milestone-form" data-toggle="tooltip" title="Crear hito">
+              <span class="glyphicon glyphicon-plus"></span>Hito
+            </button>
+        <%end%>
+
+        <div id="npmillink-card" class="timeline-filter active">
+          <%=link_to "#{t('milestones.state.pending')} (#{@filtered_pending_count})", person_show_pending_timeline_path(:person_id => @person.id),remote:true %>
+        </div>
+
+        <div id="pmillink-card" class="timeline-filter">
+          <%=link_to "#{t('milestones.state.done_or_rejected')} (#{@filtered_not_pending_count})", person_show_not_pending_timeline_path(:person_id => @person.id),remote:true %>
+        </div>
+      </div>
+
       <p><% t('milestones.zero') %></p>
+
       <%if can_view_person?(@identifier) %>
           <%= render 'milestones/form' %>
       <%end%>
+      <% if current_user_admin? %>
+          <%= render 'templates/generate' %>
+      <%end%>
+
       <div id="timeline-container">
         <%= render 'people/timeline_card' %>
       </div>

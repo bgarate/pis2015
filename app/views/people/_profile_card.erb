@@ -1,11 +1,11 @@
 <div id="profile-card" class="card profile">
   <div id="profile-picture">
     <div class="img-container">
-      <%= person_picture @image_id %>
+      <%= person_picture(@image_id) %>
     </div>
   </div>
   <h1><%= @name %>
-  <% if current_user_admin? %>
+  <% if can_view_person? @identifier %>
     <%= link_to edit_person_path(@identifier) do %>
       <span class="large-text edit glyphicon glyphicon-edit"></span>
     <% end %>
@@ -33,6 +33,13 @@
               <span class="glyphicon glyphicon-plus"></span>
             </a>
           </li>
+          <% if !@mentorships.empty? %>
+              <li class="minus" >
+                <a href="remove_mentor_form?mentee_id=<%=@identifier%>" role="button">
+                  <span class="glyphicon glyphicon-minus"></span>
+                </a>
+              </li>
+          <%end%>
       <%end%>
     </ul>
 

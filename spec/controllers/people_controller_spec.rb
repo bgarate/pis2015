@@ -19,6 +19,8 @@ describe PeopleController do
     # Seteo la expiracion de la sesion a un dia a partir del momento actual
     @no_ad_user.oauth_expires_at = Time.current().advance(days:1)
     @no_ad_user.save!
+
+    request.env["HTTP_REFERER"] = root_path
   end
 
 
@@ -140,6 +142,28 @@ describe PeopleController do
       expect(response).to redirect_to(p1)
     end
 
+    it "no deberia editar una persona" do
+      session[:user_id] = @no_ad_user.id
+      p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+      get :edit, :id=>p1.id
+      put :update, :id => p1.id, :person =>{:name=> "Juano Perez"}, :session=>session
+      p1.reload
+      expect(response).to redirect_to(p1)
+    end
+
+    it "NO deberia editar una persona" do
+      session[:user_id] = @ad_user.id
+      p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+      get :edit, :id=>p1.id
+      put :update, :id => p1.id, :person =>{:email=>"mailInvalido"}, :session=>session
+      p1.reload
+      expect(response).to redirect_to(edit_person_path)
+    end
+
 
   end
 
@@ -207,6 +231,47 @@ describe PeopleController do
 
   end
 
+  describe "remove_mentor" do
+    it "No deberia desplegar el formulario si el usuario no es admin" do
+      session[:user_id] = @no_ad_user.id
+      post :remove_mentor_form ,{:mentee_id => 1}, :session => session
+      # Espero ser redirigido
+      expect(response).to redirect_to root_path
+    end
+
+    it "Deberia desplegar el formulario si el usuario es admin" do
+      session[:user_id] = @ad_user.id
+      p1 = Person.new
+      p1.name = "Juan Perez"
+      p1.email ="juanperez2@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+      post :remove_mentor_form ,{:mentee_id => p1.id}, :session => session
+      expect(response.status).to eq(200)
+    end
+
+    it "Debería dar error si mentee y mentor son el mismo" do
+      session[:user_id] = @ad_user.id
+      get :remove_mentor,{:mentee_id => 1, :mentor_id=>1},:session => session
+      expect(response.status).to eq(422)
+    end
+
+    it "Deberia redirigir a mentee si la relacion mentee-mentor no existe" do
+      session[:user_id] = @ad_user.id
+      get :remove_mentor,{:mentee_id => @admin.id, :mentor_id=>@no_admin.id},:session => session
+      expect(response).to redirect_to(@admin)
+
+    end
+
+    it "Deberia redirigirme a mentee si todo ok" do
+      session[:user_id] = @ad_user.id
+      get :add_mentor,{:mentee_id => @no_admin.id, :mentor_id=>@admin.id ,:start_date => Date.today},:session => session
+      get :remove_mentor,{:mentee_id => @no_admin.id, :mentor_id=>@admin.id},:session => session
+      expect(response).to redirect_to(@no_admin)
+    end
+
+  end
+
   describe "permisos" do
     it 'Deberia renderizar people show por ser admin' do
       session[:user_id] = @ad_user.id
@@ -231,6 +296,25 @@ describe PeopleController do
       session[:user_id] = @no_ad_user.id
       get :show, :id => p1.id
       expect(response.status).to eq(200)
+    end
+  end
+
+  describe "switch_admin" do
+    it 'deberia cambiar de admin a no_admin' do
+      session[:user_id] = @ad_user.id
+      get :index
+      get :switch_admin, :id => @ad_user.person_id, :session=>session
+
+      resultado = Person.find(@ad_user.person_id)
+      expect(resultado.admin).to eq(false)
+    end
+
+    it 'deberia cambiar de no_admin a admin' do
+      session[:user_id] = @ad_user.id
+      post :switch_admin, {:id => @no_ad_user.person_id}, :session=>session
+
+      resultado = Person.find(@no_ad_user.person_id)
+      expect(resultado.admin).to eq(true)
     end
   end
 end

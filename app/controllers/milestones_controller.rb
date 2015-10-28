@@ -31,6 +31,10 @@ class MilestonesController < ApplicationController
 
   def index
     @milestone= Milestone.all
+    @tags = Tag.all.order(:name)
+    @people = Person.all.order(:name)
+    @categories = Category.all.order(:name)
+
     respond_to do |f|
       f.json { render json: name_and_path(@milestone)}
       f.html { render }
@@ -75,7 +79,6 @@ class MilestonesController < ApplicationController
     category=Category.find(params[:milestone][:category_id])
     @milestone.category=category
 
-
     #AUTHOR
     @milestone.author_id = current_user.person_id
 
@@ -87,7 +90,7 @@ class MilestonesController < ApplicationController
       end
     end
 
-    if category.is_feedback?
+    if category.is_feedback? && params[:milestone][:feedback_author_id]!=''
       @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
       unless @milestone.people.exists?(@milestone.feedback_author_id)
         @milestone.people<<@milestone.feedback_author
@@ -194,7 +197,6 @@ class MilestonesController < ApplicationController
 
   def update
     category=Category.find(params[:milestone][:category_id])
-
     @milestone.category = category
 
     if params[:people]!=nil
@@ -205,7 +207,7 @@ class MilestonesController < ApplicationController
         @milestone.save
       end
     end
-    if category.is_feedback?
+    if category.is_feedback? && params[:milestone][:feedback_author_id]!=''
       @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
       unless @milestone.people.exists?(@milestone.feedback_author_id)
         @milestone.people<<@milestone.feedback_author

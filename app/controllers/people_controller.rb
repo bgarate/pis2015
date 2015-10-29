@@ -127,7 +127,6 @@ class PeopleController < ApplicationController
 
   def create
     @person = Person.new(person_params.except(:image_id))
-    @person.tech_role_id = params[:tech_role_id]
     if person_params[:image_id].present?
       preloaded = Cloudinary::PreloadedFile.new(person_params[:image_id])
       raise "Invalid upload signature" if !preloaded.valid?

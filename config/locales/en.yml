@@ -368,9 +368,14 @@ en:
 
 
   collections:
+    header: 'Milestone Templates Collections'
     new:
       header: 'Create Milestone Templates Collection'
       submit: 'Create'
+    delete:
+      title: "Delete Milestone Templates Collection"
+      sure: "Are you sure you want to permanently delete this milestone templates collection?"
+    see_all: "See all milestone templates collections"
 
 
   attachmentsdocs: 'Attachments documents'

@@ -17,6 +17,14 @@ class CollectionsController < ApplicationController
     redirect_to root_path
   end
 
+  def index
+    @collections = Collection.all
+    respond_to do |f|
+      f.json { render json: name_and_path(@collections)}
+      f.html { render }
+    end
+  end
+
   def collection_params
     params.require(:collection).permit(:title,:description, :icon)
   end

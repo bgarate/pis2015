@@ -13,6 +13,7 @@
 #  updated_at         :datetime         not null
 #  category_id        :integer
 #  start_date         :date
+#  author_id          :integer
 #  completed_date     :date
 #  deleted_date       :date
 #

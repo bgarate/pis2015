@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: milestone_templates
+# Table name: templates
 #
 #  id          :integer          not null, primary key
 #  title       :string

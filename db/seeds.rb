@@ -22,11 +22,9 @@ tr2.save!
 c = Category.create(name: 'Conferencia')
 f = Category.create(name: 'Feedback')
 f.is_feedback= true
-f.doc_url='https://docs.google.com/document/d/1bpQ3HB__V1YbQ4YH6CBeDjcKp-YGjH5_WtsxFdNuMk0/edit'
 f.save!
 f2 = Category.create(name: 'Feedback diseño')
 f2.is_feedback= true
-f2.doc_url='https://docs.google.com/document/d/1VuyDDm-iDK6LF2uG9Sx8WhTJe2kON-bVW7As3BmIIhI/edit'
 f2.save!
 indu = Category.create(name: 'Inducción')
 
@@ -197,3 +195,29 @@ t.icon= 'glyphicon-flag'
 t.category_id=indu.id
 t.tags<<(tagt)
 t.save!
+
+t1 = Template.new
+t1.title= 'Feedback'
+t1.description= 'Le decimos lo que pensamos de él'
+t1.icon= 'glyphicon-flag'
+t1.category_id=f.id
+r = Resource.new
+r.doc_id= '1bpQ3HB__V1YbQ4YH6CBeDjcKp-YGjH5_WtsxFdNuMk0'
+r.title= 'feedback'
+r.url= 'https://docs.google.com/document/d/1bpQ3HB__V1YbQ4YH6CBeDjcKp-YGjH5_WtsxFdNuMk0/edit'
+r.save!
+t1.resource_id=r.id
+t1.save!
+
+t2 = Template.new
+t2.title= 'Feedback de diseño'
+t2.description= 'Le decimos si es buen o mal diseñador'
+t2.icon= 'glyphicon-flag'
+t2.category_id=f2.id
+r1 = Resource.new
+r1.doc_id= '1VuyDDm-iDK6LF2uG9Sx8WhTJe2kON-bVW7As3BmIIhI'
+r1.title= 'feedback tecnico'
+r1.url= 'https://docs.google.com/document/d/1VuyDDm-iDK6LF2uG9Sx8WhTJe2kON-bVW7As3BmIIhI/edit'
+r1.save!
+t2.resource_id=r1.id
+t2.save!

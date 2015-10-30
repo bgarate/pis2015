@@ -97,49 +97,10 @@ class MilestonesController < ApplicationController
       end
     end
 
-    #Crear documento adjunto
-    if @milestone.category && @milestone.category.doc_url
-      u = current_user
-      session = GoogleDrive.login_with_oauth(u.oauth_token)
-      begin
-        #traigo el archivo
-        f = session.file_by_url(@milestone.category.doc_url)
-        #lo copio
-        fuploaded = f.copy("#{@milestone.title}")
-        #agregar permisos a la gente asociada al hito
-        @milestone.people.each do |p|
-          fuploaded.acl.push(
-              {:type => 'user', :value => p.email, :role => 'writer'})
-        end
-
-        #se logro encontrar el resource
-        r = Resource.new
-        r.doc_id= fuploaded.resource_id
-        r.title= fuploaded.title
-        r.url= fuploaded.human_url
-        @milestone.resources<<(r)
-        @milestone.updated_at= Time.now
-        @milestone.save!
-      rescue Google::APIClient::ClientError
-        #no se logro encontrar el resorce
-        driveerr = t(:driveerrormsj)
-      rescue GoogleDrive::Error
-        #url no es valida
-        driveerr = t(:invalidurl)
-      rescue URI::InvalidURIError
-        #url no es valida
-        driveerr = t(:invalidurl)
-      end
-    end
-
     @milestone.save
 
     if @milestone.valid?
-      if driveerr.nil?
-        flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')
-      else
-        flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success') + " \n(#{t(:driveerrormsj)}: #{driveerr})"
-      end
+      flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')
     else
       flash.alert = "'#{milestone_params[:title]}' " + t('messages.create.error')
     end

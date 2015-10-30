@@ -367,6 +367,13 @@ es:
 
     zero: "No se han encontrado roles"
 
+
+  collections:
+    new:
+      header: 'Crear Colección de Plantillas de Hito'
+      submit: 'Crear'
+
+
   attachmentsdocs: 'Documentos adjuntos'
   adddoc: 'Agregar documento'
   driveerrormsj: 'Ha ocurrido un error al adjuntar el documento de drive'

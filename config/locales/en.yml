@@ -366,6 +366,13 @@ en:
 
     zero: "No roles found"
 
+
+  collections:
+    new:
+      header: 'Create Milestone Templates Collection'
+      submit: 'Create'
+
+
   attachmentsdocs: 'Attachments documents'
   adddoc: 'Add document'
   driveerrormsj: 'An error occurred while attaching the document'

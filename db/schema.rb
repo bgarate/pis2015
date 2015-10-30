@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151021173324) do
+ActiveRecord::Schema.define(version: 20151030202742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,24 @@ ActiveRecord::Schema.define(version: 20151021173324) do
     t.string   "doc_url"
     t.boolean  "is_feedback"
   end
+
+  create_table "collections", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "icon"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "collections_templates", id: false, force: :cascade do |t|
+    t.integer  "collection_id",             null: false
+    t.integer  "template_id",               null: false
+    t.integer  "days",          default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "collections_templates", ["collection_id", "template_id"], name: "index_collections_templates_on_collection_id_and_template_id", using: :btree
 
   create_table "mentorships", force: :cascade do |t|
     t.date     "start_date"

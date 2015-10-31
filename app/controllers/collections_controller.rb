@@ -1,6 +1,6 @@
 class CollectionsController < ApplicationController
 
-  before_action :get_collection, only: [:show]
+  before_action :get_collection, only: [:show, :destroy]
 
   def get_collection
     @collection = Collection.find(params[:id])
@@ -46,6 +46,17 @@ class CollectionsController < ApplicationController
   def show
     @templates = @collection.collection_templates
   end
+
+
+  def destroy
+    unless @collection.nil?
+      title = @collection.title
+      @collection.destroy
+      flash.notice = "#{title} " + t('messages.delete.success')
+    end
+    redirect_to '/collections/'
+  end
+
 
   def collection_params
     params.require(:collection).permit(:title,:description, :icon)

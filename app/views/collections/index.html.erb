@@ -26,8 +26,7 @@
                 </td>
 
                 <td>
-                  <%= link_to collections_path(m),
-                              method: :delete,
+                  <%= link_to collections_destroy_path(id: m.id),
                               data: { confirm: t('collections.delete.sure') } do %>
                       <span class='large-text glyphicon glyphicon-trash'></span>
                   <% end %>

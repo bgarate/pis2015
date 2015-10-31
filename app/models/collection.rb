@@ -12,5 +12,5 @@
 
 class Collection < ActiveRecord::Base
 
-  has_many :collection_templates
+  has_many :collection_templates, :dependent => :delete_all
 end

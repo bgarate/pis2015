@@ -367,6 +367,7 @@ en:
     zero: "No roles found"
 
 
+  # Milestone Template Collections
   collections:
     header: 'Milestone Templates Collections'
     new:
@@ -376,6 +377,8 @@ en:
               select: 'Select template'
               days: 'Days after creation'
       submit: 'Create'
+    view: 'View Milestone Templates Collection'
+    templates: 'Milestone Templates'
     delete:
       title: "Delete Milestone Templates Collection"
       sure: "Are you sure you want to permanently delete this milestone templates collection?"

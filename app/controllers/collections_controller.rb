@@ -1,5 +1,15 @@
 class CollectionsController < ApplicationController
 
+  before_action :get_collection, only: [:show]
+
+  def get_collection
+    @collection = Collection.find(params[:id])
+    unless @collection
+      redirect_to collection_path
+    end
+  end
+
+
   def new
     @templates = Template.all
   end
@@ -30,6 +40,11 @@ class CollectionsController < ApplicationController
       f.json { render json: name_and_path(@collections)}
       f.html { render }
     end
+  end
+
+
+  def show
+    @templates = @collection.collection_templates
   end
 
   def collection_params

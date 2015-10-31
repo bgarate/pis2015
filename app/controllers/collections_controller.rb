@@ -6,6 +6,13 @@ class CollectionsController < ApplicationController
 
   def create
     @collection = Collection.new(collection_params)
+
+    @collection.save
+
+    template = Template.find(params[:template])
+    days = params[:days]
+    elem = CollectionTemplate.new(collection: @collection, template: template, days: days)
+    @collection.collection_templates << elem
     @collection.save
 
     if @collection.valid?
@@ -28,4 +35,5 @@ class CollectionsController < ApplicationController
   def collection_params
     params.require(:collection).permit(:title,:description, :icon)
   end
+
 end

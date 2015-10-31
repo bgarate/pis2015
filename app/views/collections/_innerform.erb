@@ -24,7 +24,7 @@
     <div class="form-group col-xs-8">
       <%= m.label t('collections.new.templates.template'), class: "control-label" %>
 
-      <%= select_tag(:templates, options_from_collection_for_select(@templates, :id, :title), :multiple => false,
+      <%= select_tag(:template, options_from_collection_for_select(@templates, :id, :title), :multiple => false,
                      class: "chzn-select", 'data-placeholder'=> t('collections.new.templates.select'), 'style'=> 'width:100%') %>
 
     </div>

@@ -12,5 +12,5 @@
 
 class Collection < ActiveRecord::Base
 
-  has_many :templates
+  has_many :collection_templates
 end

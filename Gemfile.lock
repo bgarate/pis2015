@@ -309,11 +309,13 @@ DEPENDENCIES
   cloudinary
   coffee-rails (~> 4.1.0)
   compass-rails (~> 2.0.5)
+  google-api-client
   google_drive (= 1.0.1)
   i18n-js (>= 3.0.0.rc11)
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
+  omniauth
   omniauth-google-oauth2 (~> 0.2.1)
   pg
   rails (= 4.2.1)

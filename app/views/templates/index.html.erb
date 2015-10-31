@@ -13,6 +13,7 @@
             <td class="title_row" ><%= t('title') %></td>
             <td class="description_row"><%= t('description') %></td>
             <td><%= t('category') %></td>
+            <td><%= t('tempdoc') %></td>
             <td><%= t('tags.name') %></td>
             <td><%= t('actions') %></td>
           </tr>
@@ -28,6 +29,11 @@
                 </td>
                 <td>
                   <%= m.category.name %>
+                </td>
+                <td>
+                  <% if m.resource %>
+                    <%= link_to m.resource.url do m.resource.title end %>
+                  <% end %>
                 </td>
                 <td>
                   <ul class="chosen-choices">

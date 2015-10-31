@@ -382,6 +382,7 @@ en:
     see_all: "See all milestone templates collections"
 
 
+  tempdoc: 'Template document'
   attachmentsdocs: 'Attachments documents'
   adddoc: 'Add document'
   driveerrormsj: 'An error occurred while attaching the document'

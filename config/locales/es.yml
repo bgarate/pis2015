@@ -372,6 +372,10 @@ es:
     header: 'Colecciones de Plantillas de Hito'
     new:
       header: 'Crear Colección de Plantillas de Hito'
+      templates:
+        template: 'Plantilla'
+        select: 'Seleccione la plantilla'
+        days: 'Días desde la creación'
       submit: 'Crear'
     delete:
       title: "Borrar Colección de Plantillas de Hito"

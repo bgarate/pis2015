@@ -371,6 +371,10 @@ en:
     header: 'Milestone Templates Collections'
     new:
       header: 'Create Milestone Templates Collection'
+      templates:
+              template: 'Template'
+              select: 'Select template'
+              days: 'Days after creation'
       submit: 'Create'
     delete:
       title: "Delete Milestone Templates Collection"

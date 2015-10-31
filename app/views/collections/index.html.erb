@@ -19,7 +19,7 @@
           <% @collections.each do |m| %>
               <tr>
                 <td class="description_row">
-                  <%= m.title %>
+                  <%= link_to m.title, collection_path(m), method: :get %>
                 </td>
                 <td class="description_row">
                   <%= m.description %>

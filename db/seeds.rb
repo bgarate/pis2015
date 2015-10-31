@@ -173,7 +173,6 @@ p5.milestones << m1
 p5.milestones << m2
 
 
-p6.projects << pro
 p6.skills << sk1
 p6.skills << sk2
 p6.tech_role = tr2

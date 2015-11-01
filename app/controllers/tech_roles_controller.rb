@@ -3,7 +3,7 @@ class TechRolesController < ApplicationController
   skip_before_action :admin?, only:[:show, :index]
 
   def index
-    @techRoles=TechRole.all
+    @techRoles=TechRole.all.order('LOWER(name)')
   end
 
   def edit

@@ -50,10 +50,10 @@
               <label>
                 <%= t('project.technologies.title') %>
               </label>
-              <% @project.technologies.each do |t| %>
+              <% @technologies.each do |t| %>
                   <li><%= t.name %></li>
               <% end %>
-              <% if @project.technologies.size == 0 %>
+              <% if @technologies.size == 0 %>
                   <em><%= t('project.technologies.zero') %></em>
               <% end %>
             </td>
@@ -63,7 +63,7 @@
               <label>
                 <%= t('project.people.title') %>
               </label>
-              <% @project.people.each do |t| %>
+              <% @people.each do |t| %>
                   <li>
                     <%= link_to t.name, t %>
                     <%= link_to  controller: 'projects', action: 'unassign_person' ,project_id: @project.id, person_id: t.id do %>
@@ -71,7 +71,7 @@
                     <% end%>
                   </li>
               <% end %>
-              <% if @project.people.size == 0 %>
+              <% if @people.size == 0 %>
                   <em><%= t('project.people.zero') %></em>
               <% end %>
             </td>

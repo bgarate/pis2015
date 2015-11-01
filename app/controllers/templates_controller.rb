@@ -7,8 +7,8 @@ class TemplatesController < ApplicationController
     @person = Person.find_by(id: @identifier)
 
     #redirect_to '/people'
-    @cats=Category.all.collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
-    @tags=Tag.all
+    @cats=Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
+    @tags=Tag.all.order('LOWER(name)')
 
     if (params[:redirect_url])
       @redirect_url = params[:redirect_url]
@@ -80,7 +80,7 @@ class TemplatesController < ApplicationController
   end
 
   def index
-    @template= Template.all
+    @template= Template.all.order('LOWER(title)')
     respond_to do |f|
       f.json { render json: name_and_path(@template)}
       f.html { render }

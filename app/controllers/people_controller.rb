@@ -56,16 +56,17 @@ class PeopleController < ApplicationController
         end
       end
       #CATEGORIES PEOPLE
-      @cats=Category.all.collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
-      @authors=Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
-      @tags=Tag.all
+      @cats = Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
+
+      @authors = Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
+      @tags = Tag.all.order('LOWER(name)')
 
       #rol tecnico
       @trole = ''
       @trole = @person.tech_role.name if @person.tech_role
 
       #habilidades
-      @skills = @person.skills
+      @skills = @person.skills.order('LOWER(name)')
 
       #proyectos
       #@proysin = @person.projects.where('Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE')
@@ -85,7 +86,7 @@ class PeopleController < ApplicationController
       @overcomes = @person.milestones.where("milestones.due_date < CURRENT_DATE AND milestones.status = 0").order(due_date: :desc, created_at: :desc)
 
       #Mentores
-      @mentorships = @person.mentors
+      @mentorships = @person.mentors.order('LOWER(name)')
       @yet_pending = Milestone.pending.where('id NOT in (?)', @person.milestones.pluck(:id))
 
       #

@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
     person = Person.find(current_user.person_id)
     #person = Person.find_by(id: params[:u.person_id])
 
-    @my_mentees = person.mentees
+    @my_mentees = person.mentees.order('LOWER(name)')
 
     #@mentees  = []
 
@@ -22,7 +22,7 @@ class DashboardController < ApplicationController
       #@mentees << p
     #end
 
-    @my_milestones = person.milestones.where('status = ?',Milestone.statuses[:pending])
+    @my_milestones = person.milestones.where('status = ?',Milestone.statuses[:pending]).order('LOWER(title)')
 
 
 

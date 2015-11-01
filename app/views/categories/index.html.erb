@@ -29,7 +29,8 @@
               <tr>
                 <td><span class="large-text glyphicon <%= c.icon %>"></span></td>
                 <td><%= c.name %></td>
-                <td></td>
+                <td><%= c.status %></td>
+                <td><%=  I18n.t("categories.display_status.#{c.status}") %> </td>
                 <td></td>
                 <% if current_user_admin? %>
                     <td><%= link_to edit_category_path(c) do%>

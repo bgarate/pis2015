@@ -20,14 +20,22 @@ tr2.save!
 #e = Category.create(name: Category::HIST0RY_NAME)
 #e.save!
 c = Category.create(name: 'Conferencia')
+c.is_feedback= false
+c.status= 0
+
 f = Category.create(name: 'Feedback')
 f.is_feedback= true
+f.status= 0
 f.save!
+
 f2 = Category.create(name: 'Feedback diseño')
 f2.is_feedback= true
+f2.status= 0
 f2.save!
-indu = Category.create(name: 'Inducción')
 
+indu = Category.create(name: 'Inducción')
+indu.is_feedback= false
+indu.status= 0
 
 ################# Milestones #################
 

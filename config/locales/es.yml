@@ -301,6 +301,10 @@ es:
     doc_url: "URL del Documento"
     feedback: "Feedback"
 
+    display_status:
+      active: 'Activa'
+      inactive: 'Inactiva'
+
     delete:
       title: "Borrar Categoria"
       sure: "¿Está seguro que desea eliminar esta categoría?"

@@ -300,6 +300,10 @@ en:
     doc_url: "Document URL"
     feedback: "Feedback"
 
+    display_status:
+      active: 'Active'
+      inactive: 'Inactive'
+
     delete:
       title: "Delete Category"
       sure: "¿Are you sure you want to delete this category?"

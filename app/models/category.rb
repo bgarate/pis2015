@@ -20,6 +20,10 @@ class Category < ActiveRecord::Base
   HIST0RY_NAME = 'Historial'
   HISTORY_ICON = 'glyphicon-time'
 
+  def display_status
+    I18n.t("categories.display_status.#{status}", default: status.titleize)
+  end
+
   def self.get_or_create_history_category
 
     history_category = Category.find_by(name: HIST0RY_NAME)

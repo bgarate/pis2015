@@ -7,7 +7,6 @@
 #  icon        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  doc_url     :string
 #  is_feedback :boolean
 #
 

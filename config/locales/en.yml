@@ -297,6 +297,9 @@ en:
     icon: "Icon"
     created: "Created at"
     updated: "Updated at"
+    doc_url: "Document URL"
+    feedback: "Feedback"
+
     delete:
       title: "Delete Category"
       sure: "¿Are you sure you want to delete this category?"

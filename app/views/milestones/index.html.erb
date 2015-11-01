@@ -94,14 +94,14 @@
               </td>
               <td>
                 <ul>
-                  <% m.people.each do |p| %>
+                  <% m.people.order('LOWER(name)').each do |p| %>
                       <li><%= link_to p.name, person_path(p.id), method: :get %></li>
                   <% end %>
                 </ul>
               </td>
               <td class="tags_row">
                 <ul class="">
-                  <% m.tags.each do |t| %>
+                  <% m.tags.order('LOWER(name)').each do |t| %>
                       <li><%= t.name %></li>
                   <% end %>
                 </ul>

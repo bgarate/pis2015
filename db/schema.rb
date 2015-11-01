@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151030173000) do
+ActiveRecord::Schema.define(version: 20151101194215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,13 +44,14 @@ ActiveRecord::Schema.define(version: 20151030173000) do
     t.integer  "status",             default: 0
     t.string   "icon"
     t.integer  "feedback_author_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "category_id"
     t.date     "start_date"
     t.integer  "author_id"
     t.date     "completed_date"
     t.date     "deleted_date"
+    t.boolean  "highlighted",        default: false, null: false
   end
 
   create_table "milestones_tags", id: false, force: :cascade do |t|

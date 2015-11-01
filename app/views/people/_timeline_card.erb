@@ -19,6 +19,7 @@
               </div>
               <div class="col-xs-2">
                 <% if can_modify_milestone?e.id %>
+                    <%= milestone_highlight(e, :right)%>
                     <%= if e.status != 'rejected'
                           milestone_status(e,:right)
                         end %>

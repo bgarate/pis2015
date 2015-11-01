@@ -57,7 +57,7 @@ class CategoriesController < ApplicationController
 
   private
   def category_params
-    params.require(:category).permit(:name, :icon, :created_at, :updated_at,:doc_url,:is_feedback)
+    params.require(:category).permit(:name, :icon, :created_at, :updated_at,:is_feedback)
   end
 
   private

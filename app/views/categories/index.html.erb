@@ -16,8 +16,8 @@
           <tr>
             <td></td>
             <td><%= t('categories.name') %></td>
-            <td><%= t('categories.created') %></td>
-            <td><%= t('categories.updated') %></td>
+            <td></td>
+            <td></td>
             <% if current_user_admin? %>
                 <td></td>
                 <td></td>
@@ -29,8 +29,8 @@
               <tr>
                 <td><span class="large-text glyphicon <%= c.icon %>"></span></td>
                 <td><%= c.name %></td>
-                <td><div class="calendar left"><%= c.created_at %></div></td>
-                <td><div class="calendar left"><%= c.updated_at %></div></td>
+                <td></td>
+                <td></td>
                 <% if current_user_admin? %>
                     <td><%= link_to edit_category_path(c) do%>
                           <span class='large-text glyphicon glyphicon-pencil'></span>

@@ -15,6 +15,8 @@ class Category < ActiveRecord::Base
 
   has_many :milestones
 
+  enum status:[:active, :inactive]
+
   HIST0RY_NAME = 'Historial'
   HISTORY_ICON = 'glyphicon-time'
 

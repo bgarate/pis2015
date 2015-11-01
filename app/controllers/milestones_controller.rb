@@ -135,7 +135,7 @@ class MilestonesController < ApplicationController
                                   :body => JSON.dump(@event),
                                   :headers => {'Content-Type' => 'application/json'})
     end
-    
+
     @milestone.save
 
 

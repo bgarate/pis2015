@@ -279,7 +279,31 @@ describe MilestonesController, "Milestone Controller" do
 
     it 'is valid with a title and description' do
       session[:user_id] = @ad_user.id
-      post :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :due_date=>Time.now, :category_id=>@c1.id}
+      post :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :category_id=>@c1.id}
+      expect(response.status).to eq(302)
+    end
+
+    #GOOGLE CALENDAR
+    it 'crete milsteones with dates' do
+
+      auth = double()
+      allow(auth).to receive(:access_token=).and_return('')
+
+      servaux = double()
+      allow(servaux).to receive(:insert).and_return('')
+      serv = double()
+      allow(serv).to receive(:events).and_return(servaux)
+
+      cli = double()
+      allow(cli).to receive(:authorization).and_return(auth)
+      allow(cli).to receive(:execute).with(anything()).and_return('')
+      allow(cli).to receive(:discovered_api).with(anything(),anything()).and_return(serv)
+
+
+      Google::APIClient.stub(:new) { cli }
+
+      session[:user_id] = @ad_user.id
+      post :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :category_id=>@c1.id, :start_date=> Time.now - 5.days, :due_date=> Time.now}
       expect(response.status).to eq(302)
     end
 

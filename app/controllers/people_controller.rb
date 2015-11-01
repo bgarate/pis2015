@@ -20,7 +20,7 @@ class PeopleController < ApplicationController
 
   def index
 
-    @people = Person.all
+    @people = Person.all.order('LOWER(name)')
 
     respond_to do |f|
 
@@ -71,7 +71,7 @@ class PeopleController < ApplicationController
       #@proysin = @person.projects.where('Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE')
       #@proysend = @person.projects.where("Projects.end_date < CURRENT_DATE").length
 
-      @proysin = @person.projects.where('Projects.status <> ?', Project.statuses[:finished])
+      @proysin = @person.projects.where('Projects.status <> ?', Project.statuses[:finished]).order('LOWER(name)')
       @proysend = @person.projects.where('Projects.status = ?', Project.statuses[:finished]).length
 
       @image_id = @person.image_id
@@ -125,7 +125,7 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
-    @roles=TechRole.all
+    @roles=TechRole.all.order('LOWER(name)')
   end
 
   def create
@@ -170,7 +170,7 @@ class PeopleController < ApplicationController
       flash.alert= t('not_authorized')
       redirect_to people_path
     end
-    @roles=TechRole.all
+    @roles=TechRole.all.order('LOWER(name)')
   end
 
   def update
@@ -219,7 +219,7 @@ class PeopleController < ApplicationController
 
   def add_mentor_form
     @mentee=Person.find(params[:mentee_id])
-    @posible_mentors=Person.all.where("id NOT IN (SELECT mentor_id FROM mentorships WHERE mentee_id=?) AND id<>?",params[:mentee_id], params[:mentee_id])
+    @posible_mentors=Person.all.where("id NOT IN (SELECT mentor_id FROM mentorships WHERE mentee_id=?) AND id<>?",params[:mentee_id], params[:mentee_id]).order('LOWER(name)')
     render :file => "app/views/people/add_mentor_form"
   end
 

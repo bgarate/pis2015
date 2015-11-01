@@ -68,8 +68,11 @@ class PeopleController < ApplicationController
       @skills = @person.skills
 
       #proyectos
-      @proysin = @person.projects.where('Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE')
-      @proysend = @person.projects.where("Projects.end_date < CURRENT_DATE").length
+      #@proysin = @person.projects.where('Projects.end_date IS NULL OR Projects.end_date >= CURRENT_DATE')
+      #@proysend = @person.projects.where("Projects.end_date < CURRENT_DATE").length
+
+      @proysin = @person.projects.where('Projects.status <> ?', Project.statuses[:finished])
+      @proysend = @person.projects.where('Projects.status = ?', Project.statuses[:finished]).length
 
       @image_id = @person.image_id
 
@@ -127,7 +130,6 @@ class PeopleController < ApplicationController
 
   def create
     @person = Person.new(person_params.except(:image_id))
-    @person.tech_role_id = params[:tech_role_id]
     if person_params[:image_id].present?
       preloaded = Cloudinary::PreloadedFile.new(person_params[:image_id])
       raise "Invalid upload signature" if !preloaded.valid?

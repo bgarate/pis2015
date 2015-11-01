@@ -369,6 +369,7 @@ en:
 
     zero: "No roles found"
 
+  tempdoc: 'Template document'
   attachmentsdocs: 'Attachments documents'
   adddoc: 'Add document'
   driveerrormsj: 'An error occurred while attaching the document'

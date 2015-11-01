@@ -26,7 +26,7 @@
           <%=link_to "#{t('milestones.state.pending')} (#{@filtered_pending_count})", person_show_pending_timeline_path(:person_id => @person.id),remote:true %>
         </div>
 
-        <div id="pmillink-card" class="timeline-filter">
+        <div id="npmillink-card" class="timeline-filter">
           <%=link_to "#{t('milestones.state.done_or_rejected')} (#{@filtered_not_pending_count})", person_show_not_pending_timeline_path(:person_id => @person.id),remote:true %>
         </div>
       </div>

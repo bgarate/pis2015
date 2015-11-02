@@ -127,9 +127,12 @@
                   <div class="slider">
                     <ul>
                       <%e.resources.each do |r|%>
-                          <span class="glyphicon glyphicon glyphicon-paperclip"></span>
-                          &nbsp;&nbsp;
-                          <%=link_to r.title.truncate(60), r.url, :target => "_blank"%>
+
+                          <%=link_to  r.url, :target => "_blank" do%>
+                              <span class="glyphicon glyphicon glyphicon-paperclip"></span>
+                              &nbsp;&nbsp;
+                              <%= r.title.truncate(60) %>
+                          <% end %>
                           <br>
                       <%end%>
                     </ul>

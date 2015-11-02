@@ -68,6 +68,40 @@
 
 }
 
+.milestone-highlight {
+  position: absolute;
+  top: 15px;
+  left: 75px;
+  width: 30px;
+  height: 30px;
+  background-position: left;
+  background-size: contain;
+
+  &.true {
+    background-image: image-url('layouts/highlighted-star.png');
+  }
+
+  &.false {
+    background-image: image-url('layouts/highlight-star_empty.png');
+  }
+
+  &.right {
+    left: auto;
+    right: 75px;
+  }
+
+  &.small {
+    width: 25px;
+    height: 25px;
+  }
+
+  &.static {
+    position: static;
+    display: block;
+  }
+}
+
+
 .milestone-status {
     position: absolute;
     top: 15px;

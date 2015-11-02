@@ -106,18 +106,31 @@
             <div class="clearfix"></div>
 
             <div class="resources-list clearfix">
-              <h2><span class="glyphicon glyphicon glyphicon-paperclip"></span>  <%=t(:attachmentsdocs)%></h2>
-              <% if can_modify_milestone?(e.id) %>
-                  <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
-                      <span class="toggle-documents glyphicon glyphicon-plus"></span>
+              <h3>
+                  <% if can_modify_milestone?(e.id) %>
+                      <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
+                          <span class="glyphicon glyphicon-plus"></span>
+                      <% end %>
+                  <% else %>
+                      <span class="glyphicon glyphicon-duplicate"></span>
                   <% end %>
-              <% end %>
+              </h3>
+
+              <h2>&nbsp;&nbsp;<%=t(:attachmentsdocs)%></h2>
+
               <% unless e.resources.empty? %>
-                  <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
+                <span class="toggle-documents glyphicon glyphicon-chevron-down"></span>
+              <% end %>
+
+              <% unless e.resources.empty? %>
+
                   <div class="slider">
                     <ul>
                       <%e.resources.each do |r|%>
-                          <li><%=link_to r.title.truncate(60), r.url, :target => "_blank"%></li>
+                          <span class="glyphicon glyphicon glyphicon-paperclip"></span>
+                          &nbsp;&nbsp;
+                          <%=link_to r.title.truncate(60), r.url, :target => "_blank"%>
+                          <br>
                       <%end%>
                     </ul>
                   </div>

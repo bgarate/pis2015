@@ -16,8 +16,18 @@
     <div class="row">
       <div class="card-col col-xs-5">
         <div id="milestone-notes">
-          <h4 class="text-center"><%=t(:attachmentsdocs)%></h4>
+          <h4 class="text-center">
+            <span class="glyphicon glyphicon-duplicate"></span>
+            <%=t(:attachmentsdocs)%>
+          </h4>
           <hr>
+          <%if @milestone.resources.empty?%>
+              <p class="text-center">
+                <small>
+                  <%= t(:nonattachmentsdocs) %>
+                </small>
+              </p>
+          <%end%>
           <ul>
               <%@milestone.resources.each do |r|%>
                   <li class="clearfix">
@@ -29,20 +39,25 @@
                   </li>
               <%end%>
           </ul>
-          <%if @milestone.resources.empty?%>
-                <p class="text-center">
-                  <small>
-                    <%= t(:nonattachmentsdocs) %>
-                  </small>
-                </p>
-          <%end%>
+
+            <h5 class="text-center">
+              <% if can_modify_milestone?(@milestone.id) %>
+                  <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => @milestone.id do%>
+                      <span class="glyphicon glyphicon-plus"></span>
+                  <% end %>
+              <% end %>
+            </h5>
+
           <hr>
         </div>
       </div>
 
       <div class="card-col col-xs-5">
         <div id="milestone-notes">
-          <h4 class="text-center"><%=t('notes.header')%></h4>
+          <h4 class="text-center">
+            <span class="glyphicon glyphicon-comment"></span>
+            <%=t('notes.header')%>
+          </h4>
           <hr>
           <%= render 'notes/form' %>
           <%= render 'notes' %>

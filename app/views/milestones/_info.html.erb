@@ -5,9 +5,12 @@
           end %>
       <%= milestone_status_rej(@milestone) %>
       <% if can_modify_milestone?(@milestone.id) %>
-          <%= link_to edit_milestone_path(@milestone) do %>
+        <%= milestone_highlight(@milestone)%>
+
+      <%= link_to edit_milestone_path(@milestone) do %>
               <span class="edit glyphicon glyphicon-edit"></span>
           <% end %>
+
       <% end %>
   <% end %>
 

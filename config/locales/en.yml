@@ -236,6 +236,9 @@ en:
     rejected_date: "Rejected on: "
     mod_date: "Done/ rejected on"
 
+    highlighted: "highlighted"
+    not_highlighted: "not highlighted"
+
     state_title: "State"
     actions: "Actions"
 

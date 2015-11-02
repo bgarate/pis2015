@@ -86,13 +86,6 @@
                         message: myLanguage.requiredFields
                     }
             },
-            onSuccess : function($form) {
-                $("input[type=submit]").prop("disabled", true).closest('form').append($('<input/>', {
-                    type: 'hidden',
-                    name: this.name,
-                    value: this.value
-                })).submit();
-            },
 
         });
 

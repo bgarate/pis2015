@@ -374,6 +374,7 @@ en:
 
   tempdoc: 'Template document'
   attachmentsdocs: 'Attachments documents'
+  nonattachmentsdocs: 'No attachments'
   adddoc: 'Add document'
   driveerrormsj: 'An error occurred while attaching the document'
   notpermissionsdrive: 'Be sure you have access permissions to the file in Google Drive'

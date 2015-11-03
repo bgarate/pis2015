@@ -97,7 +97,48 @@ class MilestonesController < ApplicationController
       end
     end
 
+    #Crear eventos en google calendar
+    client = Google::APIClient.new
+    client.authorization.access_token = current_user.oauth_token
+    service = client.discovered_api('calendar', 'v3')
+    if @milestone.start_date
+
+      @event = {
+          'summary' => "#{@milestone.title} (Alfred)",
+          'description' => @milestone.description,
+          'start' => { 'date' => @milestone.start_date },
+          'end' => { 'date' => @milestone.start_date },
+          'attendees' => [] }
+      for i in 0..(@milestone.people.count-1)
+        @event['attendees'][i]={ "email" => @milestone.people[i].email }
+      end
+
+      @set_event = client.execute(:api_method => service.events.insert,
+                                  :parameters => {'calendarId' => current_person.email, 'sendNotifications' => true},
+                                  :body => JSON.dump(@event),
+                                  :headers => {'Content-Type' => 'application/json'})
+    end
+    if @milestone.due_date && (!@milestone.start_date || @milestone.start_date != @milestone.due_date)
+
+      @event = {
+          'summary' => "#{@milestone.title} - Fin (Alfred)",
+          'description' => @milestone.description,
+          'start' => { 'date' => @milestone.due_date },
+          'end' => { 'date' => @milestone.due_date },
+          'attendees' => [] }
+      for i in 0..(@milestone.people.count-1)
+        @event['attendees'][i]={ "email" => @milestone.people[i].email }
+      end
+
+      @set_event = client.execute(:api_method => service.events.insert,
+                                  :parameters => {'calendarId' => current_person.email, 'sendNotifications' => true},
+                                  :body => JSON.dump(@event),
+                                  :headers => {'Content-Type' => 'application/json'})
+    end
+
     @milestone.save
+
+
 
     if @milestone.valid?
       flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')

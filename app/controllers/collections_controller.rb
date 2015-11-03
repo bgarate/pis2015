@@ -76,6 +76,11 @@ class CollectionsController < ApplicationController
         #AUTHOR
         m.author_id = current_user.person_id
 
+        #DUE_DATE
+        if days > 0
+          m.due_date = Date.today + days
+        end
+
         #Crear documento adjunto
         if t.resource
           u = current_user

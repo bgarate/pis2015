@@ -12,6 +12,10 @@ gem 'capybara'
 #Google drive
 gem 'google_drive', '1.0.1'
 
+#Google Calendar
+gem 'google-api-client', :require => 'google/api_client'
+gem 'omniauth'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record

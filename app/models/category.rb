@@ -11,6 +11,8 @@
 #
 
 class Category < ActiveRecord::Base
+  enum status:[:active, :inactive]
+
   validates :name, presence: true, uniqueness: true
 
   has_many :milestones

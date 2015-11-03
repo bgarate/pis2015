@@ -140,6 +140,7 @@ Rails.application.routes.draw do
 
   #collections
   get '/collections/destroy'
+  get '/collections/generate'
   resources :collections do
     collection do
       get '' => 'collections#index'

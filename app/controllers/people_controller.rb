@@ -91,6 +91,7 @@ class PeopleController < ApplicationController
 
       #
       @temps = Template.all.order(title: :desc)
+      @collections = Collection.all.order(title: :desc)
       show_pending_timeline
 
     else

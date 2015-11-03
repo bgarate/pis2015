@@ -237,6 +237,8 @@ es:
     rejected_date: "Rechazado el día: "
     mod_date: "Fecha hecho/ rechazado"
 
+    highlighted: "destacado"
+    not_highlighted: "no destacado"
     state_title: "Estado"
     actions: "Acciones"
 
@@ -372,6 +374,7 @@ es:
 
   tempdoc: 'Documento plantilla'
   attachmentsdocs: 'Documentos adjuntos'
+  nonattachmentsdocs: 'Sin documentos adjuntos'
   adddoc: 'Agregar documento'
   driveerrormsj: 'Ha ocurrido un error al adjuntar el documento de drive'
   notpermissionsdrive: 'Asegúrese de que tiene permisos de acceso al archivo en Google Drive'

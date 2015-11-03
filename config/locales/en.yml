@@ -236,6 +236,9 @@ en:
     rejected_date: "Rejected on: "
     mod_date: "Done/ rejected on"
 
+    highlighted: "highlighted"
+    not_highlighted: "not highlighted"
+
     state_title: "State"
     actions: "Actions"
 
@@ -371,6 +374,7 @@ en:
 
   tempdoc: 'Template document'
   attachmentsdocs: 'Attachments documents'
+  nonattachmentsdocs: 'No attachments'
   adddoc: 'Add document'
   driveerrormsj: 'An error occurred while attaching the document'
   notpermissionsdrive: 'Be sure you have access permissions to the file in Google Drive'

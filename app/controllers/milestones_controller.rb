@@ -1,7 +1,7 @@
 class MilestonesController < ApplicationController
 
 
-  before_action :get_milestone, only: [:add_category, :next_status, :next_status_rej]
+  before_action :get_milestone, only: [:add_category, :next_status, :next_status_rej, :highlight]
   before_action :get_milestone_by_id, only: [:feedback?, :update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
   before_action :is_authorized?, only: [:edit,:update,:next_status, :next_status_rej, :destroy,:add_category]
@@ -258,6 +258,13 @@ class MilestonesController < ApplicationController
       @milestone.deleted_date = Date.today
     end
     @milestone.save!
+    redirect_to :back
+  end
+
+  def highlight
+    not_high= !@milestone.highlighted
+    @milestone.update_attribute(:highlighted, not_high)
+    @milestone.save
     redirect_to :back
   end
 

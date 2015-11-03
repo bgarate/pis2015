@@ -3,7 +3,7 @@
     <div class="card-col col-xs-8 col-xs-offset-2">
 
       <form action='adddrive' class='main-form'>
-        <h2> <%=t(:attachgoogledrivedoc) %> </h2>
+        <h1> <%=t(:attachgoogledrivedoc) %> </h1>
         <input name='milestone_id' type='hidden' value=<%=@milestone_id%> readonly class='form-control'>
         <% if @redirect_url%>
             <input name='redirect_url' type='hidden' value=<%=@redirect_url%> readonly class='form-control'>
@@ -21,9 +21,14 @@
             <% if params[:error] %>
               <span id="msj" class="help-block form-error"><%= t(:invalidurl) %></span>
             <% end %>
-        </div>
 
-        <input type='submit' value=<%=t(:attach)%> class='btn btn-default'>
+        <% if params[:error] %>
+            </div>
+        <% else %>
+            </div>
+        <% end %>
+
+        <button type='submit' class='btn btn-default'><%=t(:attach)%></button>
       </form>
 
     </div>

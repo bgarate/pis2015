@@ -1,7 +1,7 @@
 class MilestonesController < ApplicationController
 
 
-  before_action :get_milestone, only: [:add_category, :next_status, :next_status_rej]
+  before_action :get_milestone, only: [:add_category, :next_status, :next_status_rej, :highlight]
   before_action :get_milestone_by_id, only: [:feedback?, :update, :edit, :show, :destroy]
   before_action :get_category, only: [:add_category]
   before_action :is_authorized?, only: [:edit,:update,:next_status, :next_status_rej, :destroy,:add_category]
@@ -30,7 +30,7 @@ class MilestonesController < ApplicationController
   end
 
   def index
-    @milestone= Milestone.all
+    @milestone= Milestone.all.order('LOWER(title)')
     @tags = Tag.all.order(:name)
     @people = Person.all.order(:name)
     @categories = Category.all.order(:name)
@@ -49,9 +49,9 @@ class MilestonesController < ApplicationController
     @person = Person.find_by(id: @identifier)
 
     #redirect_to '/people'
-    @cats=Category.all.collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
-    @authors=Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
-    @tags=Tag.all
+    @cats=Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
+    @authors=Person.all.where('id NOT in (?)', @identifier).order('LOWER(name)').collect {|t| [t.name, t.id]}
+    @tags=Tag.all.order('LOWER(name)')
 
     if current_user_admin?
       #@people= Person.all.where('id NOT in (?)', @identifier)
@@ -60,7 +60,7 @@ class MilestonesController < ApplicationController
       @people= p.mentees.where('mentee_id NOT in (?) ', @identifier)
       @people<<p
     end
-
+    @people = @people.sort_by{|p| p.name }
     @redirect_url = request.headers["Referer"]
   end
 
@@ -97,7 +97,48 @@ class MilestonesController < ApplicationController
       end
     end
 
+    #Crear eventos en google calendar
+    client = Google::APIClient.new
+    client.authorization.access_token = current_user.oauth_token
+    service = client.discovered_api('calendar', 'v3')
+    if @milestone.start_date
+
+      @event = {
+          'summary' => "#{@milestone.title} (Alfred)",
+          'description' => @milestone.description,
+          'start' => { 'date' => @milestone.start_date },
+          'end' => { 'date' => @milestone.start_date },
+          'attendees' => [] }
+      for i in 0..(@milestone.people.count-1)
+        @event['attendees'][i]={ "email" => @milestone.people[i].email }
+      end
+
+      @set_event = client.execute(:api_method => service.events.insert,
+                                  :parameters => {'calendarId' => current_person.email, 'sendNotifications' => true},
+                                  :body => JSON.dump(@event),
+                                  :headers => {'Content-Type' => 'application/json'})
+    end
+    if @milestone.due_date && (!@milestone.start_date || @milestone.start_date != @milestone.due_date)
+
+      @event = {
+          'summary' => "#{@milestone.title} - Fin (Alfred)",
+          'description' => @milestone.description,
+          'start' => { 'date' => @milestone.due_date },
+          'end' => { 'date' => @milestone.due_date },
+          'attendees' => [] }
+      for i in 0..(@milestone.people.count-1)
+        @event['attendees'][i]={ "email" => @milestone.people[i].email }
+      end
+
+      @set_event = client.execute(:api_method => service.events.insert,
+                                  :parameters => {'calendarId' => current_person.email, 'sendNotifications' => true},
+                                  :body => JSON.dump(@event),
+                                  :headers => {'Content-Type' => 'application/json'})
+    end
+
     @milestone.save
+
+
 
     if @milestone.valid?
       flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')
@@ -141,9 +182,9 @@ class MilestonesController < ApplicationController
   end
 
   def edit
-    @cats=Category.all.collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
-    @authors=Person.all.collect {|t| [t.name, t.id]}
-    @tags = Tag.all
+    @cats=Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
+    @authors=Person.all.order('LOWER(name)').collect {|t| [t.name, t.id]}
+    @tags = Tag.all.order('LOWER(name)')
     user= Person.find(current_user.person_id)
     if current_user_admin?
       @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
@@ -153,6 +194,7 @@ class MilestonesController < ApplicationController
         @people<<user
       end
     end
+    @people = @people.sort_by{|p| p.name }
     @category_name = @milestone.category.name
   end
 
@@ -216,6 +258,13 @@ class MilestonesController < ApplicationController
       @milestone.deleted_date = Date.today
     end
     @milestone.save!
+    redirect_to :back
+  end
+
+  def highlight
+    not_high= !@milestone.highlighted
+    @milestone.update_attribute(:highlighted, not_high)
+    @milestone.save
     redirect_to :back
   end
 

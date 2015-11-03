@@ -85,7 +85,15 @@
                         element: chosen.first(),
                         message: myLanguage.requiredFields
                     }
-            }
+            },
+            /*onSuccess : function($form) {
+                $("input[type=submit]").prop("disabled", true).closest('form').append($('<input/>', {
+                    type: 'hidden',
+                    name: this.name,
+                    value: this.value
+                })).submit();
+            },*/
+
         });
 
         $(".knob-stats input").knob({
@@ -97,6 +105,7 @@
 
         $(".datatable:not(#hitos)").DataTable({
             paging: false,
+            order: [],
             "language": {
                 "search": ""
             }
@@ -162,28 +171,6 @@
             $(this).parent().toggleClass("active-slide");
             $(this).siblings(".form-slide").slideToggle();
         });
-
-
-        // jQuery plugin to prevent double submission of forms
-        jQuery.fn.preventDoubleSubmission = function() {
-            $(this).on('submit',function(e){
-                var $form = $(this);
-
-                if ($form.data('submitted') === true) {
-                    // Previously submitted - don't submit again
-                    e.preventDefault();
-                } else {
-                    // Mark it so that the next submit can be ignored
-                    $form.data('submitted', true);
-                }
-            });
-
-            // Keep chainability
-            return this;
-        };
-
-        $('form').preventDoubleSubmission();
-
 
 
         $('[role=iconpicker]').iconpicker({

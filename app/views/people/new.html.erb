@@ -5,7 +5,7 @@
     <div class="card-col col-xs-5 col-xs-offset-3">
 
       <%= form_for :person, url: people_path, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
-          <h1><span class="glyphicon glyphicon-user"></span><%= t('people.new.header') %></h1>
+          <h1><span class="glyphicon glyphicon-user"></span> <%= t('people.new.header') %></h1>
 
           <div class="form-group">
             <%= f.label t('people.new.name'), class: "control-label" %>

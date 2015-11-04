@@ -3,7 +3,7 @@
     <div class="card-col col-xs-4 col-xs-offset-4">
 
       <%= form_for :tag, url:tags_path, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
-          <h1><%= t('tags.new.header') %></h1>
+          <h1><span class="glyphicon glyphicon-tag"></span> <%= t('tags.new.header') %></h1>
 
           <div class="form-group">
             <%= f.label t('name'), class: "control-label" %>

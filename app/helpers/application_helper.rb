@@ -23,5 +23,4 @@ module ApplicationHelper
       link_to "", milestone_highlight_path(milestone.id), method: :post, class: link_class, data: { confirm: "#{t('milestones.mark_as_sure')}#{t('milestones.highlighted')}?" }
     end
   end
-
 end

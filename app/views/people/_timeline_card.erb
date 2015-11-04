@@ -24,6 +24,12 @@
                           milestone_status(e,:right)
                         end %>
                     <%= milestone_status_rej(e, :right) %>
+                <%else%>
+                  <% if e.highlighted %>
+                      <span class="milestone-highlight right true"></span>
+                  <%else%>
+                      <span class="milestone-highlight right false"></span>
+                  <%end%>
                 <%end%>
               </div>
             </div>

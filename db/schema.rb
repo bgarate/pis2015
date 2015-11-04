@@ -37,21 +37,33 @@ ActiveRecord::Schema.define(version: 20151101194215) do
   add_index "mentorships", ["mentee_id"], name: "index_mentorships_on_mentee_id", using: :btree
   add_index "mentorships", ["mentor_id"], name: "index_mentorships_on_mentor_id", using: :btree
 
+  create_table "milestone_templates", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "due_term"
+    t.text     "description"
+    t.integer  "type"
+    t.string   "icon"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "milestones", force: :cascade do |t|
     t.string   "title"
     t.date     "due_date"
     t.text     "description"
-    t.integer  "status",             default: 0
+    t.integer  "status",                       default: 0
     t.string   "icon"
     t.integer  "feedback_author_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.integer  "category_id"
     t.date     "start_date"
+    t.integer  "milestone_type",     limit: 8
     t.integer  "author_id"
     t.date     "completed_date"
     t.date     "deleted_date"
-    t.boolean  "highlighted",        default: false, null: false
+    t.boolean  "highlighted",                  default: false, null: false
   end
 
   create_table "milestones_tags", id: false, force: :cascade do |t|

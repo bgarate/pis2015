@@ -4,9 +4,6 @@ class CollectionsController < ApplicationController
 
   def get_collection
     @collection = Collection.find(params[:id])
-    unless @collection
-      redirect_to collection_path
-    end
   end
 
 

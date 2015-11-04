@@ -30,7 +30,7 @@ class MilestonesController < ApplicationController
   end
 
   def index
-    @milestone= Milestone.all.order('LOWER(title)')
+    @milestone= Milestone.all.order('LOWER(title)').limit(15) #TEMP
     @tags = Tag.all.order(:name)
     @people = Person.all.order(:name)
     @categories = Category.all.order(:name)
@@ -38,6 +38,35 @@ class MilestonesController < ApplicationController
     respond_to do |f|
       f.json { render json: name_and_path(@milestone)}
       f.html { render }
+    end
+
+  end
+
+  def report
+    if request.get?
+      @tags = Tag.all.order(:name)
+      @people = Person.all.order(:name)
+      @categories = Category.all.order(:name)
+      @milestone= Milestone.limit(15) #TEMP
+    else #es un post enviado por datatables
+      # limitar
+      @milestone= Milestone.limit(params['length']).offset(params['start'])
+
+      # filtrar
+      @milestone = @milestone.where "due_date >= ?", params[:due_date_from]
+      @milestone = @milestone.joins(:people).where(:people => {:name => 'Alfred'})
+      @milestone = @milestone.joins(:tags).where(:tags => {:name => 'Dar Feedback'})
+      # ordenar
+      @milestone =@milestone.order ('due_date ASC')# params[:order]
+
+
+    end
+
+
+
+    respond_to do |f|
+      f.json { render json: name_and_path(@milestone)}
+      f.html { render :index}
     end
 
   end

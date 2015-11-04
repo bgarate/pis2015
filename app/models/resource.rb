@@ -13,5 +13,5 @@
 
 class Resource < ActiveRecord::Base
   belongs_to :milestone
-
+  has_one :template
 end

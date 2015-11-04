@@ -7,10 +7,14 @@ class TemplatesController < ApplicationController
     @person = Person.find_by(id: @identifier)
 
     #redirect_to '/people'
-    @cats=Category.all.collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
-    @tags=Tag.all
+    @cats=Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
+    @tags=Tag.all.order('LOWER(name)')
 
-    @redirect_url = request.headers["Referer"]
+    if (params[:redirect_url])
+      @redirect_url = params[:redirect_url]
+    else
+      @redirect_url = request.headers["Referer"]
+    end
   end
 
   def create
@@ -21,6 +25,44 @@ class TemplatesController < ApplicationController
     #CATEGORIES
     category=Category.find(params[:template][:category_id])
     @template.category=category
+
+    if params[:template][:doc_url]
+      session = GoogleDrive.login_with_oauth(current_user.oauth_token)
+      begin
+        f = session.file_by_url(params[:template][:doc_url])
+        #se logro encontrar el resorce
+        r = Resource.new
+        r.doc_id= f.resource_id
+        r.title= f.title
+        r.url= f.human_url
+        r.save!
+        @template.resource_id=r.id
+
+      rescue Google::APIClient::ClientError
+        #no se logro encontrar el resorce
+        if params[:redirect_url]
+          redirect_to templates_new_path(:error => true, :redirect_url => params[:redirect_url])
+        else
+          redirect_to google_adddriveview_path(:error => true)
+        end
+        return
+      rescue GoogleDrive::Error
+        #url no es valida
+        if params[:redirect_url]
+          redirect_to templates_new_path(:error => true, :redirect_url => params[:redirect_url])
+        else
+          redirect_to google_adddriveview_path(:error => true)
+        end
+        return
+      rescue URI::InvalidURIError
+        if params[:redirect_url]
+          redirect_to templates_new_path(:error => true, :redirect_url => params[:redirect_url])
+        else
+          redirect_to google_adddriveview_path(:error => true)
+        end
+        return
+      end
+    end
 
     @template.save!
 
@@ -38,7 +80,7 @@ class TemplatesController < ApplicationController
   end
 
   def index
-    @template= Template.all
+    @template= Template.all.order('LOWER(title)')
     respond_to do |f|
       f.json { render json: name_and_path(@template)}
       f.html { render }
@@ -61,12 +103,12 @@ class TemplatesController < ApplicationController
       m.author_id = current_user.person_id
 
       #Crear documento adjunto
-      if m.category && m.category.doc_url
+      if t.resource
         u = current_user
         session = GoogleDrive.login_with_oauth(u.oauth_token)
         begin
           #traigo el archivo
-          f = session.file_by_url(m.category.doc_url)
+          f = session.file_by_url(t.resource.url)
           #lo copio
           fuploaded = f.copy("#{m.title}")
           #agregar permisos a la gente asociada al hito
@@ -75,14 +117,13 @@ class TemplatesController < ApplicationController
                 {:type => 'user', :value => p.email, :role => 'writer'})
           end
 
-          #se logro encontrar el resorce
+          #se logro encontrar el resource
           r = Resource.new
           r.doc_id= fuploaded.resource_id
           r.title= fuploaded.title
           r.url= fuploaded.human_url
           m.resources<<(r)
-          m.updated_at= Time.now
-          m.save!
+
         rescue Google::APIClient::ClientError
           #no se logro encontrar el resorce
           driveerr = t(:driveerrormsj)
@@ -123,6 +164,6 @@ class TemplatesController < ApplicationController
   end
 
   def templates_params
-    params.require(:template).permit(:title,:description, :icon, :category_id, :created_at, :updated_at)
+    params.require(:template).permit(:title, :description, :icon, :category_id, :created_at, :updated_at)
   end
 end

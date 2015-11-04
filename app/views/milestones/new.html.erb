@@ -3,7 +3,7 @@
     <div class="card-col col-xs-4 col-xs-offset-4">
 
         <%= form_for :milestone, html: { class:'timeline-form main-form ','data-toggle': 'validator'}  do |m| %>
-          <h1 class=""><span class="glyphicon glyphicon-check"></span> <%= t('milestones.new.header') %></h1>
+          <h1><span class="glyphicon glyphicon-check"> </span> <%= t('milestones.new.header') %></h1>
           <%= render partial: 'milestones/innerform', locals: {m: m, in_profile: false} %>
         <% end %>
     </div>

@@ -128,19 +128,19 @@ es:
 
   #mentor
   mentor:
-    header: "Mentores"
+    header: "Referentes"
     since: "Desde"
-    name: "Nombre del mentor"
-    nomore_msg: "No hay más mentores disponibles para agregar para"
-    adding_to: "Agregando mentor a"
+    name: "Nombre del referente"
+    nomore_msg: "No hay más referentes disponibles para agregar para"
+    adding_to: "Agregando referente a"
 
-    zero: "Sin mentores en la actualidad"
+    zero: "Sin referentes en la actualidad"
 
     add:
-      header: "Agregar Mentores"
-      submit: "Agregar Mentor"
+      header: "Agregar Referentes"
+      submit: "Agregar Referente"
     remove:
-      submit: "Quitar Mentor"
+      submit: "Quitar Referente"
 
 
   #projects
@@ -237,6 +237,8 @@ es:
     rejected_date: "Rechazado el día: "
     mod_date: "Fecha hecho/ rechazado"
 
+    highlighted: "destacado"
+    not_highlighted: "no destacado"
     state_title: "Estado"
     actions: "Acciones"
 
@@ -298,6 +300,9 @@ es:
     icon: "Icono"
     created: "Creado"
     updated: "Actualizado"
+    doc_url: "URL del Documento"
+    feedback: "Feedback"
+
     delete:
       title: "Borrar Categoria"
       sure: "¿Está seguro que desea eliminar esta categoría?"
@@ -325,7 +330,7 @@ es:
     add: "Agregar Notas"
     add_placeholder: "Agregar nota..."
     me: "Privado"
-    mentors: "Mentores"
+    mentors: "Referentes"
     every_body: "Publico"
     more: " notas mas"
 
@@ -367,7 +372,9 @@ es:
 
     zero: "No se han encontrado roles"
 
+  tempdoc: 'Documento plantilla'
   attachmentsdocs: 'Documentos adjuntos'
+  nonattachmentsdocs: 'Sin documentos adjuntos'
   adddoc: 'Agregar documento'
   driveerrormsj: 'Ha ocurrido un error al adjuntar el documento de drive'
   notpermissionsdrive: 'Asegúrese de que tiene permisos de acceso al archivo en Google Drive'

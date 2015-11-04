@@ -68,10 +68,45 @@
 
 }
 
+.milestone-highlight {
+  position: absolute;
+  top: -10px;
+  left: 15px;
+  width: 30px;
+  height: 30px;
+  background-position: left;
+  background-size: contain;
+
+  &.true {
+    background-image: image-url('layouts/star_full.png');
+  }
+
+  &.false {
+    background-image: image-url('layouts/star_empty.png');
+  }
+
+  &.right {
+    left: auto;
+    right: 15px;
+  }
+
+  &.small {
+    top: -2px;
+    width: 20px;
+    height: 20px;
+  }
+
+  &.static {
+    position: static;
+    display: block;
+  }
+}
+
+
 .milestone-status {
     position: absolute;
-    top: 15px;
-    left: 45px;
+    top: -10px;
+    left: 75px;
     width: 30px;
     height: 30px;
     background-position: left;
@@ -107,8 +142,8 @@
 
 .milestone-rej-status {
     position: absolute;
-    top: 15px;
-    left: 15px;
+    top: -10px;
+    left: 45px;
     width: 30px;
     height: 30px;
     background-size: contain;

@@ -277,129 +277,33 @@ describe MilestonesController, "Milestone Controller" do
 
     end
 
-    it 'creates a milestone with auto drive atach' do
-      a = double
-      allow(a).to receive(:push).with(anything()).and_return('')
-
-      f = double()
-      allow(f).to receive(:resource_id).and_return('unid')
-      allow(f).to receive(:title).and_return('untitulo')
-      allow(f).to receive(:human_url).and_return('/una/url')
-      allow(f).to receive(:copy).with(anything()).and_return(f)
-      allow(f).to receive(:acl).and_return(a)
-
-      s = double()
-      allow(s).to receive(:file_by_url).with(anything()).and_return(f)
-
-      GoogleDrive.stub(:login_with_oauth).with(anything()) { s }
-
-      session[:user_id] = @ad_user.id
-      p1 = Person.new
-      p1.name = "Juan Perez"
-      p1.email ="juanperez1@gmail.com"
-      p1.start_date =Time.now
-      p1.save!
-      p2 = Person.new
-      p2.name = "Juan2 Perez"
-      p2.email ="juanperez2@gmail.com"
-      p2.start_date =Time.now
-      p2.save!
-      p3 = Person.new
-      p3.name = "Juan3 Perez"
-      p3.email ="juanperez3@gmail.com"
-      p3.start_date =Time.now
-      p3.save!
-
-      c = Category.new :name=>'Feedback tecnico', doc_url: 'google/undoc', :icon=>'unicono'
-      c.created_at=Time.now
-      c.updated_at=Time.now
-      c.save!
-
-      get :new
-      post :create, :person_id=>@admin.id, :milestone=>{:title=>'milestone1', :description=>'unadescripcionde1',:category_id =>c.id},
-           :people=>[p1.id,p2.id,p3.id]
-      expect(response.status).to eq(302)
-
-    end
-
-    it 'creates a milestone with auto drive atach without permissions' do
-
-      s = double()
-      allow(s).to receive(:file_by_url).with(anything()) { raise Google::APIClient::ClientError }
-
-      GoogleDrive.stub(:login_with_oauth).with(anything()) { s }
-
-      session[:user_id] = @ad_user.id
-      p1 = Person.new
-      p1.name = "Juan Perez"
-      p1.email ="juanperez1@gmail.com"
-      p1.start_date =Time.now
-      p1.save!
-
-      c = Category.new :name=>'Feedback tecnico', doc_url: 'google/undoc', :icon=>'unicono'
-      c.created_at=Time.now
-      c.updated_at=Time.now
-      c.save!
-
-      get :new
-      post :create, :person_id=>@admin.id, :milestone=>{:title=>'milestone1', :description=>'unadescripcionde1',:category_id =>c.id},
-           :people=>[p1.id]
-      expect(response.status).to eq(302)
-    end
-
-    it 'creates a milestone with auto drive atach inavalid url 1' do
-
-      s = double()
-      allow(s).to receive(:file_by_url).with(anything()) { raise GoogleDrive::Error }
-
-      GoogleDrive.stub(:login_with_oauth).with(anything()) { s }
-
-      session[:user_id] = @ad_user.id
-      p1 = Person.new
-      p1.name = "Juan Perez"
-      p1.email ="juanperez1@gmail.com"
-      p1.start_date =Time.now
-      p1.save!
-
-      c = Category.new :name=>'Feedback tecnico', doc_url: 'google/undoc', :icon=>'unicono'
-      c.created_at=Time.now
-      c.updated_at=Time.now
-      c.save!
-
-      get :new
-      post :create, :person_id=>@admin.id, :milestone=>{:title=>'milestone1', :description=>'unadescripcionde1',:category_id =>c.id},
-           :people=>[p1.id]
-      expect(response.status).to eq(302)
-    end
-
-    it 'creates a milestone with auto drive atach inavalid url 2' do
-
-      s = double()
-      allow(s).to receive(:file_by_url).with(anything()) { raise URI::InvalidURIError }
-
-      GoogleDrive.stub(:login_with_oauth).with(anything()) { s }
-
-      session[:user_id] = @ad_user.id
-      p1 = Person.new
-      p1.name = "Juan Perez"
-      p1.email ="juanperez1@gmail.com"
-      p1.start_date =Time.now
-      p1.save!
-
-      c = Category.new :name=>'Feedback tecnico', doc_url: 'google/undoc', :icon=>'unicono'
-      c.created_at=Time.now
-      c.updated_at=Time.now
-      c.save!
-
-      get :new
-      post :create, :person_id=>@admin.id, :milestone=>{:title=>'milestone1', :description=>'unadescripcionde1',:category_id =>c.id},
-           :people=>[p1.id]
-      expect(response.status).to eq(302)
-    end
-
     it 'is valid with a title and description' do
       session[:user_id] = @ad_user.id
-      post :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :due_date=>Time.now, :category_id=>@c1.id}
+      post :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :category_id=>@c1.id}
+      expect(response.status).to eq(302)
+    end
+
+    #GOOGLE CALENDAR
+    it 'crete milsteones with dates' do
+
+      auth = double()
+      allow(auth).to receive(:access_token=).and_return('')
+
+      servaux = double()
+      allow(servaux).to receive(:insert).and_return('')
+      serv = double()
+      allow(serv).to receive(:events).and_return(servaux)
+
+      cli = double()
+      allow(cli).to receive(:authorization).and_return(auth)
+      allow(cli).to receive(:execute).with(anything()).and_return('')
+      allow(cli).to receive(:discovered_api).with(anything(),anything()).and_return(serv)
+
+
+      Google::APIClient.stub(:new) { cli }
+
+      session[:user_id] = @ad_user.id
+      post :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1', :description=>'unadescripciondemilestone', :category_id=>@c1.id, :start_date=> Time.now - 5.days, :due_date=> Time.now}
       expect(response.status).to eq(302)
     end
 

@@ -1,14 +1,20 @@
 <div id="milestone-info">
   <% if can_modify_milestone?@milestone.id %>
-  <%= if @milestone.status != 'rejected'
-        milestone_status(@milestone)
-      end %>
-  <%= milestone_status_rej(@milestone) %>
-  <% if can_modify_milestone?(@milestone.id) %>
+      <%= if @milestone.status != 'rejected'
+            milestone_status(@milestone)
+          end %>
+      <%= milestone_status_rej(@milestone) %>
+      <%= milestone_highlight(@milestone)%>
       <%= link_to edit_milestone_path(@milestone) do %>
-          <span class="edit glyphicon glyphicon-edit"></span>
-      <% end %>
-  <% end %>
+              <span class="edit glyphicon glyphicon-edit"></span>
+          <% end %>
+  <%else%>
+    <% if @milestone.highlighted %>
+      <span class="milestone-highlight true"></span>
+    <%else%>
+      <span class="milestone-highlight false"></span>
+    <%end%>
+
   <% end %>
 
   <div class="left-pane" style="margin-left: 40px;">
@@ -29,10 +35,10 @@
   <div class="right-pane">
     <p><%= @milestone.description %></p>
     <p><%
-        if feedback? && @milestone.feedback_author %>
-           <%=  t('milestones.author') + ": " %>
-           <%= link_to @milestone.feedback_author.name, person_path(@milestone.feedback_author.id), method: :get %>
-        <% end %>
+       if feedback? && @milestone.feedback_author %>
+          <%=  t('milestones.author') + ": " %>
+          <%= link_to @milestone.feedback_author.name, person_path(@milestone.feedback_author.id), method: :get %>
+      <% end %>
     </p>
 
 
@@ -124,11 +130,11 @@
             </div>
             <div class="info">
               <h2><%= p.name %></h2>
-	              <% if p.tech_role.nil? %>
-		              <h3><%= t('milestones.no_tech_role')  %></h3>
-	              <% else %>	 
+              <% if p.tech_role.nil? %>
+                  <h3><%= t('milestones.no_tech_role')  %></h3>
+              <% else %>
                   <h3><%= p.tech_role.name %></h3>
-	              <% end %>	
+              <% end %>
             </div>
           </a>
         </div>

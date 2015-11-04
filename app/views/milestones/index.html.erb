@@ -71,10 +71,17 @@
         <% @milestone.each do |m| %>
             <tr>
               <td><% if can_modify_milestone?m.id %>
+                    <%= milestone_highlight(m, :static)%>
                     <%= milestone_status_rej(m,:static) %>
                     <%= if m.status != 'rejected'
                           milestone_status(m,:static)
                         end %>
+                  <%else%>
+                    <% if m.highlighted %>
+                      <span class="milestone-highlight static true"></span>
+                    <%else%>
+                      <span class="milestone-highlight static false"></span>
+                    <%end%>
                 <% end %>
               </td>
               <% if (m.status == 'rejected') || (m.status == 'done')  %>
@@ -94,14 +101,14 @@
               </td>
               <td>
                 <ul>
-                  <% m.people.each do |p| %>
+                  <% m.people.order('LOWER(name)').each do |p| %>
                       <li><%= link_to p.name, person_path(p.id), method: :get %></li>
                   <% end %>
                 </ul>
               </td>
               <td class="tags_row">
                 <ul class="">
-                  <% m.tags.each do |t| %>
+                  <% m.tags.order('LOWER(name)').each do |t| %>
                       <li><%= t.name %></li>
                   <% end %>
                 </ul>

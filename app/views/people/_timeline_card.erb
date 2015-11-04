@@ -1,7 +1,7 @@
 <style>
   h2 {
     position: relative;
-    left: 30px;
+    left: 20px;
   }
 </style>
 <% if @milestones and not @milestones.empty? %>
@@ -19,7 +19,7 @@
               <div class="col-xs-10">
                 <%if e.pending?%>
                   <% if can_modify_milestone?e.id %>
-                      <%= milestone_highlight(e)%>
+                      <%= milestone_highlight2(e)%>
                   <%else%>
                     <% if e.highlighted %>
                       <span class="milestone-highlight true"></span>
@@ -30,12 +30,12 @@
                     <h2><%=link_to e.title, e, method: :get%></h2>
                 <%else%>
                     <% if can_modify_milestone?e.id %>
-                      <%= milestone_highlight(e)%>
+                      <%= milestone_highlight2(e)%>
                     <%else%>
                       <% if e.highlighted %>
-                        <span class="milestone-highlight true"></span>
+                        <span class="milestone-highlight2 true"></span>
                       <%else%>
-                        <span class="milestone-highlight false"></span>
+                        <span class="milestone-highlight2 false"></span>
                       <%end%>
                     <%end%>
                     <strike><h2><%=link_to e.title, e, method: :get%></h2></strike>

@@ -4,14 +4,17 @@
             milestone_status(@milestone)
           end %>
       <%= milestone_status_rej(@milestone) %>
-      <% if can_modify_milestone?(@milestone.id) %>
-        <%= milestone_highlight(@milestone)%>
-
+      <%= milestone_highlight(@milestone)%>
       <%= link_to edit_milestone_path(@milestone) do %>
               <span class="edit glyphicon glyphicon-edit"></span>
           <% end %>
+  <%else%>
+    <% if @milestone.highlighted %>
+      <span class="milestone-highlight true"></span>
+    <%else%>
+      <span class="milestone-highlight false"></span>
+    <%end%>
 
-      <% end %>
   <% end %>
 
   <div class="left-pane" style="margin-left: 40px;">

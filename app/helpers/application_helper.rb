@@ -23,16 +23,4 @@ module ApplicationHelper
       link_to "", milestone_highlight_path(milestone.id), method: :post, class: link_class, data: { confirm: "#{t('milestones.mark_as_sure')}#{t('milestones.highlighted')}?" }
     end
   end
-
-  def milestone_highlight2(milestone, *options)
-    link_class = "milestone-highlight2 "
-    options.each {|opt| link_class += opt.to_s + " "}
-    link_class += " " + milestone.highlighted.to_s
-    if milestone.highlighted
-      link_to "", milestone_highlight_path(milestone.id), method: :post, class: link_class, data: { confirm: "#{t('milestones.mark_as_sure')}#{t('milestones.not_highlighted')}?" }
-    else
-      link_to "", milestone_highlight_path(milestone.id), method: :post, class: link_class, data: { confirm: "#{t('milestones.mark_as_sure')}#{t('milestones.highlighted')}?" }
-    end
-  end
-
 end

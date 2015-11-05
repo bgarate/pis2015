@@ -20,7 +20,7 @@
           <div class="form-group">
             <%= f.label t('people.new.role'), class: "small_label" %>
             <br>
-            <%= f.select :tech_role_id, options_from_collection_for_select(@roles, :id, :name), {:include_blank => true}, {class: "chosen", 'data-placeholder'=> t('people.add_tech_role'), 'data-validation': 'required'}%>
+            <%= f.select :tech_role_id, options_from_collection_for_select(@roles, :id, :name), {}, {class: "chosen", 'data-placeholder'=> t('people.add_tech_role'), 'data-validation': 'required'}%>
           </div>
 
           <div class="row">
@@ -38,7 +38,7 @@
             <div class="form-group col-xs-6">
               <%= f.label t('people.new.birth_date'), class: "control-label" %>
               <div class="input-group">
-                    <%= f.text_field :birth_date, id:'birth_date', class: "form-control", "data-provide":"datepicker", 'data-validation': "check_date", 'data-validation-format': "dd/mm/yyyy"%>
+                    <%= f.text_field :birth_date, id:'birth_date', class: "form-control", "data-provide":"datepicker", 'data-validation': "check_birth_date", 'data-validation-format': "dd/mm/yyyy"%>
                     <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
               </div>
               
@@ -89,7 +89,7 @@
       var birth_year= parts[2];
       var birth_month= parts[1]-1;
       var birth_day= parts[0];
-      var birth_date=new Date(birth_year, birth_month, birth_day,23,59,59);
+      var birth_date=new Date(birth_year, birth_month, birth_day,00,00,00);
       var new_date=new Date();
       return (birth_date<=new_date);
     },
@@ -110,7 +110,7 @@
       var start_year= parts[2];
       var start_month= parts[1]-1;
       var start_day= parts[0];
-      var start_date=new Date(start_year, start_month, start_day,23,59,59);
+      var start_date=new Date(start_year, start_month, start_day,00,00,00);
       var new_date=new Date();
       return (start_date<=new_date);
     },

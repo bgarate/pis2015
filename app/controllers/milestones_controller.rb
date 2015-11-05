@@ -47,25 +47,32 @@ class MilestonesController < ApplicationController
       @tags = Tag.all.order(:name)
       @people = Person.all.order(:name)
       @categories = Category.all.order(:name)
-      @milestone= Milestone.limit(15) #TEMP
+      # @milestone= Milestone.limit(15) #TEMP
     else #es un post enviado por datatables
       # limitar
       @milestone= Milestone.limit(params['length']).offset(params['start'])
 
       # filtrar
-      @milestone = @milestone.where "due_date >= ?", params[:due_date_from]
-      @milestone = @milestone.joins(:people).where(:people => {:name => 'Alfred'})
-      @milestone = @milestone.joins(:tags).where(:tags => {:name => 'Dar Feedback'})
+      @milestone = @milestone.where("status = ?", params[:status]) if params[:status].present?
+      @milestone = @milestone.where("due_date >= ?", params[:due_date_from]) if params[:due_date_from].present?
+      @milestone = @milestone.where("due_date <= ?", params[:due_date_to]) if params[:due_date_to].present?
+      @milestone = @milestone.where("category_id = ?", params[:category]) if params[:category].present?
+      # @milestone = @milestone.joins(:people).where(:people => {:name => 'Alfred'})
+      @milestone = @milestone.joins("INNER JOIN (SELECT person_milestones.milestone_id FROM person_milestones WHERE person_milestones.person_id IN (1, 8) GROUP BY person_milestones.milestone_id HAVING count(milestone_id)=2) as pm ON milestones.id = pm.milestone_id ")
+
+      # @milestone = @milestone.joins(:tags).where(:tags => {:name => 'Dar Feedback'})
       # ordenar
       @milestone =@milestone.order ('due_date ASC')# params[:order]
-
+      @total_objects = 20 #TEMP
+      @total_object = 20 #TEMP
 
     end
 
 
 
     respond_to do |f|
-      f.json { render json: name_and_path(@milestone)}
+      f.json { render partial: 'milestones/report_detail'}
+      # f.json { render json: @milestone} #da un json valido, pero solo de los datos.
       f.html { render :index}
     end
 

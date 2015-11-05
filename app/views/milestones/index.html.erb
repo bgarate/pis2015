@@ -33,7 +33,7 @@
         <div class="form-group col-xs-2">
           <%= label_tag :categories, t('milestones.category'), class: "small_label" %>
           <br>
-          <%= select_tag(:categories, options_from_collection_for_select(@categories, :name, :name), include_blank: t('all'), :id => 'categoriesfilter', :multiple => false, class: "chosen", 'data-placeholder'=> t('milestones.select_tags'), 'style'=> 'width:100%') %>
+          <%= select_tag(:categories, options_from_collection_for_select(@categories, :id, :name), include_blank: t('all'), :id => 'categoriesfilter', :multiple => false, class: "chosen", 'data-placeholder'=> t('milestones.select_tags'), 'style'=> 'width:100%') %>
         </div>
       </div>
       <div class="row ">
@@ -67,84 +67,7 @@
         </tr>
         </thead>
 
-        <tbody>
-        <% @milestone.each do |m| %>
-            <tr>
-              <td><% if can_modify_milestone?m.id %>
-                    <%= milestone_status_rej(m,:static) %>
-                    <%= if m.status != 'rejected'
-                          milestone_status(m,:static)
-                        end %>
-                <% end %>
-              </td>
-              <% if (m.status == 'rejected') || (m.status == 'done')  %>
-                  <td class="description_row" style="text-decoration: line-through;">
-                    <%= link_to m.title, milestone_path(m), method: :get%>
-                  </td>
-              <% else %>
-                  <td class="description_row">
-                    <%= link_to m.title, milestone_path(m), method: :get%>
-                  </td>
-              <% end %>
-              <td class="description_row">
-                <%= m.description.truncate(50) %>
-              </td>
-              <td  class="category_row" >
-                <%= m.category.name %>
-              </td>
-              <td>
-                <ul>
-                  <% m.people.order('LOWER(name)').each do |p| %>
-                      <li><%= link_to p.name, person_path(p.id), method: :get %></li>
-                  <% end %>
-                </ul>
-              </td>
-              <td class="tags_row">
-                <ul class="">
-                  <% m.tags.order('LOWER(name)').each do |t| %>
-                      <li><%= t.name %></li>
-                  <% end %>
-                </ul>
-              </td>
-              <td>
-                <% if m.start_date != nil %>
-                    <div><%= m.start_date %></div>
-                <% end %>
-              </td>
-              <td>
-                <% if m.due_date != nil %>
-                    <div><%= m.due_date %></div>
-                <% end %>
-              </td>
-              <td>
-                <% if m.completed_date != nil || m.deleted_date != nil%>
-                    <% if m.status != 'rejected'%>
-                        <div><%= m.completed_date %></div>
-                    <% else%>
-                        <div><%= m.deleted_date %></div>
-                    <% end %>
-                <% end %>
-              </td>
-
-
-              <td>
-                <% if can_modify_milestone? m.id %>
-                    <%= link_to edit_milestone_path(m) do%>
-                        <span class='large-text glyphicon glyphicon-pencil'></span>
-                    <% end %>
-                <% end %>
-
-                <% if current_user_admin? %>
-                    <%= link_to milestone_path(m),
-                                method: :delete,
-                                data: { confirm: t('milestones.delete.sure') } do %>
-                        <span class='large-text glyphicon glyphicon-trash'></span>
-                    <% end %>
-                <%end%>
-              </td>
-            </tr>
-        <% end %>
-        </tbody>
+       
       </table>
 
     </div>

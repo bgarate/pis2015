@@ -49,32 +49,45 @@ var milestonefilters_ready = function() {
             url: '/milestones/report',
             type: 'POST',
             "data": function ( d ) {
-                d.due_date_from = "2015-01-01";
+                d.due_date_from = $('.milestone-filters #due_date_from').val();
+                d.due_date_to = $('.milestone-filters #due_date_to').val();
                 // d.custom = $('#myInput').val();
                 // etc
             }
         },
         order: [],
-        "columnDefs": [
-            { "width": "30px", "targets": 'status_col' },
-
-            {"name":"status" , "targets":"status"},
-            {"name":"title","targets":"title"}     ,
-            {"name":"description", "targets":"description"},
-            {"name":"categories","targets":"categories"}    ,
-            {"name":"people","targets":"people"},
-            {"name":"tags","targets":"tags"}     ,
-            {"name":"start_date","targets":"start_date"},
-            {"name":"due_date","targets":"due_date"}     ,
-            {"name":"mod_date","targets":"mod_date"}      ,
-            {"name":"actions" ,"targets":"actions"}
+        "columns": [
+            {"data":"status"        },
+            {"data":"title"         }     ,
+            {"data":"description"   },
+            {"data":"categories"    }    ,
+            {"data":"people"        },
+            {"data":"tags"          }     ,
+            {"data":"start_date"    },
+            {"data":"due_date"      }     ,
+            {"data":"mod_date"      }      ,
+            {"data":"actions"   }
         ],
+//        "columnDefs": [
+//            {"name":"status"        , "targets":"status_col"},
+//            {"name":"title"         ,"targets":"title"}     ,
+//            {"name":"description"   , "targets":"description"},
+//            {"name":"categories"    ,"targets":"categories"}    ,
+//            {"name":"people"        ,"targets":"people"},
+//            {"name":"tags"          ,"targets":"tags"}     ,
+//            {"name":"start_date"    ,"targets":"start_date"},
+//            {"name":"due_date"      ,"targets":"due_date"}     ,
+//            {"name":"mod_date"      ,"targets":"mod_date"}      ,
+//            {"name":"actions"       ,"targets":"actions"}
+//        ],
         "language": {
             "search": ""
         }
     });
 
-
+    tabla.on( 'draw.dt', function () {
+        console.log( 'Redraw occurred at: '+new Date().getTime() );
+    } );
     //filtro de fechas
     $( '.milestone-filters #due_date_from,.milestone-filters #due_date_to' ).on( 'change', function (ev) {
 //            if (ev.keyCode == 13) {

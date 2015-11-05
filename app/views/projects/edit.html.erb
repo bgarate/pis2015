@@ -3,7 +3,7 @@
     <div class="card-col col-xs-4 col-xs-offset-4">
 
       <%= form_for @project, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
-        <h1><%= t('project.edit.header') %></h1>
+        <h1><span class="glyphicon glyphicon-send"></span> <%= t('project.edit.header') %></h1>
 
         <div class="form-group">
             <%= f.label t('project.name'), class: "control-label" %>

@@ -1,3 +1,9 @@
+<style>
+  h2 {
+    position: relative;
+    left: 25px;
+  }
+</style>
 <% if @milestones and not @milestones.empty? %>
     <div id="timeline-card" class="card timeline">
       <ul id="milestone-list">
@@ -12,24 +18,35 @@
             <div class="row">
               <div class="col-xs-10">
                 <%if e.pending?%>
+                  <% if can_modify_milestone?e.id %>
+                      <%= milestone_highlight(e, :small)%>
+                  <%else%>
+                    <% if e.highlighted %>
+                      <span class="milestone-highlight small true"></span>
+                    <%else%>
+                      <span class="milestone-highlight small false"></span>
+                    <%end%>
+                  <%end%>
                     <h2><%=link_to e.title, e, method: :get%></h2>
                 <%else%>
+                    <% if can_modify_milestone?e.id %>
+                      <%= milestone_highlight(e)%>
+                    <%else%>
+                      <% if e.highlighted %>
+                        <span class="milestone-highlight small true"></span>
+                      <%else%>
+                        <span class="milestone-highlight small false"></span>
+                      <%end%>
+                    <%end%>
                     <strike><h2><%=link_to e.title, e, method: :get%></h2></strike>
                 <%end%>
               </div>
               <div class="col-xs-2">
                 <% if can_modify_milestone?e.id %>
-                    <%= milestone_highlight(e, :right)%>
                     <%= if e.status != 'rejected'
                           milestone_status(e,:right)
                         end %>
                     <%= milestone_status_rej(e, :right) %>
-                <%else%>
-                  <% if e.highlighted %>
-                      <span class="milestone-highlight right true"></span>
-                  <%else%>
-                      <span class="milestone-highlight right false"></span>
-                  <%end%>
                 <%end%>
               </div>
             </div>
@@ -137,7 +154,7 @@
                           <%=link_to  r.url, :target => "_blank" do%>
                               <span class="glyphicon glyphicon glyphicon-paperclip"></span>
                               &nbsp;&nbsp;
-                              <%= r.title.truncate(60) %>
+                              <%= r.title.truncate(55) %>
                           <% end %>
                           <br>
                       <%end%>

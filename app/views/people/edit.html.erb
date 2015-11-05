@@ -5,7 +5,7 @@
     <div class="card-col col-xs-5 col-xs-offset-3">
       
       <%= form_for @person, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
-        <h1><span class="glyphicon glyphicon-user"></span><%= t('people.edit.header') %></h1>
+        <h1><span class="glyphicon glyphicon-user"></span> <%= t('people.edit.header') %></h1>
 
         <div class="form-group">
           <%= f.label t('people.new.name'), class: "control-label" %>
@@ -98,7 +98,7 @@
       var birth_year= parts[2];
       var birth_month= parts[1]-1;
       var birth_day= parts[0];
-      var birth_date=new Date(birth_year, birth_month, birth_day,23,59,59);
+      var birth_date=new Date(birth_year, birth_month, birth_day,00,00,00);
       var new_date=new Date();
       return (birth_date<=new_date);
     },
@@ -119,7 +119,7 @@
       var start_year= parts[2];
       var start_month= parts[1]-1;
       var start_day= parts[0];
-      var start_date=new Date(start_year, start_month, start_day,23,59,59);
+      var start_date=new Date(start_year, start_month, start_day,00,00,00);
       var new_date=new Date();
       return (start_date<=new_date);
     },

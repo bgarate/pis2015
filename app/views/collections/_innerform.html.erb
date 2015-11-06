@@ -41,7 +41,7 @@
                      class: "chzn-select", id: "tName",'data-placeholder'=> t('collections.new.templates.select'), 'style'=> 'width:100%') %>
     </div>
     <div class="form-group col-xs-3">
-      <%= number_field_tag 'days', 0, in: 0...5000, class: "form-control", id: "tDay" %>
+      <%= number_field_tag 'days', 0, in: 0...5000, id: "tDay" %>
     </div>
     <div class="form-group col-xs-3">
       <p id="addTemp" style="background-color: lightgrey;" ><b>Add</b></p>
@@ -63,7 +63,11 @@
 
         count.value = parseInt(count.value) +1;
 
-        $("#tempTable").append("<div class=\"row\"> <div class=\"form-group col-xs-6\"> <input type=\"hidden\" name=\"temp"+count.value+"\" value=\""+selectValue+"\"> <input type=\"text\" name=\"temp"+count.value+"Text\" value=\""+selectText+"\" class=\"form-control\" disabled> </div> <div class=\"form-group col-xs-3\"> <input type=\"number\" name=\"days"+count.value+"\" value=\""+days+"\" class=\"form-control\" disabled> </div> </div>")
+        $("#tempTable").append("<div class=\"row\" id=\"row"+count.value+"\"> <div class=\"form-group col-xs-6\"> <input type=\"hidden\" name=\"temp"+count.value+"\" value=\""+selectValue+"\"> <input type=\"text\" name=\"temp"+count.value+"Text\" value=\""+selectText+"\" disabled> </div> <div class=\"form-group col-xs-3\"> <input type=\"number\" name=\"days"+count.value+"\" value=\""+days+"\" disabled> </div> <div class=\"form-group col-xs-3\"> <p class=\"rmTemp\" value=\""+count.value+"\" style=\"background-color: red;\" ><b>Remove</b></p> </div> </div>")
 
+    });
+    $(document).on('click', ".rmTemp", function(e) {
+        $("#tempTable").append($(this).attr("value"));
+        $("#row"+$(this).attr("value")).remove();
     });
 </script>

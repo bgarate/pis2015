@@ -18,8 +18,8 @@ class CollectionsController < ApplicationController
 
     unless params[:collection_templates].nil?
       params[:collection_templates].each do |t|
-        template = Template.find(t.template)
-        days = t.days
+        template = Template.find(t[:template])
+        days = t[:days]
         elem = CollectionTemplate.new(collection: @collection, template: template, days: days)
         @collection.collection_templates << elem
       end

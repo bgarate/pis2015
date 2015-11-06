@@ -48,16 +48,30 @@ describe CollectionsController, 'Collections Controller' do
     expect(response).to render_template('index')
   end
 
-=begin
+
   it 'creates a collection' do
     session[:user_id] = @ad_user.id
+    t = Template.new
+    t.title= 'Inducción android'
+    t.description= 'Periodo en el cual son adquiridos los conocimientos subyacentes que implican el confort en el manejo de android como ambiente de programación'
+    t.icon= 'glyphicon-flag'
+    t.category_id=@c1.id
+    t.save!
+
+    t2 = Template.new
+    t2.title= 'Inducción PHP'
+    t2.description= 'Periodo en el cual son adquiridos los conocimientos subyacentes que implican el confort en el manejo de PHP como lenguaje de programación'
+    t2.icon= 'glyphicon-flag'
+    t2.category_id=@c1.id
+    t2.save!
 
     get :new
-    post :create, :person_id=>@admin.id, :collection=>{:title=>'milestone1', :description=>'unadescripcionde1'}
+    post :create, {:person_id=>@admin.id, :collection=>{:title=>'milestone1', :description=>'unadescripcionde1', :icon=>'glyphicon-flag'},
+                   :collection_templates=>[{:template=>t.id, :days=>3}, {:template=>t2.id, :days=>1}]}
     expect(response.status).to eq(302)
 
   end
-=end
+
 
   it 'Show collection' do
     session[:user_id] = @ad_user

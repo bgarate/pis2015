@@ -284,8 +284,8 @@ class MilestonesController < ApplicationController
 
 
   def name_and_path (milestone)
-    milestone.map do |p|
-      {"name" => p.title, "url" => milestone_path(p)}
+    milestone.map do |m|
+      {"icon" => m.icon, "name" => m.title, "url" => milestone_path(m)}
     end
   end
 

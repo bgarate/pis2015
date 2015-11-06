@@ -23,12 +23,12 @@
         <div class="form-group col-xs-3">
           <%= label_tag :people, t('milestones.people'), class: "small_label" %>
           <br>
-          <%= select_tag(:people, options_from_collection_for_select(@people, :name, :name), :id => 'peoplefilter', :multiple => true, class: "chosen", 'data-placeholder'=> t('milestones.select_tags'), 'style'=> 'width:100%') %>
+          <%= select_tag(:people, options_from_collection_for_select(@people, :id, :name), :id => 'peoplefilter', :multiple => true, class: "chosen", 'data-placeholder'=> t('milestones.select_tags'), 'style'=> 'width:100%') %>
         </div>
         <div class="form-group col-xs-3">
           <%= label_tag :tags, t('milestones.tags'), class: "small_label" %>
           <br>
-          <%= select_tag(:tags, options_from_collection_for_select(@tags, :name, :name), :id => 'tagsfilter', :multiple => true, class: "chosen", 'data-placeholder'=> t('milestones.select_tags'), 'style'=> 'width:100%') %>
+          <%= select_tag(:tags, options_from_collection_for_select(@tags, :id, :name), :id => 'tagsfilter', :multiple => true, class: "chosen", 'data-placeholder'=> t('milestones.select_tags'), 'style'=> 'width:100%') %>
         </div>
         <div class="form-group col-xs-2">
           <%= label_tag :categories, t('milestones.category'), class: "small_label" %>
@@ -67,7 +67,7 @@
         </tr>
         </thead>
 
-       
+
       </table>
 
     </div>

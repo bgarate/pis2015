@@ -1,0 +1,25 @@
+{"draw": <%= params[:draw] || -1 %>,
+"recordsTotal": <%= @total_objects %>,
+"recordsFiltered": <%= @total_object %>,
+"data":[
+<%  iniciado=false %>
+<% @milestone.each do |m| %>
+    <% if iniciado %>
+        ,
+    <% end
+    iniciado=true
+    %>
+    {
+        "status":"<%=raw(milestone_status(m,:static).gsub('"', "'")) %>",
+        "title":"<%= raw(link_to(m.title, milestone_path(m), method: :get).gsub(/"/, "'") )%>",
+        "description":"<%= m.description.truncate(50).gsub('"', "'") %>",
+        "categories": "<%= m.category.name.gsub('"', "'") %>",
+        "people": "<ul><% m.people.order('LOWER(name)').each do |p| %><li><%= raw((link_to p.name, person_path(p.id), method: :get).gsub('"', "'")) %></li><% end %></ul>",
+        "tags":"<ul><% m.tags.order('LOWER(name)').each do |t| %><li><%= t.name %></li><% end %></ul>",
+        "start_date":"<%= m.start_date %>",
+        "due_date":"<%= m.due_date %>",
+        "mod_date":"<% if m.completed_date != nil || m.deleted_date != nil%><% if m.status != 'rejected'%><div><%= m.completed_date %></div><% else%><div><%= m.deleted_date %></div><% end %><% end %>",
+        "actions" :"<% if can_modify_milestone? m.id %><%= raw((link_to "<span class='large-text glyphicon glyphicon-pencil'></span>".html_safe, edit_milestone_path(m)).gsub('"', "'")) %><% end %><% if current_user_admin? %><%= raw((link_to "<span class='large-text glyphicon glyphicon-trash'></span>".html_safe,  milestone_path(m),method: :delete,data: { confirm: t('milestones.delete.sure') }).gsub('"', "'")) %><%end%>"
+    }
+<% end %>
+]}

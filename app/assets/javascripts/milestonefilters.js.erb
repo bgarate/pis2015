@@ -43,6 +43,7 @@ var milestonefilters_ready = function() {
 //            }
 //    );
     var tabla = $('#hitos').DataTable({
+        "processing": true,
         paging: true,
         serverSide: true,
         ajax: {
@@ -68,26 +69,27 @@ var milestonefilters_ready = function() {
             {"data":"mod_date"      }      ,
             {"data":"actions"   }
         ],
-//        "columnDefs": [
-//            {"name":"status"        , "targets":"status_col"},
-//            {"name":"title"         ,"targets":"title"}     ,
-//            {"name":"description"   , "targets":"description"},
-//            {"name":"categories"    ,"targets":"categories"}    ,
-//            {"name":"people"        ,"targets":"people"},
-//            {"name":"tags"          ,"targets":"tags"}     ,
-//            {"name":"start_date"    ,"targets":"start_date"},
-//            {"name":"due_date"      ,"targets":"due_date"}     ,
-//            {"name":"mod_date"      ,"targets":"mod_date"}      ,
-//            {"name":"actions"       ,"targets":"actions"}
-//        ],
+        "columnDefs": [
+            {"name":"status"        , "targets":"status_col"},
+            {"name":"title"         ,"targets":"title"}     ,
+            {"name":"description"   , "targets":"description"},
+            {"name":"categories"    ,"targets":"categories"}    ,
+            {"name":"people"        ,"targets":"people"},
+            {"name":"tags"          ,"targets":"tags"}     ,
+            {"name":"start_date"    ,"targets":"start_date"},
+            {"name":"due_date"      ,"targets":"due_date"}     ,
+            {"name":"mod_date"      ,"targets":"mod_date"}      ,
+            {"name":"actions"       ,"targets":"actions"}
+        ],
         "language": {
             "search": ""
         }
     });
 
-    tabla.on( 'draw.dt', function () {
-        console.log( 'Redraw occurred at: '+new Date().getTime() );
-    } );
+//    tabla.on( 'draw.dt', function () {
+//        console.log( 'Redraw occurred at: '+new Date().getTime() );
+//    } );
+
     //filtro de fechas
     $( '.milestone-filters #due_date_from,.milestone-filters #due_date_to' ).on( 'change', function (ev) {
 //            if (ev.keyCode == 13) {
@@ -103,7 +105,10 @@ var milestonefilters_ready = function() {
         var str = "";
         //$( "#tagsfilter option:selected" ).each(function() {
         $(this).find('option').filter(":selected" ).each(function() {
-            str += $( this ).text() + "|";
+            if (str.length > 0) {
+                str += ',';
+            }
+            str += $( this ).val();
         });
 //            console.log ('Parseado:' + str);
         if ( that.search() !== str ) {
@@ -117,7 +122,10 @@ var milestonefilters_ready = function() {
         var that = tabla.column('.people');
         var str = "";
         $(this).find('option').filter(":selected" ).each(function() {
-            str += $( this ).text() + "|";
+            if (str.length > 0) {
+                str += ',';
+            }
+            str += $( this ).val();
         });
 
         if ( that.search() !== str ) {

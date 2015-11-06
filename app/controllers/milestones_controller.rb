@@ -54,12 +54,21 @@ class MilestonesController < ApplicationController
 
       # filtrar
       @milestone = @milestone.where("status = ?", params[:status]) if params[:status].present?
+      @milestone = @milestone.where("category_id = ?", params[:category]) if params[:category].present?
       @milestone = @milestone.where("due_date >= ?", params[:due_date_from]) if params[:due_date_from].present?
       @milestone = @milestone.where("due_date <= ?", params[:due_date_to]) if params[:due_date_to].present?
-      @milestone = @milestone.where("category_id = ?", params[:category]) if params[:category].present?
-      # @milestone = @milestone.joins(:people).where(:people => {:name => 'Alfred'})
-      @milestone = @milestone.joins("INNER JOIN (SELECT person_milestones.milestone_id FROM person_milestones WHERE person_milestones.person_id IN (1, 8) GROUP BY person_milestones.milestone_id HAVING count(milestone_id)=2) as pm ON milestones.id = pm.milestone_id ")
 
+      # @milestone = @milestone.joins(:people).where(:people => {:name => 'Alfred'})
+      people_ids = params[:columns]['4'][:search][:value]
+      if people_ids.present? then
+        people_ids_cant = people_ids.split(',').length
+        @milestone = @milestone.joins("INNER JOIN (SELECT person_milestones.milestone_id FROM person_milestones WHERE person_milestones.person_id IN (#{people_ids}) GROUP BY person_milestones.milestone_id HAVING count(milestone_id)=#{people_ids_cant}) as pm ON milestones.id = pm.milestone_id ")
+      end
+      tags_ids = params[:columns]['5'][:search][:value]
+      if tags_ids.present? then
+        tags_ids_cant = tags_ids.split(',').length
+        @milestone = @milestone.joins("INNER JOIN (SELECT milestones_tags.milestone_id FROM milestones_tags WHERE milestones_tags.tag_id IN (#{tags_ids}) GROUP BY milestones_tags.milestone_id HAVING count(milestone_id)=#{tags_ids_cant}) as tm ON milestones.id = tm.milestone_id ")
+      end
       # @milestone = @milestone.joins(:tags).where(:tags => {:name => 'Dar Feedback'})
       # ordenar
       @milestone =@milestone.order ('due_date ASC')# params[:order]
@@ -71,7 +80,8 @@ class MilestonesController < ApplicationController
 
 
     respond_to do |f|
-      f.json { render partial: 'milestones/report_detail'}
+      f.json { render partial: 'milestones/report_detail'
+      }
       # f.json { render json: @milestone} #da un json valido, pero solo de los datos.
       f.html { render :index}
     end

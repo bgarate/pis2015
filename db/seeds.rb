@@ -117,10 +117,11 @@ tagt.name= 'Destacado'
 
 
 ################# People #################
-tr_id = tr.id
+tr_id = tr2.id
 
 p0 = Person.create!(name: "Alfred", email: "alfred.pis.2015@gmail.com", admin: true,birth_date: 4.years.ago, start_date: 3.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
 p1 = Person.create!(name: "Bruno Garate", email: "bruno.garate@gmail.com", admin: true, start_date: 3.years.ago, image_id: "y5cgoifotmmbkh1l1mn4.jpg", tech_role_id: tr_id)
+p1b = Person.create!(name: "Santiago Diaz", email: "sydz92@gmail.com", admin: false, start_date: 1168.years.ago, tech_role_id: tr_id)
 p2 = Person.create!(name: "Diego Bortot", email: "bortotdiegogm@gmail.com", admin: true, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
 p3 = Person.create!(name: "Oscar Montañés", email: "omontanes@gmail.com", admin: true, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
 p3 = Person.create!(name: "Sebastían Soleri", email: "omontanes.guri@gmail.com", admin: false, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)

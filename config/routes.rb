@@ -77,6 +77,10 @@
 
 Rails.application.routes.draw do
 
+
+
+
+
   root to: 'people#me'
 
   get 'welcome/index'
@@ -160,5 +164,12 @@ Rails.application.routes.draw do
   resources :dashboard
 
   get "/commands" => "commands#index", defaults: {format: :json}
+
+  resources :checklists do
+    collection do
+      get 'new' => 'checklists#new'
+      post 'new' => 'checklists#create'
+    end
+  end
 
 end

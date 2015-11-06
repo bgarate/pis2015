@@ -31,7 +31,7 @@ class MilestonesController < ApplicationController
 
   def index
     @milestone= Milestone.all.order('LOWER(title)')
-    @tags = Tag.all.order(:name)
+    @tags = Tag.where(validity: 'true').order(:name)
     @people = Person.all.order(:name)
     @categories = Category.all.order(:name)
 
@@ -51,7 +51,7 @@ class MilestonesController < ApplicationController
     #redirect_to '/people'
     @cats=Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
     @authors=Person.all.where('id NOT in (?)', @identifier).order('LOWER(name)').collect {|t| [t.name, t.id]}
-    @tags=Tag.all.order('LOWER(name)')
+    @tags=Tag.where(validity: 'true').order('LOWER(name)')
 
     if current_user_admin?
       #@people= Person.all.where('id NOT in (?)', @identifier)
@@ -184,7 +184,7 @@ class MilestonesController < ApplicationController
   def edit
     @cats=Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
     @authors=Person.all.order('LOWER(name)').collect {|t| [t.name, t.id]}
-    @tags = Tag.all.order('LOWER(name)')
+    @tags = Tag.where(validity: 'true').order('LOWER(name)')
     user= Person.find(current_user.person_id)
     if current_user_admin?
       @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})

@@ -59,7 +59,7 @@ class PeopleController < ApplicationController
       @cats = Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
 
       @authors = Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
-      @tags = Tag.all.order('LOWER(name)')
+      @tags = Tag.where(validity: 'true').order('LOWER(name)')
 
       #rol tecnico
       @trole = ''

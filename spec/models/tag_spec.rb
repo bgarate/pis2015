@@ -2,8 +2,9 @@
 #
 # Table name: tags
 #
-#  id   :integer          not null, primary key
-#  name :string
+#  id       :integer          not null, primary key
+#  name     :string
+#  validity :boolean          default(TRUE), not null
 #
 
 require 'rails_helper'

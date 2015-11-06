@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
+      <%= form_for :checklists, url:checklists_path, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
+          <h1><%= t('checklist.add_checklist') %></h1>
+
+          <div class="form-group">
+            <div class="input_fields_wrap">
+              <%= f.button t('checklist.add_more_items'),options= :type => '#', class: "btn btn-primary add_field_button" %>
+              <div class="input-container"><input class="form-control checklist-input" type="text" name="mytext[]"></div>
+            </div>
+          </div>
+          <%= f.button t('checklist.add_to_project'), options= :type => 'submit', class: "btn btn-default" %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

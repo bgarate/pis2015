@@ -338,6 +338,13 @@ es:
       title: "Borrar Nota"
       sure: "¿Esta seguro que desea eliminar esta nota?"
 
+  #Checklist
+  checklist:
+    add_checklist: "Agregar Checklist"
+    add_more_items: "Agregar más objetivos"
+    add_to_project: "Agregar al Proyecto"
+
+
 
   #tags
   tags:

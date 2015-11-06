@@ -16,10 +16,15 @@ class CollectionsController < ApplicationController
 
     @collection.save
 
-    template = Template.find(params[:template])
-    days = params[:days]
-    elem = CollectionTemplate.new(collection: @collection, template: template, days: days)
-    @collection.collection_templates << elem
+    unless params[:collection_templates].nil?
+      params[:collection_templates].each do |t|
+        template = Template.find(t.template)
+        days = t.days
+        elem = CollectionTemplate.new(collection: @collection, template: template, days: days)
+        @collection.collection_templates << elem
+      end
+    end
+
     @collection.save
 
     if @collection.valid?

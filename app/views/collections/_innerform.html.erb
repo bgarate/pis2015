@@ -56,12 +56,14 @@
 <script>
     $("#addTemp").click(function() {
         var select = document.getElementById("tName");
-        var days = document.getElementById("tday");
-        //var tableTemps = document.getElementById("tempTable");
+        var selectValue = select.value;
+        var selectText = select.options[select.selectedIndex].text;
+        var days = document.getElementById("tDay").value;
         var count = document.getElementById("count");
 
         count.value = parseInt(count.value) +1;
 
-        $("#tempTable").append("<div class=\"row\"> <div class=\"form-group col-xs-6\"> <input type=\"text\" name=\"temp0\" value=\"template1\" class=\"form-control\" disabled> </div> <div class=\"form-group col-xs-3\"> <input type=\"number\" name=\"days0\" value=\"0\" class=\"form-control\" disabled> </div> </div>")
+        $("#tempTable").append("<div class=\"row\"> <div class=\"form-group col-xs-6\"> <input type=\"hidden\" name=\"temp"+count.value+"\" value=\""+selectValue+"\"> <input type=\"text\" name=\"temp"+count.value+"Text\" value=\""+selectText+"\" class=\"form-control\" disabled> </div> <div class=\"form-group col-xs-3\"> <input type=\"number\" name=\"days"+count.value+"\" value=\""+days+"\" class=\"form-control\" disabled> </div> </div>")
+
     });
 </script>

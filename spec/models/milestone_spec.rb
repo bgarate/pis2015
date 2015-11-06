@@ -16,6 +16,7 @@
 #  author_id          :integer
 #  completed_date     :date
 #  deleted_date       :date
+#  highlighted        :boolean          default(FALSE), not null
 #
 
 require 'rails_helper'

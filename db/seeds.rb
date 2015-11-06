@@ -117,20 +117,21 @@ tagt.name= 'Destacado'
 
 
 ################# People #################
+tr_id = tr.id
 
-p0 = Person.create!(name: "Alfred", email: "alfred.pis.2015@gmail.com", admin: true,birth_date: 4.years.ago, start_date: 3.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
-p1 = Person.create!(name: "Bruno Garate", email: "bruno.garate@gmail.com", admin: true, start_date: 3.years.ago, image_id: "y5cgoifotmmbkh1l1mn4.jpg")
-p2 = Person.create!(name: "Diego Bortot", email: "bortotdiegogm@gmail.com", admin: true, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg")
-p3 = Person.create!(name: "Oscar Montañés", email: "omontanes@gmail.com", admin: true, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg")
-p3 = Person.create!(name: "Sebastían Soleri", email: "omontanes.guri@gmail.com", admin: false, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg")
-p4 = Person.create!(name: "Gonzalo Herrera", email: "gonzalo.herrera.1993@gmail.com", admin: true, start_date: 2.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
-p5 = Person.create!(name: "Maxi", email: "maxikotvi@gmail.com", admin: false, start_date: 23.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
-p6 = Person.create!(name: "Andy", email: "andresvasilev@gmail.com", admin: false, start_date: 2.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
-p7 = Person.create!(name: "Rodrigo", email: "rodrigoberon2014@gmail.com", admin: false, start_date: 2.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg")
-Person.create!(name: "Martin Cabrera", email: "martin.cabrera@moove-it.com", admin: true, start_date: '2007-01-15', birth_date: '1980-04-16', cellphone: '099143405', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg")
-Person.create!(name: "Andreas Fast", email: "andreas.fast@moove-it.com", admin: true, start_date: '2014-08-15', birth_date: '1990-04-16', cellphone: '099143406', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg")
-Person.create!(name: "Miguel Renom", email: "miguel.renom@moove-it.com", admin: false, start_date: '2014-08-15', birth_date: '1990-04-16', cellphone: '099143406', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg")
-Person.create!(name: "Cecilia Marcora", email: "cecilia.marcora@moove-it.com", admin: true, start_date: '2014-08-15', birth_date: '1990-04-16', cellphone: '099143406', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg")
+p0 = Person.create!(name: "Alfred", email: "alfred.pis.2015@gmail.com", admin: true,birth_date: 4.years.ago, start_date: 3.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
+p1 = Person.create!(name: "Bruno Garate", email: "bruno.garate@gmail.com", admin: true, start_date: 3.years.ago, image_id: "y5cgoifotmmbkh1l1mn4.jpg", tech_role_id: tr_id)
+p2 = Person.create!(name: "Diego Bortot", email: "bortotdiegogm@gmail.com", admin: true, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
+p3 = Person.create!(name: "Oscar Montañés", email: "omontanes@gmail.com", admin: true, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
+p3 = Person.create!(name: "Sebastían Soleri", email: "omontanes.guri@gmail.com", admin: false, start_date: 23.years.ago , image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
+p4 = Person.create!(name: "Gonzalo Herrera", email: "gonzalo.herrera.1993@gmail.com", admin: true, start_date: 2.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
+p5 = Person.create!(name: "Maxi", email: "maxikotvi@gmail.com", admin: false, start_date: 23.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
+p6 = Person.create!(name: "Andy", email: "andresvasilev@gmail.com", admin: false, start_date: 2.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
+p7 = Person.create!(name: "Rodrigo", email: "rodrigoberon2014@gmail.com", admin: false, start_date: 2.years.ago, image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
+Person.create!(name: "Martin Cabrera", email: "martin.cabrera@moove-it.com", admin: true, start_date: '2007-01-15', birth_date: '1980-04-16', cellphone: '099143405', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
+Person.create!(name: "Andreas Fast", email: "andreas.fast@moove-it.com", admin: true, start_date: '2014-08-15', birth_date: '1990-04-16', cellphone: '099143406', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
+Person.create!(name: "Miguel Renom", email: "miguel.renom@moove-it.com", admin: false, start_date: '2014-08-15', birth_date: '1990-04-16', cellphone: '099143406', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
+Person.create!(name: "Cecilia Marcora", email: "cecilia.marcora@moove-it.com", admin: true, start_date: '2014-08-15', birth_date: '1990-04-16', cellphone: '099143406', phone: '27066071', image_id: "lfblntfejcpmmkh0wfny.jpg", tech_role_id: tr_id)
 
 p0.projects << pro
 p0.projects << pro2

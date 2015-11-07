@@ -31,10 +31,16 @@
 
   <div id="tempTable">
     <input type="hidden" id="count" name="count" value="0">
-
+    <small id="empty" style="color: lightgrey"><%= t('templates.addempty') %><br><br></small>
   </div>
 
 
+  <div class="row">
+
+    <div class="form-group col-xs-6">
+      <label class="control-label"> <%= t('templates.add') %></label>
+    </div>
+  </div>
   <div class="row">
     <div class="form-group col-xs-6">
       <%= select_tag(:template, options_from_collection_for_select(@templates, :id, :title), :multiple => false,
@@ -44,7 +50,7 @@
       <%= number_field_tag 'days', 0, in: 0...5000, id: "tDay" %>
     </div>
     <div class="form-group col-xs-3">
-      <p id="addTemp" style="background-color: lightgrey;" ><b>Add</b></p>
+      <p id="addTemp" style="color: green"><span class='large-text glyphicon glyphicon-plus'></span></p>
     </div>
   </div>
 
@@ -55,18 +61,28 @@
 
 <script>
     $("#addTemp").click(function() {
+
+        if ($("#empty").length > 0){
+            $("#empty").remove();
+        }
+
         var select = document.getElementById("tName");
         var selectValue = select.value;
         var selectText = select.options[select.selectedIndex].text;
         var days = document.getElementById("tDay").value;
         var count = document.getElementById("count");
 
-        count.value = parseInt(count.value) +1;
+        if (document.getElementById("tDay").value != ""){
+            count.value = parseInt(count.value) +1;
 
-        $("#tempTable").append("<div class=\"row\" id=\"row"+count.value+"\"> <div class=\"form-group col-xs-6\"> <input type=\"hidden\" name=\"temp"+count.value+"\" value=\""+selectValue+"\"> <input type=\"text\" name=\"temp"+count.value+"Text\" value=\""+selectText+"\" disabled> </div> <div class=\"form-group col-xs-3\"> <input type=\"hidden\" name=\"offset"+count.value+"\" value=\""+days+"\"> <input type=\"text\" name=\"days"+count.value+"\" value=\""+days+"\" disabled> </div> <div class=\"form-group col-xs-3\"> <p class=\"rmTemp\" value=\""+count.value+"\" style=\"background-color: red;\" ><b>Remove</b></p> </div> </div>")
-
+            $("#tempTable").append("<div class=\"row\" id=\"row"+count.value+"\"> <div class=\"form-group col-xs-6\"> <input type=\"hidden\" name=\"temp"+count.value+"\" value=\""+selectValue+"\"> "+selectText+" </div> <div class=\"form-group col-xs-3\"> <input type=\"hidden\" name=\"offset"+count.value+"\" value=\""+days+"\"> "+days+" </div> <div class=\"form-group col-xs-3\"> <p class=\"rmTemp\" value=\""+count.value+"\" style=\"color: red;\" ><span class='glyphicon glyphicon-remove'></span></p> </div> </div>");
+        }
     });
     $(document).on('click', ".rmTemp", function(e) {
         $("#row"+$(this).attr("value")).remove();
+
+        if ($("#tempTable").text().length < 20){
+            $("#tempTable").append("<small id=\"empty\" style=\"color: lightgrey\"><%= t('templates.addempty') %><br><br></small>");
+        }
     });
 </script>

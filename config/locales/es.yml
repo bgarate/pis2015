@@ -195,6 +195,8 @@ es:
 
   #plantillas
   templates:
+    addempty: 'Sin plantillas añadidas'
+    add: 'Añadir plantilla'
     generate:
       header: 'Generar Hito a partir de Plantilla'
       submit: 'Generar'

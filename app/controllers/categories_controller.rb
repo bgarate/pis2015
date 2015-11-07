@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :get_category, only: [:edit,:update]
 
   def index
-    @category = Category.all.order('LOWER(name)')
+    @category = Category.paginate(:page => params[:page], :per_page => 5).order('LOWER(name)')
   end
 
   def new

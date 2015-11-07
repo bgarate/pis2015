@@ -77,7 +77,7 @@ describe CollectionsController, 'Collections Controller' do
     session[:user_id] = @ad_user
 
     get :show, :id=>@c.id
-    expect(response).to render_template('show')
+    expect(response).to redirect_to '/collections/'
   end
 
   it 'Delete collection' do

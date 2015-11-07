@@ -27,14 +27,11 @@ class CollectionsController < ApplicationController
 
     #Agregar Plantillas selecionadas
     (1..Integer(params[:count])).each do |i|
-      puts "\n\n in #{i} \n\n"
       if params["temp#{i}"] && params["offset#{i}"]
         template = Template.find_by(id: params["temp#{i}"])
         days = params["offset#{i}"]
         elem = CollectionTemplate.new(collection: @collection, template: template, days: days)
         @collection.collection_templates << elem
-      else
-        puts "\n\n else #{i} \n\n"
       end
     end
 
@@ -59,7 +56,8 @@ class CollectionsController < ApplicationController
 
 
   def show
-    @templates = @collection.collection_templates
+    #@templates = @collection.collection_templates
+    redirect_to('/collections/')
   end
 
 

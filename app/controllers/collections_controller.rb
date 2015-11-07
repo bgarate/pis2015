@@ -14,14 +14,27 @@ class CollectionsController < ApplicationController
   def create
     @collection = Collection.new(collection_params)
 
-    @collection.save
+    #@collection.save
 
-    unless params[:collection_templates].nil?
-      params[:collection_templates].each do |t|
-        template = Template.find(t[:template])
-        days = t[:days]
+    #unless params[:collection_templates].nil?
+    #  params[:collection_templates].each do |t|
+    #    template = Template.find(t[:template])
+    #    days = t[:days]
+    #    elem = CollectionTemplate.new(collection: @collection, template: template, days: days)
+    #    @collection.collection_templates << elem
+    #  end
+    #end
+
+    #Agregar Plantillas selecionadas
+    (1..Integer(params[:count])).each do |i|
+      puts "\n\n in #{i} \n\n"
+      if params["temp#{i}"] && params["offset#{i}"]
+        template = Template.find_by(id: params["temp#{i}"])
+        days = params["offset#{i}"]
         elem = CollectionTemplate.new(collection: @collection, template: template, days: days)
         @collection.collection_templates << elem
+      else
+        puts "\n\n else #{i} \n\n"
       end
     end
 

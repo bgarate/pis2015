@@ -193,6 +193,8 @@ es:
     delete:
       sure: "¿Está seguro que desea eliminar este proyecto?"
 
+
+
   #plantillas
   templates:
     generate:
@@ -207,6 +209,12 @@ es:
       title: "Borrar Plantilla"
       sure: "¿Esta seguro que desea eliminar esta plantilla permanentemente?"
     see_all: "Ver todas las plantillas"
+
+
+  checklist:
+    add_checklist: "Agregar Checklist"
+    add_more_items: "Agregar más objetivos"
+    add_to_project: "Agregar al Proyecto"
 
   #hitos
   milestones:

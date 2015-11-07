@@ -127,5 +127,18 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def unassign_person
+    pj_id= params[:project_id]
+
+    project= Project.find(pj_id)
+
+
+    project.save!
+
+
+    redirect_to :back
+  end
+
+
 
 end

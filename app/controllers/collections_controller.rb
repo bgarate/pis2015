@@ -3,7 +3,7 @@ class CollectionsController < ApplicationController
   before_action :get_collection, only: [:show, :destroy, :generate]
 
   def get_collection
-    @collection = Collection.find(params[:id])
+    @collection = Collection.find_by(id: params[:id])
   end
 
 
@@ -73,71 +73,73 @@ class CollectionsController < ApplicationController
 
   def generate
     p = Person.find_by(id: params[:person_id])
-    templates = @collection.collection_templates
-    templates.each do |ct|
-      t = Template.find(ct.template_id)
-      days = ct.days
-      if t && p
-        m = Milestone.new
-        m.title= t.title
-        m.description= t.description
-        m.category = t.category
-        m.icon= t.icon
-        m.tags = t.tags
-        m.people<<(p)
+    unless @collection.nil? || p.nil?
+      templates = @collection.collection_templates
+      templates.each do |ct|
+        t = Template.find(ct.template_id)
+        days = ct.days
+        if t && p
+          m = Milestone.new
+          m.title= t.title
+          m.description= t.description
+          m.category = t.category
+          m.icon= t.icon
+          m.tags = t.tags
+          m.people<<(p)
 
-        #AUTHOR
-        m.author_id = current_user.person_id
+          #AUTHOR
+          m.author_id = current_user.person_id
 
-        #DUE_DATE
-        if days > 0
-          m.due_date = Date.today + days
-        end
+          #DUE_DATE
+          if days > 0
+            m.due_date = Date.today + days
+          end
 
-        #Crear documento adjunto
-        if t.resource
-          u = current_user
-          session = GoogleDrive.login_with_oauth(u.oauth_token)
-          begin
-            #traigo el archivo
-            f = session.file_by_url(t.resource.url)
-            #lo copio
-            fuploaded = f.copy("#{m.title}")
-            #agregar permisos a la gente asociada al hito
-            m.people.each do |p|
-              fuploaded.acl.push(
-                  {:type => 'user', :value => p.email, :role => 'writer'})
+          #Crear documento adjunto
+          if t.resource
+            u = current_user
+            session = GoogleDrive.login_with_oauth(u.oauth_token)
+            begin
+              #traigo el archivo
+              f = session.file_by_url(t.resource.url)
+              #lo copio
+              fuploaded = f.copy("#{m.title}")
+              #agregar permisos a la gente asociada al hito
+              m.people.each do |p|
+                fuploaded.acl.push(
+                    {:type => 'user', :value => p.email, :role => 'writer'})
+              end
+
+              #se logro encontrar el resource
+              r = Resource.new
+              r.doc_id= fuploaded.resource_id
+              r.title= fuploaded.title
+              r.url= fuploaded.human_url
+              m.resources<<(r)
+
+            rescue Google::APIClient::ClientError
+              #no se logro encontrar el resorce
+              driveerr = t(:driveerrormsj)
+            rescue GoogleDrive::Error
+              #url no es valida
+              driveerr = t(:invalidurl)
+            rescue URI::InvalidURIError
+              #url no es valida
+              driveerr = t(:invalidurl)
             end
-
-            #se logro encontrar el resource
-            r = Resource.new
-            r.doc_id= fuploaded.resource_id
-            r.title= fuploaded.title
-            r.url= fuploaded.human_url
-            m.resources<<(r)
-
-          rescue Google::APIClient::ClientError
-            #no se logro encontrar el resorce
-            driveerr = t(:driveerrormsj)
-          rescue GoogleDrive::Error
-            #url no es valida
-            driveerr = t(:invalidurl)
-          rescue URI::InvalidURIError
-            #url no es valida
-            driveerr = t(:invalidurl)
           end
-        end
 
-        m.save!
+          m.save!
 
-        if m.valid?
-          if driveerr.nil?
-            flash.notice = "'#{t.title}' " + t('messages.create.success')
+          if m.valid?
+            if driveerr.nil?
+              flash.notice = "'#{t.title}' " + t('messages.create.success')
+            else
+              flash.notice = "'#{t.title}' " + t('messages.create.success') + " \n(#{t(:driveerrormsj)}: #{driveerr})"
+            end
           else
-            flash.notice = "'#{t.title}' " + t('messages.create.success') + " \n(#{t(:driveerrormsj)}: #{driveerr})"
+            flash.alert = "'#{t.title}' " + t('messages.create.error')
           end
-        else
-          flash.alert = "'#{t.title}' " + t('messages.create.error')
         end
       end
     end

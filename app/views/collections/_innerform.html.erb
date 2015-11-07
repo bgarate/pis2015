@@ -13,12 +13,12 @@
     <%= m.text_area :description, class: "form-control", 'data-validation':"required" %>
   </div>
 
-  <div class="row">
+  <!--<div class="row">
     <div class="form-group col-xs-6">
-      <%=  m.label t('icon'), class: "control-label" %>
+      <%  m.label t('icon'), class: "control-label" %>
       <button name="collection[icon]" class="btn btn-default" role="iconpicker" data-icon="glyphicon-flag"></button>
     </div>
-  </div>
+  </div>-->
 
   <div class="row">
     <div class="form-group col-xs-6">
@@ -31,20 +31,26 @@
 
   <div id="tempTable">
     <input type="hidden" id="count" name="count" value="0">
-
+    <small id="empty" style="color: lightgrey"><%= t('templates.addempty') %><br><br></small>
   </div>
 
 
+  <div class="row">
+
+    <div class="form-group col-xs-6">
+      <label class="control-label"> <%= t('templates.add') %></label>
+    </div>
+  </div>
   <div class="row">
     <div class="form-group col-xs-6">
       <%= select_tag(:template, options_from_collection_for_select(@templates, :id, :title), :multiple => false,
                      class: "chzn-select", id: "tName",'data-placeholder'=> t('collections.new.templates.select'), 'style'=> 'width:100%') %>
     </div>
     <div class="form-group col-xs-3">
-      <%= number_field_tag 'days', 0, in: 0...5000, class: "form-control", id: "tDay" %>
+      <%= number_field_tag 'days', 0, in: 0...5000, id: "tDay" %>
     </div>
     <div class="form-group col-xs-3">
-      <p id="addTemp" style="background-color: lightgrey;" ><b>Add</b></p>
+      <p id="addTemp" style="color: green"><span class='large-text glyphicon glyphicon-plus'></span></p>
     </div>
   </div>
 
@@ -55,13 +61,28 @@
 
 <script>
     $("#addTemp").click(function() {
+
+        if ($("#empty").length > 0){
+            $("#empty").remove();
+        }
+
         var select = document.getElementById("tName");
-        var days = document.getElementById("tday");
-        //var tableTemps = document.getElementById("tempTable");
+        var selectValue = select.value;
+        var selectText = select.options[select.selectedIndex].text;
+        var days = document.getElementById("tDay").value;
         var count = document.getElementById("count");
 
-        count.value = parseInt(count.value) +1;
+        if (document.getElementById("tDay").value != ""){
+            count.value = parseInt(count.value) +1;
 
-        $("#tempTable").append("<div class=\"row\"> <div class=\"form-group col-xs-6\"> <input type=\"text\" name=\"temp0\" value=\"template1\" class=\"form-control\" disabled> </div> <div class=\"form-group col-xs-3\"> <input type=\"number\" name=\"days0\" value=\"0\" class=\"form-control\" disabled> </div> </div>")
+            $("#tempTable").append("<div class=\"row\" id=\"row"+count.value+"\"> <div class=\"form-group col-xs-6\"> <input type=\"hidden\" name=\"temp"+count.value+"\" value=\""+selectValue+"\"> "+selectText+" </div> <div class=\"form-group col-xs-3\"> <input type=\"hidden\" name=\"offset"+count.value+"\" value=\""+days+"\"> "+days+" </div> <div class=\"form-group col-xs-3\"> <p class=\"rmTemp\" value=\""+count.value+"\" style=\"color: red;\" ><span class='glyphicon glyphicon-remove'></span></p> </div> </div>");
+        }
+    });
+    $(document).on('click', ".rmTemp", function(e) {
+        $("#row"+$(this).attr("value")).remove();
+
+        if ($("#tempTable").text().length < 20){
+            $("#tempTable").append("<small id=\"empty\" style=\"color: lightgrey\"><%= t('templates.addempty') %><br><br></small>");
+        }
     });
 </script>

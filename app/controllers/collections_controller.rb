@@ -14,12 +14,22 @@ class CollectionsController < ApplicationController
   def create
     @collection = Collection.new(collection_params)
 
-    @collection.save
+    #@collection.save
 
-    unless params[:collection_templates].nil?
-      params[:collection_templates].each do |t|
-        template = Template.find(t[:template])
-        days = t[:days]
+    #unless params[:collection_templates].nil?
+    #  params[:collection_templates].each do |t|
+    #    template = Template.find(t[:template])
+    #    days = t[:days]
+    #    elem = CollectionTemplate.new(collection: @collection, template: template, days: days)
+    #    @collection.collection_templates << elem
+    #  end
+    #end
+
+    #Agregar Plantillas selecionadas
+    (1..Integer(params[:count])).each do |i|
+      if params["temp#{i}"] && params["offset#{i}"]
+        template = Template.find_by(id: params["temp#{i}"])
+        days = params["offset#{i}"]
         elem = CollectionTemplate.new(collection: @collection, template: template, days: days)
         @collection.collection_templates << elem
       end
@@ -46,7 +56,8 @@ class CollectionsController < ApplicationController
 
 
   def show
-    @templates = @collection.collection_templates
+    #@templates = @collection.collection_templates
+    redirect_to('/collections/')
   end
 
 

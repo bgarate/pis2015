@@ -628,3 +628,8 @@ es:
       change_role_event:
         title: "%{person} es ahora %{new_role}"
         description: "%{person} pasó de %{old_role} a %{new_role}"
+
+
+  will_paginate:
+    previous_label: "Página anterior"
+    next_label: "Página siguiente"

@@ -8,7 +8,7 @@ module PersonHelper
     if id
       id
     else
-      "lfblntfejcpmmkh0wfny.jpg"
+      PeopleController::DEFAULT_IMAGE_ID
     end
   end
 

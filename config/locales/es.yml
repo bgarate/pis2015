@@ -193,6 +193,12 @@ es:
     delete:
       sure: "¿Está seguro que desea eliminar este proyecto?"
 
+    checklist:
+      add_checklist: "Agregar Checklist de Objetivos"
+      add_more_items: "Agregar más objetivos"
+      add_to_project: "Agregar al Proyecto"
+      actual_objetives: "Objetivos"
+
 
 
   #plantillas
@@ -211,10 +217,7 @@ es:
     see_all: "Ver todas las plantillas"
 
 
-  checklist:
-    add_checklist: "Agregar Checklist"
-    add_more_items: "Agregar más objetivos"
-    add_to_project: "Agregar al Proyecto"
+
 
   #hitos
   milestones:

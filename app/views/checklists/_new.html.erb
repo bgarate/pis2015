@@ -1,7 +1,7 @@
 
 <div class="card-col col-xs-12">
   <label>
-    <%= t('project.people.title') %>
+    <%= t('project.checklist.add_checklist') %>
   </label>
   <%= form_for :person, url: people_path, html: { 'data-toggle': 'validator'} do |f| %>
       <div class="input_fields_wrap">
@@ -9,7 +9,23 @@
         <div class="input-container"><input class="form-control checklist-input" type="text" name="mytext[]"></div>
       </div>
       <br>
-      <%= button_tag t('checklist.add_more_items'),options= :type => '#', class: "btn btn-sm btn-primary add_field_button" %>
-      <%= f.button t('people.new.submit'), options= :type => 'submit', class: "btn btn-sm btn-primary" %>
+      <%= button_tag t('project.checklist.add_more_items'),options= :type => '#', class: "btn btn-sm btn-primary add_field_button" %>
+      <%= f.button t('project.checklist.add_to_project'), options= :type => 'submit', class: "btn btn-sm btn-primary" %>
   <% end %>
+</div>
+
+<div class="card-col col-xs-12">
+  <label>
+    <%= t('project.checklist.actual_objetives') %>
+  </label>
+  <div class="list-group">
+    <del><a href="#" class="list-group-item disabled tached">
+      Cras justo odio
+    </a>
+    </del>
+    <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+    <a href="#" class="list-group-item">Morbi leo risus</a>
+    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+    <a href="#" class="list-group-item">Vestibulum at eros</a>
+  </div>
 </div>

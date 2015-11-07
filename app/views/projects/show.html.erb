@@ -67,7 +67,7 @@
                   <li>
                     <%= link_to t.name, t %>
                     <%= link_to  controller: 'projects', action: 'unassign_person' ,project_id: @project.id, person_id: t.id do %>
-                        <span class='large-text glyphicon glyphicon-remove'></span>
+                        <span class='glyphicon glyphicon-remove'></span>
                     <% end%>
                   </li>
               <% end %>
@@ -89,7 +89,7 @@
                             <option value= <%=p.id%> > <%=p.name%></option>
                         <% end %>
                       </select>
-                      <%= button_tag t('project.assign.submit'), :type => 'submit', id: "buttonTwo" %>
+                      <%= button_tag t('project.assign.submit'), :type => 'submit', class:"btn btn-xs btn-primary" %>
                   <% end %>
               <% end%>
             </td>
@@ -103,9 +103,7 @@
 
           </tbody>
         </table>
-        <%= link_to '/projects' do%>
-            <button type="button"  class="btn btn-default btn-xs"><span class="glyphicon glyphicon-th-list"></span>  <%=t("project.index.header")%></button>
-        <%end%>
+
       </div>
     </div>
   </div>

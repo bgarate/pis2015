@@ -80,7 +80,7 @@ class TemplatesController < ApplicationController
   end
 
   def index
-    @template= Template.all.order('LOWER(title)')
+    @template= Template.paginate(:page => params[:page], :per_page => 10).order('LOWER(title)')
     respond_to do |f|
       f.json { render json: name_and_path(@template)}
       f.html { render }

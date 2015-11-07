@@ -20,7 +20,8 @@ class PeopleController < ApplicationController
 
   def index
 
-    @people = Person.all.order('LOWER(name)')
+    #@people = Person.all.order('LOWER(name)')
+    @people = Person.paginate(:page => params[:page], :per_page => 5).order('LOWER(name)')
 
     respond_to do |f|
 

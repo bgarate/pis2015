@@ -53,6 +53,10 @@ gem 'cloudinary'
 #Translate support in js
 gem "i18n-js", ">= 3.0.0.rc11"
 
+
+# Pagination
+gem 'will_paginate'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -66,7 +66,7 @@ describe CollectionsController, 'Collections Controller' do
     t2.save!
 
     get :new
-    post :create, {:person_id=>@admin.id, :count=>0, :collection=>{:title=>'milestone1', :description=>'unadescripcionde1', :icon=>'glyphicon-flag'},
+    post :create, {:person_id=>@admin.id,  "count"=>"2", "temp1"=>"2", "offset1"=>"0", "temp2"=>"1", "offset2"=>"0", :collection=>{:title=>'milestone1', :description=>'unadescripcionde1', :icon=>'glyphicon-flag'},
                    :collection_templates=>[{:template=>t.id, :days=>3}, {:template=>t2.id, :days=>1}]}
     expect(response.status).to eq(302)
 

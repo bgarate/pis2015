@@ -223,6 +223,8 @@
             $('.progress-bar').css('width', Math.round((data.loaded * 100.0) / data.total) + '%');
         });
 
+        $('.cloudinary-fileupload').attr('accept','image/*')
+
         $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 
     };

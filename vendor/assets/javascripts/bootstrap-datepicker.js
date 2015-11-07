@@ -1406,7 +1406,7 @@
 					this.setValue();
 					this.fill();
 					if (this.picker.is(':visible')){
-						e.preventDefault();
+						//e.preventDefault();
 						if (typeof e.stopPropagation === 'function') {
 							e.stopPropagation(); // All modern browsers, IE9+
 						} else {

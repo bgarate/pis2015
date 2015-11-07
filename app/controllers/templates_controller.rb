@@ -8,7 +8,7 @@ class TemplatesController < ApplicationController
 
     #redirect_to '/people'
     @cats=Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
-    @tags=Tag.all.order('LOWER(name)')
+    @tags=Tag.where(validity: 'true').order('LOWER(name)')
 
     if (params[:redirect_url])
       @redirect_url = params[:redirect_url]

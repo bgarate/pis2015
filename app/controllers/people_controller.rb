@@ -59,7 +59,7 @@ class PeopleController < ApplicationController
       @cats = Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
 
       @authors = Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
-      @tags = Tag.all.order('LOWER(name)')
+      @tags = Tag.where(validity: 'true').order('LOWER(name)')
 
       #rol tecnico
       @trole = ''
@@ -127,7 +127,7 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
-    @roles=TechRole.all.order('LOWER(name)')
+    @roles=TechRole.where(validity: 'true').order('LOWER(name)')
   end
 
   def create
@@ -172,7 +172,7 @@ class PeopleController < ApplicationController
       flash.alert= t('not_authorized')
       redirect_to people_path
     end
-    @roles=TechRole.all.order('LOWER(name)')
+    @roles=TechRole.where(validity: 'true').order('LOWER(name)')
   end
 
   def update
@@ -265,7 +265,7 @@ class PeopleController < ApplicationController
   def name_and_path (people)
 
     people.map do |p|
-      {"name" => p.name, "url" => person_path(p)}
+      {"photo" => p.image_id,"name" => p.name, "url" => person_path(p)}
     end
 
   end

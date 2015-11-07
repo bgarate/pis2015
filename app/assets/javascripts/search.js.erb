@@ -35,7 +35,7 @@ function search_ready(){
 
     $("#nav-search").typeahead({
         minLength: 1,
-        highlight: true
+        highlight: true,
     },
     {
         name: 'commands',
@@ -50,7 +50,13 @@ function search_ready(){
         displayKey: 'name',
         source: people,
         templates: {
-            header: "<div class='search-header'>Personas</div>"
+            header: "<div class='search-header'>Personas</div>",
+            suggestion: function(data) {
+                return "<div class='search-result clearfix'>" +
+                        "   <img src='http://res.cloudinary.com/hx9jq2ajv/image/upload/" + data.photo + "' class='search-image'/>" +
+                        "   <span>" + truncate(data.name) + "</span>" +
+                        "</div>"
+            }
         }
     },
     {
@@ -58,7 +64,13 @@ function search_ready(){
         displayKey: 'name',
         source: milestones,
         templates: {
-            header: "<div class='search-header'>Hitos</div>"
+            header: "<div class='search-header'>Hitos</div>",
+            suggestion: function(data) {
+                return "<div class='search-result clearfix'>" +
+                        "   <span class='glyphicon " + data.icon + "'></span>" +
+                        "   <span>" + truncate(data.name) + "</span>" +
+                        "</div>"
+            }
         }
     },
     {
@@ -77,3 +89,9 @@ function search_ready(){
 }
 
 $().ready(search_ready);
+
+function truncate(str, length, elipsis) {
+    length = typeof length === 'undefined' ? 20 : length
+    elipsis = typeof elipsis === 'undefined' ? "..." : elipsis
+    return str.length <= length ? str : str.substring(0, length - elipsis.length) + elipsis;
+}

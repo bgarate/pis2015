@@ -7,6 +7,7 @@
 #  icon       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  validity   :boolean          default(TRUE), not null
 #
 
 class TechRole < ActiveRecord::Base

@@ -1,9 +1,3 @@
-<style>
-  h2 {
-    position: relative;
-    left: 25px;
-  }
-</style>
 <% if @milestones and not @milestones.empty? %>
     <div id="timeline-card" class="card timeline">
       <ul id="milestone-list">
@@ -27,7 +21,7 @@
                       <span class="milestone-highlight small false"></span>
                     <%end%>
                   <%end%>
-                    <h2><%=link_to e.title, e, method: :get%></h2>
+                    <h2 class="title"><%=link_to e.title, e, method: :get%></h2>
                 <%else%>
                     <% if can_modify_milestone?e.id %>
                       <%= milestone_highlight(e)%>
@@ -38,7 +32,7 @@
                         <span class="milestone-highlight small false"></span>
                       <%end%>
                     <%end%>
-                    <strike><h2><%=link_to e.title, e, method: :get%></h2></strike>
+                    <strike><h2 class="title"><%=link_to e.title, e, method: :get%></h2></strike>
                 <%end%>
               </div>
               <div class="col-xs-2">
@@ -100,7 +94,7 @@
                       <div class="form-group col-xs-6">
                         <%= f.label t('milestones.start_date'), class: "control-label" %>
                         <div class="input-group">
-                          <%= f.text_field :start_date, class: "form-control", id:'start_date' ,value:(@milestone.start_date ? l(@milestone.start_date) : nil), "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
+                          <%= f.text_field :start_date, class: "form-control submit-on-enter", id:'start_date' ,value:(@milestone.start_date ? l(@milestone.start_date) : nil), "data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy" %>
                           <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
                         </div>
                       </div>
@@ -108,15 +102,10 @@
                       <div class="form-group col-xs-6">
                         <%= f.label t('milestones.due_date'), class: "control-label" %>
                         <div class="input-group">
-                          <%= f.text_field :due_date, class: "form-control" , id:'due_date',value:(@milestone.due_date ? l(@milestone.due_date) : nil) ,"data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy" %>
+                          <%= f.text_field :due_date, class: "form-control submit-on-enter" , id:'due_date',value:(@milestone.due_date ? l(@milestone.due_date) : nil) ,"data-provide":"datepicker", 'data-validation':'check_due_date', 'data-validation-format': "dd/mm/yyyy" %>
                           <div class="input-group-addon"><span class="glyphicon glyphicon-th" aria-hidden="true"></span></div>
                         </div>
                       </div>
-
-                      <div class="btn pull-right">
-                        <%= f.button t('milestones.edit.submit'),:type => 'submit', class: "btn btn-default" %>
-                      </div>
-
 
                       </div>
 
@@ -154,7 +143,7 @@
                           <%=link_to  r.url, :target => "_blank" do%>
                               <span class="glyphicon glyphicon glyphicon-paperclip"></span>
                               &nbsp;&nbsp;
-                              <%= r.title.truncate(55) %>
+                              <%= r.title.truncate(48) %>
                           <% end %>
                           <br>
                       <%end%>

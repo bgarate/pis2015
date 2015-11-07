@@ -1,13 +1,22 @@
 class TechRolesController < ApplicationController
 
   skip_before_action :admin?, only:[:show, :index]
+  before_action :get_tech_role, only:[:edit, :update, :destroy]
+
+  def get_tech_role
+    @techRole = TechRole.find_by(id: params[:id])
+    unless @techRole && @techRole.validity?
+      redirect_to tech_roles_path
+    end
+  end
+
 
   def index
-    @techRoles=TechRole.all.order('LOWER(name)')
+    @techRoles=TechRole.where(validity: 'true').order('LOWER(name)')
   end
 
   def edit
-    @techRole = TechRole.find_by(id: params[:id])
+
   end
 
   def new
@@ -30,7 +39,6 @@ class TechRolesController < ApplicationController
   end
 
   def update
-    @techRole = TechRole.find_by(id: params[:id])
     if @techRole.update(tech_role_params)
       flash.notice = "#{tech_role_params[:name]} " + t('messages.save.success')
       redirect_to tech_roles_path
@@ -41,10 +49,10 @@ class TechRolesController < ApplicationController
   end
 
   def destroy
-    @techRole = TechRole.find_by(id: params[:id])
     if @techRole
       name = @techRole.name
-      @techRole.destroy
+      @techRole.validity = false
+      @techRole.save
       flash.notice = "#{name} " + t('messages.delete.success')
     end
     redirect_to tech_roles_path

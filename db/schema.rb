@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151101194215) do
+ActiveRecord::Schema.define(version: 20151106220324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -183,7 +183,8 @@ ActiveRecord::Schema.define(version: 20151101194215) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "name"
+    t.string  "name"
+    t.boolean "validity", default: true, null: false
   end
 
   create_table "tags_templates", id: false, force: :cascade do |t|
@@ -198,8 +199,9 @@ ActiveRecord::Schema.define(version: 20151101194215) do
   create_table "tech_roles", force: :cascade do |t|
     t.string   "name"
     t.string   "icon"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "validity",   default: true, null: false
   end
 
   add_index "tech_roles", ["name"], name: "index_tech_roles_on_name", unique: true, using: :btree

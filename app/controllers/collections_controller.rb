@@ -93,6 +93,8 @@ class CollectionsController < ApplicationController
           #DUE_DATE
           if days > 0
             m.due_date = Date.today + days
+          elsif days == 0
+            m.due_date = Date.today
           end
 
           #Crear documento adjunto
@@ -129,16 +131,38 @@ class CollectionsController < ApplicationController
             end
           end
 
+          #Crear eventos en google calendar
+          client = Google::APIClient.new
+          client.authorization.access_token = current_user.oauth_token
+          service = client.discovered_api('calendar', 'v3')
+          if m.due_date && (!m.start_date || m.start_date != m.due_date)
+
+            @event = {
+                'summary' => "#{m.title} - Fin (Alfred)",
+                'description' => m.description,
+                'start' => { 'date' => m.due_date },
+                'end' => { 'date' => m.due_date },
+                'attendees' => [] }
+            for i in 0..(m.people.count-1)
+              @event['attendees'][i]={ "email" => m.people[i].email }
+            end
+
+            @set_event = client.execute(:api_method => service.events.insert,
+                                        :parameters => {'calendarId' => current_person.email, 'sendNotifications' => true},
+                                        :body => JSON.dump(@event),
+                                        :headers => {'Content-Type' => 'application/json'})
+          end
+
           m.save!
 
           if m.valid?
             if driveerr.nil?
-              flash.notice = "'#{t.title}' " + t('messages.create.success')
+              flash.notice = t('collections.generate.success')
             else
-              flash.notice = "'#{t.title}' " + t('messages.create.success') + " \n(#{t(:driveerrormsj)}: #{driveerr})"
+              flash.notice = t('collections.generate.success') + " \n(#{t(:driveerrormsj)}: #{driveerr})"
             end
           else
-            flash.alert = "'#{t.title}' " + t('messages.create.error')
+            flash.alert = t('collections.generate.error')
           end
         end
       end

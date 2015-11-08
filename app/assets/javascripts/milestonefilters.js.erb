@@ -1,75 +1,101 @@
 var milestonefilters_ready = function() {
-    //Plugin filtro por rango de fechas en Datatable
-    $.fn.dataTableExt.afnFiltering.push(
-            function( oSettings, aData, iDataIndex ) {
-                var iDueFrom= document.getElementById('due_date_from').value;
-                var iDueTo = document.getElementById('due_date_to').value;
-                var iDueDateCol = $('.datatable#hitos th#due_date').index(); //7 es la de due_date
-                var iEndDateCol = 7;
-                //console.log ('indice due_date:' + $('.datatable#hitos th#due_date').index());
-
-                // toma dd*mm*yyyy y convierte a yyyymmdd
-                iDueFrom=iDueFrom.substring(6,10) + iDueFrom.substring(3,5)+ iDueFrom.substring(0,2);
-                iDueTo=iDueTo.substring(6,10) + iDueTo.substring(3,5)+ iDueTo.substring(0,2);
-//                    console.log ('Datos: ' +aData[iStartDateCol] + ' ' + aData[iEndDateCol]);
-
-                // toma yyyy*mm*dd y convierte a yyyymmdd
-                var datofdue=aData[iDueDateCol].substring(0,4) + aData[iDueDateCol].substring(5,7)+ aData[iDueDateCol].substring(8,10);
-//                    var datoffin=aData[iEndDateCol].substring(0,4) + aData[iEndDateCol].substring(5,7)+ aData[iEndDateCol].substring(8,10);
-
-                //si es en una sola columna se puede eliminar uno de los datofXXX
-//                console.log (datofdue);
-                if ( iDueFrom === "" && iDueTo === "" )
-                {
-                    return true;
-                }
-                else if ( datofdue==0) //hay algun filtro, pero no hay dato
-                {
-                    return false;
-                }
-                else if ( iDueFrom <= datofdue && iDueTo === "")
-                {
-                    return true;
-                }
-                else if ( iDueTo >= datofdue && iDueFrom === "")
-                {
-                    return true;
-                }
-                else if (iDueFrom <= datofdue && iDueTo >= datofdue)
-                {
-                    return true;
-                }
-                return false;
-            }
-    );
     var tabla = $('#hitos').DataTable({
-        paging: false,
+        "processing": true,
+        paging: true,
+        serverSide: true,
+        ajax: {
+            url: '/milestones/report',
+            type: 'POST',
+            "data": function ( d ) {
+                d.due_date_from = $('.milestone-filters #due_date_from').val();
+                d.due_date_to = $('.milestone-filters #due_date_to').val();
+            }
+        },
         order: [],
-        "columnDefs": [
-            { "width": "30px", "targets": 'status_col' }
+        "dom": 'lrtip',
+        "columns": [
+            {"data":"status"        },
+            {"data":"title"         }     ,
+            {"data":"description"   },
+            {"data":"categories"    }    ,
+            {"data":"people"        },
+            {"data":"tags"          }     ,
+            {"data":"start_date"    },
+            {"data":"due_date"      }     ,
+            {"data":"completed_date"      }      ,
+            {"data":"actions"   }
         ],
-        "language": {
-            "search": ""
+        "columnDefs": [
+            {"name":"status"        , "targets":"status_col"},
+            {"name":"title"         ,"targets":"title"}     ,
+            {"name":"description"   , "targets":"description"},
+            {"name":"categories"    ,"targets":"categories"}    ,
+            {"name":"people"        ,"orderable": false,"targets":"people"},
+            {"name":"tags"          ,"orderable": false,"targets":"tags"}     ,
+            {"name":"start_date"    ,"targets":"start_date"},
+            {"name":"due_date"      ,"targets":"due_date"}     ,
+            {"name":"completed_date","targets":"completed_date"}      ,
+            {"name":"actions"       ,"orderable": false,"targets":"actions"}
+        ]
+        <% if I18n.locale == :es %>
+            ,
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            }
+        <% end %>
+
+    });
+
+    $('.milestone-filters').on("keypress", function (e) {
+        var code = e.keyCode || e.which;
+        if (code == 13) {
+            e.preventDefault();
+            return false;
         }
     });
 
-
     //filtro de fechas
-    $( '.milestone-filters #due_date_from,.milestone-filters #due_date_to' ).on( 'change', function (ev) {
+    $( '.milestone-filters #due_date_from,.milestone-filters #due_date_to' ).on( 'changeDate clearDate', function (ev,d) {
 //            if (ev.keyCode == 13) {
-        tabla.draw();
 
+        if ((this.value.length == 0) || (this.value.length == 10)) {
+            tabla.draw();
+        }
 //            }
     } );
 
     //filtros select
     $( '.milestone-filters #tagsfilter' ).on( 'keydown change', function (ev) {
-        var that = tabla.column('#tags');
+        var that = tabla.column('.tags');
 
         var str = "";
         //$( "#tagsfilter option:selected" ).each(function() {
         $(this).find('option').filter(":selected" ).each(function() {
-            str += $( this ).text() + " ";
+            if (str.length > 0) {
+                str += ',';
+            }
+            str += $( this ).val();
         });
 //            console.log ('Parseado:' + str);
         if ( that.search() !== str ) {
@@ -80,10 +106,13 @@ var milestonefilters_ready = function() {
         }
     });
     $( '.milestone-filters #peoplefilter' ).on( 'keydown change', function (ev) {
-        var that = tabla.column('#people');
+        var that = tabla.column('.people');
         var str = "";
         $(this).find('option').filter(":selected" ).each(function() {
-            str += $( this ).text() + " ";
+            if (str.length > 0) {
+                str += ',';
+            }
+            str += $( this ).val();
         });
 
         if ( that.search() !== str ) {
@@ -95,7 +124,7 @@ var milestonefilters_ready = function() {
 
     });
     $( '.milestone-filters #categoriesfilter' ).on( 'keydown change', function (ev) {
-        var that = tabla.column('#categories');
+        var that = tabla.column('.categories');
         if ( that.search() !== this.value ) {
 
             that
@@ -104,9 +133,32 @@ var milestonefilters_ready = function() {
         }
 
     });
+
+    $( '.milestone-filters #statusfilter' ).on( 'keydown change', function (ev) {
+        var that = tabla.column('.status');
+        if ( that.search() !== this.value ) {
+
+            that
+                    .search( this.value )
+                    .draw();
+        }
+
+    });
+    $( '.milestone-filters #titulofilter' ).on( 'keydown change', function (ev) {
+        if ((this.value.length == 0) || (this.value.length >= 3)) {
+            var that = tabla.column('.title');
+            if (that.search() !== this.value) {
+
+                that
+                        .search(this.value)
+                        .draw();
+            }
+        }
+    });
+
     $('#reset_filters').click(function(){
         $(".chosen").val('').trigger("chosen:updated");
-        $( '.milestone-filters #due_date_from,.milestone-filters #due_date_to').val('');
+        $( '.milestone-filters').find('#due_date_from,#due_date_to,#titulofilter').val('');
         tabla.search('').columns().search('');
         tabla.draw();
     });

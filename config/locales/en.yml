@@ -57,6 +57,12 @@ en:
   icon: 'Icon'
   tags: 'Tags'
   actions: 'Actions'
+  status: 'Status'
+  start_date: 'Start date'
+  due_date: 'Due date'
+  completed_date: 'Done date'
+  created_at: 'Created at'
+  updated_at: 'Updated at'
 
   common:
     y: 'Yes'
@@ -236,7 +242,7 @@ en:
     author: "Author"
     done_date: "Done on: "
     rejected_date: "Rejected on: "
-    mod_date: "Done/ rejected on"
+    mod_date: "Done on"
 
     highlighted: "highlighted"
     not_highlighted: "not highlighted"
@@ -247,6 +253,8 @@ en:
     state:
       done_or_rejected: 'Finalized'
       pending: 'Pending'
+      done: 'Done'
+      rejected: 'Rejected'
     mark_as_sure: 'Are you sure you want to mark the milestone as '
     pendings: "Pending Milestones"
     overcomes: 'Expired milestones'
@@ -257,7 +265,7 @@ en:
     status: "Status"
     assigned: " will be assigned by default"
     assigned_to: "Assigned to this milestone"
-    zero: "No hay hitos que mostrar"
+    zero: "No milestones to show"
 
     no_tech_role: "No tech role"
 
@@ -278,6 +286,7 @@ en:
 
     see_all: "See all milestones"
 
+    download_csv: 'Download CSV'
 
 
   #dashboard

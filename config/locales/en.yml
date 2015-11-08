@@ -234,7 +234,7 @@ en:
     author: "Author"
     done_date: "Done on: "
     rejected_date: "Rejected on: "
-    mod_date: "Done/ rejected on"
+    mod_date: "Done on"
 
     highlighted: "highlighted"
     not_highlighted: "not highlighted"

@@ -56,6 +56,12 @@ es:
   reset: 'Limpiar'
   icon: 'Icono'
   actions: 'Acciones'
+  status: 'Estado'
+  start_date: 'Fecha inicio'
+  due_date: 'Fecha límite'
+  completed_date: 'Fecha hecho'
+  created_at: 'Creado en'
+  updated_at: 'Modificado en'
 
   common:
     y: 'Sí'
@@ -235,7 +241,7 @@ es:
     author: "Autor"
     done_date: "Completado el día: "
     rejected_date: "Rechazado el día: "
-    mod_date: "Fecha hecho/ rechazado"
+    mod_date: "Fecha hecho"
 
     highlighted: "destacado"
     not_highlighted: "no destacado"
@@ -243,8 +249,10 @@ es:
     actions: "Acciones"
 
     state:
-      done_or_rejected: 'Finalizados'
-      pending: 'Pendientes'
+      done_or_rejected: 'Finalizado'
+      pending: 'Pendiente'
+      done: 'Finalizado'
+      rejected: 'Rechazado'
     mark_as_sure: '¿Está seguro que desea marcar el hito como '
     pendings: "Hitos pendientes"
     overcomes: 'Hitos vencidos'

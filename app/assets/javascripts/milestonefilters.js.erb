@@ -1,47 +1,4 @@
 var milestonefilters_ready = function() {
-    //Plugin filtro por rango de fechas en Datatable
-//    $.fn.dataTableExt.afnFiltering.push(
-//            function( oSettings, aData, iDataIndex ) {
-//                var iDueFrom= document.getElementById('due_date_from').value;
-//                var iDueTo = document.getElementById('due_date_to').value;
-//                var iDueDateCol = $('.datatable#hitos th#due_date').index(); //7 es la de due_date
-//                var iEndDateCol = 7;
-//                //console.log ('indice due_date:' + $('.datatable#hitos th#due_date').index());
-//
-//                // toma dd*mm*yyyy y convierte a yyyymmdd
-//                iDueFrom=iDueFrom.substring(6,10) + iDueFrom.substring(3,5)+ iDueFrom.substring(0,2);
-//                iDueTo=iDueTo.substring(6,10) + iDueTo.substring(3,5)+ iDueTo.substring(0,2);
-////                    console.log ('Datos: ' +aData[iStartDateCol] + ' ' + aData[iEndDateCol]);
-//
-//                // toma yyyy*mm*dd y convierte a yyyymmdd
-//                var datofdue=aData[iDueDateCol].substring(0,4) + aData[iDueDateCol].substring(5,7)+ aData[iDueDateCol].substring(8,10);
-////                    var datoffin=aData[iEndDateCol].substring(0,4) + aData[iEndDateCol].substring(5,7)+ aData[iEndDateCol].substring(8,10);
-//
-//                //si es en una sola columna se puede eliminar uno de los datofXXX
-////                console.log (datofdue);
-//                if ( iDueFrom === "" && iDueTo === "" )
-//                {
-//                    return true;
-//                }
-//                else if ( datofdue==0) //hay algun filtro, pero no hay dato
-//                {
-//                    return false;
-//                }
-//                else if ( iDueFrom <= datofdue && iDueTo === "")
-//                {
-//                    return true;
-//                }
-//                else if ( iDueTo >= datofdue && iDueFrom === "")
-//                {
-//                    return true;
-//                }
-//                else if (iDueFrom <= datofdue && iDueTo >= datofdue)
-//                {
-//                    return true;
-//                }
-//                return false;
-//            }
-//    );
     var tabla = $('#hitos').DataTable({
         "processing": true,
         paging: true,
@@ -52,11 +9,10 @@ var milestonefilters_ready = function() {
             "data": function ( d ) {
                 d.due_date_from = $('.milestone-filters #due_date_from').val();
                 d.due_date_to = $('.milestone-filters #due_date_to').val();
-                // d.custom = $('#myInput').val();
-                // etc
             }
         },
         order: [],
+        "dom": 'lrtip',
         "columns": [
             {"data":"status"        },
             {"data":"title"         }     ,
@@ -66,7 +22,7 @@ var milestonefilters_ready = function() {
             {"data":"tags"          }     ,
             {"data":"start_date"    },
             {"data":"due_date"      }     ,
-            {"data":"mod_date"      }      ,
+            {"data":"completed_date"      }      ,
             {"data":"actions"   }
         ],
         "columnDefs": [
@@ -74,27 +30,33 @@ var milestonefilters_ready = function() {
             {"name":"title"         ,"targets":"title"}     ,
             {"name":"description"   , "targets":"description"},
             {"name":"categories"    ,"targets":"categories"}    ,
-            {"name":"people"        ,"targets":"people"},
-            {"name":"tags"          ,"targets":"tags"}     ,
+            {"name":"people"        ,"orderable": false,"targets":"people"},
+            {"name":"tags"          ,"orderable": false,"targets":"tags"}     ,
             {"name":"start_date"    ,"targets":"start_date"},
             {"name":"due_date"      ,"targets":"due_date"}     ,
-            {"name":"mod_date"      ,"targets":"mod_date"}      ,
-            {"name":"actions"       ,"targets":"actions"}
+            {"name":"completed_date","targets":"completed_date"}      ,
+            {"name":"actions"       ,"orderable": false,"targets":"actions"}
         ],
         "language": {
             "search": ""
         }
     });
 
-//    tabla.on( 'draw.dt', function () {
-//        console.log( 'Redraw occurred at: '+new Date().getTime() );
-//    } );
+    $('.milestone-filters').on("keypress", function (e) {
+        var code = e.keyCode || e.which;
+        if (code == 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
 
     //filtro de fechas
-    $( '.milestone-filters #due_date_from,.milestone-filters #due_date_to' ).on( 'change', function (ev) {
+    $( '.milestone-filters #due_date_from,.milestone-filters #due_date_to' ).on( 'changeDate clearDate', function (ev,d) {
 //            if (ev.keyCode == 13) {
-        tabla.draw();
 
+        if ((this.value.length == 0) || (this.value.length == 10)) {
+            tabla.draw();
+        }
 //            }
     } );
 
@@ -146,9 +108,32 @@ var milestonefilters_ready = function() {
         }
 
     });
+
+    $( '.milestone-filters #statusfilter' ).on( 'keydown change', function (ev) {
+        var that = tabla.column('.status');
+        if ( that.search() !== this.value ) {
+
+            that
+                    .search( this.value )
+                    .draw();
+        }
+
+    });
+    $( '.milestone-filters #titulofilter' ).on( 'keydown change', function (ev) {
+        if ((this.value.length == 0) || (this.value.length >= 3)) {
+            var that = tabla.column('.title');
+            if (that.search() !== this.value) {
+
+                that
+                        .search(this.value)
+                        .draw();
+            }
+        }
+    });
+
     $('#reset_filters').click(function(){
         $(".chosen").val('').trigger("chosen:updated");
-        $( '.milestone-filters #due_date_from,.milestone-filters #due_date_to').val('');
+        $( '.milestone-filters').find('#due_date_from,#due_date_to,#titulofilter').val('');
         tabla.search('').columns().search('');
         tabla.draw();
     });

@@ -60,23 +60,5 @@ class CategoriesController < ApplicationController
     params.require(:category).permit(:name, :icon, :created_at, :updated_at,:doc_url,:is_feedback)
   end
 
-  private
-  def check_doc
-
-    session = GoogleDrive.login_with_oauth(current_user.oauth_token)
-    begin
-    f = session.file_by_url(url)
-
-    #se logro encontrar el resource
-    rescue Google::APIClient::ClientError
-    #no se logro encontrar el resorce
-    rescue GoogleDrive::Error
-    #url no es valida
-
-    rescue URI::InvalidURIError
-    #url no es valida
-    end
-
-  end
 
 end

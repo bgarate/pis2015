@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="table-container">
+        <h1>
+          <%= link_to new_collection_path do%>
+              <span class='large-text glyphicon glyphicon-plus table-add-button pull-left'>  </span>
+          <% end %>
+          <%= t('collections.header') %></h1>
+        <table class="table datatable table-striped" id="colecciones" data-info="false">
+          <thead>
+          <tr>
+            <td class="title_row" ><%= t('title') %></td>
+            <td class="description_row"><%= t('description') %></td>
+            <td class="description_row"><%= t('collections.templates') %></td>
+            <td><%= t('actions') %></td>
+          </tr>
+          </thead>
+          <tbody>
+          <% @collections.each do |m| %>
+              <tr>
+                <td class="description_row">
+                  <% link_to m.title, collection_path(m), method: :get %>
+                  <%=m.title%>
+                </td>
+                <td class="description_row">
+                  <%= m.description %>
+                </td>
+
+                <td>
+                  <ul>
+                  <% m.collection_templates.each do |c| %>
+                    <li><%= "#{c.template.title} (#{c.days})" %></li>
+                  <% end %>
+                  </ul>
+                </td>
+                <td>
+                  <%= link_to collections_destroy_path(id: m.id),
+                              data: { confirm: t('collections.delete.sure') } do %>
+                      <span class='large-text glyphicon glyphicon-trash'></span>
+                  <% end %>
+                </td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>
+

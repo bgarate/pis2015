@@ -138,6 +138,17 @@ Rails.application.routes.draw do
   get '/templates/destroy'
   get '/templates/generate'
 
+  #collections
+  get '/collections/destroy'
+  get '/collections/generate'
+  resources :collections do
+    collection do
+      get '' => 'collections#index'
+      get 'new' => 'collections#new'
+      post 'new' => 'collections#create'
+    end
+  end
+
 
   get '/categories/destroy'
 

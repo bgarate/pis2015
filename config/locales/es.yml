@@ -195,6 +195,8 @@ es:
 
   #plantillas
   templates:
+    addempty: 'Sin plantillas añadidas'
+    add: 'Añadir plantilla'
     generate:
       header: 'Generar Hito a partir de Plantilla'
       submit: 'Generar'
@@ -371,6 +373,29 @@ es:
       sure: "¿Está seguro que desea eliminar el rol?"
 
     zero: "No se han encontrado roles"
+
+
+  # Colecciones de templates de hitos
+  collections:
+    header: 'Colecciones de Plantillas de Hito'
+    new:
+      header: 'Crear Colección de Plantillas de Hito'
+      templates:
+        template: 'Plantilla'
+        select: 'Seleccione la plantilla'
+        days: 'Días desde la creación'
+      submit: 'Crear'
+    view: 'Ver Colección de Plantillas de Hito'
+    templates: 'Plantillas de Hito'
+    delete:
+      title: "Borrar Colección de Plantillas de Hito"
+      sure: "¿Esta seguro que desea eliminar esta colección de plantillas de hito permanentemente?"
+    see_all: "Ver todas las colecciones de plantillas de hito"
+    generate:
+      header: 'Generar Hitos a partir de Colección de Plantillas'
+      submit: 'Generar'
+    select: 'Seleccionar colección'
+
 
   tempdoc: 'Documento plantilla'
   attachmentsdocs: 'Documentos adjuntos'

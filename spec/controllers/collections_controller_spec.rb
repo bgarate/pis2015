@@ -88,6 +88,23 @@ describe CollectionsController, 'Collections Controller' do
   end
 
   it 'creates a milestone with auto drive atach' do
+
+    auth = double()
+    allow(auth).to receive(:access_token=).and_return('')
+
+    servaux = double()
+    allow(servaux).to receive(:insert).and_return('')
+    serv = double()
+    allow(serv).to receive(:events).and_return(servaux)
+
+    cli = double()
+    allow(cli).to receive(:authorization).and_return(auth)
+    allow(cli).to receive(:execute).with(anything()).and_return('')
+    allow(cli).to receive(:discovered_api).with(anything(),anything()).and_return(serv)
+
+
+    Google::APIClient.stub(:new) { cli }
+
     a = double
     allow(a).to receive(:push).with(anything()).and_return('')
 
@@ -121,6 +138,21 @@ describe CollectionsController, 'Collections Controller' do
 
   it 'creates a milestone with auto drive atach without permissions' do
 
+    auth = double()
+    allow(auth).to receive(:access_token=).and_return('')
+
+    servaux = double()
+    allow(servaux).to receive(:insert).and_return('')
+    serv = double()
+    allow(serv).to receive(:events).and_return(servaux)
+
+    cli = double()
+    allow(cli).to receive(:authorization).and_return(auth)
+    allow(cli).to receive(:execute).with(anything()).and_return('')
+    allow(cli).to receive(:discovered_api).with(anything(),anything()).and_return(serv)
+
+    Google::APIClient.stub(:new) { cli }
+
     s = double()
     allow(s).to receive(:file_by_url).with(anything()) { raise Google::APIClient::ClientError }
 
@@ -143,6 +175,22 @@ describe CollectionsController, 'Collections Controller' do
 
   it 'creates a milestone with auto drive atach inavalid url 1' do
 
+    auth = double()
+    allow(auth).to receive(:access_token=).and_return('')
+
+    servaux = double()
+    allow(servaux).to receive(:insert).and_return('')
+    serv = double()
+    allow(serv).to receive(:events).and_return(servaux)
+
+    cli = double()
+    allow(cli).to receive(:authorization).and_return(auth)
+    allow(cli).to receive(:execute).with(anything()).and_return('')
+    allow(cli).to receive(:discovered_api).with(anything(),anything()).and_return(serv)
+
+
+    Google::APIClient.stub(:new) { cli }
+
     s = double()
     allow(s).to receive(:file_by_url).with(anything()) { raise GoogleDrive::Error }
 
@@ -164,6 +212,22 @@ describe CollectionsController, 'Collections Controller' do
   end
 
   it 'creates a milestone with auto drive atach inavalid url 2' do
+
+    auth = double()
+    allow(auth).to receive(:access_token=).and_return('')
+
+    servaux = double()
+    allow(servaux).to receive(:insert).and_return('')
+    serv = double()
+    allow(serv).to receive(:events).and_return(servaux)
+
+    cli = double()
+    allow(cli).to receive(:authorization).and_return(auth)
+    allow(cli).to receive(:execute).with(anything()).and_return('')
+    allow(cli).to receive(:discovered_api).with(anything(),anything()).and_return(serv)
+
+
+    Google::APIClient.stub(:new) { cli }
 
     s = double()
     allow(s).to receive(:file_by_url).with(anything()) { raise URI::InvalidURIError }

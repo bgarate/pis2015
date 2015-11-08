@@ -11,6 +11,11 @@
                 <%= t('project.name') %>
               </label>
               <%= @project.name %>
+              <% if current_user_admin? %>
+                <%= link_to edit_project_path(@project) do %>
+                  <span class="edit glyphicon glyphicon-edit"></span>
+                <% end %>
+              <% end %>
             </td>
           </tr>
           <tr>

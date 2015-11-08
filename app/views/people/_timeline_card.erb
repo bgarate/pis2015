@@ -24,7 +24,7 @@
                     <h2 class="title"><%=link_to e.title, e, method: :get%></h2>
                 <%else%>
                     <% if can_modify_milestone?e.id %>
-                      <%= milestone_highlight(e)%>
+                      <%= milestone_highlight(e, :small)%>
                     <%else%>
                       <% if e.highlighted %>
                         <span class="milestone-highlight small true"></span>

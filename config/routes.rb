@@ -111,7 +111,7 @@ Rails.application.routes.draw do
       post 'new' => 'projects#create'
       get 'unassign_person' =>  'projects#unassign_person'
       get ':id' => 'projects#show', :constraints  => { :id => /[-\w\.]+/ }
-      get 'index' => 'projects#index', as: 'index'
+      #get 'index' => 'projects#index', as: 'index'
 
     end
   end

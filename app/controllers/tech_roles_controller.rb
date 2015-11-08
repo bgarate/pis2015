@@ -12,7 +12,7 @@ class TechRolesController < ApplicationController
 
 
   def index
-    @techRoles=TechRole.where(validity: 'true').order('LOWER(name)')
+    @techRoles=TechRole.where(validity: 'true').paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
   end
 
   def edit

@@ -10,7 +10,7 @@ class TagsController < ApplicationController
   end
 
   def index
-    @tags = Tag.where(validity: 'true').order('LOWER(name)')
+    @tags = Tag.where(validity: 'true').paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
   end
 
   def edit

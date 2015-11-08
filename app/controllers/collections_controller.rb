@@ -43,7 +43,7 @@ class CollectionsController < ApplicationController
       flash.alert = "'#{collection_params[:title]}' " + t('messages.create.error')
     end
 
-    redirect_to root_path
+    redirect_to '/collections/'
   end
 
   def index

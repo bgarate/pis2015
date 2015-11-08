@@ -16,10 +16,9 @@
 
           <thead>
           <tr>
-            <td><%= t('id') %></td>
-            <td><%= t('name') %></td>
-            <td></td>
-            <td></td>
+            <th><%= t('id') %></th>
+            <th><%= t('name') %></th>
+            <th><%= t('milestones.actions') %></th>
           </tr>
           </thead>
           <tbody>
@@ -28,11 +27,11 @@
                 <td><%= t.id %></td>
                 <td><%= t.name %></td>
                 <% if current_user_admin? %>
-                    <td><%= link_to edit_tech_role_path(t) do%>
+                    <td>
+                      <%= link_to edit_tech_role_path(t) do%>
                           <span class='large-text glyphicon glyphicon-pencil'></span>
                       <% end %>
-                    </td>
-                    <td><%= link_to tech_role_path(t),
+                    <%= link_to tech_role_path(t),
                                     method: :delete,
                                     data: { confirm: t('tech_roles.delete.sure') } do %>
                           <span class='large-text glyphicon glyphicon-trash'></span>

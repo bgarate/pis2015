@@ -14,13 +14,12 @@
         <table class="table datatable" data-info="false">
           <thead>
           <tr>
-            <td></td>
-            <td><%= t('categories.name') %></td>
-            <td><%= t('categories.created') %></td>
-            <td><%= t('categories.updated') %></td>
+            <th></th>
+            <th><%= t('categories.name') %></th>
+            <th><%= t('categories.created') %></th>
+            <th><%= t('categories.updated') %></th>
             <% if current_user_admin? %>
-                <td></td>
-                <td></td>
+                <th><%= t('milestones.actions') %></th>
             <% end %>
           </tr>
           </thead>
@@ -35,9 +34,7 @@
                     <td><%= link_to edit_category_path(c) do%>
                           <span class='large-text glyphicon glyphicon-pencil'></span>
                       <% end %>
-                    </td>
-
-                    <td><%= link_to categories_destroy_path(category_id: c.id),
+                    <%= link_to categories_destroy_path(category_id: c.id),
                                     data: { confirm: t('categories.delete.sure') } do %>
 
                           <span class='large-text glyphicon glyphicon-trash'></span>

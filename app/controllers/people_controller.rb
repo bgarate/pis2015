@@ -145,7 +145,8 @@ class PeopleController < ApplicationController
       redirect_to @person
     else
       flash.alert = "'#{person_params[:name]}' " + t('messages.create.error')
-      redirect_to '/people/new'
+      @roles=TechRole.where(validity: 'true').order('LOWER(name)')
+      render :action =>'new'
     end
   end
 

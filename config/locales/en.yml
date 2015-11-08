@@ -289,8 +289,13 @@ en:
       header: "Mentees"
       zero: "You don't have any mentees"
     milestones:
-      header: "Pending Milestones"
+      header: "My pending milestones"
       zero: "You don't have any pending milestone"
+    review:
+      admin:
+        header: "All pending milestones"
+      mentees:
+        header: "Pending milestones from my mentees"
 
   #categories
   categories:

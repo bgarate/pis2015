@@ -392,6 +392,8 @@ es:
       sure: "¿Esta seguro que desea eliminar esta colección de plantillas de hito permanentemente?"
     see_all: "Ver todas las colecciones de plantillas de hito"
     generate:
+      success: 'Hitos generados con éxito'
+      error: 'Hubo un problema al generar alguno de los hitos'
       header: 'Generar Hitos a partir de Colección de Plantillas'
       submit: 'Generar'
     select: 'Seleccionar colección'

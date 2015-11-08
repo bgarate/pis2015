@@ -38,6 +38,38 @@ describe CategoriesController, "Categories Controller" do
       expect(response).to redirect_to(categories_path)
     end
 
+    it 'updates a category' do
+      c1=Category.new
+      c1.name='otrofeedback'
+      c1.icon='algunootroIcono'
+      c1.save!
+      get :edit, :id=> c1.id
+      put :update, :id=>c1.id, :category=>{c1.icon=>'otroIcon'}
+      expect(response.status).to eq(302)
+    end
+
+    it 'does not updates a category' do
+      c1=Category.new
+      c1.name='otrofeedback'
+      c1.icon='algunootroIcono'
+      c1.save!
+      c2=Category.new
+      c2.name='feed'
+      c2.icon='algunootroIcono'
+      c2.save!
+      get :edit, :id=> c1.id
+      put :update, :id=>c1.id, :category=>{c1.name=>'feed'}
+      expect(response.status).to eq(302)
+    end
+
+    it 'destroys a category' do
+      c1=Category.new
+      c1.name='otrofeedback'
+      c1.icon='algunootroIcono'
+      c1.save!
+      get :destroy, :category_id=>c1.id
+      expect(response.status).to eq(302)
+    end
 
   end
 

@@ -14,10 +14,9 @@
 
           <thead>
           <tr>
-            <td><%= t('id') %></td>
-            <td><%= t('name') %></td>
-            <td></td>
-            <td></td>
+            <th><%= t('id') %></th>
+            <th><%= t('name') %></th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
@@ -25,15 +24,15 @@
               <tr>
                 <td><%= t.id %></td>
                 <td><%= t.name %></td>
-                <td><%= link_to edit_tag_path(t) do%>
+                <td class="text-right"><%= link_to edit_tag_path(t) do%>
                       <span class='large-text glyphicon glyphicon-pencil'></span>
                   <% end %>
-                </td>
-                <td><%= link_to tag_path(t),
+                <%= link_to tag_path(t),
                                 method: :delete,
                                 data: { confirm: t('tags.delete.sure') } do %>
                       <span class='large-text glyphicon glyphicon-trash'></span>
                   <% end %>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
 
               </tr>

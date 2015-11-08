@@ -10,12 +10,12 @@
         <table class="table datatable table-striped" id="plantillas" data-info="false">
           <thead>
           <tr>
-            <td class="title_row" ><%= t('title') %></td>
-            <td class="description_row"><%= t('description') %></td>
-            <td><%= t('category') %></td>
-            <td><%= t('tempdoc') %></td>
-            <td><%= t('tags.name') %></td>
-            <td><%= t('actions') %></td>
+            <th class="title_row" ><%= t('title') %></th>
+            <th class="description_row"><%= t('description') %></th>
+            <th><%= t('category') %></th>
+            <th><%= t('tempdoc') %></th>
+            <th><%= t('tags.name') %></th>
+            <th><%= t('actions') %></th>
           </tr>
           </thead>
           <tbody>
@@ -35,10 +35,10 @@
                     <%= link_to m.resource.url do m.resource.title end %>
                   <% end %>
                 </td>
-                <td>
-                  <ul class="chosen-choices">
-                    <% m.tags.each do |t| %>
-                        <li class="search-choice"><%= t.name %></li>
+                <td class="tags_row">
+                  <ul class="">
+                    <% m.tags.order('LOWER(name)').each do |t| %>
+                        <li><%= t.name %></li>
                     <% end %>
                   </ul>
                 </td>

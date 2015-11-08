@@ -27,6 +27,7 @@ describe MilestonesController, "Milestone Controller" do
     @m.due_date= Time.now + (3*2*7*24*60*60)
     @m.status=0
     @m.icon = "test/silueta.gif"
+    @m.author= @admin
     @m.save!
 
     request.env["HTTP_REFERER"] = root_path
@@ -48,6 +49,7 @@ describe MilestonesController, "Milestone Controller" do
     @m1.due_date= Time.now - (3*2*7*24*60*60)
     @m1.category=@c1
     @m1.status=0
+    @m1.author = @admin
     @m1.save!
 
 
@@ -56,6 +58,7 @@ describe MilestonesController, "Milestone Controller" do
     @m2.due_date= Time.now - (3*2*7*24*60*60)
     @m2.category=@c1
     @m2.status=0
+    @m2.author = @admin
     @m2.save!
 
     @person = Person.new :name=>'noad', :email=>'noad@noadmin.com', :start_date=>Time.current(), :admin=>false
@@ -168,14 +171,33 @@ describe MilestonesController, "Milestone Controller" do
     it 'has a 200 status code' do
       session[:user_id] = @ad_user.id
       get :index, :session=>session
-      expect(response.status).to eq(200)
+      expect(response).to redirect_to('/milestones/report')
     end
 
     it 'has a 200 status code' do
       session[:user_id] = @no_ad_user.id
       get :index, :session=>session
+      expect(response).to redirect_to('/milestones/report')
+    end
+
+    it 'report get has a 200 status code' do
+      session[:user_id] = @no_ad_user.id
+      get :report, :session=>session
       expect(response.status).to eq(200)
-    end  
+    end
+
+    it 'report post has correct response type' do
+      session[:user_id] = @no_ad_user.id
+      post :report,format: :json, :session=>session, :length => 10, :start => 0
+      # expect(response.status).to eq(200)
+      response.header['Content-Type'].should include 'application/json'
+    end
+    it 'report post csv has correct response type' do
+      session[:user_id] = @no_ad_user.id
+      post :report,format: :csv, :session=>session
+      # expect(response.status).to eq(200)
+      response.header['Content-Type'].should include 'text/csv'
+    end
 
     it 'creates a milestone' do
       session[:user_id] = @ad_user.id
@@ -381,7 +403,7 @@ describe MilestonesController, "Milestone Controller" do
       m1.save
       m1.notes.create({:text=> 'una nota pa borrar'})
       delete :destroy, :id => m1.id, :session => session
-      expect(response).to redirect_to('/milestones')
+      expect(response).to redirect_to('/milestones/report')
 
     end
 

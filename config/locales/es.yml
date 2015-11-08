@@ -283,6 +283,8 @@ es:
 
     see_all: "Ver todos los hitos"
 
+    download_csv: 'Descargar CSV'
+
 
 
   #dashboard

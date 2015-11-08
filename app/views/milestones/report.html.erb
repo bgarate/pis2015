@@ -48,8 +48,10 @@
 
           <%= text_field_tag :titulo ,nil, {class: "form-control", id:'titulofilter'} %>
         </div>
-        <div class="form-group col-xs-3">
-          <%= button_to 'Download CSV list', milestones_report_path(format: :csv), method: :post, class: "btn btn-default pull-right" %>
+      </div>
+      <div class="row ">
+        <div class="form-group col-xs-12">
+          <%= button_to t('milestones.download_csv'), milestones_report_path(format: :csv), method: :post, class: "btn btn-default pull-right" %>
           <%= button_tag t('reset'), :id => 'reset_filters',:type => 'button', class: "btn btn-default pull-right" %>
         </div>
       </div>
@@ -74,7 +76,7 @@
           <th id="description" class="description description_row"><%= t('milestones.description') %></th>
           <th class="categories"><%= t('milestones.category') %></th>
           <th class="people"><%= t('milestones.people') %></th>
-          <th class="tags"><%= t('milestones.tags') %></th>
+          <th class="tags" style="max-width: 150px"><%= t('milestones.tags') %></th>
           <th class="start_date" style="width: 100px" ><%= t('milestones.start_date') %></th>
           <th class="due_date" style="width: 100px"><%= t('milestones.due_date') %></th>
           <th class="completed_date" style="width: 100px"><%= t('milestones.mod_date') %></th>
@@ -87,7 +89,5 @@
 
     </div>
   </div>
-</div>
-</div>
 </div>
 <script>$(document).ready(milestonefilters_ready);</script>

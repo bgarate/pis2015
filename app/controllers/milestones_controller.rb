@@ -30,7 +30,7 @@ class MilestonesController < ApplicationController
   end
 
   def index
-    @milestone= Milestone.all.order('LOWER(title)').limit(15) #TEMP
+    @milestone= Milestone.all.order('LOWER(title)')
     # @tags = Tag.all.order(:name)
     # @people = Person.all.order(:name)
     # @categories = Category.all.order(:name)
@@ -48,11 +48,8 @@ class MilestonesController < ApplicationController
       @people = Person.all.order(:name)
       @categories = Category.all.order(:name)
       @status = Milestone.statuses
-      # @status = [0 => :pending ,1 => :done, 2 => :rejected]
 
-      # @milestone= Milestone.limit(15) #TEMP
     else #es un post enviado por datatables
-      # limitar
       @milestone = Milestone.select("milestones.*, categories.name as categories").joins(:category)
 
       # filtrar

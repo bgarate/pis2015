@@ -290,9 +290,13 @@ es:
       header: "Usuarios Mentoreados"
       zero: "No hay usuarios mentoreados"
     milestones:
-      header: "Hitos Pendientes"
+      header: "Mis hitos pendientes"
       zero: "No hay hitos pendientes"
-
+    review:
+      admin:
+        header: "Todos los hitos pendientes"
+      mentees:
+        header: "Hitos pendientes de mis usuarios mentoreados"
 
   #categorias
   categories:

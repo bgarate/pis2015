@@ -31,10 +31,9 @@ form.main-form {
 
     }
 
-    input, textarea {
+    input, .chosen-choices, textarea {
         border-radius: 0;
         box-shadow: none;
-
         border-width: 1px 1px 3px 1px;
 
         &:focus {
@@ -45,6 +44,7 @@ form.main-form {
     textarea{
         resize: vertical;
     }
+
 
     .has-success, .has-error {
         .form-control {
@@ -126,7 +126,7 @@ form.milestone-filters {
 
     }
 
-    input, textarea {
+    input, textarea, .chosen-choices {
         border-radius: 0;
         box-shadow: none;
 
@@ -136,7 +136,18 @@ form.milestone-filters {
 
             box-shadow: none;
         }
+        height: 34px !important;
     }
+
+
+    .chosen-container-multi .chosen-choices,
+    .chosen-container-single .chosen-single,
+    {
+        border-color:  #CCCCCC;
+        height: 34px !important;
+    }
+
+
     textarea{
         resize: vertical;
     }

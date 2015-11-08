@@ -1,0 +1,104 @@
+<div class="container">
+  <form class="row milestone-filters slide-on-click clearfix toggle-disabled">
+
+    <h1><span class="glyphicon glyphicon-filter"></span> <%= t('filters')%> </h1>
+    <div class="form-slide">
+
+
+      <div class="row">
+
+        <div class="form-group col-xs-2">
+          <%= label_tag :due_date_from, t('milestones.due_date') + ' ' + t('from'), class: "control-label" %>
+
+          <%= text_field_tag :due_date_from,nil, {class: "form-control", id:'due_date_from' ,"data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy"} %>
+        </div>
+
+        <div class="form-group col-xs-2">
+          <%= label_tag :due_date_to, t('to'), class: "control-label" %>
+
+          <%= text_field_tag :due_date_to,nil, {class: "form-control", id:'due_date_to' ,"data-provide":"datepicker", 'data-validation-format': "dd/mm/yyyy"} %>
+        </div>
+        <!--</div>-->
+        <!--<div class="row">-->
+        <div class="form-group col-xs-3">
+          <%= label_tag :people, t('milestones.people'), class: "small_label" %>
+          <br>
+          <%= select_tag(:people, options_from_collection_for_select(@people, :name, :name), :id => 'peoplefilter', :multiple => true, class: "chosen", 'data-placeholder'=> t('milestones.select_tags'), 'style'=> 'width:100%') %>
+        </div>
+
+        <div class="form-group col-xs-2">
+          <%= label_tag :categories, t('milestones.category'), class: "small_label" %>
+          <br>
+          <%= select_tag(:categories, options_from_collection_for_select(@categories, :name, :name), include_blank: t('all'), :id => 'categoriesfilter', :multiple => false, class: "chosen", 'data-placeholder'=> t('milestones.select_tags'), 'style'=> 'width:100%') %>
+        </div>
+      </div>
+      <div class="row ">
+        <div class="form-group col-xs-12">
+          <%= button_tag t('reset'), :id => 'reset_filters',:type => 'button', class: "btn btn-default pull-right" %>
+        </div>
+      </div>
+    </div>
+
+  </form>
+  <div class="row">
+    <div id="container-hitos" class="table-container">
+      <h1>
+        <%= link_to new_milestone_path do%>
+            <span class='large-text glyphicon glyphicon-plus table-add-button pull-left'>  </span>
+        <% end %>
+        <%= @review_table_header %>
+      </h1>
+      <table class="table datatable table-striped" id="hitos" data-info="false">
+        <thead>
+        <tr>
+          <th class="title_row"></th>
+          <th class="title_row"><%= t('milestones.title') %></th>
+          <th id="categories"><%= t('milestones.category') %></th>
+          <th id="people"><%= t('milestones.people') %></th>
+          <th id="start_date"><%= t('milestones.start_date') %></th>
+          <th id="due_date"><%= t('milestones.due_date') %></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @milestones.each do |m| %>
+            <tr>
+              <td class="icon-row">
+                <%= milestone_icon(m).html_safe %>
+              </td>
+              <td class="description-row">
+                <%= link_to m.title, milestone_path(m), method: :get%>
+                <p><%= m.description.truncate(50) %></p>
+              </td>
+              <td  class="category_row" >
+                <%= m.category.name %>
+              </td>
+              <td>
+                <ul class="inline-list">
+                  <% m.people.order('LOWER(name)').each do |p| %>
+                      <li><%= link_to p.name, person_path(p.id), method: :get %></li>
+                  <% end %>
+                </ul>
+              </td>
+
+              <td>
+                <% if m.start_date != nil %>
+                    <div><%= m.start_date %></div>
+                <% end %>
+              </td>
+              <td>
+                <% if m.due_date != nil %>
+                    <div><%= m.due_date %></div>
+                <% end %>
+              </td>
+
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+<script>$(document).ready(milestonefilters_ready);</script>

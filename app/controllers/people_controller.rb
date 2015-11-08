@@ -4,6 +4,8 @@ class PeopleController < ApplicationController
   #skip_before_action :admin?, only:[:assign_project]
   before_action :get_person, only:[:show, :edit, :update, :show_pending_timeline, :show_not_pending_timeline, :switch_admin]
 
+  DEFAULT_IMAGE_ID = "lfblntfejcpmmkh0wfny.jpg"
+
   def get_person
     identifier = params[:id]
     @person = Person.find_by(id: params[:id] || params[:person_id])
@@ -267,7 +269,7 @@ class PeopleController < ApplicationController
   def name_and_path (people)
 
     people.map do |p|
-      {"photo" => p.image_id,"name" => p.name, "url" => person_path(p)}
+      {"photo" => (p.image_id || "lfblntfejcpmmkh0wfny.jpg"),"name" => p.name, "url" => person_path(p)}
     end
 
   end

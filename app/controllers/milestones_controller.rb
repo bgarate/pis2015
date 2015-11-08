@@ -268,14 +268,6 @@ class MilestonesController < ApplicationController
     redirect_to :back
   end
 
-  ## SE PASO AL MODELO Milestone
-  # def filter_note_by_visibility(note)
-  #     (note.visibility=='every_body') ||
-  #     (note.author_id==current_person.id) || #la hice yo?
-  #     (note.visibility=='mentors' && Person.find(note.author_id).mentors.exists?(current_person.id)) || #si es para mentores, soy su mentor
-  #     (current_person.admin?)
-  # end
-
   private
 
   def milestone_params

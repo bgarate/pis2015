@@ -73,21 +73,21 @@ describe PeopleController do
       session[:user_id] = @ad_user.id
       get :create, {:person=>{:name=>'Nombre', :start_date=>Time.current()},:session=>session}
       # Espero ser redirigido
-      expect(response.status).to eq(302)
+      expect(response).to render_template('new')
     end
 
     it "No crea usuario con nombre vacio" do
       session[:user_id] = @ad_user.id
       get :create, {:person=>{:email=>'mail@example.com', :start_date=>Time.current()},:session=>session}
       # Espero ser redirigido
-      expect(response.status).to eq(302)
+      expect(response).to render_template('new')
     end
 
     it "No crea usuario con fecha de ingreso vacio" do
       session[:user_id] = @ad_user.id
       get :create, {:person=>{:name=>'Nombre', :email=>'mail@example.com'},:session=>session}
       # Espero ser redirigido
-      expect(response.status).to eq(302)
+      expect(response).to render_template('new')
     end
   end
 

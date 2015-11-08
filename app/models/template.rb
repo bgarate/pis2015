@@ -17,5 +17,6 @@ class Template < ActiveRecord::Base
   belongs_to :resource
   belongs_to :category
   has_and_belongs_to_many :tags
+  has_many :collection_template, :dependent => :destroy
 
 end

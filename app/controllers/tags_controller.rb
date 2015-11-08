@@ -4,10 +4,13 @@ class TagsController < ApplicationController
 
   def get_tag
     @tag = Tag.find_by(id: params[:id])
+    unless @tag && @tag.validity?
+      redirect_to tags_path
+    end
   end
 
   def index
-    @tags = Tag.all.order('LOWER(name)')
+    @tags = Tag.where(validity: 'true').paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
   end
 
   def edit
@@ -47,7 +50,10 @@ class TagsController < ApplicationController
 
   def destroy
     if @tag
-      @tag.destroy
+      name = @tag.name
+      @tag.validity = false
+      @tag.save
+      flash.notice = "#{name} " + t('messages.delete.success')
     end
     redirect_to '/tags'
   end

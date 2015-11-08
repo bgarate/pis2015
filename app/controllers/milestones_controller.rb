@@ -31,9 +31,9 @@ class MilestonesController < ApplicationController
 
   def index
     @milestone= Milestone.all.order('LOWER(title)')
-    # @tags = Tag.all.order(:name)
-    # @people = Person.all.order(:name)
-    # @categories = Category.all.order(:name)
+    @tags = Tag.where(validity: 'true').order(:name)
+    @people = Person.all.order(:name)
+    @categories = Category.all.order(:name)
 
     respond_to do |f|
       f.json { render json: name_and_path(@milestone)}
@@ -147,7 +147,7 @@ class MilestonesController < ApplicationController
     #redirect_to '/people'
     @cats=Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
     @authors=Person.all.where('id NOT in (?)', @identifier).order('LOWER(name)').collect {|t| [t.name, t.id]}
-    @tags=Tag.all.order('LOWER(name)')
+    @tags=Tag.where(validity: 'true').order('LOWER(name)')
 
     if current_user_admin?
       #@people= Person.all.where('id NOT in (?)', @identifier)
@@ -280,7 +280,7 @@ class MilestonesController < ApplicationController
   def edit
     @cats=Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
     @authors=Person.all.order('LOWER(name)').collect {|t| [t.name, t.id]}
-    @tags = Tag.all.order('LOWER(name)')
+    @tags = Tag.where(validity: 'true').order('LOWER(name)')
     user= Person.find(current_user.person_id)
     if current_user_admin?
       @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
@@ -364,14 +364,6 @@ class MilestonesController < ApplicationController
     redirect_to :back
   end
 
-  ## SE PASO AL MODELO Milestone
-  # def filter_note_by_visibility(note)
-  #     (note.visibility=='every_body') ||
-  #     (note.author_id==current_person.id) || #la hice yo?
-  #     (note.visibility=='mentors' && Person.find(note.author_id).mentors.exists?(current_person.id)) || #si es para mentores, soy su mentor
-  #     (current_person.admin?)
-  # end
-
   private
 
   def milestone_params
@@ -380,8 +372,8 @@ class MilestonesController < ApplicationController
 
 
   def name_and_path (milestone)
-    milestone.map do |p|
-      {"name" => p.title, "url" => milestone_path(p)}
+    milestone.map do |m|
+      {"icon" => m.icon, "name" => m.title, "url" => milestone_path(m)}
     end
   end
 

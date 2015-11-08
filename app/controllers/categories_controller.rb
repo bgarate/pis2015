@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :get_category, only: [:edit,:update]
 
   def index
-    @category = Category.all.order('LOWER(name)')
+    @category = Category.paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
   end
 
   def new
@@ -60,23 +60,5 @@ class CategoriesController < ApplicationController
     params.require(:category).permit(:name, :icon, :created_at, :updated_at,:doc_url,:is_feedback)
   end
 
-  private
-  def check_doc
-
-    session = GoogleDrive.login_with_oauth(current_user.oauth_token)
-    begin
-    f = session.file_by_url(url)
-
-    #se logro encontrar el resource
-    rescue Google::APIClient::ClientError
-    #no se logro encontrar el resorce
-    rescue GoogleDrive::Error
-    #url no es valida
-
-    rescue URI::InvalidURIError
-    #url no es valida
-    end
-
-  end
 
 end

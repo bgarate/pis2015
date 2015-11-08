@@ -165,6 +165,32 @@ describe MilestonesController, "Milestone Controller" do
     expect(@m2.feedback_author).to eq NIL
   end
 
+  it "crea una milestones con autor de feedback" do
+    session[:user_id] = @ad_user.id
+    p1 = Person.new
+    p1.name = "Juan Perez"
+    p1.email ="juanperez1@gmail.com"
+    p1.start_date =Time.now
+    p1.save!
+    p2 = Person.new
+    p2.name = "Juan2 Perez"
+    p2.email ="juanperez2@gmail.com"
+    p2.start_date =Time.now
+    p2.save!
+    p3 = Person.new
+    p3.name = "Juan3 Perez"
+    p3.email ="juanperez3@gmail.com"
+    p3.start_date =Time.now
+    p3.save!
+
+    get :new
+    post :create, :person_id=>@admin.id, :milestone=>{:title=>'milestone1', :description=>'unadescripcionde1',:category_id =>@cFeed.id, :feedback_author_id=>p1.id},
+         :people=>[p2.id,p3.id]
+    expect(response.status).to eq(302)
+
+
+  end
+
 
   describe 'Milestone' do
 
@@ -461,8 +487,23 @@ describe MilestonesController, "Milestone Controller" do
       expect(response.status).to eq(200)
     end
 
+  end
 
+  describe "destacado" do
+    it 'Deberia destacar un hito' do
+      m1 = Milestone.new
+      m1.title ='Milestone for testing'
+      m1.description='This is a milestone to test Milestones'
+      m1.due_date=Time.now - 5.days
+      m1.created_at= Time.now
+      m1.updated_at= Time.now
+      m1.status=1
+      m1.icon= 'Icon'
+      m1.save!
+      get :highlight, :milestone_id=>m1.id
+      expect(response.status).to eq(302)
 
+    end
   end
 
 end

@@ -111,7 +111,7 @@ Rails.application.routes.draw do
       post 'new' => 'projects#create'
       get 'unassign_person' =>  'projects#unassign_person'
       get ':id' => 'projects#show', :constraints  => { :id => /[-\w\.]+/ }
-      get 'index' => 'projects#index', as: 'index'
+      #get 'index' => 'projects#index', as: 'index'
 
     end
   end
@@ -139,6 +139,17 @@ Rails.application.routes.draw do
   get 'templates' => 'templates#index'
   get '/templates/destroy'
   get '/templates/generate'
+
+  #collections
+  get '/collections/destroy'
+  get '/collections/generate'
+  resources :collections do
+    collection do
+      get '' => 'collections#index'
+      get 'new' => 'collections#new'
+      post 'new' => 'collections#create'
+    end
+  end
 
 
   get '/categories/destroy'

@@ -1,10 +1,14 @@
 module PersonHelper
 
   def person_picture id
+      cl_image_tag(image_id_or_default(id))
+  end
+
+  def image_id_or_default id
     if id
-      cl_image_tag(id)
+      id
     else
-      cl_image_tag "lfblntfejcpmmkh0wfny.jpg"
+      PeopleController::DEFAULT_IMAGE_ID
     end
   end
 

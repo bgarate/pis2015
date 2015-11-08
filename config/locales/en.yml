@@ -201,6 +201,8 @@ en:
 
   #templates
   templates:
+    addempty: 'No templates added'
+    add: 'Add template'
     generate:
       header: 'Generate Milestone from Template'
       submit: 'Generate'
@@ -298,8 +300,13 @@ en:
       header: "Mentees"
       zero: "You don't have any mentees"
     milestones:
-      header: "Pending Milestones"
+      header: "My pending milestones"
       zero: "You don't have any pending milestone"
+    review:
+      admin:
+        header: "All pending milestones"
+      mentees:
+        header: "Pending milestones from my mentees"
 
   #categories
   categories:
@@ -380,6 +387,31 @@ en:
       sure: "Are you sure you wish to delete this role?"
 
     zero: "No roles found"
+
+
+  # Milestone Template Collections
+  collections:
+    header: 'Milestone Templates Collections'
+    new:
+      header: 'Create Milestone Templates Collection'
+      templates:
+              template: 'Template'
+              select: 'Select template'
+              days: 'Days after creation'
+      submit: 'Create'
+    view: 'View Milestone Templates Collection'
+    templates: 'Milestone Templates'
+    delete:
+      title: "Delete Milestone Templates Collection"
+      sure: "Are you sure you want to permanently delete this milestone templates collection?"
+    see_all: "See all milestone templates collections"
+    generate:
+      success: 'Milestones successfully created'
+      error: "Some milestones couldn't be created"
+      header: 'Generate Milestones from Templates Collection'
+      submit: 'Generate'
+    select: 'Select collection'
+
 
   tempdoc: 'Template document'
   attachmentsdocs: 'Attachments documents'

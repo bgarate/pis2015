@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
+      <div id="div_collection">
+        <h1><span class="glyphicon glyphicon-check"></span><%= t('collections.view') %></h1>
+        <table class="table table-striped">
+          <tbody>
+          <tr>
+            <td>
+              <label>
+                <%= t('title') %>
+              </label>
+              <%= @collection.title %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>
+                <%= t('description') %>
+              </label>
+              <%= @collection.description %>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <label>
+                <%= t('collections.templates') %>
+              </label>
+
+              <div class="table-container">
+                <table class="table table-striped" id="templates" data-info="false">
+                  <thead>
+                    <tr>
+                      <td class="title_row" ><%= t('title') %></td>
+                      <td class="days_row"><%= t('collections.new.templates.days') %></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  <% @templates.each do |m| %>
+                      <tr>
+                        <td class="title_row">
+                          <%= m.template.title %>
+                        </td>
+                        <td class="days_row">
+                          <%= m.days %>
+                        </td>
+                      </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<br>

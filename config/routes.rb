@@ -160,13 +160,6 @@ Rails.application.routes.draw do
   resources :dashboard
 
 
-  resources :checklists do
-        collection do
-          get 'new' => 'checklists#new'
-          post 'new' => 'checklists#create'
-        end
-    end
-
   get "/commands" => "commands#index", defaults: {format: :json}
 
 end

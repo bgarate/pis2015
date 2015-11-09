@@ -47,15 +47,15 @@ class MilestonesController < ApplicationController
       @tags = Tag.all.order(:name)
       @people = Person.all.order(:name)
       @categories = Category.all.order(:name)
-      @status = Milestone.statuses
+      @status = Hash[Milestone.statuses.map {|k, v| [I18n.t("milestones.state.#{k}"), v] }]
 
     else #es un post enviado por datatables
       @milestone = Milestone.select("milestones.*, categories.name as categories").joins(:category)
 
       # filtrar
 
-      @milestone = @milestone.where("due_date >= ?", params[:due_date_from]) if params[:due_date_from].present?
-      @milestone = @milestone.where("due_date <= ?", params[:due_date_to]) if params[:due_date_to].present?
+      @milestone = @milestone.where("due_date >= ?", params[:due_date_from].to_datetime.strftime('%F')) if params[:due_date_from].present?
+      @milestone = @milestone.where("due_date <= ?", params[:due_date_to].to_datetime.strftime('%F')) if params[:due_date_to].present?
 
 
       if params[:columns].present?

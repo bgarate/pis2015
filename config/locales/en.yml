@@ -52,6 +52,7 @@ en:
   from: 'from'
   to: 'to'
   filters: 'Filters'
+  nofilter: 'No filter'
   all: 'All...'
   reset: 'Reset'
   icon: 'Icon'

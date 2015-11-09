@@ -52,6 +52,7 @@ es:
   from: 'desde'
   to: 'hasta'
   filters: 'Filtros'
+  nofilter: 'Sin Filtro'
   all: 'Todos...'
   reset: 'Limpiar'
   icon: 'Icono'

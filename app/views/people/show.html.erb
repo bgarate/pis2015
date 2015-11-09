@@ -36,7 +36,7 @@
         <div class="timeline-filter-2">
             <%=link_to "", person_show_timeline_cat_fil_path(:person_id => @person.id, :filter => @filter, :category_id => ''), remote:true, id: 'linkFilCats' %>
             <select id="filterCats" name="filterCats">
-              <option value="-1">Sin filtro</option>
+              <option value="-1"><%= t(:nofilter) %></option>
               <%@cats.each do |c|%>
                   <option value=<%= c[1] %>><%=c[0]%></option>
               <% end %>

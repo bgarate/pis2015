@@ -25,13 +25,24 @@
             </button>
         <%end%>
 
-        <div id="npmillink-card" class="timeline-filter active">
-          <%=link_to "#{t('milestones.state.pending')} (#{@filtered_pending_count})", person_show_pending_timeline_path(:person_id => @person.id),remote:true %>
+        <div id="npmillink-card-pending" class="timeline-filter active">
+          <%=link_to "#{t('milestones.state.pending')} (#{@filtered_pending_count})", person_show_pending_timeline_path(:person_id => @person.id),remote:true, id: 'linkpending', class: 'mainfilter' %>
         </div>
 
-        <div id="npmillink-card" class="timeline-filter">
-          <%=link_to "#{t('milestones.state.done_or_rejected')} (#{@filtered_not_pending_count})", person_show_not_pending_timeline_path(:person_id => @person.id),remote:true %>
+        <div id="npmillink-card-not-pending" class="timeline-filter">
+          <%=link_to "#{t('milestones.state.done_or_rejected')} (#{@filtered_not_pending_count})", person_show_not_pending_timeline_path(:person_id => @person.id), remote:true, id: 'linknotpending', class: 'mainfilter' %>
         </div>
+
+        <div class="timeline-filter-2">
+            <%=link_to "", person_show_timeline_cat_fil_path(:person_id => @person.id, :filter => @filter, :category_id => ''), remote:true, id: 'linkFilCats' %>
+            <select id="filterCats" name="filterCats">
+              <option value="-1">Sin filtro</option>
+              <%@cats.each do |c|%>
+                  <option value=<%= c[1] %>><%=c[0]%></option>
+              <% end %>
+            </select>
+        </div>
+
       </div>
 
       <p><% t('milestones.zero') %></p>
@@ -49,4 +60,21 @@
       </div>
     </div>
   </div>
+
 </div>
+
+<script>
+    $(".mainfilter").click(function() {
+        $("#filterCats").val(-1)
+    });
+    $("#filterCats").change(function() {
+
+        if ($("#npmillink-card-pending").attr('class') == "timeline-filter active"){
+            $("#linkFilCats").attr("href", '<%= person_show_timeline_cat_fil_path(:person_id => @person.id, :filter => 'pending')  %>' + '&category_id=' + $("#filterCats").val());
+        }else{
+            $("#linkFilCats").attr("href", '<%= person_show_timeline_cat_fil_path(:person_id => @person.id, :filter => 'not_pending')  %>' + '&category_id=' + $("#filterCats").val());
+
+        }
+        $("#linkFilCats").trigger("click");
+    });
+</script>

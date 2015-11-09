@@ -88,6 +88,7 @@ Rails.application.routes.draw do
     post :switch_admin
     get :show_pending_timeline
     get :show_not_pending_timeline
+    get :show_timeline_cat_fil
     collection do
       get 'me'
       post 'switch_admin'

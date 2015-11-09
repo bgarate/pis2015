@@ -128,6 +128,35 @@ class PeopleController < ApplicationController
     end
   end
 
+  def show_timeline_cat_fil
+    @person = Person.find_by(id: params[:person_id])
+    if ( !params[:category_id] || params[:category_id] == '-1')
+      if params[:filter] == 'not_pending'
+        @milestones = @person.milestones.where('milestones.status <> 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+      else
+        @milestones = @person.milestones.where('milestones.status = 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+      end
+      @filtered_pending_count = @milestones.size
+      @filtered_not_pending_count = @person.milestones.size - @milestones.size
+    else
+      if params[:filter] == 'not_pending'
+        @milestones = @person.milestones.where('milestones.status <> 0').where("milestones.category_id = #{params[:category_id]}").order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+      else
+        @milestones = @person.milestones.where('milestones.status = 0').where("milestones.category_id = #{params[:category_id]}").order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+      end
+      @filtered_pending_count = @milestones.size
+      @filtered_not_pending_count = @person.milestones.size - @milestones.size
+    end
+
+
+    @filter = :pending
+
+    respond_to do |f|
+      f.js {render 'people/show_timeline'}
+      f.html {}
+    end
+  end
+
   def new
     @person = Person.new
     @roles=TechRole.where(validity: 'true').order('LOWER(name)')

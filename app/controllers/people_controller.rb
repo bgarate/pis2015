@@ -39,8 +39,8 @@ class PeopleController < ApplicationController
   end
 
   def me
-    u = User.find_by(id: session[:user_id])
-    redirect_to action: 'show', id: u.person_id
+    p = current_person
+    redirect_to action: 'show', id: p.id
   end
 
   def show

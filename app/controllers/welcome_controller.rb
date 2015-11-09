@@ -7,7 +7,12 @@ class WelcomeController < ApplicationController
     if ! current_user
       @navigation_bar_visible = false
     else
-      redirect_to root_path
+      person = Person.find_by(email: current_user.person_id)
+      if person.mentees.empty? && !person.admin?
+        redirect_to root_path
+      else
+        redirect_to '/dashboard/'
+      end
     end
   end
 end

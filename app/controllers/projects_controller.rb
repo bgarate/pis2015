@@ -115,6 +115,20 @@ class ProjectsController < ApplicationController
     redirect_to :back
   end
 
+  #devuelve true si puedo desasginar al usuario de un proyecto
+  helper_method :can_unassign_person?
+  def can_unassign_person? (target)
+
+    yo = current_person
+
+    if (yo.admin?) || (yo == target) || (yo.mentees.include?(target) )
+      true
+    else
+      false
+    end
+
+  end
+
   private
   def project_params
     params.require(:project).permit(:name, :client, :status, :start_date, :end_date)

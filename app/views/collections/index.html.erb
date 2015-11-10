@@ -9,10 +9,10 @@
           <%= t('collections.header') %></h1>
         <table class="table datatable table-striped" id="colecciones" data-info="false">
           <thead>
-          <tr>
-            <th class="title_row" ><%= t('title') %></th>
-            <th class="description_row"><%= t('description') %></th>
-            <th class="description_row"><%= t('collections.templates') %></th>
+          <tr class="title_row" >
+            <th><%= t('title') %></th>
+            <th><%= t('description') %></th>
+            <th><%= t('collections.templates') %></th>
             <th><%= t('actions') %></th>
           </tr>
           </thead>
@@ -44,6 +44,7 @@
           <% end %>
           </tbody>
         </table>
+        <%= will_paginate @collections %>
       </div>
       <br>
       <br>

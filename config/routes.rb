@@ -176,7 +176,8 @@ Rails.application.routes.draw do
 
 
   #dashboard
-  resources :dashboard
+  get  '/dashboard' => 'dashboard#index'
+  post '/dashboard' => 'dashboard#index'
 
   get "/commands" => "commands#index", defaults: {format: :json}
 

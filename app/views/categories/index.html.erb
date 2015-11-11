@@ -16,6 +16,7 @@
           <tr>
             <td></td>
             <td><%= t('categories.name') %></td>
+            <td><%= t('categories.feedback') %></td>
             <td><%= t('categories.status') %></td>
             <td></td>
 
@@ -29,6 +30,13 @@
               <tr>
                 <td><span class="large-text glyphicon <%= c.icon %>"></span></td>
                 <td><%= c.name %></td>
+                <td>
+                  <% if c.is_feedback %>
+                    <%= t('common.y') %>
+                  <% else %>
+                      <%= t('common.n') %>
+                  <% end %>
+                </td>
                 <td><%=  I18n.t("categories.display_status.#{c.status}") %> </td>
                 <td></td>
                 <% if current_user_admin? %>
@@ -39,10 +47,13 @@
                           <span class='large-text glyphicon glyphicon-pencil'></span>
                       <% end %>
 
-                      <%= link_to categories_destroy_path(category_id: c.id),
-                                    data: { confirm: t('categories.delete.sure') } do %>
+                      <% if (c.status == "active") %>
 
-                          <span class='large-text glyphicon glyphicon-trash'></span>
+                          <%= link_to categories_destroy_path(category_id: c.id),
+                                        data: { confirm: t('categories.delete.sure') } do %>
+
+                              <span class='large-text glyphicon glyphicon-trash'></span>
+                          <% end %>
                       <% end %>
 
                       <% if (c.status == "inactive") %>

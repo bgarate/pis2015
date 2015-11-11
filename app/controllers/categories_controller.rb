@@ -48,9 +48,10 @@ class CategoriesController < ApplicationController
   def destroy
 
    cat = Category.find_by(id: params[:category_id])
+   templates = Template.where('category_id = ?',cat.id)
    unless cat.nil?
       name = cat.name
-      if (cat.has_milestones?)
+      if (cat.has_milestones? || templates.any?)
         cat.status = 1
         cat.save
       else

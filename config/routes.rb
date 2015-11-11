@@ -156,7 +156,12 @@ Rails.application.routes.draw do
   get '/categories/destroy'
 
   resources :categories do
+    post :activate
     resources :milestones
+
+    collection do
+      post 'activate'
+    end
   end
 
   # Google auth

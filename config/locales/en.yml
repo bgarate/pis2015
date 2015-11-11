@@ -320,6 +320,7 @@ en:
     doc_url: "Document URL"
     feedback: "Feedback"
     status: "Status"
+    activate_sure: "¿Are you sure you want to activate this category?"
 
     display_status:
       active: 'Active'

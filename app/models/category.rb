@@ -41,4 +41,8 @@ class Category < ActiveRecord::Base
 
   end
 
+  def has_milestones?
+    not milestones.empty?
+  end
+
 end

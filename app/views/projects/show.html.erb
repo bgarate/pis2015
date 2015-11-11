@@ -71,8 +71,10 @@
               <% @people.each do |t| %>
                   <li>
                     <%= link_to t.name, t %>
-                    <%= link_to  controller: 'projects', action: 'unassign_person' ,project_id: @project.id, person_id: t.id do %>
-                        <span class='large-text glyphicon glyphicon-remove'></span>
+                    <% if can_unassign_person?(t) %>
+                        <%= link_to  controller: 'projects', action: 'unassign_person' ,project_id: @project.id, person_id: t.id do %>
+                            <span class='large-text glyphicon glyphicon-remove'></span>
+                        <% end%>
                     <% end%>
                   </li>
               <% end %>
@@ -112,3 +114,4 @@
 </div>
 <br>
 <br>
+

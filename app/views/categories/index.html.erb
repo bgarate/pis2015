@@ -47,11 +47,14 @@
                           <span class='large-text glyphicon glyphicon-pencil'></span>
                       <% end %>
 
-                      <%= link_to categories_destroy_path(category_id: c.id),
-                                    data: { confirm: t('categories.delete.sure') } do %>
+                      <% if (c.status == "active") %>
 
-                          <span class='large-text glyphicon glyphicon-trash'></span>
-                      <% end %>
+                          <%= link_to categories_destroy_path(category_id: c.id),
+                                        data: { confirm: t('categories.delete.sure') } do %>
+
+                              <span class='large-text glyphicon glyphicon-trash'></span>
+                          <% end %>
+                      <% end %>    
 
                       <% if (c.status == "inactive") %>
 

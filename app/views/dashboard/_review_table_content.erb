@@ -1,0 +1,18 @@
+{
+"draw": <%= params[:draw] || -1 %>,
+"recordsTotal": <%= @recordsTotal %>,
+"recordsFiltered": <%= @recordsFiltered %>,
+"data":[
+    <% @milestones.each_with_index do |m,i| %>
+    <%= "," unless i == 0 %>
+        {
+            "icon":"<%= raw(milestone_icon(m).gsub(/"/, "'") )%>",
+            "description":"<%= raw((link_to m.title, milestone_path(m), method: :get).gsub('"', "'")) %><p><%= m.description.truncate(50).gsub('"', "'") %></p>",
+            "category": "<%= m.category.name.gsub('"', "'") %>",
+            "people": "<ul class='inline-list'><% m.people.order('LOWER(name)').each do |p| %><li><%= raw((link_to p.name, person_path(p.id), method: :get).gsub('"', "'")) %></li><% end %></ul>",
+            "start_date":"<%= m.start_date %>",
+            "due_date":"<%= m.due_date %>"
+        }
+    <% end %>
+ ]
+}

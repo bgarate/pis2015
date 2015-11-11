@@ -11,12 +11,20 @@
 #
 
 class Category < ActiveRecord::Base
+
+  enum status:[:active, :inactive]
+
   validates :name, presence: true, uniqueness: true
 
   has_many :milestones
 
+
   HIST0RY_NAME = 'Historial'
   HISTORY_ICON = 'glyphicon-time'
+
+  def display_status
+    I18n.t("categories.display_status.#{status}", default: status.titleize)
+  end
 
   def self.get_or_create_history_category
 
@@ -31,6 +39,10 @@ class Category < ActiveRecord::Base
 
     history_category
 
+  end
+
+  def has_milestones?
+    not milestones.empty?
   end
 
 end

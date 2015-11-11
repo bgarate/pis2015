@@ -1,11 +1,8 @@
 /**
  * Filter API
  * Tabla - .filter-table
- *       - rel - Ubicacion del post
  * Filter
  *       - .filter
- * Filter extra
- *       - .extra
  *       - data-name - Nombre del filtro en el post
  * Column
  *       - th
@@ -41,9 +38,18 @@ var datatables_spanisn_language = {
 
 var datablefilters_ready = function() {
 
+
     function dataFill(data) {
-        $(".filter-data").each(function(){
-            data[$(this).attr("data-name")] = $(this).val();
+        $(".filter").each(function(){
+            var value;
+            if($(this).is("select")) {
+                value = $.map($(this).find("option:selected"), function(item) {
+                    return $(item).val();
+                }).join(',');
+            } else {
+                value = $(this).val();
+            }
+            return data[$(this).attr("data-name")] = value;
         });
     }
 
@@ -53,6 +59,7 @@ var datablefilters_ready = function() {
         var name = dataName ? dataName : i.toString();
         obj.data = name;
         obj.name = name;
+        return obj;
     }).toArray();
 
 
@@ -61,7 +68,7 @@ var datablefilters_ready = function() {
         paging: true,
         serverSide: true,
         ajax: {
-            url: $(this).attr("rel"),
+            url: window.location.href,
             type: 'POST',
             data: dataFill
         },
@@ -79,5 +86,18 @@ var datablefilters_ready = function() {
         table.search('').columns().search('');
         table.draw();
     });
+
+    var datepickers = $('.filter[data-provide=datepicker]');
+
+    datepickers.on('changeDate clearDate', function (ev,d) {
+        if ((this.value.length == 0) || (this.value.length == 10)) {
+            table.draw();
+        }
+    });
+
+    $('.filter').not(datepickers).on('keydown change', function (ev) {
+        table.draw();
+    });
+
 
 };

@@ -11,13 +11,13 @@
 #
 
 class Category < ActiveRecord::Base
+
   enum status:[:active, :inactive]
 
   validates :name, presence: true, uniqueness: true
 
   has_many :milestones
 
-  enum status:[:active, :inactive]
 
   HIST0RY_NAME = 'Historial'
   HISTORY_ICON = 'glyphicon-time'

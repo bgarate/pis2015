@@ -319,6 +319,7 @@ en:
     updated: "Updated at"
     doc_url: "Document URL"
     feedback: "Feedback"
+    status: "Status"
 
     display_status:
       active: 'Active'

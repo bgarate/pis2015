@@ -3,11 +3,11 @@
     <div class="card-col col-xs-4 col-xs-offset-4">
 
       <%= form_for @techRole, url:tech_roles_path, html: { class:'main-form','data-toggle': 'validator'} do |f| %>
-          <h1><%= t('tech_roles.new.header') %></h1>
+          <h1><span class="glyphicon glyphicon-knight"></span> <%= t('tech_roles.new.header') %></h1>
 
           <div class="form-group">
             <%= f.label t('name'), class: "control-label" %>
-            <%= f.text_field :name, class: "form-control", 'data-validation': "required" %>
+            <%= f.text_field :name, class: "form-control", 'data-validation': "required", :maxlength => "30"%>
           </div>
 
           <%= f.button t('tech_roles.new.submit'), options= :type => 'submit', class: "btn btn-default" %>

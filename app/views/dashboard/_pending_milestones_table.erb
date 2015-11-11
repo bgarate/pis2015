@@ -1,0 +1,38 @@
+<div class="table-container" id="milestones_table">
+
+  <h1><%= t('dashboard.milestones.header')  %></h1>
+  <% if @my_milestones.any? %>
+
+      <table class="table datatable" data-info="false">
+        <thead>
+        <tr>
+          <td><%= t('dashboard.name')  %></td>
+          <td><%= t('dashboard.description')  %></td>
+          <td><%= t('dashboard.due_time')  %></td>
+        </tr>
+        </thead>
+        <tbody>
+
+        <% @my_milestones.each do |mil| %>
+            <tr>
+              <td><%= link_to mil.title, milestone_path(mil), method: :get%></td>
+              <td><%= mil.description.truncate(50) %></td>
+              <td>
+
+                <% if mil.due_date != nil %>
+                    <div class="calendar left">
+                      <%= l(mil.due_date, format: "%A, %B %d %Y") %>
+                    </div>
+                <% end %>
+
+              </td>
+            </tr>
+        <% end %>
+
+        </tbody>
+      </table>
+  <% else %>
+      <div class="zero"><%= t('dashboard.milestones.zero') %></div>
+  <% end %>
+
+</div>

@@ -31,15 +31,111 @@ class MilestonesController < ApplicationController
 
   def index
     @milestone= Milestone.all.order('LOWER(title)')
-    @tags = Tag.all.order(:name)
+    @tags = Tag.where(validity: 'true').order(:name)
     @people = Person.all.order(:name)
     @categories = Category.all.order(:name)
 
     respond_to do |f|
       f.json { render json: name_and_path(@milestone)}
-      f.html { render }
+      f.html { redirect_to milestones_report_path }
     end
 
+  end
+
+  def report
+    if request.get?
+      @tags = Tag.all.order(:name)
+      @people = Person.all.order(:name)
+      @categories = Category.all.order(:name)
+      @status = Hash[Milestone.statuses.map {|k, v| [I18n.t("milestones.state.#{k}"), v] }]
+
+    else #es un post enviado por datatables
+      @milestone = Milestone.select("milestones.*, categories.name as categories").joins(:category)
+
+      # filtrar
+
+      @milestone = @milestone.where("due_date >= ?", params[:due_date_from].to_datetime.strftime('%F')) if params[:due_date_from].present?
+      @milestone = @milestone.where("due_date <= ?", params[:due_date_to].to_datetime.strftime('%F')) if params[:due_date_to].present?
+
+
+      if params[:columns].present?
+        people_ids = params[:columns]['4'][:search][:value]
+        tags_ids = params[:columns]['5'][:search][:value]
+        cat_id = params[:columns]['3'][:search][:value]
+        status_id = params[:columns]['0'][:search][:value]
+        titulo = params[:columns]['1'][:search][:value]
+      else
+        people_ids = params[:people].join(',') if  params[:people].present?
+        tags_ids = params[:tags].join(',') if  params[:tags].present?
+        cat_id = params[:categories] if  params[:categories].present?
+        status_id = params[:status_id] if  params[:status_id].present?
+        titulo = params[:titulo] if  params[:titulo].present?
+      end
+      @milestone = @milestone.where("category_id = ?", cat_id) if cat_id.present?
+      @milestone = @milestone.where("status = ?", status_id) if status_id.present?
+      @milestone = @milestone.where("title LIKE ?", "%#{titulo}%") if titulo.present?
+      if people_ids.present? then
+        people_ids_cant = people_ids.split(',').length
+        @milestone = @milestone.joins("INNER JOIN (SELECT person_milestones.milestone_id FROM person_milestones WHERE person_milestones.person_id IN (#{people_ids}) GROUP BY person_milestones.milestone_id HAVING count(milestone_id)=#{people_ids_cant}) as pm ON milestones.id = pm.milestone_id ")
+      end
+
+      if tags_ids.present? then
+        tags_ids_cant = tags_ids.split(',').length
+        @milestone = @milestone.joins("INNER JOIN (SELECT milestones_tags.milestone_id FROM milestones_tags WHERE milestones_tags.tag_id IN (#{tags_ids}) GROUP BY milestones_tags.milestone_id HAVING count(milestone_id)=#{tags_ids_cant}) as tm ON milestones.id = tm.milestone_id ")
+      end
+
+
+      if request.format.json?
+        # ordenar
+        if params[:order].present?
+          col = params[:columns][params[:order]['0'][:column]][:name]
+          dir = params[:order]['0'][:dir]
+          @milestone =@milestone.order ("#{col} #{dir}")
+        end
+
+        @recordsTotal = Milestone.all.size #Total records, before filtering (i.e. the total number of records in the database)
+        @recordsFiltered = @milestone.size #Total records, after filtering (i.e. the total number of records after filtering has been applied - not just the number of records being returned for this page of data).
+        @milestone= @milestone.limit(params['length']).offset(params['start'])
+      end
+
+    end
+
+
+
+    respond_to do |f|
+      f.json { render partial: 'milestones/report_detail'}
+      f.csv { send_data milestones_to_csv, filename: "milestones-#{Date.today}.csv" }
+      # f.json { render json: @milestone} #da un json valido, pero solo de los datos.
+      f.html { render :report}
+    end
+
+  end
+
+  def milestones_to_csv
+
+    attributes = %w{id status title description start_date due_date completed_date created_at updated_at}
+
+    details = %w{milestones.people milestones.tags milestones.category milestones.author}
+    titulos = t((attributes+details))
+
+    CSV.generate(headers: true) do |csv|
+      csv << titulos
+
+      @milestone.each do |m|
+        peop = m.people.map{|p| p.name}.join('|')
+        tags = m.tags.map{|p| p.name}.join('|')
+        cat = m.category.name
+        aut = m.author.name
+        # attrs = m.attributes.values_at(*attributes)
+        attrs = attributes.map{ |attr| m.send(attr) }
+        attrs[1] = t("milestones.state.#{attrs[1]}")
+        attrs.push(peop)
+        attrs.push(tags)
+        attrs.push(cat)
+        attrs.push(aut)
+        csv << attrs
+      end
+    end
   end
 
   def new
@@ -51,7 +147,7 @@ class MilestonesController < ApplicationController
     #redirect_to '/people'
     @cats=Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
     @authors=Person.all.where('id NOT in (?)', @identifier).order('LOWER(name)').collect {|t| [t.name, t.id]}
-    @tags=Tag.all.order('LOWER(name)')
+    @tags=Tag.where(validity: 'true').order('LOWER(name)')
 
     if current_user_admin?
       #@people= Person.all.where('id NOT in (?)', @identifier)
@@ -97,7 +193,48 @@ class MilestonesController < ApplicationController
       end
     end
 
+    #Crear eventos en google calendar
+    client = Google::APIClient.new
+    client.authorization.access_token = current_user.oauth_token
+    service = client.discovered_api('calendar', 'v3')
+    if @milestone.start_date
+
+      @event = {
+          'summary' => "#{@milestone.title} (Alfred)",
+          'description' => @milestone.description,
+          'start' => { 'date' => @milestone.start_date },
+          'end' => { 'date' => @milestone.start_date },
+          'attendees' => [] }
+      for i in 0..(@milestone.people.count-1)
+        @event['attendees'][i]={ "email" => @milestone.people[i].email }
+      end
+
+      @set_event = client.execute(:api_method => service.events.insert,
+                                  :parameters => {'calendarId' => current_person.email, 'sendNotifications' => true},
+                                  :body => JSON.dump(@event),
+                                  :headers => {'Content-Type' => 'application/json'})
+    end
+    if @milestone.due_date && (!@milestone.start_date || @milestone.start_date != @milestone.due_date)
+
+      @event = {
+          'summary' => "#{@milestone.title} - Fin (Alfred)",
+          'description' => @milestone.description,
+          'start' => { 'date' => @milestone.due_date },
+          'end' => { 'date' => @milestone.due_date },
+          'attendees' => [] }
+      for i in 0..(@milestone.people.count-1)
+        @event['attendees'][i]={ "email" => @milestone.people[i].email }
+      end
+
+      @set_event = client.execute(:api_method => service.events.insert,
+                                  :parameters => {'calendarId' => current_person.email, 'sendNotifications' => true},
+                                  :body => JSON.dump(@event),
+                                  :headers => {'Content-Type' => 'application/json'})
+    end
+
     @milestone.save
+
+
 
     if @milestone.valid?
       flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')
@@ -137,13 +274,13 @@ class MilestonesController < ApplicationController
     end
     @milestone.destroy
     #redirect_to milestones_path
-    redirect_to milestones_path
+    redirect_to milestones_report_path
   end
 
   def edit
     @cats=Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
     @authors=Person.all.order('LOWER(name)').collect {|t| [t.name, t.id]}
-    @tags = Tag.all.order('LOWER(name)')
+    @tags = Tag.where(validity: 'true').order('LOWER(name)')
     user= Person.find(current_user.person_id)
     if current_user_admin?
       @people= Person.all.where('id NOT in (?)', @milestone.people.map{|p| p.id})
@@ -227,14 +364,6 @@ class MilestonesController < ApplicationController
     redirect_to :back
   end
 
-  ## SE PASO AL MODELO Milestone
-  # def filter_note_by_visibility(note)
-  #     (note.visibility=='every_body') ||
-  #     (note.author_id==current_person.id) || #la hice yo?
-  #     (note.visibility=='mentors' && Person.find(note.author_id).mentors.exists?(current_person.id)) || #si es para mentores, soy su mentor
-  #     (current_person.admin?)
-  # end
-
   private
 
   def milestone_params
@@ -243,8 +372,8 @@ class MilestonesController < ApplicationController
 
 
   def name_and_path (milestone)
-    milestone.map do |p|
-      {"name" => p.title, "url" => milestone_path(p)}
+    milestone.map do |m|
+      {"icon" => m.icon, "name" => m.title, "url" => milestone_path(m)}
     end
   end
 

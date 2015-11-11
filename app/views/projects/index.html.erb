@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12">
 
-      <div class="table-container">
+      <div class="table-container table-difrows">
         <h1>
           <% if current_user_admin? %>
             <%= link_to new_project_path, method: :get do%>
@@ -14,15 +14,15 @@
         <table class="table datatable" data-info="false">
           <thead>
           <tr>
-            <td></td>
+            <th></th>
 
-            <td><%= t('project.name') %></td>
-            <td><%= t('project.client') %></td>
-            <td><%= t('project.start_date') %></td>
-            <td><%= t('project.end_date') %></td>
+            <th><%= t('project.name') %></th>
+            <th><%= t('project.client') %></th>
+            <th><%= t('project.start_date') %></th>
+            <th><%= t('project.end_date') %></th>
             <% if current_user_admin? %>
-                <td></td>
-                <td></td>
+                <th></th>
+                <th></th>
             <% end %>
           </tr>
           </thead>
@@ -44,7 +44,7 @@
                                     method: :delete,
                                     data: { confirm: t('project.delete.sure') } do %>
 
-                          <span class='large-text glyphicon glyphicon-remove'></span>
+                          <span class='large-text glyphicon glyphicon-trash'></span>
                       <% end %>
                     </td>
                 <% end %>
@@ -52,6 +52,7 @@
           <% end %>
           </tbody>
         </table>
+        <%= will_paginate @projects %>
       </div>
 
 

@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.where(validity: 'true').order('LOWER(name)')
+    @projects = Project.where(:validity=> 'true').paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
 
     respond_to do |f|
       f.json { render json: name_and_path(@projects)}

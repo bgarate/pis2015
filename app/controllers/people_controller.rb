@@ -1,8 +1,10 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline, :edit, :update]
+  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline, :show_timeline_cat_fil, :edit, :update]
   #skip_before_action :admin?, only:[:assign_project]
   before_action :get_person, only:[:show, :edit, :update, :show_pending_timeline, :show_not_pending_timeline, :switch_admin]
+
+  DEFAULT_IMAGE_ID = "lfblntfejcpmmkh0wfny.jpg"
 
   def get_person
     identifier = params[:id]
@@ -20,7 +22,8 @@ class PeopleController < ApplicationController
 
   def index
 
-    @people = Person.all.order('LOWER(name)')
+    #@people = Person.all.order('LOWER(name)')
+    @people = Person.paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
 
     respond_to do |f|
 
@@ -36,8 +39,8 @@ class PeopleController < ApplicationController
   end
 
   def me
-    u = User.find_by(id: session[:user_id])
-    redirect_to action: 'show', id: u.person_id
+    p = current_person
+    redirect_to action: 'show', id: p.id
   end
 
   def show
@@ -59,7 +62,7 @@ class PeopleController < ApplicationController
       @cats = Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
 
       @authors = Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
-      @tags = Tag.all.order('LOWER(name)')
+      @tags = Tag.where(validity: 'true').order('LOWER(name)')
 
       #rol tecnico
       @trole = ''
@@ -91,6 +94,7 @@ class PeopleController < ApplicationController
 
       #
       @temps = Template.all.order(title: :desc)
+      @collections = Collection.all.order(title: :desc)
       show_pending_timeline
 
     else
@@ -99,7 +103,7 @@ class PeopleController < ApplicationController
   end
 
   def show_not_pending_timeline
-    @milestones = @person.milestones.where('milestones.status <> 0').order(due_date: :asc, updated_at: :desc)
+    @milestones = @person.milestones.where('milestones.status <> 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
     @filtered_not_pending_count = @milestones.size
     @filtered_pending_count = @person.milestones.size - @milestones.size
 
@@ -112,7 +116,7 @@ class PeopleController < ApplicationController
   end
 
   def show_pending_timeline
-    @milestones = @person.milestones.where('milestones.status = 0').order(due_date: :asc, updated_at: :desc)
+    @milestones = @person.milestones.where('milestones.status = 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
     @filtered_pending_count = @milestones.size
     @filtered_not_pending_count = @person.milestones.size - @milestones.size
 
@@ -124,9 +128,38 @@ class PeopleController < ApplicationController
     end
   end
 
+  def show_timeline_cat_fil
+    @person = Person.find_by(id: params[:person_id])
+    if ( !params[:category_id] || params[:category_id] == '-1')
+      if params[:filter] == 'not_pending'
+        @milestones = @person.milestones.where('milestones.status <> 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+      else
+        @milestones = @person.milestones.where('milestones.status = 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+      end
+      @filtered_pending_count = @milestones.size
+      @filtered_not_pending_count = @person.milestones.size - @milestones.size
+    else
+      if params[:filter] == 'not_pending'
+        @milestones = @person.milestones.where('milestones.status <> 0').where("milestones.category_id = #{params[:category_id]}").order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+      else
+        @milestones = @person.milestones.where('milestones.status = 0').where("milestones.category_id = #{params[:category_id]}").order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+      end
+      @filtered_pending_count = @milestones.size
+      @filtered_not_pending_count = @person.milestones.size - @milestones.size
+    end
+
+
+    @filter = :pending
+
+    respond_to do |f|
+      f.js {render 'people/show_timeline'}
+      f.html {}
+    end
+  end
+
   def new
     @person = Person.new
-    @roles=TechRole.all.order('LOWER(name)')
+    @roles=TechRole.where(validity: 'true').order('LOWER(name)')
   end
 
   def create
@@ -143,7 +176,8 @@ class PeopleController < ApplicationController
       redirect_to @person
     else
       flash.alert = "'#{person_params[:name]}' " + t('messages.create.error')
-      redirect_to '/people/new'
+      @roles=TechRole.where(validity: 'true').order('LOWER(name)')
+      render :action =>'new'
     end
   end
 
@@ -171,7 +205,7 @@ class PeopleController < ApplicationController
       flash.alert= t('not_authorized')
       redirect_to people_path
     end
-    @roles=TechRole.all.order('LOWER(name)')
+    @roles=TechRole.where(validity: 'true').order('LOWER(name)')
   end
 
   def update
@@ -264,7 +298,7 @@ class PeopleController < ApplicationController
   def name_and_path (people)
 
     people.map do |p|
-      {"name" => p.name, "url" => person_path(p)}
+      {"photo" => (p.image_id || "lfblntfejcpmmkh0wfny.jpg"),"name" => p.name, "url" => person_path(p)}
     end
 
   end

@@ -56,6 +56,15 @@ class Person < ActiveRecord::Base
     end
   end
 
+  def pending_milestones
+    milestones.where(status: Milestone.statuses[:pending])
+  end
+
+  def has_mentees?
+    not mentees.empty?
+  end
+
+
 end
 
 

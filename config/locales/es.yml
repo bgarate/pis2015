@@ -52,10 +52,17 @@ es:
   from: 'desde'
   to: 'hasta'
   filters: 'Filtros'
+  nofilter: 'Sin Filtro'
   all: 'Todos...'
   reset: 'Limpiar'
   icon: 'Icono'
   actions: 'Acciones'
+  status: 'Estado'
+  start_date: 'Fecha inicio'
+  due_date: 'Fecha límite'
+  completed_date: 'Fecha hecho'
+  created_at: 'Creado en'
+  updated_at: 'Modificado en'
 
   common:
     y: 'Sí'
@@ -195,6 +202,8 @@ es:
 
   #plantillas
   templates:
+    addempty: 'Sin plantillas añadidas'
+    add: 'Añadir plantilla'
     generate:
       header: 'Generar Hito a partir de Plantilla'
       submit: 'Generar'
@@ -235,7 +244,7 @@ es:
     author: "Autor"
     done_date: "Completado el día: "
     rejected_date: "Rechazado el día: "
-    mod_date: "Fecha hecho/ rechazado"
+    mod_date: "Fecha hecho"
 
     highlighted: "destacado"
     not_highlighted: "no destacado"
@@ -243,8 +252,10 @@ es:
     actions: "Acciones"
 
     state:
-      done_or_rejected: 'Finalizados'
-      pending: 'Pendientes'
+      done_or_rejected: 'Finalizado'
+      pending: 'Pendiente'
+      done: 'Finalizado'
+      rejected: 'Rechazado'
     mark_as_sure: '¿Está seguro que desea marcar el hito como '
     pendings: "Hitos pendientes"
     overcomes: 'Hitos vencidos'
@@ -275,6 +286,8 @@ es:
 
     see_all: "Ver todos los hitos"
 
+    download_csv: 'Descargar CSV'
+
 
 
   #dashboard
@@ -288,9 +301,13 @@ es:
       header: "Usuarios Mentoreados"
       zero: "No hay usuarios mentoreados"
     milestones:
-      header: "Hitos Pendientes"
+      header: "Mis hitos pendientes"
       zero: "No hay hitos pendientes"
-
+    review:
+      admin:
+        header: "Todos los hitos pendientes"
+      mentees:
+        header: "Hitos pendientes de mis usuarios mentoreados"
 
   #categorias
   categories:
@@ -376,8 +393,34 @@ es:
 
     zero: "No se han encontrado roles"
 
+
+  # Colecciones de templates de hitos
+  collections:
+    header: 'Colecciones de Plantillas de Hito'
+    new:
+      header: 'Crear Colección de Plantillas de Hito'
+      templates:
+        template: 'Plantilla'
+        select: 'Seleccione la plantilla'
+        days: 'Días desde la creación'
+      submit: 'Crear'
+    view: 'Ver Colección de Plantillas de Hito'
+    templates: 'Plantillas de Hito'
+    delete:
+      title: "Borrar Colección de Plantillas de Hito"
+      sure: "¿Esta seguro que desea eliminar esta colección de plantillas de hito permanentemente?"
+    see_all: "Ver todas las colecciones de plantillas de hito"
+    generate:
+      success: 'Hitos generados con éxito'
+      error: 'Hubo un problema al generar alguno de los hitos'
+      header: 'Generar Hitos a partir de Colección de Plantillas'
+      submit: 'Generar'
+    select: 'Seleccionar colección'
+
+
   tempdoc: 'Documento plantilla'
   attachmentsdocs: 'Documentos adjuntos'
+  nonattachmentsdocs: 'Sin documentos adjuntos'
   adddoc: 'Agregar documento'
   driveerrormsj: 'Ha ocurrido un error al adjuntar el documento de drive'
   notpermissionsdrive: 'Asegúrese de que tiene permisos de acceso al archivo en Google Drive'
@@ -631,3 +674,8 @@ es:
       change_role_event:
         title: "%{person} es ahora %{new_role}"
         description: "%{person} pasó de %{old_role} a %{new_role}"
+
+
+  will_paginate:
+    previous_label: "Página anterior"
+    next_label: "Página siguiente"

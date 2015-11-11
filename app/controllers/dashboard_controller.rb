@@ -4,26 +4,24 @@ class DashboardController < ApplicationController
 
 
   def index
-    #u = User.find_by(id: session[:user_id])
-
     person = Person.find(current_user.person_id)
-    #person = Person.find_by(id: params[:u.person_id])
-
     @my_mentees = person.mentees.order('LOWER(name)')
 
-    #@mentees  = []
-
-    #@my_mentees.each do |m|
-      #p = Person.new
-      #p.id << m.id
-      #p.name <<  m.name
-      #p.milestones << m.milestones.where("status != ?",:pending).order("due_date ASC, created_at DESC").limit(2)
-
-      #@mentees << p
-    #end
+    @show_review_table = current_user_admin? || current_person.has_mentees?
+    @review_table_header = current_user_admin? ?
+      t('dashboard.review.admin.header') : t('dashboard.review.mentees.header')
 
     @my_milestones = person.milestones.where('status = ?',Milestone.statuses[:pending]).order('LOWER(title)')
 
+
+    if(current_user_admin?)
+      @milestones = Milestone.all.order('LOWER(title)')
+    else
+      @milestones = get_mentees_milestones(current_person)
+    end
+
+    @people = Person.all.order(:name)
+    @categories = Category.all.order(:name)
 
 
     respond_to do |f|
@@ -38,6 +36,17 @@ class DashboardController < ApplicationController
 
     {"name" => "Dashboard", "url" => dashboard_path}
 
+  end
+
+  private
+
+  def get_mentees_milestones(person)
+    milestones = []
+    person.mentees.each do |mentee|
+      milestones = milestones | mentee.pending_milestones
+    end
+
+    milestones
   end
 
 end

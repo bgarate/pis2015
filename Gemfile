@@ -12,6 +12,10 @@ gem 'capybara'
 #Google drive
 gem 'google_drive', '1.0.1'
 
+#Google Calendar
+gem 'google-api-client', :require => 'google/api_client'
+gem 'omniauth'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use sqlite3 as the database for Active Record
@@ -48,6 +52,10 @@ gem 'cloudinary'
 
 #Translate support in js
 gem "i18n-js", ">= 3.0.0.rc11"
+
+
+# Pagination
+gem 'will_paginate'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

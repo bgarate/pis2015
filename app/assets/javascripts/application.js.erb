@@ -86,13 +86,13 @@
                         message: myLanguage.requiredFields
                     }
             },
-            onSuccess : function($form) {
+            /*onSuccess : function($form) {
                 $("input[type=submit]").prop("disabled", true).closest('form').append($('<input/>', {
                     type: 'hidden',
                     name: this.name,
                     value: this.value
                 })).submit();
-            },
+            },*/
 
         });
 
@@ -222,6 +222,8 @@
             $('.progress').removeClass("hidden");
             $('.progress-bar').css('width', Math.round((data.loaded * 100.0) / data.total) + '%');
         });
+
+        $('.cloudinary-fileupload').attr('accept','image/*')
 
         $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 

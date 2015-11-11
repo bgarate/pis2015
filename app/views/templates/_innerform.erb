@@ -20,12 +20,16 @@
         <% else %>
             <div id="div" class="form-group">
         <% end %>
-        <%= m.text_field :doc_url, class: "form-control", 'data-validation':"required" %>
+            <%= m.text_field :doc_url, class: "form-control", 'data-validation':"required" %>
+            <% if params[:error] %>
+                <span id="msj" class="help-block form-error"><%= t(:invalidurl) %></span>
+            <% end %>
         <% if params[:error] %>
-            <span id="msj" class="help-block form-error"><%= t(:invalidurl) %></span>
+            </div>
+        <% else %>
+            </div>
         <% end %>
-        </div>
-        </div>
+      </div>
 
       <div class="row">
         <div class="form-group col-xs-6">

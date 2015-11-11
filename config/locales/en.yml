@@ -52,11 +52,18 @@ en:
   from: 'from'
   to: 'to'
   filters: 'Filters'
+  nofilter: 'No filter'
   all: 'All...'
   reset: 'Reset'
   icon: 'Icon'
   tags: 'Tags'
   actions: 'Actions'
+  status: 'Status'
+  start_date: 'Start date'
+  due_date: 'Due date'
+  completed_date: 'Done date'
+  created_at: 'Created at'
+  updated_at: 'Updated at'
 
   common:
     y: 'Yes'
@@ -195,6 +202,8 @@ en:
 
   #templates
   templates:
+    addempty: 'No templates added'
+    add: 'Add template'
     generate:
       header: 'Generate Milestone from Template'
       submit: 'Generate'
@@ -234,7 +243,7 @@ en:
     author: "Author"
     done_date: "Done on: "
     rejected_date: "Rejected on: "
-    mod_date: "Done/ rejected on"
+    mod_date: "Done on"
 
     highlighted: "highlighted"
     not_highlighted: "not highlighted"
@@ -245,6 +254,8 @@ en:
     state:
       done_or_rejected: 'Finalized'
       pending: 'Pending'
+      done: 'Done'
+      rejected: 'Rejected'
     mark_as_sure: 'Are you sure you want to mark the milestone as '
     pendings: "Pending Milestones"
     overcomes: 'Expired milestones'
@@ -255,7 +266,7 @@ en:
     status: "Status"
     assigned: " will be assigned by default"
     assigned_to: "Assigned to this milestone"
-    zero: "No hay hitos que mostrar"
+    zero: "No milestones to show"
 
     no_tech_role: "No tech role"
 
@@ -276,6 +287,7 @@ en:
 
     see_all: "See all milestones"
 
+    download_csv: 'Download CSV'
 
 
   #dashboard
@@ -289,8 +301,13 @@ en:
       header: "Mentees"
       zero: "You don't have any mentees"
     milestones:
-      header: "Pending Milestones"
+      header: "My pending milestones"
       zero: "You don't have any pending milestone"
+    review:
+      admin:
+        header: "All pending milestones"
+      mentees:
+        header: "Pending milestones from my mentees"
 
   #categories
   categories:
@@ -376,8 +393,34 @@ en:
 
     zero: "No roles found"
 
+
+  # Milestone Template Collections
+  collections:
+    header: 'Milestone Templates Collections'
+    new:
+      header: 'Create Milestone Templates Collection'
+      templates:
+              template: 'Template'
+              select: 'Select template'
+              days: 'Days after creation'
+      submit: 'Create'
+    view: 'View Milestone Templates Collection'
+    templates: 'Milestone Templates'
+    delete:
+      title: "Delete Milestone Templates Collection"
+      sure: "Are you sure you want to permanently delete this milestone templates collection?"
+    see_all: "See all milestone templates collections"
+    generate:
+      success: 'Milestones successfully created'
+      error: "Some milestones couldn't be created"
+      header: 'Generate Milestones from Templates Collection'
+      submit: 'Generate'
+    select: 'Select collection'
+
+
   tempdoc: 'Template document'
   attachmentsdocs: 'Attachments documents'
+  nonattachmentsdocs: 'No attachments'
   adddoc: 'Add document'
   driveerrormsj: 'An error occurred while attaching the document'
   notpermissionsdrive: 'Be sure you have access permissions to the file in Google Drive'

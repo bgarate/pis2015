@@ -33,6 +33,13 @@ describe 'Note' do
     expect(response.status).to eq(302)
   end
 
+  it "creates another note" do
+    session[:user_id] = @ad_user.id
+    request.env['HTTP_REFERER']= '/people/1'
+    post :create, :milestone_id =>@m1.id, :note=>{:text=>'un texto pa la nota', :milestone_id=>@m1.id}
+    expect(response.status).to eq(302)
+  end
+
   it 'destroys a note' do
     n1=@m1.notes.create({:text=> 'una nota pa borrar'})
     session[:user_id] = @ad_user.id

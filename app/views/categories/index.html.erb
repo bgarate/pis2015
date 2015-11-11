@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12">
 
-      <div class="table-container">
+      <div class="table-container table-difrows">
         <h1>
           <% if current_user_admin? %>
               <%= link_to new_category_path, method: :get do%>
@@ -16,11 +16,11 @@
           <tr>
             <td></td>
             <td><%= t('categories.name') %></td>
-            <td><%= t('categories.created') %></td>
-            <td><%= t('categories.updated') %></td>
+            <td><%= t('categories.status') %></td>
+            <td></td>
+
             <% if current_user_admin? %>
-                <td></td>
-                <td></td>
+                <th><%= t('milestones.actions') %></th>
             <% end %>
           </tr>
           </thead>
@@ -29,25 +29,37 @@
               <tr>
                 <td><span class="large-text glyphicon <%= c.icon %>"></span></td>
                 <td><%= c.name %></td>
-                <td><div class="calendar left"><%= c.created_at %></div></td>
-                <td><div class="calendar left"><%= c.updated_at %></div></td>
+                <td><%=  I18n.t("categories.display_status.#{c.status}") %> </td>
+                <td></td>
                 <% if current_user_admin? %>
-                    <td><%= link_to edit_category_path(c) do%>
+                    <td>
+
+
+                      <%= link_to edit_category_path(c) do%>
                           <span class='large-text glyphicon glyphicon-pencil'></span>
                       <% end %>
-                    </td>
 
-                    <td><%= link_to categories_destroy_path(category_id: c.id),
+                      <%= link_to categories_destroy_path(category_id: c.id),
                                     data: { confirm: t('categories.delete.sure') } do %>
 
                           <span class='large-text glyphicon glyphicon-trash'></span>
                       <% end %>
+
+                      <% if (c.status == "inactive") %>
+
+                          <%= link_to  category_activate_path(c.id), method: :post,  data: { confirm: "#{t('categories.activate_sure')}" } do %>
+                              <span class='large-text glyphicon glyphicon-retweet'></span>
+                          <% end %>
+
+                      <% end %>
+
                     </td>
                 <% end %>
               </tr>
           <%end%>
           </tbody>
         </table>
+        <%= will_paginate @category %>
       </div>
 
 

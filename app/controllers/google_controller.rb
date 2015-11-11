@@ -26,7 +26,12 @@ class GoogleController < ApplicationController
       user.save!
 
       session[:user_id] = user.id
-      redirect_to root_path
+      if person.mentees.empty? && !person.admin?
+        redirect_to root_path
+      else
+        redirect_to '/dashboard/'
+      end
+
     else
       redirect_to google_unregistered_path
     end

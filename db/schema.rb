@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151101194215) do
+ActiveRecord::Schema.define(version: 20151106230312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,26 @@ ActiveRecord::Schema.define(version: 20151101194215) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.boolean  "is_feedback"
+    t.integer  "status"
+  end
+
+  create_table "collection_templates", force: :cascade do |t|
+    t.integer  "collection_id"
+    t.integer  "template_id"
+    t.integer  "days",          default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "collection_templates", ["collection_id"], name: "index_collection_templates_on_collection_id", using: :btree
+  add_index "collection_templates", ["template_id"], name: "index_collection_templates_on_template_id", using: :btree
+
+  create_table "collections", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "icon"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "mentorships", force: :cascade do |t|
@@ -37,21 +57,33 @@ ActiveRecord::Schema.define(version: 20151101194215) do
   add_index "mentorships", ["mentee_id"], name: "index_mentorships_on_mentee_id", using: :btree
   add_index "mentorships", ["mentor_id"], name: "index_mentorships_on_mentor_id", using: :btree
 
+  create_table "milestone_templates", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "due_term"
+    t.text     "description"
+    t.integer  "type"
+    t.string   "icon"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "milestones", force: :cascade do |t|
     t.string   "title"
     t.date     "due_date"
     t.text     "description"
-    t.integer  "status",             default: 0
+    t.integer  "status",                       default: 0
     t.string   "icon"
     t.integer  "feedback_author_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.integer  "category_id"
     t.date     "start_date"
+    t.integer  "milestone_type",     limit: 8
     t.integer  "author_id"
     t.date     "completed_date"
     t.date     "deleted_date"
-    t.boolean  "highlighted",        default: false, null: false
+    t.boolean  "highlighted",                  default: false, null: false
   end
 
   create_table "milestones_tags", id: false, force: :cascade do |t|
@@ -164,7 +196,8 @@ ActiveRecord::Schema.define(version: 20151101194215) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string "name"
+    t.string  "name"
+    t.boolean "validity", default: true, null: false
   end
 
   create_table "tags_templates", id: false, force: :cascade do |t|
@@ -179,8 +212,9 @@ ActiveRecord::Schema.define(version: 20151101194215) do
   create_table "tech_roles", force: :cascade do |t|
     t.string   "name"
     t.string   "icon"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.boolean  "validity",   default: true, null: false
   end
 
   add_index "tech_roles", ["name"], name: "index_tech_roles_on_name", unique: true, using: :btree
@@ -212,6 +246,8 @@ ActiveRecord::Schema.define(version: 20151101194215) do
 
   add_index "users", ["person_id"], name: "index_users_on_person_id", using: :btree
 
+  add_foreign_key "collection_templates", "collections"
+  add_foreign_key "collection_templates", "templates"
   add_foreign_key "mentorships", "people", column: "mentee_id"
   add_foreign_key "mentorships", "people", column: "mentor_id"
   add_foreign_key "milestones", "categories"

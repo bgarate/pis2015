@@ -88,6 +88,7 @@ Rails.application.routes.draw do
     post :switch_admin
     get :show_pending_timeline
     get :show_not_pending_timeline
+    get :show_timeline_cat_fil
     collection do
       get 'me'
       post 'switch_admin'
@@ -111,7 +112,7 @@ Rails.application.routes.draw do
       post 'new' => 'projects#create'
       get 'unassign_person' =>  'projects#unassign_person'
       get ':id' => 'projects#show', :constraints  => { :id => /[-\w\.]+/ }
-      get 'index' => 'projects#index', as: 'index'
+      #get 'index' => 'projects#index', as: 'index'
 
     end
   end
@@ -121,6 +122,8 @@ Rails.application.routes.draw do
   resources :tech_roles
 
   #hitos
+  get 'milestones/report' => 'milestones#report'
+  post 'milestones/report' => 'milestones#report'
   resources :milestones do
     resources :notes
     post :add_category
@@ -138,11 +141,27 @@ Rails.application.routes.draw do
   get '/templates/destroy'
   get '/templates/generate'
 
+  #collections
+  get '/collections/destroy'
+  get '/collections/generate'
+  resources :collections do
+    collection do
+      get '' => 'collections#index'
+      get 'new' => 'collections#new'
+      post 'new' => 'collections#create'
+    end
+  end
+
 
   get '/categories/destroy'
 
   resources :categories do
+    post :activate
     resources :milestones
+
+    collection do
+      post 'activate'
+    end
   end
 
   # Google auth
@@ -157,7 +176,8 @@ Rails.application.routes.draw do
 
 
   #dashboard
-  resources :dashboard
+  get  '/dashboard' => 'dashboard#index'
+  post '/dashboard' => 'dashboard#index'
 
   get "/commands" => "commands#index", defaults: {format: :json}
 

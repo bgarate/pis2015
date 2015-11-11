@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :get_category, only: [:edit,:update]
 
   def index
-    @category = Category.all.order('LOWER(name)')
+    @category = Category.paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
   end
 
   def new
@@ -18,6 +18,7 @@ class CategoriesController < ApplicationController
     @category=Category.new(category_params)
     cat_name=Category.find_by_name @category.name
     if cat_name.nil?
+      @category.status = 0
       @category.save
       redirect_to @category
     else
@@ -49,34 +50,30 @@ class CategoriesController < ApplicationController
    cat = Category.find_by(id: params[:category_id])
    unless cat.nil?
       name = cat.name
-      cat.destroy
+      if (cat.has_milestones?)
+        cat.status = 1
+        cat.save
+      else
+        cat.destroy
+      end
+
       flash.notice = "#{name} " + t('messages.delete.success')
     end
     redirect_to categories_path
   end
 
+  def activate
+
+    @cate = Category.find_by(id: params[:id] || params[:category_id])
+    @cate.status = 0
+    @cate.save!
+    redirect_to :back
+  end
+
   private
   def category_params
-    params.require(:category).permit(:name, :icon, :created_at, :updated_at,:doc_url,:is_feedback)
+    params.require(:category).permit(:name, :icon, :created_at, :updated_at,:is_feedback)
   end
 
-  private
-  def check_doc
-
-    session = GoogleDrive.login_with_oauth(current_user.oauth_token)
-    begin
-    f = session.file_by_url(url)
-
-    #se logro encontrar el resource
-    rescue Google::APIClient::ClientError
-    #no se logro encontrar el resorce
-    rescue GoogleDrive::Error
-    #url no es valida
-
-    rescue URI::InvalidURIError
-    #url no es valida
-    end
-
-  end
 
 end

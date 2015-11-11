@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
 
-    <div class="table-container" id="people_table">
+    <div class="table-container table-difrows" id="people_table">
 
       <h1>
         <% if current_user_admin? %>
@@ -20,6 +20,7 @@
               <th><%= t('people.list.email') %></th>
               <th><%= t('people.list.start_date') %></th>
               <th><%= t('people.list.admin') %></th>
+              <th></th>
               <th></th>
             </tr>
             </thead>
@@ -63,6 +64,7 @@
 
             </tbody>
           </table>
+          <%= will_paginate @people %>
       <% else %>
           <div class="zero"><%= t('people.list.zero') %></div>
       <% end %>

@@ -22,6 +22,7 @@
 //= require form-validator/jquery.form-validator.min
 //= require datatables
 //= require cloudinary
+//= require datatable-filters
 //= require bootstrap-iconpicker/js/iconset-glyphicon.min
 //= require bootstrap-iconpicker/js/bootstrap-iconpicker.min
 //= require_tree .
@@ -222,6 +223,8 @@
             $('.progress').removeClass("hidden");
             $('.progress-bar').css('width', Math.round((data.loaded * 100.0) / data.total) + '%');
         });
+
+        $('.cloudinary-fileupload').attr('accept','image/*')
 
         $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 

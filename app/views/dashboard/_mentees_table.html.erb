@@ -1,0 +1,50 @@
+<div class="table-container" id="mentees_table">
+
+  <h1><%= t('dashboard.mentees.header')  %></h1>
+  <% if @my_mentees.any? %>
+      <table class="table datatable" data-info="false">
+        <thead>
+        <tr>
+          <td></td>
+          <td><%= t('dashboard.name') %></td>
+          <td><%= t('dashboard.last_completed_milestones') %></td>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <% @my_mentees.each do |m| %>
+            <tr>
+              <td>
+                <div id="profile-picture-<%= m.id %>" class="profile_picture">
+                  <div class="img-container">
+                    <%= person_picture m.image_id %>
+                  </div>
+                </div>
+              </td>
+              <td><%= link_to m.name, person_path(m.id), method: :get%></td>
+              <td>
+                <ul>
+                  <%
+                     miles = m.milestones.where("status = ?", Milestone.statuses[:done]).order("due_date ASC, created_at DESC").limit(3)
+                     if miles.length > 0
+                       miles.each do |mil| %>
+
+                          <li><%= link_to mil.title, milestone_path(mil), method: :get%></li>
+
+                      <% end
+                         else %>
+
+                      <%= t('milestones.completed.zero') %>
+                  <% end %>
+                </ul>
+              </td>
+            </tr>
+        <% end %>
+
+        </tbody>
+      </table>
+  <% else %>
+      <div class="zero"><%= t('dashboard.mentees.zero') %></div>
+  <% end %>
+</div>

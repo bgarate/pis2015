@@ -1,0 +1,71 @@
+<div class="container">
+  <form class="row milestone-filters slide-on-click clearfix toggle-disabled">
+
+    <h1><span class="glyphicon glyphicon-filter"></span> <%= t('filters')%> </h1>
+    <div class="form-slide">
+
+
+      <div class="row">
+
+        <div class="form-group col-xs-2">
+          <%= label_tag :due_date_from, t('milestones.due_date') + ' ' + t('from'), class: "control-label" %>
+          <%= text_field_tag :due_date_from,nil, {class: "form-control filter","data-provide":"datepicker",
+                                                  "data-name":"due_date_from", 'data-validation-format': "dd/mm/yyyy"} %>
+        </div>
+
+        <div class="form-group col-xs-2">
+          <%= label_tag :due_date_to, t('to'), class: "control-label" %>
+          <%= text_field_tag :due_date_to,nil, {class: "form-control filter", "data-provide":"datepicker",
+                                                "data-name":"due_date_to", 'data-validation-format': "dd/mm/yyyy"} %>
+        </div>
+
+        <div class="form-group col-xs-3">
+          <%= label_tag :people, t('milestones.people'), class: "small_label" %>
+          <br>
+          <%= select_tag(:people, options_from_collection_for_select(@people, :id, :name), :multiple => true,
+                         class: "chosen filter full-width", "data-name":"people", 'data-placeholder'=> t('milestones.select_tags')) %>
+        </div>
+
+        <div class="form-group col-xs-2">
+          <%= label_tag :categories, t('milestones.category'), class: "small_label" %>
+          <br>
+          <%= select_tag(:categories, options_from_collection_for_select(@categories, :id, :name), include_blank: t('all'),
+                         :multiple => false, class: "chosen filter full-width", "data-name":"category", 'data-placeholder'=> t('milestones.select_tags')) %>
+        </div>
+
+      </div>
+      <div class="row ">
+
+        <div class="form-group col-xs-12">
+          <%= button_tag t('reset'),:type => 'button', class: "btn btn-default pull-right reset-filters" %>
+        </div>
+
+      </div>
+    </div>
+
+  </form>
+
+  <div class="row">
+    <div class="table-container">
+      <h1>
+        <%= @review_table_header %>
+      </h1>
+
+      <table class="table filter-table table-striped" data-info="false">
+        <thead>
+            <tr>
+              <th data-name="icon"></th>
+              <th data-name="description"><%= t('milestones.title') %></th>
+              <th data-name="category"><%= t('milestones.category') %></th>
+              <th data-name="people"><%= t('milestones.people') %></th>
+              <th data-name="start_date"><%= t('milestones.start_date') %></th>
+              <th data-name="due_date"><%= t('milestones.due_date') %></th>
+            </tr>
+        </thead>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+<script>$(document).ready(datablefilters_ready);</script>

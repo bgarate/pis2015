@@ -73,21 +73,21 @@ describe PeopleController do
       session[:user_id] = @ad_user.id
       get :create, {:person=>{:name=>'Nombre', :start_date=>Time.current()},:session=>session}
       # Espero ser redirigido
-      expect(response.status).to eq(302)
+      expect(response).to render_template('new')
     end
 
     it "No crea usuario con nombre vacio" do
       session[:user_id] = @ad_user.id
       get :create, {:person=>{:email=>'mail@example.com', :start_date=>Time.current()},:session=>session}
       # Espero ser redirigido
-      expect(response.status).to eq(302)
+      expect(response).to render_template('new')
     end
 
     it "No crea usuario con fecha de ingreso vacio" do
       session[:user_id] = @ad_user.id
       get :create, {:person=>{:name=>'Nombre', :email=>'mail@example.com'},:session=>session}
       # Espero ser redirigido
-      expect(response.status).to eq(302)
+      expect(response).to render_template('new')
     end
   end
 
@@ -127,6 +127,76 @@ describe PeopleController do
         get :show_not_pending_timeline, :person_id => p1.id, :session=>session
         expect(response.status).to eq(200)
       end
+
+  end
+
+  describe "GET show category filter" do
+
+    it 'Not pendig, category <> -1' do
+      allow_any_instance_of(ApplicationController).to receive(:admin?) { '' }
+      allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
+
+      p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
+      p1.start_date =Time.now
+      p1.admin = true
+      p1.save!
+
+      c = Category.new :name=>'Feedback', :icon=>'unicono'
+      c.created_at=Time.now
+      c.updated_at=Time.now
+      c.save!
+
+      session[:user_id] = @ad_user.id
+      get :show_timeline_cat_fil, :category_id => c.id, :filter => 'not_pending', :person_id => p1.id, :session=>session
+      expect(response.status).to eq(200)
+    end
+
+    it 'Not pendig, category = -1' do
+      allow_any_instance_of(ApplicationController).to receive(:admin?) { '' }
+      allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
+
+      p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
+      p1.start_date =Time.now
+      p1.admin = true
+      p1.save!
+
+      session[:user_id] = @ad_user.id
+      get :show_timeline_cat_fil, :category_id => -1, :filter => 'not_pending', :person_id => p1.id, :session=>session
+      expect(response.status).to eq(200)
+    end
+
+    it 'pendig, category <> -1' do
+      allow_any_instance_of(ApplicationController).to receive(:admin?) { '' }
+      allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
+
+      p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
+      p1.start_date =Time.now
+      p1.admin = true
+      p1.save!
+
+      c = Category.new :name=>'Feedback', :icon=>'unicono'
+      c.created_at=Time.now
+      c.updated_at=Time.now
+      c.save!
+
+      session[:user_id] = @ad_user.id
+      get :show_timeline_cat_fil, :category_id => c.id, :filter => 'pending', :person_id => p1.id, :session=>session
+      expect(response.status).to eq(200)
+    end
+
+    it 'pendig, category = -1' do
+      allow_any_instance_of(ApplicationController).to receive(:admin?) { '' }
+      allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
+
+      p1 = Person.new :name=>"Juan Perez", :email=>"juanperez@gmail.com"
+      p1.start_date =Time.now
+      p1.admin = true
+      p1.save!
+
+      session[:user_id] = @ad_user.id
+      get :show_timeline_cat_fil, :category_id => -1, :filter => 'pending', :person_id => p1.id, :session=>session
+      expect(response.status).to eq(200)
+    end
 
   end
 

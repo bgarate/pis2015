@@ -10,7 +10,7 @@ class TechnologiesController < ApplicationController
   end
 
   def index
-    @technologies = Technology.all.paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
+    @technologies = Technology.where(validity: 'true').paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
   end
 
   def edit
@@ -61,6 +61,8 @@ class TechnologiesController < ApplicationController
   def destroy
     if @technology
       name = @technology.name
+      @technology.validity = false
+      @technology.save
       flash.notice = "#{name} " + t('messages.delete.success')
     end
     redirect_to technologies_path

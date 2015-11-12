@@ -43,7 +43,13 @@ class TechnologiesController < ApplicationController
 
 
   def update
-    if @technology.update(technology_params)
+    if @technology.update(technology_params.except(:icon))
+      if technology_params[:icon].present?
+        preloaded = Cloudinary::PreloadedFile.new(technology_params[:icon])
+        raise "Invalid upload signature" if !preloaded.valid?
+        @technology.icon = preloaded.identifier
+        @technology.save
+      end
       flash.notice = "#{technology_params[:name]} " + t('messages.save.success')
       redirect_to technologies_path
     else

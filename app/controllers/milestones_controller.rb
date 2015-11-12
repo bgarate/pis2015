@@ -31,9 +31,9 @@ class MilestonesController < ApplicationController
 
   def index
     @milestone= Milestone.all.order('LOWER(title)')
-    @tags = Tag.where(validity: 'true').order(:name)
-    @people = Person.all.order(:name)
-    @categories = Category.all.order(:name)
+    # @tags = Tag.where(validity: 'true').order(:name)
+    # @people = Person.all.order(:name)
+    # @categories = Category.all.order(:name)
 
     respond_to do |f|
       f.json { render json: name_and_path(@milestone)}
@@ -50,12 +50,13 @@ class MilestonesController < ApplicationController
       @status = Hash[Milestone.statuses.map {|k, v| [I18n.t("milestones.state.#{k}"), v] }]
 
     else #es un post enviado por datatables
-      @milestone = Milestone.select("milestones.*, categories.name as categories").joins(:category)
+      # @milestone = Milestone.select("milestones.*, categories.name as categories").joins(:category)
+      @milestone = Milestone.includes(:category, :people, :tags)
 
       # filtrar
 
-      @milestone = @milestone.where("due_date >= ?", params[:due_date_from].to_datetime.strftime('%F')) if params[:due_date_from].present?
-      @milestone = @milestone.where("due_date <= ?", params[:due_date_to].to_datetime.strftime('%F')) if params[:due_date_to].present?
+      @milestone = @milestone.where("milestones.due_date >= ?", params[:due_date_from].to_datetime.strftime('%F')) if params[:due_date_from].present?
+      @milestone = @milestone.where("milestones.due_date <= ?", params[:due_date_to].to_datetime.strftime('%F')) if params[:due_date_to].present?
 
 
       if params[:columns].present?
@@ -71,17 +72,17 @@ class MilestonesController < ApplicationController
         status_id = params[:status_id] if  params[:status_id].present?
         titulo = params[:titulo] if  params[:titulo].present?
       end
-      @milestone = @milestone.where("category_id = ?", cat_id) if cat_id.present?
-      @milestone = @milestone.where("status = ?", status_id) if status_id.present?
-      @milestone = @milestone.where("title LIKE ?", "%#{titulo}%") if titulo.present?
+      @milestone = @milestone.where("milestones.category_id = ?", cat_id) if cat_id.present?
+      @milestone = @milestone.where("milestones.status = ?", status_id) if status_id.present?
+      @milestone = @milestone.where("milestones.title LIKE ?", "%#{titulo}%") if titulo.present?
       if people_ids.present? then
         people_ids_cant = people_ids.split(',').length
-        @milestone = @milestone.joins("INNER JOIN (SELECT person_milestones.milestone_id FROM person_milestones WHERE person_milestones.person_id IN (#{people_ids}) GROUP BY person_milestones.milestone_id HAVING count(milestone_id)=#{people_ids_cant}) as pm ON milestones.id = pm.milestone_id ")
+        @milestone = @milestone.joins("INNER JOIN (SELECT person_milestones.milestone_id FROM person_milestones WHERE person_milestones.person_id IN (#{people_ids}) GROUP BY person_milestones.milestone_id HAVING count(person_milestones.milestone_id)=#{people_ids_cant}) as pm ON milestones.id = pm.milestone_id ")
       end
 
       if tags_ids.present? then
         tags_ids_cant = tags_ids.split(',').length
-        @milestone = @milestone.joins("INNER JOIN (SELECT milestones_tags.milestone_id FROM milestones_tags WHERE milestones_tags.tag_id IN (#{tags_ids}) GROUP BY milestones_tags.milestone_id HAVING count(milestone_id)=#{tags_ids_cant}) as tm ON milestones.id = tm.milestone_id ")
+        @milestone = @milestone.joins("INNER JOIN (SELECT milestones_tags.milestone_id FROM milestones_tags WHERE milestones_tags.tag_id IN (#{tags_ids}) GROUP BY milestones_tags.milestone_id HAVING count(milestones_tags.milestone_id)=#{tags_ids_cant}) as tm ON milestones.id = tm.milestone_id ")
       end
 
 
@@ -122,12 +123,12 @@ class MilestonesController < ApplicationController
       csv << titulos
 
       @milestone.each do |m|
-        peop = m.people.map{|p| p.name}.join('|')
-        tags = m.tags.map{|p| p.name}.join('|')
+        peop = m.people.map{|p| p.name}.join('; ')
+        tags = m.tags.map{|p| p.name}.join('; ')
         cat = m.category.name
         aut = m.author.name
         # attrs = m.attributes.values_at(*attributes)
-        attrs = attributes.map{ |attr| m.send(attr) }
+        attrs = attributes.map{ |attr| m.send(attr).to_s.gsub(/\r\n/,' ')}
         attrs[1] = t("milestones.state.#{attrs[1]}")
         attrs.push(peop)
         attrs.push(tags)

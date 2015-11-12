@@ -53,7 +53,7 @@ class TechnologiesController < ApplicationController
       flash.notice = "#{technology_params[:name]} " + t('messages.save.success')
       redirect_to technologies_path
     else
-      flash.alert = "#{technologies_path[:name]} " + t('messages.save.error')
+      flash.alert = "#{technology_params[:name]} " + t('messages.save.error')
       render :edit
     end
   end

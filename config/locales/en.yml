@@ -56,6 +56,7 @@ en:
   all: 'All...'
   reset: 'Reset'
   icon: 'Icon'
+  type: 'Type'
   tags: 'Tags'
   actions: 'Actions'
   status: 'Status'
@@ -96,6 +97,7 @@ en:
   people:
 
     add_tech_role: "Add Tech Role"
+    add_skills: "Add Skills"
 
     list:
       header: "Users"
@@ -119,6 +121,7 @@ en:
       other_notes: "View %{count} other notes"
       submit: "Create"
       role: "Role"
+      skills: "Skills"
 
     edit_picture:
       header: "Edit profile image"
@@ -395,6 +398,20 @@ en:
 
     zero: "No roles found"
 
+  skills:
+      index:
+        header: "Listing skills"
+      new:
+        header: "Create skill"
+        submit: "Create"
+      edit:
+        header: "Edit skill"
+        submit: "Edit"
+
+      delete:
+        sure: "Are you sure you wish to delete this skill?"
+
+      zero: "No skills found"
 
   # Milestone Template Collections
   collections:

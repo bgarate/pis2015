@@ -33,6 +33,7 @@ class Category < ActiveRecord::Base
     if history_category == nil
       history_category = Category.new
       history_category.name = HIST0RY_NAME
+      history_category.status = 0
       history_category.icon = HISTORY_ICON
       history_category.save!
     end

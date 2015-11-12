@@ -298,8 +298,8 @@ es:
     due_time: "Fecha límite"
     last_completed_milestones: "Últimos Hitos Completados"
     mentees:
-      header: "Usuarios Mentoreados"
-      zero: "No hay usuarios mentoreados"
+      header: "Usuarios de los que soy referente"
+      zero: "No hay usuarios de los que soy referente"
     milestones:
       header: "Mis hitos pendientes"
       zero: "No hay hitos pendientes"

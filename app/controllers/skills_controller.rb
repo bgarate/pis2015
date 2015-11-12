@@ -24,7 +24,7 @@ class SkillsController < ApplicationController
   end
 
   def create
-    @skill=TechRole.new(skills_params)
+    @skill=Skill.new(skills_params)
     @skill.save
     if @skill.valid?
       flash.notice = "#{skill_params[:name]} " + t('messages.create.success')

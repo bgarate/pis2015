@@ -160,6 +160,7 @@ class PeopleController < ApplicationController
   def new
     @person = Person.new
     @roles=TechRole.where(validity: 'true').order('LOWER(name)')
+    @skills= Skill.all.order('LOWER(name)')
   end
 
   def create
@@ -170,6 +171,7 @@ class PeopleController < ApplicationController
       @person.image_id = preloaded.identifier
     end
 
+    @person.skill_ids=params[:skills]
     if @person.valid?
       @person.save
       flash.notice = "'#{person_params[:name]}' " + t('messages.create.success')
@@ -205,6 +207,7 @@ class PeopleController < ApplicationController
       flash.alert= t('not_authorized')
       redirect_to people_path
     end
+    @skills=Skill.all.order('LOWER(name)')
     @roles=TechRole.where(validity: 'true').order('LOWER(name)')
   end
 
@@ -215,6 +218,7 @@ class PeopleController < ApplicationController
 
     @person.tech_role_id=params[:tech_role_id]
     if @person.update_attributes(person_params.except(:image_id))
+      @person.skill_ids=params[:skills]
       if person_params[:image_id].present?
         preloaded = Cloudinary::PreloadedFile.new(person_params[:image_id])
         raise "Invalid upload signature" if !preloaded.valid?

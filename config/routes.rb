@@ -121,6 +121,8 @@ Rails.application.routes.draw do
 
   resources :tech_roles
 
+  resources :skills
+
   #hitos
   get 'milestones/report' => 'milestones#report'
   post 'milestones/report' => 'milestones#report'

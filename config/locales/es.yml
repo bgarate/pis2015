@@ -56,6 +56,7 @@ es:
   all: 'Todos...'
   reset: 'Limpiar'
   icon: 'Icono'
+  type: 'Tipo'
   actions: 'Acciones'
   status: 'Estado'
   start_date: 'Fecha inicio'
@@ -96,7 +97,7 @@ es:
   people:
 
     add_tech_role: "Agregar Rol Técnico"
-
+    add_skills: "Agregar Habilidades"
 
     list:
       header: "Lista de Personas"
@@ -120,6 +121,7 @@ es:
       other_notes: "Ver %{count} notas restantes"
       submit: "Crear"
       role: "Rol"
+      skills: "Habilidades"
     edit:
       header: "Editar Usuario"
       submit: "Editar"
@@ -298,8 +300,8 @@ es:
     due_time: "Fecha límite"
     last_completed_milestones: "Últimos Hitos Completados"
     mentees:
-      header: "Usuarios Mentoreados"
-      zero: "No hay usuarios mentoreados"
+      header: "Usuarios de los que soy referente"
+      zero: "No hay usuarios de los que soy referente"
     milestones:
       header: "Mis hitos pendientes"
       zero: "No hay hitos pendientes"
@@ -395,9 +397,25 @@ es:
 
     zero: "No se han encontrado roles"
 
+  skills:
+     index:
+       header: "Listando habilidades"
+     new:
+       header: "Crear habilidad"
+       submit: "Crear"
+     edit:
+       header: "Editar habilidad"
+       submit: "Editar"
+
+     delete:
+       sure: "¿Está seguro que desea eliminar la habilidad?"
+
+     zero: "No se han encontrado habilidades"
+
 
   # Colecciones de templates de hitos
   collections:
+    nooffset: 'Sin offset'
     header: 'Colecciones de Plantillas de Hito'
     new:
       header: 'Crear Colección de Plantillas de Hito'

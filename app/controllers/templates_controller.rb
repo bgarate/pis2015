@@ -25,8 +25,8 @@ class TemplatesController < ApplicationController
     #CATEGORIES
     category=Category.find(params[:template][:category_id])
     @template.category=category
-
-    if params[:template][:doc_url]
+    
+    if params[:template][:doc_url] && (params[:template][:doc_url]!='')
       session = GoogleDrive.login_with_oauth(current_user.oauth_token)
       begin
         f = session.file_by_url(params[:template][:doc_url])

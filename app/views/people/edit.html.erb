@@ -23,6 +23,12 @@
           <%= f.select :tech_role_id, options_from_collection_for_select(@roles, :id, :name, @person.tech_role_id), {}, {class: "chosen", 'data-placeholder'=> t('people.add_tech_role') }%>
         </div>
 
+        <div class="form-group">
+          <%= f.label t('people.new.skills'), class: "small_label" %>
+          <br>
+          <%= select_tag(:skills, options_from_collection_for_select(@skills, :id, :name, @person.skills.map { |t| t.id } ), :multiple => true, class: "chosen", 'data-placeholder'=> t('people.add_skills'), 'style'=> 'width:100%') %>
+        </div>
+
         <div class="row">
           <div class="form-group col-xs-6">
             <%= f.label t('people.new.cellphone'), class: "control-label" %>

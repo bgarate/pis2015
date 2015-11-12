@@ -277,7 +277,18 @@ ul.tags {
 
 ul.inline-list {
     list-style: none;
+
     li {
         display: inline;
+        margin:0 2px 0 0;
+    }
+
+    li:before {
+        content: " | ";
+    }
+
+    li:first-child:before {
+        content: none;
     }
 }
+

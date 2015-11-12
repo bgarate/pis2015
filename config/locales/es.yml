@@ -398,6 +398,7 @@ es:
 
   # Colecciones de templates de hitos
   collections:
+    nooffset: 'Sin offset'
     header: 'Colecciones de Plantillas de Hito'
     new:
       header: 'Crear Colección de Plantillas de Hito'

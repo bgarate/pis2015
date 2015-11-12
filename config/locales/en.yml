@@ -398,6 +398,7 @@ en:
 
   # Milestone Template Collections
   collections:
+    nooffset: 'Without offset'
     header: 'Milestone Templates Collections'
     new:
       header: 'Create Milestone Templates Collection'

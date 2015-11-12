@@ -413,6 +413,20 @@ es:
      zero: "No se han encontrado habilidades"
 
 
+  technologies:
+     index:
+       header: "Listando tecnologías"
+     new:
+       header: "Crear tecnología"
+       submit: "Crear"
+     edit:
+       header: "Editar tecnología"
+       submit: "Editar"
+     delete:
+       sure: "¿Está seguro que desea eliminar la tecnología?"
+     zero: "No se han encontrado tecnologías"
+
+
   # Colecciones de templates de hitos
   collections:
     nooffset: 'Sin offset'

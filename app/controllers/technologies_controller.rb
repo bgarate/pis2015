@@ -3,6 +3,8 @@ class TechnologiesController < ApplicationController
   skip_before_action :admin?, only:[:show, :index]
   before_action :get_technology, only:[:edit, :update, :destroy]
 
+  DEFAULT_ICON = "lfblntfejcpmmkh0wfny.jpg"
+
   def get_technology
     @technology = Technology.find_by(id: params[:id])
   end
@@ -24,7 +26,12 @@ class TechnologiesController < ApplicationController
   end
 
   def create
-    @technology=Technology.new(technology_params)
+    @technology=Technology.new(technology_params.except(:icon))
+    if technology_params[:icon].present?
+      preloaded = Cloudinary::PreloadedFile.new(technology_params[:icon])
+      raise "Invalid upload signature" if !preloaded.valid?
+      @technology.icon = preloaded.identifier
+    end
     @technology.save
     if @technology.valid?
       flash.notice = "#{technology_params[:name]} " + t('messages.create.success')

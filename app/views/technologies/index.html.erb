@@ -27,7 +27,14 @@
               <tr>
                 <td><%= t.id %></td>
                 <td><%= t.name %></td>
-                <td><%= image_tag t.icon %></td>
+                <td>
+                  <div id="profile-picture-<%= t.id %>" class="profile_picture">
+                    <div class="img-container">
+
+                      <%= technology_icon t.icon %>
+                    </div>
+                  </div>
+                </td>
                 <% if current_user_admin? %>
                     <td>
                       <%= link_to edit_technology_path(t) do%>

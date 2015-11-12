@@ -166,6 +166,10 @@ Rails.application.routes.draw do
     end
   end
 
+
+  # Technologies
+  resources :technologies
+
   # Google auth
   get '/auth/google_oauth2/callback', to: 'google#callback'
   get 'auth/failure', to: redirect('/')

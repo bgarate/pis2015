@@ -8,6 +8,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  is_feedback :boolean
+#  status      :integer
 #
 
 class Category < ActiveRecord::Base

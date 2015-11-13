@@ -419,6 +419,21 @@ en:
 
       zero: "No skills found"
 
+
+  technologies:
+      index:
+        header: "Listing technologies"
+      new:
+        header: "Create technology"
+        submit: "Create"
+      edit:
+        header: "Edit technology"
+        submit: "Edit"
+      delete:
+        sure: "Are you sure you wish to delete this technology?"
+      zero: "No technologies found"
+
+
   # Milestone Template Collections
   collections:
     nooffset: 'Without offset'

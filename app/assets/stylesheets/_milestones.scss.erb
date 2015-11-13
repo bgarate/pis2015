@@ -279,12 +279,16 @@
 
     .description_row, .title_row{
 
-        max-width: 160px;
+        max-width: 140px;
         word-wrap:break-word;
     }
 
     .category_row{
         max-width: 60px;
+    }
+
+    .people_row{
+        max-width: 100px;
     }
 
     ul.tags_row{
@@ -333,6 +337,7 @@
 
     }
 
+
     li{
         list-style-type: none;
     }
@@ -348,6 +353,29 @@ tfoot input {
     padding: 3px;
     box-sizing: border-box;
 }
+
+#hitos td{
+    max-width:10ch;
+
+    ul:not(.tags_row){
+
+
+        li {
+            display: inline;
+
+        }
+
+        li:before {
+            content: " | ";
+        }
+
+        li:first-child:before {
+            content: none;
+        }
+    }
+
+}
+
 
 /*.etiquetas{
     margin:0;

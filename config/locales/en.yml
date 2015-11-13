@@ -405,6 +405,12 @@ en:
       nomore_remove: "No skills available to remove to"
       add: "Add Skill"
       remove: "Remove Skill"
+      new:
+        title: 'have a new skill'
+        desc1: 'acquired the skill'
+      rm:
+        title: 'Deallocated skill to'
+        desc1: 'has no more the skill'
     index:
       header: "Listing skills"
     new:

@@ -404,6 +404,12 @@ es:
       nomore_remove: "No hay habilidades disponibles para quitar a"
       add: "Añadir Habilidad"
       remove: "Quitar Habilidad"
+      new:
+        title: 'posee una nueva habilidad'
+        desc1: 'ha adquirido la habilidad'
+      rm:
+        title: 'Habilidad desasociada a'
+        desc1: 'no posee mas la habilidad'
     index:
       header: "Listando habilidades"
     new:

@@ -308,17 +308,43 @@ class PeopleController < ApplicationController
     skill = Skill.find(params[:skill_id])
     if person && skill
       person.skills<<(skill)
+
+      #generar hito
+      milestone = Milestone.new
+      milestone.author = current_person
+      milestone.completed_date = Time.now
+      milestone.status = :done
+      milestone.people << person
+      milestone.category = Category.get_or_create_history_category
+      milestone.icon = milestone.category.icon
+      milestone.title = "#{person.name} #{I18n.translate('skills.addrm.new.title')}"
+      milestone.description = "#{person.name} #{I18n.translate('skills.addrm.new.desc1')} '#{skill.name}'"
+      milestone.save!
     end
+
     redirect_to person
   end
 
   def remove_skill
     person=Person.find(params[:person_id])
+    skill = Skill.find(params[:skill_id])
 
     #Eliminar mentor
     ps = PersonSkill.find_by(person_id: params[:person_id], skill_id: params[:skill_id])
     if ps
       ps.destroy!
+
+      #generar hito
+      milestone = Milestone.new
+      milestone.author = current_person
+      milestone.completed_date = Time.now
+      milestone.status = :done
+      milestone.people << person
+      milestone.category = Category.get_or_create_history_category
+      milestone.icon = milestone.category.icon
+      milestone.title = "#{I18n.translate('skills.addrm.rm.title')} #{person.name}"
+      milestone.description = "#{person.name} #{I18n.translate('skills.addrm.rm.desc1')} '#{skill.name}'"
+      milestone.save!
     end
     redirect_to person
   end

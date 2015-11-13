@@ -167,6 +167,7 @@ class MilestonesController < ApplicationController
   def show
     if @milestone
       @notes = @milestone.get_visible_notes(current_person)
+      @chec
     else
       redirect_to root_path
     end
@@ -268,20 +269,7 @@ class MilestonesController < ApplicationController
     redirect_to :back
   end
 
-  def add_checklist_item
 
-    redirect_to :back
-  end
-
-  def remove_checklist_item
-
-    redirect_to :back
-  end
-
-  def change_state_checklist_item
-
-    redirect_to :back
-  end
 
   ## SE PASO AL MODELO Milestone
   # def filter_note_by_visibility(note)

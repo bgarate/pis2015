@@ -2,14 +2,18 @@
   <label>
     <%= t('milestones.checklist.actual_objetives') %>
   </label>
-  <div class="list-group">
-    <del><a href="#" class="list-group-item disabled tached">
-      Cras justo odio
-    </a>
-    </del>
-    <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-    <a href="#" class="list-group-item">Morbi leo risus</a>
-    <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-    <a href="#" class="list-group-item">Vestibulum at eros</a>
-  </div>
+  <% if !@milestone.checklist_items.empty? %>
+      <div class="list-group">
+        <% @milestone.checklist_items.each do |n| %>
+            <% if n.checked? %>
+                <del><a href="#" class="list-group-item disabled">
+                  <%= n.description %>
+                </a>
+                </del>
+            <% else %>
+                <a href="#" class="list-group-item"><%= n.description %></a>
+            <% end %>
+        <% end %>
+      </div>
+  <% end %>
 </div>

@@ -342,6 +342,71 @@ describe PeopleController do
 
   end
 
+  describe "add_Skill" do
+    it "No deberia desplegar el formulario si el usuario no es admin" do
+      session[:user_id] = @no_ad_user.id
+      post :add_skill_form ,{:person_id => 1}, :session => session
+      # Espero ser redirigido
+      expect(response).to redirect_to root_path
+    end
+
+    it "Deberia desplegar el formulario si el usuario es admin" do
+      session[:user_id] = @ad_user.id
+      p1 = Person.new
+      p1.name = "Juan Perez"
+      p1.email ="juanperez2@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+      post :add_skill_form ,{:person_id => p1.id}, :session => session
+      expect(response.status).to eq(200)
+    end
+
+    it "Deberia redirigirme a person si todo ok" do
+      sk1 = Skill.new
+      sk1.name='angular'
+      sk1.icon='skills/angular.png'
+      sk1.save!
+
+      session[:user_id] = @ad_user.id
+      get :add_skill,{:person_id => @no_admin.id, :skill_id=>sk1.id},:session => session
+      expect(response).to redirect_to(@no_admin)
+    end
+
+  end
+
+  describe "remove_skill" do
+    it "No deberia desplegar el formulario si el usuario no es admin" do
+      session[:user_id] = @no_ad_user.id
+      post :remove_skill_form ,{:person_id => 1}, :session => session
+      # Espero ser redirigido
+      expect(response).to redirect_to root_path
+    end
+
+    it "Deberia desplegar el formulario si el usuario es admin" do
+      session[:user_id] = @ad_user.id
+      p1 = Person.new
+      p1.name = "Juan Perez"
+      p1.email ="juanperez2@gmail.com"
+      p1.start_date =Time.now
+      p1.save!
+      post :remove_skill_form ,{:person_id => p1.id}, :session => session
+      expect(response.status).to eq(200)
+    end
+
+    it "Deberia redirigirme a person si todo ok" do
+      session[:user_id] = @ad_user.id
+      sk1 = Skill.new
+      sk1.name='angular'
+      sk1.icon='skills/angular.png'
+      sk1.save!
+
+      get :add_skill,{:person_id => @no_admin.id, :skill_id=>sk1.id},:session => session
+      get :remove_skill,{:person_id => @no_admin.id, :skill_id=>sk1.id},:session => session
+      expect(response).to redirect_to(@no_admin)
+    end
+
+  end
+
   describe "permisos" do
     it 'Deberia renderizar people show por ser admin' do
       session[:user_id] = @ad_user.id

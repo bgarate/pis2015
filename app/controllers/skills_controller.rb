@@ -8,7 +8,7 @@ class SkillsController < ApplicationController
   end
 
   def index
-    @skills = Skill.all.paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
+    @skills = Skill.where(validity: 'true').paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
   end
 
   def edit
@@ -24,7 +24,7 @@ class SkillsController < ApplicationController
   end
 
   def create
-    @skill=Skill.new(skills_params)
+    @skill=Skill.new(skill_params)
     @skill.save
     if @skill.valid?
       flash.notice = "#{skill_params[:name]} " + t('messages.create.success')
@@ -48,6 +48,8 @@ class SkillsController < ApplicationController
   def destroy
     if @skill
       name = @skill.name
+      @skill.validity=false
+      @skill.save
       flash.notice = "#{name} " + t('messages.delete.success')
     end
     redirect_to skills_path
@@ -55,7 +57,7 @@ class SkillsController < ApplicationController
 
   private
   def skill_params
-    params.require(:skill).permit(:name)
+    params.require(:skill).permit(:name,:icon)
   end
 
 

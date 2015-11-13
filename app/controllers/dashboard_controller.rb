@@ -12,10 +12,11 @@ class DashboardController < ApplicationController
 
 
     if current_user_admin?
-      @milestones = Milestone.all.where('status = ?',Milestone.statuses[:pending]).order('LOWER(title)')
+      @milestones = Milestone.all.where('status = ?',Milestone.statuses[:pending]).order(highlighted: :desc, due_date: :asc, updated_at: :desc)
     else
       if (get_mentees_milestones(current_person)).length > 0
-        @milestones = get_mentees_milestones(current_person).where('status = ?',Milestone.statuses[:pending]).order('LOWER(title)')
+        #@milestones = get_mentees_milestones(current_person).where('status = ?',Milestone.statuses[:pending]).order('LOWER(title)')
+        @milestones = get_mentees_milestones(current_person).where('status = ?',Milestone.statuses[:pending]).order(highlighted: :desc, due_date: :asc, updated_at: :desc)
       else
         @milestones = get_mentees_milestones(current_person)
       end

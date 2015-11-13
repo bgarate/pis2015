@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12">
 
-      <div class="table-container">
+      <div class="table-container table-difrows">
 
         <h1>
             <%= link_to new_tag_path do%>
@@ -14,10 +14,9 @@
 
           <thead>
           <tr>
-            <td><%= t('id') %></td>
-            <td><%= t('name') %></td>
-            <td></td>
-            <td></td>
+            <th><%= t('id') %></th>
+            <th><%= t('name') %></th>
+            <th><%= t('milestones.actions') %></th>
           </tr>
           </thead>
           <tbody>
@@ -25,11 +24,11 @@
               <tr>
                 <td><%= t.id %></td>
                 <td><%= t.name %></td>
-                <td><%= link_to edit_tag_path(t) do%>
+                <td>
+                  <%= link_to edit_tag_path(t) do%>
                       <span class='large-text glyphicon glyphicon-pencil'></span>
                   <% end %>
-                </td>
-                <td><%= link_to tag_path(t),
+                <%= link_to tag_path(t),
                                 method: :delete,
                                 data: { confirm: t('tags.delete.sure') } do %>
                       <span class='large-text glyphicon glyphicon-trash'></span>
@@ -40,6 +39,7 @@
           <% end %>
           </tbody>
         </table>
+        <%= will_paginate @tags %>
       </div>
 
 

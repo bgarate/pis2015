@@ -27,6 +27,7 @@ describe MilestonesController, "Milestone Controller" do
     @m.due_date= Time.now + (3*2*7*24*60*60)
     @m.status=0
     @m.icon = "test/silueta.gif"
+    @m.author= @admin
     @m.save!
 
     request.env["HTTP_REFERER"] = root_path
@@ -48,6 +49,7 @@ describe MilestonesController, "Milestone Controller" do
     @m1.due_date= Time.now - (3*2*7*24*60*60)
     @m1.category=@c1
     @m1.status=0
+    @m1.author = @admin
     @m1.save!
 
 
@@ -56,6 +58,7 @@ describe MilestonesController, "Milestone Controller" do
     @m2.due_date= Time.now - (3*2*7*24*60*60)
     @m2.category=@c1
     @m2.status=0
+    @m2.author = @admin
     @m2.save!
 
     @person = Person.new :name=>'noad', :email=>'noad@noadmin.com', :start_date=>Time.current(), :admin=>false
@@ -162,20 +165,65 @@ describe MilestonesController, "Milestone Controller" do
     expect(@m2.feedback_author).to eq NIL
   end
 
+  it "crea una milestones con autor de feedback" do
+    session[:user_id] = @ad_user.id
+    p1 = Person.new
+    p1.name = "Juan Perez"
+    p1.email ="juanperez1@gmail.com"
+    p1.start_date =Time.now
+    p1.save!
+    p2 = Person.new
+    p2.name = "Juan2 Perez"
+    p2.email ="juanperez2@gmail.com"
+    p2.start_date =Time.now
+    p2.save!
+    p3 = Person.new
+    p3.name = "Juan3 Perez"
+    p3.email ="juanperez3@gmail.com"
+    p3.start_date =Time.now
+    p3.save!
+
+    get :new
+    post :create, :person_id=>@admin.id, :milestone=>{:title=>'milestone1', :description=>'unadescripcionde1',:category_id =>@cFeed.id, :feedback_author_id=>p1.id},
+         :people=>[p2.id,p3.id]
+    expect(response.status).to eq(302)
+
+
+  end
+
 
   describe 'Milestone' do
 
     it 'has a 200 status code' do
       session[:user_id] = @ad_user.id
       get :index, :session=>session
-      expect(response.status).to eq(200)
+      expect(response).to redirect_to('/milestones/report')
     end
 
     it 'has a 200 status code' do
       session[:user_id] = @no_ad_user.id
       get :index, :session=>session
+      expect(response).to redirect_to('/milestones/report')
+    end
+
+    it 'report get has a 200 status code' do
+      session[:user_id] = @no_ad_user.id
+      get :report, :session=>session
       expect(response.status).to eq(200)
-    end  
+    end
+
+    it 'report post has correct response type' do
+      session[:user_id] = @no_ad_user.id
+      post :report,format: :json, :session=>session, :length => 10, :start => 0
+      # expect(response.status).to eq(200)
+      response.header['Content-Type'].should include 'application/json'
+    end
+    it 'report post csv has correct response type' do
+      session[:user_id] = @no_ad_user.id
+      post :report,format: :csv, :session=>session
+      # expect(response.status).to eq(200)
+      response.header['Content-Type'].should include 'text/csv'
+    end
 
     it 'creates a milestone' do
       session[:user_id] = @ad_user.id
@@ -381,7 +429,7 @@ describe MilestonesController, "Milestone Controller" do
       m1.save
       m1.notes.create({:text=> 'una nota pa borrar'})
       delete :destroy, :id => m1.id, :session => session
-      expect(response).to redirect_to('/milestones')
+      expect(response).to redirect_to('/milestones/report')
 
     end
 
@@ -439,8 +487,23 @@ describe MilestonesController, "Milestone Controller" do
       expect(response.status).to eq(200)
     end
 
+  end
 
+  describe "destacado" do
+    it 'Deberia destacar un hito' do
+      m1 = Milestone.new
+      m1.title ='Milestone for testing'
+      m1.description='This is a milestone to test Milestones'
+      m1.due_date=Time.now - 5.days
+      m1.created_at= Time.now
+      m1.updated_at= Time.now
+      m1.status=1
+      m1.icon= 'Icon'
+      m1.save!
+      get :highlight, :milestone_id=>m1.id
+      expect(response.status).to eq(302)
 
+    end
   end
 
 end

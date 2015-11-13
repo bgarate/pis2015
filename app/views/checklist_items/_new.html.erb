@@ -1,9 +1,10 @@
 
 <div>
 
-  <%= form_for([@milestone, @milestone.notes.build] , html: { 'data-toggle': 'validator'}) do |f| %>
+  <%= form_for([@milestone, @milestone.checklist_items.build] , html: { 'data-toggle': 'validator'}) do |f| %>
       <div class="input-group">
-        <%= f.text_field :text, class: "submit-on-enter form-control", placeholder: t('milestones.checklist.add_more_items') %>
+
+        <%= f.text_field :description, class: "submit-on-enter form-control", placeholder: t('milestones.checklist.add_more_items') %>
         <span class="input-group-btn">
             <button class="btn btn-default" type="button"><%= t('milestones.checklist.add_checklist') %></button>
         </span>

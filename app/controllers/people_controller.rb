@@ -4,6 +4,8 @@ class PeopleController < ApplicationController
   #skip_before_action :admin?, only:[:assign_project]
   before_action :get_person, only:[:show, :edit, :update, :show_pending_timeline, :show_not_pending_timeline, :switch_admin]
 
+  DEFAULT_IMAGE_ID = "lfblntfejcpmmkh0wfny.jpg"
+
   def get_person
     identifier = params[:id]
     @person = Person.find_by(id: params[:id] || params[:person_id])
@@ -20,7 +22,8 @@ class PeopleController < ApplicationController
 
   def index
 
-    @people = Person.all.order('LOWER(name)')
+    #@people = Person.all.order('LOWER(name)')
+    @people = Person.paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
 
     respond_to do |f|
 
@@ -59,7 +62,7 @@ class PeopleController < ApplicationController
       @cats = Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
 
       @authors = Person.all.where('id NOT in (?)', @identifier).collect {|t| [t.name, t.id]}
-      @tags = Tag.all.order('LOWER(name)')
+      @tags = Tag.where(validity: 'true').order('LOWER(name)')
 
       #rol tecnico
       @trole = ''
@@ -91,6 +94,7 @@ class PeopleController < ApplicationController
 
       #
       @temps = Template.all.order(title: :desc)
+      @collections = Collection.all.order(title: :desc)
       show_pending_timeline
 
     else
@@ -126,7 +130,7 @@ class PeopleController < ApplicationController
 
   def new
     @person = Person.new
-    @roles=TechRole.all.order('LOWER(name)')
+    @roles=TechRole.where(validity: 'true').order('LOWER(name)')
   end
 
   def create
@@ -143,7 +147,8 @@ class PeopleController < ApplicationController
       redirect_to @person
     else
       flash.alert = "'#{person_params[:name]}' " + t('messages.create.error')
-      redirect_to '/people/new'
+      @roles=TechRole.where(validity: 'true').order('LOWER(name)')
+      render :action =>'new'
     end
   end
 
@@ -171,7 +176,7 @@ class PeopleController < ApplicationController
       flash.alert= t('not_authorized')
       redirect_to people_path
     end
-    @roles=TechRole.all.order('LOWER(name)')
+    @roles=TechRole.where(validity: 'true').order('LOWER(name)')
   end
 
   def update
@@ -264,7 +269,7 @@ class PeopleController < ApplicationController
   def name_and_path (people)
 
     people.map do |p|
-      {"photo" => p.image_id,"name" => p.name, "url" => person_path(p)}
+      {"photo" => (p.image_id || "lfblntfejcpmmkh0wfny.jpg"),"name" => p.name, "url" => person_path(p)}
     end
 
   end

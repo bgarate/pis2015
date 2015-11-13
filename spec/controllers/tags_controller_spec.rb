@@ -61,7 +61,7 @@ describe TagsController do
     it 'Redirigir a root path' do
       session[:user_id] = @ad_user.id
       get :show, :id => 999999
-      expect(response).to redirect_to(root_path)
+      expect(response).to redirect_to(tags_path)
     end
 
     it 'Renderiza show' do

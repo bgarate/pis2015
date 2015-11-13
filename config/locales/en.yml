@@ -302,6 +302,7 @@ en:
     name: "Name"
     description: "Description"
     due_time: "Due date"
+    start_time: "Start date"
     last_completed_milestones: "Latest Milestones Completed"
     mentees:
       header: "Mentees"

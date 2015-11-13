@@ -6,7 +6,7 @@ class DashboardController < ApplicationController
   def index
     person = Person.find(current_user.person_id)
 
-    @my_milestones = person.milestones.where('status = ?',Milestone.statuses[:pending]).order('LOWER(title)')
+    @my_milestones = person.milestones.where('status = ?',Milestone.statuses[:pending]).order(highlighted: :desc, due_date: :asc, updated_at: :desc)
     @my_mentees = person.mentees.order('LOWER(name)')
 
 

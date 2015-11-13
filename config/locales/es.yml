@@ -286,6 +286,9 @@ es:
       title: "Borrar Hito"
       sure: "¿Esta seguro que desea eliminar este hito permanentemente?"
 
+    create:
+      error: "Error al crear "
+
     see_all: "Ver todos los hitos"
 
     download_csv: 'Descargar CSV'
@@ -340,6 +343,9 @@ es:
     edit:
       header: "Editar Categoría"
       submit: "Editar"
+
+    create:
+      zero:  "La categoría no existe"
 
     zero: "No hay categorías disponibles"
 

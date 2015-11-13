@@ -398,19 +398,25 @@ es:
     zero: "No se han encontrado roles"
 
   skills:
-     index:
-       header: "Listando habilidades"
-     new:
-       header: "Crear habilidad"
-       submit: "Crear"
-     edit:
-       header: "Editar habilidad"
-       submit: "Editar"
+    addrm:
+      select: 'seleccionar habilidad'
+      nomore_add: "No hay más habilidades disponibles para agregar a"
+      nomore_remove: "No hay habilidades disponibles para quitar a"
+      add: "Añadir Habilidad"
+      remove: "Quitar Habilidad"
+    index:
+      header: "Listando habilidades"
+    new:
+      header: "Crear habilidad"
+      submit: "Crear"
+    edit:
+      header: "Editar habilidad"
+      submit: "Editar"
 
-     delete:
-       sure: "¿Está seguro que desea eliminar la habilidad?"
+    delete:
+      sure: "¿Está seguro que desea eliminar la habilidad?"
 
-     zero: "No se han encontrado habilidades"
+    zero: "No se han encontrado habilidades"
 
 
   technologies:

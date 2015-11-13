@@ -292,6 +292,36 @@ class PeopleController < ApplicationController
     end
   end
 
+  def add_skill_form
+    @person=Person.find(params[:person_id])
+    @posible_skills=Skill.all.where("id NOT IN (SELECT skill_id FROM person_skills WHERE person_id=?)",params[:person_id]).order('LOWER(name)')
+    render :file => "app/views/people/add_skill_form"
+  end
+
+  def remove_skill_form
+    @person=Person.find(params[:person_id])
+    @skills = @person.skills
+  end
+
+  def add_skill
+    person=Person.find(params[:person_id])
+    skill = Skill.find(params[:skill_id])
+    if person && skill
+      person.skills<<(skill)
+    end
+    redirect_to person
+  end
+
+  def remove_skill
+    person=Person.find(params[:person_id])
+
+    #Eliminar mentor
+    ps = PersonSkill.find_by(person_id: params[:person_id], skill_id: params[:skill_id])
+    if ps
+      ps.destroy!
+    end
+    redirect_to person
+  end
 
   private
   def person_params

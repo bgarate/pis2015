@@ -160,7 +160,7 @@ class PeopleController < ApplicationController
   def new
     @person = Person.new
     @roles=TechRole.where(validity: 'true').order('LOWER(name)')
-    @skills= Skill.all.order('LOWER(name)')
+    @skills= Skill.where(validity: 'true').order('LOWER(name)')
   end
 
   def create
@@ -207,7 +207,7 @@ class PeopleController < ApplicationController
       flash.alert= t('not_authorized')
       redirect_to people_path
     end
-    @skills=Skill.all.order('LOWER(name)')
+    @skills=Skill.where(validity: 'true').order('LOWER(name)')
     @roles=TechRole.where(validity: 'true').order('LOWER(name)')
   end
 

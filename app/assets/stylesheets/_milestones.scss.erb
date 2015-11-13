@@ -279,12 +279,18 @@
 
     .description_row, .title_row{
 
-        max-width: 160px;
+        max-width: 139px;
         word-wrap:break-word;
     }
 
     .category_row{
-        max-width: 60px;
+        max-width: 85px;
+        min-width: 85px;
+    }
+
+    .people_row{
+        max-width: 120px;
+        min-width: 120px;
     }
 
     ul.tags_row{
@@ -333,6 +339,7 @@
 
     }
 
+
     li{
         list-style-type: none;
     }
@@ -348,6 +355,29 @@ tfoot input {
     padding: 3px;
     box-sizing: border-box;
 }
+
+#hitos td{
+    max-width:10ch;
+    word-wrap:break-word;
+    ul:not(.tags_row){
+
+
+        li {
+            display: inline;
+
+        }
+
+        li:before {
+            content: " | ";
+        }
+
+        li:first-child:before {
+            content: none;
+        }
+    }
+
+}
+
 
 /*.etiquetas{
     margin:0;

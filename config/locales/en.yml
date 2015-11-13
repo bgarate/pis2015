@@ -288,9 +288,6 @@ en:
       title: "Delete Milestone"
       sure: "Are you sure you want to permanently delete this milestone?"
 
-    create:
-      error: "Error creating "
-
     see_all: "See all milestones"
 
     download_csv: 'Download CSV'
@@ -302,7 +299,6 @@ en:
     name: "Name"
     description: "Description"
     due_time: "Due date"
-    start_time: "Start date"
     last_completed_milestones: "Latest Milestones Completed"
     mentees:
       header: "Mentees"
@@ -345,9 +341,6 @@ en:
     edit:
       header: "Edit Category"
       submit: "Edit"
-
-    create:
-      zero:  "The category does not exists"
 
     zero: "There are no available Categories"
 

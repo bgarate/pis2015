@@ -286,9 +286,6 @@ es:
       title: "Borrar Hito"
       sure: "¿Esta seguro que desea eliminar este hito permanentemente?"
 
-    create:
-      error: "Error al crear "
-
     see_all: "Ver todos los hitos"
 
     download_csv: 'Descargar CSV'
@@ -301,7 +298,6 @@ es:
     name: "Nombre"
     description: "Descripción"
     due_time: "Fecha límite"
-    start_time: "Fecha inicio"
     last_completed_milestones: "Últimos Hitos Completados"
     mentees:
       header: "Usuarios de los que soy referente"
@@ -344,9 +340,6 @@ es:
     edit:
       header: "Editar Categoría"
       submit: "Editar"
-
-    create:
-      zero:  "La categoría no existe"
 
     zero: "No hay categorías disponibles"
 

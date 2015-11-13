@@ -406,19 +406,31 @@ en:
     zero: "No roles found"
 
   skills:
-      index:
-        header: "Listing skills"
+    addrm:
+      select: 'seleccionar habilidad'
+      nomore_add: "No more skills available to add to"
+      nomore_remove: "No skills available to remove to"
+      add: "Add Skill"
+      remove: "Remove Skill"
       new:
-        header: "Create skill"
-        submit: "Create"
-      edit:
-        header: "Edit skill"
-        submit: "Edit"
+        title: 'have a new skill'
+        desc1: 'acquired the skill'
+      rm:
+        title: 'Deallocated skill to'
+        desc1: 'has no more the skill'
+    index:
+      header: "Listing skills"
+    new:
+      header: "Create skill"
+      submit: "Create"
+    edit:
+      header: "Edit skill"
+      submit: "Edit"
 
-      delete:
-        sure: "Are you sure you wish to delete this skill?"
+    delete:
+      sure: "Are you sure you wish to delete this skill?"
 
-      zero: "No skills found"
+    zero: "No skills found"
 
 
   technologies:

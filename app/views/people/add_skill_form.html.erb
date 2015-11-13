@@ -1,0 +1,35 @@
+<% I18n.locale = :es %>
+
+<div class="container">
+  <div class="row">
+    <div class="card-col col-xs-4 col-xs-offset-4">
+
+
+          <%= form_tag({controller: "people", action: "add_skill", method: "get"}, {:class => 'main-form'}) do %>
+              <h1>
+                <b>Skill</b></span><span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-user"></span>
+                <% t('mentor.adding_to') %> <br><br> <%= @person.name %>:</h1>
+              <input type="hidden" name="person_id" value="<%= @person.id %>">
+
+
+            <% if @posible_skills.empty? %>
+                <p> <%= t('skills.addrm.nomore_add')+' '+@person.name %></p>
+                <%= link_to t(:back), 'javascript:history.go(-1);' %>
+            <% else %>
+              <div class="field">
+                    <%= label_tag(t('skills.addrm.select'), nil, class: 'small_label') %>
+                    <br>
+                    <%= select_tag(:skill_id, options_from_collection_for_select(@posible_skills.all, :id, :name), :required => true) %>
+              </div>
+              <br>
+              <%= button_tag t('skills.addrm.add'), options= :type => 'submit', class: "btn btn-default" %>
+          <% end %>
+
+
+          <% end %>
+
+
+
+    </div>
+  </div>
+</div>

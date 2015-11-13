@@ -21,6 +21,7 @@ class CommandsController < ApplicationController
       { "name" => "Crear hito"      , "url" => "/milestones/new"    },
       { "name" => "Ver dashboard"      , "url" => "/dashboard/"     },
       { "name" => "Ver plantillas"      , "url" => "/templates/"    },
+      { "name" => "Ver tecnologias"      , "url" => "/technologies/"    },
       { "name" => "Ver colecciónes"      , "url" => "/collections/"  },
     ]
 

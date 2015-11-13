@@ -28,9 +28,7 @@ class TechnologiesController < ApplicationController
   def create
     @technology=Technology.new(technology_params.except(:icon))
     if technology_params[:icon].present?
-      preloaded = Cloudinary::PreloadedFile.new(technology_params[:icon])
-      raise "Invalid upload signature" if !preloaded.valid?
-      @technology.icon = preloaded.identifier
+      attach_icon(@technology, technology_params[:icon])
     end
     @technology.save
     if @technology.valid?
@@ -45,11 +43,9 @@ class TechnologiesController < ApplicationController
   def update
     if @technology.update(technology_params.except(:icon))
       if technology_params[:icon].present?
-        preloaded = Cloudinary::PreloadedFile.new(technology_params[:icon])
-        raise "Invalid upload signature" if !preloaded.valid?
-        @technology.icon = preloaded.identifier
-        @technology.save
+        attach_icon(@technology, technology_params[:icon])
       end
+      @technology.save
       flash.notice = "#{technology_params[:name]} " + t('messages.save.success')
       redirect_to technologies_path
     else
@@ -66,6 +62,13 @@ class TechnologiesController < ApplicationController
       flash.notice = "#{name} " + t('messages.delete.success')
     end
     redirect_to technologies_path
+  end
+
+
+  def attach_icon(technology, icon)
+    preloaded = Cloudinary::PreloadedFile.new(icon)
+    raise "Invalid upload signature" if !preloaded.valid?
+    technology.icon = preloaded.identifier
   end
 
   private

@@ -301,6 +301,7 @@ es:
     name: "Nombre"
     description: "Descripción"
     due_time: "Fecha límite"
+    start_time: "Fecha inicio"
     last_completed_milestones: "Últimos Hitos Completados"
     mentees:
       header: "Usuarios de los que soy referente"

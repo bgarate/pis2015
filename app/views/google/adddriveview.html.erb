@@ -45,5 +45,22 @@
             if (msj!=null)
                 msj.innerHTML="";
         });
+        $('#url').on('input',function(e){
+            var div =document.getElementById("div");
+            var msj =document.getElementById("msj");
+
+            $.get("checkurl", { URL: $('#url').val() },function(data, status){
+                //alert(data == 'ok');
+                if (data == 'ok' || data == 'notfound'){
+                    div.setAttribute("class", "form-group");
+                    if (msj!=null)
+                        msj.innerHTML="";
+                }else{
+                    div.setAttribute("class", "form-group has-error");
+                    if (msj!=null)
+                        msj.innerHTML="Url inválida";
+                }
+            });
+        });
     });
 </script>

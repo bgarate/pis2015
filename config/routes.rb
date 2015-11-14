@@ -125,7 +125,9 @@ Rails.application.routes.draw do
   post 'milestones/report' => 'milestones#report'
   resources :milestones do
     resources :notes
-    resources :objectives
+    resources :objectives do
+      post :check
+    end
     post :add_category
     post :next_status
     post :next_status_rej

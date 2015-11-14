@@ -9,7 +9,7 @@
         <% @milestone.objectives.each do |n| %>
             <li class="list-group-item">
                   <span class="badge">
-                    <%= link_to controller: 'objectives',
+                    <%= link_to milestone_objective_path,
                                 action: 'check',
                                 method: :post,
                                 data: { confirm: t('notes.delete.sure')},
@@ -25,7 +25,7 @@
                                 method: :delete,
                                 data: { confirm: t('notes.delete.sure')},
                                 class: 'delete' do %>
-                      <div class="glyphicon glyphicon-ok bagde-letter" style="color: white"></div>
+                      <div class="glyphicon glyphicon-ok" style="color: white"></div>
                     <% end %>
                   </span>
                   <%= n.description %>

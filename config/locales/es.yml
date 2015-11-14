@@ -405,6 +405,8 @@ es:
     zero: "No se han encontrado roles"
 
   skills:
+    technical: 'Técnica'
+    not_technical: 'No técnica'
     addrm:
       select: 'seleccionar habilidad'
       nomore_add: "No hay más habilidades disponibles para agregar a"

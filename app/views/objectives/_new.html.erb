@@ -1,7 +1,7 @@
 
 <div>
 
-  <%= form_for([@milestone, @milestone.checklist_items.build] , html: { 'data-toggle': 'validator'}) do |f| %>
+  <%= form_for([@milestone, @milestone.objectives.build] , html: { 'data-toggle': 'validator'}) do |f| %>
       <div class="input-group">
 
         <%= f.text_field :description, class: "submit-on-enter form-control", placeholder: t('milestones.checklist.add_more_items') %>

@@ -2,9 +2,9 @@
   <label>
     <%= t('milestones.checklist.actual_objetives') %>
   </label>
-  <% if !@milestone.checklist_items.empty? %>
+  <% if !@milestone.objectives.empty? %>
       <div class="list-group">
-        <% @milestone.checklist_items.each do |n| %>
+        <% @milestone.objectives.each do |n| %>
             <% if n.checked? %>
                 <del><a href="#" class="list-group-item disabled">
                   <%= n.description %>

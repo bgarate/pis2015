@@ -153,6 +153,7 @@ Rails.application.routes.draw do
   end
 
 
+
   get '/categories/destroy'
 
   resources :categories do

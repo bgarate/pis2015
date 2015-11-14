@@ -17,6 +17,17 @@ class ObjectivesController < ApplicationController
 
   end
 
+  def check
+    @objective=  @milestone.objectives.find(params[:id])
+    @objective.checked=true;
+    @objective.save!
+    @milestone.updated_at = Time.now
+    @milestone.save!
+
+    redirect_to @milestone
+
+  end
+
   def destroy
     @objective= @milestone.objectives.find(params[:id])
     @objective.destroy

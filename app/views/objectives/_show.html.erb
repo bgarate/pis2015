@@ -2,17 +2,35 @@
   <label>
     <%= t('milestones.checklist.actual_objetives') %>
   </label>
-  <% if !@milestone.objectives.empty? %>
+  <% if @milestone.objectives.empty? %>
+      <p>No hay objetivos para el Hito</p>
+  <% else%>
       <div class="list-group">
         <% @milestone.objectives.each do |n| %>
-            <% if n.checked? %>
-                <del><a href="#" class="list-group-item disabled">
+            <li class="list-group-item">
+                  <span class="badge">
+                    <%= link_to controller: 'objectives',
+                                action: 'check',
+                                method: :post,
+                                data: { confirm: t('notes.delete.sure')},
+                                class: 'delete' do %>
+                      <div class="glyphicon glyphicon-remove" style="color: white"></div>
+                    <% end %>
+                  </span>
+              <% if n.checked? %>
+                  <del><%= n.description %></del>
+              <% else %>
+                    <span class="badge">
+                    <%= link_to [n.milestone, n],
+                                method: :delete,
+                                data: { confirm: t('notes.delete.sure')},
+                                class: 'delete' do %>
+                      <div class="glyphicon glyphicon-ok bagde-letter" style="color: white"></div>
+                    <% end %>
+                  </span>
                   <%= n.description %>
-                </a>
-                </del>
-            <% else %>
-                <a href="#" class="list-group-item"><%= n.description %></a>
-            <% end %>
+              <% end %>
+            </li>
         <% end %>
       </div>
   <% end %>

@@ -184,10 +184,13 @@ class MilestonesController < ApplicationController
       @milestone.author_id = current_user.person_id
 
       #ASSIGNED
-      if params[:people]!=nil
-        params[:people].each do |p|
-        @person2=Person.find(p)
-        @milestone.people<<@person2
+      if params[:allPeople]
+        assigned = Person.all.select(:id)
+        assign_multiple_users(@milestone, assigned)
+      else
+        if params[:people]!=nil
+          assigned = params[:people]
+          assign_multiple_users(@milestone, assigned)
         end
       end
 
@@ -270,6 +273,16 @@ class MilestonesController < ApplicationController
     redirect_to @milestone
   end
   # Por ahora queda asi, deberia ser @milestone.category= @category
+
+
+  def assign_multiple_users(milestone, assigned)
+    assigned.each do |p|
+      person=Person.find(p)
+      milestone.people<<person
+    end
+    milestone.save
+  end
+
 
   def show
     if @milestone

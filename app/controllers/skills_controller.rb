@@ -46,7 +46,9 @@ class SkillsController < ApplicationController
   end
 
   def destroy
-    if @skill
+    if @skill.person_skill.nil?
+      @skill.destroy
+    else
       name = @skill.name
       @skill.validity=false
       @skill.save
@@ -57,7 +59,7 @@ class SkillsController < ApplicationController
 
   private
   def skill_params
-    params.require(:skill).permit(:name,:icon)
+    params.require(:skill).permit(:name,:technical, :icon)
   end
 
 

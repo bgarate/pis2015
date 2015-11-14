@@ -11,11 +11,25 @@
     <% end %>
   <% end %>
   </h1>
-  <h2 stryle="overflow: hidden; text-overflow: ellipsis;"><%= @trole %></h2>
+  <h2 style="overflow: hidden; text-overflow: ellipsis;"><%= @trole %></h2>
   <ul id="skills">
     <% @skills.each do |s| %>
         <li><%= image_tag s.icon %></li>
     <% end %>
+    <%if current_user_admin? %>
+        <li class="plus" >
+          <a href="add_skill_form?person_id=<%=@identifier%>" role="button">
+            <span class="glyphicon glyphicon-plus"></span>
+          </a>
+        </li>
+        <% if !@skills.empty? %>
+            <li class="minus" >
+              <a href="remove_skill_form?person_id=<%=@identifier%>" role="button">
+                <span class="glyphicon glyphicon-minus"></span>
+              </a>
+            </li>
+        <%end%>
+    <%end%>
   </ul>
   <hr>
   <h4><%= t('mentor.header') %></h4>

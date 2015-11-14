@@ -8,6 +8,7 @@
         <tr>
           <td><%= t('dashboard.name')  %></td>
           <td><%= t('dashboard.description')  %></td>
+          <td><%= t('dashboard.start_time') %></td>
           <td><%= t('dashboard.due_time')  %></td>
         </tr>
         </thead>
@@ -17,6 +18,15 @@
             <tr>
               <td><%= link_to mil.title, milestone_path(mil), method: :get%></td>
               <td><%= mil.description.truncate(50) %></td>
+              <td>
+
+                <% if mil.start_date != nil %>
+                    <div class="calendar left">
+                      <%= l(mil.start_date, format: "%A, %B %d %Y") %>
+                    </div>
+                <% end %>
+
+              </td>
               <td>
 
                 <% if mil.due_date != nil %>

@@ -28,7 +28,7 @@
               <tr>
                 <td><%= t.id %></td>
                 <td><%= t.name %></td>
-                <td><%= image_tag t.icon %></td>
+                <td><%= cl_image_tag(t.icon) %></td>
                 <td>
                 <% if t.technical %>
                   <%= t('skills.technical') %>

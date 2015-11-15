@@ -18,6 +18,7 @@
           <tr>
             <th class="small-image-col"><%= t('icon') %></th>
             <th><%= t('name') %></th>
+
             <th><%= t('type') %></th>
             <th></th>
           </tr>
@@ -27,6 +28,7 @@
               <tr>
                 <td><%= image_tag t.icon %></td>
                 <td><%= t.name %></td>
+     
                 <td>
                 <% if t.technical %>
                   <%= t('skills.technical') %>

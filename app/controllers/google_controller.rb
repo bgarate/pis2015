@@ -115,4 +115,37 @@ class GoogleController < ApplicationController
         redirect_to root_path
       end
   end
+
+  def checkurl
+    url = params[:URL]
+    u = current_user
+    result = :error
+
+    if u and url
+      session = GoogleDrive.login_with_oauth(u.oauth_token)
+
+      begin
+        f = session.file_by_url(url)
+        #se logro encontrar el resorce
+        result = :ok
+
+      rescue Google::APIClient::ClientError
+        #no se logro encontrar el resorce
+        result = :notfound
+
+      rescue GoogleDrive::Error
+        #url no es valida
+        result = :invalid
+
+      rescue URI::InvalidURIError
+        #url no es valida
+        result = :invalid
+
+      end
+    end
+
+    respond_to do |format|
+      format.json  { render :json => result }
+    end
+  end
 end

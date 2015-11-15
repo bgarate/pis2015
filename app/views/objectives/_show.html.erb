@@ -9,22 +9,22 @@
         <% @milestone.objectives.each do |n| %>
             <li class="list-group-item">
                   <span class="badge">
-                    <%= link_to milestone_objective_check_path(@milestone.id,n.id),
-                                method: :post,
-                                class: 'delete' do %>
-                      <div class="glyphicon glyphicon-ok objective-badge"></div>
-                    <% end %>
-                  </span>
-              <% if n.checked? %>
-                  <del><%= n.description %></del>
-              <% else %>
-                    <span class="badge">
                     <%= link_to [n.milestone, n],
                                 method: :delete,
                                 class: 'delete' do %>
                       <div class="glyphicon glyphicon-remove objective-badge"></div>
                     <% end %>
                   </span>
+              <% if n.checked? %>
+                  <del><%= n.description %></del>
+              <% else %>
+                    <span class="badge">
+                          <%= link_to milestone_objective_check_path(@milestone.id,n.id),
+                                      method: :post,
+                                      class: 'delete' do %>
+                            <div class="glyphicon glyphicon-ok objective-badge"></div>
+                          <% end %>
+                      </span>
                   <%= n.description %>
               <% end %>
             </li>

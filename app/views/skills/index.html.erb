@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-8 col-xs-offset-2">
 
       <div class="table-container table-difrows">
 
@@ -16,19 +16,17 @@
 
           <thead>
           <tr>
-            <th><%= t('id') %></th>
+            <th class="small-image-col"><%= t('icon') %></th>
             <th><%= t('name') %></th>
-            <th><%= t('icon') %></th>
             <th><%= t('type') %></th>
-            <th><%= t('actions') %></th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
           <% @skills.each do |t| %>
               <tr>
-                <td><%= t.id %></td>
-                <td><%= t.name %></td>
                 <td><%= image_tag t.icon %></td>
+                <td><%= t.name %></td>
                 <td>
                 <% if t.technical %>
                   <%= t('skills.technical') %>
@@ -37,7 +35,7 @@
                 <%end%>
                 </td>
                 <% if current_user_admin? %>
-                    <td>
+                    <td class="actions">
                       <%= link_to edit_skill_path(t) do%>
                           <span class='large-text glyphicon glyphicon-pencil'></span>
                       <% end %>
@@ -48,8 +46,8 @@
                       <% end %>
                     </td>
                 <%else%>
-                    <td></td>
-                    <td></td>
+                    <td class="actions"></td>
+                    <td class="actions"></td>
                 <%end%>
               </tr>
           <% end %>

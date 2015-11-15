@@ -9,8 +9,7 @@
         <% @milestone.objectives.each do |n| %>
             <li class="list-group-item">
                   <span class="badge">
-                    <%= link_to milestone_objective_path(n),
-                                action: 'check',
+                    <%= link_to milestone_objective_check_path(@milestone.id,n.id),
                                 method: :post,
                                 class: 'delete' do %>
                       <div class="glyphicon glyphicon-ok objective-badge"></div>

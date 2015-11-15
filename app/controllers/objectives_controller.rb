@@ -1,6 +1,6 @@
 class ObjectivesController < ApplicationController
 
-  before_action :get_milestone, only: [:create, :destroy]
+  before_action :get_milestone, only: [:create,:check, :destroy]
   skip_before_action :admin?, only: [:create]
 
 
@@ -18,14 +18,12 @@ class ObjectivesController < ApplicationController
   end
 
   def check
-    @objective=  @milestone.objectives.find(params[:id])
-    @objective.checked=true;
+    @objective=@milestone.objectives.find(params[:objective_id])
+    @objective.checked=true
     @objective.save!
     @milestone.updated_at = Time.now
     @milestone.save!
-
     redirect_to @milestone
-
   end
 
   def destroy

@@ -1,10 +1,10 @@
 module PersonHelper
 
   def person_picture id
-      cl_image_tag(image_id_or_default(id))
+      cl_image_tag(imageIdOrDefault(id))
   end
 
-  def image_id_or_default id
+  def imageIdOrDefault(id)
     if id
       id
     else

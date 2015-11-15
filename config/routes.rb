@@ -183,7 +183,7 @@ Rails.application.routes.draw do
   get 'google/adddriveview'
   get 'google/adddrive'
   get 'google/driveerror'
-
+  get 'google/checkurl', :defaults => { :format => 'json' }
 
   #dashboard
   get  '/dashboard' => 'dashboard#index'

@@ -41,7 +41,12 @@ class SkillsController < ApplicationController
 
 
   def update
-    if @skill.update(skill_params)
+    if @skill.update(skill_params.except(:icon))
+      if skill_params[:icon].present?
+        preloaded = Cloudinary::PreloadedFile.new(skill_params[:icon])
+        raise "Invalid upload signature" if !preloaded.valid?
+        @skill.icon = preloaded.identifier
+      end
       flash.notice = "#{skill_params[:name]} " + t('messages.save.success')
       redirect_to skills_path
     else

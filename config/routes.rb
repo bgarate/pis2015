@@ -132,6 +132,9 @@ Rails.application.routes.draw do
   post 'milestones/report' => 'milestones#report'
   resources :milestones do
     resources :notes
+    resources :objectives do
+      post :check
+    end
     post :add_category
     post :next_status
     post :next_status_rej
@@ -157,6 +160,7 @@ Rails.application.routes.draw do
       post 'new' => 'collections#create'
     end
   end
+
 
 
   get '/categories/destroy'
@@ -188,6 +192,7 @@ Rails.application.routes.draw do
   #dashboard
   get  '/dashboard' => 'dashboard#index'
   post '/dashboard' => 'dashboard#index'
+
 
   get "/commands" => "commands#index", defaults: {format: :json}
 

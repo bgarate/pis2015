@@ -1,0 +1,26 @@
+<%if @milestone.resources.empty?%>
+    <p class="text-center">
+      <small>
+        <%= t(:nonattachmentsdocs) %>
+      </small>
+    </p>
+<%end%>
+<ul>
+  <%@milestone.resources.each do |r|%>
+      <li class="clearfix">
+        <h2>
+          <span class="glyphicon glyphicon glyphicon-paperclip"></span>
+          &nbsp;&nbsp;
+          <%=link_to r.title.truncate(60), r.url, :target => "_blank"%>
+        </h2>
+      </li>
+  <%end%>
+</ul>
+
+<h5 class="text-center">
+  <% if can_modify_milestone?(@milestone.id) %>
+      <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => @milestone.id do%>
+          <span class="glyphicon glyphicon-plus"></span>
+      <% end %>
+  <% end %>
+</h5>

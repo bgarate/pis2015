@@ -23,6 +23,7 @@ class CommandsController < ApplicationController
       { "name" => "Ver plantillas"      , "url" => "/templates/"    },
       { "name" => "Ver tecnologias"      , "url" => "/technologies/"    },
       { "name" => "Ver colecciónes"      , "url" => "/collections/"  },
+      { "name" => "Ver habilidades"      , "url" => "/skills/"  },
     ]
 
     respond_with commands

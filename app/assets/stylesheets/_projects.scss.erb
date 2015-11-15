@@ -32,7 +32,18 @@
         }
     }
 
+    #buttonTwo {
+        border-radius: 0;
+        background-color: $peterriver;
+        border: none;
+        color: white;
 
+        &:active, &:focus {
+            background-color: $peterriver-focus;
+            color: white;
+            box-shadow: none;
+        }
+    }
 
 
 
@@ -55,3 +66,14 @@
     }
 }
 
+td.project-inactive {
+    a {
+        color: grey;
+    }
+}
+
+td.project-finished {
+    a {
+        text-decoration:line-through;
+    }
+}

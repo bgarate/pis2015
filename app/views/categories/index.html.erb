@@ -14,14 +14,13 @@
         <table class="table datatable" data-info="false">
           <thead>
           <tr>
-            <td></td>
-            <td><%= t('categories.name') %></td>
-            <td><%= t('categories.feedback') %></td>
-            <td><%= t('categories.status') %></td>
-            <td></td>
-
+            <th></th>
+            <th><%= t('categories.name') %></th>
+            <th><%= t('categories.feedback') %></th>
+            <th><%= t('categories.status') %></th>
+            <th></th>
             <% if current_user_admin? %>
-                <th><%= t('milestones.actions') %></th>
+                <th></th>
             <% end %>
           </tr>
           </thead>
@@ -40,11 +39,11 @@
                 <td><%=  I18n.t("categories.display_status.#{c.status}") %> </td>
                 <td></td>
                 <% if current_user_admin? %>
-                    <td>
+                    <td class="actions">
 
 
                       <%= link_to edit_category_path(c) do%>
-                          <span class='large-text glyphicon glyphicon-pencil'></span>
+                          <span class='glyphicon glyphicon-pencil'></span>
                       <% end %>
 
                       <% if (c.status == "active") %>
@@ -52,14 +51,14 @@
                           <%= link_to categories_destroy_path(category_id: c.id),
                                         data: { confirm: t('categories.delete.sure') } do %>
 
-                              <span class='large-text glyphicon glyphicon-trash'></span>
+                              <span class='glyphicon glyphicon-trash'></span>
                           <% end %>
                       <% end %>
 
                       <% if (c.status == "inactive") %>
 
                           <%= link_to  category_activate_path(c.id), method: :post,  data: { confirm: "#{t('categories.activate_sure')}" } do %>
-                              <span class='large-text glyphicon glyphicon-retweet'></span>
+                              <span class='glyphicon glyphicon-retweet'></span>
                           <% end %>
 
                       <% end %>

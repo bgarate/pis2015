@@ -1,0 +1,103 @@
+/**
+ * Filter API
+ * Tabla - .filter-table
+ * Filter
+ *       - .filter
+ *       - data-name - Nombre del filtro en el post
+ * Column
+ *       - th
+ *       - data-name - Nombre de la columna
+ *       -
+ *
+ */
+
+var datatables_spanisn_language = {
+    "sProcessing": "Procesando...",
+    "sLengthMenu": "Mostrar _MENU_ registros",
+    "sZeroRecords": "No se encontraron resultados",
+    "sEmptyTable": "Ningún dato disponible en esta tabla",
+    "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+    "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+    "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+    "sInfoPostFix": "",
+    "sSearch": "Buscar:",
+    "sUrl": "",
+    "sInfoThousands": ",",
+    "sLoadingRecords": "Cargando...",
+    "oPaginate": {
+        "sFirst": "Primero",
+        "sLast": "Último",
+        "sNext": "Siguiente",
+        "sPrevious": "Anterior"
+    },
+    "oAria": {
+        "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+    }
+};
+
+var datablefilters_ready = function() {
+
+
+    function dataFill(data) {
+        $(".filter").each(function(){
+            var value;
+            if($(this).is("select")) {
+                value = $.map($(this).find("option:selected"), function(item) {
+                    return $(item).val();
+                }).join(',');
+            } else {
+                value = $(this).val();
+            }
+            return data[$(this).attr("data-name")] = value;
+        });
+    }
+
+    var columns = $(".filter-table th").map(function(i) {
+        var obj = {};
+        var dataName = $(this).attr("data-name");
+        var name = dataName ? dataName : i.toString();
+        obj.data = name;
+        obj.name = name;
+        return obj;
+    }).toArray();
+
+
+    var table = $('.filter-table').DataTable({
+        processing: true,
+        paging: true,
+        serverSide: true,
+        ajax: {
+            url: window.location.href,
+            type: 'POST',
+            data: dataFill
+        },
+        order: [],
+        dom: 'lrtip',
+        columns: columns
+        <% if I18n.locale == :es %>
+        ,language: datatables_spanisn_language
+        <% end %>
+    });
+
+    $('.reset-filters').click(function(){
+        $(".chosen").val('').trigger("chosen:updated");
+        $( '.filter').val('');
+        table.search('').columns().search('');
+        table.draw();
+    });
+
+    var datepickers = $('.filter[data-provide=datepicker]');
+
+    datepickers.on('changeDate clearDate', function (ev,d) {
+        if ((this.value.length == 0) || (this.value.length == 10)) {
+            table.draw();
+        }
+    });
+
+    $('.filter').not(datepickers).on('keydown change', function (ev) {
+        table.draw();
+    });
+
+
+};

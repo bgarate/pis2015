@@ -52,9 +52,11 @@ en:
   from: 'from'
   to: 'to'
   filters: 'Filters'
+  nofilter: 'No filter'
   all: 'All...'
   reset: 'Reset'
   icon: 'Icon'
+  type: 'Type'
   tags: 'Tags'
   actions: 'Actions'
   status: 'Status'
@@ -95,6 +97,7 @@ en:
   people:
 
     add_tech_role: "Add Tech Role"
+    add_skills: "Add Skills"
 
     list:
       header: "Users"
@@ -118,6 +121,7 @@ en:
       other_notes: "View %{count} other notes"
       submit: "Create"
       role: "Role"
+      skills: "Skills"
 
     edit_picture:
       header: "Edit profile image"
@@ -284,6 +288,9 @@ en:
       title: "Delete Milestone"
       sure: "Are you sure you want to permanently delete this milestone?"
 
+    create:
+      error: "Error creating "
+
     see_all: "See all milestones"
 
     download_csv: 'Download CSV'
@@ -295,6 +302,7 @@ en:
     name: "Name"
     description: "Description"
     due_time: "Due date"
+    start_time: "Start date"
     last_completed_milestones: "Latest Milestones Completed"
     mentees:
       header: "Mentees"
@@ -318,6 +326,12 @@ en:
     updated: "Updated at"
     doc_url: "Document URL"
     feedback: "Feedback"
+    status: "Status"
+    activate_sure: "¿Are you sure you want to activate this category?"
+
+    display_status:
+      active: 'Active'
+      inactive: 'Inactive'
 
     delete:
       title: "Delete Category"
@@ -331,6 +345,9 @@ en:
     edit:
       header: "Edit Category"
       submit: "Edit"
+
+    create:
+      zero:  "The category does not exists"
 
     zero: "There are no available Categories"
 
@@ -388,9 +405,53 @@ en:
 
     zero: "No roles found"
 
+  skills:
+    technical: 'Technical'
+    not_technical: 'Not technical'
+    addrm:
+      select: 'seleccionar habilidad'
+      nomore_add: "No more skills available to add to"
+      nomore_remove: "No skills available to remove to"
+      add: "Add Skill"
+      remove: "Remove Skill"
+      new:
+        title: 'have a new skill'
+        desc1: 'acquired the skill'
+      rm:
+        title: 'Deallocated skill to'
+        desc1: 'has no more the skill'
+    index:
+      header: "Listing skills"
+    new:
+      header: "Create skill"
+      submit: "Create"
+    edit:
+      header: "Edit skill"
+      submit: "Edit"
+
+    delete:
+      sure: "Are you sure you wish to delete this skill?"
+
+    zero: "No skills found"
+
+
+  technologies:
+      index:
+        header: "Listing technologies"
+      new:
+        header: "Create technology"
+        submit: "Create"
+      edit:
+        header: "Edit technology"
+        submit: "Edit"
+      delete:
+        sure: "Are you sure you wish to delete this technology?"
+      zero: "No technologies found"
+
 
   # Milestone Template Collections
   collections:
+    nooffset: 'Without offset'
     header: 'Milestone Templates Collections'
     new:
       header: 'Create Milestone Templates Collection'

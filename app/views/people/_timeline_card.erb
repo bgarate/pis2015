@@ -21,7 +21,12 @@
                       <span class="milestone-highlight small false"></span>
                     <%end%>
                   <%end%>
-                    <h2 class="title"><%=link_to e.title, e, method: :get%></h2>
+                    <h2 class="title">
+                      <%=link_to e.title, e, method: :get%>
+                      <% if e.category %>
+                          <small> <%= e.category.name %></small>
+                      <% end %>
+                    </h2>
                 <%else%>
                     <% if can_modify_milestone?e.id %>
                       <%= milestone_highlight(e, :small)%>
@@ -32,7 +37,13 @@
                         <span class="milestone-highlight small false"></span>
                       <%end%>
                     <%end%>
-                    <strike><h2 class="title"><%=link_to e.title, e, method: :get%></h2></strike>
+
+                      <h2 class="title">
+                        <strike><%=link_to e.title, e, method: :get%></strike>
+                        <% if e.category %>
+                            <small> <%= e.category.name %></small>
+                        <% end %>
+                      </h2>
                 <%end%>
               </div>
               <div class="col-xs-2">

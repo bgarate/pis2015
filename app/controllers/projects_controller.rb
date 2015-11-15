@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @technologies = Technology.all.order('LOWER(name)')
+    @technologies = Technology.where(validity: 'true').order('LOWER(name)')
   end
 
   def create
@@ -113,6 +113,20 @@ class ProjectsController < ApplicationController
     event.fire
 
     redirect_to :back
+  end
+
+  #devuelve true si puedo desasginar al usuario de un proyecto
+  helper_method :can_unassign_person?
+  def can_unassign_person? (target)
+
+    yo = current_person
+
+    if (yo.admin?) || (yo == target) || (yo.mentees.include?(target) )
+      true
+    else
+      false
+    end
+
   end
 
   private

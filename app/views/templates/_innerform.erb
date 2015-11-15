@@ -20,7 +20,7 @@
         <% else %>
             <div id="div" class="form-group">
         <% end %>
-            <%= m.text_field :doc_url, class: "form-control", 'data-validation':"required" %>
+            <%= m.text_field :doc_url, class: "form-control"%>
             <% if params[:error] %>
                 <span id="msj" class="help-block form-error"><%= t(:invalidurl) %></span>
             <% end %>

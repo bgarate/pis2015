@@ -88,6 +88,7 @@ Rails.application.routes.draw do
     post :switch_admin
     get :show_pending_timeline
     get :show_not_pending_timeline
+    get :show_timeline_cat_fil
     collection do
       get 'me'
       post 'switch_admin'
@@ -95,6 +96,10 @@ Rails.application.routes.draw do
       get 'add_mentor_form'
       post 'remove_mentor'
       get 'remove_mentor_form'
+      post 'add_skill'
+      get 'add_skill_form'
+      post 'remove_skill'
+      get 'remove_skill_form'
       post 'edit_profile_pic'
       get 'edit_profile_pic_form'
       get 'new' => 'people#new'
@@ -119,6 +124,8 @@ Rails.application.routes.draw do
   resources :tags
 
   resources :tech_roles
+
+  resources :skills
 
   #hitos
   get 'milestones/report' => 'milestones#report'
@@ -159,8 +166,17 @@ Rails.application.routes.draw do
   get '/categories/destroy'
 
   resources :categories do
+    post :activate
     resources :milestones
+
+    collection do
+      post 'activate'
+    end
   end
+
+
+  # Technologies
+  resources :technologies
 
   # Google auth
   get '/auth/google_oauth2/callback', to: 'google#callback'
@@ -174,7 +190,8 @@ Rails.application.routes.draw do
 
 
   #dashboard
-  resources :dashboard
+  get  '/dashboard' => 'dashboard#index'
+  post '/dashboard' => 'dashboard#index'
 
 
   get "/commands" => "commands#index", defaults: {format: :json}

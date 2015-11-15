@@ -52,9 +52,11 @@ es:
   from: 'desde'
   to: 'hasta'
   filters: 'Filtros'
+  nofilter: 'Sin Filtro'
   all: 'Todos...'
   reset: 'Limpiar'
   icon: 'Icono'
+  type: 'Tipo'
   actions: 'Acciones'
   status: 'Estado'
   start_date: 'Fecha inicio'
@@ -95,7 +97,7 @@ es:
   people:
 
     add_tech_role: "Agregar Rol Técnico"
-
+    add_skills: "Agregar Habilidades"
 
     list:
       header: "Lista de Personas"
@@ -119,6 +121,7 @@ es:
       other_notes: "Ver %{count} notas restantes"
       submit: "Crear"
       role: "Rol"
+      skills: "Habilidades"
     edit:
       header: "Editar Usuario"
       submit: "Editar"
@@ -290,14 +293,18 @@ es:
       title: "Borrar Hito"
       sure: "¿Esta seguro que desea eliminar este hito permanentemente?"
 
+    create:
+      error: "Error al crear "
+
     see_all: "Ver todos los hitos"
 
 
     checklist:
       add_more_items: "Escriba otro objetivo"
       add_to_milestone: "Agregar al Hito"
-      actual_objetives: "Objetivos Actuales"
+      actual_objectives: "Objetivos Actuales"
       add_checklist: "Agregar Objetivos"
+      no_objectives_yet: "No hay objetivos para el Hito"
 
     download_csv: 'Descargar CSV'
 
@@ -310,10 +317,11 @@ es:
     name: "Nombre"
     description: "Descripción"
     due_time: "Fecha límite"
+    start_time: "Fecha inicio"
     last_completed_milestones: "Últimos Hitos Completados"
     mentees:
-      header: "Usuarios Mentoreados"
-      zero: "No hay usuarios mentoreados"
+      header: "Usuarios de los que soy referente"
+      zero: "No hay usuarios de los que soy referente"
     milestones:
       header: "Mis hitos pendientes"
       zero: "No hay hitos pendientes"
@@ -333,6 +341,12 @@ es:
     updated: "Actualizado"
     doc_url: "URL del Documento"
     feedback: "Feedback"
+    status: "Estado"
+    activate_sure: "¿Está seguro que desea activar esta categoría?"
+
+    display_status:
+      active: 'Activa'
+      inactive: 'Inactiva'
 
     delete:
       title: "Borrar Categoria"
@@ -346,6 +360,9 @@ es:
     edit:
       header: "Editar Categoría"
       submit: "Editar"
+
+    create:
+      zero:  "La categoría no existe"
 
     zero: "No hay categorías disponibles"
 
@@ -403,9 +420,53 @@ es:
 
     zero: "No se han encontrado roles"
 
+  skills:
+    technical: 'Técnica'
+    not_technical: 'No técnica'
+    addrm:
+      select: 'seleccionar habilidad'
+      nomore_add: "No hay más habilidades disponibles para agregar a"
+      nomore_remove: "No hay habilidades disponibles para quitar a"
+      add: "Añadir Habilidad"
+      remove: "Quitar Habilidad"
+      new:
+        title: 'posee una nueva habilidad'
+        desc1: 'ha adquirido la habilidad'
+      rm:
+        title: 'Habilidad desasociada a'
+        desc1: 'no posee mas la habilidad'
+    index:
+      header: "Listando habilidades"
+    new:
+      header: "Crear habilidad"
+      submit: "Crear"
+    edit:
+      header: "Editar habilidad"
+      submit: "Editar"
+
+    delete:
+      sure: "¿Está seguro que desea eliminar la habilidad?"
+
+    zero: "No se han encontrado habilidades"
+
+
+  technologies:
+     index:
+       header: "Listando tecnologías"
+     new:
+       header: "Crear tecnología"
+       submit: "Crear"
+     edit:
+       header: "Editar tecnología"
+       submit: "Editar"
+     delete:
+       sure: "¿Está seguro que desea eliminar la tecnología?"
+     zero: "No se han encontrado tecnologías"
+
 
   # Colecciones de templates de hitos
   collections:
+    nooffset: 'Sin offset'
     header: 'Colecciones de Plantillas de Hito'
     new:
       header: 'Crear Colección de Plantillas de Hito'

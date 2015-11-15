@@ -29,7 +29,9 @@ class CollectionsController < ApplicationController
     (1..Integer(params[:count])).each do |i|
       if params["temp#{i}"] && params["offset#{i}"]
         template = Template.find_by(id: params["temp#{i}"])
-        days = params["offset#{i}"]
+        if params["offset#{i}"] != ''
+          days = params["offset#{i}"]
+        end
         elem = CollectionTemplate.new(collection: @collection, template: template, days: days)
         @collection.collection_templates << elem
       end
@@ -47,7 +49,7 @@ class CollectionsController < ApplicationController
   end
 
   def index
-    @collections = Collection.all
+    @collections = Collection.paginate(:page => params[:page], :per_page => 10)
     respond_to do |f|
       f.json { render json: name_and_path(@collections)}
       f.html { render }
@@ -75,7 +77,7 @@ class CollectionsController < ApplicationController
     p = Person.find_by(id: params[:person_id])
     unless @collection.nil? || p.nil?
       templates = @collection.collection_templates
-      templates.each do |ct|
+      templates.reverse.each do |ct|
         t = Template.find(ct.template_id)
         days = ct.days
         if t && p
@@ -91,10 +93,12 @@ class CollectionsController < ApplicationController
           m.author_id = current_user.person_id
 
           #DUE_DATE
-          if days > 0
-            m.due_date = Date.today + days
-          elsif days == 0
-            m.due_date = Date.today
+          if days
+            if days > 0
+              m.due_date = Date.today + days
+            elsif days == 0
+              m.due_date = Date.today
+            end
           end
 
           #Crear documento adjunto

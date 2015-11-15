@@ -1,20 +1,19 @@
 <div>
   <label>
-    <%= t('milestones.checklist.actual_objetives') %>
+    <%= t('milestones.checklist.actual_objectives') %>
   </label>
   <% if @milestone.objectives.empty? %>
-      <p>No hay objetivos para el Hito</p>
+      <p><%= t('milestones.checklist.no_objectives_yet') %></p>
   <% else%>
       <div class="list-group">
         <% @milestone.objectives.each do |n| %>
             <li class="list-group-item">
                   <span class="badge">
-                    <%= link_to milestone_objective_path,
+                    <%= link_to milestone_objective_path(n),
                                 action: 'check',
                                 method: :post,
-                                data: { confirm: t('notes.delete.sure')},
                                 class: 'delete' do %>
-                      <div class="glyphicon glyphicon-remove" style="color: white"></div>
+                      <div class="glyphicon glyphicon-ok objective-badge"></div>
                     <% end %>
                   </span>
               <% if n.checked? %>
@@ -23,9 +22,8 @@
                     <span class="badge">
                     <%= link_to [n.milestone, n],
                                 method: :delete,
-                                data: { confirm: t('notes.delete.sure')},
                                 class: 'delete' do %>
-                      <div class="glyphicon glyphicon-ok" style="color: white"></div>
+                      <div class="glyphicon glyphicon-remove objective-badge"></div>
                     <% end %>
                   </span>
                   <%= n.description %>

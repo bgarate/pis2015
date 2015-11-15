@@ -7,7 +7,7 @@
 
           <div class="form-group">
             <%= f.label t('name'), class: "control-label" %>
-            <%= f.text_field :name, class: "form-control", 'data-validation': "required" %>
+            <%= f.text_field :name, class: "form-control", 'data-validation': "required", :maxlength => "30"%>
           </div>
 
           <%= f.button t('tech_roles.new.submit'), options= :type => 'submit', class: "btn btn-default" %>

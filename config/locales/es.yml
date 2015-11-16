@@ -303,7 +303,7 @@ es:
       add_more_items: "Escriba otro objetivo"
       add_to_milestone: "Agregar al Hito"
       actual_objectives: "Objetivos Actuales"
-      add_checklist: "Agregar Objetivos"
+      add_checklist: "Agregar Objetivo"
       no_objectives_yet: "No hay objetivos para el Hito"
 
     download_csv: 'Descargar CSV'

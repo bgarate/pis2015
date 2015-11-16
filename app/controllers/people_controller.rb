@@ -103,7 +103,7 @@ class PeopleController < ApplicationController
   end
 
   def show_not_pending_timeline
-    @milestones = @person.milestones.where('milestones.status <> 0').order( completed_date: :desc,updated_at: :desc)
+    @milestones = @person.milestones.where('milestones.status <> 0').order(updated_at: :desc,completed_date: :desc)
     @filtered_not_pending_count = @milestones.size
     @filtered_pending_count = @person.milestones.size - @milestones.size
 

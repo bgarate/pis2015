@@ -21,6 +21,7 @@ describe MilestonesController, "Milestone Controller" do
     @no_ad_user.oauth_expires_at = Time.current().advance(days:1)
     @no_ad_user.save!
 
+    @c = Category.create :name=>'Una categoria', :icon=>'unicono'
     @m = Milestone.new
     @m.title = 'Conferencia Tecnológica'
     @m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
@@ -28,6 +29,7 @@ describe MilestonesController, "Milestone Controller" do
     @m.status=0
     @m.icon = "test/silueta.gif"
     @m.author= @admin
+    @m.category = @c
     @m.save!
 
     request.env["HTTP_REFERER"] = root_path

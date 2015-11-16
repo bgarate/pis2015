@@ -46,10 +46,14 @@
       <%= select_tag(:template, options_from_collection_for_select(@templates, :id, :title), :multiple => false,
                      class: "chzn-select", id: "tName",'data-placeholder'=> t('collections.new.templates.select'), 'style'=> 'width:100%') %>
     </div>
-    <div class="form-group col-xs-3">
+    <div class="form-group col-xs-2">
       <%= number_field_tag 'days', 0, in: 0...5000, id: "tDay" %>
     </div>
-    <div class="form-group col-xs-3">
+    <div class="form-group col-xs-2">
+      <input type="checkbox" name="nooff" id="nooff">
+      <label class="control-label"><small><%= t('collections.nooffset') %></small></label>
+    </div>
+    <div class="form-group col-xs-2">
       <p id="addTemp" style="color: green"><span class='large-text glyphicon glyphicon-plus'></span></p>
     </div>
   </div>
@@ -60,6 +64,16 @@
 </div>
 
 <script>
+    $("#nooff").click(function() {
+
+        if ($("#tDay").is(":visible")){
+            $("#tDay").hide();
+            $("#tDay").val('');
+        }else{
+            $("#tDay").show();
+            $("#tDay").val(0);
+        }
+    });
     $("#addTemp").click(function() {
 
         if ($("#empty").length > 0){
@@ -72,11 +86,9 @@
         var days = document.getElementById("tDay").value;
         var count = document.getElementById("count");
 
-        if (document.getElementById("tDay").value != ""){
-            count.value = parseInt(count.value) +1;
+        count.value = parseInt(count.value) +1;
+        $("#tempTable").append("<div class=\"row\" id=\"row"+count.value+"\"> <div class=\"form-group col-xs-6\"> <input type=\"hidden\" name=\"temp"+count.value+"\" value=\""+selectValue+"\"> "+selectText+" </div> <div class=\"form-group col-xs-3\"> <input type=\"hidden\" name=\"offset"+count.value+"\" value=\""+days+"\"> "+days+" </div> <div class=\"form-group col-xs-3\"> <p class=\"rmTemp\" value=\""+count.value+"\" style=\"color: red;\" ><span class='glyphicon glyphicon-remove'></span></p> </div> </div>");
 
-            $("#tempTable").append("<div class=\"row\" id=\"row"+count.value+"\"> <div class=\"form-group col-xs-6\"> <input type=\"hidden\" name=\"temp"+count.value+"\" value=\""+selectValue+"\"> "+selectText+" </div> <div class=\"form-group col-xs-3\"> <input type=\"hidden\" name=\"offset"+count.value+"\" value=\""+days+"\"> "+days+" </div> <div class=\"form-group col-xs-3\"> <p class=\"rmTemp\" value=\""+count.value+"\" style=\"color: red;\" ><span class='glyphicon glyphicon-remove'></span></p> </div> </div>");
-        }
     });
     $(document).on('click', ".rmTemp", function(e) {
         $("#row"+$(this).attr("value")).remove();

@@ -11,11 +11,13 @@ function search_ready(){
         prefetch: "/people.json"
     });
 
+    /*
     var milestones = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
         queryTokenizer: Bloodhound.tokenizers.whitespace,
         prefetch: "/milestones.json"
     });
+    */
 
     var projects = new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
@@ -29,9 +31,10 @@ function search_ready(){
         bloodhound.initialize(true);
     }
 
+    clearCaches(commands);
     clearCaches(projects);
     clearCaches(people);
-    clearCaches(milestones);
+    //clearCaches(milestones);
 
     $("#nav-search").typeahead({
         minLength: 1,
@@ -59,6 +62,7 @@ function search_ready(){
             }
         }
     },
+    /*
     {
         name: 'milestones',
         displayKey: 'name',
@@ -73,6 +77,7 @@ function search_ready(){
             }
         }
     },
+    */
     {
         name: 'projects',
         displayKey: 'name',

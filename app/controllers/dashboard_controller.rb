@@ -6,15 +6,20 @@ class DashboardController < ApplicationController
   def index
     person = Person.find(current_user.person_id)
 
-    @my_milestones = person.milestones.where('status = ?',Milestone.statuses[:pending]).order('LOWER(title)')
+    @my_milestones = person.milestones.where('status = ?',Milestone.statuses[:pending]).order(highlighted: :desc, due_date: :asc, updated_at: :desc)
     @my_mentees = person.mentees.order('LOWER(name)')
 
 
 
     if current_user_admin?
-      @milestones = Milestone.all.order('LOWER(title)')
+      @milestones = Milestone.all.where('status = ?',Milestone.statuses[:pending]).order(highlighted: :desc, due_date: :asc, updated_at: :desc)
     else
-      @milestones = get_mentees_milestones(current_person)
+      if (get_mentees_milestones(current_person)).length > 0
+        #@milestones = get_mentees_milestones(current_person).where('status = ?',Milestone.statuses[:pending]).order('LOWER(title)')
+        @milestones = get_mentees_milestones(current_person).where('status = ?',Milestone.statuses[:pending]).order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+      else
+        @milestones = get_mentees_milestones(current_person)
+      end
     end
 
     if request.get?
@@ -38,7 +43,7 @@ class DashboardController < ApplicationController
 
       @milestones = @milestones.where("category_id = ?", cat_id) if cat_id.present?
 
-      if people_ids.length > 0 then
+      if people_ids.length > 0 && !@milestones.empty? then
         @milestones = @milestones.joins("INNER JOIN (
                                         SELECT person_milestones.milestone_id
                                         FROM person_milestones
@@ -51,7 +56,9 @@ class DashboardController < ApplicationController
       if request.format.json?
         @recordsTotal = Milestone.all.size #Total records, before filtering (i.e. the total number of records in the database)
         @recordsFiltered = @milestones.size #Total records, after filtering (i.e. the total number of records after filtering has been applied - not just the number of records being returned for this page of data).
-        @milestones = @milestones.limit(params['length']).offset(params['start'])
+        if !@milestones.empty?
+          @milestones = @milestones.limit(params['length']).offset(params['start'])
+        end
       end
 
     end

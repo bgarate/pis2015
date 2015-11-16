@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
   end
 
   def new
-    @technologies = Technology.all.order('LOWER(name)')
+    @technologies = Technology.where(validity: 'true').order('LOWER(name)')
   end
 
   def create
@@ -140,6 +140,7 @@ class ProjectsController < ApplicationController
       {"name" => p.name, "url" => project_path(p)}
     end
   end
+
 
 
 end

@@ -103,7 +103,7 @@ class PeopleController < ApplicationController
   end
 
   def show_not_pending_timeline
-    @milestones = @person.milestones.where('milestones.status <> 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+    @milestones = @person.milestones.where('milestones.status <> 0').order(updated_at: :desc,completed_date: :desc)
     @filtered_not_pending_count = @milestones.size
     @filtered_pending_count = @person.milestones.size - @milestones.size
 
@@ -160,6 +160,7 @@ class PeopleController < ApplicationController
   def new
     @person = Person.new
     @roles=TechRole.where(validity: 'true').order('LOWER(name)')
+    @skills= Skill.where(validity: 'true').order('LOWER(name)')
   end
 
   def create
@@ -170,6 +171,7 @@ class PeopleController < ApplicationController
       @person.image_id = preloaded.identifier
     end
 
+    @person.skill_ids=params[:skills]
     if @person.valid?
       @person.save
       flash.notice = "'#{person_params[:name]}' " + t('messages.create.success')
@@ -205,6 +207,7 @@ class PeopleController < ApplicationController
       flash.alert= t('not_authorized')
       redirect_to people_path
     end
+    @skills=Skill.where(validity: 'true').order('LOWER(name)')
     @roles=TechRole.where(validity: 'true').order('LOWER(name)')
   end
 
@@ -215,6 +218,7 @@ class PeopleController < ApplicationController
 
     @person.tech_role_id=params[:tech_role_id]
     if @person.update_attributes(person_params.except(:image_id))
+      @person.skill_ids=params[:skills]
       if person_params[:image_id].present?
         preloaded = Cloudinary::PreloadedFile.new(person_params[:image_id])
         raise "Invalid upload signature" if !preloaded.valid?
@@ -288,6 +292,62 @@ class PeopleController < ApplicationController
     end
   end
 
+  def add_skill_form
+    @person=Person.find(params[:person_id])
+    @posible_skills=Skill.all.where("id NOT IN (SELECT skill_id FROM person_skills WHERE person_id=?)",params[:person_id]).order('LOWER(name)')
+    render :file => "app/views/people/add_skill_form"
+  end
+
+  def remove_skill_form
+    @person=Person.find(params[:person_id])
+    @skills = @person.skills
+  end
+
+  def add_skill
+    person=Person.find(params[:person_id])
+    skill = Skill.find(params[:skill_id])
+    if person && skill
+      person.skills<<(skill)
+
+      #generar hito
+      milestone = Milestone.new
+      milestone.author = current_person
+      milestone.completed_date = Time.now
+      milestone.status = :done
+      milestone.people << person
+      milestone.category = Category.get_or_create_history_category
+      milestone.icon = milestone.category.icon
+      milestone.title = "#{person.name} #{I18n.translate('skills.addrm.new.title')}"
+      milestone.description = "#{person.name} #{I18n.translate('skills.addrm.new.desc1')} '#{skill.name}'"
+      milestone.save!
+    end
+
+    redirect_to person
+  end
+
+  def remove_skill
+    person=Person.find(params[:person_id])
+    skill = Skill.find(params[:skill_id])
+
+    #Eliminar mentor
+    ps = PersonSkill.find_by(person_id: params[:person_id], skill_id: params[:skill_id])
+    if ps
+      ps.destroy!
+
+      #generar hito
+      milestone = Milestone.new
+      milestone.author = current_person
+      milestone.completed_date = Time.now
+      milestone.status = :done
+      milestone.people << person
+      milestone.category = Category.get_or_create_history_category
+      milestone.icon = milestone.category.icon
+      milestone.title = "#{I18n.translate('skills.addrm.rm.title')} #{person.name}"
+      milestone.description = "#{person.name} #{I18n.translate('skills.addrm.rm.desc1')} '#{skill.name}'"
+      milestone.save!
+    end
+    redirect_to person
+  end
 
   private
   def person_params

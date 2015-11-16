@@ -15,7 +15,6 @@
           <thead>
           <tr>
             <th></th>
-
             <th><%= t('project.name') %></th>
             <th><%= t('project.client') %></th>
             <th><%= t('project.start_date') %></th>
@@ -29,22 +28,25 @@
           <tbody>
           <% @projects.each do |m| %>
               <tr>
-                <td><%=  I18n.t("project.display_status.#{m.status}") %> </td>
-                <td><%= link_to m.name, project_path(m)%></td>
+                <td>
+                  <%= project_status_glyphicon(m) %>
+                  <span class="small"><%=  I18n.t("project.display_status.#{m.status}") %></span>
+                </td>
+                <td class="project-<%= m.status %>"><%= link_to m.name, project_path(m)%></td>
                 <td><%= m.client %></td>
                 <td><div class="calendar left"><%= m.start_date %></div></td>
                 <td><div class="calendar left"><%= m.end_date %></div></td>
                 <% if current_user_admin? %>
-                    <td><%= link_to edit_project_path(m) do%>
-                        <span class='large-text glyphicon glyphicon-pencil'></span>
+                    <td class="actions"><%= link_to edit_project_path(m) do%>
+                        <span class='glyphicon glyphicon-pencil'></span>
                       <% end %>
                     </td>
 
-                    <td><%= link_to project_path(m),
+                    <td class="actions"><%= link_to project_path(m),
                                     method: :delete,
                                     data: { confirm: t('project.delete.sure') } do %>
 
-                          <span class='large-text glyphicon glyphicon-trash'></span>
+                          <span class='glyphicon glyphicon-trash'></span>
                       <% end %>
                     </td>
                 <% end %>

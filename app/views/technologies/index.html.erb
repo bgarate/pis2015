@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+
+      <div class="table-container table-difrows">
+
+        <h1>
+          <% if current_user_admin? %>
+              <%= link_to new_technology_path do%>
+                  <span class='large-text glyphicon glyphicon-plus table-add-button pull-left'>  </span>
+              <% end %>
+          <% end %>
+          <%= t('technologies.index.header') %>
+        </h1>
+        <table class="table datatable" data-info="false">
+
+          <thead>
+          <tr>
+            <th><%= t('icon') %></th>
+            <th><%= t('name') %></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @technologies.each do |t| %>
+              <tr>
+                <td>
+                  <div id="profile-picture-<%= t.id %>" class="profile_picture">
+                    <div class="img-container">
+
+                      <%= technology_icon t.icon %>
+                    </div>
+                  </div>
+                </td>
+                <td><%= t.name %></td>
+                <% if current_user_admin? %>
+                    <td class="actions">
+                      <%= link_to edit_technology_path(t) do%>
+                          <span class='glyphicon glyphicon-pencil'></span>
+                      <% end %>
+                      <%= link_to technology_path(t),
+                                  method: :delete,
+                                  data: { confirm: t('technologies.delete.sure') } do %>
+                          <span class='glyphicon glyphicon-trash'></span>
+                      <% end %>
+                    </td>
+                <%else%>
+                    <td></td>
+                    <td></td>
+                <%end%>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <%= will_paginate @technologies %>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+

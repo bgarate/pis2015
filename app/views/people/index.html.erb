@@ -19,7 +19,7 @@
               <th><%= t('people.list.name') %></th>
               <th><%= t('people.list.email') %></th>
               <th><%= t('people.list.start_date') %></th>
-              <th><%= t('people.list.admin') %></th>
+              <th></th>
               <th></th>
               <th></th>
             </tr>
@@ -36,25 +36,22 @@
                       </div>
                     </div>
                   </td>
-                  <td><%= link_to p.name, person_path(p.id), method: :get %></td>
+                  <td>
+                    <%= link_to p.name, person_path(p.id), method: :get %>
+                    <p class="small"><%= p.tech_role.name %></p>
+                  </td>
                   <td><%= p.email %></td>
                   <td><div class="calendar left"><%= p.start_date %></div></td>
-                  <td>
-                    <% if p.admin %>
-                        <%= t('common.y') %>
-                    <% else %>
-                        <%= t('common.n') %>
-                    <% end %>
-                  </td>
-                  <td>
+                  <td><span class="small"><%= "(Admin)" if p.admin %></span></td>
+                  <td class="actions">
                     <%= link_to  person_switch_admin_path(p.id), method: :post,  data: { confirm: "#{t('people.admin.mark_as_sure')}#{t("people.admin.#{p.get_next_admin_value}")}" } do %>
-                        <span class='large-text glyphicon glyphicon-retweet'></span>
+                        <span class='glyphicon glyphicon-retweet'></span>
                      <% end %>
                   </td>
-                  <td>
+                  <td class="actions">
                     <% if can_view_person? p.id %>
                       <%= link_to edit_person_path(p) do %>
-                        <span class='large-text glyphicon glyphicon-pencil'></span>
+                        <span class='glyphicon glyphicon-pencil'></span>
                       <% end %>
                     <%end%>
                   </td>

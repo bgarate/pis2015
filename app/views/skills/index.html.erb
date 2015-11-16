@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+
+      <div class="table-container table-difrows">
+
+        <h1>
+          <% if current_user_admin? %>
+            <%= link_to new_skill_path do%>
+                <span class='large-text glyphicon glyphicon-plus table-add-button pull-left'>  </span>
+            <% end %>
+          <% end %>
+          <%= t('skills.index.header') %>
+        </h1>
+        <table class="table datatable" data-info="false">
+
+          <thead>
+          <tr>
+            <th class="small-image-col"><%= t('icon') %></th>
+            <th><%= t('name') %></th>
+
+            <th><%= t('type') %></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @skills.each do |t| %>
+              <tr>
+                <td><%= image_tag t.icon %></td>
+                <td><%= t.name %></td>
+     
+                <td>
+                <% if t.technical %>
+                  <%= t('skills.technical') %>
+                <%else%>
+                  <%= t('skills.not_technical') %>
+                <%end%>
+                </td>
+                <% if current_user_admin? %>
+                    <td class="actions">
+                      <%= link_to edit_skill_path(t) do%>
+                          <span class='large-text glyphicon glyphicon-pencil'></span>
+                      <% end %>
+                    <%= link_to skill_path(t),
+                                    method: :delete,
+                                    data: { confirm: t('skills.delete.sure') } do %>
+                          <span class='large-text glyphicon glyphicon-trash'></span>
+                      <% end %>
+                    </td>
+                <%else%>
+                    <td class="actions"></td>
+                    <td class="actions"></td>
+                <%end%>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+        <%= will_paginate @skills %>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+

@@ -96,6 +96,10 @@ Rails.application.routes.draw do
       get 'add_mentor_form'
       post 'remove_mentor'
       get 'remove_mentor_form'
+      post 'add_skill'
+      get 'add_skill_form'
+      post 'remove_skill'
+      get 'remove_skill_form'
       post 'edit_profile_pic'
       get 'edit_profile_pic_form'
       get 'new' => 'people#new'
@@ -121,11 +125,16 @@ Rails.application.routes.draw do
 
   resources :tech_roles
 
+  resources :skills
+
   #hitos
   get 'milestones/report' => 'milestones#report'
   post 'milestones/report' => 'milestones#report'
   resources :milestones do
     resources :notes
+    resources :objectives do
+      post :check
+    end
     post :add_category
     post :next_status
     post :next_status_rej
@@ -153,6 +162,7 @@ Rails.application.routes.draw do
   end
 
 
+
   get '/categories/destroy'
 
   resources :categories do
@@ -164,6 +174,10 @@ Rails.application.routes.draw do
     end
   end
 
+
+  # Technologies
+  resources :technologies
+
   # Google auth
   get '/auth/google_oauth2/callback', to: 'google#callback'
   get 'auth/failure', to: redirect('/')
@@ -173,11 +187,12 @@ Rails.application.routes.draw do
   get 'google/adddriveview'
   get 'google/adddrive'
   get 'google/driveerror'
-
+  get 'google/checkurl', :defaults => { :format => 'json' }
 
   #dashboard
   get  '/dashboard' => 'dashboard#index'
   post '/dashboard' => 'dashboard#index'
+
 
   get "/commands" => "commands#index", defaults: {format: :json}
 

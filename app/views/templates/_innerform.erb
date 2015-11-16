@@ -15,20 +15,17 @@
 
       <div class="form-group">
         <%= m.label t(:documenturl), class: "control-label" %>
-        <% if params[:error] %>
-            <div id="div" class="form-group has-error">
-        <% else %>
-            <div id="div" class="form-group">
-        <% end %>
-            <%= m.text_field :doc_url, class: "form-control", 'data-validation':"required" %>
-            <% if params[:error] %>
-                <span id="msj" class="help-block form-error"><%= t(:invalidurl) %></span>
-            <% end %>
-        <% if params[:error] %>
-            </div>
-        <% else %>
-            </div>
-        <% end %>
+
+        <div id="div" class="form-group">
+
+            <%= m.text_field :doc_url, class: "form-control", id: 'url'%>
+            <span id="msj" style="color: darkred;">
+              <% if params[:error] %>
+                  <%= t(:invalidurl) %>
+              <% end %>
+            </span>
+        </div>
+
       </div>
 
       <div class="row">
@@ -61,15 +58,3 @@
       <%= m.button t('templates.new.submit'), :type => 'submit', class: "btn btn-default" %>
 </div>
 
-<script>
-  $(document).ready(function () {
-      $('#url').click(function () {
-          var div =document.getElementById("div");
-          var msj =document.getElementById("msj");
-
-          div.setAttribute("class", "form-group");
-          if (msj!=null)
-              msj.innerHTML="";
-      });
-  });
-</script>

@@ -64,6 +64,8 @@ es:
   completed_date: 'Fecha hecho'
   created_at: 'Creado en'
   updated_at: 'Modificado en'
+  see_more: 'Ver mas...'
+  no_more: 'Ah llegado al final'
 
   common:
     y: 'Sí'

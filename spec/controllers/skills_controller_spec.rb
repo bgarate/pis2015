@@ -14,7 +14,7 @@ describe SkillsController, 'Skills Controller' do
 
     it 'creates a skill' do
       post :new
-      post :create, {:skill=>{:name=>'Nuevo skills'}}
+      post :create, {:skill=>{:name=>'Nuevo skills', :icon=>'image/upload/v1447626971/jmtrct8ndgl78fzvwyuh.png#7ecc51673e6ae66c8b797b1e21d26d448352fa2b'}}
       expect(response.status).to eq(302)
     end
 
@@ -41,7 +41,7 @@ describe SkillsController, 'Skills Controller' do
       c1.name='unskill'
       c1.save!
       get :edit, :id=>c1.id
-      post :update, {:id=>c1.id, :skill=>{:name=>'otroskillupdateado'}}
+      post :update, {:id=>c1.id, :skill=>{:name=>'otroskillupdateado',:icon=>'image/upload/v1447626971/jmtrct8ndgl78fzvwyuh.png#7ecc51673e6ae66c8b797b1e21d26d448352fa2b'}}
       expect(response.status).to eq(302)
     end
 

@@ -71,6 +71,33 @@ describe CategoriesController, "Categories Controller" do
       expect(response.status).to eq(302)
     end
 
+    it 'desactive a category' do
+      c1=Category.new
+      c1.name='otrofeedback'
+      c1.icon='algunootroIcono'
+      c1.save!
+
+      @m1 = Milestone.new :title=>'Entrega del prototipo de alfred', :description=>'Hay que entregar el protipo de alfred
+                                  a la gente de pis. Ademas de cafe y galletitas maria gratis'
+      @m1.due_date= Time.now - (3*2*7*24*60*60)
+      @m1.category=c1
+      @m1.status=0
+      @m1.author = @admin
+      @m1.save!
+      get :destroy, :category_id=>c1.id
+      expect(response.status).to eq(302)
+    end
+
+    it 'activate category' do
+      request.env["HTTP_REFERER"] = root_path
+      c1=Category.new
+      c1.name='otrofeedback'
+      c1.icon='algunootroIcono'
+      c1.save!
+      get :activate, :category_id=>c1.id
+      expect(response.status).to eq(302)
+    end
+
   end
 
 end

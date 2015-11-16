@@ -7,7 +7,7 @@
 
           <div class="form-group">
             <%= f.label t('name'), class: "control-label" %>
-            <%= f.text_field :name, class: "form-control", 'data-validation': "required", :maxlength => "30" %>
+            <%= f.text_field :name, class: "form-control", 'data-validation': "required" %>
           </div>
 
           <div class="form-group">
@@ -17,8 +17,9 @@
 
           <div class="form-group">
             <%= f.label t('icon'), class: "control-label" %>
-            <%= f.cl_image_upload(:icon, :crop => :fill, :width => 20, :height => 20) %>
+            <%= f.cl_image_upload(:icon, :crop => :fill, :width => 30, :height => 30) %>
           </div>
+
 
           <%= f.button t('save'), options= :type => 'submit', class: "btn btn-default" %>
       <% end %>

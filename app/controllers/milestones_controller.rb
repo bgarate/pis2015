@@ -50,8 +50,8 @@ class MilestonesController < ApplicationController
       @status = Hash[Milestone.statuses.map {|k, v| [I18n.t("milestones.state.#{k}"), v] }]
 
     else #es un post enviado por datatables
-      # @milestone = Milestone.select("milestones.*, categories.name as categories").joins(:category)
-      @milestone = Milestone.includes(:category, :people, :tags)
+      @milestone = Milestone.select("milestones.*, categories.name as categories").joins(:category)
+      @milestone = @milestone.includes(:people, :tags)
 
       # filtrar
 

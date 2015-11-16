@@ -16,85 +16,64 @@
       <%= render 'info' %>
     </div>
 
-
-    <div class="row">
-      <div class="card-col col-xs-5">
-        <div id="milestone-notes">
-          <h4 class="text-center">
-            <span class="glyphicon glyphicon-duplicate"></span>
-            <%=t(:attachmentsdocs)%>
-          </h4>
-          <hr>
-          <%if @milestone.resources.empty?%>
-              <p class="text-center">
-                <small>
-                  <%= t(:nonattachmentsdocs) %>
-                </small>
-              </p>
-          <%end%>
-          <ul>
-              <%@milestone.resources.each do |r|%>
-                  <li class="clearfix">
-                    <h2>
-                      <span class="glyphicon glyphicon glyphicon-paperclip"></span>
-                      &nbsp;&nbsp;
-                      <%=link_to r.title.truncate(60), r.url, :target => "_blank"%>
-                    </h2>
-                  </li>
-              <%end%>
-          </ul>
-
-            <h5 class="text-center">
-              <% if can_modify_milestone?(@milestone.id) %>
-                  <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => @milestone.id do%>
-                      <span class="glyphicon glyphicon-plus"></span>
-                  <% end %>
-              <% end %>
-            </h5>
-
-          <hr>
-        </div>
+    <div class="card-col col-xs-5">
+      <div class="milestone-container">
+        <h4 class="text-center">
+          <span class="glyphicon glyphicon-duplicate"></span>
+          <%= t(:attachmentsdocs) %>
+        </h4>
+        <hr>
+        <%= render 'milestones/show_docs' %>
       </div>
 
-      <div class="card-col col-xs-5">
-        <div id="milestone-notes">
-          <h4 class="text-center">
-            <span class="glyphicon glyphicon-comment"></span>
-            <%=t('notes.header')%>
-          </h4>
-          <hr>
-          <%= render 'notes/form' %>
-          <%= render 'notes' %>
-        </div>
+      <div class="milestone-container">
+        <h4 class="text-center">
+          <span class="glyphicon glyphicon-comment"></span>
+          <%=t('notes.header')%>
+        </h4>
+        <hr>
+        <%= render 'notes/form' %>
+        <%= render 'notes' %>
+      </div>
+
+      <div class="milestone-container">
+        <h4 class="text-center">
+          <span class="glyphicon glyphicon-screenshot"></span>
+          <%= t('milestones.checklist.actual_objectives') %>
+        </h4>
+        <hr>
+        <%= render 'objectives/show' %>
+        <%= render 'objectives/new' %>
       </div>
     </div>
+
   </div>
 </div>
 
 
 <script>
-  // Add custom validation rule
-  $.formUtils.addValidator({
-    name : 'check_due_date',
-    validatorFunction : function() {
-      var due=document.getElementById('due_date').value;
-      if (due=='') return true;
-      var parts= due.split('/');
-      var due_year= parts[2];
-      var due_month= parts[1]-1;
-      var due_day= parts[0];
-      var due_date=new Date(due_year, due_month, due_day,23,59,59);
-      var start=document.getElementById('start_date').value;
-      var parts= start.split('/');
-      var start_year= parts[2];
-      var start_month= parts[1]-1;
-      var start_day= parts[0];
-      var start_date=new Date(start_year, start_month, start_day,23,59,59);
-      return (start=='' || start_date<=due_date);
-    },
-    errorMessage : '',
-    errorMessageKey: 'badDueDate'
-  });
-  // Setup form validation
-  $.validate();
+    // Add custom validation rule
+    $.formUtils.addValidator({
+        name : 'check_due_date',
+        validatorFunction : function() {
+            var due=document.getElementById('due_date').value;
+            if (due=='') return true;
+            var parts= due.split('/');
+            var due_year= parts[2];
+            var due_month= parts[1]-1;
+            var due_day= parts[0];
+            var due_date=new Date(due_year, due_month, due_day,23,59,59);
+            var start=document.getElementById('start_date').value;
+            var parts= start.split('/');
+            var start_year= parts[2];
+            var start_month= parts[1]-1;
+            var start_day= parts[0];
+            var start_date=new Date(start_year, start_month, start_day,23,59,59);
+            return (start=='' || start_date<=due_date);
+        },
+        errorMessage : '',
+        errorMessageKey: 'badDueDate'
+    });
+    // Setup form validation
+    $.validate();
 </script>

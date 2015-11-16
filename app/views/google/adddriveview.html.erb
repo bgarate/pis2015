@@ -2,7 +2,7 @@
   <div class="row">
     <div class="card-col col-xs-8 col-xs-offset-2">
 
-      <form action='adddrive' class='main-form'>
+      <form action='adddrive' class='main-form' id='drivedocform'>
         <h1> <%=t(:attachgoogledrivedoc) %> </h1>
         <input name='milestone_id' type='hidden' value=<%=@milestone_id%> readonly class='form-control'>
         <% if @redirect_url%>
@@ -11,22 +11,16 @@
 
         <label for='URL' class='control-label'> <%=t(:documenturl)%> </label>
 
+        <div id="div" class="form-group">
 
-        <% if params[:error] %>
-            <div id="div" class="form-group has-error">
-        <% else %>
-            <div id="div" class="form-group">
-        <% end %>
             <input id='url' type='input' name='URL' class='form-control' data-validation="required">
-            <% if params[:error] %>
-              <span id="msj" class="help-block form-error"><%= t(:invalidurl) %></span>
-            <% end %>
+            <span id="msj" style="color: darkred;">
+              <% if params[:error] %>
+                  <%= t(:invalidurl) %>
+              <% end %>
+            </span>
 
-        <% if params[:error] %>
-            </div>
-        <% else %>
-            </div>
-        <% end %>
+        </div>
 
         <button type='submit' class='btn btn-default'><%=t(:attach)%></button>
       </form>
@@ -38,12 +32,34 @@
 <script>
     $(document).ready(function () {
         $('#url').click(function () {
-            var div =document.getElementById("div");
             var msj =document.getElementById("msj");
-
-            div.setAttribute("class", "form-group");
             if (msj!=null)
                 msj.innerHTML="";
+        });
+        var validurl = true;
+        $('#drivedocform').on('submit', function(e){
+            if ($('#url').val() != ''){
+                var div =document.getElementById("div");
+                var msj =document.getElementById("msj");
+
+                $.get("checkurl", { URL: $('#url').val() },function(data, status, e){
+                    //alert(data == 'ok');
+                    if (data == 'ok' || data == 'notfound'){
+                        valid = true;
+                        div.setAttribute("class", "form-group");
+                        if (msj!=null)
+                            msj.innerHTML="";
+                        validurl = true;
+                    }else{
+                        div.setAttribute("class", "form-group has-error");
+                        if (msj!=null)
+                            msj.innerHTML="Url inválida";
+                        validurl = false;
+                    }
+                });
+                if (!validurl)
+                    e.preventDefault();
+            }
         });
     });
 </script>

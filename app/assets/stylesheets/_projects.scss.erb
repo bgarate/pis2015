@@ -3,6 +3,7 @@
     border-bottom: 3px solid $peterriver;
     padding: 0px 30px 30px 30px;
     background-color: white;
+    li {list-style-type: none;}
 
     h1 {
         color: white;
@@ -62,5 +63,17 @@
         .form-control {
             box-shadow: none;
         }
+    }
+}
+
+td.project-inactive {
+    a {
+        color: grey;
+    }
+}
+
+td.project-finished {
+    a {
+        text-decoration:line-through;
     }
 }

@@ -71,6 +71,7 @@
               <% @people.each do |t| %>
                   <li>
                     <%= link_to t.name, t %>
+
                     <% if can_unassign_person?(t) %>
                         <%= link_to  controller: 'projects', action: 'unassign_person' ,project_id: @project.id, person_id: t.id do %>
                             <span class='large-text glyphicon glyphicon-remove'></span>
@@ -96,18 +97,14 @@
                             <option value= <%=p.id%> > <%=p.name%></option>
                         <% end %>
                       </select>
-                      <%= button_tag t('project.assign.submit'), :type => 'submit', id: "buttonTwo" %>
+                      <%= button_tag t('project.assign.submit'), :type => 'submit', class:"btn btn-xs btn-primary" %>
                   <% end %>
               <% end%>
             </td>
           </tr>
-
-
           </tbody>
         </table>
-        <%= link_to '/projects' do%>
-            <button type="button"  class="btn btn-default btn-xs"><span class="glyphicon glyphicon-th-list"></span>  <%=t("project.index.header")%></button>
-        <%end%>
+
       </div>
     </div>
   </div>

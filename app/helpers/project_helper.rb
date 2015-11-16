@@ -4,4 +4,14 @@ module ProjectHelper
                   :multiple => true, class: "chzn-select", 'data-placeholder'=> t('project.technologies.select'),
                   'style'=> 'width:100%')
   end
+
+  def project_status_glyphicon(project)
+
+    glyph = {active: "glyphicon-play",
+             inactive: "glyphicon-pause",
+             finished: "glyphicon-ok"}
+
+    %{<div class="glyphicon #{glyph[project.status.to_sym]}"></div>}.html_safe
+  end
+
 end

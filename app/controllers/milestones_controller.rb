@@ -274,6 +274,7 @@ class MilestonesController < ApplicationController
   def show
     if @milestone
       @notes = @milestone.get_visible_notes(current_person)
+      @chec
     else
       redirect_to root_path
     end

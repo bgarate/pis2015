@@ -38,11 +38,8 @@ class CategoriesController < ApplicationController
 
 
   def update
-    if @category.update_attributes(category_params)
-      redirect_to '/categories'
-    else
-      render :edit
-    end
+    @category.update_attributes(category_params)
+    redirect_to '/categories'
   end
 
   def destroy

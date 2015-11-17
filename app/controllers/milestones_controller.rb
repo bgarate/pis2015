@@ -281,6 +281,9 @@ class MilestonesController < ApplicationController
 
   def assign_multiple_users(milestone, assigned)
     assigned.each do |p|
+      unless p.is_a? String
+        p = p.id
+        end
       person=Person.find(p)
       milestone.people<<person
     end

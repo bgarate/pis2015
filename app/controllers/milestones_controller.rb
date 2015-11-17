@@ -124,10 +124,10 @@ class MilestonesController < ApplicationController
     CSV.generate(headers: true) do |csv|
       csv << titulos
 
-      @milestone.each do |m| #49s
+      @milestone.each do |m|
       # @milestone.find_each do |m| #46 s
-        peop = '' #m.people.map{|p| p.name}.join('; ')
-        tags = '' #m.tags.map{|p| p.name}.join('; ')
+        peop = m.people.map{|p| p.name}.join('; ')
+        tags = m.tags.map{|p| p.name}.join('; ')
         cat = m.categories
         aut = m.author_name
         # attrs = m.attributes.values_at(*attributes)

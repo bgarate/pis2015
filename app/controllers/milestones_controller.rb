@@ -164,107 +164,111 @@ class MilestonesController < ApplicationController
 
   def create
 
-
-    if Category.exists?(params[:milestone][:category_id])
-
-      @person = nil
-      if params[:person_id]
-        @person=Person.find(params[:person_id])
-        @milestone= @person.milestones.create(milestone_params)
-      else
-        @milestone = Milestone.create(milestone_params)
-      end
-
-      @milestone.tag_ids = params[:tags]
-      #CATEGORIES
-      category=Category.find(params[:milestone][:category_id])
-      @milestone.category=category
-
-      #AUTHOR
-      @milestone.author_id = current_user.person_id
-
-      #ASSIGNED
-      if params[:allPeople]
-        assigned = Person.all.select(:id)
-        assign_multiple_users(@milestone, assigned)
-      else
-        if params[:people]!=nil
-          assigned = params[:people]
-          assign_multiple_users(@milestone, assigned)
-        end
-      end
-
-      if category.is_feedback? && params[:milestone][:feedback_author_id]!=''
-        @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
-        unless @milestone.people.exists?(@milestone.feedback_author_id)
-          @milestone.people<<@milestone.feedback_author
-        end
-      end
-
-      #Crear eventos en google calendar
-      client = Google::APIClient.new
-      client.authorization.access_token = current_user.oauth_token
-      service = client.discovered_api('calendar', 'v3')
-      if @milestone.start_date
-
-        @event = {
-            'summary' => "#{@milestone.title} (Alfred)",
-            'description' => @milestone.description,
-            'start' => { 'date' => @milestone.start_date },
-            'end' => { 'date' => @milestone.start_date },
-            'attendees' => [] }
-        for i in 0..(@milestone.people.count-1)
-          @event['attendees'][i]={ "email" => @milestone.people[i].email }
-        end
-
-        @set_event = client.execute(:api_method => service.events.insert,
-                                    :parameters => {'calendarId' => current_person.email, 'sendNotifications' => true},
-                                    :body => JSON.dump(@event),
-                                    :headers => {'Content-Type' => 'application/json'})
-      end
-      if @milestone.due_date && (!@milestone.start_date || @milestone.start_date != @milestone.due_date)
-
-        @event = {
-            'summary' => "#{@milestone.title} - Fin (Alfred)",
-            'description' => @milestone.description,
-            'start' => { 'date' => @milestone.due_date },
-            'end' => { 'date' => @milestone.due_date },
-            'attendees' => [] }
-        for i in 0..(@milestone.people.count-1)
-          @event['attendees'][i]={ "email" => @milestone.people[i].email }
-        end
-
-        @set_event = client.execute(:api_method => service.events.insert,
-                                    :parameters => {'calendarId' => current_person.email, 'sendNotifications' => true},
-                                    :body => JSON.dump(@event),
-                                    :headers => {'Content-Type' => 'application/json'})
-      end
-
-      @milestone.save
-
-
-
-      if @milestone.valid?
-        flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')
-      else
-        flash.alert = "'#{milestone_params[:title]}' " + t('messages.create.error')
-      end
-
-      if @person
-        redirect_to @person
-      else
-        if params[:redirect_url]
-          redirect_to params[:redirect_url]
-        else
-          redirect_to root_path
-        end
-      end
-
-    else
-      flash.alert = t('milestones.create.error') + "'#{milestone_params[:title]}'. " + t('categories.create.zero')
+    if params[:people]==nil && !params[:allPeople]
+      flash.alert = t('milestones.create.error') + "'#{milestone_params[:title]}'. " + t('milestones.no_people_assigned')
       redirect_to new_milestone_path
-    end
+    else
 
+      if Category.exists?(params[:milestone][:category_id])
+
+        @person = nil
+        if params[:person_id]
+          @person=Person.find(params[:person_id])
+          @milestone= @person.milestones.create(milestone_params)
+        else
+          @milestone = Milestone.create(milestone_params)
+        end
+
+        @milestone.tag_ids = params[:tags]
+        #CATEGORIES
+        category=Category.find(params[:milestone][:category_id])
+        @milestone.category=category
+
+        #AUTHOR
+        @milestone.author_id = current_user.person_id
+
+        #ASSIGNED
+        if params[:allPeople]
+          assigned = Person.all.select(:id)
+          assign_multiple_users(@milestone, assigned)
+        else
+          if params[:people]!=nil
+            assigned = params[:people]
+            assign_multiple_users(@milestone, assigned)
+          end
+        end
+
+        if category.is_feedback? && params[:milestone][:feedback_author_id]!=''
+          @milestone.feedback_author_id=params[:milestone][:feedback_author_id]
+          unless @milestone.people.exists?(@milestone.feedback_author_id)
+            @milestone.people<<@milestone.feedback_author
+          end
+        end
+
+        #Crear eventos en google calendar
+        client = Google::APIClient.new
+        client.authorization.access_token = current_user.oauth_token
+        service = client.discovered_api('calendar', 'v3')
+        if @milestone.start_date
+
+          @event = {
+              'summary' => "#{@milestone.title} (Alfred)",
+              'description' => @milestone.description,
+              'start' => { 'date' => @milestone.start_date },
+              'end' => { 'date' => @milestone.start_date },
+              'attendees' => [] }
+          for i in 0..(@milestone.people.count-1)
+            @event['attendees'][i]={ "email" => @milestone.people[i].email }
+          end
+
+          @set_event = client.execute(:api_method => service.events.insert,
+                                      :parameters => {'calendarId' => current_person.email, 'sendNotifications' => true},
+                                      :body => JSON.dump(@event),
+                                      :headers => {'Content-Type' => 'application/json'})
+        end
+        if @milestone.due_date && (!@milestone.start_date || @milestone.start_date != @milestone.due_date)
+
+          @event = {
+              'summary' => "#{@milestone.title} - Fin (Alfred)",
+              'description' => @milestone.description,
+              'start' => { 'date' => @milestone.due_date },
+              'end' => { 'date' => @milestone.due_date },
+              'attendees' => [] }
+          for i in 0..(@milestone.people.count-1)
+            @event['attendees'][i]={ "email" => @milestone.people[i].email }
+          end
+
+          @set_event = client.execute(:api_method => service.events.insert,
+                                      :parameters => {'calendarId' => current_person.email, 'sendNotifications' => true},
+                                      :body => JSON.dump(@event),
+                                      :headers => {'Content-Type' => 'application/json'})
+        end
+
+        @milestone.save
+
+
+
+        if @milestone.valid?
+          flash.notice = "'#{milestone_params[:title]}' " + t('messages.create.success')
+        else
+          flash.alert = "'#{milestone_params[:title]}' " + t('messages.create.error')
+        end
+
+        if @person
+          redirect_to @person
+        else
+          if params[:redirect_url]
+            redirect_to params[:redirect_url]
+          else
+            redirect_to root_path
+          end
+        end
+
+      else
+        flash.alert = t('milestones.create.error') + "'#{milestone_params[:title]}'. " + t('categories.create.zero')
+        redirect_to new_milestone_path
+      end
+    end
   end
 
 

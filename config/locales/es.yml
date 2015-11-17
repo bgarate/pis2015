@@ -240,6 +240,7 @@ es:
     assign_to: 'Asignar a'
     cannot_assign: "No puede asignar más personas"
     people: "Personas asociadas"
+    no_people_assigned: "No hay personas asociadas al hito"
     assigned_people: "Personas asociadas al hito"
     mark_done: 'Marcar como hecho'
     add_feedback_author: 'Añadir revisor del feedback'

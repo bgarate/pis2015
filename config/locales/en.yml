@@ -233,6 +233,7 @@ en:
     assign_to: 'Assign to'
     cannot_assign: "You cannot assign more people"
     people: "Associated People"
+    no_people_assigned: "There is no person assigned to this milestone"
     assigned_people: "People associated with the milestone"
     mark_done: 'Mark as done'
     add_feedback_author: 'Add feedback reviewer'

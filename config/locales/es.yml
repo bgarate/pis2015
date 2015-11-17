@@ -332,7 +332,7 @@ es:
       admin:
         header: "Todos los hitos pendientes"
       mentees:
-        header: "Hitos pendientes de mis usuarios mentoreados"
+        header: "Hitos pendientes de los usuario de los que soy referente"
 
   #categorias
   categories:

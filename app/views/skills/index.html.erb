@@ -30,7 +30,7 @@
                 <td><%= t.name %></td>
      
                 <td>
-                <% if t.technical %>
+                <% if t.technical? %>
                   <%= t('skills.technical') %>
                 <%else%>
                   <%= t('skills.not_technical') %>

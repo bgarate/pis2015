@@ -75,10 +75,10 @@ m2.icon = "glyphicon-flag"
 
 sk1 = Skill.new
 sk1.name='angular'
-sk1.icon='skills/angular.png'
+sk1.icon='ekzpgmusbt8ltizifr37.png'
 sk2 = Skill.new
 sk2.name='java'
-sk2.icon='skills/java.png'
+sk2.icon='paexsc5nfywcry06fig2.png'
 
 
 ################# Projects #################

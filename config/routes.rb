@@ -132,6 +132,9 @@ Rails.application.routes.draw do
   post 'milestones/report' => 'milestones#report'
   resources :milestones do
     resources :notes
+    resources :objectives do
+      post :check
+    end
     post :add_category
     post :next_status
     post :next_status_rej
@@ -159,6 +162,7 @@ Rails.application.routes.draw do
   end
 
 
+
   get '/categories/destroy'
 
   resources :categories do
@@ -183,11 +187,12 @@ Rails.application.routes.draw do
   get 'google/adddriveview'
   get 'google/adddrive'
   get 'google/driveerror'
-
+  get 'google/checkurl', :defaults => { :format => 'json' }
 
   #dashboard
   get  '/dashboard' => 'dashboard#index'
   post '/dashboard' => 'dashboard#index'
+
 
   get "/commands" => "commands#index", defaults: {format: :json}
 

@@ -65,6 +65,8 @@ en:
   completed_date: 'Done date'
   created_at: 'Created at'
   updated_at: 'Updated at'
+  see_more: 'More...'
+  no_more: 'You have reached the end'
 
   common:
     y: 'Yes'
@@ -293,6 +295,15 @@ en:
 
     see_all: "See all milestones"
 
+
+    checklist:
+      add_more_items: "Add another goal"
+      add_to_milestone: "Add to milestone"
+      actual_objectives: "Current goals"
+      add_checklist: "Add goal"
+      no_objectives_yet: "There aren't any goals for this milestone"
+
+
     download_csv: 'Download CSV'
 
 
@@ -406,6 +417,8 @@ en:
     zero: "No roles found"
 
   skills:
+    technical: 'Technical'
+    not_technical: 'Not technical'
     addrm:
       select: 'seleccionar habilidad'
       nomore_add: "No more skills available to add to"

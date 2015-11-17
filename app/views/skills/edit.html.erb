@@ -7,18 +7,20 @@
 
           <div class="form-group">
             <%= f.label t('name'), class: "control-label" %>
-            <%= f.text_field :name, class: "form-control", 'data-validation': "required", :maxlength => "30" %>
+            <%= f.text_field :name, class: "form-control", 'data-validation': "required" %>
           </div>
 
           <div class="form-group">
             <%= f.label t('type'), class: "control-label" %>
-            <%= f.text_field :type, class: "form-control", :maxlength => "30"%>
+            <%= f.select :technical, {t('skills.technical')=>true, t('skills.not_technical')=> false}, {:multiple => false, :class => "chosen", 'style'=> 'width:100%'} %>
           </div>
 
           <div class="form-group">
             <%= f.label t('icon'), class: "control-label" %>
-            <%= f.text_field :icon, class: "form-control", :maxlength => "30"%>
+            <%= f.cl_image_upload(:icon, :crop => :fill, :width => 30, :height => 30) %>
           </div>
+
+
 
           <%= f.button t('save'), options= :type => 'submit', class: "btn btn-default" %>
       <% end %>

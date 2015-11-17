@@ -70,6 +70,26 @@ describe DashboardController, "Dashboard Controller" do
       expect(response.status).to eq(200)
     end
 
+    it 'post index' do
+
+      m = Milestone.new
+      m.title = 'Conferencia Tecnológica'
+      m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
+      m.due_date= Time.now + (3*2*7*24*60*60)
+      m.status=:pending
+      m.icon = "test/silueta.gif"
+      m.author= @ad_user.person
+      m.category
+      m.people<<@no_ad_user.person
+      m.save!
+
+      request.env["HTTP_ACCEPT"] = 'application/json'
+
+      session[:user_id] = @ad_user.id
+      xhr :post,:index, :id => @ad_user.id, :people => "#{@no_ad_user.id}", :length => 1, :start => 1
+      expect(response.status).to eq(200)
+    end
+
   end
 
 

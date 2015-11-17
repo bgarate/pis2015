@@ -11,11 +11,10 @@
           <thead>
           <tr>
             <th class="title_row" ><%= t('title') %></th>
-            <th class="description_row"><%= t('description') %></th>
             <th><%= t('category') %></th>
             <th><%= t('tempdoc') %></th>
             <th><%= t('tags.name') %></th>
-            <th><%= t('actions') %></th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
@@ -23,30 +22,31 @@
               <tr>
                 <td class="description_row">
                   <%= m.title %>
-                </td>
-                <td class="description_row">
-                  <%= m.description %>
+                  <p><%= m.description %></p>
                 </td>
                 <td>
                   <%= m.category.name %>
                 </td>
                 <td>
                   <% if m.resource %>
-                    <%= link_to m.resource.url do m.resource.title end %>
+                    <%= link_to m.resource.url do %>
+                      <span class="glyphicon glyphicon-paperclip"></span>
+                      <%= m.resource.title %>
+                    <% end %>
                   <% end %>
                 </td>
                 <td class="tags_row">
-                  <ul class="">
+                  <ul class="tags">
                     <% m.tags.order('LOWER(name)').each do |t| %>
                         <li><%= t.name %></li>
                     <% end %>
                   </ul>
                 </td>
 
-                <td class="text-center">
+                <td class="actions">
                       <%= link_to templates_destroy_path(template_id: m.id),
                                   data: { confirm: t('templates.delete.sure') } do %>
-                          <span class='large-text glyphicon glyphicon-trash'></span>
+                          <span class='glyphicon glyphicon-trash'></span>
                       <% end %>
                 </td>
               </tr>

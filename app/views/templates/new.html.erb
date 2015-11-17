@@ -2,7 +2,7 @@
   <div class="row">
     <div class="card-col col-xs-4 col-xs-offset-4">
 
-      <%= form_for :template, html: { class:'timeline-form main-form ','data-toggle': 'validator'}  do |m| %>
+      <%= form_for :template, html: {id:'templatesform', class:'timeline-form main-form ','data-toggle': 'validator'}  do |m| %>
           <h1 class=""><span class="glyphicon glyphicon-check"></span> <%= t('templates.new.header') %></h1>
           <%= render partial: 'templates/innerform', locals: {m: m, in_profile: false} %>
       <% end %>
@@ -13,5 +13,43 @@
 
 <script>
     $(".chzn-select").chosen();
+    $(document).ready(function () {
+        $('#url').click(function () {
+            var div =document.getElementById("div");
+            var msj =document.getElementById("msj");
 
+            div.setAttribute("class", "form-group");
+            if (msj!=null)
+                msj.innerHTML="";
+        });
+        var validurl = true;
+        $('#templatesform').on('submit', function(e){
+            if ($('#url').val() != ''){
+                var div =document.getElementById("div");
+                var msj =document.getElementById("msj");
+
+                $.get("/google/checkurl", { URL: $('#url').val() },function(data, status, e){
+                    //alert(data == 'ok');
+                    if (data == 'ok'){
+                        valid = true;
+                        div.setAttribute("class", "form-group");
+                        if (msj!=null)
+                            msj.innerHTML="";
+                        validurl = true;
+                    }else{
+                        div.setAttribute("class", "form-group has-error");
+                        if (msj!=null)
+                            msj.innerHTML="Url inválida";
+                        validurl = false;
+                    }
+                });
+                if (!validurl)
+                    e.preventDefault();
+            }else{
+                div.setAttribute("class", "form-group");
+                if (msj!=null)
+                    msj.innerHTML="";
+            }
+        });
+    });
 </script>

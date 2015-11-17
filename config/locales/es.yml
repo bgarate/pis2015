@@ -64,6 +64,8 @@ es:
   completed_date: 'Fecha hecho'
   created_at: 'Creado en'
   updated_at: 'Modificado en'
+  see_more: 'Ver mas...'
+  no_more: 'Ah llegado al final'
 
   common:
     y: 'Sí'
@@ -202,6 +204,10 @@ es:
     delete:
       sure: "¿Está seguro que desea eliminar este proyecto?"
 
+
+
+
+
   #plantillas
   templates:
     addempty: 'Sin plantillas añadidas'
@@ -218,6 +224,9 @@ es:
       title: "Borrar Plantilla"
       sure: "¿Esta seguro que desea eliminar esta plantilla permanentemente?"
     see_all: "Ver todas las plantillas"
+
+
+
 
   #hitos
   milestones:
@@ -291,7 +300,16 @@ es:
 
     see_all: "Ver todos los hitos"
 
+
+    checklist:
+      add_more_items: "Escriba otro objetivo"
+      add_to_milestone: "Agregar al Hito"
+      actual_objectives: "Objetivos Actuales"
+      add_checklist: "Agregar Objetivo"
+      no_objectives_yet: "No hay objetivos para el Hito"
+
     download_csv: 'Descargar CSV'
+
 
 
 
@@ -405,6 +423,8 @@ es:
     zero: "No se han encontrado roles"
 
   skills:
+    technical: 'Técnica'
+    not_technical: 'No técnica'
     addrm:
       select: 'seleccionar habilidad'
       nomore_add: "No hay más habilidades disponibles para agregar a"

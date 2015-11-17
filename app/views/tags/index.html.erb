@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-8 col-xs-offset-2">
 
       <div class="table-container table-difrows">
 
@@ -14,24 +14,22 @@
 
           <thead>
           <tr>
-            <th><%= t('id') %></th>
             <th><%= t('name') %></th>
-            <th><%= t('milestones.actions') %></th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
           <% @tags.each do |t| %>
               <tr>
-                <td><%= t.id %></td>
                 <td><%= t.name %></td>
-                <td>
+                <td class="actions">
                   <%= link_to edit_tag_path(t) do%>
-                      <span class='large-text glyphicon glyphicon-pencil'></span>
+                      <span class='glyphicon glyphicon-pencil'></span>
                   <% end %>
                 <%= link_to tag_path(t),
                                 method: :delete,
                                 data: { confirm: t('tags.delete.sure') } do %>
-                      <span class='large-text glyphicon glyphicon-trash'></span>
+                      <span class='glyphicon glyphicon-trash'></span>
                   <% end %>
                 </td>
 

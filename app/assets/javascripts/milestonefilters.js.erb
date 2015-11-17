@@ -9,6 +9,11 @@ var milestonefilters_ready = function() {
             "data": function ( d ) {
                 d.due_date_from = $('.milestone-filters #due_date_from').val();
                 d.due_date_to = $('.milestone-filters #due_date_to').val();
+                d.people = $( '.milestone-filters #peoplefilter').val();
+                d.tags = $( '.milestone-filters #tagsfilter').val();
+                d.categories = $( '.milestone-filters #categoriesfilter').val();
+                d.status_id = $( '.milestone-filters #statusfilter').val();
+                d.titulo = $( '.milestone-filters #titulofilter').val();
             }
         },
         order: [],
@@ -16,10 +21,8 @@ var milestonefilters_ready = function() {
         "columns": [
             {"data":"status"        },
             {"data":"title"         }     ,
-            {"data":"description"   },
             {"data":"categories"    }    ,
             {"data":"people"        },
-            {"data":"tags"          }     ,
             {"data":"start_date"    },
             {"data":"due_date"      }     ,
             {"data":"completed_date"      }      ,
@@ -28,10 +31,8 @@ var milestonefilters_ready = function() {
         "columnDefs": [
             {"name":"status"        , "targets":"status_col"},
             {"name":"title"         ,"targets":"title"}     ,
-            {"name":"description"   , "targets":"description"},
             {"name":"categories"    ,"targets":"categories"}    ,
             {"name":"people"        ,"orderable": false,"targets":"people"},
-            {"name":"tags"          ,"orderable": false,"targets":"tags"}     ,
             {"name":"start_date"    ,"targets":"start_date"},
             {"name":"due_date"      ,"targets":"due_date"}     ,
             {"name":"completed_date","targets":"completed_date"}      ,

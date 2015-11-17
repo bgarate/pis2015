@@ -28,6 +28,12 @@ var timeline_ready = function () {
         }, 400);
         return false;
     });
+    $(".oncelink").one('click',function(e){
+        $(this).on('click',function(ev){
+            ev.preventDefault();
+            return false;
+        });
+    });
 };
 
 $(document).ready(timeline_ready);

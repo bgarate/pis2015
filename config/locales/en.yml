@@ -65,6 +65,8 @@ en:
   completed_date: 'Done date'
   created_at: 'Created at'
   updated_at: 'Updated at'
+  see_more: 'More...'
+  no_more: 'You have reached the end'
 
   common:
     y: 'Yes'

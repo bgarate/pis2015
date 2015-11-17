@@ -13,8 +13,13 @@ describe TechnologiesController, "Technologies Controller" do
     end
 
     it 'creates a technology' do
+      p = double()
+      allow(p).to receive(:valid?).and_return(true)
+      allow(p).to receive(:identifier).and_return('unid')
+      Cloudinary::PreloadedFile.stub(:new).with(anything()) { p }
+
       post :new
-      post :create, {:technology=>{:name=>'Nueva Technologia'}}
+      post :create, {:technology=>{:name=>'Nueva Technologia', :icon=>'unicon'}}
       # expect(response.status).to eq(302)
       expect(flash[:notice]).to eq "Nueva Technologia " + I18n.t('messages.create.success')
     end
@@ -35,11 +40,16 @@ describe TechnologiesController, "Technologies Controller" do
 
     #update
     it 'updates a technology' do
+      p = double()
+      allow(p).to receive(:valid?).and_return(true)
+      allow(p).to receive(:identifier).and_return('unid')
+      Cloudinary::PreloadedFile.stub(:new).with(anything()) { p }
+
       c1=Technology.new
       c1.name='tec'
       c1.save!
       get :edit, :id=>c1.id
-      post :update, {:id=>c1.id, :technology=>{:name=>'tec_updateado'}}
+      post :update, {:id=>c1.id, :technology=>{:name=>'tec_updateado', :icon=>'unicon'}}
       expect(flash[:notice]).to eq "tec_updateado " + I18n.t('messages.save.success')
     end
 
@@ -61,6 +71,21 @@ describe TechnologiesController, "Technologies Controller" do
       # delete :destroy, {:tech_role=>{:id=>c1.id}}
       delete :destroy, {:id=>c1.id}
       expect(flash[:notice]).to eq "tec " + I18n.t('messages.delete.success')
+    end
+
+    #delete
+    it 'attach_icon' do
+      t=Technology.new
+      t.name='tec'
+      t.save!
+
+      p = double()
+      allow(p).to receive(:valid?).and_return(true)
+      allow(p).to receive(:identifier).and_return('unid')
+      Cloudinary::PreloadedFile.stub(:new).with(anything()) { p }
+
+      tc = TechnologiesController.new
+      expect(tc.attach_icon(t,'icon')).not_to eq NIL
     end
 
   end

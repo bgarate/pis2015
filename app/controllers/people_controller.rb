@@ -6,7 +6,7 @@ class PeopleController < ApplicationController
 
   DEFAULT_IMAGE_ID = "lfblntfejcpmmkh0wfny.jpg"
 
-  @@tl_page_size = 5 #tamaño de pagina de timeline
+  @@tl_page_size = 10 #tamaño de pagina de timeline
 
   def get_person
     identifier = params[:id]
@@ -105,27 +105,14 @@ class PeopleController < ApplicationController
   end
 
   def show_not_pending_timeline
-    @milestones = @person.milestones.where('milestones.status <> 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+    apply_filter_not_pending
     @filtered_not_pending_count = @milestones.size
-    @filtered_pending_count = @person.milestones.size - @milestones.size
+    @filtered_pending_count = @person.milestones.size - @filtered_not_pending_count
 
+    @milestones = @milestones.limit(@@tl_page_size)
     @filter = :not_pending
 
-    respond_to do |f|
-      f.js {render 'people/show_timeline'}
-      f.html {}
-    end
-  end
-
-  def show_pending_timeline
-    @milestones = @person.milestones.where('milestones.status = 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
-    @filtered_pending_count = @milestones.size
-    @milestones = @milestones.limit(@@tl_page_size)
-
-    @filtered_not_pending_count = @person.milestones.size - @filtered_pending_count
-
-    @filter = :pending
-    @hay_mas = @filtered_count > (@@tl_page_size)
+    @hay_mas = (@filtered_not_pending_count > @@tl_page_size)
     @page = '2'
     respond_to do |f|
       f.js {render 'people/show_timeline'}
@@ -133,19 +120,48 @@ class PeopleController < ApplicationController
     end
   end
 
+  def show_pending_timeline
+    apply_filter_pending
+    @filtered_pending_count = @milestones.size
+    @milestones = @milestones.limit(@@tl_page_size)
+
+    @filtered_not_pending_count = @person.milestones.size - @filtered_pending_count
+
+    @filter = :pending
+    @hay_mas = (@filtered_pending_count > @@tl_page_size)
+    @page = '2'
+    respond_to do |f|
+      f.js {render 'people/show_timeline'}
+      f.html {}
+    end
+  end
+
+  def apply_filter_pending
+    @milestones = @person.milestones.where('milestones.status = 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+  end
+
+  def apply_filter_not_pending
+    @milestones = @person.milestones.where('milestones.status <> 0').order(updated_at: :desc,completed_date: :desc)
+  end
+
   def show_timeline_cat_fil
     @person = Person.find_by(id: params[:person_id])
 
     if params[:filter] == 'not_pending'
-      @milestones = @person.milestones.where('milestones.status <> 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+      apply_filter_not_pending
     else
-      @milestones = @person.milestones.where('milestones.status = 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+      apply_filter_pending
     end
-    @milestones =@milestones.where("milestones.category_id = #{params[:category_id]}") if params[:category_id].present?
+    @milestones =@milestones.where("milestones.category_id = #{params[:category_id]}") if (params[:category_id].present? && params[:category_id]!='-1')
     @category_id = params[:category_id]
 
     @filtered_count = @milestones.size
-    page = params[:page].to_i
+    if params[:page].present?
+      page = params[:page].to_i
+    else
+      page = 1
+    end
+
     offset = @@tl_page_size*(page - 1)
     @milestones = @milestones.limit(@@tl_page_size).offset(offset)
 
@@ -156,8 +172,11 @@ class PeopleController < ApplicationController
 
 
     respond_to do |f|
-      f.js {render 'people/show_inner_timeline'}
-      # f.js {render 'people/show_timeline'}
+      if params[:paging].present?
+        f.js {render 'people/show_inner_timeline'}
+      else
+        f.js {render 'people/show_timeline'}
+      end
       f.html {}
     end
   end

@@ -22,6 +22,12 @@ var timeline_ready = function () {
     });
     $(".resources-list .slider, .notes-list .slider").hide();
     $(".toggle-documents, .notes-list").parent().children("h2").addClass("pointer");
+    $('#scroll-to-top').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 400);
+        return false;
+    });
 };
 
 $(document).ready(timeline_ready);

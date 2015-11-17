@@ -217,7 +217,7 @@
     </li>
 <% end %>
 <% if @hay_mas %>
-    <%=link_to t(:see_more), person_show_timeline_cat_fil_path(:person_id => @person.id, :filter => @filter, :category_id => @category_id, :page => @page), remote:true, id: 'scroller' %>
+    <%=link_to t(:see_more), person_show_timeline_cat_fil_path(:person_id => @person.id, :filter => @filter, :category_id => @category_id, :page => @page , :paging => true), remote:true, id: 'scroller' %>
 <% else %>
-    <p><%= t('no_more') %></p>
+    <%=link_to t('no_more'),{}, id:'scroll-to-top' %>>
 <% end %>

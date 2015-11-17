@@ -236,3 +236,25 @@ r1.url= 'https://docs.google.com/document/d/1VuyDDm-iDK6LF2uG9Sx8WhTJe2kON-bVW7A
 r1.save!
 t2.resource_id=r1.id
 t2.save!
+
+################# Milestones reloaded #################
+for i in 1..9500
+  mr = Milestone.new
+  mr.title = "Milestone masivo #{i}"
+  mr.description= "Descripcion de milestone masivo #{i}"
+  mr.start_date = Time.now
+  mr.author_id = 1
+  mr.due_date= Time.now + (i*12*60*60) #uno cada 12 horas
+  mr.status=i % 3 #de 0 a 2
+  if mr.status == 1
+    mr.completed_date = mr.due_date
+  elsif me.status == 2
+    mr.deleted_date = mr.due_date
+  end
+  mr.icon = "test/silueta.gif"
+  mr.category_id = (i % 4) + 1 # de 1 a 4
+  mr.icon = "glyphicon-flag"
+  mr.person_ids = (i % 13) + 1 #de 1 a 13
+  mr.tag_ids = (i % 7) + 1 #de 1 a 7
+  mr.save
+end

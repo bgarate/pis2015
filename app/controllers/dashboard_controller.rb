@@ -73,10 +73,7 @@ class DashboardController < ApplicationController
   private
 
   def get_mentees_milestones(person)
-    milestones = []
-    person.mentees.each do |mentee|
-      milestones = milestones | mentee.pending_milestones
-    end
+    milestones = Milestone.where("id IN (Select milestone_id from person_milestones JOIN (SELECT mentee_id from mentorships where mentor_id = #{person.id}) mentees ON person_id = mentee_id)")
 
     milestones
   end

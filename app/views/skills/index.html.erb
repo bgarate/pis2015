@@ -26,11 +26,11 @@
           <tbody>
           <% @skills.each do |t| %>
               <tr>
-                <td><%= image_tag t.icon %></td>
+                <td><%= cl_image_tag t.icon %></td>
                 <td><%= t.name %></td>
      
                 <td>
-                <% if t.technical %>
+                <% if t.technical? %>
                   <%= t('skills.technical') %>
                 <%else%>
                   <%= t('skills.not_technical') %>

@@ -50,8 +50,8 @@ class MilestonesController < ApplicationController
       @status = Hash[Milestone.statuses.map {|k, v| [I18n.t("milestones.state.#{k}"), v] }]
 
     else #es un post enviado por datatables
-      # @milestone = Milestone.select("milestones.*, categories.name as categories").joins(:category)
-      @milestone = Milestone.includes(:category, :people, :tags)
+      @milestone = Milestone.select("milestones.*, categories.name as categories").joins(:category)
+      @milestone = @milestone.includes(:people, :tags)
 
       # filtrar
 
@@ -59,19 +59,19 @@ class MilestonesController < ApplicationController
       @milestone = @milestone.where("milestones.due_date <= ?", params[:due_date_to].to_datetime.strftime('%F')) if params[:due_date_to].present?
 
 
-      if params[:columns].present?
-        people_ids = params[:columns]['4'][:search][:value]
-        tags_ids = params[:columns]['5'][:search][:value]
-        cat_id = params[:columns]['3'][:search][:value]
-        status_id = params[:columns]['0'][:search][:value]
-        titulo = params[:columns]['1'][:search][:value]
-      else
+      # if params[:columns].present?
+      #   people_ids = params[:columns]['4'][:search][:value]
+      #   tags_ids = params[:columns]['5'][:search][:value]
+      #   cat_id = params[:columns]['3'][:search][:value]
+      #   status_id = params[:columns]['0'][:search][:value]
+      #   titulo = params[:columns]['1'][:search][:value]
+      # else
         people_ids = params[:people].join(',') if  params[:people].present?
         tags_ids = params[:tags].join(',') if  params[:tags].present?
         cat_id = params[:categories] if  params[:categories].present?
         status_id = params[:status_id] if  params[:status_id].present?
         titulo = params[:titulo] if  params[:titulo].present?
-      end
+      # end
       @milestone = @milestone.where("milestones.category_id = ?", cat_id) if cat_id.present?
       @milestone = @milestone.where("milestones.status = ?", status_id) if status_id.present?
       @milestone = @milestone.where("milestones.title LIKE ?", "%#{titulo}%") if titulo.present?
@@ -125,7 +125,7 @@ class MilestonesController < ApplicationController
       @milestone.each do |m|
         peop = m.people.map{|p| p.name}.join('; ')
         tags = m.tags.map{|p| p.name}.join('; ')
-        cat = m.category.name
+        cat = m.categories
         aut = m.author.name
         # attrs = m.attributes.values_at(*attributes)
         attrs = attributes.map{ |attr| m.send(attr).to_s.gsub(/\r\n/,' ')}

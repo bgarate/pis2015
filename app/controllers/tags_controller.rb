@@ -20,12 +20,7 @@ class TagsController < ApplicationController
   end
 
   def show
-    if @tag
-      #nombre
       @name = @tag.name
-    else
-      redirect_to root_path
-    end
   end
 
   def create

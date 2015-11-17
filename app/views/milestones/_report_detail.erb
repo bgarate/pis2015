@@ -7,7 +7,7 @@
     <%= "," unless i == 0 %>
     {
         "status":"<%=raw((milestone_highlight(m, :static) + ' ' + milestone_status(m,:static)).gsub('"', "'")) %>",
-        "description":"<%= raw(link_to(m.title, milestone_path(m), method: :get).gsub(/"/, "'"))%><p><%= m.description.truncate(100).gsub('"', "'").gsub(/\r\n/, ' ') %></p><ul class='tags_row'><% m.tags.order('LOWER(name)').each do |t| %><li><%= t.name %></li><% end %></ul>",
+        "title":"<%= raw(link_to(m.title, milestone_path(m), method: :get).gsub(/"/, "'"))%><p><%= m.description.truncate(100).gsub('"', "'").gsub(/\r\n/, ' ') %></p><ul class='tags_row'><% m.tags.order('LOWER(name)').each do |t| %><li><%= t.name %></li><% end %></ul>",
         "categories": "<%= m.category.name.gsub('"', "'") %>",
         "people": "<ul><% m.people.order('LOWER(name)').each do |p| %><li><%= raw((link_to p.name, person_path(p.id), method: :get).gsub('"', "'")) %></li><% end %></ul>",
         "start_date":"<%= m.start_date %>",

@@ -295,6 +295,15 @@ en:
 
     see_all: "See all milestones"
 
+
+    checklist:
+      add_more_items: "Add another goal"
+      add_to_milestone: "Add to milestone"
+      actual_objectives: "Current goals"
+      add_checklist: "Add goal"
+      no_objectives_yet: "There aren't any goals for this milestone"
+
+
     download_csv: 'Download CSV'
 
 

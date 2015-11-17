@@ -46,13 +46,7 @@ class ApplicationController < ActionController::Base
   #devuelve true si hay usr logueado y es admin, false en otro caso.
   helper_method :current_user_admin?
   def current_user_admin?
-    user = current_user
-    if user
-      user.person.admin
-    else
-      false
-    end
-
+    current_user.person.admin
   end
 
 
@@ -65,8 +59,6 @@ class ApplicationController < ActionController::Base
     view_person = Person.find_by(id: person_id)
     if user and (user.person.admin or (user.person_id == person_id) or (current_person.mentees.include? view_person))
       true
-    elsif not user
-      redirect_to root_path
     else
       false
     end

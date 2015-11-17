@@ -47,6 +47,7 @@ class SkillsController < ApplicationController
         raise "Invalid upload signature" if !preloaded.valid?
         @skill.icon = preloaded.identifier
       end
+      @skill.save
       flash.notice = "#{skill_params[:name]} " + t('messages.save.success')
       redirect_to skills_path
     else

@@ -97,6 +97,8 @@ class MilestonesController < ApplicationController
         @recordsTotal = Milestone.all.size #Total records, before filtering (i.e. the total number of records in the database)
         @recordsFiltered = @milestone.size #Total records, after filtering (i.e. the total number of records after filtering has been applied - not just the number of records being returned for this page of data).
         @milestone= @milestone.limit(params['length']).offset(params['start'])
+      elsif request.format.csv? #
+        @milestone= @milestone.select("people.name as author_name").joins(:author)
       end
 
     end
@@ -122,11 +124,12 @@ class MilestonesController < ApplicationController
     CSV.generate(headers: true) do |csv|
       csv << titulos
 
-      @milestone.each do |m|
-        peop = m.people.map{|p| p.name}.join('; ')
-        tags = m.tags.map{|p| p.name}.join('; ')
+      @milestone.each do |m| #49s
+      # @milestone.find_each do |m| #46 s
+        peop = '' #m.people.map{|p| p.name}.join('; ')
+        tags = '' #m.tags.map{|p| p.name}.join('; ')
         cat = m.categories
-        aut = m.author.name
+        aut = m.author_name
         # attrs = m.attributes.values_at(*attributes)
         attrs = attributes.map{ |attr| m.send(attr).to_s.gsub(/\r\n/,' ')}
         attrs[1] = t("milestones.state.#{attrs[1]}")

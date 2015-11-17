@@ -238,7 +238,7 @@
 # t2.save!
 
 ################# Milestones reloaded #################
-for i in 1..9500
+for i in 99..9500
   mr = Milestone.new
   mr.title = "Milestone masivo #{i}"
   mr.description= "Descripcion de milestone masivo #{i}"

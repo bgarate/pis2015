@@ -359,14 +359,16 @@ describe MilestonesController, "Milestone Controller" do
 
     it 'is invalid without a title' do
       session[:user_id] = @ad_user.id
-      post :create, :person_id=>@admin.id, :milestone=>{ :description=>'unadescripciondemilestone', :category_id=>@c1.id}
+      post :create, :person_id=>@admin.id, :milestone=>{ :description=>'unadescripciondemilestone', :category_id=>@c1.id},
+           :allPeople=>true
       expect(response).to redirect_to(@admin)
     end
 
-    it 'is invalid without a description' do
+    it 'is invalid without a category' do
       session[:user_id] = @ad_user.id
-      get :create, :person_id=>@admin.id, :milestone=>{:title=>'Milestone1', :category_id=>@c1.id}
-      expect(response.status).to redirect_to(@admin)
+      post :create, :person_id=>@admin.id, :milestone=>{ :title=>"titulo", :description=>'unadescripciondemilestone'},
+           :allPeople=>true
+      expect(response).to redirect_to(new_milestone_path)
     end
 
     it 'modifica el hito' do
@@ -416,6 +418,12 @@ describe MilestonesController, "Milestone Controller" do
         m1.save!
         get :show, :id => m1.id, :session=>session
         expect(response).to render_template("show")
+    end
+
+    it 'no muestra la milestone con id invalida' do
+      session[:user_id] = @ad_user.id
+      get :show, :id => "invalid", :session=>session
+      expect(response.status).to eq(302)
     end
 
     it 'destruye la milestone' do

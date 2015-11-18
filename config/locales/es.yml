@@ -65,7 +65,7 @@ es:
   created_at: 'Creado en'
   updated_at: 'Modificado en'
   see_more: 'Ver mas...'
-  no_more: 'Ah llegado al final'
+  no_more: 'Ha llegado al final'
 
   common:
     y: 'Sí'
@@ -240,6 +240,7 @@ es:
     assign_to: 'Asignar a'
     cannot_assign: "No puede asignar más personas"
     people: "Personas asociadas"
+    no_people_assigned: "No hay personas asociadas al hito"
     assigned_people: "Personas asociadas al hito"
     mark_done: 'Marcar como hecho'
     add_feedback_author: 'Añadir revisor del feedback'
@@ -331,7 +332,7 @@ es:
       admin:
         header: "Todos los hitos pendientes"
       mentees:
-        header: "Hitos pendientes de mis usuarios mentoreados"
+        header: "Hitos pendientes de los usuario de los que soy referente"
 
   #categorias
   categories:

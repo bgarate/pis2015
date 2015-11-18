@@ -20,7 +20,7 @@ var datatables_spanisn_language = {
     "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
     "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
     "sInfoPostFix": "",
-    "sSearch": "Buscar:",
+    "sSearch": "",
     "sUrl": "",
     "sInfoThousands": ",",
     "sLoadingRecords": "Cargando...",
@@ -51,6 +51,7 @@ var datablefilters_ready = function() {
             }
             return data[$(this).attr("data-name")] = value;
         });
+        data["search"] = $(".dataTables_filter input[type=search]").val();
     }
 
     var columns = $(".filter-table th").map(function(i) {
@@ -73,10 +74,13 @@ var datablefilters_ready = function() {
             data: dataFill
         },
         order: [],
-        dom: 'lrtip',
-        columns: columns
+        columns: columns,
         <% if I18n.locale == :es %>
-        ,language: datatables_spanisn_language
+        language: datatables_spanisn_language,
+        <% else %>
+        "language": {
+            "search": ""
+        }
         <% end %>
     });
 
@@ -95,7 +99,8 @@ var datablefilters_ready = function() {
         }
     });
 
-    $('.filter').not(datepickers).on('keydown change', function (ev) {
+    $('.filter, .dataTables_filter input[type=search]')
+            .not(datepickers).on('keydown change', function (ev) {
         table.draw();
     });
 

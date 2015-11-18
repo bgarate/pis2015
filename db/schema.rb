@@ -187,7 +187,7 @@ ActiveRecord::Schema.define(version: 20151114001411) do
 
   create_table "skills", force: :cascade do |t|
     t.string   "name"
-    t.integer  "type"
+    t.boolean  "technical"
     t.string   "icon"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false

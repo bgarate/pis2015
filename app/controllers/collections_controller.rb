@@ -49,7 +49,7 @@ class CollectionsController < ApplicationController
   end
 
   def index
-    @collections = Collection.paginate(:page => params[:page], :per_page => 10)
+    @collections = Collection.all
     respond_to do |f|
       f.json { render json: name_and_path(@collections)}
       f.html { render }

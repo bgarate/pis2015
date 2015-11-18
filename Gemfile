@@ -87,8 +87,5 @@ group :development, :test do
   # Annotate
   gem 'annotate'
 
-  # Use Capistrano for deployment
-  gem 'capistrano-rails'
-
 end
 

@@ -65,7 +65,7 @@ es:
   created_at: 'Creado en'
   updated_at: 'Modificado en'
   see_more: 'Ver mas...'
-  no_more: 'Ah llegado al final'
+  no_more: 'Ha llegado al final'
 
   common:
     y: 'Sí'

@@ -8,7 +8,7 @@ class SkillsController < ApplicationController
   end
 
   def index
-    @skills = Skill.where(validity: 'true').paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
+    @skills = Skill.where(validity: 'true').all.order('LOWER(name)')
   end
 
   def edit

@@ -36,6 +36,7 @@ class DashboardController < ApplicationController
 
       @milestones = @milestones.where("due_date >= ?", params[:due_date_from].to_datetime.strftime('%F')) if params[:due_date_from].present?
       @milestones = @milestones.where("due_date <= ?", params[:due_date_to].to_datetime.strftime('%F')) if params[:due_date_to].present?
+      
 
       people_ids = params[:people].split(",")
 

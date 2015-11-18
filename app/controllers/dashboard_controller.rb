@@ -36,11 +36,11 @@ class DashboardController < ApplicationController
 
       @milestones = @milestones.where("due_date >= ?", params[:due_date_from].to_datetime.strftime('%F')) if params[:due_date_from].present?
       @milestones = @milestones.where("due_date <= ?", params[:due_date_to].to_datetime.strftime('%F')) if params[:due_date_to].present?
-      
 
       people_ids = params[:people].split(",")
 
       cat_id = params[:category]
+      search = params[:search]
 
       @milestones = @milestones.where("category_id = ?", cat_id) if cat_id.present?
 
@@ -53,6 +53,8 @@ class DashboardController < ApplicationController
                                         HAVING count(milestone_id)=#{people_ids.length}) as pm
                                       ON milestones.id = pm.milestone_id ")
       end
+
+      @milestones = @milestones.search(search)
 
       if request.format.json?
         @recordsTotal = Milestone.all.size #Total records, before filtering (i.e. the total number of records in the database)

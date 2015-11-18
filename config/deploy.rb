@@ -38,6 +38,7 @@ set :keep_releases, 5
 
 set :branch, "deploy"
 set :user, "vagrant"
+set :use_sudo, false
 
 set :rails_env, "production"
 set :deploy_via, :copy

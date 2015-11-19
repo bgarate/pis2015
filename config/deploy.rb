@@ -36,7 +36,8 @@ set :deploy_to, "/home/pis2015/apps"
 # Default value for keep_releases is 5
 set :keep_releases, 5
 
-set :branch, "deploy"
+#set :branch, "deploy"
+set :branch, "alfred-239-b"
 set :user, "pis2015"
 set :use_sudo, false
 

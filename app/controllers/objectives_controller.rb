@@ -1,7 +1,7 @@
 class ObjectivesController < ApplicationController
 
   before_action :get_milestone, only: [:create,:check, :destroy]
-  skip_before_action :admin?, only: [:create, :check]
+  skip_before_action :admin?, only: [:create, :check, :destroy]
 
 
   def get_milestone

@@ -28,16 +28,16 @@ class TagsController < ApplicationController
     @tag.save
     if @tag.valid?
       flash.notice = "Tag #{tag_params[:name]} " + t('messages.create.success')
-      redirect_to '/tags'
+      redirect_to tags_path
     else
       flash.alert = "Tag #{tag_params[:name]} " + t('messages.create.error')
-      redirect_to '/tags/new'
+      redirect_to new_tag_path
     end
   end
 
   def update
     if @tag.update(tag_params)
-      redirect_to '/tags'
+      redirect_to tags_path
     else
       render :edit
     end
@@ -50,7 +50,7 @@ class TagsController < ApplicationController
       @tag.save
       flash.notice = "#{name} " + t('messages.delete.success')
     end
-    redirect_to '/tags'
+    redirect_to tags_path
   end
 
   private

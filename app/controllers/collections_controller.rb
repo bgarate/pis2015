@@ -45,7 +45,7 @@ class CollectionsController < ApplicationController
       flash.alert = "'#{collection_params[:title]}' " + t('messages.create.error')
     end
 
-    redirect_to '/collections/'
+    redirect_to collections_path
   end
 
   def index
@@ -59,7 +59,7 @@ class CollectionsController < ApplicationController
 
   def show
     #@templates = @collection.collection_templates
-    redirect_to('/collections/')
+    redirect_to(collections_path)
   end
 
 

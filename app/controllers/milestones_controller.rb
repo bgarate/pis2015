@@ -10,7 +10,7 @@ class MilestonesController < ApplicationController
   def is_authorized?
     unless can_modify_milestone? @milestone.id
       flash.alert = t('not_authorized')
-      redirect_to '/people'
+      redirect_to people_path
     end
   end
 
@@ -21,7 +21,7 @@ class MilestonesController < ApplicationController
   def get_milestone_by_id
     @milestone=Milestone.find_by(id: params[:id])
     if @milestone.nil?
-      redirect_to '/milestones'
+      redirect_to milestones_path
     end
   end
 
@@ -149,7 +149,6 @@ class MilestonesController < ApplicationController
     @identifier =  u.person_id
     @person = Person.find_by(id: @identifier)
 
-    #redirect_to '/people'
     @cats=Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
     @authors=Person.all.where('id NOT in (?)', @identifier).order('LOWER(name)').collect {|t| [t.name, t.id]}
     @tags=Tag.where(validity: 'true').order('LOWER(name)')

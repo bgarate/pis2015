@@ -14,7 +14,7 @@ class ProjectsController < ApplicationController
       end
     end
     unless @project  && @project.validity?
-      redirect_to '/projects'
+      redirect_to projects_path
     end
   end
 
@@ -60,9 +60,9 @@ class ProjectsController < ApplicationController
     @project.technology_ids = params[:technologies]
     @project.save
     if @project.valid?
-      redirect_to '/projects/'
+      redirect_to projects_path
     else
-      redirect_to '/projects/new'
+      redirect_to new_project_path
     end
   end
 
@@ -81,7 +81,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.validity=false
     @project.save
-    redirect_to '/projects'
+    redirect_to projects_path
   end
 
   def assign_person

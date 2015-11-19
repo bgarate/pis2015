@@ -6,7 +6,6 @@ class TemplatesController < ApplicationController
     @identifier =  u.person_id
     @person = Person.find_by(id: @identifier)
 
-    #redirect_to '/people'
     @cats=Category.all.order('LOWER(name)').collect {|t| [t.name, t.id, 'isfeedback' => t.is_feedback]}
     @tags=Tag.where(validity: 'true').order('LOWER(name)')
 

@@ -77,14 +77,14 @@ describe CollectionsController, 'Collections Controller' do
     session[:user_id] = @ad_user
 
     get :show, :id=>@c.id
-    expect(response).to redirect_to '/collections/'
+    expect(response).to redirect_to collections_path
   end
 
   it 'Delete collection' do
     session[:user_id] = @ad_user.id
 
     get :destroy, :id=>@c.id
-    expect(response).to redirect_to '/collections/'
+    expect(response).to redirect_to collections_path
   end
 
   it 'creates a milestone with auto drive atach' do

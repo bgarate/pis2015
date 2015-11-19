@@ -41,7 +41,7 @@ set :branch, "alfred-239-b"
 set :user, "pis2015"
 set :use_sudo, false
 
-set :rails_env, "production"
+set :rails_env, "development"
 set :deploy_via, :copy
 
 #PROBANDO

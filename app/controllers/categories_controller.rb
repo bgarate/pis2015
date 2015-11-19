@@ -23,7 +23,7 @@ class CategoriesController < ApplicationController
       redirect_to @category
     else
       flash.alert= t('categories.new.exists')
-      redirect_to '/categories/new'
+      redirect_to new_category_path
     end
   end
 
@@ -39,7 +39,7 @@ class CategoriesController < ApplicationController
 
   def update
     @category.update_attributes(category_params)
-    redirect_to '/categories'
+    redirect_to categories_path
   end
 
   def destroy

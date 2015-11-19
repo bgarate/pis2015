@@ -69,7 +69,7 @@ class CollectionsController < ApplicationController
       @collection.destroy
       flash.notice = "#{title} " + t('messages.delete.success')
     end
-    redirect_to '/collections/'
+    redirect_to collections_path
   end
 
 

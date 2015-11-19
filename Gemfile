@@ -66,6 +66,8 @@ gem 'will_paginate'
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
 
+gem 'routing-filter'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

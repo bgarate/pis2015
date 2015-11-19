@@ -240,6 +240,9 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     retriable (1.4.1)
+    routing-filter (0.5.1)
+      actionpack (~> 4.2)
+      activesupport (~> 4.2)
     rspec-activemodel-mocks (1.0.2)
       activemodel (>= 3.0)
       activesupport (>= 3.0)
@@ -341,6 +344,7 @@ DEPENDENCIES
   rails (= 4.2.1)
   rails_12factor
   responders (~> 2.0)
+  routing-filter
   rspec-activemodel-mocks
   rspec-rails
   sass-rails (~> 5.0)

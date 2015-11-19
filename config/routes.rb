@@ -77,6 +77,8 @@
 
 Rails.application.routes.draw do
 
+  filter :locale
+
   root to: 'people#me'
 
   get 'welcome/index'

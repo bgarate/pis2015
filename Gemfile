@@ -3,8 +3,9 @@ source 'https://rubygems.org'
 #HEROKU
 group :production do
   gem 'rails_12factor' #necesario para Heroku
+  ruby "2.2.2" #especifica la versión de ruby a usar en Heroku.
 end
-ruby "2.2.2" #especifica la versión de ruby a usar en Heroku.
+
 
 # Gema para la autenticación con google
 gem "omniauth-google-oauth2", "~> 0.2.1"

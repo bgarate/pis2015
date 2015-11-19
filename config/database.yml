@@ -32,11 +32,10 @@ test:
 
 #configuración para Heroku
 production:
-  adapter: postgresql
-  host: ec2-54-204-20-164.compute-1.amazonaws.com
+  <<: *default
+  database: alfred_development
+  host: localhost
   port: 5432
   pool: 5
-  timeout: 5000
-  database: d5l1f0r9l8inag
-  username: ctsholzofwcgxv
-  password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>
+  username: postgres
+  password: 123 #<%= ENV['ALFRED_DATABASE_PASSWORD'] %>

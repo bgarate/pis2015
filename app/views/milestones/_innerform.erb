@@ -60,7 +60,9 @@
 
         </div>
 
-        <% unless in_profile %>
+        <% if in_profile %>
+          <%= m.hidden_field(:people, :value=>@person.id) %>
+        <% else %>
             <div class="form-group col-xs-12">
               <% if @people.empty? %>
                   <%= m.label t('milestones.cannot_assign')%>
@@ -77,7 +79,7 @@
             </div>
         <% end %>
       </div>
-      <%= m.hidden_field(:people, :value=>@person.id) %>
+
       <%= m.button t('milestones.new.submit'), :type => 'submit', class: "btn btn-default" %>
 </div>
 <script>

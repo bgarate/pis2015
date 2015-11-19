@@ -166,7 +166,7 @@ class MilestonesController < ApplicationController
 
   def create
 
-    if params[:people]==nil && !params[:allPeople]
+    if params[:people]==nil && !params[:allPeople] && params[:milestone][:people]==nil
       flash.alert = t('milestones.create.error') + "'#{milestone_params[:title]}'. " + t('milestones.no_people_assigned')
       redirect_to new_milestone_path
     else

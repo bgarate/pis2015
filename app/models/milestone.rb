@@ -63,7 +63,31 @@ class Milestone < ActiveRecord::Base
     self.notes.includes(:author).order(created_at: :desc).select {|n| filter_note_by_visibility(n,current_person)}
   end
 
+  def self.search(text, fields = [:title,:description])
+
+    texts = text.split(" ")
+
+    query_parameters = []
+
+    query_terms = texts.map do |str|
+
+      fields.map do |field|
+        query_parameters.push(wildcard(str))
+        "#{field.to_s} ILIKE ?"
+      end.join(" OR ").prepend("(") + ") "
+
+    end.join(" AND ")
+
+    where(query_terms, *query_parameters)
+
+  end
+
   private
+
+  def self.wildcard(str)
+    "%#{str}%"
+  end
+
   def filter_note_by_visibility(note,current_person)
     (note.visibility=='every_body') ||
     (note.author_id==current_person.id) || #la hice yo?

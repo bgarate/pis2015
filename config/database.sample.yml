@@ -16,7 +16,7 @@ development:
   port: 5432
   pool: 5
   username: postgres
-  password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>
+  password: 123
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -28,7 +28,7 @@ test:
   port: 5432
   pool: 5
   username: postgres
-  password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>
+  password: 123
 
 #configuración para capistrano
 production:
@@ -38,4 +38,4 @@ production:
     port: 5432
     pool: 5
     username: postgres
-    password: 123#<%= ENV['ALFRED_DATABASE_PASSWORD'] %>
+    password: 123

@@ -74,7 +74,9 @@ class MilestonesController < ApplicationController
       # end
       @milestone = @milestone.where("milestones.category_id = ?", cat_id) if cat_id.present?
       @milestone = @milestone.where("milestones.status = ?", status_id) if status_id.present?
-      @milestone = @milestone.where("milestones.title LIKE ?", "%#{titulo}%") if titulo.present?
+      # @milestone = @milestone.where("milestones.title LIKE ?", "%#{titulo}%") if titulo.present?
+      @milestone = @milestone.search(titulo) if titulo.present?
+
       if people_ids.present? then
         people_ids_cant = people_ids.split(',').length
         @milestone = @milestone.joins("INNER JOIN (SELECT person_milestones.milestone_id FROM person_milestones WHERE person_milestones.person_id IN (#{people_ids}) GROUP BY person_milestones.milestone_id HAVING count(person_milestones.milestone_id)=#{people_ids_cant}) as pm ON milestones.id = pm.milestone_id ")

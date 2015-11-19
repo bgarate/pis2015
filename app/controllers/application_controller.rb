@@ -83,6 +83,29 @@ class ApplicationController < ActionController::Base
   end
 
 
+  helper_method :can_check_objective?
+  def can_check_objective? (milestone)
+
+    #puedo si soy admin, si estoy asignado al hito, o si soy mentor de alguno asignado al hito?
+    yo = current_person
+
+    if (yo.admin?) || (milestone.people.include?(yo))
+
+      true
+
+    else
+      res = false
+      yo.mentees.each do |m|
+        if milestone.people.include?(m)
+          res = true
+          break
+        end
+      end
+
+      res
+    end
+
+  end
 
   helper_method :navigation_bar_visible
 

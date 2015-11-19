@@ -6,8 +6,10 @@
       <p><%= t('milestones.checklist.no_objectives_yet') %></p>
   <% else%>
       <div class="list-group">
+        <% can_check = can_check_objective? (@milestone)%>
         <% @milestone.objectives.each do |n| %>
             <li class="list-group-item">
+                <% if  can_check %>
                   <span class="badge">
                     <%= link_to [n.milestone, n],
                                 method: :delete,
@@ -15,9 +17,11 @@
                       <div class="glyphicon glyphicon-remove objective-badge"></div>
                     <% end %>
                   </span>
+                <% end %>
               <% if n.checked? %>
                   <del><%= n.description %></del>
               <% else %>
+                  <% if  can_check %>
                     <span class="badge">
                           <%= link_to milestone_objective_check_path(@milestone.id,n.id),
                                       method: :post,
@@ -25,6 +29,7 @@
                             <div class="glyphicon glyphicon-ok objective-badge"></div>
                           <% end %>
                       </span>
+                  <% end %>
                   <%= n.description %>
               <% end %>
             </li>

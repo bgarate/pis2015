@@ -1,7 +1,7 @@
 class ObjectivesController < ApplicationController
 
   before_action :get_milestone, only: [:create,:check, :destroy]
-  skip_before_action :admin?, only: [:create]
+  skip_before_action :admin?, only: [:create, :check]
 
 
   def get_milestone
@@ -33,9 +33,11 @@ class ObjectivesController < ApplicationController
   end
 
 
+
   private
   def objective_params
     params.require(:objective).permit(:description, :created_at, :updated_at, :milestone_id)
   end
+
 
 end

@@ -44,17 +44,9 @@ set :use_sudo, false
 set :rails_env, "production"
 set :deploy_via, :copy
 
-#PROBANDO
-#rbenv
-#set :rbenv_ruby, '2.2.2'
-#set :rbenv_ruby_dir, '/home/pis2015/.rbenv/versions/2.2.2'
-#set :rbenv_custom_path, '/usr'
-
 #rvm
 set :rvm_type, :user                     # Defaults to: :auto
 set :rvm_ruby_version, '2.2.2'      # Defaults to: 'default'
-#set :rvm_custom_path, '~/.myveryownrvm'  # only needed if not detected
-#PROBANDO
 
 namespace :deploy do
 
@@ -67,4 +59,14 @@ namespace :deploy do
     end
   end
 
+  desc 'Start application'
+  task :start do
+    on roles(:app), in: :sequence, wait: 5 do
+      #levantar el servidor
+      execute "rails server -e production"
+    end
+  end
+
+  after :finishing, :restart
 end
+

@@ -30,13 +30,12 @@ test:
   username: postgres
   password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>
 
-#configuración para Heroku
+#configuración para capistrano
 production:
-  adapter: postgresql
-  host: ec2-54-204-20-164.compute-1.amazonaws.com
-  port: 5432
-  pool: 5
-  timeout: 5000
-  database: d5l1f0r9l8inag
-  username: ctsholzofwcgxv
-  password: <%= ENV['ALFRED_DATABASE_PASSWORD'] %>
+  <<: *default
+    database: alfred_production
+    host: localhost
+    port: 5432
+    pool: 5
+    username: postgres
+    password: 123#<%= ENV['ALFRED_DATABASE_PASSWORD'] %>

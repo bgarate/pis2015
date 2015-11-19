@@ -65,6 +65,7 @@ gem 'will_paginate'
 
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
+#gem 'capistrano-rbenv', group: :development
 
 
 group :development, :test do

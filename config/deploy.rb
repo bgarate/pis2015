@@ -12,7 +12,7 @@ set :repo_url, 'git@github.com:bgarate/pis2015.git'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/home/#{user}/apps'
+set :deploy_to, "/home/pis2015/apps"
 
 
 # Default value for :format is :pretty
@@ -37,12 +37,17 @@ set :deploy_to, '/home/#{user}/apps'
 set :keep_releases, 5
 
 set :branch, "deploy"
-set :user, "vagrant"
+set :user, "pis2015"
 set :use_sudo, false
 
 set :rails_env, "production"
 set :deploy_via, :copy
 
+#PROBANDO
+#set :rbenv_ruby, '2.2.2'
+#set :rbenv_ruby_dir, '/home/pis2015/.rbenv/versions/2.2.2'
+#set :rbenv_custom_path, '/usr'
+#PROBANDO
 
 namespace :deploy do
 

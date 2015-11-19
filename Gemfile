@@ -2,8 +2,10 @@ source 'https://rubygems.org'
 
 #HEROKU
 group :production do
-  gem 'rails_12factor' #necesario para Heroku
-  ruby "2.2.2" #especifica la versión de ruby a usar en Heroku.
+  #necesario para Heroku
+  gem 'rails_12factor'
+  #especifica la versión de ruby a usar en Heroku.
+  ruby "2.2.2"
 end
 
 

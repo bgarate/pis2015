@@ -45,9 +45,15 @@ set :rails_env, "production"
 set :deploy_via, :copy
 
 #PROBANDO
+#rbenv
 #set :rbenv_ruby, '2.2.2'
 #set :rbenv_ruby_dir, '/home/pis2015/.rbenv/versions/2.2.2'
 #set :rbenv_custom_path, '/usr'
+
+#rvm
+set :rvm_type, :user                     # Defaults to: :auto
+set :rvm_ruby_version, '2.2.2'      # Defaults to: 'default'
+#set :rvm_custom_path, '~/.myveryownrvm'  # only needed if not detected
 #PROBANDO
 
 namespace :deploy do

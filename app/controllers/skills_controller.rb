@@ -8,7 +8,7 @@ class SkillsController < ApplicationController
   end
 
   def index
-    @skills = Skill.where(validity: 'true').all.order('LOWER(name)')
+    @skills = Skill.all.order('LOWER(name)')
   end
 
   def edit
@@ -67,6 +67,14 @@ class SkillsController < ApplicationController
       flash.notice = "#{name} " + t('messages.delete.success')
     end
     redirect_to skills_path
+  end
+
+  def activate
+
+    @skill = Skill.find_by(id: params[:id] || params[:skill_id])
+    @skill.validity = true
+    @skill.save!
+    redirect_to :back
   end
 
   private

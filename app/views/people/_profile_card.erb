@@ -13,15 +13,17 @@
   </h1>
   <h2 style="overflow: hidden; text-overflow: ellipsis;"><%= @trole %></h2>
   <ul id="skills">
+    <li class="plus" >
+      <%if current_user_admin? %>
+          <a href="add_skill_form?person_id=<%=@identifier%>" role="button">
+            <span class="glyphicon glyphicon-plus"></span>
+          </a>
+      <% end %>
+    </li>
     <% @skills.each do |s| %>
         <li><%= cl_image_tag s.icon %></li>
     <% end %>
     <%if current_user_admin? %>
-        <li class="plus" >
-          <a href="add_skill_form?person_id=<%=@identifier%>" role="button">
-            <span class="glyphicon glyphicon-plus"></span>
-          </a>
-        </li>
         <% if !@skills.empty? %>
             <li class="minus" >
               <a href="remove_skill_form?person_id=<%=@identifier%>" role="button">
@@ -35,18 +37,17 @@
   <h4><%= t('mentor.header') %></h4>
 
     <ul id="mentors">
-      <% if @mentorships.empty? %>
-          <li><%= t('mentor.zero') %></li>
-      <%else%><% @mentorships.each do |s| %>
-            <li title="<%= s.name %>"><%= link_to person_picture(s.image_id), s %></li>
-          <%end%>
-      <%end%>
       <%if current_user_admin? %>
           <li class="plus" >
             <a href="add_mentor_form?mentee_id=<%=@identifier%>" role="button">
               <span class="glyphicon glyphicon-plus"></span>
             </a>
           </li>
+      <% end %>
+      <% @mentorships.each do |s| %>
+            <li title="<%= s.name %>"><%= link_to person_picture(s.image_id), s %></li>
+      <%end%>
+      <%if current_user_admin? %>
           <% if !@mentorships.empty? %>
               <li class="minus" >
                 <a href="remove_mentor_form?mentee_id=<%=@identifier%>" role="button">

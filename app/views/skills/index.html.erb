@@ -18,8 +18,8 @@
           <tr>
             <th class="small-image-col"><%= t('icon') %></th>
             <th><%= t('name') %></th>
-
             <th><%= t('type') %></th>
+            <th><%= t('categories.status')%></th>
             <th></th>
           </tr>
           </thead>
@@ -37,15 +37,28 @@
                 <%end%>
                 </td>
                 <% if current_user_admin? %>
+                  <td>
+                    <% if t.validity %>
+                        <%=t('valid') %>
+                    <% else %>
+                        <%=t('invalid')%>
+                    <%end%>
+                  </td>
                     <td class="actions">
                       <%= link_to edit_skill_path(t) do%>
                           <span class='large-text glyphicon glyphicon-pencil'></span>
                       <% end %>
-                    <%= link_to skill_path(t),
-                                    method: :delete,
-                                    data: { confirm: t('skills.delete.sure') } do %>
-                          <span class='large-text glyphicon glyphicon-trash'></span>
-                      <% end %>
+                    <% if t.validity %>
+                      <%= link_to skill_path(t),
+                                      method: :delete,
+                                      data: { confirm: t('skills.delete.sure') } do %>
+                            <span class='large-text glyphicon glyphicon-trash'></span>
+                        <% end %>
+                    <%else%>
+                          <%= link_to  skill_activate_path(t.id), method: :post,  data: { confirm: "#{t('skills.activate_sure')}" } do %>
+                            <span class='glyphicon glyphicon-retweet'></span>
+                          <% end %>
+                    <%end%>
                     </td>
                 <%else%>
                     <td class="actions"></td>

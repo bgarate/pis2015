@@ -1,8 +1,8 @@
-<%= form_for([@milestone, @milestone.notes.build], html: { class: 'notes-form', 'data-toggle': 'validator'}) do |n| %>
+<%= form_for([@milestone, @milestone.notes.build], html: { class: 'notes-form', 'data-toggle': 'validator'}) do |note| %>
     <div class="input-group full-width">
-      <%= n.text_field :text, 'data-validation': "required",
+      <%= note.text_field :text, 'data-validation': "required",
                      class: "submit-on-enter form-control", placeholder: t('notes.add_placeholder') %>
-      <%= n.select(:visibility,options_for_select(
+      <%= note.select(:visibility,options_for_select(
                                       [["&#xe105".html_safe,:every_body],
                                        ["&#xe106;".html_safe,:mentors],
                                        ["&#xe033;".html_safe,:me]]),

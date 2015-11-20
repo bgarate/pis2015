@@ -1,13 +1,14 @@
 var timeline_ready = function () {
 
-    $(".resources-list .toggle-documents, .resources-list h2, " +
-            ".notes-list .toggle-documents, .notes-list h2").unbind().click(function(e) {
-        var obj = $(this).parent().children(".toggle-documents");
+    $(".toggle-documents, .resources-list h2, " +
+            ".notes-list h2").unbind().click(function(e) {
+        var obj = $(this).parents(".slider-list").find(".toggle-documents");
 
-        if($(this).parent().children(".slider").length == 0)
+        var list = $(this).parents(".slider-list").find(".slider");
+
+
+        if(list.length == 0)
             return;
-
-        var list = obj.siblings(".slider");
 
         if(list.is(":hidden")) {
             obj.removeClass("glyphicon-chevron-down");

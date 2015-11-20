@@ -199,7 +199,7 @@ class PeopleController < ApplicationController
     if @person.valid?
       @person.save
       flash.notice = "'#{person_params[:name]}' " + t('messages.create.success')
-      redirect_to @person
+      redirect_to '/people'
     else
       flash.alert = "'#{person_params[:name]}' " + t('messages.create.error')
       @roles=TechRole.where(validity: 'true').order('LOWER(name)')

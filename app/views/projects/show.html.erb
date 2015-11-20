@@ -2,6 +2,11 @@
   <div class="row">
     <div class="card-col col-xs-4 col-xs-offset-4">
       <div id="div_project">
+        <% if current_user_admin? %>
+            <%= link_to edit_project_path(@project) do %>
+                <span class="edit glyphicon glyphicon-edit"></span>
+            <% end %>
+        <% end %>
         <h1><span class="glyphicon glyphicon-check"></span><%= t('project.view') %></h1>
         <table class="table table-striped">
           <tbody>
@@ -11,11 +16,6 @@
                 <%= t('project.name') %>
               </label>
               <%= @project.name %>
-              <% if current_user_admin? %>
-                <%= link_to edit_project_path(@project) do %>
-                  <span class="edit glyphicon glyphicon-edit"></span>
-                <% end %>
-              <% end %>
             </td>
           </tr>
           <tr>
@@ -63,22 +63,24 @@
               <% end %>
             </td>
           </tr>
-          <tr>
+          <tr class="no-hover">
             <td>
               <label>
                 <%= t('project.people.title') %>
               </label>
-              <% @people.each do |t| %>
-                  <li>
-                    <%= link_to t.name, t %>
+              <ul id="project-asignees">
+                  <% @people.each do |t| %>
+                      <li>
+                        <%= link_to t.name, t %>
 
-                    <% if can_unassign_person?(t) %>
-                        <%= link_to  controller: 'projects', action: 'unassign_person' ,project_id: @project.id, person_id: t.id do %>
-                            <span class='large-text glyphicon glyphicon-remove'></span>
+                        <% if can_unassign_person?(t) %>
+                            <%= link_to  url_options = {controller: 'projects', action: 'unassign_person' ,project_id: @project.id, person_id: t.id}, { :class => "pull-right" }  do %>
+                                <span class='large-text glyphicon glyphicon-remove'></span>
+                            <% end%>
                         <% end%>
-                    <% end%>
-                  </li>
-              <% end %>
+                      </li>
+                  <% end %>
+              </ul>
               <% if @people.size == 0 %>
                   <em><%= t('project.people.zero') %></em>
               <% end %>
@@ -86,18 +88,18 @@
           </tr>
           <tr>
             <td>
-              <%= form_tag ({:action => 'assign_person', :controller => 'projects', :project_id => @project.id}) do   %>
+              <%= form_tag({:action => 'assign_person', :controller => 'projects', :project_id => @project.id}) do   %>
                   <% if !@usr.empty?%>
                       <label>
                         <%= t('project.assign.title') %>
                       </label>
                       <br>
-                      <select name="person_id">
+                      <select name="person_id" class="chosen submit-on-select full-width" data-placeholder="Seleccione una opcion...">
+                        <option value=""></option>
                         <% @usr.each do |p|%>
                             <option value= <%=p.id%> > <%=p.name%></option>
                         <% end %>
                       </select>
-                      <%= button_tag t('project.assign.submit'), :type => 'submit', class:"btn btn-xs btn-primary" %>
                   <% end %>
               <% end%>
             </td>

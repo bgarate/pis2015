@@ -127,7 +127,9 @@ Rails.application.routes.draw do
 
   resources :tech_roles
 
-  resources :skills
+  resources :skills do
+    post :activate
+  end
 
   #hitos
   get 'milestones/report' => 'milestones#report'

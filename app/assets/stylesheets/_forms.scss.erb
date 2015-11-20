@@ -31,31 +31,8 @@ form.main-form {
 
     }
 
-    input, .chosen-choices, textarea {
-        border-radius: 0;
-        box-shadow: none;
-        border-width: 1px 1px 3px 1px;
-
-        &:focus {
-            outline: none;
-            border-color: #66afe9;
-            box-shadow: none;
-        }
-    }
     textarea{
         resize: vertical;
-    }
-
-    .chosen-choices, .chosen-single {
-        background: white;
-        border-radius: 0;
-        border-width: 1px 1px 3px 1px;
-        height: 34px;
-        line-height: 34px;
-
-        div b {
-            background: url(chosen-sprite.png) no-repeat 0 6px;
-        }
     }
 
 
@@ -152,17 +129,8 @@ form.milestone-filters {
             border-color: #66afe9;
             box-shadow: none;
         }
-        height: 34px !important;
+        min-height: 34px;
     }
-
-
-    .chosen-container-multi .chosen-choices,
-    .chosen-container-single .chosen-single,
-    {
-        border-color:  #CCCCCC;
-        height: 34px !important;
-    }
-
 
     textarea{
         resize: vertical;
@@ -226,4 +194,39 @@ form.milestone-filters {
         background-color: $peterriver;
     }
 
+}
+
+.main-form input, .chosen-choices, textarea {
+    border-radius: 0;
+    box-shadow: none;
+    border-width: 1px 1px 3px 1px;
+
+    &:focus {
+        outline: none;
+        border-color: #66afe9;
+        box-shadow: none;
+    }
+}
+
+form .chosen-container-multi .chosen-choices, form .chosen-container-single .chosen-single {
+    background: white;
+    border-radius: 0;
+    border-width: 1px 1px 3px 1px;
+    min-height: 34px;
+    line-height: 34px;
+    border-color:  #CCCCCC;
+    div b {
+        background: url(chosen-sprite.png) no-repeat 0 6px;
+    }
+
+}
+
+form .chosen-container-multi .chosen-choices{
+
+    min-height: 30px;
+    line-height: 30px;
+
+    input {
+        min-height: 0;
+    }
 }

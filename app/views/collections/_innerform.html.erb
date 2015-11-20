@@ -19,19 +19,20 @@
       <button name="collection[icon]" class="btn btn-default" role="iconpicker" data-icon="glyphicon-flag"></button>
     </div>
   </div>-->
+  <div class="template-list">
+      <div class="row">
+        <div class="form-group col-xs-6">
+          <%= m.label t('collections.new.templates.template'), class: "control-label" %>
+        </div>
+        <div class="form-group col-xs-3">
+          <%= m.label t('collections.new.templates.days'), class: "control-label" %>
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="form-group col-xs-6">
-      <%= m.label t('collections.new.templates.template'), class: "control-label" %>
-    </div>
-    <div class="form-group col-xs-3">
-      <%= m.label t('collections.new.templates.days'), class: "control-label" %>
-    </div>
-  </div>
-
-  <div id="tempTable">
-    <input type="hidden" id="count" name="count" value="0">
-    <small id="empty" style="color: lightgrey"><%= t('templates.addempty') %><br><br></small>
+      <div id="tempTable">
+        <input type="hidden" id="count" name="count" value="0">
+        <small id="empty" style="color: lightgrey"><%= t('templates.addempty') %><br><br></small>
+      </div>
   </div>
 
 
@@ -44,12 +45,12 @@
   <div class="row">
     <div class="form-group col-xs-6">
       <%= select_tag(:template, options_from_collection_for_select(@templates, :id, :title), :multiple => false,
-                     class: "chzn-select", id: "tName",'data-placeholder'=> t('collections.new.templates.select'), 'style'=> 'width:100%') %>
+                     class: "chosen form-control", id: "tName",'data-placeholder'=> t('collections.new.templates.select'), 'style'=> 'width:100%') %>
     </div>
     <div class="form-group col-xs-2">
-      <%= number_field_tag 'days', 0, in: 0...5000, id: "tDay" %>
+      <%= number_field_tag 'days', 0, in: 0...5000, id: "tDay", class: "form-control" %>
     </div>
-    <div class="form-group col-xs-2">
+    <div class="form-group checkbox col-xs-2">
       <input type="checkbox" name="nooff" id="nooff">
       <label class="control-label"><small><%= t('collections.nooffset') %></small></label>
     </div>
@@ -87,7 +88,7 @@
         var count = document.getElementById("count");
 
         count.value = parseInt(count.value) +1;
-        $("#tempTable").append("<div class=\"row\" id=\"row"+count.value+"\"> <div class=\"form-group col-xs-6\"> <input type=\"hidden\" name=\"temp"+count.value+"\" value=\""+selectValue+"\"> "+selectText+" </div> <div class=\"form-group col-xs-3\"> <input type=\"hidden\" name=\"offset"+count.value+"\" value=\""+days+"\"> "+days+" </div> <div class=\"form-group col-xs-3\"> <p class=\"rmTemp\" value=\""+count.value+"\" style=\"color: red;\" ><span class='glyphicon glyphicon-remove'></span></p> </div> </div>");
+        $("#tempTable").append("<div class=\"row\" id=\"row"+count.value+"\"> <div class=\"form-group col-xs-6\"> <input type=\"hidden\" name=\"temp"+count.value+"\" value=\""+selectValue+"\"> "+selectText+" </div> <div class=\"form-group col-xs-3\"> <input type=\"hidden\" name=\"offset"+count.value+"\" value=\""+days+"\"> "+days+" </div> <div class=\"form-group col-xs-3\"> <p class=\"rmTemp\" value=\""+count.value+"\" ><span class='glyphicon glyphicon-remove'></span></p> </div> </div>");
 
     });
     $(document).on('click', ".rmTemp", function(e) {

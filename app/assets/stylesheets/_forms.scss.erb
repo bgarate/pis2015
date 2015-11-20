@@ -37,12 +37,25 @@ form.main-form {
         border-width: 1px 1px 3px 1px;
 
         &:focus {
-
+            outline: none;
+            border-color: #66afe9;
             box-shadow: none;
         }
     }
     textarea{
         resize: vertical;
+    }
+
+    .chosen-choices, .chosen-single {
+        background: white;
+        border-radius: 0;
+        border-width: 1px 1px 3px 1px;
+        height: 34px;
+        line-height: 34px;
+
+        div b {
+            background: url(chosen-sprite.png) no-repeat 0 6px;
+        }
     }
 
 
@@ -87,7 +100,9 @@ form.main-form {
     .btn-default.disabled, .btn-default.disabled:hover, .btn-default.disabled:focus, .btn-default.disabled.focus, .btn-default.disabled:active, .btn-default.disabled.active, .btn-default[disabled], .btn-default[disabled]:hover, .btn-default[disabled]:focus, .btn-default[disabled].focus, .btn-default[disabled]:active, .btn-default[disabled].active, fieldset[disabled] .btn-default, fieldset[disabled] .btn-default:hover, fieldset[disabled] .btn-default:focus, fieldset[disabled] .btn-default.focus, fieldset[disabled] .btn-default:active, fieldset[disabled] .btn-default.active {
         background-color:#2980B8;
     }
-};
+
+
+}
 
 form.milestone-filters {
     margin-top: 0px;
@@ -133,7 +148,8 @@ form.milestone-filters {
         border-width: 1px 1px 3px 1px;
 
         &:focus {
-
+            outline: none;
+            border-color: #66afe9;
             box-shadow: none;
         }
         height: 34px !important;

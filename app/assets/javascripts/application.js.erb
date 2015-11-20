@@ -104,8 +104,8 @@
 
         $.fn.datepicker.defaults.format = "dd/mm/yyyy";
 
-        $(".datatable:not(#hitos)").DataTable({
-            paging: false,
+        $(".datatable:not(#hitos, #review-table)").DataTable({
+            paging: true,
             order: [],
             "language": {
                 "search": ""

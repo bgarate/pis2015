@@ -1,5 +1,3 @@
-<%= cloudinary_js_config %>
-
 <div class="container">
   <div class="row">
     <div class="card-col col-xs-5 col-xs-offset-3">
@@ -19,8 +17,7 @@
 
           <div class="form-group">
             <%= f.label t('people.new.role'), class: "small_label" %>
-            <br>
-            <%= f.select :tech_role_id, options_from_collection_for_select(@roles, :id, :name), {}, {class: "chosen", 'data-placeholder'=> t('people.add_tech_role'), 'data-validation': 'required'}%>
+            <%= f.select :tech_role_id, options_from_collection_for_select(@roles, :id, :name), {}, {class: "chosen full-width", 'data-placeholder'=> t('people.add_tech_role'), 'data-validation': 'required'}%>
           </div>
 
           <div class="form-group">
@@ -59,23 +56,28 @@
               </div>
             </div>
 
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="progress hidden">
-                  <div class="progress-bar" role="progressbar">
-                  </div>
+          </div>
+
+          <div class="row">
+            <div  class="col-xs-offset-3 col-xs-6">
+              <div class="image-preview"></div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="progress hidden">
+                <div class="progress-bar" role="progressbar">
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="row">
-              <div class="form-group col-xs-6">
-                <%= f.label "Imagen", class: "control-label" %>
-                <%= f.cl_image_upload(:image_id, :crop => :fill, :width => 300, :height => 300) %>
-              </div>
-              <div class="form-group col-xs-6">
-                <div class="image-preview"></div>
-              </div>
+
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <%= f.label "Imagen", class: "control-label" %>
+              <%= f.cl_image_upload(:image_id, :crop => :fill, :width => 300, :height => 300, html: {class: "" }) %>
             </div>
           </div>
           <%= f.button t('people.new.submit'), options= :type => 'submit', class: "btn btn-default" %>

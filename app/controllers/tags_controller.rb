@@ -10,7 +10,7 @@ class TagsController < ApplicationController
   end
 
   def index
-    @tags = Tag.where(validity: 'true').paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
+    @tags = Tag.where(validity: 'true').all.order('LOWER(name)')
   end
 
   def edit
@@ -20,12 +20,7 @@ class TagsController < ApplicationController
   end
 
   def show
-    if @tag
-      #nombre
       @name = @tag.name
-    else
-      redirect_to root_path
-    end
   end
 
   def create

@@ -1,9 +1,11 @@
 #div_project {
+
+    position: relative;
+
     margin-top: 30px;
     border-bottom: 3px solid $peterriver;
     padding: 0px 30px 30px 30px;
     background-color: white;
-    li {list-style-type: none;}
 
     h1 {
         color: white;
@@ -64,6 +66,19 @@
             box-shadow: none;
         }
     }
+
+    .edit {
+        position: absolute;
+        top: 16px;
+        right: 22px;
+        font-size: 17px;
+
+        color: #8fb0cc;
+
+        &:hover {
+            color: white;
+        }
+    }
 }
 
 td.project-inactive {
@@ -75,5 +90,33 @@ td.project-inactive {
 td.project-finished {
     a {
         text-decoration:line-through;
+    }
+}
+
+ul#project-asignees {
+
+    padding-left: 0;
+
+    li {
+
+        list-style-type: none;
+        padding: 5px 10px 0 10px;
+
+        &:hover{
+            background-color: #D5DADC;
+            .glyphicon {
+                color: #337ab7;
+            }
+        }
+
+        .glyphicon {
+            font-size: 10px;
+            vertical-align: 4px;
+            color: #91a5b5;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
     }
 }

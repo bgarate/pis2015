@@ -1,14 +1,18 @@
+<% if can_check_objective?(@milestone) %>
+<div class="row">
+    <div class="col-xs-12">
 
-<div>
 
-  <%= form_for([@milestone, @milestone.objectives.build] , html: { 'data-toggle': 'validator'}) do |f| %>
-      <div class="input-group">
 
-        <%= f.text_field :description, class: "submit-on-enter form-control", placeholder: t('milestones.checklist.add_more_items') %>
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="submit"><%= t('milestones.checklist.add_checklist') %></button>
-        </span>
-      </div>
-  <% end %>
+      <%= form_for([@milestone, @milestone.objectives.build] , html: { 'data-toggle': 'validator'}) do |f| %>
+          <div class="input-group full-width">
+
+            <div>
+              <%= f.text_field :description, class: "submit-on-enter form-control", 'data-validation': "required", placeholder: t('milestones.checklist.add_more_items') %>
+            </div>
+
+          </div>
+      <% end %>
+    </div>
 </div>
-
+<% end %>

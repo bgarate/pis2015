@@ -86,7 +86,7 @@ describe DashboardController, "Dashboard Controller" do
       request.env["HTTP_ACCEPT"] = 'application/json'
 
       session[:user_id] = @ad_user.id
-      xhr :post,:index, :id => @ad_user.id, :people => "#{@no_ad_user.id}", :length => 1, :start => 1
+      xhr :post,:index, :id => @ad_user.id, :people => "#{@no_ad_user.id}", :length => 1, :start => 1, :search=>''
       expect(response.status).to eq(200)
     end
 

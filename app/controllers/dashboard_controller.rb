@@ -40,6 +40,7 @@ class DashboardController < ApplicationController
       people_ids = params[:people].split(",")
 
       cat_id = params[:category]
+      search = params[:search]
 
       @milestones = @milestones.where("category_id = ?", cat_id) if cat_id.present?
 
@@ -52,6 +53,8 @@ class DashboardController < ApplicationController
                                         HAVING count(milestone_id)=#{people_ids.length}) as pm
                                       ON milestones.id = pm.milestone_id ")
       end
+
+      @milestones = @milestones.search(search)
 
       if request.format.json?
         @recordsTotal = Milestone.all.size #Total records, before filtering (i.e. the total number of records in the database)
@@ -73,10 +76,7 @@ class DashboardController < ApplicationController
   private
 
   def get_mentees_milestones(person)
-    milestones = []
-    person.mentees.each do |mentee|
-      milestones = milestones | mentee.pending_milestones
-    end
+    milestones = Milestone.where("id IN (Select milestone_id from person_milestones JOIN (SELECT mentee_id from mentorships where mentor_id = #{person.id}) mentees ON person_id = mentee_id)")
 
     milestones
   end

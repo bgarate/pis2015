@@ -1,8 +1,4 @@
-<style>
-    body {
-      background-color: white;
-    }
-</style>
+
 <div class="container-fluid">
   <div class="row">
     <div class="card-col col-xs-12">
@@ -20,7 +16,7 @@
       <div class="milestone-container">
         <h4 class="text-center">
           <span class="glyphicon glyphicon-duplicate"></span>
-          <%=t(:attachmentsdocs)%>
+          <%= t(:attachmentsdocs) %>
         </h4>
         <hr>
         <%= render 'milestones/show_docs' %>
@@ -32,14 +28,14 @@
           <%=t('notes.header')%>
         </h4>
         <hr>
-        <%= render 'notes/form' %>
+        <%= render 'notes/form' , n: nil%>
         <%= render 'notes' %>
       </div>
 
       <div class="milestone-container">
         <h4 class="text-center">
           <span class="glyphicon glyphicon-screenshot"></span>
-          <%=t('milestones.checklist.actual_objetives')%>
+          <%= t('milestones.checklist.actual_objectives') %>
         </h4>
         <hr>
         <%= render 'objectives/show' %>

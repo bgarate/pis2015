@@ -1,7 +1,10 @@
+
+<% if @my_mentees.any? %>
+
 <div class="table-container" id="mentees_table">
 
   <h1><%= t('dashboard.mentees.header')  %></h1>
-  <% if @my_mentees.any? %>
+
       <table class="table datatable" data-info="false">
         <thead>
         <tr>
@@ -44,7 +47,6 @@
 
         </tbody>
       </table>
-  <% else %>
-      <div class="zero"><%= t('dashboard.mentees.zero') %></div>
-  <% end %>
+
 </div>
+<% end %>

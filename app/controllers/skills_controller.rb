@@ -2,13 +2,13 @@ class SkillsController < ApplicationController
 
   skip_before_action :admin?, only:[:show, :index]
   before_action :get_skill, only:[:edit, :update, :destroy]
-
+  
   def get_skill
     @skill = Skill.find_by(id: params[:id])
   end
 
   def index
-    @skills = Skill.where(validity: 'true').paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
+    @skills = Skill.all.order('LOWER(name)')
   end
 
   def edit
@@ -47,6 +47,7 @@ class SkillsController < ApplicationController
         raise "Invalid upload signature" if !preloaded.valid?
         @skill.icon = preloaded.identifier
       end
+      @skill.save
       flash.notice = "#{skill_params[:name]} " + t('messages.save.success')
       redirect_to skills_path
     else
@@ -66,6 +67,14 @@ class SkillsController < ApplicationController
       flash.notice = "#{name} " + t('messages.delete.success')
     end
     redirect_to skills_path
+  end
+
+  def activate
+
+    @skill = Skill.find_by(id: params[:id] || params[:skill_id])
+    @skill.validity = true
+    @skill.save!
+    redirect_to :back
   end
 
   private

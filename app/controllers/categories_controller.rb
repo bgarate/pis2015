@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   before_action :get_category, only: [:edit,:update]
 
   def index
-    @category = Category.paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
+    @category = Category.all.order('LOWER(name)')
   end
 
   def new
@@ -38,11 +38,8 @@ class CategoriesController < ApplicationController
 
 
   def update
-    if @category.update_attributes(category_params)
-      redirect_to '/categories'
-    else
-      render :edit
-    end
+    @category.update_attributes(category_params)
+    redirect_to '/categories'
   end
 
   def destroy

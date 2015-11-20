@@ -40,7 +40,6 @@
     &.card.stats {
         background-color: $peterriver;
         border-color: $peterriver-dark;
-        min-height: 20em;
     }
 
     &.card.pending {
@@ -138,7 +137,7 @@
     }
 
     h4 {
-        text-transform: uppercase;
+
     }
 
     .edit {
@@ -146,6 +145,22 @@
         color: #19c8ab;
         top:15px;
         right: 23px;
+
+        &:hover {
+            color: white;
+        }
+    }
+
+    li {
+        &.plus, &.minus {
+
+            a {
+                color: #19c8ab;
+                &:hover {
+                    color: white;
+                }
+            }
+        }
     }
 
 }
@@ -165,18 +180,6 @@ ul#skills {
             width: 100%;
         }
 
-        &.plus {
-            background-color: white;
-            a {
-                color: $turqoise;
-            }
-        }
-        &.minus {
-            background-color: white;
-            a {
-                color: $turqoise;
-            }
-        }
     }
 }
 
@@ -191,29 +194,6 @@ ul#mentors {
             width: 30px;
             border-radius: 50%;
         }
-
-        &.plus {
-            padding-top: 5px;
-            padding-left: 4px;
-            text: center;
-            background-color: white;
-            width: 30px;
-            height: 30px;
-            a {
-                color: $turqoise;
-            }
-        }
-        &.minus {
-            padding-top: 6px;
-            padding-left: 2px;
-            text: center;
-            background-color: white;
-            width: 30px;
-            height: 30px;
-            a {
-                color: $turqoise;
-            }
-        }
     }
 }
 
@@ -224,23 +204,14 @@ ul#mentors {
 
     .img-container {
         border-radius: 50%;
-        border: solid 2px white;
+        border: solid 4px #19c8ab;
         width: 100%;
         margin: auto;
-        padding: 15px;
+
 
         img {
             border-radius: 50%;
             width: 100%;
-
-
-            @include transition(0.3s ease-in-out);
-
-            &:hover {
-                @include scale(1.1);
-                @include transition(0.3s ease-in-out);
-            }
-
         }
     }
 
@@ -254,9 +225,6 @@ ul#mentors {
     font-size: 13px;
 
     .badge-stats {
-
-        border-bottom: 2px solid $peterriver-dark;
-        padding-bottom: 20px;
 
         .badge {
             margin-left: 5px;
@@ -490,15 +458,17 @@ ul#milestone-list {
 
         .notes-list form{
 
-            color: black;
+            float: left;
+            width: calc(100% - 45px);
 
             input, select {
+                color: black;
                 float: left;
                 height: 20px;
-                background-color: rgba(white,0.2);
+                background-color: white;
                 border:none;
                 @include input-placeholder {
-                    color: #555555;
+                    color: goldenrod;
                 }
                 &:focus {
                     outline-color: transparent;
@@ -506,12 +476,23 @@ ul#milestone-list {
                 }
             }
 
+            .form-error {
+                clear: both;
+            }
+
+
+
             input {
-                width: calc(100% - 100px);
+                width: calc(100% - 40px);
+                margin-top: 1px;
             }
             select {
-                width: 45px;
+                font-size: 10px;
+                width: 40px;
+                padding: 0;
+                border-radius: 0 4px 4px 0;
             }
+
         }
 
         p {
@@ -535,7 +516,7 @@ ul#milestone-list {
                 font-weight: bold;
                 float: left;
                 .glyphicon {
-                    padding-right: 10px;
+                    padding: 3px 10px 0 0;
                 }
             }
 

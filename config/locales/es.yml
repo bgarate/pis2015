@@ -33,6 +33,8 @@ es:
   project: "Proyecto"
   projects: "Proyectos"
 
+  valid: "Válida"
+  invalid: "Inválida"
   stats: "Estadísticas"
   events: "Eventos"
   save: "Guardar"
@@ -64,6 +66,8 @@ es:
   completed_date: 'Fecha hecho'
   created_at: 'Creado en'
   updated_at: 'Modificado en'
+  see_more: 'Ver mas...'
+  no_more: 'Ha llegado al final'
 
   common:
     y: 'Sí'
@@ -238,6 +242,7 @@ es:
     assign_to: 'Asignar a'
     cannot_assign: "No puede asignar más personas"
     people: "Personas asociadas"
+    no_people_assigned: "No hay personas asociadas al hito"
     assigned_people: "Personas asociadas al hito"
     mark_done: 'Marcar como hecho'
     add_feedback_author: 'Añadir revisor del feedback'
@@ -303,7 +308,7 @@ es:
       add_more_items: "Escriba otro objetivo"
       add_to_milestone: "Agregar al Hito"
       actual_objectives: "Objetivos Actuales"
-      add_checklist: "Agregar Objetivos"
+      add_checklist: "Agregar Objetivo"
       no_objectives_yet: "No hay objetivos para el Hito"
 
     download_csv: 'Descargar CSV'
@@ -329,7 +334,7 @@ es:
       admin:
         header: "Todos los hitos pendientes"
       mentees:
-        header: "Hitos pendientes de mis usuarios mentoreados"
+        header: "Hitos pendientes de los usuario de los que soy referente"
 
   #categorias
   categories:
@@ -423,6 +428,7 @@ es:
   skills:
     technical: 'Técnica'
     not_technical: 'No técnica'
+    activate_sure: '¿Está seguro que desea activar esta habilidad?'
     addrm:
       select: 'seleccionar habilidad'
       nomore_add: "No hay más habilidades disponibles para agregar a"

@@ -47,6 +47,12 @@ describe TechRolesController, "tech Roles Controller" do
     end
 
     #update
+    it 'updates a tech role not found' do
+      post :update, {:id=>1123123123123123, :tech_role=>{:name=>'otrotechroleupdateado'}}
+      expect(response).to redirect_to tech_roles_path
+    end
+
+    #update
     it 'does not update a tech role' do
       c1=TechRole.new
       c1.name='otrotechrole'

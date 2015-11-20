@@ -1,3 +1,6 @@
+body.milestones {
+    background-color: white;
+}
 
 #btnListMilestones{
     float: right;
@@ -121,15 +124,16 @@
     margin-bottom: 15px;
 
 
-    form {
+    .notes-form {
 
         padding-bottom: 20px;
 
-        input {
-            width: calc(100% - 50px);
+        input.form-control {
+            margin-top: 1px;
+            width: calc(100% - 75px);
         }
-        select {
-            width: 45px;
+        select.form-control {
+            width: 75px;
         }
     }
 
@@ -162,7 +166,7 @@
             .time {
                 font-size: 10px;
                 float: right;
-                padding-right: 30px;
+                margin-right: -10px;
                 line-height: 2;
             }
 
@@ -299,8 +303,8 @@
         /*max-width: 191px;*/
 
 
-        float: left;
-        margin: 0px;
+        float: right;
+        margin-right: 30px;
 
         li {
             position: relative;

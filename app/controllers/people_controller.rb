@@ -1,10 +1,14 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline, :show_timeline_cat_fil, :edit, :update]
+  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline,
+                                    :show_not_pending_timeline,:add_skill,:add_skill_form,:remove_skill,
+                                    :remove_skill_form, :show_timeline_cat_fil, :edit, :update]
   #skip_before_action :admin?, only:[:assign_project]
   before_action :get_person, only:[:show, :edit, :update, :show_pending_timeline, :show_not_pending_timeline, :switch_admin]
 
   DEFAULT_IMAGE_ID = "lfblntfejcpmmkh0wfny.jpg"
+
+  @@tl_page_size = 10 #tamaño de pagina de timeline
 
   def get_person
     identifier = params[:id]
@@ -22,8 +26,8 @@ class PeopleController < ApplicationController
 
   def index
 
-    #@people = Person.all.order('LOWER(name)')
-    @people = Person.paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
+    @people = Person.all.order('LOWER(name)')
+    #@people = Person.paginate(:page => params[:page], :per_page => 10).order('LOWER(name)')
 
     respond_to do |f|
 
@@ -103,12 +107,15 @@ class PeopleController < ApplicationController
   end
 
   def show_not_pending_timeline
-    @milestones = @person.milestones.where('milestones.status <> 0').order(updated_at: :desc,completed_date: :desc)
+    apply_filter_not_pending
     @filtered_not_pending_count = @milestones.size
-    @filtered_pending_count = @person.milestones.size - @milestones.size
+    @filtered_pending_count = @person.milestones.size - @filtered_not_pending_count
 
+    @milestones = @milestones.limit(@@tl_page_size)
     @filter = :not_pending
 
+    @hay_mas = (@filtered_not_pending_count > @@tl_page_size)
+    @page = '2'
     respond_to do |f|
       f.js {render 'people/show_timeline'}
       f.html {}
@@ -116,43 +123,62 @@ class PeopleController < ApplicationController
   end
 
   def show_pending_timeline
-    @milestones = @person.milestones.where('milestones.status = 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+    apply_filter_pending
     @filtered_pending_count = @milestones.size
-    @filtered_not_pending_count = @person.milestones.size - @milestones.size
+    @milestones = @milestones.limit(@@tl_page_size)
+
+    @filtered_not_pending_count = @person.milestones.size - @filtered_pending_count
 
     @filter = :pending
-
+    @hay_mas = (@filtered_pending_count > @@tl_page_size)
+    @page = '2'
     respond_to do |f|
       f.js {render 'people/show_timeline'}
       f.html {}
     end
   end
 
+  def apply_filter_pending
+    @milestones = @person.milestones.where('milestones.status = 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
+  end
+
+  def apply_filter_not_pending
+    @milestones = @person.milestones.where('milestones.status <> 0').order(updated_at: :desc,completed_date: :desc)
+  end
+
   def show_timeline_cat_fil
     @person = Person.find_by(id: params[:person_id])
-    if ( !params[:category_id] || params[:category_id] == '-1')
-      if params[:filter] == 'not_pending'
-        @milestones = @person.milestones.where('milestones.status <> 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
-      else
-        @milestones = @person.milestones.where('milestones.status = 0').order(highlighted: :desc, due_date: :asc, updated_at: :desc)
-      end
-      @filtered_pending_count = @milestones.size
-      @filtered_not_pending_count = @person.milestones.size - @milestones.size
+
+    if params[:filter] == 'not_pending'
+      apply_filter_not_pending
     else
-      if params[:filter] == 'not_pending'
-        @milestones = @person.milestones.where('milestones.status <> 0').where("milestones.category_id = #{params[:category_id]}").order(highlighted: :desc, due_date: :asc, updated_at: :desc)
-      else
-        @milestones = @person.milestones.where('milestones.status = 0').where("milestones.category_id = #{params[:category_id]}").order(highlighted: :desc, due_date: :asc, updated_at: :desc)
-      end
-      @filtered_pending_count = @milestones.size
-      @filtered_not_pending_count = @person.milestones.size - @milestones.size
+      apply_filter_pending
+    end
+    @milestones =@milestones.where("milestones.category_id = #{params[:category_id]}") if (params[:category_id].present? && params[:category_id]!='-1')
+    @category_id = params[:category_id]
+
+    @filtered_count = @milestones.size
+    if params[:page].present?
+      page = params[:page].to_i
+    else
+      page = 1
     end
 
+    offset = @@tl_page_size*(page - 1)
+    @milestones = @milestones.limit(@@tl_page_size).offset(offset)
 
-    @filter = :pending
+
+    @filter = params[:filter]
+    @hay_mas = @filtered_count > (page * @@tl_page_size)
+    @page = page + 1
+
 
     respond_to do |f|
-      f.js {render 'people/show_timeline'}
+      if params[:paging].present?
+        f.js {render 'people/show_inner_timeline'}
+      else
+        f.js {render 'people/show_timeline'}
+      end
       f.html {}
     end
   end
@@ -175,7 +201,7 @@ class PeopleController < ApplicationController
     if @person.valid?
       @person.save
       flash.notice = "'#{person_params[:name]}' " + t('messages.create.success')
-      redirect_to @person
+      redirect_to '/people'
     else
       flash.alert = "'#{person_params[:name]}' " + t('messages.create.error')
       @roles=TechRole.where(validity: 'true').order('LOWER(name)')
@@ -304,48 +330,50 @@ class PeopleController < ApplicationController
   end
 
   def add_skill
-    person=Person.find(params[:person_id])
-    skill = Skill.find(params[:skill_id])
-    if person && skill
-      person.skills<<(skill)
 
-      #generar hito
-      milestone = Milestone.new
-      milestone.author = current_person
-      milestone.completed_date = Time.now
-      milestone.status = :done
-      milestone.people << person
-      milestone.category = Category.get_or_create_history_category
-      milestone.icon = milestone.category.icon
-      milestone.title = "#{person.name} #{I18n.translate('skills.addrm.new.title')}"
-      milestone.description = "#{person.name} #{I18n.translate('skills.addrm.new.desc1')} '#{skill.name}'"
-      milestone.save!
-    end
+    person=Person.find(params[:person_id])
+      skill = Skill.find(params[:skill_id])
+      if person && skill
+        person.skills<<(skill)
+
+        #generar hito
+        milestone = Milestone.new
+        milestone.author = current_person
+        milestone.completed_date = Time.now
+        milestone.status = :done
+        milestone.people << person
+        milestone.category = Category.get_or_create_history_category
+        milestone.icon = milestone.category.icon
+        milestone.title = "#{person.name} #{I18n.translate('skills.addrm.new.title')}"
+        milestone.description = "#{person.name} #{I18n.translate('skills.addrm.new.desc1')} '#{skill.name}'"
+        milestone.save!
+      end
 
     redirect_to person
   end
 
   def remove_skill
     person=Person.find(params[:person_id])
-    skill = Skill.find(params[:skill_id])
+      skill = Skill.find(params[:skill_id])
 
-    #Eliminar mentor
-    ps = PersonSkill.find_by(person_id: params[:person_id], skill_id: params[:skill_id])
-    if ps
-      ps.destroy!
+      #Eliminar mentor
+      ps = PersonSkill.find_by(person_id: params[:person_id], skill_id: params[:skill_id])
+      if ps
+        ps.destroy!
 
-      #generar hito
-      milestone = Milestone.new
-      milestone.author = current_person
-      milestone.completed_date = Time.now
-      milestone.status = :done
-      milestone.people << person
-      milestone.category = Category.get_or_create_history_category
-      milestone.icon = milestone.category.icon
-      milestone.title = "#{I18n.translate('skills.addrm.rm.title')} #{person.name}"
-      milestone.description = "#{person.name} #{I18n.translate('skills.addrm.rm.desc1')} '#{skill.name}'"
-      milestone.save!
-    end
+        #generar hito
+        milestone = Milestone.new
+        milestone.author = current_person
+        milestone.completed_date = Time.now
+        milestone.status = :done
+        milestone.people << person
+        milestone.category = Category.get_or_create_history_category
+        milestone.icon = milestone.category.icon
+        milestone.title = "#{I18n.translate('skills.addrm.rm.title')} #{person.name}"
+        milestone.description = "#{person.name} #{I18n.translate('skills.addrm.rm.desc1')} '#{skill.name}'"
+        milestone.save!
+      end
+
     redirect_to person
   end
 

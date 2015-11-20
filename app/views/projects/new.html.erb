@@ -20,7 +20,7 @@
               <%= f.select :status, options_for_select(Project.status_names_for_select) %>
           </div>
 
-          <div class="form-group col-xs-12">
+          <div class="form-group">
               <%= f.label t('project.technologies.title'), class: "control-label" %>
 
               <%= select_tag(:technologies, options_from_collection_for_select(@technologies, :id, :name), :multiple => true,

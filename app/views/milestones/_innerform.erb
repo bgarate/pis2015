@@ -72,8 +72,10 @@
                                  class: 'chzn-select', 'data-placeholder'=> t('milestones.select_people'),
                                  'style'=> 'width:100%', 'id'=>'listaPersonas') %>
                   <div class="form-group">
-                    <input type="checkbox" name="allPeople" id="allPeople">
-                    <label class="control-label"><small><%= 'Todos los usuarios' %></small></label>
+                    <div class="checkbox">
+                      <input type="checkbox" name="allPeople" id="allPeople">
+                      <label class="control-label"><small><%= 'Todos los usuarios' %></small></label>
+                    </div>
                   </div>
               <%end%>
             </div>

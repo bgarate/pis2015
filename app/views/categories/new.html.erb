@@ -25,8 +25,10 @@
 
             <div class="row">
               <div class="form-group col-xs-6">
-                <%=  c.label t('categories.feedback'), class: "control-label" %>
-                <%=  c.check_box :is_feedback, class: "" %>
+                <div class="checkbox">
+                  <%=  c.check_box :is_feedback, class: "" %>
+                  <%=  c.label t('categories.feedback'), class: "control-label" %>
+                </div>
               </div>
             </div>
 

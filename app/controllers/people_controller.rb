@@ -1,6 +1,8 @@
 class PeopleController < ApplicationController
 
-  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline, :show_not_pending_timeline, :show_timeline_cat_fil, :edit, :update]
+  skip_before_action :admin?, only:[:show, :index, :me, :show_pending_timeline,
+                                    :show_not_pending_timeline,:add_skill,:add_skill_form,:remove_skill,
+                                    :remove_skill_form, :show_timeline_cat_fil, :edit, :update]
   #skip_before_action :admin?, only:[:assign_project]
   before_action :get_person, only:[:show, :edit, :update, :show_pending_timeline, :show_not_pending_timeline, :switch_admin]
 
@@ -328,48 +330,50 @@ class PeopleController < ApplicationController
   end
 
   def add_skill
-    person=Person.find(params[:person_id])
-    skill = Skill.find(params[:skill_id])
-    if person && skill
-      person.skills<<(skill)
 
-      #generar hito
-      milestone = Milestone.new
-      milestone.author = current_person
-      milestone.completed_date = Time.now
-      milestone.status = :done
-      milestone.people << person
-      milestone.category = Category.get_or_create_history_category
-      milestone.icon = milestone.category.icon
-      milestone.title = "#{person.name} #{I18n.translate('skills.addrm.new.title')}"
-      milestone.description = "#{person.name} #{I18n.translate('skills.addrm.new.desc1')} '#{skill.name}'"
-      milestone.save!
-    end
+    person=Person.find(params[:person_id])
+      skill = Skill.find(params[:skill_id])
+      if person && skill
+        person.skills<<(skill)
+
+        #generar hito
+        milestone = Milestone.new
+        milestone.author = current_person
+        milestone.completed_date = Time.now
+        milestone.status = :done
+        milestone.people << person
+        milestone.category = Category.get_or_create_history_category
+        milestone.icon = milestone.category.icon
+        milestone.title = "#{person.name} #{I18n.translate('skills.addrm.new.title')}"
+        milestone.description = "#{person.name} #{I18n.translate('skills.addrm.new.desc1')} '#{skill.name}'"
+        milestone.save!
+      end
 
     redirect_to person
   end
 
   def remove_skill
     person=Person.find(params[:person_id])
-    skill = Skill.find(params[:skill_id])
+      skill = Skill.find(params[:skill_id])
 
-    #Eliminar mentor
-    ps = PersonSkill.find_by(person_id: params[:person_id], skill_id: params[:skill_id])
-    if ps
-      ps.destroy!
+      #Eliminar mentor
+      ps = PersonSkill.find_by(person_id: params[:person_id], skill_id: params[:skill_id])
+      if ps
+        ps.destroy!
 
-      #generar hito
-      milestone = Milestone.new
-      milestone.author = current_person
-      milestone.completed_date = Time.now
-      milestone.status = :done
-      milestone.people << person
-      milestone.category = Category.get_or_create_history_category
-      milestone.icon = milestone.category.icon
-      milestone.title = "#{I18n.translate('skills.addrm.rm.title')} #{person.name}"
-      milestone.description = "#{person.name} #{I18n.translate('skills.addrm.rm.desc1')} '#{skill.name}'"
-      milestone.save!
-    end
+        #generar hito
+        milestone = Milestone.new
+        milestone.author = current_person
+        milestone.completed_date = Time.now
+        milestone.status = :done
+        milestone.people << person
+        milestone.category = Category.get_or_create_history_category
+        milestone.icon = milestone.category.icon
+        milestone.title = "#{I18n.translate('skills.addrm.rm.title')} #{person.name}"
+        milestone.description = "#{person.name} #{I18n.translate('skills.addrm.rm.desc1')} '#{skill.name}'"
+        milestone.save!
+      end
+
     redirect_to person
   end
 

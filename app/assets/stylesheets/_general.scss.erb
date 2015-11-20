@@ -72,8 +72,8 @@
   position: absolute;
   top: 15px;
   left: 15px;
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   background-position: left;
   background-size: contain;
 
@@ -82,8 +82,12 @@
   }
 
   &.false {
-    background-image: image-url('layouts/star_empty.png');
+    background-image: image-url('layouts/star_empty2.png');
   }
+
+    &:hover {
+        background-image: image-url('layouts/star_grey.png');
+    }
 
   &.right {
     left: auto;
@@ -117,7 +121,7 @@
     }
 
     &.pending {
-        background-image: image-url('layouts/status-pending.png');
+        background-image: image-url('layouts/status-pending2.png');
     }
 
     &.rejected {

@@ -68,6 +68,8 @@ es:
   updated_at: 'Modificado en'
   see_more: 'Ver mas...'
   no_more: 'Ha llegado al final'
+  home: "Inicio"
+  commands: "Comandos"
 
   common:
     y: 'Sí'
@@ -100,6 +102,7 @@ es:
   #people
   people:
 
+    people: "Personas"
     add_tech_role: "Agregar Rol Técnico"
     add_skills: "Agregar Habilidades"
 
@@ -232,7 +235,7 @@ es:
 
   #hitos
   milestones:
-
+    milestones: "Hitos"
     header: "Hitos"
     title: "Título"
     category: "Categoría"
@@ -312,6 +315,9 @@ es:
       no_objectives_yet: "No hay objetivos para el Hito"
 
     download_csv: 'Descargar CSV'
+
+    create_from_template: "Crear hito desde template"
+    create_from_collection: "Crear hito desde colección"
 
 
 

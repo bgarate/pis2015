@@ -69,6 +69,8 @@ en:
   updated_at: 'Updated at'
   see_more: 'More...'
   no_more: 'You have reached the end'
+  home: "Home"
+  comands: "Comands"
 
   common:
     y: 'Yes'
@@ -100,6 +102,7 @@ en:
   #people
   people:
 
+    people: "People"
     add_tech_role: "Add Tech Role"
     add_skills: "Add Skills"
 
@@ -226,7 +229,7 @@ en:
 
   #milestones
   milestones:
-
+    milestones: "Milestones"
     header: "Milestones"
     title: "Title"
     category: "Category"
@@ -308,6 +311,9 @@ en:
 
 
     download_csv: 'Download CSV'
+
+    create_from_template: "Create milestone from template"
+    create_from_collection: "Create milestone from collection"
 
 
   #dashboard

@@ -22,7 +22,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav left-menu">
                 <li class="active">
-                  <%= link_to root_path, "data-toggle": "tooltip", "data-placement": "bottom",title: "Inicio" do %>
+                  <%= link_to root_path, "data-toggle": "tooltip", "data-placement": "bottom",title: t('home') do %>
                       <span class="glyphicon glyphicon-home"></span>
                   <% end %>
                   <%= link_to dashboard_path, "data-toggle": "tooltip", "data-placement": "bottom",title: "Dashboard" do %>
@@ -31,7 +31,7 @@
 
                   <% if current_user_admin? %>
 
-                    <%= link_to '/people', "data-toggle": "tooltip", "data-placement": "bottom",title: "Personas" do %>
+                    <%= link_to people_path, "data-toggle": "tooltip", "data-placement": "bottom",title: t('people.people') do %>
                       <span class="glyphicon glyphicon-user"></span>
 
                     <% end %>
@@ -40,11 +40,11 @@
 
                   <% end %>
 
-                  <%= link_to  '/projects', "data-toggle": "tooltip", "data-placement": "bottom",title: "Proyectos" do %>
+                  <%= link_to  projects_path, "data-toggle": "tooltip", "data-placement": "bottom",title: t('projects') do %>
                       <span class="glyphicon glyphicon-send"></span>
                   <% end %>
 
-                  <%= link_to milestones_report_path, "data-toggle": "tooltip", "data-placement": "bottom",title: "Hitos" do %>
+                  <%= link_to milestones_report_path, "data-toggle": "tooltip", "data-placement": "bottom",title: t('milestones.milestones') do %>
                       <span class="glyphicon glyphicon-flag"></span>
                   <% end %>
 

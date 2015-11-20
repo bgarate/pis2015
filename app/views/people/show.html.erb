@@ -10,18 +10,18 @@
 
 
         <% if current_user_admin? %>
-            <button class="slide-form-button" data-rel="from-collection-form" data-toggle="tooltip" title="Crear hitos desde coleccion">
+            <button class="slide-form-button" data-rel="from-collection-form" data-toggle="tooltip" title="<%= t('milestones.create_from_collection') %>">
               <span class="glyphicon glyphicon-briefcase"></span>
             </button>
-            <button class="slide-form-button" data-rel="from-template-form" data-toggle="tooltip" title="Crear hito desde template">
+            <button class="slide-form-button" data-rel="from-template-form" data-toggle="tooltip" title="<%= t('milestones.create_from_template') %>">
               <span class="glyphicon glyphicon-star"></span>
             </button>
         <%end%>
 
 
         <%if can_view_person?(@identifier) %>
-            <button class="slide-form-button" data-rel="new-milestone-form" data-toggle="tooltip" title="Crear hito">
-              <span class="glyphicon glyphicon-plus"></span>Hito
+            <button class="slide-form-button" data-rel="new-milestone-form" data-toggle="tooltip" title="<%= t('milestones.new.header') %>">
+              <span class="glyphicon glyphicon-plus"></span><%= t('milestone') %>
             </button>
         <%end%>
 

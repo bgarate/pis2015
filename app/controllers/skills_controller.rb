@@ -2,7 +2,7 @@ class SkillsController < ApplicationController
 
   skip_before_action :admin?, only:[:show, :index]
   before_action :get_skill, only:[:edit, :update, :destroy]
-
+  
   def get_skill
     @skill = Skill.find_by(id: params[:id])
   end

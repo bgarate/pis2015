@@ -14,7 +14,7 @@
   <h2 style="overflow: hidden; text-overflow: ellipsis;"><%= @trole %></h2>
   <ul id="skills">
     <li class="plus" >
-      <%if current_user_admin? %>
+      <%if can_view_person? @identifier %>
           <a href="add_skill_form?person_id=<%=@identifier%>" role="button">
             <span class="glyphicon glyphicon-plus"></span>
           </a>
@@ -23,7 +23,7 @@
     <% @skills.each do |s| %>
         <li><%= cl_image_tag s.icon %></li>
     <% end %>
-    <%if current_user_admin? %>
+    <%if can_view_person? @identifier %>
         <% if !@skills.empty? %>
             <li class="minus" >
               <a href="remove_skill_form?person_id=<%=@identifier%>" role="button">

@@ -343,11 +343,11 @@ describe PeopleController do
   end
 
   describe "add_Skill" do
-    it "No deberia desplegar el formulario si el usuario no es admin" do
+    it "Deberia desplegar el formulario si el usuario no es admin pero es el mismo" do
       session[:user_id] = @no_ad_user.id
-      post :add_skill_form ,{:person_id => 1}, :session => session
+      post :add_skill_form ,{:person_id => @no_admin.id}, :session => session
       # Espero ser redirigido
-      expect(response).to redirect_to root_path
+      expect(response.status).to eq(200)
     end
 
     it "Deberia desplegar el formulario si el usuario es admin" do
@@ -375,11 +375,11 @@ describe PeopleController do
   end
 
   describe "remove_skill" do
-    it "No deberia desplegar el formulario si el usuario no es admin" do
+    it "Deberia desplegar el formulario si el usuario no es admin pero es el mismo" do
       session[:user_id] = @no_ad_user.id
-      post :remove_skill_form ,{:person_id => 1}, :session => session
+      post :remove_skill_form ,{:person_id => @no_admin.id}, :session => session
       # Espero ser redirigido
-      expect(response).to redirect_to root_path
+      expect(response.status).to eq(200)
     end
 
     it "Deberia desplegar el formulario si el usuario es admin" do

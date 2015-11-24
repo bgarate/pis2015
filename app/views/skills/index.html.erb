@@ -19,8 +19,10 @@
             <th class="small-image-col"><%= t('icon') %></th>
             <th><%= t('name') %></th>
             <th><%= t('type') %></th>
-            <th><%= t('categories.status')%></th>
-            <th></th>
+            <% if current_user_admin? %>
+             <th><%= t('categories.status')%></th>
+             <th></th>
+            <%end%>
           </tr>
           </thead>
           <tbody>

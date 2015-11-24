@@ -320,7 +320,7 @@ class PeopleController < ApplicationController
 
   def add_skill_form
     @person=Person.find(params[:person_id])
-    @posible_skills=Skill.all.where("id NOT IN (SELECT skill_id FROM person_skills WHERE person_id=?)",params[:person_id]).order('LOWER(name)')
+    @posible_skills=Skill.all.where("id NOT IN (SELECT skill_id FROM person_skills WHERE person_id=?)",params[:person_id]).where('validity': true).order('LOWER(name)')
     render :file => "app/views/people/add_skill_form"
   end
 

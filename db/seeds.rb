@@ -8,7 +8,7 @@
 
 
 tr = TechRole.new
-tr.name= "Vendedor de Tortas Fritas"
+tr.name= "Desarrollador ruby"
 tr.save!
 
 tr2 = TechRole.new
@@ -47,7 +47,7 @@ indu.save!
 
 m = Milestone.new
 m.title = 'Conferencia Tecnológica'
-m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas. Ademas de cafe y galletitas maria gratis'
+m.description= 'Se va a hablar de como las aspiradors roboticas van a cambiar nuestras vidas.'
 m.due_date= Time.now + (3*2*7*24*60*60)
 m.status=0
 m.icon = "test/silueta.gif"
@@ -56,15 +56,15 @@ m.icon = "glyphicon-flag"
 
 m1 = Milestone.new
 m1.title = 'Entrega del prototipo de alfred'
-m1.description= 'Hay que entregar el protipo de alfred a la gente de pis. Ademas de cafe y galletitas maria gratis'
+m1.description= 'Entrega del primer protipo de alfred a moove-it y validación del mismo'
 m1.due_date= Time.now - (3*2*7*24*60*60)
 m1.status=0
 m1.category = c
 m1.icon = "glyphicon-flag"
 
 m2 = Milestone.new
-m2.title = 'Otra entrega de alfred'
-m2.description = 'Esperemos meter mas puntos que 10'
+m2.title = 'Entrega de alfred'
+m2.description = 'Entrega final de alfred y puesta en producción'
 m2.due_date = Time.now
 m2.status = 0
 m2.category = f
@@ -84,15 +84,15 @@ sk2.icon='paexsc5nfywcry06fig2.png'
 ################# Projects #################
 
 pro = Project.new
-pro.name= 'Super Tortas 0.1'
+pro.name= 'Super robots 0.1'
 pro.client= 'ATU'
 pro.status= 0
 pro.start_date= Time.now - (2*7*24*60*60)
 pro.end_date= Time.now - (2*7*24*60*60)
 
 pro2 = Project.new
-pro2.name= 'Super Candies 1.0'
-pro2.client= 'Candy World'
+pro2.name= 'Gestión inteligente'
+pro2.client= 'BSE'
 pro2.status= 0
 pro2.start_date= Time.now - (2*7*24*60*60)
 pro2.end_date= Time.now + (2*7*24*60*60)
@@ -213,7 +213,7 @@ t.save!
 
 t1 = Template.new
 t1.title= 'Feedback'
-t1.description= 'Le decimos lo que pensamos de él'
+t1.description= 'Instancia en la cual un compañero le da una devolución a otro, con el fin de buscar la mejora continua'
 t1.icon= 'glyphicon-flag'
 t1.category_id=f.id
 r = Resource.new
@@ -226,7 +226,7 @@ t1.save!
 
 t2 = Template.new
 t2.title= 'Feedback de diseño'
-t2.description= 'Le decimos si es buen o mal diseñador'
+t2.description= 'Feedback especial para diseñadores'
 t2.icon= 'glyphicon-flag'
 t2.category_id=f2.id
 r1 = Resource.new

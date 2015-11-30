@@ -6,7 +6,7 @@ class PeopleController < ApplicationController
   #skip_before_action :admin?, only:[:assign_project]
   before_action :get_person, only:[:show, :edit, :update, :show_pending_timeline, :show_not_pending_timeline, :switch_admin]
 
-  DEFAULT_IMAGE_ID = "lfblntfejcpmmkh0wfny.jpg"
+  DEFAULT_IMAGE_ID = "faizsnstt8ivlnpjnzw2.jpg"
 
   @@tl_page_size = 10 #tamaño de pagina de timeline
 

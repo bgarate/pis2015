@@ -386,7 +386,7 @@ class PeopleController < ApplicationController
   def name_and_path (people)
 
     people.map do |p|
-      {"photo" => (p.image_id || "lfblntfejcpmmkh0wfny.jpg"),"name" => p.name, "url" => person_path(p)}
+      {"photo" => (p.image_id || "faizsnstt8ivlnpjnzw2.jpg"),"name" => p.name, "url" => person_path(p)}
     end
 
   end

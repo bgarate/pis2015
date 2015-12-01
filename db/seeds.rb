@@ -236,3 +236,12 @@ r1.url= 'https://docs.google.com/document/d/1VuyDDm-iDK6LF2uG9Sx8WhTJe2kON-bVW7A
 r1.save!
 t2.resource_id=r1.id
 t2.save!
+
+################# Collections #################
+
+cole = Collection.new
+cole.title= 'Primeros hitos'
+cole.description= 'Hitos que son asignados a una persona cuando esta comienza a trabajar en moove-it'
+cole.collection_templates<<CollectionTemplate.new(:template=>t, :days=>2)
+cole.collection_templates<<CollectionTemplate.new(:template=>t1, :days=>30)
+cole.save!

@@ -107,9 +107,13 @@
         $(".datatable:not(#hitos, #review-table)").DataTable({
             paging: true,
             order: [],
+            <% if I18n.locale == :es %>
+            language: datatables_spanisn_language,
+            <% else %>
             "language": {
                 "search": ""
             }
+            <% end %>
         });
 
         $(".slide-form-button").each(function() {

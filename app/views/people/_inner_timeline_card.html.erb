@@ -125,7 +125,7 @@
 
     <div class="clearfix"></div>
 
-    <div class="resources-list clearfix">
+    <div class="slider-list resources-list clearfix">
       <h3>
         <% if can_modify_milestone?(e.id) %>
             <%=link_to :controller => 'google', :action => 'adddriveview', :milestone_id => e.id do%>
@@ -168,7 +168,7 @@
     <% visible_notes = e.get_visible_notes(current_person)
        n = visible_notes.first %>
 
-    <div class="notes-list clearfix">
+    <div class="slider-list notes-list clearfix">
       <h2><span class="glyphicon glyphicon-comment"></span></h2>
 
       <%= render "notes/form" %>

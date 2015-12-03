@@ -8,7 +8,11 @@ class SkillsController < ApplicationController
   end
 
   def index
-    @skills = Skill.all.order('LOWER(name)')
+    if current_user_admin?
+      @skills = Skill.all.order('LOWER(name)')
+    else
+      @skills = Skill.all.where('validity': true).order('LOWER(name)')
+    end
   end
 
   def edit

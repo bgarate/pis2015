@@ -19,14 +19,23 @@
             <th class="small-image-col"><%= t('icon') %></th>
             <th><%= t('name') %></th>
             <th><%= t('type') %></th>
-            <th><%= t('categories.status')%></th>
-            <th></th>
+            <% if current_user_admin? %>
+             <th><%= t('categories.status')%></th>
+             <th></th>
+            <%end%>
           </tr>
           </thead>
           <tbody>
           <% @skills.each do |t| %>
               <tr>
-                <td><%= cl_image_tag t.icon %></td>
+                <%if t.icon %>
+                    <td><%= cl_image_tag t.icon %></td>
+                <%else%>
+                    <td>
+                      <% cl_image_tag 'zkcotcwo3uvosunynfqo.png' %>
+                      <img src="http://res.cloudinary.com/hx9jq2ajv/image/upload/xhju4mvhp4acbjok01ld.png" style="width: 32px;height: 32px;">
+                    </td>
+                <%end%>
                 <td><%= t.name %></td>
      
                 <td>

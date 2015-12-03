@@ -3,12 +3,21 @@ require 'rails_helper'
 describe SkillsController, 'Skills Controller' do
   before(:each) do
     allow_any_instance_of(ApplicationController).to receive(:loged?) { '' }
+    # Creo una persona de tipo administrador
+    @admin = Person.new :name=>'NombreAdmin', :email=>'mail@admin.com', :start_date=>Time.current(), :admin=>true
+    @admin.save!
+    # Creo un usuario asociado a dicha persona
+    @ad_user = User.new :person => @admin
+    # Seteo la expiracion de la sesion a un dia a partir del momento actual
+    @ad_user.oauth_expires_at = Time.current().advance(days:1)
+    @ad_user.save!
   end
 
   describe 'Skills' do
 
     it 'has a 200 status code' do
-      get :index
+      session[:user_id] = @ad_user.id
+      get :index, :session=>session
       expect(response.status).to eq(200)
     end
 

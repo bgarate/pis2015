@@ -21,7 +21,11 @@
       <% end %>
     </li>
     <% @skills.each do |s| %>
-        <li><%= cl_image_tag s.icon %></li>
+        <%if s.icon %>
+            <li><%= cl_image_tag s.icon %></li>
+        <%else%>
+            <li><%= cl_image_tag 'xhju4mvhp4acbjok01ld.png' %></li>
+        <%end%>
     <% end %>
     <%if can_view_person? @identifier %>
         <% if !@skills.empty? %>
